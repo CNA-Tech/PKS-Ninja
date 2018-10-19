@@ -107,36 +107,171 @@ kubectl get svc --all-namespaces
 </details>
 <br/>
 
-## Step 2: Review Sample Application Components
+## Step 2: Explore your Kubernetes cluster
 
-2.0 Clone the github repository for the Planespotter
+2.1 Review your current kubeconfig and context with the command `kubectl config view -o yaml`
 
-2.1 Ensure github is installed on your workstation and from your default github directory clone the planespotter github repository
+<details><summary>Expand to view sample output</summary>
+
+``` bash
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority: ..\AppData\Local\Temp\lw-ca-cert-EVIF.pem091613171
+    server: https://api.afewell-cluster-69fc65f8-d37d-11e8-918b-0a1dada1e740.fa2c1d78-9f00-4e30-8268-4ab81862080d.vke-user.com:443
+  name: afewell-cluster
+contexts:
+- context:
+    cluster: afewell-cluster
+    user: -afewell-cluster
+  name: afewell-cluster-context
+current-context: afewell-cluster-context
+kind: Config
+preferences: {}
+users:
+- name: -afewell-cluster
+  user:
+    auth-provider:
+      config:
+        client-id: f1a34f25-83f8-447f-9abd-389be1018538
+        client-secret: f1a3****-****-****-****-********8538
+        id-token: Removed from output
+        idp-certificate-authority: C:\Users\afewell\AppData\Local\Temp\lw-ca-cert-EVIF.pem091613171
+        idp-issuer-url: https://lightwave.vke.cloud.vmware.com/openidconnect/fa2c1d78-9f00-4e30-8268-4ab81862080d
+        refresh-token: ""
+      name: oidc
+```
+
+</details>
+<br/>
+
+2.2 View the nodes and component statuses for your cluster with the following commands:
+
+``` bash
+kubectl get nodes
+kubectl get cs
+```
+
+NOTE: The K8s cluster deployed in the example lab is based on the VKE developer cluster template which runs all K8s services on a common node
+
+<details><summary>Screenshot 2.2</summary>
+<img src="Images/2018-10-19-14-14-32.png">
+<img src="Images/2018-10-19-15-47-40.png">
+</details>
+<br/>
+
+2.3 View the namespaces in your cluster with the command `kubectl get namespaces`
+
+<details><summary>Screenshot 2.3</summary>
+<img src="Images/2018-10-19-12-11-13.png">
+</details>
+<br/>
+
+2.4 Observe that in the `kube config view` output from step 2.1 above that there is no namespace listed, and so when you issue kubectl commands they will apply to the default namespace - unless you specify the namespace in the command, or specify a namespace for your context (which we will do in a later exercise)
+
+2.5 View pods in the default and other namespaces with the following commands. As you will observe in the output, there are currently no pods running in the default or kube-system namespaces:
+
+``` bash
+kubectl get pods
+kubectl get pods --all-namespaces
+kubectl get pods --namespace=kube-system
+kubectl get pods -n vke-system
+```
+
+<details><summary>Screenshot 2.5</summary>
+<img src="Images/2018-10-19-12-36-32.png">
+</details>
+<br/>
+
+2.6 Create the `planespotter` namespace that we will use later for deploying the planespotter app and view the namespace with the commands:
+
+``` bash
+kubectl create namespace planespotter
+kubectl get ns planespotter
+kubectl get ns planespotter -o yaml
+kubectl get pods -n planespotter
+```
+
+<details><summary>Screenshot 2.6</summary>
+<img src="Images/2018-10-19-12-56-22.png">
+<img src="Images/2018-10-19-12-56-54.png">
+</details>
+<br/>
+
+2.7 Set your current context namespace to `planespotter` and view your kube config file to see that the namespace setting is now displayed in the output. Be sure to replace references to "afewell-cluster-context" with the name of your cluster context
+
+``` bash
+kubectl config current-context
+kubectl config set-context afewell-cluster-context --namespace=planespotter
+kubectl config view -o jsonpath='{.contexts[?(@.name == "afewell-cluster-context")].context.namespace}'
+
+kubectl config view -o yaml
+
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority: ..\AppData\Local\Temp\lw-ca-cert-EVIF.pem091613171
+    server: https://api.afewell-cluster-69fc65f8-d37d-11e8-918b-0a1dada1e740.fa2c1d78-9f00-4e30-8268-4ab81862080d.vke-user.com:443
+  name: afewell-cluster
+contexts:
+- context:
+    cluster: afewell-cluster
+    namespace: planespotter
+    user: -afewell-cluster
+  name: afewell-cluster-context
+current-context: afewell-cluster-context
+kind: Config
+preferences: {}
+users:
+- name: -afewell-cluster
+  user:
+    auth-provider:
+      config:
+        client-id: f1a34f25-83f8-447f-9abd-389be1018538
+        client-secret: f1a3****-****-****-****-********8538
+        id-token: Removed from output
+        idp-certificate-authority: C:\Users\afewell\AppData\Local\Temp\lw-ca-cert-EVIF.pem091613171
+        idp-issuer-url: https://lightwave.vke.cloud.vmware.com/openidconnect/fa2c1d78-9f00-4e30-8268-4ab81862080d
+        refresh-token: ""
+      name: oidc
+```
+
+<details><summary>Screenshot 2.7</summary>
+<img src="Images/2018-10-19-13-54-28.png">
+<img src="Images/2018-10-19-15-35-24.png">
+</details>
+<br/>
+
+## Step 3: Review Sample Application Components
+
+3.0 Clone the github repository for the Planespotter
+
+3.1 Ensure github is installed on your workstation and from your default github directory clone the planespotter github repository
 
 `git clone https://github.com/Boskey/planespotter.git`
 
-<details><summary>Screenshot 2.1</summary>
+<details><summary>Screenshot 3.1</summary>
 <img src="Images/2018-10-19-03-09-01.png">
 </details>
 <br/>
 
-2.2 List the contents of the planespotter directory, observe the different subdirectories for each application component, docs and a directory for kubernetes manifests
+3.2 List the contents of the planespotter directory, observe the different subdirectories for each application component, docs and a directory for kubernetes manifests
 
-<details><summary>Screenshot 2.2</summary>
+<details><summary>Screenshot 3.2</summary>
 <img src="Images/2018-10-19-03-25-42.png">
 </details>
 <br/>
 
-2.3 Navigate to the planespotter/frontend directory and list the files, observe the the application source and build files for the frontend application are located in this folder
+3.3 Navigate to the planespotter/frontend directory and list the files, observe the the application source and build files for the frontend application are located in this folder
 
-<details><summary>Screenshot 2.3</summary>
+<details><summary>Screenshot 3.3</summary>
 <img src="Images/2018-10-19-03-33-26.png">
 </details>
 <br/>
 
-2.4 Navigate to the planespotter/kubernetes directory and list the files to show the different deployment manifests and supporting yaml files
+3.4 Navigate to the planespotter/kubernetes directory and list the files to show the different deployment manifests and supporting yaml files
 
-<details><summary>Screenshot 2.4</summary>
+<details><summary>Screenshot 3.4</summary>
 <img src="Images/2018-10-19-03-39-31.png">
 </details>
 <br/>
