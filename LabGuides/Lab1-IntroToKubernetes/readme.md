@@ -246,16 +246,16 @@ users:
 
 3.0 Clone the github repository for the Planespotter
 
-3.1 Ensure github is installed on your workstation and from your default github directory clone the planespotter github repository
+3.1 Ensure git is installed on your workstation and from your default github directory clone the planespotter github repository
 
 `git clone https://github.com/Boskey/planespotter.git`
 
 <details><summary>Screenshot 3.1</summary>
-<img src="Images/2018-10-19-03-09-01.png">
+<img src="Images/2018-10-19-21-38-11.png">
 </details>
 <br/>
 
-3.2 List the contents of the planespotter directory, observe the different subdirectories for each application component, docs and a directory for kubernetes manifests
+3.2 List the contents of the planespotter directory, observe the different subdirectories for each application component, docs and for kubernetes manifests
 
 <details><summary>Screenshot 3.2</summary>
 <img src="Images/2018-10-19-03-25-42.png">
@@ -276,22 +276,19 @@ users:
 </details>
 <br/>
 
-## Step 3: Pods, Replica Sets and Deployments
+## Step 4: Pods, Replica Sets and Deployments
 
-As discussed in the Kubernetes 101 lecture, Kubernetes deployments include pod and replicaset objects and controllers. While you can observe details about pod and replicaset objects, current versions of Kubernetes do not lot you deploy a pod or a replicaset independently, these objects get created automatically as part of a deployment. 
+As discussed in the Kubernetes 101 lecture, Kubernetes deployments include pod and replicaset objects and controllers. While you can observe details about pod and replicaset objects, current versions of Kubernetes do not lot you deploy a pod or a replicaset independently, they get created automatically as part of a deployment.
 
-In Step 3, you will deploy just the frontend portion of the planespotter app and review the deployment, replica set and pod object data
+In Step 4, you will deploy just the frontend portion of the planespotter app and review the deployment, replica set and pod object data
 
-3.1 Save a copy of the frontend-deployment_all_k8s.yaml as frontend-deployment_only.yaml
+4.1 Save a copy of the frontend-deployment_all_k8s.yaml as frontend-deployment_only.yaml
 
 `cp frontend-deployment_all_k8s.yaml frontend-deployment_only.yaml`
 
-<details><summary>Screenshot 3.1</summary>
-<img src="Images/2018-10-19-03-09-01.png">
-</details>
-<br/>
+4.2 Edit the frontend-deployment_only.yaml file to only include the deployment spec and remove the service spec (Remove all lines from the 2nd set of 3 dashes "---" and after) and change "replicas" to 1. the resulting file should look like the following:
 
-3.2 Edit the frontend-deployment_only.yaml file to only include the deployment spec and remove the service spec and also remove the "namespace: planespotter" line, the resulting file should look like the following:
+<details><summary>Click to expand output</summary>
 
 ``` bash
 ---
@@ -299,11 +296,12 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: planespotter-frontend
+  namespace: planespotter
   labels:
     app: planespotter-frontend
     tier: frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: planespotter-frontend
@@ -315,7 +313,7 @@ spec:
     spec:
       containers:
       - name: planespotter-fe
-        image: afewell/planespotter:planespotter-frontend
+        image: yfauser/planespotter-frontend:d0b30abec8bfdbde01a36d07b30b2a3802d9ccbb
         imagePullPolicy: IfNotPresent
         env:
         - name: PLANESPOTTER_API_ENDPOINT
@@ -326,16 +324,18 @@ spec:
           value: "5"
 ```
 
-3.3 Deploy the frontend app using the updated manifest file with the command:
+</details>
+
+4.3 Deploy the frontend app using the updated manifest file with the command:
 
 `kubectl create -f frontend-deployment_only.yaml`
 
-<details><summary>Screenshot 3.3</summary>
+<details><summary>Screenshot 4.3</summary>
 <img src="Images/2018-10-19-08-22-56.png">
 </details>
 <br/>
 
-3.4 Use kubectl to view the deployment, replica set and pod objects with the following commands:
+4.4 Use kubectl to view the deployment, replica set and pod objects with the following commands:
 
 ``` bash
 kubectl get pods
@@ -343,12 +343,12 @@ kubectl get replicasets
 kubectl get deployments
 ```
 
-<details><summary>Screenshot 3.4</summary>
-<img src="Images/2018-10-19-08-26-13.png">
+<details><summary>Screenshot 4.4</summary>
+<img src="Images/2018-10-19-18-55-10.png">
 </details>
 <br/>
 
-3.5 View the details of the pod object in yaml by using the kubectl `-o yaml` flag which causes the output of the command to be returned in yaml format. The output should look similar to the following:
+4.5 View the details of the pod object in yaml by using the kubectl `-o yaml` flag which causes the output of the command to be returned in yaml format. The output should look similar to the following:
 
 `kubectl get pods -o yaml`
 
@@ -531,14 +531,16 @@ metadata:
   resourceVersion: ""
   selfLink: ""
 ```
+
 </details>
 <br/>
 
-3.6 View the details of the replicaset object in yaml by using the kubectl `-o yaml` flag which causes the output of the command to be returned in yaml format. The output should look similar to the following:
+4.6 View the details of the replicaset object in yaml by using the kubectl `-o yaml` flag which causes the output of the command to be returned in yaml format. The output should look similar to the following:
 
 `kubectl get replicasets -o yaml`
 
 <details><summary>Click to expand output</summary>
+
 ``` bash
 apiVersion: v1
 items:
@@ -568,7 +570,7 @@ items:
     selfLink: /apis/extensions/v1beta1/namespaces/default/replicasets/planespotter-frontend-7c578ffd8b
     uid: 8b5bb146-d38f-11e8-b2df-025cf0afe8d0
   spec:
-    replicas: 2
+    replicas: 1
     selector:
       matchLabels:
         app: planespotter-frontend
@@ -612,7 +614,7 @@ metadata:
 </details>
 <br/>
 
-3.7 View the details of the deployment object in yaml by using the kubectl `-o yaml` flag which causes the output of the command to be returned in yaml format. The output should look similar to the following:
+4.7 View the details of the deployment object in yaml by using the kubectl `-o yaml` flag which causes the output of the command to be returned in yaml format. The output should look similar to the following:
 
 `kubectl get deployments -o yaml`
 
@@ -637,7 +639,7 @@ items:
     uid: 8b5b0401-d38f-11e8-b2df-025cf0afe8d0
   spec:
     progressDeadlineSeconds: 600
-    replicas: 2
+    replicas: 1
     revisionHistoryLimit: 2
     selector:
       matchLabels:
@@ -688,7 +690,7 @@ items:
       status: "False"
       type: Progressing
     observedGeneration: 1
-    replicas: 2
+    replicas: 1
     unavailableReplicas: 2
     updatedReplicas: 2
 kind: List
@@ -699,7 +701,121 @@ metadata:
 </details>
 <br/>
 
-3.8 Save a copy of frontend-deployment_all_k8s.yaml as frontend-deployment_only.yaml
+4.7 Scale up your current deployment by adjusting the quantity of replicas and then verify with the following commands:
+
+``` bash
+kubectl scale deployment planespotter-frontend --replicas 2
+kubectl get pods
+kubectl get deployments
+```
+<details><summary>Screenshot 4.7</summary>
+<img src="Images/2018-10-19-19-06-22.png">
+</details>
+<br/>
+
+4.8 Cleanup your current deployment to prepare for the next exercise with the following commands
+
+``` bash
+kubectl delete deployment planespotter-frontend
+kubectl get pods
+kubectl get deployments
+```
+
+<details><summary>Screenshot 4.8</summary>
+<img src="Images/2018-10-19-19-11-52.png">
+</details>
+<br/>
+
+## Step 5: Services - ClusterIP, NodePort & LoadBalancer
+
+5.1 Deploy and observe a ClusterIP Service deployment
+
+In this section you will deploy the planespotter frontend app, but this time we will include the service spec with the deployment.
+
+5.1.1 Save a copy of the frontend-deployment_all_k8s.yaml as frontend-deployment_ClusterIP.yaml
+
+`cp frontend-deployment_all_k8s.yaml frontend-deployment_ClusterIP.yaml`
+
+5.1.2 Edit the frontend-deployment_ClusterIP.yaml file to only include both the deployment spec and the service spec. Delete the ingress spec, which the section from the 3rd set of 3 dashes "---" and every line after. The resulting file should look like the following:
+
+<details><summary>Click to expand output</summary>
+
+``` bash
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: planespotter-frontend
+  namespace: planespotter
+  labels:
+    app: planespotter-frontend
+    tier: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: planespotter-frontend
+  template:
+    metadata:
+      labels:
+        app: planespotter-frontend
+        tier: frontend
+    spec:
+      containers:
+      - name: planespotter-fe
+        image: yfauser/planespotter-frontend:d0b30abec8bfdbde01a36d07b30b2a3802d9ccbb
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PLANESPOTTER_API_ENDPOINT
+          value: planespotter-svc
+        - name: TIMEOUT_REG
+          value: "5"
+        - name: TIMEOUT_OTHER
+          value: "5"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: planespotter-frontend
+  namespace: planespotter
+  labels:
+    app: planespotter-frontend
+spec:
+  ports:
+    # the port that this service should serve on
+    - port: 80
+  selector:
+    app: planespotter-frontend
+```
+
+</details>
+
+5.1.3 Deploy the frontend app using the updated manifest file with the command:
+
+`kubectl create -f frontend-deployment_ClusterIP.yaml`
+
+<details><summary>Screenshot 5.1.3</summary>
+<img src="Images/2018-10-19-22-42-57.png">
+</details>
+<br/>
+
+5.1.4 Use kubectl to view the deployment, replica set and pod objects with the following commands:
+
+``` bash
+kubectl get pods
+kubectl get replicasets
+kubectl get deployments
+```
+
+<details><summary>Screenshot 5.1.4</summary>
+<img src="Images/2018-10-19-22-45-20.png">
+</details>
+<br/>
+
+<details><summary>Click to expand output</summary>
+
+``` bash
+
 
 `cp frontend-deployment_all_k8s.yaml frontend-deployment_only.yaml`
 
