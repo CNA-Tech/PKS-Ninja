@@ -1138,11 +1138,46 @@ kubectl get services
 
 ### 5.5 Deploy the planespotter-frontend app with an Ingress controller
 
-5.5.1 Use cat or a text editor to examine the frontend-deployment_all_k8s.yaml file. Pay special attention to the Ingress spec, which is the section after the third set of triple dashes "---" and has the value "kind: Ingress"
+5.5.1 Make a copy of the `frontend-deployment_all_k8s.yaml` file, save it as `frontend-deployment_ingress.yaml`
 
-`cat frontend-deployment_all_k8s.yaml`
+Example:
+`cp frontend-deployment_all_k8s.yaml frontend-deployment_ingress.yaml`
 
-<details><summary>Expand this section to see an example frontend-deployment_all_k8s.yaml</summary>
+5.5.2 Get the URL of your smarcluster with the following command, be sure to replace 'afewell-cluster' with the name of your cluster:
+
+``` bash
+vke cluster show afewell-cluster | grep Address
+```
+
+<details><summary>Screenshot 5.5.2</summary>
+<img src="Images/2018-10-20-15-45-19.png">
+</details>
+<br/>
+
+5.5.3 Edit the `frontend-deployment_ingress.yaml` file, near the bottom of the file in the ingress spec section, change the value for spec.rules.host to URL for your smartcluster as shown in the following snippet:
+
+NOTE: Be sure to replace the URL shown here with the URL for your own smartcluster
+
+``` bash
+spec:
+  rules:
+  - host: afewell-cluster-69fc65f8-d37d-11e8-918b-0a1dada1e740.fa2c1d78-9f00-4e30-8268-4ab81862080d.vke-user.com
+    http:
+      paths:
+      - backend:
+          serviceName: planespotter-frontend
+          servicePort: 80
+```
+
+<details><summary>Click to expand to see the full contents of frontend-deployment_ingress.yaml</summary>
+
+When reviewing the file contents below, observe that it includes a ClusterIP service spec which only provides an IP address that is usable for pod-to-pod communications in the cluster. The file also includes an ingress spec which implements the default VKE ingress controller.
+
+In the following steps after you deploy the planespotter-frontend with ingress controller, you will be able to browse from your workstation to the running planespotter app in your VKE environment even though you have not assigned a nat or public IP for the service.
+
+Ingress controllers act as a proxies, recieving http/s requests from external clients and then based on the URL hostname or path, the ingress controller will proxy the request to the corresponding back-end service. For example mysite.com/path1 and mysite.com/path2 can be routed to different backing services running in the kubernetes cluster.
+
+In the file below, no rules are specified to different paths and so accordingly, all requests sent to the host defined in the spec, your VKE SmartCluster URL, will be proxied by the ingress controller to the planespotter-frontend ClusterIP service also defined in the frontend-deployment_ingress.yaml file
 
 ``` bash
 ---
@@ -1198,7 +1233,7 @@ metadata:
   namespace: planespotter
 spec:
   rules:
-  - host: planespotter.demo.yves.local
+  - host: afewell-cluster-69fc65f8-d37d-11e8-918b-0a1dada1e740.fa2c1d78-9f00-4e30-8268-4ab81862080d.vke-user.com
     http:
       paths:
       - backend:
@@ -1209,69 +1244,51 @@ spec:
 </details>
 <br/>
 
-5.5.2 Run the updated planespotter-frontend app and verify deployment with the following commands. Make note of the external IP address/hostname shown in the output of `kubectl get services`
+5.5.4 Run the updated planespotter-frontend app and verify deployment with the following commands. Make note of the external IP address/hostname shown in the output of `kubectl get services`
 
 ``` bash
-kubectl create -f frontend-deployment_all_k8s.yaml
+kubectl create -f frontend-deployment_ingress.yaml
 kubectl get pods
 kubectl get deployments
 kubectl get services
-kubectl get services -o yaml
+kubectl get ingress
+kubectl describe ingress
 ```
 
-<details><summary>Screenshot 5.4.3.1</summary>
-<img src="Images/2018-10-20-03-34-35.png">
+<details><summary>Screenshot 5.5.4</summary>
+<img src="Images/2018-10-20-16-11-14.png">
 </details>
 
-<details><summary>Screenshot 5.4.3.2</summary>
-<img src="Images/2018-10-20-03-36-10.png">
-</details>
-<br/>
+5.5.5 Open a browser and go to the url of your VKE SmartCluster to verify that planespotter-frontend is externally accessible with the LoadBalancer service
 
-5.4.4 Open a browser and go to the hostname shown in Screenshot 5.4.3.2 above to verify that planespotter-frontend is externally accessible with the LoadBalancer service
-
-<details><summary>Screenshot 5.4.4</summary>
-<img src="Images/2018-10-20-03-39-39.png">
+<details><summary>Screenshot 5.5.5</summary>
+<img src="Images/2018-10-20-16-26-46.png">
 </details>
 <br/>
 
-5.4.5 Clean up the planespotter-frontend deployment and service and verify with the following commands:
+5.5.6 Clean up the planespotter-frontend components and verify with the following commands:
 
 ``` bash
-kubectl delete -f frontend-deployment_LoadBalancer.yaml
+kubectl delete -f frontend-deployment_ingress.yaml
 kubectl get pods
 kubectl get deployments
 kubectl get services
+kubectl get ingress
 ```
 
-<details><summary>Screenshot 5.4.5</summary>
-<img src="Images/2018-10-20-03-22-35.png">
+<details><summary>Screenshot 5.5.6</summary>
+<img src="Images/2018-10-20-16-32-19.png">
 </details>
 <br/>
 
-3.3 Save a copy of frontend-deployment_all_k8s.yaml as frontend-deployment_only.yaml
+## Next Steps
 
-`cp frontend-deployment_all_k8s.yaml frontend-deployment_only.yaml`
+This lab provided an introductory overview of Kubernetes operations. Additional topics such as persistent volumes, network policy, config maps, stateful sets and more will be covered in more detail in the ongoing labs.
 
-<details><summary>Screenshot 3.1</summary>
-<img src="Images/2018-10-19-03-09-01.png">
-</details>
-<br/>
+If you are following the PKS Ninja cirriculum, [click here to proceed to the next lab](../Lab2-PksInstallationPhaseOne). As you proceed through the remaining labs you will learn more advanced details about Kubernetes using additional planespotter app components as examples and then deploy the complete planespotter application on a PKS environment. 
 
-3.3 Save a copy of frontend-deployment_all_k8s.yaml as frontend-deployment_only.yaml
+If you are not following the PKS Ninja cirriculum and would like to deploy the complete planespotter app on VKE, you can find [complete deployment instructions here](https://github.com/Boskey/run_kubernetes_with_vmware)
 
-`cp frontend-deployment_all_k8s.yaml frontend-deployment_only.yaml`
+### Thank you for completing the Introduction to Kubernetes Lab!
 
-<details><summary>Screenshot 3.1</summary>
-<img src="Images/2018-10-19-03-09-01.png">
-</details>
-<br/>
-
-3.3 Save a copy of frontend-deployment_all_k8s.yaml as frontend-deployment_only.yaml
-
-`cp frontend-deployment_all_k8s.yaml frontend-deployment_only.yaml`
-
-<details><summary>Screenshot 3.1</summary>
-<img src="Images/2018-10-19-03-09-01.png">
-</details>
-<br/>
+### [Please click here to proceed to Lab2: PKS Installation Phase 1](../Lab2-PksInstallationPhaseOne)
