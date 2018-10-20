@@ -204,8 +204,12 @@ kubectl get pods -n planespotter
 kubectl config current-context
 kubectl config set-context afewell-cluster-context --namespace=planespotter
 kubectl config view -o jsonpath='{.contexts[?(@.name == "afewell-cluster-context")].context.namespace}'
-
 kubectl config view -o yaml
+```
+
+<details><summary>Click to expand to see the full output</summary>
+
+``` bash
 
 apiVersion: v1
 clusters:
@@ -235,6 +239,9 @@ users:
         refresh-token: ""
       name: oidc
 ```
+
+</details>
+<br/>
 
 <details><summary>Screenshot 2.7</summary>
 <img src="Images/2018-10-19-13-54-28.png">
@@ -325,6 +332,7 @@ spec:
 ```
 
 </details>
+<br/>
 
 4.3 Deploy the frontend app using the updated manifest file with the command:
 
@@ -1022,7 +1030,7 @@ kubectl get services
 </details>
 <br/>
 
-5.4.2 Edit the `frontend-deployment_NodePort.yaml` file, near the bottom of the file in the Service.Spec section, add the value `type: LoadBalancer` as shown in the following snippet:
+5.4.2 Edit the `frontend-deployment_LoadBalancer.yaml` file, near the bottom of the file in the service spec section, add the value `type: LoadBalancer` as shown in the following snippet:
 
 ``` bash
 spec:
@@ -1034,7 +1042,7 @@ spec:
     app: planespotter-frontend
 ```
 
-<details><summary>Click to expand to see the full contents of frontend-deployment_NodePort.yaml</summary>
+<details><summary>Click to expand to see the full contents of frontend-deployment_LoadBalancer.yaml</summary>
 
 ``` bash
 ---
@@ -1101,7 +1109,6 @@ kubectl get services -o yaml
 <details><summary>Screenshot 5.4.3.1</summary>
 <img src="Images/2018-10-20-03-34-35.png">
 </details>
-<br/>
 
 <details><summary>Screenshot 5.4.3.2</summary>
 <img src="Images/2018-10-20-03-36-10.png">
@@ -1131,21 +1138,114 @@ kubectl get services
 
 ### 5.5 Deploy the planespotter-frontend app with an Ingress controller
 
-3.3 Save a copy of frontend-deployment_all_k8s.yaml as frontend-deployment_only.yaml
+5.5.1 Use cat or a text editor to examine the frontend-deployment_all_k8s.yaml file. Pay special attention to the Ingress spec, which is the section after the third set of triple dashes "---" and has the value "kind: Ingress"
 
-`cp frontend-deployment_all_k8s.yaml frontend-deployment_only.yaml`
+`cat frontend-deployment_all_k8s.yaml`
 
-<details><summary>Screenshot 3.1</summary>
-<img src="Images/2018-10-19-03-09-01.png">
+<details><summary>Expand this section to see an example frontend-deployment_all_k8s.yaml</summary>
+
+``` bash
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: planespotter-frontend
+  namespace: planespotter
+  labels:
+    app: planespotter-frontend
+    tier: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: planespotter-frontend
+  template:
+    metadata:
+      labels:
+        app: planespotter-frontend
+        tier: frontend
+    spec:
+      containers:
+      - name: planespotter-fe
+        image: yfauser/planespotter-frontend:d0b30abec8bfdbde01a36d07b30b2a3802d9ccbb
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PLANESPOTTER_API_ENDPOINT
+          value: planespotter-svc
+        - name: TIMEOUT_REG
+          value: "5"
+        - name: TIMEOUT_OTHER
+          value: "5"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: planespotter-frontend
+  namespace: planespotter
+  labels:
+    app: planespotter-frontend
+spec:
+  ports:
+    # the port that this service should serve on
+    - port: 80
+  selector:
+    app: planespotter-frontend
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: planespotter-frontend
+  namespace: planespotter
+spec:
+  rules:
+  - host: planespotter.demo.yves.local
+    http:
+      paths:
+      - backend:
+          serviceName: planespotter-frontend
+          servicePort: 80
+```
+
 </details>
 <br/>
 
-3.3 Save a copy of frontend-deployment_all_k8s.yaml as frontend-deployment_only.yaml
+5.5.2 Run the updated planespotter-frontend app and verify deployment with the following commands. Make note of the external IP address/hostname shown in the output of `kubectl get services`
 
-`cp frontend-deployment_all_k8s.yaml frontend-deployment_only.yaml`
+``` bash
+kubectl create -f frontend-deployment_all_k8s.yaml
+kubectl get pods
+kubectl get deployments
+kubectl get services
+kubectl get services -o yaml
+```
 
-<details><summary>Screenshot 3.1</summary>
-<img src="Images/2018-10-19-03-09-01.png">
+<details><summary>Screenshot 5.4.3.1</summary>
+<img src="Images/2018-10-20-03-34-35.png">
+</details>
+
+<details><summary>Screenshot 5.4.3.2</summary>
+<img src="Images/2018-10-20-03-36-10.png">
+</details>
+<br/>
+
+5.4.4 Open a browser and go to the hostname shown in Screenshot 5.4.3.2 above to verify that planespotter-frontend is externally accessible with the LoadBalancer service
+
+<details><summary>Screenshot 5.4.4</summary>
+<img src="Images/2018-10-20-03-39-39.png">
+</details>
+<br/>
+
+5.4.5 Clean up the planespotter-frontend deployment and service and verify with the following commands:
+
+``` bash
+kubectl delete -f frontend-deployment_LoadBalancer.yaml
+kubectl get pods
+kubectl get deployments
+kubectl get services
+```
+
+<details><summary>Screenshot 5.4.5</summary>
+<img src="Images/2018-10-20-03-22-35.png">
 </details>
 <br/>
 
