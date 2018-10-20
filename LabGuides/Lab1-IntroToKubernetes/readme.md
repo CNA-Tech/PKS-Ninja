@@ -152,7 +152,7 @@ kubectl get nodes
 kubectl get cs
 ```
 
-NOTE: The K8s cluster deployed in the example lab is based on the VKE developer cluster template which runs all K8s services on a common node
+NOTE: The K8s cluster deployed in the example lab is based on the VKE developer cluster template which starts with a single node and adds additional nodes dynamically with VKE's "Smart Cluster" feature. Accordingly, if you run this command again in later steps, you may see additional nodes running. 
 
 <details><summary>Screenshot 2.2</summary>
 <img src="Images/2018-10-19-14-14-32.png">
@@ -278,7 +278,7 @@ users:
 
 ## Step 4: Pods, Replica Sets and Deployments
 
-As discussed in the Kubernetes 101 lecture, Kubernetes deployments include pod and replicaset objects and controllers. While you can observe details about pod and replicaset objects, current versions of Kubernetes do not lot you deploy a pod or a replicaset independently, they get created automatically as part of a deployment.
+As discussed in the Kubernetes 101 lecture, Kubernetes deployments include pod and replicaset objects and controllers
 
 In Step 4, you will deploy just the frontend portion of the planespotter app and review the deployment, replica set and pod object data
 
@@ -728,7 +728,7 @@ kubectl get deployments
 
 ## Step 5: Services - ClusterIP, NodePort & LoadBalancer
 
-5.1 Deploy and observe a ClusterIP Service deployment
+### 5.1 Deploy and observe a ClusterIP Service deployment
 
 In this section you will deploy the planespotter frontend app, but this time we will include the service spec with the deployment.
 
@@ -789,6 +789,7 @@ spec:
 ```
 
 </details>
+<br/>
 
 5.1.3 Deploy the frontend app using the updated manifest file with the command:
 
@@ -799,7 +800,7 @@ spec:
 </details>
 <br/>
 
-5.1.4 Use kubectl to view the deployment, replica set and pod objects with the following commands:
+5.1.4 View the deployment, replica set and pod objects with the following commands:
 
 ``` bash
 kubectl get pods
@@ -812,17 +813,323 @@ kubectl get deployments
 </details>
 <br/>
 
-<details><summary>Click to expand output</summary>
+5.1.5 View the planespotter-frontend service details. Note that there is no external IP address assigned to planespotter-frontend as ClusterIP service only provides an internal IP address for pod-to-pod communications:
 
 ``` bash
+kubectl get svc # this is the same as kubectl get services
+kubectl get services
+kubectl get services -o wide # wide output shows more detail
+kubectl get services -o yaml # outputting to yaml or json includes even more detail
+```
 
-
-`cp frontend-deployment_all_k8s.yaml frontend-deployment_only.yaml`
-
-<details><summary>Screenshot 3.1</summary>
-<img src="Images/2018-10-19-03-09-01.png">
+<details><summary>Screenshot 5.1.5</summary>
+<img src="Images/2018-10-19-22-56-39.png">
 </details>
 <br/>
+
+### 5.2 Setup a test pod that you can use to validate pod-to-pod communications
+
+5.2.1 As a testing pod, you will deploy the official shell-demo pod from the Kubernetes documentation, review the [shell-demo manifest here](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/) before proceeding
+
+5.2.2 Deploy the shell-demo pod and verify deployment status with the following commands:
+
+``` bash
+kubectl get pods
+kubectl create -f https://k8s.io/examples/application/shell-demo.yaml
+kubectl get pods
+```
+
+<details><summary>Screenshot 5.2.2</summary>
+<img src="Images/2018-10-20-01-01-54.png">
+</details>
+<br/>
+
+5.2.3 Use kubectl exec to open a bash shell to the shell-demo pod with the command `kubectl exec -it shell-demo -- /bin/bash`
+
+Note that the shell does not have a prompt, so for example in Screenshot 5.2.3 below, after entering the command `kubectl exec -it shell-demo -- /bin/bash`, the output shows the result of entering the "ls" command:
+
+<details><summary>Screenshot 5.2.3</summary>
+<img src="Images/2018-10-20-01-16-23.png">
+</details>
+<br/>
+
+5.2.4 Install curl and use it to test the planespotter-frontend ClusterIP service. Repeat the curl a couple of times, it reports back the IP address of the planespotter-frontend pod that serving the request, and after executing curl a few times you should see the requests being services by both running planespotter-frontend pods, demonstrating that the ClusterIP service is both fullfiling http requests and also load balancing those requests across the running pods.
+
+Note that when creating a service, a local DNS record is created for the service name in the Kube DNS service. Pods running in the cluster can access a service using the service name, or via the service IP address 
+
+``` bash
+apt-get update
+apt-get install curl -y
+curl planespotter-frontend | grep Planespotter # curl by service name
+curl 10.0.0.185 | grep Planespotter or curl 
+```
+
+<details><summary>Screenshot 5.2.4</summary>
+<img src="Images/2018-10-20-01-42-28.png">
+</details>
+<br/>
+
+5.2.5 Clean up the planespotter-frontend deployment and service in preparation for the next lab.
+
+This could be done by seperately deleting the deployment and service with the commands `kubectl delete deployment planespotter-frontend` and `kubectl delete service planespotter-frontend`
+
+However, you can also use the same yaml file you used to deploy the application in step 5.1.3 above to delete each spec included in the file with the command `kubectl -f frontend-deployment_ClusterIP.yaml`
+
+Using a file to manage a deployment is especially useful if your app consists of several specs as a single command can be used to create, update or delete a complex deployment
+
+Use either method described above to delete the planespotter-frontend deployment and enter the following commands to ensure the deployment and the service have been deleted:
+
+``` bash
+kubectl get pods
+kubectl get deployments
+kubectl get services
+```
+
+<details><summary>Screenshot 5.2.5</summary>
+<img src="Images/2018-10-20-02-24-00.png">
+</details>
+<br/>
+
+### 5.3 Deploy the planespotter-frontend app with the NodePort Service
+
+5.3.1 Make a copy of the `frontend-deployment_ClusterIP.yaml` file, save it as `frontend-deployment_NodePort.yaml`
+
+<details><summary>Screenshot 5.3.1</summary>
+<img src="Images/2018-10-20-02-29-06.png">
+</details>
+<br/>
+
+5.3.2 Edit the `frontend-deployment_NodePort.yaml` file, near the bottom of the file in the Service.Spec section, add the value `type: NodePort` as shown in the following snippet:
+
+``` bash
+spec:
+  type: NodePort
+  ports:
+    # the port that this service should serve on
+    - port: 80
+  selector:
+    app: planespotter-frontend
+```
+
+<details><summary>Click to expand to see the full contents of frontend-deployment_NodePort.yaml</summary>
+
+``` bash
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: planespotter-frontend
+  namespace: planespotter
+  labels:
+    app: planespotter-frontend
+    tier: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: planespotter-frontend
+  template:
+    metadata:
+      labels:
+        app: planespotter-frontend
+        tier: frontend
+    spec:
+      containers:
+      - name: planespotter-fe
+        image: yfauser/planespotter-frontend:d0b30abec8bfdbde01a36d07b30b2a3802d9ccbb
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PLANESPOTTER_API_ENDPOINT
+          value: planespotter-svc
+        - name: TIMEOUT_REG
+          value: "5"
+        - name: TIMEOUT_OTHER
+          value: "5"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: planespotter-frontend
+  namespace: planespotter
+  labels:
+    app: planespotter-frontend
+spec:
+  type: NodePort
+  ports:
+    # the port that this service should serve on
+    - port: 80
+  selector:
+    app: planespotter-frontend
+```
+
+</details>
+<br/>
+
+5.3.3 Run the updated planespotter-frontend app and verify deployment with the following commands. Make note of the port numbers shown in the output of `kubectl get services`
+
+``` bash
+kubectl create -f frontend-deployment_NodePort.yaml
+kubectl get pods
+kubectl get deployments
+kubectl get services
+kubectl get services -o yaml
+```
+
+<details><summary>Screenshot 5.3.3</summary>
+<img src="Images/2018-10-20-02-46-40.png">
+</details>
+<br/>
+
+5.3.4 Get the IP address of a worker node using the following commands. If you have multiple worker nodes running in your cluster, it does not matter which nodes IP address you use to test the service as with NodePort any node can fulfill the service request. Be sure to replace the worker node name in the example below with the worker node name from your environment
+
+``` bash
+kubectl get nodes
+kubectl get node worker-5ba97a60-d42a-11e8-bab6-024dd3eb0b96 -o yaml | grep address:
+```
+
+<details><summary>Screenshot 5.3.4</summary>
+<img src="Images/2018-10-20-03-06-17.png">
+</details>
+<br/>
+
+5.3.5 Open a shell session with the shell-demo pod and use curl to validate the NodePort service. Use screenshot 5.3.5 for reference:
+
+<details><summary>Screenshot 5.3.5</summary>
+<img src="Images/2018-10-20-03-16-41.png">
+</details>
+<br/>
+
+5.3.6 Clean up the planespotter-frontend deployment and service and verify with the following commands:
+
+``` bash
+kubectl delete -f frontend-deployment_NodePort.yaml
+kubectl get pods
+kubectl get deployments
+kubectl get services
+```
+
+<details><summary>Screenshot 5.3.6</summary>
+<img src="Images/2018-10-20-03-22-35.png">
+</details>
+<br/>
+
+### 5.4 Deploy the planespotter-frontend app with the LoadBalancer Service
+
+5.4.1 Make a copy of the `frontend-deployment_NodePort.yaml` file, save it as `frontend-deployment_LoadBalancer.yaml`
+
+<details><summary>Screenshot 5.4.1</summary>
+<img src="Images/2018-10-20-03-26-49.png">
+</details>
+<br/>
+
+5.4.2 Edit the `frontend-deployment_NodePort.yaml` file, near the bottom of the file in the Service.Spec section, add the value `type: LoadBalancer` as shown in the following snippet:
+
+``` bash
+spec:
+  type: LoadBalancer
+  ports:
+    # the port that this service should serve on
+    - port: 80
+  selector:
+    app: planespotter-frontend
+```
+
+<details><summary>Click to expand to see the full contents of frontend-deployment_NodePort.yaml</summary>
+
+``` bash
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: planespotter-frontend
+  namespace: planespotter
+  labels:
+    app: planespotter-frontend
+    tier: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: planespotter-frontend
+  template:
+    metadata:
+      labels:
+        app: planespotter-frontend
+        tier: frontend
+    spec:
+      containers:
+      - name: planespotter-fe
+        image: yfauser/planespotter-frontend:d0b30abec8bfdbde01a36d07b30b2a3802d9ccbb
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PLANESPOTTER_API_ENDPOINT
+          value: planespotter-svc
+        - name: TIMEOUT_REG
+          value: "5"
+        - name: TIMEOUT_OTHER
+          value: "5"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: planespotter-frontend
+  namespace: planespotter
+  labels:
+    app: planespotter-frontend
+spec:
+  type: LoadBalancer
+  ports:
+    # the port that this service should serve on
+    - port: 80
+  selector:
+    app: planespotter-frontend
+```
+
+</details>
+<br/>
+
+5.4.3 Run the updated planespotter-frontend app and verify deployment with the following commands. Make note of the external IP address/hostname shown in the output of `kubectl get services`
+
+``` bash
+kubectl create -f frontend-deployment_LoadBalancer.yaml
+kubectl get pods
+kubectl get deployments
+kubectl get services
+kubectl get services -o yaml
+```
+
+<details><summary>Screenshot 5.4.3.1</summary>
+<img src="Images/2018-10-20-03-34-35.png">
+</details>
+<br/>
+
+<details><summary>Screenshot 5.4.3.2</summary>
+<img src="Images/2018-10-20-03-36-10.png">
+</details>
+<br/>
+
+5.4.4 Open a browser and go to the hostname shown in Screenshot 5.4.3.2 above to verify that planespotter-frontend is externally accessible with the LoadBalancer service
+
+<details><summary>Screenshot 5.4.4</summary>
+<img src="Images/2018-10-20-03-39-39.png">
+</details>
+<br/>
+
+5.4.5 Clean up the planespotter-frontend deployment and service and verify with the following commands:
+
+``` bash
+kubectl delete -f frontend-deployment_LoadBalancer.yaml
+kubectl get pods
+kubectl get deployments
+kubectl get services
+```
+
+<details><summary>Screenshot 5.4.5</summary>
+<img src="Images/2018-10-20-03-22-35.png">
+</details>
+<br/>
+
+### 5.5 Deploy the planespotter-frontend app with an Ingress controller
 
 3.3 Save a copy of frontend-deployment_all_k8s.yaml as frontend-deployment_only.yaml
 
