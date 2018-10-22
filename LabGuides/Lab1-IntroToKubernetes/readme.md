@@ -294,8 +294,6 @@ users:
 
 ## Step 4: Pods, Replica Sets and Deployments
 
-As discussed in the Kubernetes 101 lecture, Kubernetes deployments include pod and replicaset objects and controllers
-
 In Step 4, you will deploy just the frontend portion of the planespotter app and review the deployment, replica set and pod object data
 
 4.1 Save a copy of the frontend-deployment_all_k8s.yaml as frontend-deployment_only.yaml
