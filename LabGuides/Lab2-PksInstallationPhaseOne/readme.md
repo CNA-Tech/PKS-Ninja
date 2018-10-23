@@ -5,9 +5,7 @@
 - [Lab Access Instructions]()
 - [Step 1: Deploy Ops Manager]()
 - [Step 2: Deploy BOSH]()
-- [Step 3: Deploy Harbor]()
-- [Step 4: ]()
-- [Step 5: ]()
+- [Step 3: Prep for PKS Installation]()
 - [Next Steps]()
 
 ## Lab Access Instructions
@@ -244,10 +242,21 @@ Note: Each of the availability zones below will have a single cluster. When you 
   - DNS 192.168.110.10
   - Gateway 172.31.0.1
   - Availability Zones: PKS-MGMT-1, PKS-MGMT-2
-- Click Save
+- Click `Add Network` to add a network with the following values
+  - Name: PKS-COMP
+  - vSphere Network Name: ls-pks-service
+  - CIDR: 172.31.2.0/23
+  - Reserved IP Ranges: 172.31.2.1
+  - DNS 192.168.110.10
+  - Gateway 172.31.2.1
+  - Availability Zones: PKS-COMP
 
-<details><summary>Screenshot 2.6</summary>
+<details><summary>Screenshot 2.6.1</summary>
 <img src="Images/2018-10-21-23-02-32.png">
+</details>
+
+<details><summary>Screenshot 2.6.2</summary>
+<img src="Images/2018-10-22-15-21-58.png">
 </details>
 <br/>
 
@@ -283,7 +292,7 @@ Note: Each of the availability zones below will have a single cluster. When you 
 </details>
 <br/>
 
-2.11 Review the `Applying Changes` to observe the BOSH VM deployment until it is complete. Once complete, you should see a `Changes applied` popup window as shown in Screenshot 2.11.2
+2.11 Review the `Applying Changes` to observe the BOSH VM deployment. This will take a while to complete. While BOSH is deploying, you can skip ahead to Step 3 and return to the `Applying Changes` screen periodically to check the status of the deployment. Once the BOSH deployment is complete, you should see a `Changes applied` popup window as shown in Screenshot 2.11.2
 
 <details><summary>Screenshot 2.11.1 </summary>
 <img src="Images/2018-10-21-23-26-50.png">
@@ -300,7 +309,7 @@ Note: Each of the availability zones below will have a single cluster. When you 
 <img src="Images/2018-10-22-00-51-05.png">
 </details>
 
-## Step 3: Install PKS
+## Step 3: Prep for PKS Install
 
 3.1 Generate NSX-T Principal Identity certificate (You will need this for PKS Intallation)
 
@@ -370,7 +379,7 @@ curl -k -X POST \
 </details>
 <br/>
 
-3.1.3 Return to the bash prompt and enter the command `bash create_certificate.sh`
+3.1.3 Return to the bash prompt enter the command `bash create_certificate.sh` and enter the password `VMware1!` when prompted
 
 <details><summary>Screenshot 3.1.3</summary>
 <img src="Images/2018-10-22-02-45-20.png">
@@ -389,9 +398,89 @@ cat pks-nsx-t-superuser.key
 </details>
 <br/>
 
-3.2 Import the PKS Tile
+3.1.5 In the NSX Manager UI, go to System > Trust to view certificates. You should now see a certificate for `pks-nsx-t-superuser`
 
-3.2.1 Log into the Ops Manager UI, Click `Import a Product`, select the Pivotal Container Service binary file and wait for the file to import
+<details><summary>Screenshot 3.1.5</summary>
+<img src="Images/2018-10-22-03-42-57.png">
+</details>
+<br/>
+
+3.2 Create and Register Principal Identity
+
+3.2.1 Use a text editor to create a file with the following shell script and your certificate ID to generate the PI cert, for example `nano create_pi.sh`. **Do not cut and paste this script exactly, make sure to change the CERTIFICATE_ID to the id value from the create_certificate.sh output found in step 3.1.3
+
+<details><summary>Click to expand create_pi.sh</summary>
+
+``` bash
+#!/bin/bash
+#create_pi.sh
+
+NSX_MANAGER="192.168.110.42"
+NSX_USER="admin"
+CERTIFICATE_ID='27fbd52c-a90e-478f-9fd1-2fb52625c9fe'
+
+PI_NAME="pks-nsx-t-superuser"
+NSX_SUPERUSER_CERT_FILE="pks-nsx-t-superuser.crt"
+NSX_SUPERUSER_KEY_FILE="pks-nsx-t-superuser.key"
+NODE_ID=$(cat /proc/sys/kernel/random/uuid)
+
+stty -echo
+printf "Password: "
+read NSX_PASSWORD
+stty echo
+
+pi_request=$(cat <<END
+    {
+         "display_name": "$PI_NAME",
+         "name": "$PI_NAME",
+         "permission_group": "superusers",
+         "certificate_id": "$CERTIFICATE_ID",
+         "node_id": "$NODE_ID"
+    }
+END
+)
+
+curl -k -X POST \
+    "https://${NSX_MANAGER}/api/v1/trust-management/principal-identities" \
+    -u "$NSX_USER:$NSX_PASSWORD" \
+    -H 'content-type: application/json' \
+    -d "$pi_request"
+
+curl -k -X GET \
+    "https://${NSX_MANAGER}/api/v1/trust-management/principal-identities" \
+    --cert $(pwd)/"$NSX_SUPERUSER_CERT_FILE" \
+    --key $(pwd)/"$NSX_SUPERUSER_KEY_FILE"
+```
+
+</details>
+<br/>
+
+<details><summary>Screenshot 3.2.1</summary>
+<img src="Images/2018-10-22-03-15-42.png">
+</details>
+<br/>
+
+3.2.2 Return to the bash prompt and enter the command `bash create_pi.sh` and enter the password `VMware1!` when prompted. Your output should look similar to Screenshot 3.2.2 below
+
+<details><summary>Screenshot 3.2.2</summary>
+<img src="Images/2018-10-22-03-25-06.png">
+</details>
+<br/>
+
+3.2.3 In the NSX Manager UI, go to System > Users and verify that you see a user account for `pks-nsx-t-superuser`
+
+<details><summary>Screenshot 3.2.3</summary>
+<img src="Images/2018-10-22-03-32-45.png">
+</details>
+<br/>
+
+3.3 Import the PKS Tile
+
+- Note: If you are not sure if your BOSH deployment has completed yet, check now to see if it is complete, using step 2.11 above if needed for reference
+  - If the deployment is complete, return to the Ops Manager homepage and proceed with the following steps
+  - If your BOSH deployment is not yet complete, leave your browser tab open to continue to monitor the deployment status and open a new tab and connect to the Ops Manager UI so that you have 2 active browser sessions. Use the 2nd Ops Manager connection to complete the following step
+
+3.3.1 Log into the Ops Manager UI, Click `Import a Product`, select the Pivotal Container Service binary file. This is the final step of the phase 1 lab, when you resume with the phase 2 installation lab you will complete the PKS installation
 
 <details><summary>Screenshot 3.2.1.1 </summary>
 <img src="Images/2018-10-22-01-34-24.png">
@@ -402,35 +491,6 @@ cat pks-nsx-t-superuser.key
 </details>
 <br/>
 
-3.2.2 Once the import is complete you should see a `Pivotal Container Service` section in the left navigation bar. Click on the `+` icon
-
-<details><summary>Screenshot 3.2.2.1 </summary>
-<img src="Images/2018-10-22-01-55-08.png">
-</details>
-
-<details><summary>Screenshot 3.2.2.2 </summary>
-<img src="Images/2018-10-22-01-55-47.png">
-</details>
-<br/>
-
-
-
-
-
-
-
-
-
-
-
 ## Next Steps
 
-This lab provided an introductory overview of Kubernetes operations. Additional topics such as persistent volumes, network policy, config maps, stateful sets and more will be covered in more detail in the ongoing labs.
-
-If you are following the PKS Ninja cirriculum, [click here to proceed to the next lab](../Lab2-PksInstallationPhaseOne). As you proceed through the remaining labs you will learn more advanced details about Kubernetes using additional planespotter app components as examples and then deploy the complete planespotter application on a PKS environment.
-
-If you are not following the PKS Ninja cirriculum and would like to deploy the complete planespotter app on VKE, you can find [complete deployment instructions here](https://github.com/Boskey/run_kubernetes_with_vmware)
-
-### Thank you for completing the Introduction to Kubernetes Lab!
-
-### [Please click here to proceed to Lab2: PKS Installation Phase 1](../Lab2-PksInstallationPhaseOne)
+### [Please click here to proceed to Lab2: PKS Installation Phase 2](../Lab3-PksInstallationPhaseTwo)
