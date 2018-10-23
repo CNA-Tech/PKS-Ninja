@@ -8,571 +8,300 @@
 - [Step 3: Prep for PKS Installation]()
 - [Next Steps]()
 
-## Lab Access Instructions
+## Step 1: Install PKS
 
-For PKS Ninja students using the labs provided in the course, the lab admins will provide you with an IP address to RDP into the ControlCenter desktop in the vPod that has been assigned to you.
+1.1 Login to the Ops Manager UI and click on the Pivotal Container Service tile to access its configuration settings
 
-All instructions in this lab guide should be performed from the ControlCenter desktop unless otherwise specified.
+Note: If you do not see a `Pivotal Container Service` tile, check the left hand column and next to `Pivotal Container Service` click the `+` icon as shown in Screenshot 1.1.b and the `Pivotal Container Service` tile will be added and you can click on it to view the tile configuration
 
-## Step 1: Deploy Ops Manager
+<details><summary>Screenshot 1.1 </summary>
+<img src="Images/2018-10-22-01-55-47.png">
+</details>
 
-1.1 In the vSphere web client, right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`
-
-<details><summary>Screenshot 1.1</summary>
-<img src="Images/2018-10-21-16-56-33.png">>
+<details><summary>Screenshot 1.1.b </summary>
+<img src="Images/2018-10-22-21-34-37.png">
 </details>
 <br/>
 
-1.2 On the `Select template` screen, select `Local File` and navigate to the Ops Manager OVA file
+1.2 Select the `Assign AZs and Network Assignments` tab and enter the following values:
+
+- Place singleton jobs in : PKS-MGMT-2
+- Balance other jobs in: PKS-MGMT-2
+- Network: PKS-MGMT
+- Service Network: PKS-COMP
+- Click Save
 
 <details><summary>Screenshot 1.2</summary>
-<img src="Images/2018-10-21-17-03-48.png">
+<img src="Images/2018-10-22-15-33-10.png">
 </details>
 <br/>
 
-1.3 On the `Select name and location` screen, enter the Name `opsman` and select `RegionA01` as the datacenter
+1.3 Select the `PKS API` tab and enter the following values:
+
+- API Hostname: pks.corp.local
 
 <details><summary>Screenshot 1.3</summary>
-<img src="Images/2018-10-21-17-09-11.png">
+<img src="Images/2018-10-22-15-33-10.png">
 </details>
 <br/>
 
-1.4 On the `Select a resource` screen, select the `pks-mgmt-1` resource pool
+1.4 Select the `PKS API` tab and enter the following values:
+
+- API Hostname: pks.corp.local
 
 <details><summary>Screenshot 1.4</summary>
-<img src="Images/2018-10-21-17-12-16.png">
+<img src="Images/2018-10-22-19-30-22.png">
 </details>
 <br/>
 
-1.5 On the `Review details` screen, confitm the details and click `Next`
+1.5 Select the `Plan 1` tab and enter the following values:
+
+- Master Availability Zones: PKS-COMP
+- Worker Persistent Disk Type: 10gb
+- Enable Priviledged Containers: true
+- Click Save
 
 <details><summary>Screenshot 1.5</summary>
-<img src="Images/2018-10-21-17-13-13.png">
+<img src="Images/2018-10-22-19-31-47.png">
 </details>
 <br/>
 
-1.6 On the `Select Storage` screen, set `Thin Provision` as the virtual disk format and `RegionA01-ISCSI01-COMP01` as the datastore
+1.6 Select the `Plan 2` tab and enter the following values:
+
+- Active: True
+- Master/ETCD Nodes: 1
+- Master/ETCD VM Type: medium
+- Master Availability Zone: PKS-COMP
+- Worker VM Type: large
+- Worker Persistent Disk Type: 10gb
+- Worker Availability Zone: PKS-COMP
+- Enable Privileged Containers: True
 
 <details><summary>Screenshot 1.6</summary>
-<img src="Images/2018-10-21-17-14-47.png">
+<img src="Images/2018-10-22-19-37-39.png">
 </details>
 <br/>
 
-1.7 On the `Select networks` screen, ensure the `Destination Network` is set to `VM-RegionA01-vDS-MGMT`.
-
-Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connecting it to a different network during the `Deploy OVF Template` wizard as at the time of writing, there is a bug that prevents attachnment to a logical switch. After the OVF deployment is complete, a later step will have you change the network attachment.
+1.7 Select the `Plan 3` tab, set the value for `Plan` to `Inactive` and click `Save`
 
 <details><summary>Screenshot 1.7</summary>
-<img src="Images/2018-10-21-17-16-11.png">
+<img src="Images/2018-10-22-19-39-35.png">
 </details>
 <br/>
 
-1.8 On the `Customize template` screen, enter the following variables:
+1.8 Select the `Kubernetes Cloud Provider` tab and enter the following values:
 
-- Admin Password: VMware1!
-- Custom Hostname: opsman
-- DNS: 192.168.110.10
-- Default Gateway: 172.31.0.1
-- IP Address: 172.31.0.3
-- NTP Servers: ntp.corp.local
-- Netmask: 255.255.255.0
+- Choose your IaaS: vSphere
+- vCenter Master Credentials: administrator@vsphere.local
+  - Password: VMware1!
+- vCenter Host: vcsa-01a.corp.local
+- Datacenter Name: RegionA01
+- Datastore Name: RegionA01-ISCI01-COMP01
+- Stored VM Folder: pks_vms
+- Click Save
 
 <details><summary>Screenshot 1.8</summary>
-<img src="Images/2018-10-21-17-30-07.png">
+<img src="Images/2018-10-22-19-45-25.png">
 </details>
 <br/>
 
-1.9 On the `Ready to complete` screen, confirm the details and click `Finish`
+1.9 Prepare Variables to Configure the `Networking` tab
 
-<details><summary>Screenshot 1.9</summary>
-<img src="Images/2018-10-21-17-31-21.png">
+1.9.1 Log into the NSX Manager UI, go to `Networking > IPAM`, and on the IPAM page and gather the ID for the `ip-block-nodes-deployments` and `ip-block-pods-deployments` and keep note of the values
+
+<details><summary>Screenshot 1.9.1.1</summary>
+<img src="Images/2018-10-22-19-54-15.png">
+</details>
+
+<details><summary>Screenshot 1.9.1.2</summary>
+<img src="Images/2018-10-22-19-56-07.png">
 </details>
 <br/>
 
-1.10 After completing the `Deploy OVF Template` wizard, go to your recent tasks view and wait for the `Status` to change to `Completed` before proceeding
+1.9.2 In the NSX Manager UI, go to `Networking > Routing`, click on t0-pks and gather the t0-pks ID value
 
-<details><summary>Screenshot 1.10</summary>
-<img src="Images/2018-10-21-18-42-50.png">
+<details><summary>Screenshot 1.9.2</summary>
+<img src="Images/2018-10-22-19-59-01.png">
 </details>
 <br/>
 
-1.11 In the vSphere web client in the `Hosts and Clusters` view, expand the `pks-mgmt-1` resource pool and select the opsman vm. On the `Actions` pulldown select `Edit Settings`
+1.9.3 In the NSX Manger UI, go to the `Inventory > Groups > IP Pools` click on the ID value for `ip-pool-vips` and a pop-up window will display the entire ID value, keep note of it
+
+<details><summary>Screenshot 1.9.3</summary>
+<img src="Images/2018-10-22-20-12-07.png">
+</details>
+<br/>
+
+1.10 Return to the NSX Manager UI, go to the settings page for Pivotal Container Service, click on the `Networking` tab and enter the following values:
+
+- Container Networking Interface: NSX-T
+- NSX Manager Hostname: nsxmgr-01a.corp.local
+- NSX Manager Super User Principal Identity Certificate: Use the value you gathered in [Lab 2 Step 3.1.4] (https://github.com/CNA-Tech/PKS-Ninja/blob/master/LabGuides/Lab2-PksInstallationPhaseOne) pasting the certificate in the first box and the key in the 2nd box
+- NSX Manager CA Cert: Use the value you gathered in [Lab 2 Step 2.1](https://github.com/CNA-Tech/PKS-Ninja/blob/master/LabGuides/Lab2-PksInstallationPhaseOne)
+- Disable SSL certificate verification: True
+- NAT mode: True
+- Pods IP Block ID: Use the value you gathered in step 1.9.1 above
+- Nodes IP Block ID: Use the value you gathered in step 1.9.1 above
+- T0 Router ID: Use the value you gathered in step 1.9.2 above
+- Floating IP Pool ID: Use the value you gathered in step 1.9.3 above
+- Nodes DNS: 192.168.110.10
+- vSphere Cluster Names: RegionA01-COMP01
+- Enable outbound internet access: True
+- Click Save
+
+<details><summary>Screenshot 1.10.1</summary>
+<img src="Images/2018-10-22-20-28-14.png">
+</details>
+
+<details><summary>Screenshot 1.10.2</summary>
+<img src="Images/2018-10-22-20-29-03.png">
+</details>
+<br/>
+
+1.11 Select the `UAA` tab, click the radio button for `Internal UAA` and click `Save`
 
 <details><summary>Screenshot 1.11</summary>
-<img src="Images/2018-10-21-19-35-33.png">
+<img src="Images/2018-10-22-20-30-52.png">
 </details>
 <br/>
 
-1.12 On the `Edit Settings` menu for the opsman vm, set `Network Adapter 1` to `ls-pks-mgmt`
+1.12 Select the `Errands` tab and enter the following values:
+
+- NSX-T Validation Errand: On
+- Delete all clusters errand: On
+- Click Save
 
 <details><summary>Screenshot 1.12</summary>
-<img src="Images/2018-10-21-19-39-17.png">
+<img src="Images/2018-10-22-20-33-01.png">
 </details>
 <br/>
 
-1.13 In the vSphere web client, right click on the opsman vm and select `Power On`
+1.13 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes'
 
-<details><summary>Screenshot 1.13</summary>
-<img src="Images/2018-10-21-19-40-08.png">
+<details><summary>Screenshot 1.7</summary>
+<img src="Images/2018-10-22-21-09-16.png">
 </details>
 <br/>
 
-1.14 Open a web browser connection to `opsman.corp.local` and select `Internal Authentication`
+1.8 After you click `Apply Changes` BOSH will begin deploying PKS and it will take a while. Leave the `Applying Changes` window open and check it periodically for status. While waiting for the deployment, use another browser tab to open a second connection to the Ops Manager UI and use the second browser session to complete the harbor configuration in the next section.
 
-<details><summary>Screenshot 1.14</summary>
-<img src="Images/2018-10-21-19-47-13.png">
-</details>
-<br/>
+### Step 2: Install Harbor
 
-1.15 On the `Internal Authentication` screen, enter the following values, check the box to agree to terms and conditions and click `Setup Authentication`
+2.1 On a new browser tab, open a connection to the Ops Manager UI, click on `Import a Product` select the Harbor file and click `Open`. It can take a few minutes to import the Harbor file
 
-Note: After clicking `Setup Authentication` it will take several minutes for the authentication system to start. The login screen will appear after the authentication system is finished starting up
-
-- Username: Admin
-- Password: VMware1!
-- Decryption Passphrase: VMware1!
-
-<details><summary>Screenshot 1.15</summary>
-<img src="Images/2018-10-21-19-49-15.png">
-</details>
-<br/>
-
-1.16 From the Ops Manager web UI, login with Username: `Admin` Password: `VMware1!`
-
-<details><summary>Screenshot 1.16</summary>
-<img src="Images/2018-10-21-19-55-42.png">
-</details>
-<br/>
-
-## Step 2: Deploy BOSH
-
-2.1 From the ControlCenter desktop, open putty and connect to `cli-vm`. When you open the ssh session it will attempt to connect to PKS, which has not been deployed yet so it will hang, hold down the ctrl or cmd key while you press `C` to return to the Bash prompt and enter the following command:
-
-`openssl s_client -host nsxmgr-01a.corp.local -port 443 -prexit -showcerts`
-
-Save the section of the output from `Begin Certificate` to `End Certificate` for use in the following steps
-
-<details><summary>Screenshot 2.1</summary>
-<img src="Images/2018-10-21-21-43-02.png">
-</details>
-<br/>
-
-2.2 Log into the Ops Manager web UI and click on the tile `BOSH Director for vSphere`
-
-<details><summary>Screenshot 2.2</summary>
-<img src="Images/2018-10-21-21-07-42.png">
-</details>
-<br/>
-
-2.3 On the `vCenter Configuration` page, enter the following values and click `Save`:
-
-- Name: vcsa-01a
-- vCenter Host: vcsa-01a.corp.local
-- vCenter Username: administrator@vsphere.local
-- vCenter Password: VMware1!
-- Datacenter Name: RegionA01
-- Virtual Disk Type: thin
-- Ephemeral Datastore Names: RegionA01-ISCSI01-COMP01
-- Persistent Datastore Names: RegionA01-ISCSI01-COMP01
-- Select `NSX Networking`
-- NSX Mode: NSX-T
-- NSX Address: nsxmgr-01a.corp.local
-- NSX Username: admin
-- NSX Password: VMware1!
-- VM Folder: pks_vms
-- Template Folder: pks_templates
-- Disk path Folder: pks_disk
-
-<details><summary>Screenshot 2.3.1</summary>
-<img src="Images/2018-10-21-21-29-43.png">
+<details><summary>Screenshot 2.1.1 </summary>
+<img src="Images/2018-10-22-21-23-55.png">
 </details>
 
-<details><summary>Screenshot 2.3.2</summary>
-<img src="Images/2018-10-21-21-44-38.png">
-</details>
-<br/>
-
-2.4 Continue with the Bosh Director tile configuration, select the `Director Config` tab and enter the following values:
-
-- NTP Servers: ntp.corp.local
-- Enable VM Resurrector Plugin: True
-- Enable Post Deploy Scripts: True
-- Recreate All VMs: True
-- Leave all other settings set to default values and click `Save`
-
-<details><summary>Screenshot 2.4</summary>
-<img src="Images/2018-10-21-21-52-58.png">
-</details>
-<br/>
-
-2.5 Continue with the Bosh Director tile configuration, select the `Create Availability Zones` tab and enter the following details:
-
-Note: Each of the availability zones below will have a single cluster. When you add an availability zone, make sure to click `Add` and do **not** click `Add Cluster`
-
-- Click `Add` to add an Availability Zone with the following values
-  - Name: PKS-MGMT-1
-  - IaaS Configuration: vcsa-01a
-  - Cluster: RegionA01-MGMT01
-  - Resource Pool: pks-mgmt-1
-- Click `Add` to add an Availability Zone with the following values
-  - Name: PKS-COMP
-  - IaaS Configuration: vcsa-01a
-  - Cluster: RegionA01-COMP01
-  - Resource Pool: pks-comp-1
-- Click `Add` to add an Availability Zone with the following values
-  - Name: PKS-MGMT-2
-  - IaaS Configuration: vcsa-01a
-  - Cluster: RegionA01-COMP01
-  - Resource Pool: pks-mgmt-2
-- Click Save
-
-<details><summary>Screenshot 2.5</summary>
-<img src="Images/2018-10-21-22-06-12.png">
-</details>
-<br/>
-
-2.6 Continue with the Bosh Director tile configuration, select the `Create Networks` tab and enter the following values:
-
-- Enable ICMP Checks: True
-- Click `Add Network` to add a network with the following values
-  - Name: PKS-MGMT
-  - vSphere Network Name: ls-pks-mgmt
-  - CIDR: 172.31.0.0/24
-  - Reserved IP Ranges: 172.31.0.3
-  - DNS 192.168.110.10
-  - Gateway 172.31.0.1
-  - Availability Zones: PKS-MGMT-1, PKS-MGMT-2
-- Click `Add Network` to add a network with the following values
-  - Name: PKS-COMP
-  - vSphere Network Name: ls-pks-service
-  - CIDR: 172.31.2.0/23
-  - Reserved IP Ranges: 172.31.2.1
-  - DNS 192.168.110.10
-  - Gateway 172.31.2.1
-  - Availability Zones: PKS-COMP
-
-<details><summary>Screenshot 2.6.1</summary>
-<img src="Images/2018-10-21-23-02-32.png">
-</details>
-
-<details><summary>Screenshot 2.6.2</summary>
-<img src="Images/2018-10-22-15-21-58.png">
-</details>
-<br/>
-
-2.7 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
-
-- Singleton Availability Zone: PKS-MGMT-2
-- Network: PKS-MGMT
-- Click Save
-
-<details><summary>Screenshot 2.7</summary>
-<img src="Images/2018-10-21-23-17-12.png">
-</details>
-<br/>
-
-2.8 Continue with the Bosh Director tile configuration, select the `Resource Config` tab and change the value of the `VM Type` in the second row to `medium.disk` as shown in Screenshot 2.8
-
-<details><summary>Screenshot 2.8</summary>
-<img src="Images/2018-10-22-01-12-45.png">
-</details>
-<br/>
-
-2.9 In the Ops Manager web UI, click on `Installation Dashboard` on the top menu bar and then click `Review Pending Changes`
-
-<details><summary>Screenshot 2.9</summary>
-<img src="Images/2018-10-21-23-23-00.png">
-</details>
-<br/>
-
-2.10 On the `Review Pending Changes` screen, ensure that the checkbox for Bosh Director is checked and click `Apply Changes`
-
-<details><summary>Screenshot 2.10</summary>
-<img src="Images/2018-10-21-23-24-52.png">
-</details>
-<br/>
-
-2.11 Review the `Applying Changes` to observe the BOSH VM deployment until it is complete. Once complete, you should see a `Changes applied` popup window as shown in Screenshot 2.11.2
-
-<details><summary>Screenshot 2.11.1 </summary>
-<img src="Images/2018-10-21-23-26-50.png">
-</details>
-
-<details><summary>Screenshot 2.11.2 </summary>
-<img src="Images/2018-10-22-00-41-06.png">
-</details>
-<br/>
-
-2.12 In the vSphere web client from the `Hosts and Clusters` view, expand the pks-mgmt-2 resource pool and you should see the BOSH vm
-
-<details><summary>Screenshot 2.12 </summary>
-<img src="Images/2018-10-22-00-51-05.png">
-</details>
-
-## Step 3: Prep for PKS Install
-
-3.1 Generate NSX-T Principal Identity certificate (You will need this for PKS Intallation)
-
-3.1.1 From the ControlCenter desktop, open putty and connect to `cli-vm`. When you open the ssh session it will attempt to connect to PKS, which has not been deployed yet so it will hang, hold down the `ctrl` or `cmd` key while you press `C` to return to the bash prompt and enter the following command:
-
-``` bash
-mkdir nsxt-pi-cert
-cd nsxt-pi-cert
-```
-
-3.1.2 Use a text editor to create a file with the following shell script to generate the PI cert, for example `nano create_certificate.sh'. Copy the following text to the file:
-
-<details><summary>Click to expand create_certificate.sh</summary>
-
-``` bash
-#!/bin/bash
-#create_certificate.sh
-
-NSX_MANAGER="192.168.110.42"
-NSX_USER="admin"
-
-PI_NAME="pks-nsx-t-superuser"
-NSX_SUPERUSER_CERT_FILE="pks-nsx-t-superuser.crt"
-NSX_SUPERUSER_KEY_FILE="pks-nsx-t-superuser.key"
-
-stty -echo
-printf "Password: "
-read NSX_PASSWORD
-stty echo
-
-openssl req \
-  -newkey rsa:2048 \
-  -x509 \
-  -nodes \
-  -keyout "$NSX_SUPERUSER_KEY_FILE" \
-  -new \
-  -out "$NSX_SUPERUSER_CERT_FILE" \
-  -subj /CN=pks-nsx-t-superuser \
-  -extensions client_server_ssl \
-  -config <(
-    cat /etc/ssl/openssl.cnf \
-    <(printf '[client_server_ssl]\nextendedKeyUsage = clientAuth\n')
-  ) \
-  -sha256 \
-  -days 730
-
-cert_request=$(cat <<END
-  {
-    "display_name": "$PI_NAME",
-    "pem_encoded": "$(awk '{printf "%s\\n", $0}' $NSX_SUPERUSER_CERT_FILE)"
-  }
-END
-)
-
-curl -k -X POST \
-    "https://${NSX_MANAGER}/api/v1/trust-management/certificates?action=import" \
-    -u "$NSX_USER:$NSX_PASSWORD" \
-    -H 'content-type: application/json' \
-    -d "$cert_request"
-```
-
-</details>
-<br/>
-
-<details><summary>Screenshot 3.1.2</summary>
-<img src="Images/2018-10-22-02-30-12.png">
-</details>
-<br/>
-
-3.1.3 Return to the bash prompt enter the command `bash create_certificate.sh` and enter the password `VMware1!` when prompted
-
-<details><summary>Screenshot 3.1.3</summary>
-<img src="Images/2018-10-22-02-45-20.png">
-</details>
-<br/>
-
-3.1.4 Review the contents of the NSX PI certificate and key and save or copy the contents as you will need these keys in later steps
-
-``` bash
-cat pks-nsx-t-superuser.crt
-cat pks-nsx-t-superuser.key
-```
-
-<details><summary>Screenshot 3.1.4</summary>
-<img src="Images/2018-10-22-02-52-14.png">
-</details>
-<br/>
-
-3.1.5 In the NSX Manager UI, go to System > Trust to view certificates. You should now see a certificate for `pks-nsx-t-superuser`
-
-<details><summary>Screenshot 3.1.5</summary>
-<img src="Images/2018-10-22-03-42-57.png">
-</details>
-<br/>
-
-3.2 Create and Register Principal Identity
-
-3.2.1 Use a text editor to create a file with the following shell script and your certificate ID to generate the PI cert, for example `nano create_pi.sh`. **Do not cut and paste this script exactly, make sure to change the CERTIFICATE_ID to the id value from the create_certificate.sh output found in step 3.1.3
-
-<details><summary>Click to expand create_pi.sh</summary>
-
-``` bash
-#!/bin/bash
-#create_pi.sh
-
-NSX_MANAGER="192.168.110.42"
-NSX_USER="admin"
-CERTIFICATE_ID='27fbd52c-a90e-478f-9fd1-2fb52625c9fe'
-
-PI_NAME="pks-nsx-t-superuser"
-NSX_SUPERUSER_CERT_FILE="pks-nsx-t-superuser.crt"
-NSX_SUPERUSER_KEY_FILE="pks-nsx-t-superuser.key"
-NODE_ID=$(cat /proc/sys/kernel/random/uuid)
-
-stty -echo
-printf "Password: "
-read NSX_PASSWORD
-stty echo
-
-pi_request=$(cat <<END
-    {
-         "display_name": "$PI_NAME",
-         "name": "$PI_NAME",
-         "permission_group": "superusers",
-         "certificate_id": "$CERTIFICATE_ID",
-         "node_id": "$NODE_ID"
-    }
-END
-)
-
-curl -k -X POST \
-    "https://${NSX_MANAGER}/api/v1/trust-management/principal-identities" \
-    -u "$NSX_USER:$NSX_PASSWORD" \
-    -H 'content-type: application/json' \
-    -d "$pi_request"
-
-curl -k -X GET \
-    "https://${NSX_MANAGER}/api/v1/trust-management/principal-identities" \
-    --cert $(pwd)/"$NSX_SUPERUSER_CERT_FILE" \
-    --key $(pwd)/"$NSX_SUPERUSER_KEY_FILE"
-```
-
-</details>
-<br/>
-
-<details><summary>Screenshot 3.2.1</summary>
-<img src="Images/2018-10-22-03-15-42.png">
-</details>
-<br/>
-
-3.2.2 Return to the bash prompt and enter the command `bash create_pi.sh` and enter the password `VMware1!` when prompted. Your output should look similar to Screenshot 3.2.2 below
-
-<details><summary>Screenshot 3.2.2</summary>
-<img src="Images/2018-10-22-03-25-06.png">
-</details>
-<br/>
-
-3.2.3 In the NSX Manager UI, go to System > Users and verify that you see a user account for `pks-nsx-t-superuser`
-
-<details><summary>Screenshot 3.2.3</summary>
-<img src="Images/2018-10-22-03-32-45.png">
-</details>
-<br/>
-
-3.3 Import the PKS Tile
-
-3.3.1 Log into the Ops Manager UI, Click `Import a Product`, select the Pivotal Container Service binary file and wait for the file to import
-
-<details><summary>Screenshot 3.2.1.1 </summary>
-<img src="Images/2018-10-22-01-34-24.png">
-</details>
-
-<details><summary>Screenshot 3.2.1.2 </summary>
+<details><summary>Screenshot 2.1.2 </summary>
 <img src="Images/2018-10-22-01-27-45.png">
 </details>
 <br/>
 
-3.3.2 Once the import is complete you should see a `Pivotal Container Service` section in the left navigation bar. Click on the `+` icon
+2.2 In the left hand column of the Ops Manager homepage under `VMware Harbor Registy`, click on the `+` icon to add the Harbor tile to the `Installation Dashboard`
 
-<details><summary>Screenshot 3.3.2.1 </summary>
-<img src="Images/2018-10-22-01-55-08.png">
-</details>
-
-3.4 Click on the Pivotal Container Service Tile
-
-<details><summary>Screenshot 3.4 </summary>
-<img src="Images/2018-10-22-01-55-47.png">
+<details><summary>Screenshot 2.2 </summary>
+<img src="Images/2018-10-22-21-45-54.png">
 </details>
 <br/>
 
-3.5 Select the `Assign AZs and Network Assignments` tab and enter the following values:
+2.3 Click on the `VMware Harbor Registry` tile to open its configuration settings
 
-- Place singleton jobs in : PKS-MGMT-2
-- Balance other jobs in: PKS-MGMT-2
+<details><summary>Screenshot 2.3 </summary>
+<img src="Images/2018-10-22-21-47-27.png">
+</details>
+<br/>
+
+2.4 Select the `Assign AZs and Networks` tab and enter the following values:
+
+- Singleton Availability Zone: PKS-MGMT-1
+- Balance other jobs in: PKS-MGMT-1
 - Network: PKS-MGMT
-- Service Network: PKS-COMP
-- Click Save
 
-<details><summary>Screenshot 3.5</summary>
-<img src="Images/2018-10-22-15-33-10.png">
+<details><summary>Screenshot 2.4</summary>
+<img src="Images/2018-10-22-21-53-32.png">
 </details>
 <br/>
 
-3.5 Select the `Assign AZs and Network Assignments` tab and enter the following values:
+2.5 Select the `General` tab and set the `Hostname` to `harbor.corp.local`
 
-- Place singleton jobs in : PKS-MGMT-2
-- Balance other jobs in: PKS-MGMT-2
+<details><summary>Screenshot 2.5</summary>
+<img src="Images/2018-10-22-21-57-03.png">
+</details>
+<br/>
+
+2.6 Select the `Certificate` tab, select `Generate RSA Certificate` and enter `harbor.corp.local` and click `Generate`
+
+<details><summary>Screenshot 2.6</summary>
+<img src="Images/2018-10-22-21-53-32.png">
+</details>
+<br/>
+
+2.7 On the `Certificate` tab, click `Save`
+
+<details><summary>Screenshot 2.7</summary>
+<img src="Images/2018-10-22-22-11-03.png">
+</details>
+<br/>
+
+2.8 On the `Credentials` tab, set the `Admin Password` to `VMware1!` and click `Save`
+
+<details><summary>Screenshot 2.8</summary>
+<img src="Images/2018-10-22-22-13-53.png">
+</details>
+<br/>
+
+2.9 On the `Resource Config` tab, set the `Persistent Disk Type` to `10 GB`
+
+<details><summary>Screenshot 2.9</summary>
+<img src="Images/2018-10-22-22-18-57.png">
+</details>
+<br/>
+
+2.4 Select the `Assign AZs and Networks` tab and enter the following values:
+
+- Singleton Availability Zone: PKS-MGMT-1
+- Balance other jobs in: PKS-MGMT-1
 - Network: PKS-MGMT
-- Service Network: PKS-COMP
-- Click Save
 
-<details><summary>Screenshot 3.5</summary>
-<img src="Images/2018-10-22-15-33-10.png">
+<details><summary>Screenshot 2.4</summary>
+<img src="Images/2018-10-22-21-53-32.png">
 </details>
 <br/>
 
-Click on PKS Tile
+2.4 Select the `Assign AZs and Networks` tab and enter the following values:
 
-<img src="Images/2018-10-22-01-55-47.png">
+- Singleton Availability Zone: PKS-MGMT-1
+- Balance other jobs in: PKS-MGMT-1
+- Network: PKS-MGMT
 
-Go back to BOSH deployment steps and add step to add PKS-COMP network per pks-params
+<details><summary>Screenshot 2.4</summary>
+<img src="Images/2018-10-22-21-53-32.png">
+</details>
+<br/>
 
-- PKS Tile > Assign AZ ...
-- singleton: pks-mgmt-2
-- balance jobs: pks-mgmt-2
-- network: PKS-MGMT
-- Service Net: PKS-COMP
-- Save
-- PKS API
-  - pks.corp.local
-- Plan 1
-  - Master Availability Zones: PKS-COMP
-  - Worker Persistent Disk Type: 10gb
-  - Enable Priviledged Containers: true
-- Plan 2 
-  - Active: True
-  - master: medium
-  - worker vm: large
-  - worker perst disk: 10gb
-  - master/worker/az: PKS-COMP
-  - priv containers true
-- Plan 3
-  - Inactive
-  - CLick Save
-- Kubernetes Cloud Provider
-- IaaS: vSphere
-- credentials administrator@vsphere.local VMware1!
+2.4 Select the `Assign AZs and Networks` tab and enter the following values:
 
+- Singleton Availability Zone: PKS-MGMT-1
+- Balance other jobs in: PKS-MGMT-1
+- Network: PKS-MGMT
 
+<details><summary>Screenshot 2.4</summary>
+<img src="Images/2018-10-22-21-53-32.png">
+</details>
+<br/>
 
+**STOP**: Before proceeding, ensure that the PKS tile deployment has completed
 
+2.5 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
 
-
-
+<details><summary>Screenshot 2.5</summary>
+<img src="Images/2018-10-22-22-22-46.png">
+</details>
+<br/>
 
 ## Next Steps
 
-This lab provided an introductory overview of Kubernetes operations. Additional topics such as persistent volumes, network policy, config maps, stateful sets and more will be covered in more detail in the ongoing labs.
+### Thank you for completing the Installation Phase 2 Lab!
 
-If you are following the PKS Ninja cirriculum, [click here to proceed to the next lab](../Lab2-PksInstallationPhaseOne). As you proceed through the remaining labs you will learn more advanced details about Kubernetes using additional planespotter app components as examples and then deploy the complete planespotter application on a PKS environment.
-
-If you are not following the PKS Ninja cirriculum and would like to deploy the complete planespotter app on VKE, you can find [complete deployment instructions here](https://github.com/Boskey/run_kubernetes_with_vmware)
-
-### Thank you for completing the Introduction to Kubernetes Lab!
-
-### [Please click here to proceed to Lab2: PKS Installation Phase 1](../Lab2-PksInstallationPhaseOne)
+### [Please click here to proceed to Lab2: PKS Installation Phase 1](../Lab4-Harbor)
