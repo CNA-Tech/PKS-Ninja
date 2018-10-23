@@ -1,4 +1,12 @@
-### Harbor Enterprise Container Registry
+# Lab 4: Harbor Enterprise Container Registry
+
+**Contents:**
+
+- [Step 1: Install PKS]()
+- [Step 2: Install Harbor]()
+- [Next Steps]()
+
+## Overview
 
 The application deployments in this lab make use of a private container registry. We are
 using software from a VMware opensource project called Harbor as our registry. Harbor
@@ -11,13 +19,7 @@ capability of Harbor. Most organizations will use a private registry rather than
 Docker hub to improve security and latency for their applications. Although Harbor can
 be deployed as a highly available application, we have not done that for this lab.
 
-**Login to Harbor UI**
-
-1. Click on Google Chrome
-2. Click on Harbor.corp.local bookmark
-3. Login to Harbor with Username: admin and Password: VMware1!
-
-**View Projects and Repositories**
+## Step 1: Prepare Projects and Repositories
 
 Harbor organizes images into a set of projects and repositories within those projects.
 Repositories can have one or more images associated with them. Each of the images
@@ -26,6 +28,79 @@ associated with them so that administrators can regulate access to images and cr
 image distribution pipelines across registries that might be geographically dispersed.
 You should now be at a summary screen that shows all of the projects in this registry.
 For our lab, we are interested in a single project called library.
+
+1.1 Login to harbor.corp.local and click on `+ New Project`
+
+<details><summary>Screenshot 1.1 </summary>
+<img src="Images/2018-10-23-01-31-40.png">
+</details>
+<br/>
+
+1.2 On the `New Project` screen, set the `Project Name` to `trusted` and click `OK`
+
+<details><summary>Screenshot 1.2 </summary>
+<img src="Images/2018-10-23-01-35-25.png">
+</details>
+<br/>
+
+1.3 On the `Projects` page, click on `trusted`,  click on the `configuration` tab and enter the values as shown in Screenshot 1.3
+
+<details><summary>Screenshot 1.3</summary>
+<img src="Images/2018-10-23-02-45-20.png">
+</details>
+<br/>
+
+1.4 On the `Projects` page, click on `library`,  and on the Repositories tab, click `PUSH IMAGE` and keep note of the commands for use in later steps
+
+<details><summary>Screenshot 1.4</summary>
+<img src="Images/2018-10-23-03-01-54.png">
+</details>
+<br/>
+
+1.5 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm`. When you connect an outdated script will run causing the shell to hang for a few seconds until it times out. This is expected behavior, wait for the script to time out and then you can use the bash environment normally
+
+<details><summary>Screenshot 1.5 </summary>
+<img src="Images/2018-10-23-03-04-55.png">
+</details>
+<br/>
+
+1.6 From the cli-vm prompt, clone the planespotter github repository with the command `git clone https://github.com/yfauser/planespotter.git` and view
+
+<details><summary>Screenshot 1.6</summary>
+<img src="Images/2018-10-23-03-10-14.png">
+</details>
+<br/>
+
+## Step 2: Build Docker Images for Planespotter
+
+2.1 From the cli-vm prompt, list the contents of the `/planespotter` directory and observe the folders for the four apps that together make up planespotter, `adsb-sync`, `app-server`, `frontend` and `db-install`
+
+<details><summary>Screenshot 2.1 </summary>
+<img src="Images/2018-10-23-03-16-29.png">
+</details>
+<br/>
+
+2.2 Build the adsb-sync image with the following commands:
+
+```bash
+cd ~/planespotter/adsb-sync/
+docker build . 
+docker tag harbor.corp.local/library/adsb-sync:v1
+
+<details><summary>Screenshot 1.1 </summary>
+<img src="Images/2018-10-23-01-31-40.png">
+</details>
+<br/>
+
+**Login to Harbor UI**
+
+1. Click on Google Chrome
+2. Click on Harbor.corp.local bookmark
+3. Login to Harbor with Username: admin and Password: VMware1!
+
+**View Projects and Repositories**
+
+
 
 The library project contains five repositories and has no access control. it is available to
 the public.

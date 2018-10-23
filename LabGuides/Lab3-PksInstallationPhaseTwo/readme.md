@@ -1,11 +1,9 @@
-# Lab PKS Installation Phase 2
+# Lab 3: PKS Installation Phase 2
 
 **Contents:**
 
-- [Lab Access Instructions]()
 - [Step 1: Install PKS]()
 - [Step 2: Install Harbor]()
-- [Step 3: Prep for PKS Installation]()
 - [Next Steps]()
 
 ## Step 1: Install PKS
