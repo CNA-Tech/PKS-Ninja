@@ -124,7 +124,7 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 </details>
 <br/>
 
-1.10 Return to the NSX Manager UI, go to the settings page for Pivotal Container Service, click on the `Networking` tab and enter the following values:
+1.10 Return to the Ops Manager UI, go to the settings page for Pivotal Container Service, click on the `Networking` tab and enter the following values:
 
 - Container Networking Interface: NSX-T
 - NSX Manager Hostname: nsxmgr-01a.corp.local
