@@ -1,14 +1,5 @@
 # Lab 5: Deploy First PKS Cluster & Planespotter
 
-**Contents:**
-
-- [Step 1: Prepare Projects and Repositories]()
-- [Step 2: Install OpsMan Root Cert on BOSH for PKS/K8s <-> Harbor communications]()
-- [Step 3: Install Harbor certificate on `cli-vm`]()
-- [Step 4: Build Docker Image for Planespotter Frontend]()
-- [Step 5 Content Trust & Vulnerability Scanning]()
-- [Next Steps]()
-
 ## Step 1: Create UAA Account for PKS User
 
 1.1 Login to Ops Manager UI, Click on the PKS tile and then click on the `Credentials` tab, look for `Pks Uaa Management Admin Client` , click `Link to Credential`
@@ -67,7 +58,7 @@ pks clusters
 pks create-cluster my-cluster --external-hostname my-cluster --plan small
 ```
 
-Note: It will take ~10 minutes for the cluster to deploy, you may proceed with step 3 while the cluster deployment is in progress, however do not proceed to step 4 until the cluster has been fully deployed
+Note: It will take ~10 minutes for the cluster to deploy, you may proceed with step 3 while the cluster deployment is in progress, however do not proceed to step 4 until the cluster deployment status is `succeeded`
 
 Also, it may be interesting for you to look at the `Tasks` menu in vCenter to observe some of the vSphere tasks that occur on cluster creation
 
@@ -78,4 +69,42 @@ Also, it may be interesting for you to look at the `Tasks` menu in vCenter to ob
 
 ## Step 3: Prepare Planespotter K8s Manifests for Deployment
 
-3.1 From `cli-vm`, use nano or another text editor to change the image pull location in the frontend deploymnent manifest to pull the image you created and pushed to harbor previously
+3.1 From `cli-vm`, use nano or another text editor to change the image pull location in the frontend deployment manifest to pull the image you created and pushed to harbor previously at  `harbor.corp.local/library/frontend:v1`. Use the following commands to open the manifest in nano and then reference Screenshot 3.1 as needed to complete the update and save the file
+
+```bash
+cd ~/planespotter/kubernetes
+nano frontend-deployment_all_k8s.yaml
+# update file, save and close
+```
+
+<details><summary>Screenshot 2.2 </summary>
+<img src="Images/2018-10-24-06-46-07.png">
+</details>
+<br/>
+
+3.2 View the `app-server-deployment_all_k8s.yaml` file, observe the container image value is `yfauser/planespotter-app-server:1508888202fc85246248c0892c0d27dda34de8e1` which is a working configuration. You may notice this does not specify the location of the registry it is using, and that is because this container is located on docker hub, which is a default search location for docker hosts including PKS deployed K8s nodes
+
+<details><summary>Screenshot 2.2 </summary>
+<img src="Images/2018-10-24-07-07-26.png">
+</details>
+<br/>
+
+You should now understand the differences in how to configure a kubernetes manifest to pull from docker hub or from Harbor
+
+## Step 4: Deploy Planespotter App
+
+4.1 Before proceeding, verify that your cluster has successfully deployed by entering the command `pks clusters` from `cli-vm`. If your PKS CLI session has timed out, login again using the command provided in step 2.1
+
+<details><summary>Screenshot 2.2 </summary>
+<img src="Images/2018-10-24-07-15-44.png">
+</details>
+<br/>
+
+4.2 Pull down the login credentials for `my-cluster` with the command `pks get-credentials my-cluster`
+
+<details><summary>Screenshot 2.2 </summary>
+<img src="Images/2018-10-24-07-17-19.png">
+</details>
+<br/>
+
+Please use the instructions at [this link](https://github.com/Boskey/run_kubernetes_with_vmware/wiki/Deploy-Plane-Spotter) to complete deployment of the planespotter app
