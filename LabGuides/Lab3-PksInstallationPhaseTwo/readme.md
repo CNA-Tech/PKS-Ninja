@@ -38,23 +38,16 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 
 - API Hostname: pks.corp.local
 
+- Generate Certificate with *.corp.local
+
 <details><summary>Screenshot 1.3</summary>
 <img src="Images/2018-10-22-15-33-10.png">
 </details>
 <br/>
 
-1.4 Select the `PKS API` tab and enter the following values:
-
-- API Hostname: pks.corp.local
-
-<details><summary>Screenshot 1.4</summary>
-<img src="Images/2018-10-22-19-30-22.png">
-</details>
-<br/>
-
 1.5 Select the `Plan 1` tab and enter the following values:
 
-- Master Availability Zones: PKS-COMP
+- Master/ETCD Availability Zones: PKS-COMP
 - Worker Persistent Disk Type: 10gb
 - Enable Priviledged Containers: true
 - Click Save
