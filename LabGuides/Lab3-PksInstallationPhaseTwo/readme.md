@@ -10,7 +10,7 @@
 
 1.1 Login to the Ops Manager UI and click on the Pivotal Container Service tile to access its configuration settings
 
-Note: If you do not see a `Pivotal Container Service` tile, check the left hand column and next to `Pivotal Container Service` click the `+` icon as shown in Screenshot 1.1.b and the `Pivotal Container Service` tile will be added and you can click on it to view the tile configuration
+Note: If you do not see a `Pivotal Container Service` tile, check the left hand column and next to `Pivotal Container Service` click the `+` icon as shown in Screenshot 1.1.b and the `Pivotal Container Service` tile will be added to the `Installation Dashboard` and you can click on it to view the tile configuration
 
 <details><summary>Screenshot 1.1 </summary>
 <img src="Images/2018-10-22-01-55-47.png">
@@ -256,42 +256,9 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 </details>
 <br/>
 
-2.4 Select the `Assign AZs and Networks` tab and enter the following values:
-
-- Singleton Availability Zone: PKS-MGMT-1
-- Balance other jobs in: PKS-MGMT-1
-- Network: PKS-MGMT
-
-<details><summary>Screenshot 2.4</summary>
-<img src="Images/2018-10-22-21-53-32.png">
-</details>
-<br/>
-
-2.4 Select the `Assign AZs and Networks` tab and enter the following values:
-
-- Singleton Availability Zone: PKS-MGMT-1
-- Balance other jobs in: PKS-MGMT-1
-- Network: PKS-MGMT
-
-<details><summary>Screenshot 2.4</summary>
-<img src="Images/2018-10-22-21-53-32.png">
-</details>
-<br/>
-
-2.4 Select the `Assign AZs and Networks` tab and enter the following values:
-
-- Singleton Availability Zone: PKS-MGMT-1
-- Balance other jobs in: PKS-MGMT-1
-- Network: PKS-MGMT
-
-<details><summary>Screenshot 2.4</summary>
-<img src="Images/2018-10-22-21-53-32.png">
-</details>
-<br/>
-
 **STOP**: Before proceeding, ensure that the PKS tile deployment has completed
 
-2.5 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
+2.10 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
 
 <details><summary>Screenshot 2.5</summary>
 <img src="Images/2018-10-22-22-22-46.png">

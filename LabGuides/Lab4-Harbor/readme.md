@@ -11,8 +11,7 @@
 The application deployments in this lab make use of a private container registry. We are
 using software from a VMware opensource project called Harbor as our registry. Harbor
 is included as an enterprise supported product with Pivotal Container Service (PKS). In
-this section, you will become familiar with the core capability of Harbor. You will create
-a project and see how to push and pull images from the repos. You will also enable
+this section, you will become familiar with the core capability of Harbor. You will create a project and see how to push and pull images from the repos. You will also enable
 content trust so that images are signed by the publisher and only signed images may be
 pulled from the project repo. You will also be introduced to the vulnerability scanning
 capability of Harbor. Most organizations will use a private registry rather than public
@@ -57,23 +56,123 @@ For our lab, we are interested in a single project called library.
 </details>
 <br/>
 
-1.5 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm`. When you connect an outdated script will run causing the shell to hang for a few seconds until it times out. This is expected behavior, wait for the script to time out and then you can use the bash environment normally
+## Step 2: Intall OpsMan root cert on BOSH for PKS/K8s <-> Harbor communications
 
-<details><summary>Screenshot 1.5 </summary>
+Harbor requires HTTPS/SSL and does not support unencrypted http communications or any workaround to bypass this requirement. In order for a container host to push or pull images from Harbor, the environment either must reference a common CA or you must install the Harbor Root Certificate on the docker/container host as a trusted source
+
+For K8s nodes, PKS (BOSH) automates the process of certificate setup. For PKS you should use the Ops Manager root certificate as it was used to sign the Harbor root certificate. In this section you will install the Ops Manager root cert in the BOSH director tile which will enable all PKS deployed K8s clusters to trust the registry automatically
+
+2.1 Log into the Ops Manager UI, go to `Admin > Settings > Advanced` and click `Download Root CA Cert` as shown in Screenshot 2.1
+
+<details><summary>Screenshot 2.1</summary>
+<img src="Images/2018-10-24-01-09-48.png">
+</details>
+<br/>
+
+2.2 From the ControlCenter desktop open Notepad++, select `File > Open` and select the `root_ca_certificate` from the `E:\Downloads` directory, and copy the contents of the file to the clipboard. This is the root cert that you downloaded in the previous step
+
+<details><summary>Screenshot 2.2.1</summary>
+<img src="Images/2018-10-24-01-21-06.png">
+</details>
+
+<details><summary>Screenshot 2.2.2</summary>
+<img src="Images/2018-10-24-01-12-58.png">
+</details>
+
+<details><summary>Screenshot 2.2.3</summary>
+<img src="Images/2018-10-24-01-25-24.png">
+</details>
+<br/>
+
+2.3 From the Ops Manager UI homepage click the `BOSH Director for vSphere` tile, go to the `Security` tab and paste the certificate in the `Trusted Certificates` textbox and click `Save`.
+
+<details><summary>Screenshot 2.3.1</summary>
+<img src="Images/2018-10-24-01-23-15.png">
+</details>
+
+<details><summary>Screenshot 2.3.2</summary>
+<img src="Images/2018-10-24-01-31-59.png">
+</details>
+<br/>
+
+This completes the Ops Manger certificate setup for PKS/K8s <-> Harbor connections
+
+## Step 3: Install Harbor certificate on `cli-vm`
+
+Harbor and container registries in general typically need to need to connect to other clients than just the K8s clusters, for example developer workstations, pipeline tools etc. When providing certificates for external clients to connect to Harbor, you should use the Harbor certificate to preserve the security of the Ops Manager certificate which should be only used for control plane operations. Accordingly, we will install the Harbor certificate on the cli-vm ubuntu host we will be using to manually interact with docker and Harber in this lab
+
+Note: `cli-vm` is just a standard ubuntu jumpbox with docker, PKS CLI, Kubectl, GIT and a few other utilities installed
+
+3.1 From the Ops Manager homepage, click on the `VMware Harbor Registry` tile, go to the `Certificate` tab and copy the SSL certificate text from the top textbox
+
+<details><summary>Screenshot 3.1.1</summary>
+<img src="Images/2018-10-24-01-50-50.png">
+</details>
+
+<details><summary>Screenshot 3.1.2</summary>
+<img src="Images/2018-10-24-01-48-15.png">
+</details>
+<br/>
+
+3.2 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm`.
+
+Note: When you connect an outdated script will run causing the shell to hang for a few seconds until it times out. We havent had a chance to update the script yet so for now, wait for the script to time out and then you can use the ubuntu bash environment normally
+
+<details><summary>Screenshot 3.2 </summary>
 <img src="Images/2018-10-23-03-04-55.png">
 </details>
 <br/>
 
-1.6 From the cli-vm prompt, clone the planespotter github repository with the command `git clone https://github.com/yfauser/planespotter.git` and view
+3.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
+
+```bash
+sudo su
+# use Password: VMware1!
+cd /etc/docker/certs.d/harbor.corp.local
+nano ca.crt
+# Paste the certificate text into nano, save and close the file
+systemctl daemon-reload
+systemctl restart docker
+exit
+```
+
+<details><summary>Screenshot 3.3.1</summary>
+<img src="Images/2018-10-24-02-12-17.png">
+</details>
+
+<details><summary>Screenshot 3.3.2</summary>
+<img src="Images/2018-10-24-02-15-15.png">
+</details>
+<br/>
+
+You have now prepared `cli-vm' for secure communication with Harbor
+
+## Step 4: Build Docker Image for Planespotter
+
+In Step 4, you will clone the planespotter repo and use the downloaded source files to build the container for the planespotter-frontend app to prepare Harbor for the planespotter app deployment you will do later in Lab 5.
+
+In this case we will only build the planespotter-frontend container ourselves as the planespotter repo already comes with K8s deployment manifests that are setup to download pre-built planepotter containers from docker hub so while we do not need to build the containers its valuable to see the process and how to setup K8s manifests to pull from either Harbor or Docker Hub later in Lab 5
+
+3.1 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm` and wait for the bash prompt
+
+<details><summary>Screenshot 3.1 </summary>
+<img src="Images/2018-10-23-03-04-55.png">
+</details>
+<br/>
+
+3.2 From the cli-vm prompt, clone the planespotter github repository with the following commands:
+
+```bash
+cd ~
+git clone https://github.com/yfauser/planespotter.git`
+```
 
 <details><summary>Screenshot 1.6</summary>
 <img src="Images/2018-10-23-03-10-14.png">
 </details>
 <br/>
 
-## Step 2: Build Docker Images for Planespotter
-
-2.1 From the cli-vm prompt, list the contents of the `/planespotter` directory and observe the folders for the four apps that together make up planespotter, `adsb-sync`, `app-server`, `frontend` and `db-install`
+2.1 From the cli-vm prompt, list the contents of the `/planespotter/
 
 <details><summary>Screenshot 2.1 </summary>
 <img src="Images/2018-10-23-03-16-29.png">
@@ -84,13 +183,36 @@ For our lab, we are interested in a single project called library.
 
 ```bash
 cd ~/planespotter/adsb-sync/
-docker build . 
-docker tag harbor.corp.local/library/adsb-sync:v1
+docker build .
+```
 
-<details><summary>Screenshot 1.1 </summary>
-<img src="Images/2018-10-23-01-31-40.png">
+<details><summary>Screenshot 2.2 </summary>
+<img src="Images/2018-10-23-03-32-13.png">
 </details>
 <br/>
+
+2.3 Gather the image tag from the last line of the docker build output as shown in Screenshot 2.3
+
+<details><summary>Screenshot 2.3 </summary>
+<img src="Images/2018-10-23-03-41-26.png">
+</details>
+<br/>
+
+2.4 Update the image tag and push to harbor with the following commands - be sure to replace the value `5e04a5212605` in the `docker tag` command below with the tag value  
+
+```bash
+docker tag 5e04a5212605 harbor.corp.local/library/adsb-sync:v1
+docker push harbor.corp.local/library/adsb-sync:v1
+```
+
+<details><summary>Screenshot 1.1 </summary>
+<img src="Images/2018-10-23-03-32-13.png">
+</details>
+<br/>
+
+docker tag harbor.corp.local/library/adsb-sync:v1
+
+
 
 **Login to Harbor UI**
 
