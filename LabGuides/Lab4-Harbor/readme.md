@@ -2,8 +2,10 @@
 
 **Contents:**
 
-- [Step 1: Install PKS]()
-- [Step 2: Install Harbor]()
+- [Step 1: Prepare Projects and Repositories]()
+- [Step 2: Install OpsMan Root Cert on BOSH for PKS/K8s <-> Harbor communications]()
+- [Step 3: Install Harbor certificate on `cli-vm`]()
+- [Step 4: Build Docker Image for Planespotter Frontend]()
 - [Next Steps]()
 
 ## Overview
@@ -56,7 +58,7 @@ For our lab, we are interested in a single project called library.
 </details>
 <br/>
 
-## Step 2: Intall OpsMan root cert on BOSH for PKS/K8s <-> Harbor communications
+## Step 2: Install OpsMan Root Cert on BOSH for PKS/K8s <-> Harbor communications
 
 Harbor requires HTTPS/SSL and does not support unencrypted http communications or any workaround to bypass this requirement. In order for a container host to push or pull images from Harbor, the environment either must reference a common CA or you must install the Harbor Root Certificate on the docker/container host as a trusted source
 
@@ -99,7 +101,7 @@ This completes the Ops Manger certificate setup for PKS/K8s <-> Harbor connectio
 
 ## Step 3: Install Harbor certificate on `cli-vm`
 
-Harbor and container registries in general typically need to need to connect to other clients than just the K8s clusters, for example developer workstations, pipeline tools etc. When providing certificates for external clients to connect to Harbor, you should use the Harbor certificate to preserve the security of the Ops Manager certificate which should be only used for control plane operations. Accordingly, we will install the Harbor certificate on the cli-vm ubuntu host we will be using to manually interact with docker and Harber in this lab
+Harbor and container registries in general typically need to need to connect to other clients than just the K8s clusters, for example developer workstations, pipeline tools etc. When providing certificates for external clients to connect to Harbor, you should use the Harbor certificate to preserve the security of the Ops Manager certificate which should be only used for control plane operations. Accordingly, we will install the Harbor certificate on the cli-vm ubuntu host we will be using to manually interact with docker and Harbor in this lab
 
 Note: `cli-vm` is just a standard ubuntu jumpbox with docker, PKS CLI, Kubectl, GIT and a few other utilities installed
 
@@ -147,73 +149,82 @@ exit
 
 You have now prepared `cli-vm' for secure communication with Harbor
 
-## Step 4: Build Docker Image for Planespotter
+## Step 4: Build Docker Image for Planespotter Frontend
 
-In Step 4, you will clone the planespotter repo and use the downloaded source files to build the container for the planespotter-frontend app to prepare Harbor for the planespotter app deployment you will do later in Lab 5.
+In Step 4, you will clone the planespotter repo and use the downloaded source files to build the container for the planespotter frontend app to prepare Harbor for the planespotter app deployment you will do later in Lab 5.
 
-In this case we will only build the planespotter-frontend container ourselves as the planespotter repo already comes with K8s deployment manifests that are setup to download pre-built planepotter containers from docker hub so while we do not need to build the containers its valuable to see the process and how to setup K8s manifests to pull from either Harbor or Docker Hub later in Lab 5
+In this case we will only build the planespotter frontend container ourselves as the planespotter repo already comes with K8s deployment manifests that are setup to download pre-built planepotter containers from docker hub. While we do not have to build the containers in this case, its valuable to see the process and how to setup K8s manifests to pull from either Harbor or Docker Hub later in Lab 5
 
-3.1 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm` and wait for the bash prompt
+4.1 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm` and wait for the bash prompt
 
-<details><summary>Screenshot 3.1 </summary>
+<details><summary>Screenshot 4.1 </summary>
 <img src="Images/2018-10-23-03-04-55.png">
 </details>
 <br/>
 
-3.2 From the cli-vm prompt, clone the planespotter github repository with the following commands:
+4.2 From the cli-vm prompt, clone the planespotter github repository with the following commands:
 
 ```bash
 cd ~
-git clone https://github.com/yfauser/planespotter.git`
+git clone https://github.com/yfauser/planespotter.git
 ```
 
-<details><summary>Screenshot 1.6</summary>
+<details><summary>Screenshot 4.2</summary>
 <img src="Images/2018-10-23-03-10-14.png">
 </details>
 <br/>
 
-2.1 From the cli-vm prompt, list the contents of the `/planespotter/
-
-<details><summary>Screenshot 2.1 </summary>
-<img src="Images/2018-10-23-03-16-29.png">
-</details>
-<br/>
-
-2.2 Build the adsb-sync image with the following commands:
+4.3 View the planespotter frontend dockerfile with the following commands:
 
 ```bash
-cd ~/planespotter/adsb-sync/
-docker build .
+cd ~/planespotter/frontend/
+cat Dockerfile
 ```
 
-<details><summary>Screenshot 2.2 </summary>
-<img src="Images/2018-10-23-03-32-13.png">
+<details><summary>Screenshot 4.3 </summary>
+<img src="Images/2018-10-24-03-06-42.png">
 </details>
 <br/>
 
-2.3 Gather the image tag from the last line of the docker build output as shown in Screenshot 2.3
+4.4 Build the planespotter frontend container image with the command `docker build .` and copy the image ID from the last line of the output to the clipboard
 
-<details><summary>Screenshot 2.3 </summary>
-<img src="Images/2018-10-23-03-41-26.png">
+<details><summary>Screenshot 4.4.1 </summary>
+<img src="Images/2018-10-24-03-13-22.png">
+</details>
+
+<details><summary>Screenshot 4.4.2 </summary>
+<img src="Images/2018-10-24-03-17-58.png">
 </details>
 <br/>
 
-2.4 Update the image tag and push to harbor with the following commands - be sure to replace the value `5e04a5212605` in the `docker tag` command below with the tag value  
+4.5 Update the image tag and push to harbor with the following commands - be sure to replace the value `a6a227b1a503` in the `docker tag` command below with the tag value you gathered in the previous step  
 
 ```bash
-docker tag 5e04a5212605 harbor.corp.local/library/adsb-sync:v1
+docker tag a6a227b1a503 harbor.corp.local/library/frontend:v1
 docker push harbor.corp.local/library/adsb-sync:v1
 ```
 
-<details><summary>Screenshot 1.1 </summary>
-<img src="Images/2018-10-23-03-32-13.png">
+<details><summary>Screenshot 4.5 </summary>
+<img src="Images/2018-10-24-03-22-00.png">
 </details>
 <br/>
 
-docker tag harbor.corp.local/library/adsb-sync:v1
+4.6 Log into the Harbor UI and navigate to `Projects > library` and click on `library/frontend` to see the image you built and pushed to Harbor in the previous steps.
 
+<details><summary>Screenshot 4.6.1 </summary>
+<img src="Images/2018-10-24-03-27-01.png">
+</details>
 
+<details><summary>Screenshot 4.6.2 </summary>
+<img src="Images/2018-10-24-03-27-29.png">
+</details>
 
+<details><summary>Screenshot 4.6.3 </summary>
+<img src="Images/2018-10-24-03-31-17.png">
+</details>
+<br/>
+
+<!--
 **Login to Harbor UI**
 
 1. Click on Google Chrome
@@ -404,3 +415,4 @@ pod from the signed image.
 **You've finished Lab 4**
 
 Congratulations on completing Lab 4!
+--!>
