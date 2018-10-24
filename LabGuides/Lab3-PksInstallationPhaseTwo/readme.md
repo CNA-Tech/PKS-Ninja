@@ -49,6 +49,7 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 
 - Master/ETCD Availability Zones: PKS-COMP
 - Worker Persistent Disk Type: 10gb
+- Worker Availability Zone: PKS-COMP
 - Enable Priviledged Containers: true
 - Click Save
 
