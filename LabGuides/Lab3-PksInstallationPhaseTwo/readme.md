@@ -88,7 +88,7 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
   - Password: VMware1!
 - vCenter Host: vcsa-01a.corp.local
 - Datacenter Name: RegionA01
-- Datastore Name: RegionA01-ISCI01-COMP01
+- Datastore Name: RegionA01-ISCSI01-COMP01
 - Stored VM Folder: pks_vms
 - Click Save
 
