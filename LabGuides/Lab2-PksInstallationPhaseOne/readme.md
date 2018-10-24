@@ -179,6 +179,7 @@ Save the section of the output from `Begin Certificate` to `End Certificate` for
 - NSX Address: nsxmgr-01a.corp.local
 - NSX Username: admin
 - NSX Password: VMware1!
+- Copy and Paste the NSX-T Cert from step 2.1
 - VM Folder: pks_vms
 - Template Folder: pks_templates
 - Disk path Folder: pks_disk
