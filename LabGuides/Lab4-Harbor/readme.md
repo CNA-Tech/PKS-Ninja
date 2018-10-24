@@ -6,6 +6,7 @@
 - [Step 2: Install OpsMan Root Cert on BOSH for PKS/K8s <-> Harbor communications]()
 - [Step 3: Install Harbor certificate on `cli-vm`]()
 - [Step 4: Build Docker Image for Planespotter Frontend]()
+- [Step 5 Content Trust & Vulnerability Scanning]()
 - [Next Steps]()
 
 ## Overview
@@ -60,7 +61,7 @@ For our lab, we are interested in a single project called library.
 
 ## Step 2: Install OpsMan Root Cert on BOSH for PKS/K8s <-> Harbor communications
 
-Harbor requires HTTPS/SSL and does not support unencrypted http communications or any workaround to bypass this requirement. In order for a container host to push or pull images from Harbor, the environment either must reference a common CA or you must install the Harbor Root Certificate on the docker/container host as a trusted source
+To establish secure HTTPS/SSL and does not support unencrypted http communications or any workaround to bypass this requirement. In order for a container host to push or pull images from Harbor, the environment either must reference a common CA or you must install the Harbor Root Certificate on the docker/container host as a trusted source
 
 For K8s nodes, PKS (BOSH) automates the process of certificate setup. For PKS you should use the Ops Manager root certificate as it was used to sign the Harbor root certificate. In this section you will install the Ops Manager root cert in the BOSH director tile which will enable all PKS deployed K8s clusters to trust the registry automatically
 
@@ -224,7 +225,39 @@ docker push harbor.corp.local/library/adsb-sync:v1
 </details>
 <br/>
 
+## [Click here to proceed to Lab 5: Deploy your First PKS Cluster & Planespotter app](../Lab5-DeployFirstCluster)
+
 <!--
+
+## Step 5 Content Trust & Vulnerability Scanning
+
+Content trust allows admins to require that images be signed in order for the container to run. In this section, you will push untrusted and trusted images to Harbor that we have pre-installed in the `cli-vm` in your the lab vPod, use them to validate the content trust feature You will also trigger a Clair vulnerability scan and view the results. Note that content trust and vulnerability scanning features are independent of one another and can be used seperately
+
+5.1 Resume or if needed reopen your SSH connection to `cli-vm` and upload the untrusted image with the command `docker push harbor.corp.local/trusted/helloworld:V2`
+
+<details><summary>Screenshot 5.1 </summary>
+<img src="Images/2018-10-24-04-20-26.png">
+</details>
+<br/>
+
+5.2 From `cli-vm` configure environmental variables that enable the docker client to validate signed images with Harbor and upload the trusted image with the following commands. Use the passphrase `handsonlab` when prompted
+
+```bash
+export DOCKER_CONTENT_TRUST_SERVER=https://harbor.corp.local:4443
+export DOCKER_CONTENT_TRUST=1
+docker push harbor.corp.local/trusted/nginx:V2
+#passphrase = handsonlab
+```
+
+<details><summary>Screenshot 5.1 </summary>
+<img src="Images/2018-10-24-04-20-26.png">
+</details>
+<br/>
+
+## Click here to proceed to [Lab 5: Deploy your First PKS Cluster & Planespotter app](../Lab5-DeployFirstCluster)
+
+
+
 **Login to Harbor UI**
 
 1. Click on Google Chrome
