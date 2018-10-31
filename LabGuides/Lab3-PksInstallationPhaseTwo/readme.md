@@ -235,10 +235,10 @@ Leave the `Applying Changes` window open and check it periodically for status. W
 </details>
 <br/>
 
-2.6 Select the `Certificate` tab, select `Generate RSA Certificate` and enter `harbor.corp.local` and click `Generate`
+2.6 Select the `Certificate` tab, select `Generate RSA Certificate`, enter `harbor.corp.local` and click `Generate`
 
 <details><summary>Screenshot 2.6</summary>
-<img src="Images/2018-10-22-21-53-32.png">
+<img src="Images/2018-10-31-15-24-23.png">
 </details>
 <br/>
 
@@ -256,7 +256,7 @@ Leave the `Applying Changes` window open and check it periodically for status. W
 </details>
 <br/>
 
-2.9 On the `Resource Config` tab, set the `Persistent Disk Type` to `10 GB`
+2.9 On the `Resource Config` tab, set the `Persistent Disk Type` to `20 GB`
 
 <details><summary>Screenshot 2.9</summary>
 <img src="Images/2018-10-22-22-18-57.png">
