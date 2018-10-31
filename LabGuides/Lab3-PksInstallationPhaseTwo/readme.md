@@ -186,7 +186,9 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 </details>
 <br/>
 
-1.14 After you click `Apply Changes` BOSH will begin deploying PKS and it will take a while. Leave the `Applying Changes` window open and check it periodically for status. While waiting for the deployment, use another browser tab to open a second connection to the Ops Manager UI and use the second browser session to complete the harbor configuration in the next section.
+1.14 After you click `Apply Changes` BOSH will begin deploying PKS and it will take a while to complete. In the nested example lab, the PKS deployment took ~1 hour to complete. 
+
+Leave the `Applying Changes` window open and check it periodically for status. While waiting for the deployment, use another browser tab to open a second connection to the Ops Manager UI and use the second browser session to complete the harbor configuration in the next section.
 
 ### Step 2: Install Harbor
 

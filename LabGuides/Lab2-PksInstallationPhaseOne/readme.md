@@ -91,6 +91,8 @@ Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connec
 
 1.10 After completing the `Deploy OVF Template` wizard, go to your recent tasks view and wait for the `Status` to change to `Completed` before proceeding
 
+Note: In the Nested example lab, it takes ~20 minutes to deploy the Ops Manager VM
+
 <details><summary>Screenshot 1.10</summary>
 <img src="Images/2018-10-21-18-42-50.png">
 </details>
@@ -295,6 +297,8 @@ Note: Each of the availability zones below will have a single cluster. When you 
 
 2.11 Review the `Applying Changes` to observe the BOSH VM deployment. This will take a while to complete. While BOSH is deploying, you can skip ahead to Step 3 and return to the `Applying Changes` screen periodically to check the status of the deployment. Once the BOSH deployment is complete, you should see a `Changes applied` popup window as shown in Screenshot 2.11.2
 
+Note: In the nested example lab, it takes ~30 minutes to complete the BOSH deployment
+
 <details><summary>Screenshot 2.11.1 </summary>
 <img src="Images/2018-10-21-23-26-50.png">
 </details>
@@ -482,6 +486,8 @@ curl -k -X GET \
   - If your BOSH deployment is not yet complete, leave your browser tab open to continue to monitor the deployment status and open a new tab and connect to the Ops Manager UI so that you have 2 active browser sessions. Use the 2nd Ops Manager connection to complete the following step
 
 3.3.1 Log into the Ops Manager UI, Click `Import a Product`, select the Pivotal Container Service binary file. This is the final step of the phase 1 lab, when you resume with the phase 2 installation lab you will complete the PKS installation
+
+Note: In the nested example lab, it takes ~10 minutes to import the PKS tile
 
 <details><summary>Screenshot 3.2.1.1 </summary>
 <img src="Images/2018-10-22-01-34-24.png">
