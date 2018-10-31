@@ -161,25 +161,32 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 </details>
 <br/>
 
-1.11 Select the `Errands` tab and enter the following values:
+1.11 Select the `Usage Data` tab, select `No, I do not want to join the CEIP and Telemetry Program for PKS` and click `Save`
+
+<details><summary>Screenshot 1.11</summary>
+<img src="Images/2018-10-31-14-07-35.png">
+</details>
+<br/>
+
+1.12 Select the `Errands` tab and enter the following values:
 
 - NSX-T Validation Errand: On
 - Delete all clusters errand: On
 - Click Save
 
-<details><summary>Screenshot 1.11</summary>
+<details><summary>Screenshot 1.12</summary>
 <img src="Images/2018-10-22-20-33-01.png">
 </details>
 <br/>
 
-1.12 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes'
+1.13 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes'
 
-<details><summary>Screenshot 1.12</summary>
+<details><summary>Screenshot 1.13</summary>
 <img src="Images/2018-10-22-21-09-16.png">
 </details>
 <br/>
 
-1.13 After you click `Apply Changes` BOSH will begin deploying PKS and it will take a while. Leave the `Applying Changes` window open and check it periodically for status. While waiting for the deployment, use another browser tab to open a second connection to the Ops Manager UI and use the second browser session to complete the harbor configuration in the next section.
+1.14 After you click `Apply Changes` BOSH will begin deploying PKS and it will take a while. Leave the `Applying Changes` window open and check it periodically for status. While waiting for the deployment, use another browser tab to open a second connection to the Ops Manager UI and use the second browser session to complete the harbor configuration in the next section.
 
 ### Step 2: Install Harbor
 
