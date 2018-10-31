@@ -267,7 +267,7 @@ Leave the `Applying Changes` window open and check it periodically for status. W
 
 2.10 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
 
-<details><summary>Screenshot 2.5</summary>
+<details><summary>Screenshot 2.10</summary>
 <img src="Images/2018-10-22-22-22-46.png">
 </details>
 <br/>
