@@ -276,4 +276,4 @@ Leave the `Applying Changes` window open and check it periodically for status. W
 
 ### Thank you for completing the Installation Phase 2 Lab!
 
-### [Please click here to proceed to Lab2: PKS Installation Phase 1](../Lab4-Harbor)
+### [Please click here to proceed to Lab4: Harbor Enterprise Container Registry](../Lab4-Harbor)
