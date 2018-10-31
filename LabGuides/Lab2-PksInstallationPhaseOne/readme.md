@@ -321,7 +321,7 @@ mkdir nsxt-pi-cert
 cd nsxt-pi-cert
 ```
 
-3.1.2 Use a text editor to create a file with the following shell script to generate the PI cert, for example `nano create_certificate.sh'. Copy the following text to the file:
+3.1.2 Use a text editor to create a file with the following shell script to generate the PI cert, for example `nano create_certificate.sh`. Copy the following text to the file:
 
 <details><summary>Click to expand create_certificate.sh</summary>
 
