@@ -128,7 +128,7 @@ Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connec
 
 Note: After clicking `Setup Authentication` it will take several minutes for the authentication system to start. The login screen will appear after the authentication system is finished starting up
 
-- Username: Admin
+- Username: admin
 - Password: VMware1!
 - Decryption Passphrase: VMware1!
 
