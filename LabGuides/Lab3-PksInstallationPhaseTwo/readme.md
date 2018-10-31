@@ -37,15 +37,19 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 1.3 Select the `PKS API` tab and enter the following values:
 
 - API Hostname: pks.corp.local
+- Click `Generate RSA Certificate`
+  - to generate the certificate, use the value `*.corp.local` and click `Generate`
 
-- Generate Certificate with *.corp.local
+<details><summary>Screenshot 1.3.1</summary>
+<img src="Images/2018-10-31-13-51-49.png">
+</details>
 
-<details><summary>Screenshot 1.3</summary>
-<img src="Images/2018-10-22-15-33-10.png">
+<details><summary>Screenshot 1.3.2</summary>
+<img src="Images/2018-10-31-13-51-09.png">
 </details>
 <br/>
 
-1.5 Select the `Plan 1` tab and enter the following values:
+1.4 Select the `Plan 1` tab and enter the following values:
 
 - Master/ETCD Availability Zones: PKS-COMP
 - Worker Persistent Disk Type: 10gb
@@ -53,12 +57,12 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 - Enable Priviledged Containers: true
 - Click Save
 
-<details><summary>Screenshot 1.5</summary>
+<details><summary>Screenshot 1.4</summary>
 <img src="Images/2018-10-22-19-31-47.png">
 </details>
 <br/>
 
-1.6 Select the `Plan 2` tab and enter the following values:
+1.5 Select the `Plan 2` tab and enter the following values:
 
 - Active: True
 - Master/ETCD Nodes: 1
@@ -69,19 +73,19 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 - Worker Availability Zone: PKS-COMP
 - Enable Privileged Containers: True
 
-<details><summary>Screenshot 1.6</summary>
+<details><summary>Screenshot 1.5</summary>
 <img src="Images/2018-10-22-19-37-39.png">
 </details>
 <br/>
 
-1.7 Select the `Plan 3` tab, set the value for `Plan` to `Inactive` and click `Save`
+1.6 Select the `Plan 3` tab, set the value for `Plan` to `Inactive` and click `Save`
 
-<details><summary>Screenshot 1.7</summary>
+<details><summary>Screenshot 1.6</summary>
 <img src="Images/2018-10-22-19-39-35.png">
 </details>
 <br/>
 
-1.8 Select the `Kubernetes Cloud Provider` tab and enter the following values:
+1.7 Select the `Kubernetes Cloud Provider` tab and enter the following values:
 
 - Choose your IaaS: vSphere
 - vCenter Master Credentials: administrator@vsphere.local
@@ -92,39 +96,39 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 - Stored VM Folder: pks_vms
 - Click Save
 
-<details><summary>Screenshot 1.8</summary>
+<details><summary>Screenshot 1.7</summary>
 <img src="Images/2018-10-22-19-45-25.png">
 </details>
 <br/>
 
-1.9 Prepare Variables to Configure the `Networking` tab
+1.8 Prepare Variables to Configure the `Networking` tab
 
-1.9.1 Log into the NSX Manager UI, go to `Networking > IPAM`, and on the IPAM page and gather the ID for the `ip-block-nodes-deployments` and `ip-block-pods-deployments` and keep note of the values
+1.8.1 Log into the NSX Manager UI, go to `Networking > IPAM`, and on the IPAM page and gather the ID for the `ip-block-nodes-deployments` and `ip-block-pods-deployments` and keep note of the values
 
-<details><summary>Screenshot 1.9.1.1</summary>
+<details><summary>Screenshot 1.8.1.1</summary>
 <img src="Images/2018-10-22-19-54-15.png">
 </details>
 
-<details><summary>Screenshot 1.9.1.2</summary>
+<details><summary>Screenshot 1.8.1.2</summary>
 <img src="Images/2018-10-22-19-56-07.png">
 </details>
 <br/>
 
-1.9.2 In the NSX Manager UI, go to `Networking > Routing`, click on t0-pks and gather the t0-pks ID value
+1.8.2 In the NSX Manager UI, go to `Networking > Routing`, click on t0-pks and gather the t0-pks ID value
 
-<details><summary>Screenshot 1.9.2</summary>
+<details><summary>Screenshot 1.8.2</summary>
 <img src="Images/2018-10-22-19-59-01.png">
 </details>
 <br/>
 
-1.9.3 In the NSX Manger UI, go to the `Inventory > Groups > IP Pools` click on the ID value for `ip-pool-vips` and a pop-up window will display the entire ID value, keep note of it
+1.8.3 In the NSX Manger UI, go to the `Inventory > Groups > IP Pools` click on the ID value for `ip-pool-vips` and a pop-up window will display the entire ID value, keep note of it
 
-<details><summary>Screenshot 1.9.3</summary>
+<details><summary>Screenshot 1.8.3</summary>
 <img src="Images/2018-10-22-20-12-07.png">
 </details>
 <br/>
 
-1.10 Return to the Ops Manager UI, go to the settings page for Pivotal Container Service, click on the `Networking` tab and enter the following values:
+1.9 Return to the Ops Manager UI, go to the settings page for Pivotal Container Service, click on the `Networking` tab and enter the following values:
 
 - Container Networking Interface: NSX-T
 - NSX Manager Hostname: nsxmgr-01a.corp.local
@@ -141,41 +145,41 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 - Enable outbound internet access: True
 - Click Save
 
-<details><summary>Screenshot 1.10.1</summary>
+<details><summary>Screenshot 1.9.1</summary>
 <img src="Images/2018-10-22-20-28-14.png">
 </details>
 
-<details><summary>Screenshot 1.10.2</summary>
+<details><summary>Screenshot 1.9.2</summary>
 <img src="Images/2018-10-22-20-29-03.png">
 </details>
 <br/>
 
-1.11 Select the `UAA` tab, click the radio button for `Internal UAA` and click `Save`
+1.10 Select the `UAA` tab, click the radio button for `Internal UAA` and click `Save`
 
-<details><summary>Screenshot 1.11</summary>
+<details><summary>Screenshot 1.10</summary>
 <img src="Images/2018-10-22-20-30-52.png">
 </details>
 <br/>
 
-1.12 Select the `Errands` tab and enter the following values:
+1.11 Select the `Errands` tab and enter the following values:
 
 - NSX-T Validation Errand: On
 - Delete all clusters errand: On
 - Click Save
 
-<details><summary>Screenshot 1.12</summary>
+<details><summary>Screenshot 1.11</summary>
 <img src="Images/2018-10-22-20-33-01.png">
 </details>
 <br/>
 
-1.13 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes'
+1.12 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes'
 
-<details><summary>Screenshot 1.7</summary>
+<details><summary>Screenshot 1.12</summary>
 <img src="Images/2018-10-22-21-09-16.png">
 </details>
 <br/>
 
-1.8 After you click `Apply Changes` BOSH will begin deploying PKS and it will take a while. Leave the `Applying Changes` window open and check it periodically for status. While waiting for the deployment, use another browser tab to open a second connection to the Ops Manager UI and use the second browser session to complete the harbor configuration in the next section.
+1.13 After you click `Apply Changes` BOSH will begin deploying PKS and it will take a while. Leave the `Applying Changes` window open and check it periodically for status. While waiting for the deployment, use another browser tab to open a second connection to the Ops Manager UI and use the second browser session to complete the harbor configuration in the next section.
 
 ### Step 2: Install Harbor
 
