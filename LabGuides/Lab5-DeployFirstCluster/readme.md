@@ -55,7 +55,7 @@ uaac member add pks.clusters.admin pksadmin
 
 ```bash
 pks clusters
-pks create-cluster my-cluster --external-hostname my-cluster --plan small
+pks create-cluster my-cluster --external-hostname my-cluster.corp.local --plan small
 ```
 
 Note: It will take ~10 minutes for the cluster to deploy, you may proceed with step 3 while the cluster deployment is in progress, however do not proceed to step 4 until the cluster deployment status is `succeeded`
