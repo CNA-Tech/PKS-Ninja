@@ -100,6 +100,8 @@ For K8s nodes, PKS (BOSH) automates the process of certificate setup. For PKS yo
 
 2.4 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
 
+Note: In the nested example lab, this step took ~40 minutes to complete
+
 <details><summary>Screenshot 2.4</summary>
 <img src="Images/2018-10-22-22-22-46.png">
 </details>
