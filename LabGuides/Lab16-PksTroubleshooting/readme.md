@@ -1,4 +1,4 @@
-# Lab 11 - PKS Troubleshooting
+# Lab 16 - PKS Troubleshooting
 
 **Contents:**
 
@@ -47,7 +47,7 @@ The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimize
 </details>
 <br/>
 
-1.1.2 On the `Select Template` screen, select `local file` and select the vSphere PKS Plugin OVA File
+1.1.2 On the `Select Template` screen, select `local file` and select the vSphere PKS Plugin OVA File in the `E:\Downloads` directory
 
 <details><summary>Screenshot 1.1.2</summary>
 <img src="Images/2018-11-09-23-09-37.png">
@@ -121,13 +121,13 @@ The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimize
 </details>
 <br/>
 
+Note: If there are insufficient resources to deploy the OVA, edit the settings for the NSX-T Controller, Edge & Manager to remove resource reservations
+
 Please proceed through the following steps while the OVA template is deploying
 
 1.2 Confirm all VM's installed and configured during NSX-T and PKS installation are running and in good health in vCenter
 
 1.2.1 Login to the vSphere web client, Navigate to `Hosts and Clusters`, and verify that the `nsxt-manager`, `nsxc-1` and `nsxedge-1.corp.local` virtual machines are powered on. View the summary screen of each VM to ensure there are no error messages and overall VM health appears good
-
-Note: In a typical environment, you should also reference the NSX-T and PKS documentation and ensure that the vCenter environment, ESXi hosts and NSX Management physical and virtual hosts have been configured with the approprate hardware and environment preparation required. In the student lab environment, due to resource limitations many of the resources are configured with suboptimal resource configurations that should never be used in POC or Production settings. The lab hardware has been preconfigured, and students have already completed and familiar with the installation steps used, so a comprehensive validation of the base environment is not needed in the lab steps, however additional validation should be considered in a production deployment
 
 <details><summary>Screenshot 1.2.1 </summary>
 <img src="Images/2018-11-09-03-20-33.png">
@@ -243,4 +243,30 @@ Part of the point of this step is to demonstrate the complexity of correlating K
 </details>
 <br/>
 
-1.3.9 Open a new web browser tab and navigate to https://192.168.100.72
+1.3.9 Open a new web browser tab and navigate to https://192.168.100.72, login with the username `administrator@vsphere.local` and password `VMware1!`, and on the `Complete PKS plugin registration` screen, click `CONTINUE`
+
+<details><summary>Screenshot 1.3.9</summary>
+<img src="Images/2018-11-10-02-16-41.png">
+</details>
+<br/>
+
+1.3.10 Continue with the `Complete PKS plugin registration` screen, click `REGISTER` and wait for the registration process to complete
+
+<details><summary>Screenshot 1.3.10</summary>
+<img src="Images/2018-11-10-02-18-40.png">
+</details>
+<br/>
+
+1.3.10 Finish the `Complete PKS plugin registration` dialogue by clicking `LOGOUT`
+
+<details><summary>Screenshot 1.3.10</summary>
+<img src="Images/2018-11-10-02-21-56.png">
+</details>
+<br/>
+
+1.3.11 From the control center desktop, if you have any open connections to the vSphere web or HTML5 client, log out of your sessions and close the tabs. Open a new browser window and log into the vSphere HTML5 Client, you should now see an option for `VMware PKS` on the Home screen, Shortcuts screen and in the pulldown menu
+
+<details><summary>Screenshot 1.3.11</summary>
+<img src="Images/2018-11-10-02-26-49.png">
+</details>
+<br/>
