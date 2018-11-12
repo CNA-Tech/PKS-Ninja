@@ -2,11 +2,12 @@
 
 **Contents:**
 
-- [Step 1: Validate Base Environment]() <!-- Validate MTU, Base vCenter, components external to NSX and PKS -->
-- [Step 2: Validate NSX-T Control Plane Health]()
-- [Step 3: Validate Ops Manager & BOSH Director Health]()
-- [Step 4: Validate PKS Control Plane Health]()
-- [Step 5 Common Troubleshooting Scenarios]()
+- [Step 1: Validate Base Environment]()
+- [Step 2: Validate Kubernetes Cluster Deployment & Operation]()
+- [Step 3: Validate NSX-T Control Plane Health]()
+- [Step 4: Validate Ops Manager & BOSH Director Health]()
+- [Step 5: Validate PKS Control Plane Health]()
+- [Step 6 Common Troubleshooting Scenarios]()
 - [Next Steps]()
 
 ## Overview
@@ -134,9 +135,9 @@ Please proceed through the following steps while the OVA template is deploying
 </details>
 <br/>
 
-1.2.2 In the vSphere web client, on the `Hosts and Clusters` page, expand the `pks-mgmt-1` resource pool and check the summary tab of the `opsman`, BOSH and Harbor VM's. The BOSH and Harbor VM's have automatically generated VM names that are hard to identify. If you look under the `pks-mgmt-1` resource pool, you should see two virtual machines that have names beginning with "vm-", if you click on each of these VM's, on the summary tab under `Custom Attributes`, the value for the `Deployment` parameter should be `p-bosh` for the BOSH VM and `harbor-container-registry-...` for the harbor VM, as shown in the following screenshots
+1.2.2 In the vSphere web client, on the `Hosts and Clusters` page, expand the `pks-mgmt-1` resource pool and check the summary tab of the `opsman`, BOSH and Harbor VM's. The BOSH and Harbor VM's have automatically generated VM names that are hard to identify. If you look under the `pks-mgmt-1` resource pool, you should see two virtual machines that have names beginning with "vm-", if you click on each of these VM's, on the `Summary` screen under `Custom Attributes`, the value for the `Deployment` parameter should be `p-bosh` for the BOSH VM and `harbor-container-registry-...` for the harbor VM, as shown in the following screenshots
 
-Note: You should also see some VM's in the `pks-mgmt-1` resource pool that have names beginning with "sc-". These VMs are used by BOSH when processing certain tasks, these VMs may be off or on under normal healthy state, however if they are powered on it indicates BOSH is processing a task and should be checked as it could be related to other unexpected behavior in the environment
+Note: You should also see some VM's in the `pks-mgmt-1` resource pool that have names beginning with "sc-". These VMs are used by BOSH when processing certain tasks, these VMs may be off or on under normal healthy state, however if they are powered on it indicates BOSH is processing a task
 
 <details><summary>Screenshot 1.2.2.1</summary>
 <img src="Images/2018-11-09-03-38-24.png">
@@ -236,14 +237,14 @@ Part of the point of this step is to demonstrate the complexity of correlating K
 </details>
 <br/>
 
-1.3.8 From the console connection to the `pks-ui` VM, restart network services with the command `systemctl restart systemd-networkd`, and then close the browser tab to the `pks-ui` console
+1.3.8 From the console connection to the `pks-ui` VM, restart network services with the command `systemctl restart systemd-networkd`, `ping vcsa-01a.corp.local` to verify connectivity and then close the browser tab to the `pks-ui` console
 
 <details><summary>Screenshot 1.3.8</summary>
-<img src="Images/2018-11-10-00-41-35.png">
+<img src="Images/2018-11-10-12-29-00.png">
 </details>
 <br/>
 
-1.3.9 Open a new web browser tab and navigate to https://192.168.100.72, login with the username `administrator@vsphere.local` and password `VMware1!`, and on the `Complete PKS plugin registration` screen, click `CONTINUE`
+1.3.9 Open a new web browser tab and navigate to `https://192.168.100.72`, login with the username `administrator@vsphere.local` and password `VMware1!`, and on the `Complete PKS plugin registration` screen, click `CONTINUE`
 
 <details><summary>Screenshot 1.3.9</summary>
 <img src="Images/2018-11-10-02-16-41.png">
@@ -257,16 +258,230 @@ Part of the point of this step is to demonstrate the complexity of correlating K
 </details>
 <br/>
 
-1.3.10 Finish the `Complete PKS plugin registration` dialogue by clicking `LOGOUT`
+1.3.11 Finish the `Complete PKS plugin registration` dialogue by clicking `LOGOUT`
 
-<details><summary>Screenshot 1.3.10</summary>
+<details><summary>Screenshot 1.3.11</summary>
 <img src="Images/2018-11-10-02-21-56.png">
 </details>
 <br/>
 
-1.3.11 From the control center desktop, if you have any open connections to the vSphere web or HTML5 client, log out of your sessions and close the tabs. Open a new browser window and log into the vSphere HTML5 Client, you should now see an option for `VMware PKS` on the Home screen, Shortcuts screen and in the pulldown menu
+1.3.12 From the control center desktop, if you have any open connections to the vSphere web or HTML5 client, log out of your sessions and close the tabs. Open a new browser window and log into the vSphere HTML5 Client, you should now see an option for `VMware PKS` on the Home screen, Shortcuts screen and in the pulldown menu. Click on the `VMware PKS` icon to open the plugin
 
-<details><summary>Screenshot 1.3.11</summary>
+<details><summary>Screenshot 1.3.12</summary>
 <img src="Images/2018-11-10-02-26-49.png">
+</details>
+<br/>
+
+1.3.13 Gather the BOSH credentials needed to connect from the PKS UI VM
+
+Open a browser connection to Opsman with admin/VMware1!, click on the `Bosh Director for vSphere` tile and navigate to the `Credentials`, Find the row for `Bosh Commandline Credentials` and click `Link to Credentials` and record the values for `BOSH_Client` and `Bosh_Client_Secret` as shown in the screenshots below. Be careful not to leave any leading or trailing spaces when you copy the secret
+
+<details><summary>Screenshot 1.3.13.1</summary>
+<img src="Images/2018-11-10-14-03-12.png">
+</details>
+
+<details><summary>Screenshot 1.3.13.2</summary>
+<img src="Images/2018-11-10-13-29-09.png">
+</details>
+
+<details><summary>Screenshot 1.3.13.3</summary>
+<img src="Images/2018-11-10-14-01-57.png">
+</details>
+<br/>
+
+1.3.14 After you click on `VMware PKS` you will be directed to the `PKS Instances` configuration, enter the following values:
+
+- PKS API Endpoint
+  - Hostname: pks.corp.local
+  - Username: pksadmin
+  - Password: VMware1!
+- BOSH Endpoint
+  - IP Address: 172.31.0.2
+  - Username: ops_manager
+  - Password: Use the value for the `BOSH_CLIENT_SECRET` you gathered in the previous step
+- Networking endpoint
+  - Networking Stack: NSX-T
+  - Username: admin
+  - Password: VMware1!
+- Click `Add`
+- Click `Continue` to confirm the PKS and BOSH fingerprints per the screenshots below
+
+<details><summary>Screenshot 1.3.14.1</summary>
+<img src="Images/2018-11-10-14-09-05.png">
+</details>
+
+<details><summary>Screenshot 1.3.14.2</summary>
+<img src="Images/2018-11-10-14-11-06.png">
+</details>
+
+<details><summary>Screenshot 1.3.14.3</summary>
+<img src="Images/2018-11-11-01-19-55.png">
+</details>
+<br/>
+
+1.4 Utilize the vSphere PKS Plugin to validate PKS Instance & K8s Cluster Health
+
+1.4.1 From the vSphere HTML5 Client, navigate to the `VMware PKS` plugin and click on the name of your PKS instance
+
+<details><summary>Screenshot 1.4.1</summary>
+<img src="Images/2018-11-11-01-22-54.png">
+</details>
+<br/>
+
+1.4.2 On the `Summary` tab for your PKS instance, observe the details provided. The `Summary` tab is optimized to provide the most commonly needed PKS Instance details for VM administrators supporting PKS environments.
+
+<details><summary>Screenshot 1.4.2</summary>
+<img src="Images/2018-11-11-01-27-53.png">
+</details>
+<br/>
+
+1.4.3 On the `Summary` tab for your PKS instance, observe that the VM name for the PKS Control Plane VM is provided making it simple for an admin to find in vCenter. Click on the name of the VM and observe that you are directed to the VM page in the vSphere client where VM admins can leverage their experience and the mature vSphere toolset to validate the health and performance of the VM. Navigate back to the `Summary` tab of your PKS instance in the `VMware PKS` plugin
+
+<details><summary>Screenshot 1.4.3.1</summary>
+<img src="Images/2018-11-11-01-32-13.png">
+</details>
+
+<details><summary>Screenshot 1.4.3.2</summary>
+<img src="Images/2018-11-11-01-33-34.png">
+</details>
+<br/>
+
+1.4.4 On the `Summary` tab for your PKS instance, observe that the key network objects for PKS cluster health are displayed. Click on the name of the `Tier-0` router and observe that you are directed to the objects page in the NSX-T UI where VM admins can leverage their experience and the mature NSX-T toolset to validate the health and performance of the router. Navigate back to the `Summary` tab of your PKS instance in the `VMware PKS` plugin
+
+<details><summary>Screenshot 1.4.4.1</summary>
+<img src="Images/2018-11-11-01-58-00.png">
+</details>
+
+<details><summary>Screenshot 1.4.4.2</summary>
+<img src="Images/2018-11-11-01-58-56.png">
+</details>
+<br/>
+
+1.4.5 Return to the `VMware PKS` plugin, navigate to the `Nodes` tab. On this screen you will see a list of all the running master and worker nodes for all K8s clusters deployed using this PKS instance
+
+Observe that the list of nodes provides key details such as node status, type, IP Address, cluster association as well as VM and AZ names with the ability to launch directly to the vSphere client page for the associated object
+
+<details><summary>Screenshot 1.4.5</summary>
+<img src="Images/2018-11-12-00-43-39.png">
+</details>
+<br/>
+
+1.4.6 From the `VMware PKS` plugin, navigate to the `Nodes` tab for your PKS instance. On this screen you will see the configuration of the PKS instance selected. These details can be used both to validate or edit the plugin configuration or as a reference for the information provided
+
+Navigate through the `PKS API Endpoint`, `Networking` and `Bosh Endpoint` pages and observe the details provided
+
+<details><summary>Screenshot 1.4.6.1</summary>
+<img src="Images/2018-11-12-00-54-18.png">
+</details>
+
+<details><summary>Screenshot 1.4.6.2</summary>
+<img src="Images/2018-11-12-00-55-58.png">
+</details>
+
+<details><summary>Screenshot 1.4.6.3</summary>
+<img src="Images/2018-11-12-00-56-13.png">
+</details>
+<br/>
+
+1.4.7 Return to the `VMware PKS` plugin, navigate to the `K8s Clusters`. On this screen you will see a list of all the running clusters in this PKS instance. Click on `my-cluster` to view cluster details
+
+<details><summary>Screenshot 1.4.7.1</summary>
+<img src="Images/2018-11-11-01-38-52.png">
+</details>
+
+<details><summary>Screenshot 1.4.7.2</summary>
+<img src="Images/2018-11-11-01-41-35.png">
+</details>
+<br/>
+
+1.4.6 Return to the `my-cluster > Summary` tab in the `VMware PKS` plugin and take some time to observe the details provided about your cluster
+
+The Cluster overview provides key details about cluster composition pertinent for planning and troubleshooting
+
+The Networking section provides information specific to the selected `my-cluster` deployment. Observe that the Load Balancer information is provided on the my-cluster screen as with PKS/NSX-T a load-balancer is deployed with each K8s cluster. Likewise the node-level networking objects where the cluster is deployed are presented, however the pod network objects are not shown as pod networks are deployed on a per-namespace basis, and accordingly are displayed on the namespaces tab
+
+The Nodes section allows you to easily identify the master or node VM's in vCenter
+
+The Storage section provides details about vSphere storage componentes used to provision persistent volumes for running kubernetes pods. There are currently no persistent volumes deployed, so no information is displayed at this time
+
+<details><summary>Screenshot 1.4.6</summary>
+<img src="Images/2018-11-11-02-10-03.png">
+</details>
+<br/>
+
+1.4.7 From the `my-cluster` screen in the `VMware PKS` plugin, select the `Nodes` tab and take some time to observe the details provided about your cluster's nodes
+
+<details><summary>Screenshot 1.4.7</summary>
+<img src="Images/2018-11-11-02-15-47.png">
+</details>
+<br/>
+
+1.4.8 From the `my-cluster` screen in the `VMware PKS` plugin, select the `Namespaces` tab and take some time to observe the details provided about your cluster's nodes. Remember that NSX-T deployes unique network objects for each namespace
+
+Observe the long, autogenerated name for each namespaces logical switch, and consider how much dramatically easier it is to identify vCenter assets that support the Kubernetes cluster deployments with the plugin. Click on the name of the `Pod Network` for the `default` namespace and observe that this launches you directly into the NSX Manager UI for that object
+
+<details><summary>Screenshot 1.4.8.1</summary>
+<img src="Images/2018-11-11-02-21-36.png">
+</details>
+
+<details><summary>Screenshot 1.4.8.2</summary>
+<img src="Images/2018-11-11-02-24-43.png">
+</details>
+<br/>
+
+## Step 2: Validate Kubernetes Cluster Deployment & Operation
+
+2.1 Observe Kubernetes Cluster with the Kubernetes Dashboard
+
+2.1.1 From the vSphere HTML5 Client, navigate to `VMware PKS > Your PKS Instance > K8s Clusters > my-cluster > Summary`, click on the `OPEN K8S UI` link and follow the instructions to connect to the dashboard for my-cluster
+
+<details><summary>Screenshot 2.1.1</summary>
+<img src="Images/2018-11-12-01-23-30.png">
+</details>
+
+2.1.1.1 From the `Open K8s 'my-cluster' UI` screen, copy the text from the `Set context` box
+
+<details><summary>Screenshot 2.1.1.1</summary>
+<img src="Images/2018-11-12-02-13-52.png">
+</details>
+<br/>
+
+2.1.1.2 On the control center desktop, open Notepad++ and paste the contents of the clipboard. The text provided is prepared for BASH, and you need to prepare the commands to paste into the windows command prompt
+
+Remove the string `&& \` from the end of each line and copy the updated text to the clipboard
+
+<details><summary>Screenshot 2.1.1.2</summary>
+<img src="Images/2018-11-12-02-18-44.png">
+</details>
+<br/>
+
+2.1.1.3 On the control center desktop, open a command prompt and paste the contents of the clipboard into the command prompt
+
+<details><summary>Screenshot 2.1.1.3</summary>
+<img src="Images/2018-11-12-02-23-14.png">
+</details>
+<br/>
+
+2.1.1.4 From the control center command prompt, enter the command `kubectl proxy --port=8011`
+
+<details><summary>Screenshot 2.1.1.4</summary>
+<img src="Images/2018-11-12-02-30-46.png">
+</details>
+<br/>
+
+2.1.1.5 From the control center desktop open a browser tab, connect to `http://localhost:8011/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login`, select `Token` and paste the value from the `Open K8s UI > '3. Open Kubernetes dashboard` textbox and click `SIGN IN`
+
+Note: Students using the onecloud lab can use the browser shortcut to the dashboard but will need to update the port number to 8011 in the url bar
+
+<details><summary>Screenshot 2.1.1.5.1</summary>
+<img src="Images/2018-11-12-02-36-54.png">
+</details>
+
+<details><summary>Screenshot 2.1.1.5.2</summary>
+<img src="Images/2018-11-12-02-37-57.png">
+</details>
+
+<details><summary>Screenshot 2.1.1.5.3</summary>
+<img src="Images/2018-11-12-02-39-33.png">
 </details>
 <br/>

@@ -22,7 +22,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 1.0 SSH to the cli-vm
 
 <details><summary>Screenshot 1.0</summary>
-<img src="images/ssh-cli-vm.png">
+<img src="Images/ssh-cli-vm.png">
 </details>
 
 1.1 Navigate to the concourse directory where the docker-compose.yml file is located.
@@ -30,7 +30,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 `cd concourse`
 
 <details><summary>Screenshot 1.1</summary>
-<img src="images/concourse-dir.png">
+<img src="Images/concourse-dir.png">
 </details>
 
 1.2 Use docker-compose to stand up the pipeline and web server.
@@ -38,7 +38,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 `docker-compose up -d`
 
 <details><summary>Screenshot 1.2</summary>
-<img src="images/docker-compose-up.png">
+<img src="Images/docker-compose-up.png">
 </details>
 
 1.3 Verify that the all 3 containers are in a **running** state and that none have *Exited*
@@ -46,7 +46,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 `docker ps`
 
 <details><summary>Screenshot 1.3</summary>
-<img src="images/docker-ps.png">
+<img src="Images/docker-ps.png">
 </details>
 
 1.4 Using a web browser navigate to the concourse URL
@@ -54,7 +54,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 `http://cli-vm.corp.local:8080`
 
 <details><summary>Screenshot 1.4</summary>
-<img src="images/pipeline-ui.png">
+<img src="Images/pipeline-ui.png">
 </details>
 
 1.5 In the upper right-hand corner login to Concourse
@@ -63,7 +63,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 - Password: vmware
 
 <details><summary>Screenshot 1.5</summary>
-<img src="images/concourse-login.png">
+<img src="Images/concourse-login.png">
 </details>
 
 1.6 Import the NSX pipeline using the `fly` cli command on the cli-vm.
@@ -76,31 +76,31 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 - confirm the parameters file import with `y`
 
 <details><summary>Screenshot 1.6.1</summary>
-<img src="images/nsx-pipeline-dir.png">
+<img src="Images/nsx-pipeline-dir.png">
 </details>
 
 <details><summary>Screenshot 1.6.2</summary>
-<img src="images/source-nsxt-setup.png">
+<img src="Images/source-nsxt-setup.png">
 </details>
 
 <details><summary>Screenshot 1.6.3</summary>
-<img src="images/pipeline-import.png">
+<img src="Images/pipeline-import.png">
 </details>
 
 <details><summary>Screenshot 1.6.4</summary>
-<img src="images/confirm-import.png">
+<img src="Images/confirm-import.png">
 </details>
 
 1.7 Go back to the web browser and confirm that the pipeline has imported and hit the **Play** button
 
 <details><summary>Screenshot 1.7</summary>
-<img src="images/pipeline-ui.png">
+<img src="Images/pipeline-ui.png">
 </details>
 
 1.8 Click on *install-nsx-t* 
 
 <details><summary>Screenshot 1.8</summary>
-<img src="images/pipeline-ui.png">
+<img src="Images/pipeline-ui.png">
 </details>
 
 1.9 Verify that the pipeline is not in an *errored* state.
@@ -109,27 +109,27 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
   - If it is in an errored state perform a `fly-d` and `fly-s` to destory and re-import the pipeline on the cli-vm.
 
 <details><summary>Screenshot 1.9</summary>
-<img src="images/pipeline-started.png">
+<img src="Images/pipeline-started.png">
 </details>
 
 1.10 Click on the **install-nsx-t**
 
 <details><summary>Screenshot 1.10</summary>
-<img src="images/install-nsx-t.png">
+<img src="Images/install-nsx-t.png">
 </details>
 
 1.11 Execute the pipeline with the **Plus** button in the upper right-hand corner
 
 <details><summary>Screenshot 1.11</summary>
-<img src="images/install-nsx-t-plus.png">
+<img src="Images/install-nsx-t-plus.png">
 </details>
 
 1.12 Grab some coffee and watch the magic happen! 
 
-<img src="images/automate-all-things.png">
+<img src="Images/automate-all-things.png">
 
 1.13 After coffee :coffee: and around 45 to 60 minutes you should see this.
 
 <details><summary>Screenshot 1.13</summary>
-<img src="images/pipeline-complete.png">
+<img src="Images/pipeline-complete.png">
 </details>
