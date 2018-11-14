@@ -5,15 +5,22 @@
 - [1.0 Create your first repo & basic operations]()
 - [2.0 Cloning, Forking and Committing]()
 - [3.0 Practical Github Workflows]()
+- [4.0 Bonus Lab - Customizing your PRE/DevOps workstation]()
 - [Next Steps]()
 
 ## 1.0 Create your first repo & basic operations
 
-If you do not have a github account, go to github.com and follow the simple instructions on the homepage to create an account.
+If you do not have a github account, go to github.com and follow the simple instructions on the homepage to create an account
 
-In general it is a good practice to use a long-term personal email address when creating your account, as your github account and contributions you make reflect your professional reputation and you should when possible keep your account in the event of a change of employment as you would with a Linkedin account or resume. If you plan to become a regular practitioner in container and cloud native technologies, regardless of whether you have a developer or infrastructure focus, you should plan and make goals for yourself to become a regular contributor on github.
+In general it is a good practice to use a long-term personal email address when creating your account, as your github account and contributions you make reflect your professional reputation and you should when possible keep your account in the event of a change of employment as you would with a Linkedin account or resume. If you plan to become a regular practitioner in container and cloud native technologies, regardless of whether you have a developer or infrastructure focus, you should plan and make goals for yourself to become a regular contributor on github
 
-Github is not just for coders, there is a huge need for non-code contributions and code contributions alike. Documentation, Reference architectures, tutorials, even fixing typos and so on, and each time you do your github profile reports the amount of contributions you make. Over time, this can become a huge enabler for achieving career goals and enhancing your professional and community profile.
+Github is not just for coders, there is a huge need for non-code contributions and code contributions alike. Documentation, Reference architectures, tutorials, even fixing typos and so on, and each time you do your github profile reports the amount of contributions you make. Over time, this can become a huge enabler for achieving career goals and enhancing your professional and community profile
+
+Github has tremendous practical benefits for infrastructure operations teams, for example you may personally use or know of others who use Docker hub as powerful and simple way to download and run an application. Github can be used in a very similar manner, as was demonstrated in lab 5 of this course where students download and run the Planespotter application.
+
+As you observed with the planespotter application deployment, a user does not need to modify any files and can simply execute a few simple commands to run the planespotter application by cloning the github repo.  You can even run the planespotter deployment manifests directly from github.com without cloning the repo, and kubectl will resolve the external URL and deploy the application on your local kubernetes cluster.
+
+Unlike docker hub however github is extremely flexible and can host infrastructure as code that can be customized for nearly any type of application or deployment need. Github hosts thousands of different containerized and kubernetes ready projects, a large percentage of which can simply be run in your PKS environment with no to minimal modification.
 
 In this course, you will create and start making commits to repositories on github, and if you havent already, start to build your experience and reputation in this important technical community that is pervasive across cloud native technologies
 
@@ -21,11 +28,23 @@ VMware Cloud Native Business unit has a large amount of activity in open source 
 
 As noted in the lecture, git is not github, the latter is a company recently acquired by Microsoft that provides online git repository services. Git is an open source distributed version control system created by Linus Torvalds that is compatible with but does not require online or external git repository services. While github is the most commercially well known git repository, there are many others, and for VMware employees this lab guide will include a subsection on connecting to VMware's internal gitlab environment
 
-### 1.1 Create local repo
+### 1.1 Create local repo & push to github
 
 **Stop:** Prior to beginning this lab, you should have a functional PKS deployment running in a non-production lab environment. For students following the Ninja course, all manual installation steps or pipeline installations for core PKS components should be completed in your lab environment before proceeding
 
-1.1.0 From the control center desktop, use putty to connect and login to `cli-vm`. Make a new directory for a test repository and initialize the repository with the following commands
+1.1.0 Prepare your local git environment with your name and email address as shown in the following commands. Be sure to use your own name and the email address associated with your github account
+
+```bash
+git config --global user.name "Pablo Picasso"
+git config --global user.email "PPicasso@fakemail.com"
+```
+
+<details><summary>Screenshot 1.1.0</summary>
+<img src="Images/2018-11-14-02-56-16.png">
+</details>
+<br/>
+
+1.1.1 From the control center desktop, use putty to connect and login to `cli-vm`. Make a new directory for a test repository and initialize the repository with the following commands
 
 ```bash
 mkdir ~/TestRepo1
@@ -36,14 +55,79 @@ git status
 
 Observe that the output of the `git status` command shows that you are currently on the branch master, you are still on your initial commit (you havent committed anything yet), and that you have not yet added anything to commit
 
-<details><summary>Screenshot 1.1.0 </summary>
+<details><summary>Screenshot 1.1.1</summary>
 <img src="Images/2018-11-14-01-36-08.png">
 </details>
 <br/>
 
-1.1.1 From `cli-vm`, enter the following commands to create
+1.1.2 From `cli-vm`, enter the following commands to view the structure created by the `git init` command you entered in the previous step. For general usage you don't have to worry about the automatically created files, they are pretty much self contained and dont require user interaction for standard usage
 
-<details><summary>Screenshot 1.1.0 </summary>
-<img src="Images/2018-11-14-01-36-08.png">
+```bash
+ll
+ll ./git
+```
+
+<details><summary>Screenshot 1.1.2</summary>
+<img src="Images/2018-11-14-02-24-02.png">
+</details>
+<br/>
+
+1.1.3 From `cli-vm`, enter the following commands to prepare your git repository for pushing to github.com. Github requires that directory is not empty before it can be pushed, and github also will display any text file named `readme.md` (case insensitive) saved in any directory within a github repo ... for example, if you look at the github page you are reading this lab guide from right now, you will see this lab guide is saved as `readme.md`, and is uniquely identified by the `/Lab12-Git` directory where it is located
+
+There is no requirement to have a readme.md file in any directory, only that a directory is not empty, however it is typical convention to include a readme.md file and is common to use a blank readme.md file to initialize a directory as shown in the following commands
+
+Be sure to replace the string `afewell` in the `git remote add origin` command below with your own github username
+
+```bash
+touch readme.md
+cat readme.md # as you can see from there being no output, the file has no contents but can still be used to initialize the repository or push a new subdirectory
+git status
+```
+
+Observe that git recognized the addition of the new `readme.md`, but it is currently untracked. Git will not push untracked changes, so files with changes need to be committed to update the repository before it can be pushed
+
+<details><summary>Screenshot 1.1.3</summary>
+<img src="Images/2018-11-14-02-41-33.png">
+</details>
+<br/>
+
+1.1.5 Commit the changes to your local repository with the command `git commit -m "first commit"` and review the changes with the `git status` command
+
+Observe in the output of the git status command that you are still on the initial commit, the new readme.md file is recognized but is listed under `changes to be committed` as git requires that changes be commited with a commit message
+
+<details><summary>Screenshot 1.1.3</summary>
+<img src="Images/2018-11-14-02-41-33.png">
+</details>
+<br/>
+
+1.1.4 Commit the changes to your local repository with the command `git commit -m "first commit"` and review the changes with the `git status` command
+
+Observe in the output of the git status command that you are still on the initial commit, the new readme.md file is recognized but is listed under `changes to be committed` as git requires that changes be commited with a commit message
+
+<details><summary>Screenshot 1.1.3</summary>
+<img src="Images/2018-11-14-02-41-33.png">
+</details>
+<br/>
+
+1.1.4 Commit the changes to your local repository with the command `git commit -m "first commit"` and review the changes with the `git status` command
+
+There is no requirement to have a readme.md file in any directory, only that a directory is not empty, however it is typical convention to include a readme.md file and is common to use a blank readme.md file to initialize a directory as shown in the following commands
+
+Be sure to replace the string `afewell` in the `git remote add origin` command below with your own github username
+
+```bash
+touch readme.md
+cat readme.md # as you can see from there being no output, the file has no contents but can still be used to initialize the repository or push a new subdirectory
+git add readme.md
+git status
+git commit -m "first commit"
+git remote add origin git@github.com:afewell/TestRepo1.git
+git push -u origin master
+
+
+```
+
+<details><summary>Screenshot 1.1.3</summary>
+<img src="Images/2018-11-14-02-24-02.png">
 </details>
 <br/>
