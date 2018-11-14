@@ -407,9 +407,61 @@ Observe in the output of the `ls` command that the master branch now contains bo
 </details>
 <br/>
 
-2.1.5 Open a web browser connection to the root github page for your `TestRepo1` repository at `https://github.com/yourAccountName/TestRepo1`, and observe that you can now see the master.txt and branch2.txt files
+2.1.5 Open a web browser connection to the root github page for your `TestRepo1` repository at `https://github.com/yourAccountName/TestRepo1`, and observe that you can now see the master.txt and branch2.txt files in the github repository
 
 <details><summary>Screenshot 2.1.5</summary>
 <img src="Images/2018-11-14-07-34-56.png">
 </details>
 <br/>
+
+### 2.2 Forking and Pull requests
+
+The main use case for github is for users to be able to clone remote repositories and use the code for something or contribute code to a central repository
+
+In step 1.2, you created a repository on github.com, cloned it to cli-vm, created and modified files locally and pushed them back to the repository in a very simple fashion. You were able to simply push to your repository because its yours and you dont have to worry about numerous different people trying to issue commits, often without knowledge or coordination with one another
+
+In shared repositories the maintainers generally cant allow any number of people to randomly commit updates to the repository, but often users want to save and distribute a version of the source project with some level of customization that could be as simple as an added label or annotation needed for some purpose in your environment
+
+Forking allows users to make their own seperate copy of a git repository with customizations both locally and to their own seperate github repo. Git also provides tools to keep a fork in sync with an upstream source repository
+
+To fork or not to fork, that is the question
+--
+
+First, if you dont need to customize files, you dont need a fork - simple
+
+Next, when contributing to a shared github repository, there are generally requirements for any contributors to make any updates to their own forked copy and submit changes for central review via a "pull request" process. Regardless of whether contribution guidelines require forking or some other process, when contributing to a shared community you generally need to follow their defined process  
+
+For many of the most common github use cases, there may be no need to push to a repository back to github. Even in cases where you need to modify files, it often works to clone a remote repository, make any needed changes to the local copy of the repository, and rely on the local copies without needing to push back to github
+
+However there are many cases where a user benefits from maintaining a seperate customized copy or even a forked distribution
+
+For example, typically when a user deploys github based code into runtime environments, the user needs to make some modification to the provided files. For example, the planespotter, nsx-t-datacenter and nsx-t-ci pipeline repositories all include sample parameter files that are meant to be customized even for standard deployments
+
+Whether you simply want to keep an online github backup, leverage the central repository so you can easily access your fork from anywhere, or perhaps you may host a workshop or share a reference use case with others who may benefit from your customizations, forks are a great option. For many use cases, maintaining a fork can be as simple and reliable as cloning while offering a host of additional powerful benefits
+
+While there are powerful simple use cases for forking, maintaining forked distributions of complex software can get extremely challenging. Complex use cases should not be entered into without thorough analysis and careful planning
+
+So when should I fork?
+--
+
+The primary challenge in maintaining a forked distribution is the extent to which you may need to modify the source files, and there are many use cases where modifying source files is unnecessary
+
+In many cases applications hosted in github repositories provide parameter or configuration files that need to be customized prior to deployment. Generaly these sorts of files are provided as sample templates, allowing the user to save a and use a local copy of the file saved under a unique filename. 
+
+If your modifications fit these parameters, it is very straightforward to maintain as you can easily pull from upstream without directly forcing any updates or changes to your customized files. It is always possible that an update to source could impact any customized files you use so careful consideration should always be taken, however it is a best practice in cloud native development to minimize changes to configuration and parameter files in effort to simplify upgrades and code maintenance
+
+In some cases, a repo may host code that requires users to modify parameters in a file that has to have a specific name and location in the repo. In cases like this, a user may be forced to modify source files to deploy the distribution, and in the event of updates it may be required to overwrite modified copies in your fork without a greater modification to the code base. This type of situation is not a best practice and should likely not be encountered in popular and well-maintained repositories
+
+In other cases, you may desire to make other modifications to a forked repository that you intend to maintain over time.
+
+
+Wh
+
+
+
+
+we will examine 2 of those use cases here
+
+First, you will create a personal fork of the planespotter repository with minor customizations for your environment. This can be very useful if a repository you use regularly requires a minor customization to be deployed for your environment and you would like to be able to centrally store your variation on github where you or others can easily download and run the application
+
+which notifies the admins of the source repo that there is a potential update, project admins generally implement quality review processes and get to decide, if/when/how they merge the update back into the master branch.
