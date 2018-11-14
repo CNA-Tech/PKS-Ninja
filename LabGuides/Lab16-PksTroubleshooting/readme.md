@@ -2,9 +2,9 @@
 
 **Contents:**
 
-- [Step 1: Validate Base Environment]()
-- [Step 2: Validate Kubernetes Cluster Deployment & Operation]()
-- [Step 3: Common Troubleshooting Scenarios]()
+- [1.0 Validate Base Environment]()
+- [2.0 Accelerating Problem Resolution with the vSphere PKS Plugin]()
+- [3.0 Validation and Troubleshooting with Kubernetes Native Tools]()
 - [Next Steps]()
 
 ## Overview
@@ -23,7 +23,7 @@ In this lab guide, we will initially focus on validating all the core PKS compon
 
 This is not necessarily an ideal order to follow in a troubleshooting scenario as you may have error messages or other contextual information that lead you on a more direct path, however in lieu of more direct information running through an all-around validation of core components is an excellent excercise to help identify error conditions and details that can lead towards problem resolution
 
-## Step 1: Validate Base Environment
+## 1.0 Validate Base Environment
 
 **Stop:** Prior to beginning this lab, you should have a functional PKS deployment running in a non-production lab environment. For students following the Ninja course, all steps from labs 2-5 should be completed in your lab environment before proceeding.
 
@@ -123,7 +123,7 @@ Note: If there are insufficient resources to deploy the OVA, edit the settings f
 
 Please proceed through the following steps while the OVA template is deploying
 
-## 1.2 Validate NSX-T Pipeline Installation and Core Component Health
+### 1.2 Validate NSX-T Pipeline Installation and Core Component Health
 
 1.2.1 Login to the vSphere web client, Navigate to `Hosts and Clusters`, and verify that the `nsxt-manager`, `nsxc-1` and `nsxedge-1.corp.local` virtual machines are powered on. View the summary screen of each VM to ensure there are no error messages and overall VM health appears good
 
@@ -385,7 +385,7 @@ Part of the point of this step is to demonstrate the complexity of correlating K
 </details>
 <br/>
 
-## Step 2: Accelerating Planning, Operations and Problem Resolution with the vSphere PKS Plugin
+## 2.0 Accelerating Planning, Operations and Problem Resolution with the vSphere PKS Plugin
 
 The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimized to support common workflows for virtual infrastructure administrators supporting PKS environments. The plugin is a very useful tool for validating the health of the PKS environment and rapidly identifying and accessing related assets and tools for planning changes or accelerating problem resolution
 
@@ -674,7 +674,7 @@ kubectl get pv
 </details>
 <br/>
 
-## Step 3: Validation and Troubleshooting with Kubernetes Native Tools
+## 3.0 Validation and Troubleshooting with Kubernetes Native Tools
 
 ### 3.1 Observe and Validate Kubernetes Clusters with the Kubernetes Dashboard
 
@@ -816,3 +816,7 @@ As you can see from the output of the above commands, output flags can change th
 <img src="Images/2018-11-13-19-46-20.png">
 </details>
 <br/>
+
+3.2.8 View the [Official kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) and experiment with different commands in your lab environment
+
+You have now completed the troubleshooting lab
