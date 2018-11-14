@@ -3,10 +3,7 @@
 **Contents:**
 
 - [1.0 Create your first repo & basic operations]()
-- [2.0 Branching and Forking]()
-- [3.0 Practical Github Workflows]()
-- [4.0 Bonus Lab - Customizing your PRE/DevOps workstation]()
-- [Next Steps]()
+- [2.0 Branching, Forking and contributing to repositories]()
 
 ## 1.0 Create your first repo & basic operations
 
@@ -336,7 +333,7 @@ git logs
 </details>
 <br/>
 
-## 2.0 Branching, Merging and Forking
+## 2.0 Branching, Forking and contributing to repositories
 
 2.1 Branching and Merging
 
@@ -418,16 +415,16 @@ Observe in the output of the `ls` command that the master branch now contains bo
 
 The main use case for github is for users to be able to clone remote repositories and use the code for something or contribute code to a central repository
 
-In step 1.2, you created a repository on github.com, cloned it to cli-vm, created and modified files locally and pushed them back to the repository in a very simple fashion. You were able to simply push to your repository because its yours and you dont have to worry about numerous different people trying to issue commits, often without knowledge or coordination with one another
+In step 1.2, you created a repository on github.com, cloned it to cli-vm, created and modified files locally and pushed them back to the repository in a very simple fashion. You were able to simply push to your repository because its yours and you dont have to worry about numerous different people trying to make commits, often without knowledge or coordination with one another
 
-In shared repositories the maintainers generally cant allow any number of people to randomly commit updates to the repository, but often users want to save and distribute a version of the source project with some level of customization that could be as simple as an added label or annotation needed for some purpose in your environment
+In shared repositories the maintainers generally cant allow any number of people to randomly commit updates to the repository, but often users want to save and distribute a version of the source project with some level of customization.  
 
 Forking allows users to make their own seperate copy of a git repository with customizations both locally and to their own seperate github repo. Git also provides tools to keep a fork in sync with an upstream source repository
 
 To fork or not to fork, that is the question
 --
 
-First, if you dont need to customize files, you dont need a fork - simple
+First, if you dont need to customize any files, you dont need to fork - simple
 
 Next, when contributing to a shared github repository, there are generally requirements for any contributors to make any updates to their own forked copy and submit changes for central review via a "pull request" process. Regardless of whether contribution guidelines require forking or some other process, when contributing to a shared community you generally need to follow their defined process  
 
@@ -446,22 +443,38 @@ So when should I fork?
 
 The primary challenge in maintaining a forked distribution is the extent to which you may need to modify the source files, and there are many use cases where modifying source files is unnecessary
 
-In many cases applications hosted in github repositories provide parameter or configuration files that need to be customized prior to deployment. Generaly these sorts of files are provided as sample templates, allowing the user to save a and use a local copy of the file saved under a unique filename. 
+In many cases applications hosted in github repositories provide parameter or configuration files that need to be customized prior to deployment. Generaly these sorts of files are provided as sample templates, allowing the user to save a and use a local copy of the file saved under a unique filename
 
 If your modifications fit these parameters, it is very straightforward to maintain as you can easily pull from upstream without directly forcing any updates or changes to your customized files. It is always possible that an update to source could impact any customized files you use so careful consideration should always be taken, however it is a best practice in cloud native development to minimize changes to configuration and parameter files in effort to simplify upgrades and code maintenance
 
 In some cases, a repo may host code that requires users to modify parameters in a file that has to have a specific name and location in the repo. In cases like this, a user may be forced to modify source files to deploy the distribution, and in the event of updates it may be required to overwrite modified copies in your fork without a greater modification to the code base. This type of situation is not a best practice and should likely not be encountered in popular and well-maintained repositories
 
-In other cases, you may desire to make other modifications to a forked repository that you intend to maintain over time.
+In other cases, you may desire to make other modifications, perhaps to source code or dependency files, to a forked repository that you intend to maintain over time. There is no simple yardstick for measuring the complexity of maintaining this type of fork as user experience can vary dramatically based on how each individual project is designed and maintained.
 
+A good general rule of thumb however is that the more modifications, the more there is to maintain, and with more modifications its more likely that additional complexities may be encountered for code maintenance. A key consideration here are the developer practices of the project you want to fork, some projects have well-defined standards for developer integrations and modifications that can help to provide planning, awareness and support to help prepare and minimize the impact of code updates
 
-Wh
+Forking and Pull requests lab exercises
+--
 
+2.2.1 Open a web browser,  log into your github.com account and from the same tab, navigate to the PKS Ninja Repo at [https://github.com/cna-tech/pks-ninja](https://github.com/cna-tech/pks-ninja). Click the `Fork` button on the upper right hand corner of the page as shown in the screenshot below
 
+Note to lab proctors: If your account is listed as an admin for the CNA-Tech or PKS-Ninja repos, you will not be able to fork the repo unless you login with a different account
 
+<details><summary>Screenshot 2.2.1</summary>
+<img src="Images/2018-11-14-11-26-54.png">
+</details>
+<br/>
 
-we will examine 2 of those use cases here
+2.2.2 After the fork is completed, your browser will be redirected to the github page for the new forked repo. Click the `Clone or download' link and copy the url as shown in the screenshot below
 
-First, you will create a personal fork of the planespotter repository with minor customizations for your environment. This can be very useful if a repository you use regularly requires a minor customization to be deployed for your environment and you would like to be able to centrally store your variation on github where you or others can easily download and run the application
+<details><summary>Screenshot 2.2.2</summary>
+<img src="Images/2018-11-14-11-33-50.png">
+</details>
+<br/>
 
-which notifies the admins of the source repo that there is a potential update, project admins generally implement quality review processes and get to decide, if/when/how they merge the update back into the master branch.
+2.2.3 After the fork is completed, your browser will be redirected to the github page for the new forked repo. Click the `Clone or download' link and copy the url as shown in the screenshot below
+
+<details><summary>Screenshot 2.2.3</summary>
+<img src="Images/2018-11-14-11-33-50.png">
+</details>
+<br/>
