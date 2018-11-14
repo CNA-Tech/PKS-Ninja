@@ -3,7 +3,7 @@
 **Contents:**
 
 - [1.0 Create your first repo & basic operations]()
-- [2.0 Cloning, Forking and Committing]()
+- [2.0 Forking and Committing]()
 - [3.0 Practical Github Workflows]()
 - [4.0 Bonus Lab - Customizing your PRE/DevOps workstation]()
 - [Next Steps]()
@@ -123,7 +123,7 @@ Observe in the output that the commit updated the updated local branch to be the
 </details>
 <br/>
 
-1.1.8 Name your project `TestRepo1` and click `Create repository`. On the Quick Setup instructions, copy the command under `…or push an existing repository from the command line` section and paste them into the `cli-vm` prompt as shown in the following screenshots
+1.1.8 Name your project `TestRepo1` and click `Create repository`. On the Quick Setup instructions, copy the command under `…or push an existing repository from the command line` section, paste the commands into the `cli-vm` prompt and follow the prompts to authenticate to your github account as shown in the following screenshots
 
 <details><summary>Screenshot 1.1.8.1</summary>
 <img src="Images/2018-11-14-03-52-27.png">
@@ -138,14 +138,90 @@ Observe in the output that the commit updated the updated local branch to be the
 </details>
 <br/>
 
-1.1.9 Resume your web browser connection to your accounts TestRepo1 repository page on github.com and refresh the page to see the readme.md file pushed from the previous step. Click on the `1 commit` icon as shown in the screenshot below and review the provided details
-
-<details><summary>Screenshot 1.1.9.1</summary>
-<img src="Images/2018-11-14-04-12-49.png">
-</details>
+1.1.9 Resume your web browser connection to your accounts TestRepo1 repository page on github.com and refresh the page to see the readme.md file pushed from the previous step. Click on the `commits` icon as shown in the screenshot below and review the provided details
 
 <details><summary>Screenshot 1.1.9</summary>
-<img src="Images/2018-11-14-04-13-49.png">
+<img src="Images/2018-11-14-04-12-49.png">
 </details>
 <br/>
 
+1.1.10 In your web browser session, click on the ID of the `first commit` as shown in the following screenshot to review the full details associated with the commit
+
+<details><summary>Screenshot 1.1.10.1</summary>
+<img src="Images/2018-11-14-04-23-01.png">
+</details>
+
+<details><summary>Screenshot 1.1.10.2</summary>
+<img src="Images/2018-11-14-04-23-51.png">
+</details>
+<br/>
+
+1.1.11 From the `cli-vm` prompt, update the `readme.md` file, stage and commit changes, and push changes to github with the following commands
+
+```bash
+echo "first file edit" >> readme.md
+git add .
+git commit -m "updated readme.md with first file edit"
+git push
+# follow the prompts to authenticate to your github account to complete the push
+```
+
+<details><summary>Screenshot 1.1.11</summary>
+<img src="Images/2018-11-14-04-36-54.png">
+</details>
+<br/>
+
+1.1.12 Resume your web browser connection and navigate to https://github.com/yourAccountName/TestRepo1 to see the updates to the readme.md file pushed from the previous step. Observe that that contents of the readme.md file are displayed on the page. Click on the id of the commit as shown in the following screenshots and observe the commit detail screen shows a visual diff to easily identify changes associated with the commit
+
+<details><summary>Screenshot 1.1.12.1</summary>
+<img src="Images/2018-11-14-04-44-46.png">
+</details>
+
+<details><summary>Screenshot 1.1.12.2</summary>
+<img src="Images/2018-11-14-04-47-13.png">
+</details>
+<br/>
+
+1.1.13 From the commit page, click on `TestRepo1` near the top of the screen to be directed back to the root page for the repository. On the right hand side of the readme.md file display click the edit icon, add a second line to the readme.md file with the text "second file edit", enter the commit message "updated readme.md with second file edit" and click `Commit changes`
+
+<details><summary>Screenshot 1.1.13.1</summary>
+<img src="Images/2018-11-14-04-49-41.png">
+</details>
+
+<details><summary>Screenshot 1.1.13.2</summary>
+<img src="Images/2018-11-14-04-52-36.png">
+</details>
+
+<details><summary>Screenshot 1.1.13.3</summary>
+<img src="Images/2018-11-14-04-54-51.png">
+</details>
+<br/>
+
+1.1.14 From the `cli-vm` prompt, enter the following commands to pull the second file edit from github and view the updated readme.md file
+
+```bash
+git pull
+cat readme.md
+```
+
+<details><summary>Screenshot 1.1.11</summary>
+<img src="Images/2018-11-14-05-06-33.png">
+</details>
+<br/>
+
+### 1.2 Create remote repo, clone and edit locally
+
+1.2.1 Open a web browser connection to your profile at `https://github.com/yourAccountName`, click on the `Repositories` tab
+
+<details><summary>Screenshot 1.1.13.1</summary>
+<img src="Images/2018-11-14-05-13-41.png">
+</details>
+
+<details><summary>Screenshot 1.1.13.2</summary>
+<img src="Images/2018-11-14-04-52-36.png">
+</details>
+
+<details><summary>Screenshot 1.1.13.3</summary>
+<img src="Images/2018-11-14-04-54-51.png">
+</details>
+<br/>
