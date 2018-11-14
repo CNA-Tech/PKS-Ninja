@@ -472,9 +472,43 @@ Note to lab proctors: If your account is listed as an admin for the CNA-Tech or 
 </details>
 <br/>
 
-2.2.3 After the fork is completed, your browser will be redirected to the github page for the new forked repo. Click the `Clone or download' link and copy the url as shown in the screenshot below
+2.2.3 From the control center destop use putty to connect to `cli-vm` and enter the following commands to clone the repo. Note that first you will create a seperate directory for the forked clone in case anyone has cloned the source repo to their environment, this will prevent confusion. There is no requirement to have any special naming of folders where forked directories are cloned. 
+
+Note: Be sure to replace the URL in the `git clone` command with the URL of your fork of the PKS-Ninja repo
+
+```bash
+mkdir ~/Forked
+cd ~/Forked
+git clone https://github.com/yourAccountName/PKS-Ninja.git # replace the url with the url to your fork of the PKS-Ninja repo
+cd PKS-Ninja
+```
 
 <details><summary>Screenshot 2.2.3</summary>
-<img src="Images/2018-11-14-11-33-50.png">
+<img src="Images/2018-11-14-11-42-45.png">
+<img src="Images/2018-11-14-11-43-13.png">
+</details>
+<br/>
+
+2.2.4 From the `cli-vm` prompt ensure you are in the `/root/Forked/PKS-Ninja` dirctory with the command `pwd` and connect your forked clone back to the source PKS-Ninja repository with the command `git remote add upstream https://github.com/CNA-Tech/PKS-Ninja.git`, and validate the upstream configuration with the command `git remote -v`
+
+<details><summary>Screenshot 2.2.4</summary>
+<img src="Images/2018-11-14-11-56-55.png">
+</details>
+<br/>
+
+2.2.5 From the `cli-vm` prompt, enter the following commands to create a new folder with your github username under the students directory and initialize a readme file in that folder
+
+**Make sure you replace the string "yourGithubUsername" in the commands below with your unique github username**
+
+```bash
+ls
+cd Students
+mkdir yourGithubUsername
+touch yourGithubUsername/readme.md
+cd ~/Forked/PKS-Ninja/
+```
+
+<details><summary>Screenshot 2.2.5</summary>
+<img src="Images/2018-11-14-12-03-03.png">
 </details>
 <br/>
