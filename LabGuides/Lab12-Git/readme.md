@@ -543,3 +543,16 @@ git push origin master
 <img src="Images/2018-11-14-12-21-50.png">
 </details>
 <br/>
+
+2.2.9 After you submit the pull request, an administrator of the PKS-Ninja repo can visit the pull requests tab and merge the requested changes. The screenshot below shows an administrator-level view, you should also be able to view the pull request in the CNA-Tech/PKS-Ninja repository on the pull requests tab, but you will not have the rights to merge the pull request
+
+<details><summary>Screenshot 2.2.9</summary>
+<img src="Images/2018-11-14-12-27-26.png">
+</details>
+<br/>
+
+2.2.10 From your web browser, navigate to the [https://github.com/CNA-Tech/PKS-Ninja/tree/master/Students](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Students) page. After an administrator merges your pull request, you should see a folder with yourGitHubUsername on this page
+
+### You now know how to contribute to CNABU, VMware and other Github repos, we need your contribution to build the best learning community we can! Using the fork/pull request process you executed in the above steps, you could even post updates as simple as correcting a typo you find on a page or making bigger contributions! We can definitely use your help and look forward to growing VMware CNA learning communities together!
+
+### Thank you for completing the PKS Ninja Intro to Git lab!
