@@ -91,43 +91,61 @@ Observe that git recognized the addition of the new `readme.md`, but it is curre
 </details>
 <br/>
 
+1.1.4 Stage the new `readme.md` file with the command `git add readme.md` and review the changes with the `git status` command
+
+Observe in the output of the git status command that you are still on the initial commit, the new readme.md file is recognized but is listed under `changes to be committed` as git requires that changes be commited with a commit message
+
+<details><summary>Screenshot 1.1.3</summary>
+<img src="Images/2018-11-14-03-13-36.png">
+</details>
+<br/>
+
 1.1.5 Commit the changes to your local repository with the command `git commit -m "first commit"` and review the changes with the `git status` command
 
-Observe in the output of the git status command that you are still on the initial commit, the new readme.md file is recognized but is listed under `changes to be committed` as git requires that changes be commited with a commit message
+Observe in the output that the commit updated the updated local branch to be the new master branch indicating that the new `readme.md` file is now part of your master branch. Observe that the git status command now shows there is nothing to commit, as no additional changes have been made
 
-<details><summary>Screenshot 1.1.3</summary>
-<img src="Images/2018-11-14-02-41-33.png">
+<details><summary>Screenshot 1.1.5</summary>
+<img src="Images/2018-11-14-03-14-54.png">
 </details>
 <br/>
 
-1.1.4 Commit the changes to your local repository with the command `git commit -m "first commit"` and review the changes with the `git status` command
+1.1.6 Enter the command `git log` to view your commit history for the current branch. Note there is only a single entry at this time as you just made your first commit, and the date/time, author and commit message are provided
 
-Observe in the output of the git status command that you are still on the initial commit, the new readme.md file is recognized but is listed under `changes to be committed` as git requires that changes be commited with a commit message
-
-<details><summary>Screenshot 1.1.3</summary>
-<img src="Images/2018-11-14-02-41-33.png">
+<details><summary>Screenshot 1.1.6</summary>
+<img src="Images/2018-11-14-03-29-28.png">
 </details>
 <br/>
 
-1.1.4 Commit the changes to your local repository with the command `git commit -m "first commit"` and review the changes with the `git status` command
+1.1.7 Open a web browser to github.com, login to your account and select `Start a project` to create a new repository. Currently the git CLI client does not support creating new github.com repositories, so you will create a new repository that will be updated with your local changes on the first push
 
-There is no requirement to have a readme.md file in any directory, only that a directory is not empty, however it is typical convention to include a readme.md file and is common to use a blank readme.md file to initialize a directory as shown in the following commands
-
-Be sure to replace the string `afewell` in the `git remote add origin` command below with your own github username
-
-```bash
-touch readme.md
-cat readme.md # as you can see from there being no output, the file has no contents but can still be used to initialize the repository or push a new subdirectory
-git add readme.md
-git status
-git commit -m "first commit"
-git remote add origin git@github.com:afewell/TestRepo1.git
-git push -u origin master
-
-
-```
-
-<details><summary>Screenshot 1.1.3</summary>
-<img src="Images/2018-11-14-02-24-02.png">
+<details><summary>Screenshot 1.1.7</summary>
+<img src="Images/2018-11-14-03-43-37.png">
 </details>
 <br/>
+
+1.1.8 Name your project `TestRepo1` and click `Create repository`. On the Quick Setup instructions, copy the command under `…or push an existing repository from the command line` section and paste them into the `cli-vm` prompt as shown in the following screenshots
+
+<details><summary>Screenshot 1.1.8.1</summary>
+<img src="Images/2018-11-14-03-52-27.png">
+</details>
+
+<details><summary>Screenshot 1.1.8.2</summary>
+<img src="Images/2018-11-14-03-58-48.png">
+</details>
+
+<details><summary>Screenshot 1.1.8.3</summary>
+<img src="Images/2018-11-14-04-08-41.png">
+</details>
+<br/>
+
+1.1.9 Resume your web browser connection to your accounts TestRepo1 repository page on github.com and refresh the page to see the readme.md file pushed from the previous step. Click on the `1 commit` icon as shown in the screenshot below and review the provided details
+
+<details><summary>Screenshot 1.1.9.1</summary>
+<img src="Images/2018-11-14-04-12-49.png">
+</details>
+
+<details><summary>Screenshot 1.1.9</summary>
+<img src="Images/2018-11-14-04-13-49.png">
+</details>
+<br/>
+
