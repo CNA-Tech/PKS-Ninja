@@ -512,3 +512,34 @@ cd ~/Forked/PKS-Ninja/
 <img src="Images/2018-11-14-12-03-03.png">
 </details>
 <br/>
+
+2.2.6 From the `cli-vm` prompt, enter the following commands to stage, commit and push these changes up to your forked github repository
+
+**Make sure you replace the string "yourGithubUsername" in the commands below with your unique github username**
+
+```bash
+git add Students/yourGithubUsername/
+git add Students/yourGithubUsername/readme.md
+git commit -m "added PKS-Ninja/Students/yourGithubUsername subdirectory and readme. file"
+git push origin master
+```
+
+<details><summary>Screenshot 2.2.6</summary>
+<img src="Images/2018-11-14-12-14-14.png">
+<img src="Images/2018-11-14-12-14-57.png">
+</details>
+<br/>
+
+2.2.7 Open a web browser connection to the source PKS-Ninja repo at `https://github.com/cna-tech/pks-ninja` and click on `New Pull Request` as shown in the image below
+
+<details><summary>Screenshot 2.2.7</summary>
+<img src="Images/2018-11-14-12-17-20.png">
+</details>
+<br/>
+
+2.2.8 On the `Open a pull request` page, click on the `compare across forks` link and select CNA-Tech/PKS-Ninja as the `base fork` on the left and yourGithubUsername/PKS-Ninja as the head fork on the right and click `create pull request` as shown in the screenshot below
+
+<details><summary>Screenshot 2.2.8</summary>
+<img src="Images/2018-11-14-12-21-50.png">
+</details>
+<br/>
