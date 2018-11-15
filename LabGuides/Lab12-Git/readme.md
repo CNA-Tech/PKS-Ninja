@@ -23,7 +23,7 @@ In this course, you will create and start making commits to repositories on gith
 
 VMware Cloud Native Business unit has a large amount of activity in open source communities, and are increasing our efforts to create more educational content in open github communities just like this course. As part of this effort, there are ample opportunities for contributors of all backgrounds and with any level of time commitment, even something as simple as fixing a typo can help increase your comfort and fluency with the tools while increasing your professional and community reputation, so please join in and take part in contributing to github.com/cna-tech projects
 
-As noted in the lecture, git is not github, the latter is a company recently acquired by Microsoft that provides online git repository services. Git is an open source distributed version control system created by Linus Torvalds that is compatible with but does not require online or external git repository services. While github is the most commercially well known git repository, there are many others, and for VMware employees this lab guide will include a subsection on connecting to VMware's internal gitlab environment
+As noted in the lecture, git is not github, the latter is a company recently acquired by Microsoft that provides online git repository services. Git is an open source distributed version control system created by Linus Torvalds that is compatible with but does not require online or external git repository services. While github is the most commercially well known git repository, there are many others <!--and for VMware employees this lab guide will include a subsection on connecting to VMware's internal gitlab environment -->
 
 ### 1.1 Create local repo & push to github
 
@@ -552,6 +552,11 @@ git push origin master
 <br/>
 
 2.2.10 From your web browser, navigate to the [https://github.com/CNA-Tech/PKS-Ninja/tree/master/Students](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Students) page. After an administrator merges your pull request, you should see a folder with yourGitHubUsername on this page
+
+<details><summary>Screenshot 2.2.10</summary>
+<img src="Images/2018-11-14-12-35-10.png">
+</details>
+<br/>
 
 ### You now know how to contribute to CNABU, VMware and other Github repos, we need your contribution to build the best learning community we can! Using the fork/pull request process you executed in the above steps, you could even post updates as simple as correcting a typo you find on a page or making bigger contributions! We can definitely use your help and look forward to growing VMware CNA learning communities together!
 
