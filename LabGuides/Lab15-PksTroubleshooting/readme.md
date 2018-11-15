@@ -1,4 +1,4 @@
-# Lab 16 - PKS Troubleshooting
+# Lab 15 - PKS Troubleshooting
 
 **Contents:**
 
@@ -284,7 +284,7 @@ Note: You should also see some VM's in the `pks-mgmt-1` resource pool that have 
 1.3.4 From the control center desktop, open a putty session with opsman.corp.local and login with username `ubuntu` password `VMware1!` and enter the following command to prepare a local Bosh Director alias:
 
 ```bash
-bosh alias-env my-bosh -e 172.31.0.2 --ca-cert var/tempest/workspaces/default/root_ca_certificate
+bosh alias-env my-bosh -e 172.31.0.2 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
 ```
 
 <details><summary>Screenshot 1.3.4</summary>

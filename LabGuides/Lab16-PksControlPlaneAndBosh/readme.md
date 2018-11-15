@@ -1,53 +1,110 @@
 # Lab 16 - PKS Control Plane and BOSH
 
-**Contents:**
+This lab aligns directly with the provided lecture, and accordingly there is not much explanation of details provided beyond how to execute steps that align with the lecture
 
-- [1.0 Create your first repo & basic operations]()
-- [2.0 Branching, Forking and contributing to repositories]()
+1.1.1 Log in to the ops manager web interface with username `admin` password `VMware1!`, navigate to `BOSH Director for vSPhere > Status` and observe the details provided. Note the IP address.
 
-## 1.0 Create your first repo & basic operations
+<details><summary>Screenshot 1.1.1.1</summary>
+<img src="Images/2018-11-13-01-07-18.png">
+</details>
 
-If you do not have a github account, go to github.com and follow the simple instructions on the homepage to create an account
-
-In general it is a good practice to use a long-term personal email address when creating your account, as your github account and contributions you make reflect your professional reputation and you should when possible keep your account in the event of a change of employment as you would with a Linkedin account or resume. If you plan to become a regular practitioner in container and cloud native technologies, regardless of whether you have a developer or infrastructure focus, you should plan and make goals for yourself to become a regular contributor on github
-
-Github is not just for coders, there is a huge need for non-code contributions and code contributions alike. Documentation, Reference architectures, tutorials, even fixing typos and so on, and each time you do your github profile reports the amount of contributions you make. Over time, this can become a huge enabler for achieving career goals and enhancing your professional and community profile
-
-Github has tremendous practical benefits for infrastructure operations teams, for example you may personally use or know of others who use Docker hub as powerful and simple way to download and run an application. Github can be used in a very similar manner, as was demonstrated in lab 5 of this course where students download and run the Planespotter application.
-
-As you observed with the planespotter application deployment, a user does not need to modify any files and can simply execute a few simple commands to run the planespotter application by cloning the github repo.  You can even run the planespotter deployment manifests directly from github.com without cloning the repo, and kubectl will resolve the external URL and deploy the application on your local kubernetes cluster.
-
-Unlike docker hub however github is extremely flexible and can host infrastructure as code that can be customized for nearly any type of application or deployment need. Github hosts thousands of different containerized and kubernetes ready projects, a large percentage of which can simply be run in your PKS environment with no to minimal modification.
-
-In this course, you will create and start making commits to repositories on github, and if you havent already, start to build your experience and reputation in this important technical community that is pervasive across cloud native technologies
-
-VMware Cloud Native Business unit has a large amount of activity in open source communities, and are increasing our efforts to create more educational content in open github communities just like this course. As part of this effort, there are ample opportunities for contributors of all backgrounds and with any level of time commitment, even something as simple as fixing a typo can help increase your comfort and fluency with the tools while increasing your professional and community reputation, so please join in and take part in contributing to github.com/cna-tech projects
-
-As noted in the lecture, git is not github, the latter is a company recently acquired by Microsoft that provides online git repository services. Git is an open source distributed version control system created by Linus Torvalds that is compatible with but does not require online or external git repository services. While github is the most commercially well known git repository, there are many others <!--and for VMware employees this lab guide will include a subsection on connecting to VMware's internal gitlab environment -->
-
-### 1.1 Create local repo & push to github
-
-**Stop:** Prior to beginning this lab, you should have a functional PKS deployment running in a non-production lab environment. For students following the Ninja course, all manual installation steps or pipeline installations for core PKS components should be completed in your lab environment before proceeding
-
-1.1.0 Prepare your local git environment with your name and email address as shown in the following commands. Be sure to use your own name and the email address associated with your github account
-
-```bash
-git config --global user.name "Pablo Picasso"
-git config --global user.email "PPicasso@fakemail.com"
-```
-
-<details><summary>Screenshot 1.1.0</summary>
-<img src="Images/2018-11-14-02-56-16.png">
+<details><summary>Screenshot 1.1.1.2</summary>
+<img src="Images/2018-11-13-01-14-16.png">
 </details>
 <br/>
 
-1.1.1 From the control center desktop, use putty to connect and login to `cli-vm`. Make a new directory for a test repository and initialize the repository with the following commands
+1.1.2 Navigate to the on the `Credentials` tab. On the `Director Credentials` row, click `Link to Credential` and record the password
+
+<details><summary>Screenshot 1.1.2.1</summary>
+<img src="Images/2018-11-13-01-08-25.png">
+</details>
+
+<details><summary>Screenshot 1.1.2.2</summary>
+<img src="Images/2018-11-13-01-16-59.png">
+</details>
+<br/>
+
+1.1.3 From the control center desktop, open a putty session with opsman.corp.local and login with username `ubuntu` password `VMware1!` and enter the following command to prepare a local Bosh Director alias:
 
 ```bash
-mkdir ~/TestRepo1
-cd ~/TestRepo
-git init
-git status
+bosh alias-env my-bosh -e 172.31.0.2 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
 ```
 
-Observe that the output of the `git status` command shows that you are currently on the branch master, you are still on your initial commit (you havent committed anything yet), and that you have not yet added anything to commit
+<details><summary>Screenshot 1.1.3</summary>
+<img src="Images/2018-11-13-01-41-48.png">
+</details>
+<br/>
+
+1.1.4 From the Ops Manager prompt, log into Bosh Director with the command `bosh -e my-bosh log-in` using username `director` and the password you gathered in a recent step
+
+<details><summary>Screenshot 1.1.4</summary>
+<img src="Images/2018-11-13-01-47-39.png">
+</details>
+<br/>
+
+1.1.5 From the Bosh CLI, check your deployments with the command `bosh -e my-bosh deployments` and observe the name of your PKS deployment, which begins with `pivotal-container-service-...` as shown in the following screenshot
+
+<details><summary>Screenshot 1.1.5</summary>
+<img src="Images/2018-11-13-02-13-57.png">
+</details>
+<br/>
+
+1.1.6 From the Bosh CLI, enter the command `PKS=$(bosh -e my-bosh deployments | grep ^pivotal | awk '{print $1;}')` to assign the long name of the PKS deployment from the previous command to the `PKS` variable
+
+<details><summary>Screenshot 1.1.6</summary>
+<img src="Images/2018-11-15-00-26-14.png">
+</details>
+<br/>
+
+1.1.7 From the Bosh CLI, set the BOSH_ENVIRONMENT variable so you dont have to keep typing in the `e my-bosh` evey time you enter a bosh command. Also run the bosh cloud-check with the following commands and observe the output
+
+```bash
+export BOSH_ENVIRONMENT=my-bosh
+bosh -d $PKS cloud-check
+```
+
+<details><summary>Screenshot 1.1.7</summary>
+<img src="Images/2018-11-13-02-13-57.png">
+</details>
+<br/>
+
+1.1.8 From the Bosh CLI, run the following commands to check the status of the bosh-managed VMs. Observe that the first command lists all VM's managed by your Bosh director while the 2nd command only shows the VMs that are part of the PKS deployment.
+
+Ensure that the `Process State` for each instance is `running` and the value in the `Active` column is `true`
+
+```bash
+bosh vms
+bosh -d $PKS vms
+```
+
+<details><summary>Screenshot 1.1.8</summary>
+<img src="Images/2018-11-15-00-53-34.png">
+</details>
+<br/>
+
+1.1.9 From the Bosh CLI, enter the following commands to view common bosh commands specific to the PKS deployment, as detailed in the lecture
+
+```bash
+bosh -d $PKS vms
+bosh -d $PKS instances
+bosh -d $PKS tasks
+bosh -d $PKS tasks -ar
+bosh -d $PKS task 110
+bosh -d $PKS task 110 --debug
+```
+
+1.1.10 From the Bosh CLI, enter the following commands to assign the bosh deployment name for the `my-cluster` kubernetes custer and view common bosh commands specific to the `my-cluster` deployment, as detailed in the lecture
+
+Note: Do not simply copy/paste the commands below, be sure to go through them one by one to be able to see the output. Also note the SSH commands below, you will need to disconnect from each of the master and worker ssh sessions listed below to return to the opsman/bosh cli
+
+```bash
+CLUSTER=$(bosh deployments | grep ^service-instance | awk '{print $1;}')
+bosh -d $CLUSTER vms --vitals
+bosh -d $CLUSTER tasks --recent=9
+bosh -d $CLUSTER task 91 --debug
+bosh -d $CLUSTER ssh master/0
+bosh -d $CLUSTER ssh worker/0
+bosh -d $CLUSTER logs
+bosh -d $CLUSTER cloud-check
+bosh –d $CLUSTER releases
+```
