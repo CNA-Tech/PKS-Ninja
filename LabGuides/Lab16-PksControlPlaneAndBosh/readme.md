@@ -2,6 +2,8 @@
 
 This lab aligns directly with the provided lecture, and accordingly there is not much explanation of details provided beyond how to execute steps that align with the lecture
 
+## 1.0 - Navigate the BOSH CLI
+
 1.1.1 Log in to the ops manager web interface with username `admin` password `VMware1!`, navigate to `BOSH Director for vSPhere > Status` and observe the details provided. Note the IP address.
 
 <details><summary>Screenshot 1.1.1.1</summary>
