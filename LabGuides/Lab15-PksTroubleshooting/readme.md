@@ -2,9 +2,9 @@
 
 **Contents:**
 
-- [1.0 Validate Base Environment]()
-- [2.0 Accelerating Problem Resolution with the vSphere PKS Plugin]()
-- [3.0 Validation and Troubleshooting with Kubernetes Native Tools]()
+- [1.0 Validate Base Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab15-PksTroubleshooting#10-validate-base-environment)
+- [2.0 Accelerating Problem Resolution with the vSphere PKS Plugin](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab15-PksTroubleshooting#20-accelerating-planning-operations-and-problem-resolution-with-the-vsphere-pks-plugin)
+- [3.0 Validation and Troubleshooting with Kubernetes Native Tools](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab15-PksTroubleshooting#30-validation-and-troubleshooting-with-kubernetes-native-tools)
 - [Next Steps]()
 
 ## Overview
