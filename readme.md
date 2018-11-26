@@ -1,5 +1,7 @@
 # Welcome to the PKS Ninja Community
 
+This site is under active development, please excuse any errors or omissions
+
 ## Community Intro & Overview
 
 The PKS Ninja program is dedicated to building a community of students and practitioners of Cloud Native Technologies. The community seeks to provide practical educational experiences that help enrich and maximize the knowledge sharing potential for community participants and contributors
