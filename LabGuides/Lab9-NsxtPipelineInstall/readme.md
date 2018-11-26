@@ -58,19 +58,19 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 `fly-s`
 - confirm the parameters file import with `y`
 
-<details><summary>Screenshot 1.6.1</summary>
+<details><summary>Screenshot 1.4.1</summary>
 <img src="Images/nsx-pipeline-dir.png">
 </details>
 
-<details><summary>Screenshot 1.6.2</summary>
+<details><summary>Screenshot 1.4.2</summary>
 <img src="Images/source-nsxt-setup.png">
 </details>
 
-<details><summary>Screenshot 1.6.3</summary>
+<details><summary>Screenshot 1.4.3</summary>
 <img src="Images/pipeline-import.png">
 </details>
 
-<details><summary>Screenshot 1.6.4</summary>
+<details><summary>Screenshot 1.4.4</summary>
 <img src="Images/confirm-import.png">
 </details>
 
@@ -78,7 +78,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 
 `http://cli-vm.corp.local:8080`
 
-<details><summary>Screenshot 1.4</summary>
+<details><summary>Screenshot 1.5</summary>
 <img src="Images/pipeline-ui.png">
 </details>
 
@@ -87,7 +87,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 - Username: nsx
 - Password: vmware
 
-<details><summary>Screenshot 1.5</summary>
+<details><summary>Screenshot 1.6</summary>
 <img src="Images/concourse-login.png">
 </details>
 
