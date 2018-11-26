@@ -69,13 +69,13 @@ Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connec
 
 1.8 On the `Customize template` screen, enter the following variables:
 
+- IP Address: 172.31.0.3
+- Netmask: 255.255.255.0
+- Default Gateway: 172.31.0.1
+- DNS: 192.168.110.10
+- NTP Servers: ntp.corp.local
 - Admin Password: VMware1!
 - Custom Hostname: opsman
-- DNS: 192.168.110.10
-- Default Gateway: 172.31.0.1
-- IP Address: 172.31.0.3
-- NTP Servers: ntp.corp.local
-- Netmask: 255.255.255.0
 
 <details><summary>Screenshot 1.8</summary>
 <img src="Images/2018-10-21-17-30-07.png">
