@@ -41,7 +41,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 <img src="Images/docker-compose-up.png">
 </details>
 
-1.3 Verify that the all 4 containers are in an **Up** status and that none have *Exited*
+1.3 Verify that all 4 containers are in an **Up** status and that none have *Exited*
 
 `docker ps`
 
