@@ -133,6 +133,8 @@ Note: After clicking `Setup Authentication` it will take several minutes for the
 - Username: admin
 - Password: VMware1!
 - Decryption Passphrase: VMware1!
+- Check "I agree to the terms and conditions..."
+- Click "Setup Authentication"
 
 <details><summary>Screenshot 1.15</summary>
 <img src="Images/2018-10-21-19-49-15.png">
