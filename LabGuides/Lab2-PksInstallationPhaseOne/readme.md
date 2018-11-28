@@ -30,28 +30,28 @@ All instructions in this lab guide should be performed from the ControlCenter de
 </details>
 <br/>
 
-1.3 On the `Select name and location` screen, enter the Name `opsman` and select `RegionA01` as the datacenter
+1.3 On the `Select name and folder` screen, rename the Virtual machine name `opsman` and select `RegionA01` as the datacenter
 
 <details><summary>Screenshot 1.3</summary>
 <img src="Images/2018-10-21-17-09-11.png">
 </details>
 <br/>
 
-1.4 On the `Select a resource` screen, select the `pks-mgmt-1` resource pool
+1.4 On the `Select a compute resource` screen, select the `pks-mgmt-1` resource pool
 
 <details><summary>Screenshot 1.4</summary>
 <img src="Images/2018-10-21-17-12-16.png">
 </details>
 <br/>
 
-1.5 On the `Review details` screen, confitm the details and click `Next`
+1.5 On the `Review details` screen, confirm the details and click `Next`
 
 <details><summary>Screenshot 1.5</summary>
 <img src="Images/2018-10-21-17-13-13.png">
 </details>
 <br/>
 
-1.6 On the `Select Storage` screen, set `Thin Provision` as the virtual disk format and `RegionA01-ISCSI01-COMP01` as the datastore
+1.6 On the `Select storage` screen, set `Thin Provision` as the virtual disk format and `RegionA01-ISCSI01-COMP01` as the datastore
 
 <details><summary>Screenshot 1.6</summary>
 <img src="Images/2018-10-21-17-14-47.png">
@@ -69,13 +69,14 @@ Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connec
 
 1.8 On the `Customize template` screen, enter the following variables:
 
-- Admin Password: VMware1!
-- Custom Hostname: opsman
-- DNS: 192.168.110.10
-- Default Gateway: 172.31.0.1
-- IP Address: 172.31.0.3
-- NTP Servers: ntp.corp.local
-- Netmask: 255.255.255.0
+  - IP Address: 172.31.0.3
+  - Netmask: 255.255.255.0
+  - Default Gateway: 172.31.0.1
+  - DNS: 192.168.110.10
+  - NTP Servers: ntp.corp.local
+  - Admin Password: VMware1!
+  - Public SSH Key: (leave blank)
+  - Custom Hostname: opsman
 
 <details><summary>Screenshot 1.8</summary>
 <img src="Images/2018-10-21-17-30-07.png">
