@@ -39,6 +39,7 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 - API Hostname: pks.corp.local
 - Click `Generate RSA Certificate`
   - to generate the certificate, use the value `*.corp.local` and click `Generate`
+- Click Save
 
 <details><summary>Screenshot 1.3.1</summary>
 <img src="Images/2018-10-31-13-51-49.png">
