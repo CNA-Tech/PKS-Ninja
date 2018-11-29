@@ -136,9 +136,9 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 - NSX Manager CA Cert: Use the value you gathered in [Lab 2 Step 2.1](https://github.com/CNA-Tech/PKS-Ninja/blob/master/LabGuides/Lab2-PksInstallationPhaseOne)
 - Disable SSL certificate verification: True
 - NAT mode: True
-- Pods IP Block ID: Use the value you gathered in step 1.9.1 above
-- Nodes IP Block ID: Use the value you gathered in step 1.9.1 above
-- T0 Router ID: Use the value you gathered in step 1.9.2 above
+- Pods IP Block ID: Use the value you gathered in step 1.8.1 above
+- Nodes IP Block ID: Use the value you gathered in step 1.8.1 above
+- T0 Router ID: Use the value you gathered in step 1.8.2 above
 - Floating IP Pool ID: Use the value you gathered in step 1.9.3 above
 - Nodes DNS: 192.168.110.10
 - vSphere Cluster Names: RegionA01-COMP01
