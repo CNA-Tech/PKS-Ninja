@@ -211,7 +211,7 @@ cat Dockerfile
 
 ```bash
 docker tag a6a227b1a503 harbor.corp.local/library/frontend:v1
-docker push harbor.corp.local/library/adsb-sync:v1
+docker push harbor.corp.local/library/frontend:v1
 ```
 
 <details><summary>Screenshot 4.5 </summary>
