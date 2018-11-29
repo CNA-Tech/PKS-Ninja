@@ -65,10 +65,10 @@ Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connec
 <details><summary>Screenshot 1.7</summary>
 <img src="Images/2018-10-21-17-16-11.png">
 </details>
-<br/>
 
 1.8 On the `Customize template` screen, enter the following variables:
 
+</br>
   - IP Address: 172.31.0.3
   - Netmask: 255.255.255.0
   - Default Gateway: 172.31.0.1
@@ -153,7 +153,7 @@ Note: After clicking `Setup Authentication` it will take several minutes for the
 
 `openssl s_client -host nsxmgr-01a.corp.local -port 443 -prexit -showcerts`
 
-Save the section of the output from `Begin Certificate` to `End Certificate` for use in the following steps
+Save the section of the output from `Begin Certificate` to `End Certificate` for use in the following steps, be sure to include the `---Begin Certificate---` and `---End Certificate---` header and footer
 
 <details><summary>Screenshot 2.1</summary>
 <img src="Images/2018-10-21-21-43-02.png">
@@ -168,7 +168,6 @@ Save the section of the output from `Begin Certificate` to `End Certificate` for
 <br/>
 
 2.3 On the `vCenter Configuration` page, enter the following values and click `Save`:
-
 - Name: vcsa-01a
 - vCenter Host: vcsa-01a.corp.local
 - vCenter Username: administrator@vsphere.local
@@ -196,7 +195,7 @@ Save the section of the output from `Begin Certificate` to `End Certificate` for
 </details>
 <br/>
 
-2.4 Continue with the Bosh Director tile configuration, select the `Director Config` tab and enter the following values:
+2.4 Continue with the Bosh Director tile configuration, select the `Director Config` tab on the left side menu and enter the following values:
 
 - NTP Servers: ntp.corp.local
 - Enable VM Resurrector Plugin: True
@@ -211,8 +210,7 @@ Save the section of the output from `Begin Certificate` to `End Certificate` for
 
 2.5 Continue with the Bosh Director tile configuration, select the `Create Availability Zones` tab and enter the following details:
 
-Note: Each of the availability zones below will have a single cluster. When you add an availability zone, make sure to click `Add` and do **not** click `Add Cluster`
-
+Note: Each of the availability zones below will have a single cluster. When you add an availability zone, make sure to click `Add` on the upper right side of the window and do **not** click `Add Cluster`
 - Click `Add` to add an Availability Zone with the following values
   - Name: PKS-MGMT-1
   - IaaS Configuration: vcsa-01a
@@ -246,14 +244,15 @@ Note: Each of the availability zones below will have a single cluster. When you 
   - DNS 192.168.110.10
   - Gateway 172.31.0.1
   - Availability Zones: PKS-MGMT-1, PKS-MGMT-2
-- Click `Add Network` to add a network with the following values
+- Click `Add Network` to add a network with the following values:
   - Name: PKS-COMP
   - vSphere Network Name: ls-pks-service
   - CIDR: 172.31.2.0/23
   - Reserved IP Ranges: 172.31.2.1
-  - DNS 192.168.110.10
-  - Gateway 172.31.2.1
+  - DNS: 192.168.110.10
+  - Gateway: 172.31.2.1
   - Availability Zones: PKS-COMP
+  -Click Save
 
 <details><summary>Screenshot 2.6.1</summary>
 <img src="Images/2018-10-21-23-02-32.png">
@@ -276,6 +275,7 @@ Note: Each of the availability zones below will have a single cluster. When you 
 <br/>
 
 2.8 Continue with the Bosh Director tile configuration, select the `Resource Config` tab and change the value of the `VM Type` in the second row to `medium.disk` as shown in Screenshot 2.8
+-Click Save
 
 <details><summary>Screenshot 2.8</summary>
 <img src="Images/2018-10-22-01-12-45.png">
@@ -378,6 +378,7 @@ curl -k -X POST \
 ```
 
 </details>
+Press `ctrl o` `enter` and then `ctrl x` to return to bash prompt
 <br/>
 
 <details><summary>Screenshot 3.1.2</summary>
