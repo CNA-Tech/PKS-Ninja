@@ -16,6 +16,8 @@ Obtaining IP address of the ControlCenter desktop: From browser on the virtual l
 
 All instructions in this lab guide should be performed from the ControlCenter desktop unless otherwise specified.
 
+PKS installation on vSphere requires NSX-T to be installed. If NSX-T is not installed in your environment, jump to Lab9 to install and return here. One way to verify if NSX-T is installed is try accessing the NSX Manager/Console.
+
 ## Step 1: Deploy Ops Manager
 
 1.1 Launch the Chrome browser on the desktop, and launch the vSphere web client from the short-cut. To login, use the Windows authentication. In the vSphere web client, right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`
@@ -108,7 +110,7 @@ Note: In the Nested example lab, it takes ~20 minutes to deploy the Ops Manager 
 </details>
 <br/>
 
-1.12 On the `Edit Settings` menu for the opsman vm, set `Network Adapter 1` to `ls-pks-mgmt`
+1.12 On the `Edit Settings` menu for the opsman vm, set `Network Adapter 1` to `ls-pks-mgmt` If you don't see this network, that means NSX-T hasn't been installed as required. Please jump to Lab9 and install NSX-T.
 
 <details><summary>Screenshot 1.12</summary>
 <img src="Images/2018-10-21-19-39-17.png">
