@@ -16,7 +16,7 @@ All instructions in this lab guide should be performed from the ControlCenter de
 
 ## Step 1: Deploy Ops Manager
 
-1.1 In the vSphere web client, right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`
+1.1 Launch the Chrome browser on the desktop, and launch the vSphere web client from the short-cut. To login, use the Windows authentication. In the vSphere web client, right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`
 
 <details><summary>Screenshot 1.1</summary>
 <img src="Images/2018-10-21-16-56-33.png">>
