@@ -53,9 +53,6 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 
 `http://cli-vm.corp.local:8080`
 
-<details><summary>Screenshot 1.4</summary>
-<img src="Images/pipeline-ui.png">
-</details>
 
 1.5 In the upper right-hand corner login to Concourse
 
