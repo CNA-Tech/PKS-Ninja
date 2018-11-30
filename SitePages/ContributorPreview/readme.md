@@ -18,9 +18,11 @@ To get started going through the labs, you need some additional background infor
 
 The live version of the Ninja course is broken up into 2 seperate sessions, the first session includes labs 1-8, and the second session includes labs 9-16. The students in the live version of the course install PKS during the first session, and then start with a fresh lab environment for the second session where students perform a pipeline-based installation
 
-The above paragraph is not clearly explained in the current lab guides, it is likely unclear to people viewing the labs on github how this is broken down, this will be clarified but for the time being it is important that you as reviewers understand this point
+The above paragraph is not clearly explained in the current lab guides, to people viewing the labs on github it is currently not clear how this is broken down, this will be clarified but for the time being it is important that you as reviewers understand this point
 
-If you would like to go through the labs in sequence, keep in mind you will need to reload a fresh Ninja pod when you begin lab 9 so you can complete the installation. If you would like to proceed through all the labs without restarting the pod to do a pipeline installation, you should be able to do so. The results of the manual installation should be identical to the pipeline installation, so you should be able to complete either installation process, and then proceed to any of the other labs. 
+If you would like to go through the labs in sequence, keep in mind you will need to install NSX-T before you can begin lab 2, as the first week of ninja included a manual PKS Install, but NSXT was preinstalled on the base pod at that time. You can use the pipeline install covered in lab 9 to install nsx-t and then proceed with lab 2 if you want to go in order from the beginning. 
+
+If you finish labs 1-8 and want to proceed with lab 9-16, you will need to reload a fresh Ninja pod when you begin lab 9 so you can complete the installation. If you would like to proceed through all the labs without restarting the pod to do a pipeline installation, you should be able to do so. The results of the manual installation should be identical to the pipeline installation, so you should be able to complete either installation process, and then proceed to any of the other labs. 
 
 ## What needs the most help?
 

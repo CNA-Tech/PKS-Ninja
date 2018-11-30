@@ -314,7 +314,7 @@ The reason why the automerge failed in this case is because both the local and r
 git add .
 git commit -m "Resolved merging conflict for README.md"
 git push origin master
-git logs
+git log
 ```
 
 <details><summary>Screenshot 1.2.11</summary>
