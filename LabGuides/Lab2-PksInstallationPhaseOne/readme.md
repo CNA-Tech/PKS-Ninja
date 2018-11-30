@@ -12,6 +12,8 @@
 
 For PKS Ninja students using the labs provided in the course, the lab admins will provide you with an IP address to RDP into the ControlCenter desktop in the vPod that has been assigned to you.
 
+Obtaining IP address of the ControlCenter desktop: From browser on the virtual lab environment deskop, go to http://myip.oc.vmware.com/
+
 All instructions in this lab guide should be performed from the ControlCenter desktop unless otherwise specified.
 
 ## Step 1: Deploy Ops Manager
