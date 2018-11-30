@@ -23,7 +23,7 @@ All instructions in this lab guide should be performed from the ControlCenter de
 </details>
 <br/>
 
-1.2 On the `Select template` screen, select `Local File` and navigate to the Ops Manager OVA file
+1.2 On the `Select template` screen, select `Local File` and navigate to the Ops Manager OVA file. The file is E:\Downloads, and named "pcf-vsphere-2.3.build.170.ova"
 
 <details><summary>Screenshot 1.2</summary>
 <img src="Images/2018-10-21-17-03-48.png">
