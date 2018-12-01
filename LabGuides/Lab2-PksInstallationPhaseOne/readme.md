@@ -412,6 +412,7 @@ cat pks-nsx-t-superuser.key
 <br/>
 
 3.1.5 In the NSX Manager UI, go to System > Trust to view certificates. You should now see a certificate for `pks-nsx-t-superuser`
+Login for NSX Manager UI is: admin/VMware1!
 
 <details><summary>Screenshot 3.1.5</summary>
 <img src="Images/2018-10-22-03-42-57.png">
@@ -481,6 +482,7 @@ curl -k -X GET \
 <br/>
 
 3.2.3 In the NSX Manager UI, go to System > Users and verify that you see a user account for `pks-nsx-t-superuser`
+Login for NSX Manager UI is: admin/VMware1!
 
 <details><summary>Screenshot 3.2.3</summary>
 <img src="Images/2018-10-22-03-32-45.png">
