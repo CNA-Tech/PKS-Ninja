@@ -157,6 +157,8 @@ Note: After clicking `Setup Authentication` it will take several minutes for the
 
 `openssl s_client -host nsxmgr-01a.corp.local -port 443 -prexit -showcerts`
 
+If the above command fails with gethostbyname failure, then use nsxmgr-01a, or the IP address of nsxmgr-01a which is set to be  192.168.110.42. You can verify this by doing nslookup nsxmgr-01a.
+
 Save the section of the output from `Begin Certificate` to `End Certificate` for use in the following steps, be sure to include the `---Begin Certificate---` and `---End Certificate---` header and footer
 
 <details><summary>Screenshot 2.1</summary>
