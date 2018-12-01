@@ -32,6 +32,7 @@ You should now be at a summary screen that shows all of the projects in this reg
 For our lab, we are interested in a single project called library.
 
 1.1 Login to harbor.corp.local and click on `+ New Project`
+
 Login info: admin/VMware1!
 
 <details><summary>Screenshot 1.1 </summary>
