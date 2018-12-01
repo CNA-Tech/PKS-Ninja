@@ -31,9 +31,9 @@ Note: If you are already logged in, your screen should resemble screenshot 1.1.2
 </details>
 <br/>
 
-1.4 Confirm that the pipeline has imported and hit the **Play** button
+1.3 Confirm that the pipeline has imported and hit the **Play** button
 
-<details><summary>Screenshot 1.4</summary>
+<details><summary>Screenshot 1.3</summary>
 Note: The image below will look slightly different than yours as the pipline was already run on the reference system
 <img src="Images/2018-11-11-00-20-38.png">
 </details>
