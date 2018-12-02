@@ -67,7 +67,7 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 
 - Active: True
 - Master/ETCD Nodes: 1
-- Master/ETCD VM Type: medium
+- Master/ETCD VM Type: medium (cpu: 2, ram: 4 GB, disk: 8 GB)
 - Master Availability Zone: PKS-COMP
 - Worker VM Type: large
 - Worker Persistent Disk Type: 10gb
