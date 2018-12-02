@@ -216,6 +216,8 @@ docker tag a6a227b1a503 harbor.corp.local/library/frontend:v1
 docker push harbor.corp.local/library/frontend:v1
 ```
 
+If docker push fails with "denied: requested access to the resource is denied", do "docker login harbor.corp.local" with user id=admin, and password = VMware1!, and then do docker push as above.
+
 <details><summary>Screenshot 4.5 </summary>
 <img src="Images/2018-10-24-03-22-00.png">
 </details>
