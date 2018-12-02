@@ -320,7 +320,7 @@ Note: In the nested example lab, it takes ~30 minutes to complete the BOSH deplo
 
 3.1 Generate NSX-T Principal Identity certificate (You will need this for PKS Intallation)
 
-3.1.1 From the ControlCenter desktop, open putty and connect to `cli-vm`. When you open the ssh session it will attempt to connect to PKS, which has not been deployed yet so it will hang, hold down the `ctrl` or `cmd` key while you press `C` to return to the bash prompt and enter the following command:
+3.1.1 From the ControlCenter desktop, open putty and connect to `cli-vm`. Enter the following command:
 
 ``` bash
 mkdir nsxt-pi-cert
