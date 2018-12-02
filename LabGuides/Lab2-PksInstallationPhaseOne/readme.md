@@ -414,7 +414,7 @@ cat pks-nsx-t-superuser.key
 
 3.2 Create and Register Principal Identity
 
-3.2.1 From the `cli-vm` prompt, use a text editor to create a file with the following shell script and your certificate ID to generate the PI cert, for example `nano create_pi.sh`. **Do not cut and paste this script exactly, make sure to change the CERTIFICATE_ID to the id value from the create_certificate.sh output found in step 3.1.3
+3.2.1 From the `cli-vm` prompt, use a text editor to create a file with the following shell script and your certificate ID to generate the PI cert, for example `nano create_pi.sh`. _\[Do not cut and paste this script exactly, make sure to change the CERTIFICATE_ID to the id value from the create_certificate.sh output found in step 3.1.3]_
 
 <details><summary>Click to expand create_pi.sh</summary>
 
