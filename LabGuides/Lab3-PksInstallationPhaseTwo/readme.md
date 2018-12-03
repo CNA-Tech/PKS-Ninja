@@ -104,6 +104,7 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 1.8 Prepare Variables to Configure the `Networking` tab
 
 1.8.1 Log into the NSX Manager UI, go to `Networking > IPAM`, and on the IPAM page and gather the ID for the `ip-block-nodes-deployments` and `ip-block-pods-deployments` and keep note of the values
+Login for NSX Manager UI is: admin/VMware1!
 
 <details><summary>Screenshot 1.8.1.1</summary>
 <img src="Images/2018-10-22-19-54-15.png">

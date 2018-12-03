@@ -33,6 +33,8 @@ For our lab, we are interested in a single project called library.
 
 1.1 Login to harbor.corp.local and click on `+ New Project`
 
+Login info: admin/VMware1!
+
 <details><summary>Screenshot 1.1 </summary>
 <img src="Images/2018-10-23-01-31-40.png">
 </details>
@@ -211,8 +213,10 @@ cat Dockerfile
 
 ```bash
 docker tag a6a227b1a503 harbor.corp.local/library/frontend:v1
-docker push harbor.corp.local/library/adsb-sync:v1
+docker push harbor.corp.local/library/frontend:v1
 ```
+
+If docker push fails with "denied: requested access to the resource is denied", do "docker login harbor.corp.local" with user id=admin, and password = VMware1!, and then do docker push as above.
 
 <details><summary>Screenshot 4.5 </summary>
 <img src="Images/2018-10-24-03-22-00.png">

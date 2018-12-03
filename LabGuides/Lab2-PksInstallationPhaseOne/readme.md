@@ -157,6 +157,10 @@ Note: After clicking `Setup Authentication` it will take several minutes for the
 
 `openssl s_client -host nsxmgr-01a.corp.local -port 443 -prexit -showcerts`
 
+If the above command fails with gethostbyname failure, then use the IP address of nsxmgr-01a which is set to be  192.168.110.42. You can verify this by doing nslookup nsxmgr-01a.
+
+`openssl s_client -host 192.168.110.42 -port 443 -prexit -showcerts`
+
 Save the section of the output from `Begin Certificate` to `End Certificate` for use in the following steps, be sure to include the `---Begin Certificate---` and `---End Certificate---` header and footer
 
 <details><summary>Screenshot 2.1</summary>
@@ -410,6 +414,7 @@ cat pks-nsx-t-superuser.key
 <br/>
 
 3.1.5 In the NSX Manager UI, go to System > Trust to view certificates. You should now see a certificate for `pks-nsx-t-superuser`
+Login for NSX Manager UI is: admin/VMware1!
 
 <details><summary>Screenshot 3.1.5</summary>
 <img src="Images/2018-10-22-03-42-57.png">
@@ -479,6 +484,7 @@ curl -k -X GET \
 <br/>
 
 3.2.3 In the NSX Manager UI, go to System > Users and verify that you see a user account for `pks-nsx-t-superuser`
+Login for NSX Manager UI is: admin/VMware1!
 
 <details><summary>Screenshot 3.2.3</summary>
 <img src="Images/2018-10-22-03-32-45.png">
