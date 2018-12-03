@@ -12,46 +12,50 @@
 
 For PKS Ninja students using the labs provided in the course, the lab admins will provide you with an IP address to RDP into the ControlCenter desktop in the vPod that has been assigned to you.
 
+Obtaining IP address of the ControlCenter desktop: From browser on the virtual lab environment deskop, go to http://myip.oc.vmware.com/
+
 All instructions in this lab guide should be performed from the ControlCenter desktop unless otherwise specified.
+
+PKS installation on vSphere requires NSX-T to be installed. If NSX-T is not installed in your environment, jump to Lab9 to install and return here. One way to verify if NSX-T is installed is try accessing the NSX Manager/Console.
 
 ## Step 1: Deploy Ops Manager
 
-1.1 In the vSphere web client, right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`
+1.1 Launch the Chrome browser on the desktop, and launch the vSphere web client from the short-cut. To login, use the Windows authentication. In the vSphere web client, right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`
 
 <details><summary>Screenshot 1.1</summary>
 <img src="Images/2018-10-21-16-56-33.png">>
 </details>
 <br/>
 
-1.2 On the `Select template` screen, select `Local File` and navigate to the Ops Manager OVA file
+1.2 On the `Select template` screen, select `Local File` and navigate to the Ops Manager OVA file. The file is E:\Downloads, and named "pcf-vsphere-2.3.build.170.ova"
 
 <details><summary>Screenshot 1.2</summary>
 <img src="Images/2018-10-21-17-03-48.png">
 </details>
 <br/>
 
-1.3 On the `Select name and location` screen, enter the Name `opsman` and select `RegionA01` as the datacenter
+1.3 On the `Select name and folder` screen, rename the Virtual machine name `opsman` and select `RegionA01` as the datacenter
 
 <details><summary>Screenshot 1.3</summary>
 <img src="Images/2018-10-21-17-09-11.png">
 </details>
 <br/>
 
-1.4 On the `Select a resource` screen, select the `pks-mgmt-1` resource pool
+1.4 On the `Select a compute resource` screen, select the `pks-mgmt-1` resource pool
 
 <details><summary>Screenshot 1.4</summary>
 <img src="Images/2018-10-21-17-12-16.png">
 </details>
 <br/>
 
-1.5 On the `Review details` screen, confitm the details and click `Next`
+1.5 On the `Review details` screen, confirm the details and click `Next`
 
 <details><summary>Screenshot 1.5</summary>
 <img src="Images/2018-10-21-17-13-13.png">
 </details>
 <br/>
 
-1.6 On the `Select Storage` screen, set `Thin Provision` as the virtual disk format and `RegionA01-ISCSI01-COMP01` as the datastore
+1.6 On the `Select storage` screen, set `Thin Provision` as the virtual disk format and `RegionA01-ISCSI01-COMP01` as the datastore
 
 <details><summary>Screenshot 1.6</summary>
 <img src="Images/2018-10-21-17-14-47.png">
@@ -65,10 +69,10 @@ Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connec
 <details><summary>Screenshot 1.7</summary>
 <img src="Images/2018-10-21-17-16-11.png">
 </details>
-<br/>
 
 1.8 On the `Customize template` screen, enter the following variables:
 
+<<<<<<< HEAD
 - IP Address: 172.31.0.3
 - Netmask: 255.255.255.0
 - Default Gateway: 172.31.0.1
@@ -76,6 +80,17 @@ Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connec
 - NTP Servers: ntp.corp.local
 - Admin Password: VMware1!
 - Custom Hostname: opsman
+=======
+</br>
+  - IP Address: 172.31.0.3
+  - Netmask: 255.255.255.0
+  - Default Gateway: 172.31.0.1
+  - DNS: 192.168.110.10
+  - NTP Servers: ntp.corp.local
+  - Admin Password: VMware1!
+  - Public SSH Key: (leave blank)
+  - Custom Hostname: opsman
+>>>>>>> 4b83042eb5d684ff5a9895bdbb90b9dd9bc39862
 
 <details><summary>Screenshot 1.8</summary>
 <img src="Images/2018-10-21-17-30-07.png">
@@ -105,7 +120,7 @@ Note: In the Nested example lab, it takes ~20 minutes to deploy the Ops Manager 
 </details>
 <br/>
 
-1.12 On the `Edit Settings` menu for the opsman vm, set `Network Adapter 1` to `ls-pks-mgmt`
+1.12 On the `Edit Settings` menu for the opsman vm, set `Network Adapter 1` to `ls-pks-mgmt` If you don't see this network, that means NSX-T hasn't been installed as required. Please jump to Lab9 and install NSX-T.
 
 <details><summary>Screenshot 1.12</summary>
 <img src="Images/2018-10-21-19-39-17.png">
@@ -154,7 +169,11 @@ Note: After clicking `Setup Authentication` it will take several minutes for the
 
 `openssl s_client -host nsxmgr-01a.corp.local -port 443 -prexit -showcerts`
 
-Save the section of the output from `Begin Certificate` to `End Certificate` for use in the following steps
+If the above command fails with gethostbyname failure, then use the IP address of nsxmgr-01a which is set to be  192.168.110.42. You can verify this by doing nslookup nsxmgr-01a.
+
+`openssl s_client -host 192.168.110.42 -port 443 -prexit -showcerts`
+
+Save the section of the output from `Begin Certificate` to `End Certificate` for use in the following steps, be sure to include the `---Begin Certificate---` and `---End Certificate---` header and footer
 
 <details><summary>Screenshot 2.1</summary>
 <img src="Images/2018-10-21-21-43-02.png">
@@ -169,7 +188,6 @@ Save the section of the output from `Begin Certificate` to `End Certificate` for
 <br/>
 
 2.3 On the `vCenter Configuration` page, enter the following values and click `Save`:
-
 - Name: vcsa-01a
 - vCenter Host: vcsa-01a.corp.local
 - vCenter Username: administrator@vsphere.local
@@ -197,7 +215,7 @@ Save the section of the output from `Begin Certificate` to `End Certificate` for
 </details>
 <br/>
 
-2.4 Continue with the Bosh Director tile configuration, select the `Director Config` tab and enter the following values:
+2.4 Continue with the Bosh Director tile configuration, select the `Director Config` tab on the left side menu and enter the following values:
 
 - NTP Servers: ntp.corp.local
 - Enable VM Resurrector Plugin: True
@@ -212,8 +230,7 @@ Save the section of the output from `Begin Certificate` to `End Certificate` for
 
 2.5 Continue with the Bosh Director tile configuration, select the `Create Availability Zones` tab and enter the following details:
 
-Note: Each of the availability zones below will have a single cluster. When you add an availability zone, make sure to click `Add` and do **not** click `Add Cluster`
-
+Note: Each of the availability zones below will have a single cluster. When you add an availability zone, make sure to click `Add` on the upper right side of the window and do **not** click `Add Cluster`
 - Click `Add` to add an Availability Zone with the following values
   - Name: PKS-MGMT-1
   - IaaS Configuration: vcsa-01a
@@ -247,14 +264,15 @@ Note: Each of the availability zones below will have a single cluster. When you 
   - DNS 192.168.110.10
   - Gateway 172.31.0.1
   - Availability Zones: PKS-MGMT-1, PKS-MGMT-2
-- Click `Add Network` to add a network with the following values
+- Click `Add Network` to add a network with the following values:
   - Name: PKS-COMP
   - vSphere Network Name: ls-pks-service
   - CIDR: 172.31.2.0/23
   - Reserved IP Ranges: 172.31.2.1
-  - DNS 192.168.110.10
-  - Gateway 172.31.2.1
+  - DNS: 192.168.110.10
+  - Gateway: 172.31.2.1
   - Availability Zones: PKS-COMP
+  -Click Save
 
 <details><summary>Screenshot 2.6.1</summary>
 <img src="Images/2018-10-21-23-02-32.png">
@@ -277,6 +295,7 @@ Note: Each of the availability zones below will have a single cluster. When you 
 <br/>
 
 2.8 Continue with the Bosh Director tile configuration, select the `Resource Config` tab and change the value of the `VM Type` in the second row to `medium.disk` as shown in Screenshot 2.8
+-Click Save
 
 <details><summary>Screenshot 2.8</summary>
 <img src="Images/2018-10-22-01-12-45.png">
@@ -379,6 +398,7 @@ curl -k -X POST \
 ```
 
 </details>
+Press `ctrl o` `enter` and then `ctrl x` to return to bash prompt
 <br/>
 
 <details><summary>Screenshot 3.1.2</summary>
@@ -406,6 +426,7 @@ cat pks-nsx-t-superuser.key
 <br/>
 
 3.1.5 In the NSX Manager UI, go to System > Trust to view certificates. You should now see a certificate for `pks-nsx-t-superuser`
+Login for NSX Manager UI is: admin/VMware1!
 
 <details><summary>Screenshot 3.1.5</summary>
 <img src="Images/2018-10-22-03-42-57.png">
@@ -475,6 +496,7 @@ curl -k -X GET \
 <br/>
 
 3.2.3 In the NSX Manager UI, go to System > Users and verify that you see a user account for `pks-nsx-t-superuser`
+Login for NSX Manager UI is: admin/VMware1!
 
 <details><summary>Screenshot 3.2.3</summary>
 <img src="Images/2018-10-22-03-32-45.png">

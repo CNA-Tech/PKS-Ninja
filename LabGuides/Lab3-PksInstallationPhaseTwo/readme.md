@@ -66,8 +66,13 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 1.5 Select the `Plan 2` tab and enter the following values:
 
 - Active: True
+<<<<<<< HEAD
 - Master/ETCD Nodes: 1
 - Master/ETCD VM Type: medium (cpu: 2, ram: 4 GB, disk: 8 GB)
+=======
+- Master/ETCD Node Instances: 1
+- Master/ETCD VM Type: medium
+>>>>>>> 4b83042eb5d684ff5a9895bdbb90b9dd9bc39862
 - Master Availability Zone: PKS-COMP
 - Worker VM Type: large
 - Worker Persistent Disk Type: 10gb
@@ -105,6 +110,7 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 1.8 Prepare Variables to Configure the `Networking` tab
 
 1.8.1 Log into the NSX Manager UI, go to `Networking > IPAM`, and on the IPAM page and gather the ID for the `ip-block-nodes-deployments` and `ip-block-pods-deployments` and keep note of the values
+Login for NSX Manager UI is: admin/VMware1!
 
 <details><summary>Screenshot 1.8.1.1</summary>
 <img src="Images/2018-10-22-19-54-15.png">
@@ -140,7 +146,11 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 - Pods IP Block ID: Use the value you gathered in step 1.8.1 above
 - Nodes IP Block ID: Use the value you gathered in step 1.8.1 above
 - T0 Router ID: Use the value you gathered in step 1.8.2 above
+<<<<<<< HEAD
 - Floating IP Pool ID: Use the value you gathered in step 1.9.3 above
+=======
+- Floating IP Pool ID: Use the value you gathered in step 1.8.3 above
+>>>>>>> 4b83042eb5d684ff5a9895bdbb90b9dd9bc39862
 - Nodes DNS: 192.168.110.10
 - vSphere Cluster Names: RegionA01-COMP01
 - Enable outbound internet access: True
@@ -180,14 +190,14 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 </details>
 <br/>
 
-1.13 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes'
+1.13 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`
 
 <details><summary>Screenshot 1.13</summary>
 <img src="Images/2018-10-22-21-09-16.png">
 </details>
 <br/>
 
-1.14 After you click `Apply Changes` BOSH will begin deploying PKS and it will take a while to complete. In the nested example lab, the PKS deployment took ~1 hour to complete. 
+1.14 After you click `Apply Changes` BOSH will begin deploying PKS and it will take a while to complete. In the nested example lab, the PKS deployment took ~1 hour to complete.
 
 Leave the `Applying Changes` window open and check it periodically for status. While waiting for the deployment, use another browser tab to open a second connection to the Ops Manager UI and use the second browser session to complete the harbor configuration in the next section.
 
@@ -223,13 +233,14 @@ Leave the `Applying Changes` window open and check it periodically for status. W
 - Singleton Availability Zone: PKS-MGMT-1
 - Balance other jobs in: PKS-MGMT-1
 - Network: PKS-MGMT
+- Click `Save`
 
 <details><summary>Screenshot 2.4</summary>
 <img src="Images/2018-10-22-21-53-32.png">
 </details>
 <br/>
 
-2.5 Select the `General` tab and set the `Hostname` to `harbor.corp.local`
+2.5 Select the `General` tab and set the `Hostname` to `harbor.corp.local` , Click `Save`
 
 <details><summary>Screenshot 2.5</summary>
 <img src="Images/2018-10-22-21-57-03.png">
@@ -264,7 +275,7 @@ Leave the `Applying Changes` window open and check it periodically for status. W
 </details>
 <br/>
 
-**STOP**: Before proceeding, ensure that the PKS tile deployment has completed
+**STOP**: Before proceeding, ensure that the PKS tile deployment has completed.  There will be a blue bar across the top that will show `Applying Changes` and a button for `Show Progress` as it continues to apply
 
 2.10 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
 
