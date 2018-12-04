@@ -72,7 +72,6 @@ Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connec
 
 1.8 On the `Customize template` screen, enter the following variables:
 
-<<<<<<< HEAD
 - IP Address: 172.31.0.3
 - Netmask: 255.255.255.0
 - Default Gateway: 172.31.0.1
@@ -80,17 +79,6 @@ Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connec
 - NTP Servers: ntp.corp.local
 - Admin Password: VMware1!
 - Custom Hostname: opsman
-=======
-</br>
-  - IP Address: 172.31.0.3
-  - Netmask: 255.255.255.0
-  - Default Gateway: 172.31.0.1
-  - DNS: 192.168.110.10
-  - NTP Servers: ntp.corp.local
-  - Admin Password: VMware1!
-  - Public SSH Key: (leave blank)
-  - Custom Hostname: opsman
->>>>>>> 4b83042eb5d684ff5a9895bdbb90b9dd9bc39862
 
 <details><summary>Screenshot 1.8</summary>
 <img src="Images/2018-10-21-17-30-07.png">
@@ -260,7 +248,7 @@ Note: Each of the availability zones below will have a single cluster. When you 
   - Name: PKS-MGMT
   - vSphere Network Name: ls-pks-mgmt
   - CIDR: 172.31.0.0/24
-  - Reserved IP Ranges: 172.31.0.3 **[<--Should we not be reserving 172.31.0.1 here as well?]**
+  - Reserved IP Ranges: 172.31.0.1-172.31.0.3
   - DNS 192.168.110.10
   - Gateway 172.31.0.1
   - Availability Zones: PKS-MGMT-1, PKS-MGMT-2
