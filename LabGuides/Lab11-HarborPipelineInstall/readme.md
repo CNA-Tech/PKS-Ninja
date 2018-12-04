@@ -54,7 +54,7 @@ Note: Early versions of the lab template used login `Username: NSX Password: VMw
 </details>
 <br/>
 
-1.4 On the upper right hand corner of the upload-harbor task screen, click the plus + icon to kick off the pipeline
+1.4 On the upper right hand corner of the upload-harbor task screen, click the plus + icon to kick off the pipeline which only takes about 5 minutes to run, but it kicks off another ops manager deployment which takes ~45 minutes to run in the reference lab
 
 <details><summary>Screenshot 1.4.1</summary>
 <img src="Images/2018-12-04-10-47-45.png">
@@ -63,12 +63,25 @@ Note: Early versions of the lab template used login `Username: NSX Password: VMw
 <details><summary>Screenshot 1.4.2</summary>
 <img src="Images/2018-12-04-10-48-35.png">
 </details>
+
+<details><summary>Screenshot 1.4.3</summary>
+<img src="Images/2018-12-04-10-55-23.png">
+</details>
 <br/>
 
-1.5 Grab some coffee and watch the magic happen! 
+1.5 Open a web browser connection to the Ops Manager UI, Login, and you should see a blue bar that says `Applying Changes`. Click on `Show Progress`. Note that the harbor installation will be complete once the 
 
-<img src="Images/automate-all-things.png">
+<details><summary>Screenshot 1.5.1</summary>
+<img src="Images/2018-12-04-11-00-54.png">
+</details>
 
-1.6 After coffee :coffee: and around ~45 minutes all the boxes in the pipeline should be green
+<details><summary>Screenshot 1.5.2</summary>
+<img src="Images/2018-12-04-11-01-29.png">
+</details>
 
-Note: If the pipline fails, you can click the job that failed and click the + sign to restart the failed task and the pipeline will resume
+<details><summary>Screenshot 1.5.3</summary>
+Need screensot of applying changes screen on completion
+</details>
+<br/>
+
+Note: Early versions of the harbor pipeline staged the deployment in opsmanager, but did not start the deployment. If when you log into opsmanager the harbor deployment has not started, you may need to manually start the deployment by clicking on `Review Pending Changes` and then `Apply Changes`
