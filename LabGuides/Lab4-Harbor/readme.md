@@ -63,9 +63,11 @@ Login info: admin/VMware1!
 
 ## Step 2: Install OpsMan Root Cert on BOSH for PKS/K8s <-> Harbor communications
 
-To establish secure HTTPS/SSL and does not support unencrypted http communications or any workaround to bypass this requirement. In order for a container host to push or pull images from Harbor, the environment either must reference a common CA or you must install the Harbor Root Certificate on the docker/container host as a trusted source
+Harbor requires clients to connect via SSL. In order for a container host to push/pull images to/from Harbor, the participants must agree on a common CA or self-signed (sometimes referred to as 'custom') root certificate as a source for trust. A root certificate is a public key certificate for encryption channel negotiation that also authenticates the identity of the remote host. It is not used for authorization purposes.
 
-For K8s nodes, PKS (BOSH) automates the process of certificate setup. For PKS you should use the Ops Manager root certificate as it was used to sign the Harbor root certificate. In this section you will install the Ops Manager root cert in the BOSH director tile which will enable all PKS deployed K8s clusters to trust the registry automatically
+For PKS deployed K8s nodes, BOSH automates the process of root certificate trust(s) configuration via its tile configured list of trusted root certificates. For non-PKS/BOSH deployed participants (e.g. Devloper worsktations, CI/CD tools, etc.), you will need to manually configure a root certificate trust.
+
+In this section you will install the Ops Manager root certificate in the BOSH director tile. Among other connections, this will enable trust between all PKS deployed K8s nodes and the Harbor registry. This is due to BOSH and Harbor registry having been deployed by Ops Manager with its root certificate configured as trusted root certificate automatically. Essentially, this allows all PKS deployed k8s nodes to establish SSL communication with all other Ops Manager deployed services.
 
 2.1 Log into the Ops Manager UI, go to `Admin > Settings > Advanced` and click `Download Root CA Cert` as shown in Screenshot 2.1
 
@@ -113,7 +115,7 @@ This completes the Ops Manger certificate setup for PKS/K8s <-> Harbor connectio
 
 ## Step 3: Install Harbor certificate on `cli-vm`
 
-Harbor and container registries in general typically need to need to connect to other clients than just the K8s clusters, for example developer workstations, pipeline tools etc. When providing certificates for external clients to connect to Harbor, you should use the Harbor certificate to preserve the security of the Ops Manager certificate which should be only used for control plane operations. Accordingly, we will install the Harbor certificate on the cli-vm ubuntu host we will be using to manually interact with docker and Harbor in this lab
+Harbor and container registries in general typically need to negotiate communication with clients other than just K8s nodes, for example, developer workstations, pipeline tools, etc. When providing certificates for external clients fpr the sole purpose of communicating with Harbor, you should use the Harbor self-signed certificate instead of the Ops Man certificate. This minimizes the distribution of the Ops Manager certificate and is just good practice. Accordingly, we will install the Harbor certificate on the cli-vm ubuntu host we will be using to manually interact with docker and Harbor in this lab
 
 Note: `cli-vm` is just a standard ubuntu jumpbox with docker, PKS CLI, Kubectl, GIT and a few other utilities installed
 
@@ -130,24 +132,20 @@ Note: `cli-vm` is just a standard ubuntu jumpbox with docker, PKS CLI, Kubectl, 
 
 3.2 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm`.
 
-Note: When you connect an outdated script will run causing the shell to hang for a few seconds until it times out. We havent had a chance to update the script yet so for now, wait for the script to time out and then you can use the ubuntu bash environment normally
-
 <details><summary>Screenshot 3.2 </summary>
 <img src="Images/2018-10-23-03-04-55.png">
 </details>
 <br/>
 
-3.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
+3.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory (create this dierectory if i doesn't already exist) and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
 
 ```bash
-sudo su
-# use Password: VMware1!
+mkdir /etc/docker/certs.d/harbor.corp.local
 cd /etc/docker/certs.d/harbor.corp.local
 nano ca.crt
 # Paste the certificate text into nano, save and close the file
 systemctl daemon-reload
 systemctl restart docker
-exit
 ```
 
 <details><summary>Screenshot 3.3.1</summary>
@@ -163,9 +161,9 @@ You have now prepared `cli-vm' for secure communication with Harbor
 
 ## Step 4: Build Docker Image for Planespotter Frontend
 
-In Step 4, you will clone the planespotter repo and use the downloaded source files to build the container for the planespotter frontend app to prepare Harbor for the planespotter app deployment you will do later in Lab 5.
+In Step 4, you will clone the planespotter repo and use the downloaded source files to build a container for the planespotter frontend app, and prepare Harbor for the planespotter app deployment you will do later in Lab 5.
 
-In this case we will only build the planespotter frontend container ourselves as the planespotter repo already comes with K8s deployment manifests that are setup to download pre-built planepotter containers from docker hub. While we do not have to build the containers in this case, its valuable to see the process and how to setup K8s manifests to pull from either Harbor or Docker Hub later in Lab 5
+In this case we will only build the planespotter frontend container ourselves, as the planespotter repo already includes K8s deployment manifests configured to download pre-built containers from docker hub. While we do not have to build the containers in this case, its valuable to see the process and how to setup K8s manifests to pull from either Harbor or Docker Hub later in Lab 5
 
 4.1 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm` and wait for the bash prompt
 
@@ -213,6 +211,12 @@ cat Dockerfile
 
 ```bash
 docker tag a6a227b1a503 harbor.corp.local/library/frontend:v1
+<<<<<<< HEAD
+docker login harbor.corp.local
+ - User Name: Admin
+ - Password: VMware1!
+=======
+>>>>>>> 4b83042eb5d684ff5a9895bdbb90b9dd9bc39862
 docker push harbor.corp.local/library/frontend:v1
 ```
 

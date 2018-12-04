@@ -3,7 +3,7 @@
 ## Overview
 
 Concourse is an Open source CI/CD pipeline tool used to perform Day 1 and 2 Ops on the CNA platform.
-The NSX-T Pipeline was created to allow our customers a simple way to deploy NSX-T end to end in a click of a button and to create a repeatable deployment process.
+The NSX-T Pipeline was created to provide our customers a simple way to deploy NSX-T (end to end) in a few clicks, with a repeatable deployment process.
 
 In this lab you will setup Concourse and then run a pipeline to install NSX-T
 
@@ -41,7 +41,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 <img src="Images/docker-compose-up.png">
 </details>
 
-1.3 Verify that the all 3 containers are in a **running** state and that none have *Exited*
+1.3 Verify that all 4 containers are in the **Up** status and that none have *Exited*
 
 `docker ps`
 
@@ -49,6 +49,9 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 <img src="Images/docker-ps.png">
 </details>
 
+<<<<<<< HEAD
+1.4 Import the NSX pipeline using the `fly` cli command on the cli-vm.
+=======
 1.4 Using a web browser navigate to the concourse URL
 
 `http://cli-vm.corp.local:8080`
@@ -64,6 +67,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 </details>
 
 1.6 Import the NSX pipeline using the `fly` cli command on the cli-vm.  The source script will create the `fly-s` alias used below to simplify the commands.
+>>>>>>> 4b83042eb5d684ff5a9895bdbb90b9dd9bc39862
 
 `cd ~/nsx-t-datacenter-ci-pipelines/pipelines`
 
@@ -72,23 +76,44 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 `fly-s`
 - confirm the parameters file import with `y`
 
-<details><summary>Screenshot 1.6.1</summary>
+<details><summary>Screenshot 1.4.1</summary>
 <img src="Images/nsx-pipeline-dir.png">
 </details>
 
-<details><summary>Screenshot 1.6.2</summary>
+<details><summary>Screenshot 1.4.2</summary>
 <img src="Images/source-nsxt-setup.png">
 </details>
 
-<details><summary>Screenshot 1.6.3</summary>
+<details><summary>Screenshot 1.4.3</summary>
 <img src="Images/pipeline-import.png">
 </details>
 
-<details><summary>Screenshot 1.6.4</summary>
+<details><summary>Screenshot 1.4.4</summary>
 <img src="Images/confirm-import.png">
 </details>
 
+<<<<<<< HEAD
+1.5 Using a web browser navigate to the concourse URL
+
+`http://cli-vm.corp.local:8080`
+
+<details><summary>Screenshot 1.5</summary>
+<img src="Images/pipeline-ui.png">
+</details>
+
+1.6 In the upper right-hand corner login to Concourse
+
+- Username: nsx
+- Password: vmware
+
+<details><summary>Screenshot 1.6</summary>
+<img src="Images/concourse-login.png">
+</details>
+
+1.7 Confirm that the pipeline has imported and hit the **Play** button
+=======
 1.7 Go back to the web browser and confirm that the pipeline has imported and hit the **Play** button in the lower right hand corner of the *install-nsx-t* tile
+>>>>>>> 4b83042eb5d684ff5a9895bdbb90b9dd9bc39862
 
 <details><summary>Screenshot 1.7</summary>
 <img src="Images/pipeline-ui.png">

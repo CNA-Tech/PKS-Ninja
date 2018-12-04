@@ -72,6 +72,15 @@ Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connec
 
 1.8 On the `Customize template` screen, enter the following variables:
 
+<<<<<<< HEAD
+- IP Address: 172.31.0.3
+- Netmask: 255.255.255.0
+- Default Gateway: 172.31.0.1
+- DNS: 192.168.110.10
+- NTP Servers: ntp.corp.local
+- Admin Password: VMware1!
+- Custom Hostname: opsman
+=======
 </br>
   - IP Address: 172.31.0.3
   - Netmask: 255.255.255.0
@@ -81,6 +90,7 @@ Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connec
   - Admin Password: VMware1!
   - Public SSH Key: (leave blank)
   - Custom Hostname: opsman
+>>>>>>> 4b83042eb5d684ff5a9895bdbb90b9dd9bc39862
 
 <details><summary>Screenshot 1.8</summary>
 <img src="Images/2018-10-21-17-30-07.png">
@@ -138,6 +148,8 @@ Note: After clicking `Setup Authentication` it will take several minutes for the
 - Username: admin
 - Password: VMware1!
 - Decryption Passphrase: VMware1!
+- Check "I agree to the terms and conditions..."
+- Click "Setup Authentication"
 
 <details><summary>Screenshot 1.15</summary>
 <img src="Images/2018-10-21-19-49-15.png">
@@ -248,7 +260,7 @@ Note: Each of the availability zones below will have a single cluster. When you 
   - Name: PKS-MGMT
   - vSphere Network Name: ls-pks-mgmt
   - CIDR: 172.31.0.0/24
-  - Reserved IP Ranges: 172.31.0.3
+  - Reserved IP Ranges: 172.31.0.3 **[<--Should we not be reserving 172.31.0.1 here as well?]**
   - DNS 192.168.110.10
   - Gateway 172.31.0.1
   - Availability Zones: PKS-MGMT-1, PKS-MGMT-2
@@ -327,7 +339,7 @@ Note: In the nested example lab, it takes ~30 minutes to complete the BOSH deplo
 
 3.1 Generate NSX-T Principal Identity certificate (You will need this for PKS Intallation)
 
-3.1.1 From the ControlCenter desktop, open putty and connect to `cli-vm`. When you open the ssh session it will attempt to connect to PKS, which has not been deployed yet so it will hang, hold down the `ctrl` or `cmd` key while you press `C` to return to the bash prompt and enter the following command:
+3.1.1 From the ControlCenter desktop, open putty and connect to `cli-vm`. Enter the following command:
 
 ``` bash
 mkdir nsxt-pi-cert
@@ -423,7 +435,7 @@ Login for NSX Manager UI is: admin/VMware1!
 
 3.2 Create and Register Principal Identity
 
-3.2.1 From the `cli-vm` prompt, use a text editor to create a file with the following shell script and your certificate ID to generate the PI cert, for example `nano create_pi.sh`. **Do not cut and paste this script exactly, make sure to change the CERTIFICATE_ID to the id value from the create_certificate.sh output found in step 3.1.3
+3.2.1 From the `cli-vm` prompt, use a text editor to create a file with the following shell script and your certificate ID to generate the PI cert, for example `nano create_pi.sh`. _\[Do not cut and paste this script exactly, make sure to change the CERTIFICATE_ID to the id value from the create_certificate.sh output found in step 3.1.3]_
 
 <details><summary>Click to expand create_pi.sh</summary>
 

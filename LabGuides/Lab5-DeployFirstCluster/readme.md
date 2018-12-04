@@ -44,7 +44,7 @@ uaac member add pks.clusters.admin pksadmin
 
 2.1 From `cli-vm`, Login to the PKS CLI with the following command:
 
-`pks login -a pks.corp.local -u pksadmin -p VMware1! --skip-ssl-verification`
+`pks login -a pks.corp.local -u pksadmin -p VMware1! --skip-ssl-validation`
 
 <details><summary>Screenshot 2.1 </summary>
 <img src="Images/2018-10-24-05-43-06.png">

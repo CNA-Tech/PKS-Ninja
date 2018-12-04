@@ -28,7 +28,7 @@ these VMDK files are mounted as volumes when the container is running. When the 
 is deleted the Kubernetes volume is unmounted and the data in VMDK files persists.
 
 PKS deploys Kubernetes clusters with the vSphere storage provider already configured.
-In Module 4 you will upgrade an existing application to add persistent volumes and see
+In Module 4 **<-- Incorrect lab guide numbering?**  you will upgrade an existing application to add persistent volumes and see
 that even after deleting your pods and recreating them, the application data persists. In
 order to use Persistent Volumes (PV) the user needs to create a
 PersistentVolumeClaim(PVC) which is nothing but a request for PVs. A claim must
@@ -62,7 +62,7 @@ to configure.
 
 The login credentials for our cluster are stored in PKS. The get credentials command
 updates the kubectl CLI config file with the correct context for your cluster. We will
-spend more time on this in Module 3.
+spend more time on this in Module 3.**<-- Incorrect lab guide numbering?**
 
 **Create Storage Class**
 
