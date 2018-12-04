@@ -23,65 +23,52 @@ Note: If you are already logged in, your screen should resemble screenshot 1.1.2
 
 1.2 If you are not already logged in, in the upper right-hand corner login to Concourse
 
-- Username: admin
-- Password: VMware1!
+```yaml
+Username: admin
+Password: VMware1!
+```
+
+Note: Early versions of the lab template used login `Username: NSX Password: VMware`
 
 <details><summary>Screenshot 1.2.1</summary>
 <img src="Images/2018-11-30-15-44-59.png">
 </details>
-<br/>
 
-1.3 Confirm that the pipeline has imported and hit the **Play** button
-
-<details><summary>Screenshot 1.3</summary>
-Note: The image below will look slightly different than yours as the pipline was already run on the reference system
-<img src="Images/2018-11-11-00-20-38.png">
+<details><summary>Screenshot 1.2.2</summary>
+<img src="Images/2018-12-04-09-53-22.png">
 </details>
 <br/>
 
-1.5 Click on `install-pks-with-nsx`
+1.3 Click on `install-pks-with-nsx` tile, click on the `harbor-install-standalone` pipeline, and then click on the `upload-harbor` task as shown in the following screenshots
 
-<details><summary>Screenshot 1.5</summary>
-Note: The image below will look slightly different than yours as the pipline was already run on the reference system
-<img src="Images/2018-11-11-00-22-24.png">
+<details><summary>Screenshot 1.3.1</summary>
+<img src="Images/2018-12-04-10-43-27.png">
+</details>
+
+<details><summary>Screenshot 1.3.2</summary>
+<img src="Images/2018-12-04-10-44-05.png">
+</details>
+
+<details><summary>Screenshot 1.3.3</summary>
+<img src="Images/2018-12-04-10-45-28.png">
 </details>
 <br/>
 
-1.6 Verify that the pipeline is not in an *errored* state.
+1.4 On the upper right hand corner of the upload-harbor task screen, click the plus + icon to kick off the pipeline
 
-- You will see Maroon colored boxes if the pipline is errored out.
-  - If it is in an errored state perform a `fly-d` and `fly-s` to destory and re-import the pipeline on the cli-vm.
+<details><summary>Screenshot 1.4.1</summary>
+<img src="Images/2018-12-04-10-47-45.png">
+</details>
 
-<details><summary>Screenshot 1.6</summary>
-Note: The image below will look slightly different than yours as the pipline was already run on the reference system
-<img src="Images/2018-11-11-00-25-04.png">
+<details><summary>Screenshot 1.4.2</summary>
+<img src="Images/2018-12-04-10-48-35.png">
 </details>
 <br/>
 
-1.7 Click on the **deploy-opsman**
-
-<details><summary>Screenshot 1.7</summary>
-Note: The image below will look slightly different than yours as the pipline was already run on the reference system
-<img src="Images/2018-11-11-00-27-12.png">
-</details>
-<br/>
-
-1.8 Execute the pipeline with the **Plus** button in the upper right-hand corner
-
-<details><summary>Screenshot 1.8</summary>
-Note: The image below will look slightly different than yours as the pipline was already run on the reference system
-<img src="Images/2018-11-11-00-28-04.png">
-</details>
-<br/>
-
-1.9 Grab some coffee and watch the magic happen! 
+1.5 Grab some coffee and watch the magic happen! 
 
 <img src="Images/automate-all-things.png">
 
-1.10 After coffee :coffee: and around ~150-200 minutes all the boxes in the pipeline should be green
+1.6 After coffee :coffee: and around ~45 minutes all the boxes in the pipeline should be green
 
 Note: If the pipline fails, you can click the job that failed and click the + sign to restart the failed task and the pipeline will resume
-
-<details><summary>Screenshot 1.10</summary>
-<img src="Images/2018-11-11-00-31-45.png">
-</details>
