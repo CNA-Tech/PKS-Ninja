@@ -69,6 +69,7 @@ Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connec
 <details><summary>Screenshot 1.7</summary>
 <img src="Images/2018-10-21-17-16-11.png">
 </details>
+<br/>
 
 1.8 On the `Customize template` screen, enter the following variables:
 
