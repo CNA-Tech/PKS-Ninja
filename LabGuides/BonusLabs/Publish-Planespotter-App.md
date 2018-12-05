@@ -6,7 +6,7 @@ The planespotter app has been deployed with micro-services created for each sub-
 
 2. Check the external URL/IP address assigned to the service (make note of the first IP addres under External-IP).
 
-'kubectl get service planespotter-frontend-lb'
+`kubectl get service planespotter-frontend-lb`
 
 Copy the IP under the "External-IP" section and point your browser to that location.
 
