@@ -21,9 +21,10 @@ With Kubernetes, each component needed for the app is defined in the deployment 
 
 `kubectl create ns planespotter`
 
-`kubectl config set-context kubernetes-admin@kubernetes --namespace planespotter`
+`kubectl config set-context my-cluster --namespace planespotter`
 
-This will create a private namespace for us to deploy all the application components into.
+This will create a private namespace for us to deploy all the application components into and set the namespace as default for our current context.
+
 Verify your namespace has been created
 
 `kubectl get namespaces`
@@ -32,13 +33,11 @@ You should see the planespotter namespace created along with others like, vke-sy
 
 2. Create a persistent volume claim for mysql
 
-`kubectl create -f https://raw.githubusercontent.com/Boskey/planespotter/master/kubernetes/mysql_claim.yaml`
+`kubectl create -f ~/planespotter/kubernetes/storage_class.yaml`
 
-The above command will generate a persistent volume claim needed to store data for the MySQl server , this claim will generate a 2 GB volume which is derived from a storage class "Default" pre-provisioned at the the cluster.
+`kubectl create -f ~/planespotter/kubernetes/mysql_claim.yaml`
 
-Explore the YAML file to see what will be claimed, the volume type, the amount of storage needed etc. The file is here
-
-https://github.com/Boskey/planespotter/blob/master/kubernetes/mysql_claim.yaml
+The above commands will create a storage class and generate a persistent volume claim needed to store data for the MySQl server , this claim will generate a 2 GB volume which is derived from a storage class "Default". Explore the YAML files to see what will be claimed, the volume type, the amount of storage needed etc. 
 
 Verify the persistent volume has been generated.
  
@@ -46,29 +45,28 @@ Verify the persistent volume has been generated.
 
 3. Deploy the MySQL Pod
 
-`kubectl create -f https://raw.githubusercontent.com/Boskey/planespotter/master/kubernetes/mysql_pod.yaml`
+`kubectl create -f ~/planespotter/kubernetes/mysql_pod.yaml`
 
 This will deploy MySQL server which will utilize the Persistent Volume created in the above step. 
 Verify the MySQL server app has been deployed
 
 `kubectl get pods --namespace planespotter`
 
-You should see pods created with name MySQL.
+You should see the pod created with name 'mysql-0'. 
 
 4. Deploy the App-Server Pod 
 
-`kubectl create -f https://raw.githubusercontent.com/Boskey/planespotter/master/kubernetes/app-server-deployment_all_k8s.yaml`
-
+`kubectl create -f ~/planespotter/kubernetes/app-server-deployment_all_k8s.yaml`
 
 5. Deploy the Frontend
 
-`kubectl create -f https://raw.githubusercontent.com/Boskey/planespotter/master/kubernetes/frontend-deployment_all_k8s.yaml`
+`kubectl create -f ~/planespotter/kubernetes/frontend-deployment_all_k8s.yaml`
 
 6. Deploy Redis and the ADSB Sync Service
 
-`kubectl create -f https://raw.githubusercontent.com/Boskey/planespotter/master/kubernetes/redis_and_adsb_sync_all_k8s.yaml`
+`kubectl create -f ~/planespotter/kubernetes/redis_and_adsb_sync_all_k8s.yaml`
 
-Verify all the pods needed for front-end, redis, DBC Sync services and App server have been deployed.
+Verify all the pods needed for front-end, redis, DBC Sync services and App server(7 total) have been deployed and have netered Running state.
 
 `kubectl get pods --namespace planespotter`
 
@@ -84,8 +82,6 @@ Check all the services that were created for each component. You can also explor
 You should see a service created for each component, like MySQL, frontend, app-server etc. Also note the Type of service, each one is a "Cluster IP" type with NO External-IP allocated to them.
 
 ## Next: Continue to Publishing the Planespotter app
-
-https://github.com/Boskey/run_kubernetes_with_vmware/wiki/Publish-Planespotter-App
 
 
 
