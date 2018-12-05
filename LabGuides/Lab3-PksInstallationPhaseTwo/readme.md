@@ -66,18 +66,14 @@ Note: If you do not see a `Pivotal Container Service` tile, check the left hand 
 1.5 Select the `Plan 2` tab and enter the following values:
 
 - Active: True
-<<<<<<< HEAD
-- Master/ETCD Nodes: 1
-- Master/ETCD VM Type: medium (cpu: 2, ram: 4 GB, disk: 8 GB)
-=======
 - Master/ETCD Node Instances: 1
-- Master/ETCD VM Type: medium
->>>>>>> 4b83042eb5d684ff5a9895bdbb90b9dd9bc39862
+- Master/ETCD VM Type: medium (cpu: 2, ram: 4 GB, disk: 8 GB)
 - Master Availability Zone: PKS-COMP
-- Worker VM Type: large
+- Worker VM Type: large (cpu: 2, ram: 8 GB, disk: 16 GB)
 - Worker Persistent Disk Type: 10gb
 - Worker Availability Zone: PKS-COMP
 - Enable Privileged Containers: True
+- Click Save
 
 <details><summary>Screenshot 1.5</summary>
 <img src="Images/2018-10-22-19-37-39.png">
@@ -144,13 +140,8 @@ Login for NSX Manager UI is: admin/VMware1!
 - Disable SSL certificate verification: True
 - NAT mode: True
 - Pods IP Block ID: Use the value you gathered in step 1.8.1 above
-- Nodes IP Block ID: Use the value you gathered in step 1.8.1 above
 - T0 Router ID: Use the value you gathered in step 1.8.2 above
-<<<<<<< HEAD
-- Floating IP Pool ID: Use the value you gathered in step 1.9.3 above
-=======
 - Floating IP Pool ID: Use the value you gathered in step 1.8.3 above
->>>>>>> 4b83042eb5d684ff5a9895bdbb90b9dd9bc39862
 - Nodes DNS: 192.168.110.10
 - vSphere Cluster Names: RegionA01-COMP01
 - Enable outbound internet access: True
@@ -159,6 +150,7 @@ Login for NSX Manager UI is: admin/VMware1!
 <details><summary>Screenshot 1.9.1</summary>
 <img src="Images/2018-10-22-20-28-14.png">
 </details>
+<br/>
 
 <details><summary>Screenshot 1.9.2</summary>
 <img src="Images/2018-10-22-20-29-03.png">
