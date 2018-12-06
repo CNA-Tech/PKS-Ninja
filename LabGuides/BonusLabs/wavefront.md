@@ -1,5 +1,5 @@
 # Lab - PKS / Wavefront Integration
-## -- Under Construction -- _Please use proper PR process to contribute to this lab guide. It is recommended that you work on a single section per PR. For file paths, screenshots, URLs, etc., atempt to maintain 'look and feel' of other sections_
+## -- Under Construction -- _Please use proper PR process to contribute to this lab guide. It is recommended that you work on a single section per PR. For file paths, screenshots, URLs, etc., attempt to maintain 'look and feel' of other sections_
 
 **Contents:**
 
