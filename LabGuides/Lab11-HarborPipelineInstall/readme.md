@@ -28,7 +28,7 @@ Username: admin
 Password: VMware1!
 ```
 
-Note: Early versions of the lab template used login `Username: NSX Password: VMware`
+Note: Early versions of the lab template used login `Username: nsx Password: vmware`
 
 <details><summary>Screenshot 1.2.1</summary>
 <img src="Images/2018-11-30-15-44-59.png">
