@@ -2,6 +2,7 @@
 
 ## Overview of App
 Now that we have a Kubernetes cluster, let's look at the magic of Kubernetes by deploying an application. For this exercise we will be using an app called 'planespotter' developed by the very talented @yfauser [here](https://github.com/yfauser/planespotter). Planespotter essentially lets you query Aircraft data from FAA. It has the following components
+
 1. Front-end: User interface to take queries and showcase results
 2. API App server: to retrieve data from DB
 3. MySQL DB: Stores Aircraft registration data from FAA
@@ -13,9 +14,11 @@ The deployment YAML for planespotter-frontend has specified 2 replica sets, henc
 
 Go ahead, take a look at the planespotter deployment YAML here! https://github.com/Boskey/planespotter/blob/master/kubernetes/frontend-deployment_all_k8s.yaml
 
+You will recall that we used git to clone the above repo locally and modified one of the manifests (.yaml file) to pull an image from our private Harbor registry. We will use the local files to deploy our app, some will pull images from Docker Hub while the manifest we edited earlier will pull from our Harbor registry.
+
 ## Deployment Procedure
 
-With Kubernetes, each component needed for the app is defined in the deployment YAML. The deployment YAML identifies the base container image , the dependencies needed from the infrastructure etc. The yaml files also creates a API service that frontends the component-pod.
+With Kubernetes, each component needed for the app is defined in the deployment YAML. The deployment YAML identifies the base container image , the dependencies needed from the infrastructure etc. The yaml files also creates an API service that frontends the component-pod.
 
 1. Create namespace "planespotter" and use that namespace as default
 
@@ -37,7 +40,7 @@ You should see the planespotter namespace created along with others like, vke-sy
 
 `kubectl create -f ~/planespotter/kubernetes/mysql_claim.yaml`
 
-The above commands will create a storage class and generate a persistent volume claim needed to store data for the MySQl server , this claim will generate a 2 GB volume which is derived from a storage class "Default". Explore the YAML files to see what will be claimed, the volume type, the amount of storage needed etc. 
+The above commands will create a storage class and generate a persistent volume claim needed to store data for the MySQl server , this claim will generate a 2 GB volume. Explore the YAML files to see what will be claimed, the volume type, the amount of storage needed etc. 
 
 Verify the persistent volume has been generated.
  
@@ -66,7 +69,7 @@ You should see the pod created with name 'mysql-0'.
 
 `kubectl create -f ~/planespotter/kubernetes/redis_and_adsb_sync_all_k8s.yaml`
 
-Verify all the pods needed for front-end, redis, DBC Sync services and App server(7 total) have been deployed and have netered Running state.
+Verify all the pods needed for front-end, redis, DBC Sync services and App server (7 total) have been deployed and have entered Running state.
 
 `kubectl get pods --namespace planespotter`
 
