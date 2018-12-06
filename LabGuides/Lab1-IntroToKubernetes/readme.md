@@ -1,26 +1,37 @@
-# Introduction to Kubernetes - Lab Exercises
+# Introduction to Kubernetes
+## Lab Exercises
 
-**Contents:**
+---
 
-- [Step 1: Configure access to VKE and deploy Kubernetes cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab1-IntroToKubernetes#step-1-configure-access-to-vke-and-deploy-kubernetes-cluster)
-- [Step 2: Explore your Kubernetes cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab1-IntroToKubernetes#step-2-explore-your-kubernetes-cluster)
-- [Step 3: Review Sample Application Components](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab1-IntroToKubernetes#step-3-review-sample-application-components)
-- [Step 4: Pods, Replica Sets and Deployments](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab1-IntroToKubernetes#step-4-pods-replica-sets-and-deployments)
-- [Step 5: ClusterIP, NodePort, LoadBalancer & Ingress](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab1-IntroToKubernetes#step-5-services---clusterip-nodeport--loadbalancer)
-- [Next Steps](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab1-IntroToKubernetes#next-steps)
+## Contents
+
+- [Step 1: Configure access to VKE and deploy Kubernetes cluster](#step-1-configure-access-to-vke-and-deploy-kubernetes-cluster)
+- [Step 2: Explore your Kubernetes cluster](#step-2-explore-your-kubernetes-cluster)
+- [Step 3: Review Sample Application Components](#step-3-review-sample-application-components)
+- [Step 4: Pods, Replica Sets and Deployments](#step-4-pods-replica-sets-and-deployments)
+- [Step 5: ClusterIP, NodePort, LoadBalancer & Ingress](#step-5-services---clusterip-nodeport--loadbalancer)
+- [Next Steps](#next-steps)
+
+---
 
 ## Step 1: Configure access to VKE and deploy Kubernetes cluster
 
-1.1 Register and Login to VKE
+------
+
+### 1.1 Register and Login to VKE
 
 - By now you should have an invitation email to login to VMware Kubernetes Engine (VKE), please follow instructions in the email to sign-up as a user for VKE
 - In order to register for VKE, you will need to have a login in 'My VMware'. If you already have a login in 'My VMware' using the same email address you used for registration you don't have to create a new one. Else, you will be directed to create a 'My VMworld' ID.
 - One of the Proctors for the Workshop should have assigned you a Kubernetes Cluster that's already pre-created and assigned to you, please have the cluster name handy.
 - If you haven't received the invitation email or do not know the name of the Kubernetes Cluster assigned to you, please reach out to one of the proctors.
 
-1.2 Download VKE CLI & Kubectl
+------
+
+### 1.2 Download VKE CLI & Kubectl
 
 The VKE CLI will help us interact with the platform, fetch us the tokens needed to get authenticated access to the Kubernetes cluster
+
+------
 
 - In a browser, launch the VMware Cloud Services console. https://console.cloud.vmware.com/
 - Log in to your VMware Cloud services organization.
@@ -30,6 +41,9 @@ The VKE CLI will help us interact with the platform, fetch us the tokens needed 
 - After the download completes, move the vke executable to a common bin directory (for example, ~/bin or %UserProfile%\bin).
   - For Linux or Mac OS X: % mkdir ~/bin % cp vke ~/bin
   - For Windows: mkdir %UserProfile%\bin copy vke.exe %UserProfile%\bin
+
+------
+
 - Make sure your bin directory is accessible on your PATH.
   - For Linux or Mac OS X: % export PATH=$PATH:/Users/your-user-name/bin
   - For Windows: set PATH=%PATH%;%UserProfile%\bin
@@ -37,7 +51,9 @@ The VKE CLI will help us interact with the platform, fetch us the tokens needed 
   - For Linux or Mac OS X: % chmod +x ~/bin/vke
   - For Windows: attrib +x %UserProfile%\bin\vke.exe
 - Now change to a different directory and check the version to verify that the CLI is ready to use. vke --version
-  
+
+------
+
 Kubectl is a command line interface for Kubernetes, it lets you interact with the Kubernetes cluster. Once logged in to the cluster Kubectl will be used anytime you want to deploy apps/services/provision storage etc. or need to query the cluster for existing pods/nodes/apps/services etc.
 
 Kubectl is also available to download from the VKE Console page, once logged in to the console, Click on Developer-->click on -->Actions -->Download kubectl
@@ -46,40 +62,51 @@ Once downloaded, save the file in your environment for you to be able to access 
 
 You can also interact with Kubernetes using the kubernetes dashboard if you prefer UI over CLI, the Kubernetes dashboard is available from the VKE console-->Your-Cluster-Name>-->Actions-->Open K8's UI
 
+------
+
 1.3 Login to VKE via VKE CLI
 
 So far we have downloaded the vke CLI and kubectl CLI, now we will login to VKE via the CLI to fetch the access tokens needed to talk to the clusters hosted in VKE via Kubectl
 
 Get access to the Organization ID and Refresh Tokens
 
+------
+
 1.3.1 Go back to the VKE web interface Click on 'Developer Center' and click the Overview tab, once there you will see the CLI to login to VKE with the organization ID , copy the entire command and store it in a text editor
 
 <details><summary>Screenshot 1.3.1</summary>
-<img src="Images/2018-10-19-00-26-40.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-00-26-40.png">
 </details>
 <br/>
+
+------
 
 1.3.2 On the same page, click on 'Get your Refresh Token', this will redirect the browser to the 'My Accounts' page and you will see your OAuth Refresh Token, copy the token. If there is no token click "Generate Key" and copy it. Save the 'refresh token'
 
 <details><summary>Screenshot 1.3.2.1</summary>
-<img src="Images/2018-10-19-02-03-56.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-02-03-56.png">
 </details>
 
 <details><summary>Screenshot 1.3.2.2</summary>
-<img src="Images/2018-10-19-02-12-46.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-02-12-46.png">
 </details>
 <br/>
 
 **Please treat this Refresh Token as your Password and DO NOT SHARE it with others**
+
+------
+
 
 1.3.3 Login to VKE, copy paste the VKE Login command from above (step 1.3.1) and replace 'your-refresh-token' with the one you retrieved above (step 1.3.2)
 
 `vke account login --organization fa2c1d78-9f00-4e30-8268-4ab81862080d --refresh-token {your token here, remove the brackets`
 
 <details><summary>Screenshot 1.3.3</summary>
-<img src="Images/2018-10-19-02-32-46.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-02-32-46.png">
 </details>
 <br/>
+
+------
 
 1.3.4 Set folder and project within VKE
 
@@ -89,20 +116,26 @@ vke project set SharedProject
 ```
 
 <details><summary>Screenshot 1.3.4</summary>
-<img src="Images/2018-10-19-02-46-10.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-02-46-10.png">
 </details>
 <br/>
+
+------
 
 1.3.5 Fetch Kubectl auth for your cluster, replace with the name of the cluster assigned to you in the command below
 
 `vke cluster auth setup afewell-cluster`
 
 <details><summary>Screenshot 1.3.5</summary>
-<img src="Images/2018-10-19-02-51-03.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-02-51-03.png">
 </details>
 <br/>
 
+------
+
 1.4 Access Kubernetes Cluster via Kubectl
+
+------
 
 1.4.1 View the pods and services in your cluster to validate connectivity
 
@@ -112,11 +145,15 @@ kubectl get svc --all-namespaces
 ```
 
 <details><summary>Screenshot 1.4.1</summary>
-<img src="Images/2018-10-19-02-58-07.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-02-58-07.png">
 </details>
 <br/>
 
+---
+
 ## Step 2: Explore your Kubernetes cluster
+
+------
 
 2.1 Review your current kubeconfig and context with the command `kubectl config view -o yaml`
 
@@ -154,6 +191,9 @@ users:
 </details>
 <br/>
 
+------
+
+
 2.2 View the nodes and component statuses for your cluster with the following commands:
 
 ``` bash
@@ -164,19 +204,25 @@ kubectl get cs
 NOTE: The K8s cluster deployed in the example lab is based on the VKE developer cluster template which starts with a single node and adds additional nodes dynamically with VKE's "Smart Cluster" feature. Accordingly, if you run this command again in later steps, you may see additional nodes running. 
 
 <details><summary>Screenshot 2.2</summary>
-<img src="Images/2018-10-19-14-14-32.png">
-<img src="Images/2018-10-19-15-47-40.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-14-14-32.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-15-47-40.png">
 </details>
 <br/>
+
+------
 
 2.3 View the namespaces in your cluster with the command `kubectl get namespaces`
 
 <details><summary>Screenshot 2.3</summary>
-<img src="Images/2018-10-19-12-11-13.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-12-11-13.png">
 </details>
 <br/>
 
+------
+
 2.4 Observe that in the `kube config view` output from step 2.1 above that there is no namespace listed, and so when you issue kubectl commands they will apply to the default namespace - unless you specify the namespace in the command, or specify a namespace for your context (which we will do in a later exercise)
+
+------
 
 2.5 View pods in the default and other namespaces with the following commands. As you will observe in the output, there are currently no pods running in the default or kube-system namespaces:
 
@@ -188,9 +234,11 @@ kubectl get pods -n vke-system
 ```
 
 <details><summary>Screenshot 2.5</summary>
-<img src="Images/2018-10-19-12-36-32.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-12-36-32.png">
 </details>
 <br/>
+
+------
 
 2.6 Create the `planespotter` namespace that we will use later for deploying the planespotter app and view the namespace with the commands:
 
@@ -202,10 +250,12 @@ kubectl get pods -n planespotter
 ```
 
 <details><summary>Screenshot 2.6</summary>
-<img src="Images/2018-10-19-12-56-22.png">
-<img src="Images/2018-10-19-12-56-54.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-12-56-22.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-12-56-54.png">
 </details>
 <br/>
+
+------
 
 2.7 Set your current context namespace to `planespotter` and view your kube config file to see that the namespace setting is now displayed in the output. Be sure to replace references to "afewell-cluster-context" with the name of your cluster context
 
@@ -253,12 +303,17 @@ users:
 <br/>
 
 <details><summary>Screenshot 2.7</summary>
-<img src="Images/2018-10-19-13-54-28.png">
-<img src="Images/2018-10-19-15-35-24.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-13-54-28.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-15-35-24.png">
 </details>
 <br/>
 
+
+---
+
 ## Step 3: Review Sample Application Components
+
+------
 
 3.0 Clone the github repository for the Planespotter
 
@@ -267,38 +322,50 @@ users:
 `git clone https://github.com/Boskey/planespotter.git`
 
 <details><summary>Screenshot 3.1</summary>
-<img src="Images/2018-10-19-21-38-11.png">
+![screenshot](LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-21-38-11.png)
 </details>
 <br/>
+
+------
 
 3.2 List the contents of the planespotter directory, observe the different subdirectories for each application component, docs and for kubernetes manifests
 
 <details><summary>Screenshot 3.2</summary>
-<img src="Images/2018-10-19-03-25-42.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-03-25-42.png">
 </details>
 <br/>
+
+------
 
 3.3 Navigate to the planespotter/frontend directory and list the files, observe the the application source and build files for the frontend application are located in this folder
 
 <details><summary>Screenshot 3.3</summary>
-<img src="Images/2018-10-19-03-33-26.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-03-33-26.png">
 </details>
 <br/>
+
+------
 
 3.4 Navigate to the planespotter/kubernetes directory and list the files to show the different deployment manifests and supporting yaml files
 
 <details><summary>Screenshot 3.4</summary>
-<img src="Images/2018-10-19-03-39-31.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-03-39-31.png">
 </details>
 <br/>
+
+---
 
 ## Step 4: Pods, Replica Sets and Deployments
 
 In Step 4, you will deploy just the frontend portion of the planespotter app and review the deployment, replica set and pod object data
 
+------
+
 4.1 Save a copy of the frontend-deployment_all_k8s.yaml as frontend-deployment_only.yaml
 
 `cp frontend-deployment_all_k8s.yaml frontend-deployment_only.yaml`
+
+------
 
 4.2 Edit the frontend-deployment_only.yaml file to only include the deployment spec and remove the service spec (Remove all lines from the 2nd set of 3 dashes "---" and after) and change "replicas" to 1. the resulting file should look like the following:
 
@@ -341,14 +408,18 @@ spec:
 </details>
 <br/>
 
+------
+
 4.3 Deploy the frontend app using the updated manifest file with the command:
 
 `kubectl create -f frontend-deployment_only.yaml`
 
 <details><summary>Screenshot 4.3</summary>
-<img src="Images/2018-10-19-08-22-56.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-08-22-56.png">
 </details>
 <br/>
+
+------
 
 4.4 Use kubectl to view the deployment, replica set and pod objects with the following commands:
 
@@ -359,9 +430,11 @@ kubectl get deployments
 ```
 
 <details><summary>Screenshot 4.4</summary>
-<img src="Images/2018-10-19-18-55-10.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-18-55-10.png">
 </details>
 <br/>
+
+------
 
 4.5 View the details of the pod object in yaml by using the kubectl `-o yaml` flag which causes the output of the command to be returned in yaml format. The output should look similar to the following:
 
@@ -550,6 +623,8 @@ metadata:
 </details>
 <br/>
 
+------
+
 4.6 View the details of the replicaset object in yaml by using the kubectl `-o yaml` flag which causes the output of the command to be returned in yaml format. The output should look similar to the following:
 
 `kubectl get replicasets -o yaml`
@@ -628,6 +703,8 @@ metadata:
 ```
 </details>
 <br/>
+
+------
 
 4.7 View the details of the deployment object in yaml by using the kubectl `-o yaml` flag which causes the output of the command to be returned in yaml format. The output should look similar to the following:
 
@@ -716,6 +793,8 @@ metadata:
 </details>
 <br/>
 
+------
+
 4.7 Scale up your current deployment by adjusting the quantity of replicas and then verify with the following commands:
 
 ``` bash
@@ -724,9 +803,11 @@ kubectl get pods
 kubectl get deployments
 ```
 <details><summary>Screenshot 4.7</summary>
-<img src="Images/2018-10-19-19-06-22.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-19-06-22.png">
 </details>
 <br/>
+
+------
 
 4.8 Cleanup your current deployment to prepare for the next exercise with the following commands
 
@@ -737,19 +818,27 @@ kubectl get deployments
 ```
 
 <details><summary>Screenshot 4.8</summary>
-<img src="Images/2018-10-19-19-11-52.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-19-11-52.png">
 </details>
 <br/>
 
+---
+
 ## Step 5: Services - ClusterIP, NodePort & LoadBalancer
+
+------
 
 ### 5.1 Deploy and observe a ClusterIP Service deployment
 
 In this section you will deploy the planespotter frontend app, but this time we will include the service spec with the deployment.
 
+------
+
 5.1.1 Save a copy of the frontend-deployment_all_k8s.yaml as frontend-deployment_ClusterIP.yaml
 
 `cp frontend-deployment_all_k8s.yaml frontend-deployment_ClusterIP.yaml`
+
+------
 
 5.1.2 Edit the frontend-deployment_ClusterIP.yaml file to only include both the deployment spec and the service spec. Delete the ingress spec, which the section from the 3rd set of 3 dashes "---" and every line after. The resulting file should look like the following:
 
@@ -806,14 +895,18 @@ spec:
 </details>
 <br/>
 
+------
+
 5.1.3 Deploy the frontend app using the updated manifest file with the command:
 
 `kubectl create -f frontend-deployment_ClusterIP.yaml`
 
 <details><summary>Screenshot 5.1.3</summary>
-<img src="Images/2018-10-19-22-42-57.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-22-42-57.png">
 </details>
 <br/>
+
+------
 
 5.1.4 View the deployment, replica set and pod objects with the following commands:
 
@@ -824,9 +917,11 @@ kubectl get deployments
 ```
 
 <details><summary>Screenshot 5.1.4</summary>
-<img src="Images/2018-10-19-22-45-20.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-22-45-20.png">
 </details>
 <br/>
+
+------
 
 5.1.5 View the planespotter-frontend service details. Note that there is no external IP address assigned to planespotter-frontend as ClusterIP service only provides an internal IP address for pod-to-pod communications:
 
@@ -838,13 +933,19 @@ kubectl get services -o yaml # outputting to yaml or json includes even more det
 ```
 
 <details><summary>Screenshot 5.1.5</summary>
-<img src="Images/2018-10-19-22-56-39.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-19-22-56-39.png">
 </details>
 <br/>
 
+------
+
 ### 5.2 Setup a test pod that you can use to validate pod-to-pod communications
 
+------
+
 5.2.1 As a testing pod, you will deploy the official shell-demo pod from the Kubernetes documentation, review the [shell-demo manifest here](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/) before proceeding
+
+------
 
 5.2.2 Deploy the shell-demo pod and verify deployment status with the following commands:
 
@@ -855,18 +956,22 @@ kubectl get pods
 ```
 
 <details><summary>Screenshot 5.2.2</summary>
-<img src="Images/2018-10-20-01-01-54.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-01-01-54.png">
 </details>
 <br/>
+
+------
 
 5.2.3 Use kubectl exec to open a bash shell to the shell-demo pod with the command `kubectl exec -it shell-demo -- /bin/bash`
 
 Note that the shell does not have a prompt, so for example in Screenshot 5.2.3 below, after entering the command `kubectl exec -it shell-demo -- /bin/bash`, the output shows the result of entering the "ls" command:
 
 <details><summary>Screenshot 5.2.3</summary>
-<img src="Images/2018-10-20-01-16-23.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-01-16-23.png">
 </details>
 <br/>
+
+------
 
 5.2.4 Install curl and use it to test the planespotter-frontend ClusterIP service. Repeat the curl a couple of times, it reports back the IP address of the planespotter-frontend pod that serving the request, and after executing curl a few times you should see the requests being services by both running planespotter-frontend pods, demonstrating that the ClusterIP service is both fullfiling http requests and also load balancing those requests across the running pods.
 
@@ -880,9 +985,11 @@ curl 10.0.0.185 | grep Planespotter or curl
 ```
 
 <details><summary>Screenshot 5.2.4</summary>
-<img src="Images/2018-10-20-01-42-28.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-01-42-28.png">
 </details>
 <br/>
+
+------
 
 5.2.5 Clean up the planespotter-frontend deployment and service in preparation for the next lab.
 
@@ -901,18 +1008,24 @@ kubectl get services
 ```
 
 <details><summary>Screenshot 5.2.5</summary>
-<img src="Images/2018-10-20-02-24-00.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-02-24-00.png">
 </details>
 <br/>
 
+------
+
 ### 5.3 Deploy the planespotter-frontend app with the NodePort Service
+
+------
 
 5.3.1 Make a copy of the `frontend-deployment_ClusterIP.yaml` file, save it as `frontend-deployment_NodePort.yaml`
 
 <details><summary>Screenshot 5.3.1</summary>
-<img src="Images/2018-10-20-02-29-06.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-02-29-06.png">
 </details>
 <br/>
+
+------
 
 5.3.2 Edit the `frontend-deployment_NodePort.yaml` file, near the bottom of the file in the Service.Spec section, add the value `type: NodePort` as shown in the following snippet:
 
@@ -980,6 +1093,8 @@ spec:
 </details>
 <br/>
 
+------
+
 5.3.3 Run the updated planespotter-frontend app and verify deployment with the following commands. Make note of the port numbers shown in the output of `kubectl get services`
 
 ``` bash
@@ -991,9 +1106,11 @@ kubectl get services -o yaml
 ```
 
 <details><summary>Screenshot 5.3.3</summary>
-<img src="Images/2018-10-20-02-46-40.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-02-46-40.png">
 </details>
 <br/>
+
+------
 
 5.3.4 Get the IP address of a worker node using the following commands. If you have multiple worker nodes running in your cluster, it does not matter which nodes IP address you use to test the service as with NodePort any node can fulfill the service request. Be sure to replace the worker node name in the example below with the worker node name from your environment
 
@@ -1003,16 +1120,20 @@ kubectl get node worker-5ba97a60-d42a-11e8-bab6-024dd3eb0b96 -o yaml | grep addr
 ```
 
 <details><summary>Screenshot 5.3.4</summary>
-<img src="Images/2018-10-20-03-06-17.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-03-06-17.png">
 </details>
 <br/>
+
+------
 
 5.3.5 Open a shell session with the shell-demo pod and use curl to validate the NodePort service. Use screenshot 5.3.5 for reference:
 
 <details><summary>Screenshot 5.3.5</summary>
-<img src="Images/2018-10-20-03-16-41.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-03-16-41.png">
 </details>
 <br/>
+
+------
 
 5.3.6 Clean up the planespotter-frontend deployment and service and verify with the following commands:
 
@@ -1024,18 +1145,24 @@ kubectl get services
 ```
 
 <details><summary>Screenshot 5.3.6</summary>
-<img src="Images/2018-10-20-03-22-35.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-03-22-35.png">
 </details>
 <br/>
 
+------
+
 ### 5.4 Deploy the planespotter-frontend app with the LoadBalancer Service
+
+------
 
 5.4.1 Make a copy of the `frontend-deployment_NodePort.yaml` file, save it as `frontend-deployment_LoadBalancer.yaml`
 
 <details><summary>Screenshot 5.4.1</summary>
-<img src="Images/2018-10-20-03-26-49.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-03-26-49.png">
 </details>
 <br/>
+
+------
 
 5.4.2 Edit the `frontend-deployment_LoadBalancer.yaml` file, near the bottom of the file in the service spec section, add the value `type: LoadBalancer` as shown in the following snippet:
 
@@ -1103,6 +1230,8 @@ spec:
 </details>
 <br/>
 
+------
+
 5.4.3 Run the updated planespotter-frontend app and verify deployment with the following commands. Make note of the external IP address/hostname shown in the output of `kubectl get services`
 
 ``` bash
@@ -1114,20 +1243,24 @@ kubectl get services -o yaml
 ```
 
 <details><summary>Screenshot 5.4.3.1</summary>
-<img src="Images/2018-10-20-03-34-35.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-03-34-35.png">
 </details>
 
 <details><summary>Screenshot 5.4.3.2</summary>
-<img src="Images/2018-10-20-03-36-10.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-03-36-10.png">
 </details>
 <br/>
+
+------
 
 5.4.4 Open a browser and go to the hostname shown in Screenshot 5.4.3.2 above to verify that planespotter-frontend is externally accessible with the LoadBalancer service
 
 <details><summary>Screenshot 5.4.4</summary>
-<img src="Images/2018-10-20-03-39-39.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-03-39-39.png">
 </details>
 <br/>
+
+------
 
 5.4.5 Clean up the planespotter-frontend deployment and service and verify with the following commands:
 
@@ -1139,16 +1272,22 @@ kubectl get services
 ```
 
 <details><summary>Screenshot 5.4.5</summary>
-<img src="Images/2018-10-20-03-22-35.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-03-22-35.png">
 </details>
 <br/>
 
+------
+
 ### 5.5 Deploy the planespotter-frontend app with an Ingress controller
+
+------
 
 5.5.1 Make a copy of the `frontend-deployment_all_k8s.yaml` file, save it as `frontend-deployment_ingress.yaml`
 
 Example:
 `cp frontend-deployment_all_k8s.yaml frontend-deployment_ingress.yaml`
+
+------
 
 5.5.2 Get the URL of your smarcluster with the following command, be sure to replace 'afewell-cluster' with the name of your cluster:
 
@@ -1157,9 +1296,11 @@ vke cluster show afewell-cluster | grep Address
 ```
 
 <details><summary>Screenshot 5.5.2</summary>
-<img src="Images/2018-10-20-15-45-19.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-15-45-19.png">
 </details>
 <br/>
+
+------
 
 5.5.3 Edit the `frontend-deployment_ingress.yaml` file, near the bottom of the file in the ingress spec section, change the value for spec.rules.host to URL for your smartcluster as shown in the following snippet:
 
@@ -1251,6 +1392,8 @@ spec:
 </details>
 <br/>
 
+------
+
 5.5.4 Run the updated planespotter-frontend app and verify deployment with the following commands. Make note of the external IP address/hostname shown in the output of `kubectl get services`
 
 ``` bash
@@ -1263,15 +1406,19 @@ kubectl describe ingress
 ```
 
 <details><summary>Screenshot 5.5.4</summary>
-<img src="Images/2018-10-20-16-11-14.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-16-11-14.png">
 </details>
+
+------
 
 5.5.5 Open a browser and go to the url of your VKE SmartCluster to verify that planespotter-frontend is externally accessible with the LoadBalancer service
 
 <details><summary>Screenshot 5.5.5</summary>
-<img src="Images/2018-10-20-16-26-46.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-16-26-46.png">
 </details>
 <br/>
+
+------
 
 5.5.6 Clean up the planespotter-frontend components and verify with the following commands:
 
@@ -1284,9 +1431,11 @@ kubectl get ingress
 ```
 
 <details><summary>Screenshot 5.5.6</summary>
-<img src="Images/2018-10-20-16-32-19.png">
+<img src="LabGuides/Lab1-IntroToKubernetes/Images/2018-10-20-16-32-19.png">
 </details>
 <br/>
+
+---
 
 ## Next Steps
 
@@ -1296,6 +1445,10 @@ If you are following the PKS Ninja cirriculum, [click here to proceed to the nex
 
 If you are not following the PKS Ninja cirriculum and would like to deploy the complete planespotter app on VKE, you can find [complete deployment instructions here](https://github.com/Boskey/run_kubernetes_with_vmware)
 
+---
+
 ### Thank you for completing the Introduction to Kubernetes Lab!
+
+---
 
 ### [Please click here to proceed to Lab2: PKS Installation Phase 1](../Lab2-PksInstallationPhaseOne)
