@@ -8,8 +8,8 @@
 - [Step 2: Log into Wavefront and Collect API Info](#step-2-log-into-wavefront-and-collect-api-info)
 - [Step 3: Configure PKS Tile for Wavefront Monitoring](#step-3-configure-pks-tile-for-wavefront-monitoring)
 - [Step 4: Confirm Wavefront Proxy Deployment](#step-4-confirm-wavefront-proxy-deployment)
-- [Step 5: Create a Wavefront Dashboard](#step-5)
-- [Next Steps]()
+- [Step 5: Create a Wavefront Dashboard](#step-5-create-a-wavefront-dashboard)
+- [Next Steps](#next-steps)
 
 <br>
 
