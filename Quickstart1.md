@@ -12,12 +12,19 @@ Setup RDP client with the IP address as the target
 Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/NsxtPipelineInstall-IN7016
 
 script this to run from cli-vm:
+
 cd concourse
+
 docker-compose up -d
+
 docker ps
+
 (verify ps results)
+
 cd ~/nsx-t-datacenter-ci-pipelines/pipelines
+
 source nsxt-setup.sh
+
 fly-s
 
 
