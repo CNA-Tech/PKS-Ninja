@@ -11,6 +11,17 @@ Setup RDP client with the IP address as the target
 # 3) Install NSX-T using Concourse pipeline
 Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/NsxtPipelineInstall-IN7016
 
+script this to run from cli-vm:
+cd concourse
+docker-compose up -d
+docker ps
+(verify ps results)
+cd ~/nsx-t-datacenter-ci-pipelines/pipelines
+source nsxt-setup.sh
+fly-s
+
+
+
 # 4) Install PKS using Concourse pipeline
 Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksPipelineInstall-IN2456
 
