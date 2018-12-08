@@ -8,8 +8,7 @@
 - [Step 2: Log into Wavefront and Collect API Info](#step-2-log-into-wavefront-and-collect-api-info)
 - [Step 3: Configure PKS Tile for Wavefront Monitoring](#step-3-configure-pks-tile-for-wavefront-monitoring)
 - [Step 4: Confirm Wavefront Proxy Deployment](#step-4-confirm-wavefront-proxy-deployment)
-- [Step 5: Create a Wavefront Dashboard](#step-5-create-a-wavefront-dashboard)
-- [Next Steps](#next-steps)
+- [Step 5: Review Wavefront PKS Dashboard](#step-5-review-wavefront-pks-dashboard)
 
 ## Lab Access Instructions
 
@@ -111,8 +110,43 @@ _Note: These errands simply direct PKS to add Wavefront components on creation o
 </details>
 <br/>
 
-## Step 5: Wavefront Dashboards
+## Step 5: Review Wavefront PKS Dashboard
 
-## Next Steps
+5.1 Login to your Wavefront subscription.
+- Click on `Dashboards` in the top menu bar
 
-### [Please click here to proceed to ..
+<details><summary>Screenshot 5.1</summary>
+<img src="Images/2018-12-07-22-51-00.png">
+</details>
+<br/>
+
+5.2 Under integrations on the left, click on `VMware PKS`.
+
+<details><summary>Screenshot 5.2</summary>
+<img src="Images/2018-12-07-22-51-30.png">
+</details>
+<br/>
+
+5.3 Click on `VMware PKS`.
+
+<details><summary>Screenshot 5.3 </summary>
+<img src="Images/2018-12-07-22-52-00.png">
+</details>
+<br/>
+
+5.4 Review your PKS Dashboard. 
+
+<details><summary>Screenshot 5.4 </summary>
+<img src="Images/2018-12-07-22-53-00.png">
+</details>
+<br/>
+
+5.5 Click on `Pod Containers` in the top menu bar. Hover over the `CPU Usage Rate By Pod Container` graph to list metrics by container.
+
+<details><summary>Screenshot 5.5 </summary>
+<img src="Images/2018-12-07-22-13-00.png">
+</details>
+<br/>
+
+## Summary
+
