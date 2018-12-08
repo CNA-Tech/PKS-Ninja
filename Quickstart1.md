@@ -14,7 +14,7 @@ Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/NsxtPipel
 # 4) Install PKS using Concourse pipeline
 Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksPipelineInstall-IN2456
 
-# 5) Install Harbour
+# 5) Install Harbor
 Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborPipelineInstal-IN4968
 
 # 6) Deploy App
