@@ -1,4 +1,4 @@
-## Quickstart Guide - PKS using Concourse pipelines
+## Quickstart Guide - Install NSX-T, PKS, and Harbor using Concourse pipelines
 
 # 1) Get VMware training lab environment
 
