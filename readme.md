@@ -16,12 +16,6 @@ Practical, hands on experience and regular practice is key to becoming an effect
 
 While the community does have an overall focus on VMware PKS, all are welcome as learning materials on this site cross a broad range of related topics with a strong focus on open source, devops, and all things cloud native
 
-<details><summary>VMware Employees - Expand this section for employee-specific details</summary>
-<img src="Images/2018-10-21-16-56-33.png">>
-</details>
-<br/>
-## VMware Employees - Expand this section for employee-specific details
-
 ## Approach and Learning Philosophy
 
 A central ideology behind this community is that CI/CD fundamentally breaks the traditional educational model. For most in the community the rapid pace of feature velocity delivered in PKS and related cloud native technologies is new and is clearly a challenge to deal with, especially as new cloud native methodologies are applied to an increasing array of enterprise-specific needs and applications
