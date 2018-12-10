@@ -34,11 +34,4 @@ This is the exact process used by communities across github to contribute to ope
 
 Member participation is the ultimate goal of this community. To keep pace with the demands of the increasingly rapid growth of the technologies we support, we truly need a community effort. All participants of this community are strongly encouraged to participate, and that can be as simple as providing some feedback about the materials when you go through them, sharing word of mouth with your peers about the community, resolving issues or adding improvements, or even contributing entirely new lab guides. Every contribution adds significant value to the participants github and community profile
 
-Please see the [Contributors Guide]() to learn more!
-
-
-
-
-This site includes the lab guides for VMware's internal invitation-only PKS Ninja Course offering. If you are a student in a live VMware class welcome! The course instructor will provide directions in alignment with your class schedule.
-
-This community is not exclusive to class students, and we want any and we hop can provide a valued educational resource regardless of whether you are a Ninja class student, vmware or partnern employee
+Please see the [Contributors Guide](https://github.com/CNA-Tech/PKS-Ninja/blob/master/Courses/ContributorsGuide-CG2415/readme.md) to learn more!
