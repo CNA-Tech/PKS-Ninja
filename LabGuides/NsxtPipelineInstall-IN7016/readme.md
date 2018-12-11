@@ -98,7 +98,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 </details>
 <br>
 
-1.7 Go back to the web browser and confirm that the pipeline has imported and hit the **Play** button in the lower right hand corner of the *install-nsx-t* tile and then on **install-nsx-t**
+1.7 Click the **Play** button in the lower right hand corner of the *install-nsx-t* tile and then on **install-nsx-t**
 
 <details><summary>Screenshot 1.7</summary>
 <img src="Images/pipeline-ui.png">
