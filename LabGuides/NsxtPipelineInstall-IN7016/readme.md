@@ -98,51 +98,44 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 </details>
 <br>
 
-1.7 Go back to the web browser and confirm that the pipeline has imported and hit the **Play** button in the lower right hand corner of the *install-nsx-t* tile
+1.7 Go back to the web browser and confirm that the pipeline has imported and hit the **Play** button in the lower right hand corner of the *install-nsx-t* tile and then on **install-nsx-t**
 
 <details><summary>Screenshot 1.7</summary>
 <img src="Images/pipeline-ui.png">
 </details>
 <br>
 
-1.8 Click on *install-nsx-t*
-
-<details><summary>Screenshot 1.8</summary>
-<img src="Images/install-nsx-t.png">
-</details>
-<br>
-
-1.9 Verify that the pipeline is not in an *errored* state
+1.8 Verify that the pipeline is not in an *errored* state
 
 - You will see Maroon colored boxes if the pipline is errored out
   - If it is in an errored state perform a `fly-d` and `fly-s` to destory and re-import the pipeline on the cli-vm.
 
-<details><summary>Screenshot 1.9</summary>
+<details><summary>Screenshot 1.8</summary>
 <img src="Images/pipeline-started.png">
 </details>
 <br>
 
-1.10 Click on the **install-nsx-t** light-gray box in the pipeline
+1.9 Click on the **install-nsx-t** light-gray box in the pipeline
 
-<details><summary>Screenshot 1.10</summary>
+<details><summary>Screenshot 1.9</summary>
 <img src="Images/install-nsx-t.png">
 </details>
 <br>
 
-1.11 Execute the pipeline with the **Plus** button in the upper right-hand corner
+1.10 Execute the pipeline with the **Plus** button in the upper right-hand corner
 
-<details><summary>Screenshot 1.11</summary>
+<details><summary>Screenshot 1.10</summary>
 <img src="Images/install-nsx-t-plus.png">
 </details>
 <br>
 
-1.12 Grab some coffee and watch the magic happen!
+1.11 Grab some coffee and watch the magic happen!
 
 <img src="Images/automate-all-things.png">
 <br>
 
-1.13 After coffee :coffee: and around 45 to 60 minutes you should see this.
+1.12 After coffee :coffee: and around 45 to 60 minutes you should see this.
 
-<details><summary>Screenshot 1.13</summary>
+<details><summary>Screenshot 1.12</summary>
 <img src="Images/pipeline-complete.png">
 </details>
