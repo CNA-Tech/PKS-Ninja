@@ -2,6 +2,10 @@
 
 This section is currently under development and is incomplete, please check back soon for additional updates
 
+NOTE: The steps below have have you create a fork of the cna-tech/pks-ninja repository and this is incorrect and needs to be updated. Instead, you need to create a fork of the cna-tech/students repository, and create your student folder there
+
+This guide will be updated soon, but in the meantime if you follow the steps below, please execute the steps according to the variable update provided in the previous note
+
 Forking and Pull requests lab exercises
 --
 
