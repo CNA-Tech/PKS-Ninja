@@ -18,20 +18,16 @@ While the community does have an overall focus on VMware PKS, all are welcome as
 
 ## Approach and Learning Philosophy
 
-A central ideology behind this community is that CI/CD fundamentally breaks the traditional educational model. For most in the community the rapid pace of feature velocity delivered in PKS and related cloud native technologies is new and is clearly a challenge to deal with, especially as new cloud native methodologies are applied to an increasing array of enterprise-specific needs and applications
+Agile, CI/CD and the rapidly increasing cadence of feature delivery creates new requirements and challenges for technology workers that need to support cloud native platforms and applications
 
-As the pace of software development continues to accelerate, it is well understood that to support these demands developers need new tools and processes such as Agile methodologies and continuous integration and continuous delivery tools and support systems.
+While it is common knowledge that application developers need extensive tools and support ecosystems to be able to deliver software at an agile cadence, to successfully implement agile development and operations, it is critical to have an education and enablement methodology that can keep pace. Whether your role is in operations, development or even a LOB technical role, we are all in positions where our organizations require us to be technical specialists and when new features are out and there is no training or effective knowledge sharing, the entire initiative suffers
 
-What is often less emphasized is the needs of the community that provides operational support for all these new rapidly developed features. In order to support faster developement cycles and aspire to full continuous integration and deployment, support staff must have operational support systems and educational and practice knowledge that evolves with the pace of software
+The PKS-Ninja community provides an innovative model that provides unique methods to help participants quickly gain comfort and familiarity with devops and cloud native tools and best practices. The community and this lab guide is a markdown file in a git repository, a living software project that participants interact with as a core part of the learning experience
 
-The only way for this model to work, is if operational support systems, processes, training and other impacted functions also adopt Agile and CI/CD methodologies
+The courses and lab guides provided center around a common set of topologies, participants learn while building and configuring their own lab environment. Each community participant then has access to a common lab environment, where community members can easily share their knowledge and practices with each other in a way that all members of the community can easily replicate
 
-This community seeks to apply rapid development methodologies to educational tools and materials provided. This factor provides a unique educational opportunity as The best way to learn about rapid development and CI/CD is to practice, and as the community and all content within is managed with these principles, it provides a unique opportunity to participate in real-world rapid development practices from the beginning of a members participation in the community
+The community also provides a model and platform for online courseware delivery, with the key goal of making providing simple processes to make it easier to build, share and absorb expert content. All participants in the community are encouraged to add lab guides or host their courses on the PKS-Ninja repository, where we plan to deliver a diverse learning catalog of cloud native learning and enablement assets based in practical hands on learning
 
-Early in the core cirriculum students learn to fork the PKS-Ninja repo, create a subdirectory for themselves in the /Students directory, and create a pull request to merge their update back into the core PKS-Ninja repo. Throughout the materials students are encouraged to save and commit their own exercises and updates back to the PKS-Ninja repo to get comforatable with this new and important regular practice for cloud native practitioners
+To get started with the community, please check out the [Community Getting Started Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GettingStarted-GS3861)
 
-This is the exact process used by communities across github to contribute to open projects, lab guide contributors are encouraged to focus on exercises and challenges that require contribution and participation both in this and other open communities
-
-Member participation is the ultimate goal of this community. To keep pace with the demands of the increasingly rapid growth of the technologies we support, we truly need a community effort. All participants of this community are strongly encouraged to participate, and that can be as simple as providing some feedback about the materials when you go through them, sharing word of mouth with your peers about the community, resolving issues or adding improvements, or even contributing entirely new lab guides. Every contribution adds significant value to the participants github and community profile
-
-Please see the [Contributors Guide](https://github.com/CNA-Tech/PKS-Ninja/blob/master/Courses/ContributorsGuide-CG2415/readme.md) to learn more!
+Thank you for your interest and participation in the PKS Ninja community!
