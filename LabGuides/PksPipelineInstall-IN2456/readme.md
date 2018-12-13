@@ -4,24 +4,30 @@
 
 In this guide you will add the PKS Installation Pipeline to Concourse and start the pipeline
 
-**With the current version of PKS Concourse Pipeline, the pipeline will fail at deploy-pks stage**
 
-Temporary Workaround:
+***With the current version of PKS Concourse Pipeline, the pipeline will fail at deploy-pks stage***
 
-Within your lab session, open a new browser window and go to: https://github.com/nvpnathan/nsx-t-ci-pipeline/tree/master/tasks/config-pks/tasks/config-pks/
+**Temporary Workaround:**
+_____________________________________________________________________
+Within your lab session, open a new browser window and go to: https://github.com/nvpnathan/nsx-t-ci-pipeline/tree/master/tasks
 
 0.1 Replace config-pks task script with workaround version
-Using Putty, login to the `cli-vm`and navigate to `~/nsx-t-ci-pipeline/tasks/config-pks/`
 
-Remove the existing task.sh file `rm task.sh`
-Create new `task.sh` and copy in workaround script `nano task.sh`
+Using Putty, login to the `cli-vm`and navigate to config pks directory
+`cd ~/nsx-t-ci-pipeline/tasks/config-pks/`
 
-Go back to the github page and click on `task.sh`, copy this entire file and copy into open `task.sh` file in your `cli-vm`.
+Remove the existing task.sh file
+`rm task.sh`
+Create new `task.sh` and copy in workaround script
+`nano task.sh`
+
+Go back to the github page and click on `task.sh` to open it, copy this entire file and paste it into open `task.sh` file in your `cli-vm`.
 -Save the file `ctrl o`
 -Exit the file `ctrl x`
 
-0.2 Replace the config-pks task yml file with workaround version
-Remove the existing task.yml file `rm task.yml`
+0.2 Replace the config-pks task configuration file with workaround version
+Remove the existing task.yml file
+`rm task.yml`
 Create new `task.yml` and copy in workaround script
 `nano task.yml`
 
@@ -29,8 +35,9 @@ Go back to the github page and click on `task.yml`, copy this entire file and co
 Save the file `ctrl o`
 Exit the file `ctrl x`
 
-0.3 Remove the existing task.sh file `rm config-pks-1.1.sh`
-Create new `config-pks-1.1.sh` and copy in workaround script `nano config-pks-1.1.sh`
+0.3 Remove the existing config-pks script file `rm config-pks-1.1.sh`
+Create new `config-pks-1.1.sh` and copy in workaround script
+`nano config-pks-1.1.sh`
 
 Go back to the github page and click on `config-pks-1.1.sh`, copy this entire file and copy into open `config-pks-1.1.sh` file in your `cli-vm`.
 Save the file `ctrl o`
@@ -39,15 +46,17 @@ Exit the file `ctrl x`
 0.4 Edit the pipeline configuration to skip PKS Syslog
 Within the `cli-vm`, change directory to `~/nsx-t-ci-pipeline/pipelines/`
 `cd ~/nsx-t-ci-pipeline/pipelines/`
+
 Open the `install-pks-pipeline.yml` file within a text editor
 `nano install-pks-pipeline.yml`
+
 Scroll down until you see 7 variables beginning with `PKS_SYSLOG...`
 Ensure each of these variables is commented out by placing a `#` in front of it
 Save the file `ctrl o`
 Exit the file `ctrl x`
 
 *Continue with the instructions below to complete the PKS installation*
-
+________________________________________________________
 1.1 From the `cli-vm` prompt, Import the PKS pipeline using the `fly` cli command on the cli-vm.
 
 `cd ~/nsx-t-ci-pipelines/pipelines`
