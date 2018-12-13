@@ -6,9 +6,9 @@ In this guide you will add the PKS Installation Pipeline to Concourse and start 
 
 
 ***With the current version of PKS Concourse Pipeline, the pipeline will fail at deploy-pks stage***
-
-**Temporary Workaround:**
 _____________________________________________________________________
+**Temporary Workaround:**
+
 Within your lab session, open a new browser window and go to: https://github.com/nvpnathan/nsx-t-ci-pipeline/tree/master/tasks/config-pks
 <details><summary>Screenshot 0.0</summary>
 <img src="Images/workaround-repo.png">
