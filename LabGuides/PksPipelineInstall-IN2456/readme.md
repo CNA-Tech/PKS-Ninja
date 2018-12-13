@@ -14,6 +14,7 @@ Within your lab session, open a new browser window and go to: https://github.com
 <img src="Images/workaround-repo.png">
 </details>
 
+
 0.1 Replace config-pks task script with workaround version
 
 Using Putty, login to the `cli-vm`and navigate to config pks directory
@@ -29,8 +30,9 @@ Go back to the github page and click on `task.sh` to open it, copy this entire f
 - Save the file `ctrl o` `enter`
 - Exit the file `ctrl x`
 <details><summary>Screenshot 0.1</summary>
-<img src="Images/config-pks.png">
+<img src="Images/task-sh.png">
 </details>
+
 
 0.2 Replace the config-pks task configuration file with workaround version
 
@@ -47,6 +49,7 @@ Go back to the github page and click on `task.yml`, copy this entire file and co
 <img src="Images/task-yml.png">
 </details>
 
+
 0.3 Remove the existing config-pks script file `rm config-pks-1.1.sh`
 Create new `config-pks-1.1.sh` and copy in workaround script
 - `nano config-pks-1.1.sh`
@@ -57,6 +60,7 @@ Go back to the github page and click on `config-pks-1.1.sh`, copy this entire fi
 <details><summary>Screenshot 0.3</summary>
 <img src="Images/config-pks-script.png">
 </details>
+
 
 0.4 Edit the pipeline configuration to skip PKS Syslog
 Within the `cli-vm`, change directory to `~/nsx-t-ci-pipeline/pipelines/`
@@ -74,6 +78,8 @@ Ensure each of these variables is commented out by placing a `#` in front of it
 </details>
 
 *Continue with the instructions below to complete the PKS installation*
+
+
 ________________________________________________________
 1.1 From the `cli-vm` prompt, Import the PKS pipeline using the `fly` cli command on the cli-vm.
 
