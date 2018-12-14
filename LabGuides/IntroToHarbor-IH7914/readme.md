@@ -242,7 +242,7 @@ If docker push fails with "denied: requested access to the resource is denied", 
 </details>
 <br/>
 
-## [Click here to proceed to Lab 5: Deploy your First PKS Cluster & Planespotter app](../Lab5-DeployFirstCluster)
+## [Click here to proceed to Lab 5: Deploy your First PKS Cluster & Planespotter app](../DeployFirstCluster-DC1610)
 
 <!--
 
