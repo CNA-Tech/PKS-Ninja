@@ -71,6 +71,11 @@ Also, it may be interesting for you to look at the `Tasks` menu in vCenter to ob
 
 3.1 From `cli-vm`, use nano or another text editor to change the image pull location in the frontend deployment manifest to pull the image you created and pushed to harbor previously at  `harbor.corp.local/library/frontend:v1`. Use the following commands to open the manifest in nano and then reference Screenshot 3.1 as needed to complete the update and save the file
 
+Note: If you have no `/planespotter/kuberenetes` directory, or did not complete the Harbor lab run:  `git clone https://github.com/yfauser/planespotter.git`
+<<<<<<< HEAD
+
+=======
+>>>>>>> accc83ae5dc4346bba1734b4e7da5a703967254c
 ```bash
 cd ~/planespotter/kubernetes
 nano frontend-deployment_all_k8s.yaml
