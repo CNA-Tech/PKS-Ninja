@@ -10,9 +10,9 @@ For instructions to get started with accessing courses and learning materials on
 
 The PKS Ninja program is dedicated to building a community of students and practitioners of Cloud Native Technologies. The community seeks to provide practical educational experiences that help enrich and maximize the knowledge sharing potential for community participants and contributors
 
-This site also hosts the lab guides used in the VMware internal/invite-only PKS Ninja course, however anyone can access the materials provided on this site. Both PKS Ninja students and the broader community need access to continuing education, which is a key focus of the PKS Ninja Community
+This site also hosts the lab guides used in the VMware internal/invite-only PKS Ninja course, however anyone can access the materials provided on this site. Both PKS Ninja students and the broader community need access to continuously updates and advanced learning assets that keep pace with rapidly changing technologies, and this is the central focus of the PKS Ninja community
 
-Practical, hands on experience and regular practice is key to becoming an effective practitioner in cloud native technologies. A central focus of the community is  hands on eductation, centered around real world workflows, tools and processes, and made real through actual contribution in open & open source community projects
+Practical, hands on experience and regular practice is key to becoming an effective practitioner in cloud native technologies. The Ninja learning model focuses on hands on eductation, centered around real world workflows, tools and processes, and made real through actual contribution in open & open source community projects
 
 While the community does have an overall focus on VMware PKS, all are welcome as learning materials on this site cross a broad range of related topics with a strong focus on open source, devops, and all things cloud native
 
