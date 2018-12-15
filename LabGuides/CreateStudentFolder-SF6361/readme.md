@@ -38,7 +38,7 @@ Once you make updates to your forked copy of the repository, you can then create
 
 In the steps below, you will create a fork, and in your forked copy of the repository you will create a /Students/{your github id} folder, commit this update to your fork, and then open a pull request to have your folder added to the official repository. Be sure to use your github ID as this will allow all students to create unique folders, which is a great way to get started with simple pull requests since students will only modify their own folder, there should be no conflicts and easy or even automated merge requests for proctors and repo admins
 
-Creating and cloning your fork only needs to be done one time, once you have cloned your fork to your workstation, you can continue to synchronize you fork, make updates and open a pull request without needing to recreate or reclone repeatedly, but it is important that whenever you plan to make an update, you always sync your fork before making updates to ensure you are working from the latest version. 
+Creating and cloning your fork only needs to be done one time, once you have cloned your fork to your workstation, you can continue to synchronize you fork, make updates and open a pull request without needing to recreate or reclone repeatedly, but it is important that whenever you plan to make an update, you always sync your fork before making updates to ensure you are working from the latest version
 
 You can review section 2 below, [Keeping your fork in sync and making pull request]() and use it as a reference for the steps you should do every time you prepare an update you want to pull into the official repository
 
