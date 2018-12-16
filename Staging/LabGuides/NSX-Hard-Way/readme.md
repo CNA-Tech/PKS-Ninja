@@ -40,56 +40,56 @@ This section follows the standard documentation, which includes additional detai
 1.1 In the vSphere web client (not the HTML5 Client), From the Hosts and Clusters view, right click on the RegionA01-MGMT01 Cluster and select `Deploy OVF Template'
 
 <Details><Summary>Screenshot 1.1</Summary>
-<img src="Images/2018-10-16-23-43-44.png">
+<img src="images/2018-10-16-23-43-44.png">
 </Details>
 <br/>
 
 1.2 On the `Select Template` step, select `Local File` and Navigate to the NSXT Manager OVA file. In the reference lab, this is located on the E:/Downloads Directory
 
 <details><summary>Screenshot 1.2</summary>
-<img src="Images/2018-10-16-23-48-52.png">
+<img src="images/2018-10-16-23-48-52.png">
 </details>
 <br/>
 
 1.3 On the `Select name and location` step, use the name `nsxmgr-01a` and select RegionA01 Datacenter as the location
 
 <details><summary>Screenshot 1.3</summary>
-<img src="Images/2018-10-17-00-06-33.png">
+<img src="images/2018-10-17-00-06-33.png">
 </details>
 <br/>
 
 1.4 On the `Select a Resource` step, select RegionA01-MGMT
 
 <details><summary>Screenshot 1.4</summary>
-<img src="Images/2018-10-16-23-54-05.png">
+<img src="images/2018-10-16-23-54-05.png">
 </details>
 <br/>
 
 1.5 On the `Review Details` step, verify details and click `Next`
 
 <details><summary>Screenshot 1.5</summary>
-<img src="Images/2018-10-16-23-55-58.png">
+<img src="images/2018-10-16-23-55-58.png">
 </details>
 <br/>
 
 1.6 On the `Select Configuration` step, select a Small Configuration
 
 <details><summary>Screenshot 1.6</summary>
-<img src="Images/2018-10-16-23-57-38.png">
+<img src="images/2018-10-16-23-57-38.png">
 </details>
 <br/>
 
 1.7 On the `Select Storage` step, set the virtual disk format to `Thin Provision` and select the `RegionA01-ISCSI01-COMP01` datastore
 
 <details><summary>Screenshot 1.7</summary>
-<img src="Images/2018-10-16-23-59-52.png">
+<img src="images/2018-10-16-23-59-52.png">
 </details>
 <br/>
 
 1.8 On the `Select Networks` step, set the Destination Network to `VM-RegionA01-vDS-MGMT
 
 <details><summary>Screenshot 1.8</summary>
-<img src="Images/2018-10-17-00-02-21.png">
+<img src="images/2018-10-17-00-02-21.png">
 </details>
 <br/>
 
@@ -111,14 +111,14 @@ This section follows the standard documentation, which includes additional detai
 - All other options were left as default values
 
 <details><summary>Screenshot 1.8</summary>
-<img src="Images/2018-10-17-00-12-14.png">
+<img src="images/2018-10-17-00-12-14.png">
 </details>
 <br/>
 
 1.9 Complete the Deploy OVF Template Wizard
 
 <details><summary>Screenshot 1.9</summary>
-<img src="Images/2018-10-17-00-13-27.png">
+<img src="images/2018-10-17-00-13-27.png">
 </details>
 <br/>
 
@@ -126,14 +126,14 @@ This section follows the standard documentation, which includes additional detai
 <br/>
 
 <details><summary>Screenshot 1.10</summary>
-<img src="Images/2018-10-17-00-51-10.png">
+<img src="images/2018-10-17-00-51-10.png">
 </details>
 <br/>
 
 1.11 In the vSphere web client go to Hosts and Clusters and on the `Actions` menu for `nsxmgr-01a`, select `Edit Settings`
 
 <details><summary>Screenshot 1.11</summary>
-<img src="Images/2018-10-17-02-19-08.png">
+<img src="images/2018-10-17-02-19-08.png">
 </details>
 <br/>
 
@@ -142,7 +142,7 @@ This section follows the standard documentation, which includes additional detai
 NOTE: This step is provided to help limit the requirements for resource constrained lab environments, if your lab environment has ample hardware resources, you may skip this step
 
 <details><summary>Screenshot 1.12</summary>
-<img src="Images/2018-10-17-02-22-04.png">
+<img src="images/2018-10-17-02-22-04.png">
 </details>
 <br/>
 
@@ -151,7 +151,7 @@ NOTE: This step is provided to help limit the requirements for resource constrai
 NOTE: If the option to power on the nsxmgr-01a VM is not available, log out and then log back in to the vSphere web client
 
 <details><summary>Screenshot 1.13</summary>
-<img src="Images/2018-10-17-01-23-08.png">
+<img src="images/2018-10-17-01-23-08.png">
 </details>
 <br/>
 
@@ -165,7 +165,7 @@ NOTE: On your first login, you will be prompted to accept the EULA. Accept EULA 
 <br/>
 
 <details><summary>Screenshot 1.14</summary>
-<img src="Images/2018-10-17-01-34-33.png">
+<img src="images/2018-10-17-01-34-33.png">
 </details>
 <br/>
 This completes the NSX Manager installation, please proceed on to the Controller installation section below
@@ -173,11 +173,11 @@ This completes the NSX Manager installation, please proceed on to the Controller
 
 ## Step 2: Add NSX Compute Manager
 
-### 2.1 From NSX Manager, click on **Fabric** -> **Compute Managers**
+ 2.1 From NSX Manager, click on **Fabric** -> **Compute Managers**
 
 <details><summary>Screenshot 2.1</summary><img src="images/2018-12-15-12-23-49.png"></details><br>
 
-### 2.2 Click on **Add** and Configure the New Compute Manager form with following values:
+ 2.2 Click on **Add** and Configure the New Compute Manager form with following values:
 
 - Name: `vcsa-01a`
 - Domain Name/IP Address: `vcsa-01a.corp.local`
@@ -191,21 +191,21 @@ This completes the NSX Manager installation, please proceed on to the Controller
 <details><summary>Screenshot 2.2.2</summary><img src="images/2018-12-13-16-17-18.png"></details><br>
 
 
-### 3.3 Click **Refresh** in the lower left hand corner and verify the Compute Manager is `Verified` and `Up`
+ 3.3 Click **Refresh** in the lower left hand corner and verify the Compute Manager is `Verified` and `Up`
 
 <details><summary>Screenshot 3.3.1</summary><img src="images/2018-12-13-16-19-15.png"></details>
 <details><summary>Screenshot 3.3.2</summary><img src="images/2018-12-13-16-20-07.png"></details><br>
 
 ## Step 3: Deploy NSX Controller
 
-### 3.1 Click on **System** -> **Components**
+ 3.1 Click on **System** -> **Components**
 
 - Click **Add Controllers** 
 
 <details><summary>Screenshot 3.1.1</summary><img src="images/2018-12-13-16-25-33.png"></details>
 <details><summary>Screenshot 3.1.2</summary><img src="images/2018-12-13-16-26-24.png"></details><br>
 
-### 3.2 Enable `SSH` and `Root Access`, then complete Add Controller form with the following:
+ 3.2 Enable `SSH` and `Root Access`, then complete Add Controller form with the following:
 
 ##### 3.2.1
 - Compute Manager: `vcsa-01a`
@@ -231,7 +231,7 @@ This completes the NSX Manager installation, please proceed on to the Controller
 <details><summary>Screenshot 3.2.2</summary><img src="images/2018-12-13-19-43-08.png"></details>
 <details><summary>Screenshot 3.2.3</summary><img src="images/2018-12-15-12-44-01.png"></details><br>
 
-### 3.3 Verify Management and Controller Cluster Connectivity **Up**
+ 3.3 Verify Management and Controller Cluster Connectivity **Up**
 
 <details><summary>Screenshot 3.3.1</summary><img src="images/2018-12-13-20-12-05.png"></details><br>
 
@@ -252,7 +252,7 @@ _Optional:_
     - <details><summary>Screenshot 3.3.4</summary><img src="images/2018-12-13-20-36-28.png"></details>
     - <details><summary>Screenshot 3.3.5</summary><img src="images/2018-12-13-20-37-41.png"></details><br>
 
-### 3.4 Resize Controller
+ 3.4 Resize Controller
 
 _Note: Confirm that step 3.3 has completed before performinng step 3.4. This step is for lab resource efficiency only. We are resizing the Controller VM to be the equivelant of a Small factor. This is only applicable for a lab environment._
 
@@ -267,13 +267,13 @@ _Note: Confirm that step 3.3 has completed before performinng step 3.4. This ste
 
 ## Step 4: Create IP Pool
 
-### 4.1 Click **Inventory** -> **Groups**
+ 4.1 Click **Inventory** -> **Groups**
 
 - Click on **IP Pools**
 
 <details><summary>Screenshot 4.1</summary><img src="images/2018-12-14-11-03-53.png"></details><br>
 
-### 4.2 Create the TEP IP Pool, click **Add** and complete with the following values
+ 4.2 Create the TEP IP Pool, click **Add** and complete with the following values
 
 - Name: `tep-ip-pool`
 - Click `Add` under Subnets
@@ -286,17 +286,17 @@ _Note: Confirm that step 3.3 has completed before performinng step 3.4. This ste
 
 ## Step 5: Prepare and Configure ESXi Hosts
 
-### 5.1 Click on **Fabirc** -> **Nodes**
+ 5.1 Click on **Fabirc** -> **Nodes**
 
 - Click **Hosts**
 
 <details><summary>Screenshot 5.1</summary><img src="images/2018-12-14-11-18-47.png"></details><br>
 
-### 5.2 Select **vcsa-01a** from the **Managed by** dropdown
+ 5.2 Select **vcsa-01a** from the **Managed by** dropdown
 
 <details><summary>Screenshot 5.2</summary><img src="images/2018-12-14-11-19-49.png"></details><br>
 
-### 5.3 Configure Cluster RegionA01-MGMT01
+ 5.3 Configure Cluster RegionA01-MGMT01
 
 - Select **RegionA01-MGMT01**
 - Click **Configure Cluster**
@@ -324,7 +324,7 @@ _Note: Confirm that step 3.3 has completed before performinng step 3.4. This ste
 
 <details><summary>Screenshot 5.3.4</summary><img src="images/2018-12-14-11-29-20.png"></details><br>
 
-### 5.4 Configure RegionA01-COMP01
+ 5.4 Configure RegionA01-COMP01
 
 - Select **RegionA01-COMP01**
 - Click **Configure Cluster**
@@ -341,14 +341,14 @@ _Note: Confirm that step 3.3 has completed before performinng step 3.4. This ste
 
 ## Step 6: Deploy NSX Edge
 
-### 6.1 Click on **Fabric** -> **Nodes**
+ 6.1 Click on **Fabric** -> **Nodes**
 
 - Click on **Edges**
 
 <details><summary>Screenshot 6.1.1</summary><img src="images/2018-12-13-21-19-56.png" width=75%></details>
 <details><summary>Screenshot 6.1.2</summary><img src="images/2018-12-13-21-22-06.png"></details><br>
 
-### 6.2 Add an NSX Edge
+ 6.2 Add an NSX Edge
 
 ##### 6.2.1 - Name and Description
 
@@ -377,7 +377,7 @@ _Note: Confirm that step 3.3 has completed before performinng step 3.4. This ste
 
 <details><summary>Screenshot 6.2.3</summary><img src="images/2018-12-13-21-41-18.png"></details>
 
-##### 6.2.4 - Configure Ports
+#### 6.2.4 - Configure Ports
 
 - Assignment: `Static`
 - Management IP: `192.168.110.91/24`
@@ -391,7 +391,7 @@ _Note: Confirm that step 3.3 has completed before performinng step 3.4. This ste
 
 <details><summary>Screenshot 6.2.4</summary><img src="images/2018-12-14-12-14-48.png"></details><br>
 
-### 6.3 Monitor deployment status until **Deployment Status** shows **Node Ready** and **Manager Connectivity  Up**. You may need to hit the **Refresh** link in the lower-left corner.
+ 6.3 Monitor deployment status until **Deployment Status** shows **Node Ready** and **Manager Connectivity  Up**. You may need to hit the **Refresh** link in the lower-left corner.
 
 <details><summary>Screenshot 6.3</summary><img src="images/2018-12-15-13-52-12.png"></details>
 
@@ -399,13 +399,13 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 <br>
 
-### 6.4 Verify that the edge vm has been created and powered on in vCenter web client
+ 6.4 Verify that the edge vm has been created and powered on in vCenter web client
 
 <details><summary>Screenshot 6.4</summary><img src="images/2018-12-15-13-53-04.png"></details><br>
 
 ## Step 7: Create Edge Transport Node
 
-### 7.1 Configure the **nsxedge-1** edge as a transport node
+ 7.1 Configure the **nsxedge-1** edge as a transport node
 
 - Click on **Fabric** -> **Nodes**
 - Click **Edges**
@@ -415,7 +415,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 <details><summary>Screenshot 7.1</summary><img src="images/2018-12-14-12-32-36.png"></details><br>
 
-### 7.2 Create a new transport zone for VLAN connection
+ 7.2 Create a new transport zone for VLAN connection
 
 - Click on **Create New Transport Zone** 
 - Name: `vlan-tz`
@@ -427,7 +427,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 <details><summary>Screenshot 7.2.1</summary><img src="images/2018-12-15-14-01-41.png"></details>
 <details><summary>Screenshot 7.2.2</summary><img src="images/2018-12-14-12-37-38.png"></details><br>
 
-### 7.3 Configure the **General** tab with the following inputs
+ 7.3 Configure the **General** tab with the following inputs
 
 - Name: `edge-tn-1`
 - Select `overlay-tz` in **Available**
@@ -435,7 +435,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 <details><summary>Screenshot 7.3</summary><img src="images/2018-12-14-12-40-22.png"></details><br>
 
-### 7.4 Configure the **N-VDS** tab with the following inputs
+ 7.4 Configure the **N-VDS** tab with the following inputs
 
 - Click on **N-VDS** tab 
 - Edge Switch Name: `hostswith-vlan`
@@ -455,7 +455,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 <details><summary>Screenshot 7.4.2</summary><img src="images/2018-12-14-12-45-21.png"></details>
 <details><summary>Screenshot 7.4.3</summary><img src="images/2018-12-14-12-48-26.png"></details><br>
 
-### 7.5 Add an Edge Cluster
+ 7.5 Add an Edge Cluster
 
 - Click on **Fabric** -> **Nodes**
 - Click on **Edge Clusters**
@@ -468,14 +468,14 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 <details><summary>Screenshot 7.5</summary><img src="images/2018-12-14-12-52-40.png"></details><br>
 
-### 7.6 Click on **Transport Nodes** and verify edge-tn-1 status is **Success** and **Up**
+ 7.6 Click on **Transport Nodes** and verify edge-tn-1 status is **Success** and **Up**
 
 <details><summary>Screenshot 7.6</summary><img src="images/2018-12-14-12-54-08.png"></details><br>
 
 
 ## Step 8: Create Switches and Routers
 
-### 8.1 Create VLAN Uplink Switch
+ 8.1 Create VLAN Uplink Switch
 
 - Click on **Networking** -> **Switching**
 - Click on **Add**
@@ -487,7 +487,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 <details><summary>Screenshot 8.1.1</summary><img src="images/2018-12-14-20-06-42.png"></details>
 <details><summary>Screenshot 8.1.2</summary><img src="images/2018-12-14-20-03-39.png"></details><br>
 
-### 8.2 Create PKS Management Switch
+ 8.2 Create PKS Management Switch
 
 - Clcik on **Add**
 - Name: `ls-pks-mgmt`
@@ -496,7 +496,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 <details><summary>Screenshot 8.2</summary><img src="images/2018-12-15-14-56-24.png"></details><br>
 
-### 8.3 Create PKS Compute Switch
+ 8.3 Create PKS Compute Switch
 
 - Clcik on **Add**
 - Name: `ls-pks-service`
@@ -505,14 +505,14 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 <details><summary>Screenshot 8.3</summary><img src="images/2018-12-15-14-57-10.png"></details><br>
 
-### 8.4 Create T0 Router
+ 8.4 Create T0 Router
 
 - Click on **Networking** -> **Routers**
 - Click on **Add** -> **T0 Router**
 
 <details><summary>Screenshot 8.4.1</summary><img src="images/2018-12-14-20-17-20.png"></details>
 
-    **EXTREMELY IMPORTANT - You must configure HA Mode as `Active-Standby`**
+    Be sure to configure HA Mode as `Active-Standby
 
 - Name: `t0-pks`
 - Edge Cluster: `edge-cluster-1`
@@ -522,7 +522,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 <details><summary>Screenshot 8.4.2</summary><img src="images/2018-12-15-15-09-20.png"></details><br>
 
-### 8.5 Creare PKS Managent T1 Router
+ 8.5 Create PKS Managent T1 Router
 
 - Click **Add** -> **Tier-1 Router**
 - Name: `t1-pks-mgmt`
@@ -533,7 +533,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 <details><summary>Screenshot 8.5</summary><img src="images/2018-12-15-15-11-39.png"></details><br>
 
-### 8.6 Create PKS Compute T1 Router
+ 8.6 Create PKS Compute T1 Router
 
 - Click **Networking** -> **Routers**
 - Click **Add** -> **Tier-1 Router**
@@ -545,7 +545,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 <details><summary>Screenshot 8.6</summary><img src="images/2018-12-15-15-13-17.png"></details><br>
 
-### 8.7 Configure T0 Router VLAN Uplink Port
+ 8.7 Configure T0 Router VLAN Uplink Port
 
 - Click on **t0-PKS**
 - Select **Configuration** -> **Router Ports**
@@ -565,7 +565,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
  <details><summary>Screenshot 8.7.3</summary><img src="images/2018-12-14-20-36-31.png"></details><br>
 
-### 8.8 Add T0 Static Route
+ 8.8 Add T0 Static Route
 
 - Clcik on **Routing** -> **Static Routes**
 
@@ -583,7 +583,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 - From the `cli-vm`, ping the uplink port address `192.168.200.3` to test connectivity
 
-### 8.9 Configure PKS Compute T1 Ports
+ 8.9 Configure PKS Compute T1 Ports
 
 - Click **Networking** -> **Routers**
 - Click on **t1-pks-service** (_Verify that the router name is now listed over 'Overview'_)
@@ -600,7 +600,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 <details><summary>Screenshot 8.9.2</summary><img src="images/2018-12-15-15-28-05.png"></details><br>
 
-### 8.10 Configure PKS Management T1 Ports and Route Advertisement
+ 8.10 Configure PKS Management T1 Ports and Route Advertisement
 
 - Click on **t1-pks-mgmt** (_Verify that the router name is now listed over 'Overview'_)
 - Click on **Configuration** -> **Router Ports**
@@ -611,7 +611,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 - IP Address/mask: `172.31.0.1/24`
 - Click **Add**
 
-### 8.11 Enable T1 Route Advertisement
+ 8.11 Enable T1 Route Advertisement
 
 - Select `t1-pks-mgmt`
 - Click on **Routing** -> **Route Advertisement**
@@ -629,7 +629,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 ## Step 9: Create IP Blocks for PKS Components
 
-### 9.1 Create Node IP Block
+ 9.1 Create Node IP Block
 
 - Click on **Networking** -> **IPAM**
 
@@ -641,7 +641,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 <details><summary>Screenshot 9.1.2</summary><img src="images/2018-12-14-22-36-20.png"></details><br>
 
-### 9.2 Create Node IP Block
+ 9.2 Create Node IP Block
 
 - Click **Add**
 - Name: `ip-block-pods`
@@ -652,7 +652,7 @@ _Note: If the status doesn't update after a few minutes, try navigating to the H
 
 ## Step 10: Create Network Address Translation Rules
 
-### 10.1 Define NAT Rules
+ 10.1 Define NAT Rules
 
 - Click on **Networking** -> **Routers**
 - Select the t0-PKS Router
@@ -670,7 +670,7 @@ _Note: Leaving an entry blank is the method to set it as `Any`_
 
 <details><summary>Screenshot 10.1.2</summary><img src="images/2018-12-14-22-57-47.png"></details><br>
 
-### 10.2 Repeat the steps above to complete the remaining rules in Screenshot 11.2
+ 10.2 Repeat the steps above to complete the remaining rules in Screenshot 11.2
 
 <details><summary>Screenshot 10.2</summary><img src="images/2018-12-14-22-54-37.png"></details><br>
 
