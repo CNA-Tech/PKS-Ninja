@@ -40,56 +40,56 @@ This section follows the standard documentation, which includes additional detai
 1.1 In the vSphere web client (not the HTML5 Client), From the Hosts and Clusters view, right click on the RegionA01-MGMT01 Cluster and select `Deploy OVF Template'
 
 <Details><Summary>Screenshot 1.1</Summary>
-<img src="Images/2018-10-16-23-43-44.png">
+<img src="images/2018-10-16-23-43-44.png">
 </Details>
 <br/>
 
 1.2 On the `Select Template` step, select `Local File` and Navigate to the NSXT Manager OVA file. In the reference lab, this is located on the E:/Downloads Directory
 
 <details><summary>Screenshot 1.2</summary>
-<img src="Images/2018-10-16-23-48-52.png">
+<img src="images/2018-10-16-23-48-52.png">
 </details>
 <br/>
 
 1.3 On the `Select name and location` step, use the name `nsxmgr-01a` and select RegionA01 Datacenter as the location
 
 <details><summary>Screenshot 1.3</summary>
-<img src="Images/2018-10-17-00-06-33.png">
+<img src="images/2018-10-17-00-06-33.png">
 </details>
 <br/>
 
 1.4 On the `Select a Resource` step, select RegionA01-MGMT
 
 <details><summary>Screenshot 1.4</summary>
-<img src="Images/2018-10-16-23-54-05.png">
+<img src="images/2018-10-16-23-54-05.png">
 </details>
 <br/>
 
 1.5 On the `Review Details` step, verify details and click `Next`
 
 <details><summary>Screenshot 1.5</summary>
-<img src="Images/2018-10-16-23-55-58.png">
+<img src="images/2018-10-16-23-55-58.png">
 </details>
 <br/>
 
 1.6 On the `Select Configuration` step, select a Small Configuration
 
 <details><summary>Screenshot 1.6</summary>
-<img src="Images/2018-10-16-23-57-38.png">
+<img src="images/2018-10-16-23-57-38.png">
 </details>
 <br/>
 
 1.7 On the `Select Storage` step, set the virtual disk format to `Thin Provision` and select the `RegionA01-ISCSI01-COMP01` datastore
 
 <details><summary>Screenshot 1.7</summary>
-<img src="Images/2018-10-16-23-59-52.png">
+<img src="images/2018-10-16-23-59-52.png">
 </details>
 <br/>
 
 1.8 On the `Select Networks` step, set the Destination Network to `VM-RegionA01-vDS-MGMT
 
 <details><summary>Screenshot 1.8</summary>
-<img src="Images/2018-10-17-00-02-21.png">
+<img src="images/2018-10-17-00-02-21.png">
 </details>
 <br/>
 
@@ -111,14 +111,14 @@ This section follows the standard documentation, which includes additional detai
 - All other options were left as default values
 
 <details><summary>Screenshot 1.8</summary>
-<img src="Images/2018-10-17-00-12-14.png">
+<img src="images/2018-10-17-00-12-14.png">
 </details>
 <br/>
 
 1.9 Complete the Deploy OVF Template Wizard
 
 <details><summary>Screenshot 1.9</summary>
-<img src="Images/2018-10-17-00-13-27.png">
+<img src="images/2018-10-17-00-13-27.png">
 </details>
 <br/>
 
@@ -126,14 +126,14 @@ This section follows the standard documentation, which includes additional detai
 <br/>
 
 <details><summary>Screenshot 1.10</summary>
-<img src="Images/2018-10-17-00-51-10.png">
+<img src="images/2018-10-17-00-51-10.png">
 </details>
 <br/>
 
 1.11 In the vSphere web client go to Hosts and Clusters and on the `Actions` menu for `nsxmgr-01a`, select `Edit Settings`
 
 <details><summary>Screenshot 1.11</summary>
-<img src="Images/2018-10-17-02-19-08.png">
+<img src="images/2018-10-17-02-19-08.png">
 </details>
 <br/>
 
@@ -142,7 +142,7 @@ This section follows the standard documentation, which includes additional detai
 NOTE: This step is provided to help limit the requirements for resource constrained lab environments, if your lab environment has ample hardware resources, you may skip this step
 
 <details><summary>Screenshot 1.12</summary>
-<img src="Images/2018-10-17-02-22-04.png">
+<img src="images/2018-10-17-02-22-04.png">
 </details>
 <br/>
 
@@ -151,7 +151,7 @@ NOTE: This step is provided to help limit the requirements for resource constrai
 NOTE: If the option to power on the nsxmgr-01a VM is not available, log out and then log back in to the vSphere web client
 
 <details><summary>Screenshot 1.13</summary>
-<img src="Images/2018-10-17-01-23-08.png">
+<img src="images/2018-10-17-01-23-08.png">
 </details>
 <br/>
 
@@ -165,7 +165,7 @@ NOTE: On your first login, you will be prompted to accept the EULA. Accept EULA 
 <br/>
 
 <details><summary>Screenshot 1.14</summary>
-<img src="Images/2018-10-17-01-34-33.png">
+<img src="images/2018-10-17-01-34-33.png">
 </details>
 <br/>
 This completes the NSX Manager installation, please proceed on to the Controller installation section below
