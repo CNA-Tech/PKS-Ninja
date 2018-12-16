@@ -215,7 +215,7 @@ This completes the NSX Manager installation, please proceed on to the Controller
 
 (Note: Notice there is no option for Small Controller size. Leave the default of 'Mediumm', you will change it to a 'Small' config in a later step.)
 
-<details><summary>Screenshot 3.2.1</summary><img src="images/2018-12-16-16-38-45.png"></details>
+<details><summary>Screenshot 3.2.1</summary><img src="images/2018-12-16-16-38-45.png"></details><br>
 
 - Host Name/FQDN: `nsxc-1`
 - Cluster: `RegionA01-MGMT01`
