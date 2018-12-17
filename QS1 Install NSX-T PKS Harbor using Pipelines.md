@@ -27,6 +27,10 @@ source nsxt-setup.sh
 
 fly-s
 
+http://cli-vm.corp.local:8080/teams/main/pipelines/install-nsx-t
+
+admin/VMware1!
+
 
 
 # 4) Install PKS using Concourse pipeline
