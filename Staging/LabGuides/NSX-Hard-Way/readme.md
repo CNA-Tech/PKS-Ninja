@@ -12,24 +12,22 @@ Anyone who implements any software used in this lab must provide their own licen
 
 For those needing access to VMware licensing for lab and educational purposes, we recommend contacting your VMware account team. Also, the [VMware User Group's VMUG Advantage Program](https://www.vmug.com/Join/VMUG-Advantage-Membership) provides a low-cost method of gaining access to VMware licenses for evaluation purposes.
 
-### NSX-T
-
 This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.3 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-3E0C4CEC-D593-4395-84C4-150CD6285963.html)
 
-#### Install NSX-T Manager
+<BR>
 
-Overview of Tasks Covered in Lab 1
+### Overview of Tasks Covered in Lab 1
 
 - [Step 1:  Deploy NSXT Manager using OVF Install Wizard](#step-1--deploy-nsxt-manager-using-ovf-install-wizard)
-- [Step 2: Add NSX Compute Manager](#step-2-add-nsx-compute-manager)  
-- [Step 3: Deploy NSX Controller](#step-3-deploy-nsx-controller)             
+- [Step 2: Add NSX Compute Manager](#step-2-add-nsx-compute-manager)
+- [Step 3: Deploy NSX Controller](#step-3-deploy-nsx-controller)
 - [Step 4: Create IP Pool](#step-4-create-ip-pool)
-- [Step 5: Prepare and Configure ESXi Hosts](#step-5-prepare-and-configure-esxi-hosts)   
-- [Step 6: Deploy NSX Edge](#step-6-deploy-nsx-edge) 
-- [Step 7: Create Edge Transport Node](#step-7-create-edge-transport-node)  
-- [Step 8: Create Switches and Routers](#step-8-create-switches-and-routers)  
-- [Step 9: Create IP Blocks for PKS Components](#step-9-create-ip-blocks-for-pks-components) 
-- [Step 10: Create Network Address Translation Rules](#step-10-create-network-address-translation-rules)  
+- [Step 5: Prepare and Configure ESXi Hosts](#step-5-prepare-and-configure-esxi-hosts)
+- [Step 6: Deploy NSX Edge](#step-6-deploy-nsx-edge)
+- [Step 7: Create Edge Transport Node](#step-7-create-edge-transport-node)
+- [Step 8: Create Switches and Routers](#step-8-create-switches-and-routers)
+- [Step 9: Create Network Address Translation Rules](#step-9-create-network-address-translation-rules)
+- [Step 10: Create IP Blocks for PKS Components](#step-10-create-ip-blocks-for-pks-components)
 
 
 NOTE: NSX Manager OVA cannot be installed via HTML5 client, so for installation labs please use the vSphere web client (Flash-based).
@@ -237,6 +235,8 @@ The NSX controller is the center of the NSX overlay control plane. I a productio
 
  3.3 Verify Management Cluster is **Stable** and Controller Cluster Connectivity is **Up**
 
+ This process will take some time as the VM is built, registered, and connected with the management plane.
+
 <details><summary>Screenshot 3.3</summary><img src="images/2018-12-13-20-12-05.png"></details><br>
 
 _Optional:_
@@ -271,7 +271,7 @@ _NOTE: Confirm that step 3.3 has completed before proceeding to step 3.4. This s
 
 ## Step 4: Create IP Pool
 
-An IP Pool is an IP address range definition that can be applied to NSX tunnel end-points. In this step, you will create an ip pool to provde addresses to ESXi hosts and your edge VM tunnel endpoints.
+An IP Pool is an IP address range definition that can be applied to NSX tunnel endpoints. In this step, you will create an ip pool to provde addresses to ESXi hosts and your edge VM tunnel endpoints.
 
  4.1 Click **Inventory** -> **Groups**, and then click on **IP Pools**
 
@@ -353,7 +353,8 @@ An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networkin
 - Click on `Add EDge VM`
 - Name: `nsxedge-1.corp.local`
 - Host name/FQDN: `nsxedge-1.corp.local`
-- Form Factor: `Large` _(PKS currently requires the NSX Edge to be Large size)_
+- Form Factor: **`Large`** _(PKS currently requires the NSX Edge to be Large size)_
+- Make sure you selected 'Large' size
 - Click on **Next**
 
 <details><summary>Screenshot 6.1.1</summary><img src="images/2018-12-16-17-32-59.png"></details><br>
@@ -369,7 +370,7 @@ An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networkin
 - Datastore: `RegionA01-ISCSI01-COMP01`
 - Click **Next**
 
-<details><summary>Screenshot 6.1.3</summary><img src="images/2018-12-13-21-41-18.png"></details><br>
+<details><summary>Screenshot 6.1.3</summary><img src="images/2018-12-17-12-31-59.png"></details><br>
 
 - Assignment: `Static`
 - Management IP: `192.168.110.91/24`
@@ -383,7 +384,9 @@ An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networkin
 
 <details><summary>Screenshot 6.1.4</summary><img src="images/2018-12-14-12-14-48.png"></details><br>
 
- 6.2 Monitor deployment status until **Deployment Status** shows **Node Ready** and **Manager Connectivity  Up**. You may need to hit the **Refresh** link in the lower-left corner.
+ 6.2 Monitor deployment status until **Deployment Status** shows **Node Ready** and **Manager Connectivity  Up**. 
+ 
+ You may need to hit the **Refresh** link in the lower-left corner and it may take a while to complete. Controller connectivity will not show Up until we complete a future configuration.
 
 <details><summary>Screenshot 6.3</summary><img src="images/2018-12-15-13-52-12.png"></details><br>
 
@@ -393,7 +396,7 @@ An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networkin
 
 ## Step 7: Create Edge Transport Node
 
-An NSX Edge Transport Node is the configuration of an edge with an existing transport zone. This includes install and configure of the tunnel enddpoint and virtual switch for connection to your NSX network,
+An NSX Edge Transport Node is the configuration of an edge with an existing transport zone. This includes install and configure of the tunnel enddpoint and virtual switch for connection to your NSX network.
 
  7.1 Configure the **nsxedge-1** edge as a transport node
 
@@ -402,9 +405,13 @@ An NSX Edge Transport Node is the configuration of an edge with an existing tran
 - Click the gear dropdown
 - Select Configure as Tansport Node
 
-<details><summary>Screenshot 7.1</summary><img src="images/2018-12-14-12-32-36.png"></details><br>
+_NOTE: If the 'Configure as Transport Node' menu item is not active, wait a few minutes and try again._
+
+<details><summary>Screenshot 7.1</summary><img src="images/2018-12-17-12-42-44.png"></details><br>
 
 7.2 Complete the Transport Node as follows
+
+_NOTE: This conifguration step is a common source of confusion when first learning to configure NSX-T. You are configuring the edge VM with an interface connecting to the physical network via a vSphere vswitch and an interface connected to the overlay host switch with a tunnel enpoint that is connected to a vSphere vswitch. The TEP terminates inside the edge VM. This configuration enables routing to/from overlay/physical._
 
 - Click on **Create New Transport Zone** 
 
@@ -548,7 +555,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 - Type: `Uplink`
 - Transport Node: `edge-tn-1`
 - Logical Switch: `uplink-vlan-ls`
-- IP Address/mask: `192.168.200.3/24`
+- IP Address/mask: `192.168.200.3/24`  _(NOTE: We will ping this later to check connectivity)_
 - Click **Add**
 
  <details><summary>Screenshot 8.7.3</summary><img src="images/2018-12-14-20-36-31.png"></details><br>
@@ -562,7 +569,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 - Click on **Add**
 - Network: `0.0.0.0/0`
 - Click on **Next Hops +Add**
-- Next Hop: `192.168.200.1` _(Note: pressing enter after typing the address will save it)_
+- Next Hop: `192.168.200.1`
 - Click **Add** 
 
  <details><summary>Screenshot 8.8.2</summary><img src="images/2018-12-14-20-48-34.png"></details><br>
@@ -613,21 +620,50 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 
 - Repeat step 8.11 for router `t1-pks-service`
 
-## Step 9: Create IP Blocks for PKS Components
+<br>
+
+## Step 9: Create Network Address Translation Rules
+
+In this step, you create NAT rules to map addresses to/from the PKS and k8s networks and the physica network.
+
+9.1 Define NAT Rules
+
+- Click on **Networking** -> **Routers**
+- Select the `t0-pks` Router
+- Click on **Services** -> **NAT**
+
+<details><summary>Screenshot 9.1.1</summary><img src="images/2018-12-14-22-44-32.png"></details><br>
+
+- Click on **Add**
+- Action: `SNAT`
+- Source IP: `172.31.0.0/24`
+- Translated IP: `10.40.14.12`
+- Click **Add**
+
+_(NOTE: Leaving an entry blank is the method to set it as **Any**)_
+
+<details><summary>Screenshot 9.1.2</summary><img src="images/2018-12-14-22-57-47.png"></details><br>
+
+- Repeat the steps above to complete the remaining rules in Screenshot 11.2
+
+<details><summary>Screenshot 9.1.3</summary><img src="images/2018-12-14-22-54-37.png"></details><br>
+
+
+## Step 10: Create IP Blocks for PKS Components
 
 IP Blocks are another construct to define IP address ranges. In this case, we will define a range to be applied to PKS node VMs and another to be applied to k8s pods.
 
- 9.1 Create Node IP Block
+ 9.1 Create Nodes IP Block
 
 - Click on **Networking** -> **IPAM**
 
-<details><summary>Screenshot 9.1.1</summary><img src="images/2018-12-16-18-14-27.png"></details><br>
+<details><summary>Screenshot 10.1.1</summary><img src="images/2018-12-16-18-14-27.png"></details><br>
 
 - Click **Add**
 - Name: `ip-block-nodes`
 - CIDR: `172.15.0.0/16`
 
-<details><summary>Screenshot 9.1.2</summary><img src="images/2018-12-14-22-36-20.png"></details><br>
+<details><summary>Screenshot 10.1.2</summary><img src="images/2018-12-14-22-36-20.png"></details><br>
 
  9.2 Create Pods IP Block
 
@@ -636,33 +672,7 @@ IP Blocks are another construct to define IP address ranges. In this case, we wi
 - CIDR: `172.16.0.0/16`
 - Click **Add**
 
-<details><summary>Screenshot 9.2</summary><img src="images/2018-12-14-22-39-32.png"></details><br>
-
-## Step 10: Create Network Address Translation Rules
-
-In this final step, we create NAT rules to map addresses to/from the PKS and k8s networks and the physica network.
-
- 10.1 Define NAT Rules
-
-- Click on **Networking** -> **Routers**
-- Select the `t0-pks` Router
-- Click on **Services** -> **NAT**
-
-<details><summary>Screenshot 10.1.1</summary><img src="images/2018-12-14-22-44-32.png"></details><br>
-
-- Click on **Add**
-- Action: `SNAT`
-- Source IP: `172.31.0.0/24`
-- Translated IP: `10.40.14.12`
-- Click **Add**
-
-(_Note: Leaving an entry blank is the method to set it as **Any**_)
-
-<details><summary>Screenshot 10.1.2</summary><img src="images/2018-12-14-22-57-47.png"></details><br>
-
-- Repeat the steps above to complete the remaining rules in Screenshot 11.2
-
-<details><summary>Screenshot 10.1.3</summary><img src="images/2018-12-14-22-54-37.png"></details><br>
+<details><summary>Screenshot 10.2</summary><img src="images/2018-12-14-22-39-32.png"></details><br>
 
 
 ### You have now completed the NSX-T Installation for PKS lab. Click on the dashboard to check that it matches the image below. It may have some yellow based on your lab CPU activity, but the numbers should match.
