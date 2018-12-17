@@ -52,12 +52,9 @@ This section follows the standard documentation, which includes additional detai
 </details>
 <br/>
 
-1.3 On the `Select name and location` step, use the name `nsxmgr-01a` and select RegionA01 Datacenter as the location
+1.3 On the `Select name and location` step, use the name `nsxt-manager` and select RegionA01 Datacenter as the location
 
-<details><summary>Screenshot 1.3</summary>
-<img src="images/2018-10-17-00-06-33.png">
-</details>
-<br/>
+<details><summary>Screenshot 1.3</summary><img src="images/2018-12-17-11-08-16.png"></details><br>
 
 1.4 On the `Select a Resource` step, select RegionA01-MGMT
 
@@ -96,19 +93,23 @@ This section follows the standard documentation, which includes additional detai
 
 1.9 On the `Customize Template` step, enter the following variables:
 
-- System Root User Password: VMware1!
-- CLI Admin User Password: VMware1!
-- CLI Audit User Password: VMware1!
-- Hostname: nsxmgr-01a
-- Rolename: nsx-manager
-- Default Gateway: 192.168.110.1
-- Management Network IPv4 Address: 192.168.110.42
-- Management Network Netmask: 255.255.255.0
-- DNS Server List: 192.168.110.10
-- Domain Search List: corp.local
-- NTP Server: 192.168.100.1
-- Enable SSH: True
-- Allow Root SSH Logins: True
+- Application
+    - System Root User Password: VMware1!
+    - CLI Admin User Password: VMware1!
+    - CLI Audit User Password: VMware1!
+- DNS
+    - DNS Server List: 192.168.110.10
+    - Domain Search List: corp.local
+- Network Properties
+    - Default Gateway: 192.168.110.1
+    - Hostname: nsxmgr-01a.corp.local
+    - Management Network IPv4 Address: 192.168.110.42
+    - Management Network Netmask: 255.255.255.0
+    - Rolename: nsx-manager
+- Services Configuration
+    - Allow Root SSH Logins: True
+    - Enable SSH: True
+    - NTP Server: 192.168.100.1
 - All other options were left as default values
 
 <details><summary>Screenshot 1.8</summary>
@@ -160,19 +161,22 @@ NOTE: If the option to power on the nsxmgr-01a VM is not available, log out and 
 
 `https://nsxmgr-01a.corp.local/login.jsp`
 
-<br/>
-NOTE: On your first login, you will be prompted to accept the EULA. Accept EULA and opt out of VMware Customer Experience program.
-<br/>
-<br/>
+Login as:
+
+- User: admin
+- Password: VMware1!
+
+_NOTE: On your first login, you will be prompted to accept the EULA. Accept EULA and opt out of VMware Customer Experience program._
 
 <details><summary>Screenshot 1.14</summary>
 <img src="images/2018-10-17-01-34-33.png">
 </details>
 <br/>
-This completes the NSX Manager installation, please proceed on to the Controller installation section below
 
 
 ## Step 2: Add NSX Compute Manager
+
+In sthis step, you create a connection between the NSX manager and your vCenter. This enables NSX manager to deploy VIBs to the hosts, controller and edge VMs, etc.
 
  2.1 From NSX Manager, click on **Fabric** -> **Compute Managers**
 
@@ -188,6 +192,8 @@ This completes the NSX Manager installation, please proceed on to the Controller
 - Clcik **Add**
 - Click **Add** again to accept the vCenter certificate thumbprint
 
+_NOTE: in a production implementation, you would first copy the vCetner thumbprint and then provide it in the form to properly authenticate the intial connection._
+
 <details><summary>Screenshot 2.2.1</summary><img src="images/2018-12-13-16-15-57.png"></details>
 <details><summary>Screenshot 2.2.2</summary><img src="images/2018-12-13-16-17-18.png"></details><br>
 
@@ -198,6 +204,8 @@ This completes the NSX Manager installation, please proceed on to the Controller
 <details><summary>Screenshot 2.3.2</summary><img src="images/2018-12-16-16-55-15.png"></details><br>
 
 ## Step 3: Deploy NSX Controller
+
+The NSX controller is the center of the NSX overlay control plane. I a production implementation, you would deploy at least three in a cluster for redundancy.
 
  3.1 Click on **System** -> **Components**, and then click **Add Controllers** 
 
@@ -250,7 +258,7 @@ _Optional:_
 
  3.4 Resize Controller
 
-_(Note: Confirm that step 3.3 has completed before proceeding to step 3.4. This step is for lab resource efficiency only. We are resizing the Controller VM to be the equivelant of a Small factor. This is only applicable for a lab environment.)_
+_NOTE: Confirm that step 3.3 has completed before proceeding to step 3.4. This step is for lab resource efficiency only. We are resizing the Controller VM to be the equivelant of a Small factor. This is only applicable for a lab environment._
 
 - Login to the vCenter web client with Windows authentication
 - Shutdown the **nsxc-01a** VM
@@ -262,6 +270,8 @@ _(Note: Confirm that step 3.3 has completed before proceeding to step 3.4. This 
 <details><summary>Screenshot 3.4</summary><img src="images/2018-12-15-12-58-05.png"></details><br>
 
 ## Step 4: Create IP Pool
+
+An IP Pool is an IP address range definition that can be applied to NSX tunnel end-points. In this step, you will create an ip pool to provde addresses to ESXi hosts and your edge VM tunnel endpoints.
 
  4.1 Click **Inventory** -> **Groups**, and then click on **IP Pools**
 
@@ -280,6 +290,8 @@ _(Note: Confirm that step 3.3 has completed before proceeding to step 3.4. This 
 
 ## Step 5: Prepare and Configure ESXi Hosts
 
+Prepapting hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kernel modues) and configuring the NSX tunnel endpoints. You will use the NSX Manager web client to configure this step.
+
  5.1 Click on **Fabirc** -> **Nodes**, and then click on **Hosts**
 
 <details><summary>Screenshot 5.1</summary><img src="images/2018-12-16-17-15-38.png"></details><br>
@@ -293,12 +305,12 @@ _(Note: Confirm that step 3.3 has completed before proceeding to step 3.4. This 
 - Select **RegionA01-MGMT01**
 - Click **Configure Cluster**
 
-<details><summary>Screenshot 5.3.1</summary><img src="images/2018-12-14-11-21-52.png"></details>
+<details><summary>Screenshot 5.3.1</summary><img src="images/2018-12-14-11-21-52.png"></details><br>
 
 - Enable `Automatically Install NSX` and `Automatically Create Transport Node`
 - Click on **Or Create New Transport Zone**  under Transport Zone
 
-<details><summary>Screenshot 5.3.2</summary><img src="images/2018-12-14-11-24-32.png"></details>
+<details><summary>Screenshot 5.3.2</summary><img src="images/2018-12-14-11-24-32.png"></details><br>
 
 - Name: `overlay-tz`
 - N-VDS Name: `hostswitch-overlay`
@@ -306,7 +318,7 @@ _(Note: Confirm that step 3.3 has completed before proceeding to step 3.4. This 
 - Traffic Type: `Overlay`
 - Click **Add**
 
-<details><summary>Screenshot 5.3.3</summary><img src="images/2018-12-14-11-27-25.png"></details>
+<details><summary>Screenshot 5.3.3</summary><img src="images/2018-12-14-11-27-25.png"></details><br>
 
 - Uplink Profile: `nsx-default-uplink-hostswitch-profile`
 - Ip Assignment: `Use IP Pool`
@@ -321,7 +333,7 @@ _(Note: Confirm that step 3.3 has completed before proceeding to step 3.4. This 
 - Select **RegionA01-COMP01**
 - Click **Configure Cluster**
 
-<details><summary>Screenshot 5.4</summary><img src="images/2018-12-14-11-35-42.png"></details>
+<details><summary>Screenshot 5.4</summary><img src="images/2018-12-14-11-35-42.png"></details><br>
 
 - Enable `Automatically Install NSX` and `Automatically Create Transport Node`
 - Transport Zone: `overlay-tz`
@@ -332,6 +344,8 @@ _(Note: Confirm that step 3.3 has completed before proceeding to step 3.4. This 
 - Click **Add**
 
 ## Step 6: Deploy NSX Edge
+
+An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networking for your NSX environment. It also serves an interface for a tier 0 router (more on tier 0 routers later) to connect to the physical netwrok.
 
   6.1 Add an NSX Edge
 
@@ -378,6 +392,8 @@ _(Note: Confirm that step 3.3 has completed before proceeding to step 3.4. This 
 <details><summary>Screenshot 6.3</summary><img src="images/2018-12-16-17-34-16.png"></details><br>
 
 ## Step 7: Create Edge Transport Node
+
+An NSX Edge Transport Node is the configuration of an edge with an existing transport zone. This includes install and configure of the tunnel enddpoint and virtual switch for connection to your NSX network,
 
  7.1 Configure the **nsxedge-1** edge as a transport node
 
@@ -446,6 +462,8 @@ _(Note: Confirm that step 3.3 has completed before proceeding to step 3.4. This 
 
 ## Step 8: Create Switches and Routers
 
+NSX switches and routers enable virtual and physical network connectivity. NSX uses multiple tier 1 routers spoked into a tier 0 router. The teir 0 router connects to the physical network though the edge VLAN interface. For this, you will create a VLAN Uplink switch. You will then create tier 1 switches and routers to connect the virtual subnets to the tier 0.
+
  8.1 Create VLAN Uplink Switch
 
 - Click on **Networking** -> **Switching**
@@ -482,7 +500,7 @@ _(Note: Confirm that step 3.3 has completed before proceeding to step 3.4. This 
 
 - Click on **Networking** -> **Routers**, and then click on **Add** -> **T0 Router**
 
-<details><summary>Screenshot 8.4.1</summary><img src="images/2018-12-14-20-17-20.png"></details>
+<details><summary>Screenshot 8.4.1</summary><img src="images/2018-12-14-20-17-20.png"></details><br>
 
     Be sure to configure HA Mode as `Active-Standby
 
@@ -589,13 +607,15 @@ _(Note: Confirm that step 3.3 has completed before proceeding to step 3.4. This 
     - Advertise All NSX Cnnected Routes
     - Advertise All NAT Routes
     - Click `Save`
-    <br>
+    <br>==
 
 <details><summary>Screenshot 8.11</summary><img src="images/2018-12-15-15-36-08.png"></details><br>
 
 - Repeat step 8.11 for router `t1-pks-service`
 
 ## Step 9: Create IP Blocks for PKS Components
+
+IP Blocks are another construct to define IP address ranges. In this case, we will define a range to be applied to PKS node VMs and another to be applied to k8s pods.
 
  9.1 Create Node IP Block
 
@@ -619,6 +639,8 @@ _(Note: Confirm that step 3.3 has completed before proceeding to step 3.4. This 
 <details><summary>Screenshot 9.2</summary><img src="images/2018-12-14-22-39-32.png"></details><br>
 
 ## Step 10: Create Network Address Translation Rules
+
+In this final step, we create NAT rules to map addresses to/from the PKS and k8s networks and the physica network.
 
  10.1 Define NAT Rules
 
