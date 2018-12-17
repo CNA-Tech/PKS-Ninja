@@ -576,7 +576,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 
 - From the `cli-vm`, ping the T0 uplink port address `192.168.200.3` to test connectivity
 
- 8.9 Configure PKS Compute T1 Ports
+ 8.9 Configure PKS Service T1 Ports
 
 - Click **Networking** -> **Routers**
 - Click on **t1-pks-service** (_Verify that the router name is now listed over 'Overview'_)
@@ -631,9 +631,6 @@ In this step, you create NAT rules to map addresses to/from the PKS and k8s netw
 - Click on **Networking** -> **Routers**
 - Select the `t0-pks` Router
 - Click on **Services** -> **NAT**
-
-<details><summary>Screenshot 9.1.1</summary><img src="images/2018-12-14-22-44-32.png"></details><br>
-
 - Click on **Add**
 - Action: `SNAT`
 - Source IP: `172.31.0.0/24`
@@ -642,30 +639,27 @@ In this step, you create NAT rules to map addresses to/from the PKS and k8s netw
 
 _(NOTE: Leaving an entry blank is the method to set it as **Any**)_
 
-<details><summary>Screenshot 9.1.2</summary><img src="images/2018-12-14-22-57-47.png"></details><br>
+<details><summary>Screenshot 9.1</summary><img src="images/2018-12-14-22-57-47.png"></details><br>
 
-- Repeat the steps above to complete the remaining rules in Screenshot 11.2
+9.2 Repeat 9.1 steps to complete the remaining rules in Screenshot 9.2
 
-<details><summary>Screenshot 9.1.3</summary><img src="images/2018-12-14-22-54-37.png"></details><br>
+<details><summary>Screenshot 9.2</summary><img src="images/2018-12-14-22-54-37.png"></details><br>
 
 
 ## Step 10: Create IP Blocks for PKS Components
 
 IP Blocks are another construct to define IP address ranges. In this case, we will define a range to be applied to PKS node VMs and another to be applied to k8s pods.
 
- 9.1 Create Nodes IP Block
+ 10.1 Create Nodes IP Block
 
 - Click on **Networking** -> **IPAM**
-
-<details><summary>Screenshot 10.1.1</summary><img src="images/2018-12-16-18-14-27.png"></details><br>
-
 - Click **Add**
 - Name: `ip-block-nodes`
 - CIDR: `172.15.0.0/16`
 
-<details><summary>Screenshot 10.1.2</summary><img src="images/2018-12-14-22-36-20.png"></details><br>
+<details><summary>Screenshot 10.1</summary><img src="images/2018-12-14-22-36-20.png"></details><br>
 
- 9.2 Create Pods IP Block
+ 10.2 Create Pods IP Block
 
 - Click **Add**
 - Name: `ip-block-pods`
