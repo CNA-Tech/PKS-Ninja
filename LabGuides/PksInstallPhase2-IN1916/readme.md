@@ -139,7 +139,8 @@ Login for NSX Manager UI is: admin/VMware1!
 - NSX Manager CA Cert: Use the value you gathered in [Lab 2 Step 2.1](https://github.com/CNA-Tech/PKS-Ninja/blob/master/LabGuides/Lab2-PksInstallationPhaseOne)
 - Disable SSL certificate verification: True
 - NAT mode: True
-- Pods IP Block ID: Use the value you gathered in step 1.8.1 above
+- Pods IP Block ID: Use the value you gathered in step 1.8.1.2 above
+- Nodes IP Block ID: Use the value you gathered in step 1.8.1.1 above
 - T0 Router ID: Use the value you gathered in step 1.8.2 above
 - Floating IP Pool ID: Use the value you gathered in step 1.8.3 above
 - Nodes DNS: 192.168.110.10
@@ -280,4 +281,4 @@ Leave the `Applying Changes` window open and check it periodically for status. W
 
 ### Thank you for completing the Installation Phase 2 Lab!
 
-### [Please click here to proceed to Lab4: Harbor Enterprise Container Registry](../Lab4-Harbor)
+### [Please click here to proceed to Lab4: Harbor Enterprise Container Registry](/LabGuides/IntroToHarbor-IH7914/)

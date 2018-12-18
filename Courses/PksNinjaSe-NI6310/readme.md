@@ -10,11 +10,11 @@ THe following is the original PKS Ninja agenda, at the current time this can be 
 - Intro to Kubernetes Lab
 - Intro to PKS Architecture
 - PKS Installation Phase 1 pptx
-- PKS Installation Phase 1 Lab
+- [PKS Installation Phase 1 Lab](/LabGuides/PksInstallPhase1-IN3138)
 - Intro to NSX-T for PKS
 - PKS Installation Phase 2 (post NSX knowledge)
 - PKS Installation Phase 2 Lab (might carryover)
-- Harbor
+- Harbor 
 - Harbor Lab
 - Deploying First Cluster Lab/First App (PlaneSpotter) + Break
 - PKS Storage & Persistence
