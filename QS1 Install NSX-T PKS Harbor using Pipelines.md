@@ -41,4 +41,4 @@ Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborPip
 
 Harbor login: admin/VMware1!
 
-# 6) Deploy App
+See Guide #2 to setup cluster and deploy apps
