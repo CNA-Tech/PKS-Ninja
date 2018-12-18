@@ -155,7 +155,7 @@ Note: After clicking `Setup Authentication` it will take several minutes for the
 
 ## Step 2: Deploy BOSH
 
-2.1 From the ControlCenter desktop, open putty and connect to `cli-vm`. When you open the ssh session it will attempt to connect to PKS, which has not been deployed yet so it will hang, hold down the ctrl or cmd key while you press `C` to return to the Bash prompt and enter the following command:
+2.1 From the ControlCenter desktop, open putty and connect to `cli-vm`. At the Bash prompt enter the following command:
 
 `openssl s_client -host nsxmgr-01a.corp.local -port 443 -prexit -showcerts`
 
@@ -514,4 +514,4 @@ Note: In the nested example lab, it takes ~10 minutes to import the PKS tile
 
 ## Next Steps
 
-### [Please click here to proceed to Lab2: PKS Installation Phase 2](../Lab3-PksInstallationPhaseTwo)
+### [Please click here to proceed to PKS Installation Phase 2](LabGuides/PksInstallPhase2-IN1916/)
