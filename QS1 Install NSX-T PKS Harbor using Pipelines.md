@@ -39,4 +39,6 @@ Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksPipeli
 # 5) Install Harbor
 Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborPipelineInstal-IN4968
 
+Harbor login: admin/VMware1!
+
 # 6) Deploy App
