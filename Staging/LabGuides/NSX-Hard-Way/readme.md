@@ -14,8 +14,6 @@ For those needing access to VMware licensing for lab and educational purposes, w
 
 This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.3 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-3E0C4CEC-D593-4395-84C4-150CD6285963.html)
 
-<BR>
-
 ### Overview of Tasks Covered in Lab 1
 
 - [Step 1:  Deploy NSXT Manager using OVF Install Wizard](#step-1--deploy-nsxt-manager-using-ovf-install-wizard)
@@ -179,7 +177,7 @@ _NOTE: On your first login, you will be prompted to accept the EULA. Accept EULA
 
 In sthis step, you create a connection between the NSX manager and your vCenter. This enables NSX manager to deploy VIBs to the hosts, controller and edge VMs, etc.
 
- 2.1 From NSX Manager, click on **Fabric** -> **Compute Managers**
+ 2.1 From NSX Manager, click on **Fabric** -> **Compute Manager**
 
 <details><summary>Screenshot 2.1</summary><img src="images/2018-12-16-16-58-11.png"></details><br>
 
@@ -295,7 +293,7 @@ An IP Pool is an IP address range definition within the NSX-T IPAM construct. In
 
 - Name: `ip-pool-vips`
 - Click `Add` under Subnets
-- IP Range: `10.40.14.34-10.40.14.62``
+- IP Range: `10.40.14.34-10.40.14.62`
 - CIDR: `10.40.14.32/27`
 - Click **Add**
 
@@ -685,15 +683,14 @@ IP Blocks are another construct to define IP address ranges. In this case, we wi
 
 In this final step, you will generate a self-signed certificate for API access to NSX-T. This is required to enable BOSH Director to authenticate to NSX-T Manager. In a production implementation, you would likely opt for a CA signed certificate. Refer to the NSX-T documentation for more detail. To make this step easier, we will set some variables and reuse common command directions from the PKS documentation. 
 
-11.1 From the cli-vm, switch to your home directory and create a directory to work from
+11.1 From the cli-vm, create a directory to work from
 
-- cd ~
-- mkdir nsx-t-api-cert
-- cd nsx-t-api-cert
+- `mkdir ~/nsx-t-api-cert`
+- `cd ~/nsx-t-api-cert`
 
 11.2 Create the nsx-cert.cnf file in your nsx-t-api-cert directory, copy the below contents into it, save and exit.
 
-- 'nano nsx-cert.cnf'
+- `nano nsx-cert.cnf`
 - Paste below contents into file, save, exit
 
 ```
@@ -758,6 +755,7 @@ openssl req -newkey rsa:2048 -x509 -nodes \
 - Name: `NSX-T API CERT`
 - Paste the .crt file contents you copies into the `Certificate Contents` field
 - Copy and paste the .key file output to the `Private Key` field
+- Password: `VMware1!`
 - Click **Import**
 
 <details><summary>Screenshot 11.8</summary><img src="images/2018-12-18-01-26-30.png"></details><br>
