@@ -16,11 +16,11 @@ Obtaining IP address of the ControlCenter desktop: From browser on the virtual l
 
 All instructions in this lab guide should be performed from the ControlCenter desktop unless otherwise specified.
 
-PKS installation on vSphere requires NSX-T to be installed. If NSX-T is not installed in your environment, jump to Lab9 to install and return here. One way to verify if NSX-T is installed is try accessing the NSX Manager/Console.
+PKS installation on vSphere requires NSX-T to be installed. If NSX-T is not installed in your environment, jump to [NSX-T Pipeline Install](/LabGuides/NsxtPipelineInstall-IN7016/) to install and return here. One way to verify if NSX-T is installed is try accessing the NSX Manager/Console.
 
 ## Step 1: Deploy Ops Manager
 
-1.1 Launch the Chrome browser on the desktop, and launch the vSphere web client from the short-cut. To login, use the Windows authentication. In the vSphere web client, right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`
+1.1 Launch the Chrome browser from the desktop or Windows taskbar, and launch the **RegionA vCenter** vSphere web client from the **RegionA** bookmarks folder, select *Use Windows session authentication* and click **Login**. In the vSphere web client, right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`
 
 <details><summary>Screenshot 1.1</summary>
 <img src="Images/2018-10-21-16-56-33.png">>
@@ -34,14 +34,14 @@ PKS installation on vSphere requires NSX-T to be installed. If NSX-T is not inst
 </details>
 <br/>
 
-1.3 On the `Select name and folder` screen, rename the Virtual machine name `opsman` and select `RegionA01` as the datacenter
+1.3 On the `Select name and location` screen, rename the Virtual machine name `opsman` and select `RegionA01` as the datacenter
 
 <details><summary>Screenshot 1.3</summary>
 <img src="Images/2018-10-21-17-09-11.png">
 </details>
 <br/>
 
-1.4 On the `Select a compute resource` screen, select the `pks-mgmt-1` resource pool
+1.4 On the `Select a resource` screen, select the `pks-mgmt-1` resource pool
 
 <details><summary>Screenshot 1.4</summary>
 <img src="Images/2018-10-21-17-12-16.png">
@@ -64,7 +64,7 @@ PKS installation on vSphere requires NSX-T to be installed. If NSX-T is not inst
 
 1.7 On the `Select networks` screen, ensure the `Destination Network` is set to `VM-RegionA01-vDS-MGMT`.
 
-Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connecting it to a different network during the `Deploy OVF Template` wizard as at the time of writing, there is a bug that prevents attachnment to a logical switch. After the OVF deployment is complete, a later step will have you change the network attachment.
+Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connecting it to a different network during the `Deploy OVF Template` wizard as at the time of writing, there is a bug that prevents attachment to a logical switch. After the OVF deployment is complete, a later step will have you change the network attachment.
 
 <details><summary>Screenshot 1.7</summary>
 <img src="Images/2018-10-21-17-16-11.png">
@@ -73,14 +73,14 @@ Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connec
 
 1.8 On the `Customize template` screen, enter the following variables:
 
-  - IP Address: 172.31.0.3
-  - Netmask: 255.255.255.0
-  - Default Gateway: 172.31.0.1
-  - DNS: 192.168.110.10
-  - NTP Servers: ntp.corp.local
   - Admin Password: VMware1!
-  - Public SSH Key: (leave blank)
   - Custom Hostname: opsman
+  - DNS: 192.168.110.10
+  - Default Gateway: 172.31.0.1
+  - IP Address: 172.31.0.3
+  - NTP Servers: ntp.corp.local
+  - Netmask: 255.255.255.0
+  - Public SSH Key: (leave blank)
 
 <details><summary>Screenshot 1.8</summary>
 <img src="Images/2018-10-21-17-30-07.png">
@@ -110,7 +110,7 @@ Note: In the Nested example lab, it takes ~20 minutes to deploy the Ops Manager 
 </details>
 <br/>
 
-1.12 On the `Edit Settings` menu for the opsman vm, set `Network Adapter 1` to `ls-pks-mgmt` If you don't see this network, that means NSX-T hasn't been installed as required. Please jump to Lab9 and install NSX-T.
+1.12 On the `Edit Settings` menu for the opsman vm, set `Network Adapter 1` to `ls-pks-mgmt` If you don't see this network, that means NSX-T hasn't been installed as required. Please jump to [NSX-T Pipeline Install](/LabGuides/NsxtPipelineInstall-IN7016/) and install NSX-T first.
 
 <details><summary>Screenshot 1.12</summary>
 <img src="Images/2018-10-21-19-39-17.png">
@@ -133,13 +133,13 @@ Note: In the Nested example lab, it takes ~20 minutes to deploy the Ops Manager 
 
 1.15 On the `Internal Authentication` screen, enter the following values, check the box to agree to terms and conditions and click `Setup Authentication`
 
-Note: After clicking `Setup Authentication` it will take several minutes for the authentication system to start. The login screen will appear after the authentication system is finished starting up
-
 - Username: admin
 - Password: VMware1!
 - Decryption Passphrase: VMware1!
 - Check "I agree to the terms and conditions..."
 - Click "Setup Authentication"
+
+Note: After clicking `Setup Authentication` it will take several minutes for the authentication system to start. The login screen will appear after the authentication system is finished starting up
 
 <details><summary>Screenshot 1.15</summary>
 <img src="Images/2018-10-21-19-49-15.png">
