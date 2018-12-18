@@ -770,8 +770,9 @@ openssl req -newkey rsa:2048 -x509 -nodes \
 11.13 Execute the following command to install the certifcate for API access
 
 ```
-curl --insecure -u admin:'VMware1!' -X POST "https://$NSX_MANAGER_IP_ADDRESS/api/v1/node/services/http?action=apply_certificate&certificate_id=$CERTIFICATE_ID"
-root@cli-vm:~/nsx-ca-cert#
+curl --insecure -u admin:'VMware1!' \
+ -X POST \
+ "https://$NSX_MANAGER_IP_ADDRESS/api/v1/node/services/http?action=apply_certificate&certificate_id=$CERTIFICATE_ID"
 ```
 11.14 Refresh NSX Manager web page and accept certificate if prompted.
 
