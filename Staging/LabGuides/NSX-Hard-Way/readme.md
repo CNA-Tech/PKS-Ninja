@@ -14,6 +14,7 @@ For those needing access to VMware licensing for lab and educational purposes, w
 
 This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.3 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-3E0C4CEC-D593-4395-84C4-150CD6285963.html)
 
+<BR>
 
 ### Overview of Tasks Covered in Lab 1
 
@@ -27,11 +28,14 @@ This lab follows the standard documentation, which includes additional details a
 - [Step 8: Create Switches and Routers](#step-8-create-switches-and-routers)
 - [Step 9: Create Network Address Translation Rules](#step-9-create-network-address-translation-rules)
 - [Step 10: Create IP Blocks for PKS Components](#step-10-create-ip-blocks-for-pks-components)
+- [Step 11: Create NSX API Access Certificate](#step-11-create-nsx-api-access-certificate)
 
 
 NOTE: NSX Manager OVA cannot be installed via HTML5 client, so for installation labs please use the vSphere web client (Flash-based).
 
 This section follows the standard documentation, which includes additional details and explanations: [NSX Manager Installation](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-A65FE3DD-C4F1-47EC-B952-DEDF1A3DD0CF.html)
+
+-----------------------
 
 ## Step 1:  Deploy NSXT Manager using OVF Install Wizard
 
@@ -173,7 +177,7 @@ _NOTE: On your first login, you will be prompted to accept the EULA. Accept EULA
 
 ## Step 2: Add NSX Compute Manager
 
-In sthis step, you create a connection between the NSX manager and your vCenter. This enables NSX manager to deploy VIBs to, and manage, the hosts and edge VMs.
+In sthis step, you create a connection between the NSX manager and your vCenter. This enables NSX manager to deploy VIBs to the hosts, controller and edge VMs, etc.
 
  2.1 From NSX Manager, click on **Fabric** -> **Compute Managers**
 
@@ -240,7 +244,7 @@ The NSX controller is the center of the NSX overlay control plane. I a productio
 
 _Optional:_
 
-- On the cli-vm, create and open terminal emulator SSH sessions, as described in Screenshots 3.3.1 and 3.3.2, and execute the following commands to check control plane health 
+- On the cli-vm, create and open terminal emulator SSH sessions, as described in Screenshots 3.3.2 and 3.3.3, and execute the following commands to check control plane health 
 
     - <details><summary>Screenshot 3.3.1</summary><img src="images/2018-12-13-20-23-33.png"></details>
     - <details><summary>Screenshot 3.3.2</summary><img src="images/2018-12-13-20-33-16.png"></details>
@@ -468,7 +472,7 @@ _NOTE: This conifguration step is a common source of confusion when first learni
 
 ## Step 8: Create Switches and Routers
 
-NSX switches and routers enable virtual and physical network connectivity. NSX uses multiple tier 1 routers spoked into a tier 0 router. The tier 0 router connects to the physical network through the edge VLAN interface. For this, you will create a VLAN Uplink switch. You will then create tier 1 switches and routers to connect the virtual subnets to the tier 0.
+NSX switches and routers enable virtual and physical network connectivity. NSX uses multiple tier 1 routers spoked into a tier 0 router. The teir 0 router connects to the physical network though the edge VLAN interface. For this, you will create a VLAN Uplink switch. You will then create tier 1 switches and routers to connect the virtual subnets to the tier 0.
 
  8.1 Create VLAN Uplink Switch
 
@@ -493,7 +497,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 
 <details><summary>Screenshot 8.2</summary><img src="images/2018-12-15-14-56-24.png"></details><br>
 
- 8.3 Create PKS Service Switch
+ 8.3 Create PKS Compute Switch
 
 - Clcik on **Add**
 - Name: `ls-pks-service`
@@ -559,7 +563,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 
  <details><summary>Screenshot 8.7.3</summary><img src="images/2018-12-14-20-36-31.png"></details><br>
 
- 8.8 Add T0 Default Route
+ 8.8 Add T0 Static Route
 
 - Clcik on **Routing** -> **Static Routes**
 
@@ -592,7 +596,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 
 <details><summary>Screenshot 8.9.2</summary><img src="images/2018-12-15-15-28-05.png"></details><br>
 
- 8.10 Configure PKS Management T1 Ports
+ 8.10 Configure PKS Management T1 Ports and Route Advertisement
 
 - Click on **t1-pks-mgmt** (_Verify that the router name is now listed over 'Overview'_)
 - Click on **Configuration** -> **Router Ports**
@@ -613,15 +617,17 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
     - Advertise All NSX Cnnected Routes
     - Advertise All NAT Routes
     - Click `Save`
+    <br>==
 
 <details><summary>Screenshot 8.11</summary><img src="images/2018-12-15-15-36-08.png"></details><br>
 
 - Repeat step 8.11 for router `t1-pks-service`
 
+<br>
 
 ## Step 9: Create Network Address Translation Rules
 
-In this step, you create NAT rules to map addresses to/from the PKS management, k8s pod, and physical networks.
+In this step, you create NAT rules to map addresses to/from the PKS and k8s networks and the physica network.
 
 9.1 Define NAT Rules
 
@@ -638,7 +644,7 @@ _(NOTE: Leaving an entry blank is the method to set it as **Any**)_
 
 <details><summary>Screenshot 9.1</summary><img src="images/2018-12-14-22-57-47.png"></details><br>
 
-9.2 Repeat step 9.1 to complete the remaining rules in Screenshot 9.2
+9.2 Repeat 9.1 steps to complete the remaining rules in Screenshot 9.2
 
 <details><summary>Screenshot 9.2</summary><img src="images/2018-12-14-22-54-37.png"></details><br>
 
@@ -663,7 +669,116 @@ IP Blocks are another construct to define IP address ranges. In this case, we wi
 - CIDR: `172.16.0.0/16`
 - Click **Add**
 
-<details><summary>Screenshot 10.2</summary><img src="images/2018-12-14-22-39-32.png"></details>
+<details><summary>Screenshot 10.2</summary><img src="images/2018-12-14-22-39-32.png"></details><br>
+
+## Step 11: Create NSX API Access Certificate
+
+In this final step, you will generate a self-signed certificate for API access to NSX-T. This is required to enable BOSH Director to authenticate to NSX-T Manager. In a production implementation, you would likely opt for a CA signed certificate. Refer to the NSX-T documentation for more detail. To make this step easier, we will set some variables and reuse common command directions from the PKS documentation. 
+
+11.1 From the cli-vm, switch to your home directory and create a directory to work from
+
+- cd ~
+- mkdir nsx-t-api-cert
+- cd nsx-t-api-cert
+
+11.2 Create the nsx-cert.cnf file in your nsx-t-api-cert directory, copy the below contents into it, save and exit.
+
+- 'nano nsx-cert.cnf'
+- Paste below contents into file, save, exit
+
+```
+default_bits = 2048
+distinguished_name = req_distinguished_name
+req_extensions = req_ext
+prompt = no
+[ req_distinguished_name ]
+countryName = US
+stateOrProvinceName = California
+localityName = CA
+organizationName = NSX
+commonName = 192.168.110.42
+[ req_ext ]
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = 192.168.110.42
+```
+
+<br>
+11.3 Install JQ on cli-vm with `apt-get install jq -y` command
+
+11.4 Export following variables at your cli-vm commmand line
+
+- `export NSX_MANAGER_IP_ADDRESS=192.168.110.42`
+- `export NSX_MANAGER_COMMONNAME=192.168.110.42`
+
+<details><summary>Screenshot 11.4</summary><img src="images/2018-12-18-01-47-44.png"></details><br>
+
+11.5  Paste the following command to your cli-vm command line and execute it
+
+```
+openssl req -newkey rsa:2048 -x509 -nodes \
+
+> -keyout nsx.key -new -out nsx.crt -subj /CN=$NSX_MANAGER_COMMONNAME \
+
+> -reqexts SAN -extensions SAN -config <(cat ./nsx-cert.cnf \
+
+>  <(printf "[SAN]\nsubjectAltName=DNS:$NSX_MANAGER_COMMONNAME,IP:$NSX_MANAGER_IP_ADDRESS")) -sha256 -days 365
+```
+
+<br>
+
+11.6 Display contents of .crt and .key files
+
+- `cat nsx.crt`
+- `cat nsx.key`
+- Copy the contents of `nsx.crt` to your clipboard, beginning with `'-----BEGIN CERTIFICATE'` to the end of `'END CERTIFICATE-----'`
+
+
+<details><summary>Screenshot 11.6</summary><img src="images/2018-12-18-01-14-28.png"></details><br>
+
+11.7 In NSX Manager, click on **System** -> **Trust**
+
+<details><summary>Screenshot 11.7</summary><img src="images/2018-12-18-01-20-03.png"></details><br>
+
+11.8 Click on **Certificates** -> **Import** -> **Import Certificate**
+
+<details><summary>Screenshot 11.8</summary><img src="images/2018-12-18-01-19-04.png"></details><br>
+
+11.9 Configure the Import Certificate form as follows
+
+- Name: `NSX-T API CERT`
+- Paste the .crt file contents you copies into the `Certificate Contents` field
+- Copy and paste the .key file output to the `Private Key` field
+- Click **Import**
+
+<details><summary>Screenshot 11.9</summary><img src="images/2018-12-18-01-26-30.png"></details><br>
+
+11.10 Click on the 'X' in the upper-right corner to return to the tabular list of certificates
+
+<details><summary>Screenshot 11.10</summary><img src="images/2018-12-18-01-36-40.png"></details><br>
+
+11.11 Click on the newly imported certificate ID and copy the value to the clipboard
+
+<details><summary>Screenshot 11.11</summary><img src="images/2018-12-18-01-35-52.png"></details><br>
+
+11.12 From your cli-vm command line, export the certificate ID as a variable (Replace with your certificate ID)
+
+- `export CERTIFICATE_ID=<Your Certificate ID>`
+
+<details><summary>Screenshot 11.12</summary><img src="images/2018-12-18-01-40-06.png"></details><br>
+
+11.13 Execute the following command to install the certifcate for API access
+
+```
+curl --insecure -u admin:'VMware1!' \
+ -X POST \
+ "https://$NSX_MANAGER_IP_ADDRESS/api/v1/node/services/http?action=apply_certificate&certificate_id=$CERTIFICATE_ID"
+```
+11.14 Refresh NSX Manager web page and accept certificate if prompted.
+
+<br>
+
+------------------
 
 
 ### You have now completed the NSX-T Installation for PKS lab. Click on the dashboard to check that it matches the image below. It may have some yellow based on your lab CPU activity, but the numbers should match.
