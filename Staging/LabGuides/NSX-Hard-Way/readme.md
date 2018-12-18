@@ -14,7 +14,6 @@ For those needing access to VMware licensing for lab and educational purposes, w
 
 This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.3 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-3E0C4CEC-D593-4395-84C4-150CD6285963.html)
 
-<BR>
 
 ### Overview of Tasks Covered in Lab 1
 
@@ -469,7 +468,7 @@ _NOTE: This conifguration step is a common source of confusion when first learni
 
 ## Step 8: Create Switches and Routers
 
-NSX switches and routers enable virtual and physical network connectivity. NSX uses multiple tier 1 routers spoked into a tier 0 router. The teir 0 router connects to the physical network though the edge VLAN interface. For this, you will create a VLAN Uplink switch. You will then create tier 1 switches and routers to connect the virtual subnets to the tier 0.
+NSX switches and routers enable virtual and physical network connectivity. NSX uses multiple tier 1 routers spoked into a tier 0 router. The tier 0 router connects to the physical network through the edge VLAN interface. For this, you will create a VLAN Uplink switch. You will then create tier 1 switches and routers to connect the virtual subnets to the tier 0.
 
  8.1 Create VLAN Uplink Switch
 
@@ -622,7 +621,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 
 ## Step 9: Create Network Address Translation Rules
 
-In this step, you create NAT rules to map addresses to/from the PKS and k8s networks and the physica network.
+In this step, you create NAT rules to map addresses to/from the PKS management, k8s pod, and physical networks.
 
 9.1 Define NAT Rules
 
@@ -664,7 +663,7 @@ IP Blocks are another construct to define IP address ranges. In this case, we wi
 - CIDR: `172.16.0.0/16`
 - Click **Add**
 
-<details><summary>Screenshot 10.2</summary><img src="images/2018-12-14-22-39-32.png"></details><br>
+<details><summary>Screenshot 10.2</summary><img src="images/2018-12-14-22-39-32.png"></details>
 
 
 ### You have now completed the NSX-T Installation for PKS lab. Click on the dashboard to check that it matches the image below. It may have some yellow based on your lab CPU activity, but the numbers should match.
