@@ -593,7 +593,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 
 <details><summary>Screenshot 8.9.2</summary><img src="images/2018-12-15-15-28-05.png"></details><br>
 
- 8.10 Configure PKS Management T1 Ports and Route Advertisement
+ 8.10 Configure PKS Management T1 Ports
 
 - Click on **t1-pks-mgmt** (_Verify that the router name is now listed over 'Overview'_)
 - Click on **Configuration** -> **Router Ports**
@@ -614,13 +614,11 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
     - Advertise All NSX Cnnected Routes
     - Advertise All NAT Routes
     - Click `Save`
-    <br>==
 
 <details><summary>Screenshot 8.11</summary><img src="images/2018-12-15-15-36-08.png"></details><br>
 
 - Repeat step 8.11 for router `t1-pks-service`
 
-<br>
 
 ## Step 9: Create Network Address Translation Rules
 
@@ -641,7 +639,7 @@ _(NOTE: Leaving an entry blank is the method to set it as **Any**)_
 
 <details><summary>Screenshot 9.1</summary><img src="images/2018-12-14-22-57-47.png"></details><br>
 
-9.2 Repeat 9.1 steps to complete the remaining rules in Screenshot 9.2
+9.2 Repeat step 9.1 to complete the remaining rules in Screenshot 9.2
 
 <details><summary>Screenshot 9.2</summary><img src="images/2018-12-14-22-54-37.png"></details><br>
 
