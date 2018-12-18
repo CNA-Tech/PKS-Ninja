@@ -2,6 +2,10 @@
 Pre-req: QS1 - PKS ready with Harbor
 
 # 1. Setup first cluster
+
+UAA login via ssh to opsman
+
+
 Follow https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610
 
 # 2. Deploy first app
