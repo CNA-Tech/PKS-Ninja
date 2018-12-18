@@ -272,9 +272,9 @@ _NOTE: Confirm that step 3.3 has completed before proceeding to step 3.4. This s
 
 <details><summary>Screenshot 3.4</summary><img src="images/2018-12-15-12-58-05.png"></details><br>
 
-## Step 4: Create IP Pool
+## Step 4: Create IP Pools
 
-An IP Pool is an IP address range definition that can be applied to NSX tunnel endpoints. In this step, you will create an ip pool to provde addresses to ESXi hosts and your edge VM tunnel endpoints.
+An IP Pool is an IP address range definition within the NSX-T IPAM construct. In this step, you will create an ip pool for tunnel endpoints and an ip pool for k8s cluster load balancers.
 
  4.1 Click **Inventory** -> **Groups**, and then click on **IP Pools**
 
@@ -290,6 +290,16 @@ An IP Pool is an IP address range definition that can be applied to NSX tunnel e
 - Click **Add**
 
 <details><summary>Screenshot 4.2</summary><img src="images/2018-12-14-11-09-57.png"></details><br>
+
+ 4.2 Create the k8s LB Pool, click **Add** and complete with the following values
+
+- Name: `ip-pool-vips`
+- Click `Add` under Subnets
+- IP Range: `10.40.14.34-10.40.14.62``
+- CIDR: `10.40.14.32/27`
+- Click **Add**
+
+<br>
 
 ## Step 5: Prepare and Configure ESXi Hosts
 
@@ -657,7 +667,7 @@ IP Blocks are another construct to define IP address ranges. In this case, we wi
 
 - Click on **Networking** -> **IPAM**
 - Click **Add**
-- Name: `ip-block-nodes`
+- Name: `ip-block-nodes-deployments`
 - CIDR: `172.15.0.0/16`
 
 <details><summary>Screenshot 10.1</summary><img src="images/2018-12-14-22-36-20.png"></details><br>
@@ -665,7 +675,7 @@ IP Blocks are another construct to define IP address ranges. In this case, we wi
  10.2 Create Pods IP Block
 
 - Click **Add**
-- Name: `ip-block-pods`
+- Name: `ip-block-pods-deployments`
 - CIDR: `172.16.0.0/16`
 - Click **Add**
 
@@ -704,16 +714,15 @@ DNS.1 = 192.168.110.42
 ```
 
 <br>
-11.3 Install JQ on cli-vm with `apt-get install jq -y` command
 
-11.4 Export following variables at your cli-vm commmand line
+11.3 Export following variables at your cli-vm commmand line
 
 - `export NSX_MANAGER_IP_ADDRESS=192.168.110.42`
 - `export NSX_MANAGER_COMMONNAME=192.168.110.42`
 
-<details><summary>Screenshot 11.4</summary><img src="images/2018-12-18-01-47-44.png"></details><br>
+<details><summary>Screenshot 11.3</summary><img src="images/2018-12-18-01-47-44.png"></details><br>
 
-11.5  Paste the following command to your cli-vm command line and execute it
+11.4  Paste the following command to your cli-vm command line and execute it
 
 ```
 openssl req -newkey rsa:2048 -x509 -nodes \
@@ -727,54 +736,57 @@ openssl req -newkey rsa:2048 -x509 -nodes \
 
 <br>
 
-11.6 Display contents of .crt and .key files
+11.5 Display contents of .crt and .key files
 
 - `cat nsx.crt`
 - `cat nsx.key`
 - Copy the contents of `nsx.crt` to your clipboard, beginning with `'-----BEGIN CERTIFICATE'` to the end of `'END CERTIFICATE-----'`
 
 
-<details><summary>Screenshot 11.6</summary><img src="images/2018-12-18-01-14-28.png"></details><br>
+<details><summary>Screenshot 11.5</summary><img src="images/2018-12-18-01-14-28.png"></details><br>
 
-11.7 In NSX Manager, click on **System** -> **Trust**
+11.6 In NSX Manager, click on **System** -> **Trust**
 
-<details><summary>Screenshot 11.7</summary><img src="images/2018-12-18-01-20-03.png"></details><br>
+<details><summary>Screenshot 11.6</summary><img src="images/2018-12-18-01-20-03.png"></details><br>
 
-11.8 Click on **Certificates** -> **Import** -> **Import Certificate**
+11.7 Click on **Certificates** -> **Import** -> **Import Certificate**
 
-<details><summary>Screenshot 11.8</summary><img src="images/2018-12-18-01-19-04.png"></details><br>
+<details><summary>Screenshot 11.7</summary><img src="images/2018-12-18-01-19-04.png"></details><br>
 
-11.9 Configure the Import Certificate form as follows
+11.8 Configure the Import Certificate form as follows
 
 - Name: `NSX-T API CERT`
 - Paste the .crt file contents you copies into the `Certificate Contents` field
 - Copy and paste the .key file output to the `Private Key` field
 - Click **Import**
 
-<details><summary>Screenshot 11.9</summary><img src="images/2018-12-18-01-26-30.png"></details><br>
+<details><summary>Screenshot 11.8</summary><img src="images/2018-12-18-01-26-30.png"></details><br>
 
-11.10 Click on the 'X' in the upper-right corner to return to the tabular list of certificates
+11.9 Click on the 'X' in the upper-right corner to return to the tabular list of certificates
 
-<details><summary>Screenshot 11.10</summary><img src="images/2018-12-18-01-36-40.png"></details><br>
+<details><summary>Screenshot 11.9</summary><img src="images/2018-12-18-01-36-40.png"></details><br>
 
-11.11 Click on the newly imported certificate ID and copy the value to the clipboard
+11.10 Click on the newly imported certificate ID and copy the value to the clipboard
 
-<details><summary>Screenshot 11.11</summary><img src="images/2018-12-18-01-35-52.png"></details><br>
+<details><summary>Screenshot 11.10</summary><img src="images/2018-12-18-01-35-52.png"></details><br>
 
-11.12 From your cli-vm command line, export the certificate ID as a variable (Replace with your certificate ID)
+11.11 From your cli-vm command line, export the certificate ID as a variable (Replace with your certificate ID)
 
 - `export CERTIFICATE_ID=<Your Certificate ID>`
 
-<details><summary>Screenshot 11.12</summary><img src="images/2018-12-18-01-40-06.png"></details><br>
+<details><summary>Screenshot 11.11</summary><img src="images/2018-12-18-01-40-06.png"></details><br>
 
-11.13 Execute the following command to install the certifcate for API access
+11.12 Execute the following command to install the certifcate for API access
 
 ```
 curl --insecure -u admin:'VMware1!' \
  -X POST \
  "https://$NSX_MANAGER_IP_ADDRESS/api/v1/node/services/http?action=apply_certificate&certificate_id=$CERTIFICATE_ID"
 ```
-11.14 Refresh NSX Manager web page and accept certificate if prompted.
+
+<br>
+
+11.13 Refresh NSX Manager web page and accept certificate if prompted.
 
 <br>
 
