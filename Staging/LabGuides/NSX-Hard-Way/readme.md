@@ -14,7 +14,6 @@ For those needing access to VMware licensing for lab and educational purposes, w
 
 This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.3 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-3E0C4CEC-D593-4395-84C4-150CD6285963.html)
 
-<BR>
 
 ### Overview of Tasks Covered in Lab 1
 
@@ -174,7 +173,7 @@ _NOTE: On your first login, you will be prompted to accept the EULA. Accept EULA
 
 ## Step 2: Add NSX Compute Manager
 
-In sthis step, you create a connection between the NSX manager and your vCenter. This enables NSX manager to deploy VIBs to the hosts, controller and edge VMs, etc.
+In sthis step, you create a connection between the NSX manager and your vCenter. This enables NSX manager to deploy VIBs to, and manage, the hosts and edge VMs.
 
  2.1 From NSX Manager, click on **Fabric** -> **Compute Managers**
 
@@ -241,7 +240,7 @@ The NSX controller is the center of the NSX overlay control plane. I a productio
 
 _Optional:_
 
-- On the cli-vm, create and open terminal emulator SSH sessions, as described in Screenshots 3.3.2 and 3.3.3, and execute the following commands to check control plane health 
+- On the cli-vm, create and open terminal emulator SSH sessions, as described in Screenshots 3.3.1 and 3.3.2, and execute the following commands to check control plane health 
 
     - <details><summary>Screenshot 3.3.1</summary><img src="images/2018-12-13-20-23-33.png"></details>
     - <details><summary>Screenshot 3.3.2</summary><img src="images/2018-12-13-20-33-16.png"></details>
@@ -469,7 +468,7 @@ _NOTE: This conifguration step is a common source of confusion when first learni
 
 ## Step 8: Create Switches and Routers
 
-NSX switches and routers enable virtual and physical network connectivity. NSX uses multiple tier 1 routers spoked into a tier 0 router. The teir 0 router connects to the physical network though the edge VLAN interface. For this, you will create a VLAN Uplink switch. You will then create tier 1 switches and routers to connect the virtual subnets to the tier 0.
+NSX switches and routers enable virtual and physical network connectivity. NSX uses multiple tier 1 routers spoked into a tier 0 router. The tier 0 router connects to the physical network through the edge VLAN interface. For this, you will create a VLAN Uplink switch. You will then create tier 1 switches and routers to connect the virtual subnets to the tier 0.
 
  8.1 Create VLAN Uplink Switch
 
@@ -494,7 +493,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 
 <details><summary>Screenshot 8.2</summary><img src="images/2018-12-15-14-56-24.png"></details><br>
 
- 8.3 Create PKS Compute Switch
+ 8.3 Create PKS Service Switch
 
 - Clcik on **Add**
 - Name: `ls-pks-service`
@@ -560,7 +559,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 
  <details><summary>Screenshot 8.7.3</summary><img src="images/2018-12-14-20-36-31.png"></details><br>
 
- 8.8 Add T0 Static Route
+ 8.8 Add T0 Default Route
 
 - Clcik on **Routing** -> **Static Routes**
 
@@ -593,7 +592,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 
 <details><summary>Screenshot 8.9.2</summary><img src="images/2018-12-15-15-28-05.png"></details><br>
 
- 8.10 Configure PKS Management T1 Ports and Route Advertisement
+ 8.10 Configure PKS Management T1 Ports
 
 - Click on **t1-pks-mgmt** (_Verify that the router name is now listed over 'Overview'_)
 - Click on **Configuration** -> **Router Ports**
@@ -614,17 +613,15 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
     - Advertise All NSX Cnnected Routes
     - Advertise All NAT Routes
     - Click `Save`
-    <br>==
 
 <details><summary>Screenshot 8.11</summary><img src="images/2018-12-15-15-36-08.png"></details><br>
 
 - Repeat step 8.11 for router `t1-pks-service`
 
-<br>
 
 ## Step 9: Create Network Address Translation Rules
 
-In this step, you create NAT rules to map addresses to/from the PKS and k8s networks and the physica network.
+In this step, you create NAT rules to map addresses to/from the PKS management, k8s pod, and physical networks.
 
 9.1 Define NAT Rules
 
@@ -641,7 +638,7 @@ _(NOTE: Leaving an entry blank is the method to set it as **Any**)_
 
 <details><summary>Screenshot 9.1</summary><img src="images/2018-12-14-22-57-47.png"></details><br>
 
-9.2 Repeat 9.1 steps to complete the remaining rules in Screenshot 9.2
+9.2 Repeat step 9.1 to complete the remaining rules in Screenshot 9.2
 
 <details><summary>Screenshot 9.2</summary><img src="images/2018-12-14-22-54-37.png"></details><br>
 
@@ -666,7 +663,7 @@ IP Blocks are another construct to define IP address ranges. In this case, we wi
 - CIDR: `172.16.0.0/16`
 - Click **Add**
 
-<details><summary>Screenshot 10.2</summary><img src="images/2018-12-14-22-39-32.png"></details><br>
+<details><summary>Screenshot 10.2</summary><img src="images/2018-12-14-22-39-32.png"></details>
 
 
 ### You have now completed the NSX-T Installation for PKS lab. Click on the dashboard to check that it matches the image below. It may have some yellow based on your lab CPU activity, but the numbers should match.
