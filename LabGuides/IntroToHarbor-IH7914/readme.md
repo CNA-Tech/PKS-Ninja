@@ -222,6 +222,9 @@ docker push harbor.corp.local/library/frontend:v1
 
 If docker push fails with "denied: requested access to the resource is denied", do "docker login harbor.corp.local" with user id=admin, and password = VMware1!, and then do docker push as above.
 
+If the cli-vm doesn't DNS resolve harbor.corp.local:
+Find the IP address (10.40.14.5) of the Harbor host from the ControlCenter (RDP desktop) DNS Mgr and add the IP address to /etc/hosts of cli-vm. After that do a docker login and then push!
+
 <details><summary>Screenshot 4.5 </summary>
 <img src="Images/2018-10-24-03-22-00.png">
 </details>
