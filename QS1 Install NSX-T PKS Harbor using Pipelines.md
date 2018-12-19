@@ -34,6 +34,9 @@ admin/VMware1!
 
 
 # 4) Install PKS using Concourse pipeline
+
+Pipeline has issues. Review Issues list upstream!
+
 Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksPipelineInstall-IN2456
 
 # 5) Install Harbor
