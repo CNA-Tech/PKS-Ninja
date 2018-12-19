@@ -48,6 +48,15 @@ App image can be downloaded from Harbor if it was added during setup, or from Gi
 
 Harbor install lab didn't add Planerspotter.  Add using the following steps
 
+Download from Git, and build image.
+
+Docker tag it, Docker push to harbor.
+
+cli-vm may not DNS resolve harbor.corp.local  
+Find the IP address (10.40.14.5) of the harbor host from the ControlCenter (RDP desktop) DNS Mgr and add the IP address to /etc/hosts of cli-vm.  After that do a docker login and then push!
+
+
+
 
 
 2) From Git:
