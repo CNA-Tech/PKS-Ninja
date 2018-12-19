@@ -55,7 +55,7 @@ Docker tag it, Docker push to harbor.
 cli-vm may not DNS resolve harbor.corp.local  
 Find the IP address (10.40.14.5) of the harbor host from the ControlCenter (RDP desktop) DNS Mgr and add the IP address to /etc/hosts of cli-vm.  After that do a docker login and then push!
 
-
+Details Lab: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHarbor-IH7914
 
 
 
