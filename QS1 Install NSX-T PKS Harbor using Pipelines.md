@@ -57,6 +57,8 @@ Install OpsMan Root Cert on Bosh for PKS nodes <> Harbor comms.
   Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHarbor-IH7914
   
   
-  
+Add Harbor cert to cli-vm for comms
+
+
 
 See Guide #2 to setup cluster and deploy apps
