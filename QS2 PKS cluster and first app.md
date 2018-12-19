@@ -40,4 +40,15 @@ For detsils see lab guide:
 
 Follow https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610
 
-# 3. Deploy first app
+# 3. Deploy Planespotter
+
+App image can be downloaded from Harbor if it was added during setup, or from Git.
+
+1) Harbor:
+
+Harbor install lab didn't add Planerspotter.  Add using the following steps
+
+
+
+2) From Git:
+
