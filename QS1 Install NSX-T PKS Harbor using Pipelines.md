@@ -44,4 +44,19 @@ Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborPip
 
 Harbor login: admin/VMware1!
 
+# 6) Setup Harbor
+
+Create a new project called "trusted", Configuration Select: Enable..Prevent..Automatically..
+
+On Projects->Library -> Push Image, note commands to tag and push from docker.
+
+Install OpsMan Root Cert on Bosh for PKS nodes <> Harbor comms.
+
+
+
+  Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHarbor-IH7914
+  
+  
+  
+
 See Guide #2 to setup cluster and deploy apps
