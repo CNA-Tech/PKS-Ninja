@@ -5,20 +5,24 @@
 
 ## Overview of App
 
-Now that we have a Kubernetes cluster, let's look at the magic of Kubernetes by deploying an application. For this exercise we will be using an app called 'planespotter' developed by the very talented @yfauser [here](https://github.com/yfauser/planespotter). Planespotter essentially lets you query Aircraft data from the FAA Registry. It has the following components
+
+Now that we have a Kubernetes cluster, let's look at the magic of Kubernetes by deploying an application. For this exercise we will be using an app called 'planespotter' developed by the very talented @yfauser [here](https://github.com/yfauser/planespotter). Planespotter essentially lets you query Aircraft data from FAA. It has the following components
+
 
 1. Front-end: User interface to take queries and showcase results
 2. API App server: to retrieve data from DB
 3. MySQL DB: Stores Aircraft registration data from FAA
 4. Redis-server: Memory cache server to fetch data of Aircrafts currently airborne
 
-Explore the YAML files that will be used for the deployments (Located in ~/planespotter/kubernetes). For example look at the front-end deployment YAML file to see how many pods and replicas the deployment YAML has specified. The deployment YAML for planespotter-frontend has specified 2 replica sets, hence post deployment you should see two pods deployed for the frontend app. 
+## Explore the YAML files that will be used for the deployments. For example look at the front-end deployment YAML file to see how many pods and replicas the deployment YAML has specified.
 
-Similarly, take a note of the labels the frontend service has been allocated. These labels will be used to built the frontend loadbalancer when we expose the app. Kubernetes will understand which pods to route the incoming traffic for the front-end loadbalancer. The traffic is routed via pod labels, hence there is no need to configure IP addresses, host names etc.
+The deployment YAML for planespotter-frontend has specified 2 replica sets, hence post deployment you should see two pods deployed for the frontend app. Similarly, take a note of the labels the frontend service has been allocated. These labels will be used to built the frontend loadbalancer when we expose the app. Kubernetes will understand which pods to route the incoming traffic for the front-end loadbalancer. The traffic is routed via pod labels, hence there is no need to mess with IP addresses, host names etc!
 
-With Kubernetes, each component needed for the app is defined in the deployment YAML. The deployment YAML identifies the base container image , the dependencies needed from the infrastructure etc. The yaml files also create an API service that frontends the component-pod.
+Go ahead, take a look at the planespotter deployment YAML here! https://github.com/Boskey/planespotter/blob/master/kubernetes/frontend-deployment_all_k8s.yaml
 
-In the Intro to Harbor lab, we modified one of the manifests (.yaml file) to pull an image from our private Harbor registry.If you haven't completed the Intro to Harbor lab, all images will be pulled from the remote registry.
+With Kubernetes, each component needed for the app is defined in the deployment YAML. The deployment YAML identifies the base container image , the dependencies needed from the infrastructure etc. The yaml files also creates an API service that frontends the component-pod.
+
+In the Intro to Harbor lab, we modified one of the manifests (.yaml file) to pull an image from our private Harbor registry.If you haven't completes the Intro to Harbor lab, all images will be pulled from the remote registry.
 
 ## Overview of Steps
 
@@ -27,15 +31,16 @@ In the Intro to Harbor lab, we modified one of the manifests (.yaml file) to pul
 - [Step 3: Publish the Planespotter app to expose it to the outside world](#step-3-publish-the-planespotter-app-to-expose-it-to-the-outside-world)
 - [Step 4: Understanding how Kubernetes Maintains state by looking at an example of ReplicaSets.](#step-4-understanding-how-kubernetes-maintains-state-by-looking-at-an-example-of-replicasets)
 
--------------
-_If you've completed the Intro to Intro to Harbor lab, you'll already have the Planespotter repo cloned locally; If you haven't, you will need to clone it. Follow the directions below from the `cli-vm` to clone the repo for this lab:_
+--------------
+
+## Step 1: Configure K8s Cluster for App Deployment
+
+_If you've completed the Intro to Harbor lab, you'll already have the Planespotter repo cloned locally; If you haven't,  you will need to clone it. Follow the directions below from the `cli-vm` to clone the repo for this lab:_
 
 - `cd ~`
 - `git clone https://github.com/yfauser/planespotter.git`
 
---------------
-
-## Step 1: Configure K8s Cluster for App Deployment
+<br>
 
 1.1 Create namespace "planespotter" and set the namespace as your default
 
@@ -54,7 +59,7 @@ _If you've completed the Intro to Intro to Harbor lab, you'll already have the P
 
 - `kubectl create -f ~/planespotter/kubernetes/mysql_claim.yaml`
 
-_The above commands will create a storage class and generate a persistent volume claim needed to store data for the MySQl server , this claim will generate a 2 GB volume. Explore the YAML files to see what will be claimed, the volume type, the amount of storage needed etc._
+_The above commands will create a storage class and generate a persistent volume claim needed to store data for the MySQl server , this claim will generate a 2 GB volume. Explore the YAML files to see what will be claimed, the volume type, the amount of storage needed etc. _
 
 1.4 Verify the persistent volume has been generated.
  
@@ -95,9 +100,8 @@ The planespotter app has been deployed with micro-services created for each sub-
 
 3.1 Expose the planespotter-frontend with the following command
 
-```
-kubectl expose deployment planespotter-frontend \
---name=planespotter-frontend-lb --port=80 --target-port=80 --type=LoadBalancer --namespace=planespotter
+```bash
+kubectl expose deployment planespotter-frontend --name=planespotter-frontend-lb --port=80 --target-port=80 --type=LoadBalancer --namespace=planespotter
 ```
 
 3.2 Check the external URL/IP address assigned to the service (make note of the first IP addres under External-IP).
