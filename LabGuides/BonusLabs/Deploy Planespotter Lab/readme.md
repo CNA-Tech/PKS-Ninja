@@ -5,7 +5,9 @@
 
 ## Overview of App
 
+
 Now that we have a Kubernetes cluster, let's look at the magic of Kubernetes by deploying an application. For this exercise we will be using an app called 'planespotter' developed by the very talented @yfauser [here](https://github.com/yfauser/planespotter). Planespotter essentially lets you query Aircraft data from FAA. It has the following components
+
 
 1. Front-end: User interface to take queries and showcase results
 2. API App server: to retrieve data from DB
@@ -98,8 +100,8 @@ The planespotter app has been deployed with micro-services created for each sub-
 
 3.1 Expose the planespotter-frontend with the following command
 
-```
-`kubectl expose deployment planespotter-frontend --name=planespotter-frontend-lb --port=80 --target-port=80 --type=LoadBalancer --namespace=planespotter`
+```bash
+kubectl expose deployment planespotter-frontend --name=planespotter-frontend-lb --port=80 --target-port=80 --type=LoadBalancer --namespace=planespotter
 ```
 
 3.2 Check the external URL/IP address assigned to the service (make note of the first IP addres under External-IP).
