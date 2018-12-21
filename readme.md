@@ -2,7 +2,7 @@
 
 Note: This site is under active development, please excuse any errors or omissions
 
-The PKS Ninja Community on Github provides free learning resources for cloud native technologies. To learn more about the community, please read the [Community Intro]() and the [Approach and Learning Philosophy]() sections below
+The PKS Ninja Community on Github provides free learning resources for cloud native technologies. To learn more about the community, please read the [Community Intro](https://github.com/CNA-Tech/PKS-Ninja#community-intro--overview) and the [Approach and Learning Philosophy](https://github.com/CNA-Tech/PKS-Ninja#approach-and-learning-philosophy) sections below
 
 For instructions to get started with accessing courses and learning materials on the site, check out the [Community Getting Started Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GettingStarted-GS3861)
 
