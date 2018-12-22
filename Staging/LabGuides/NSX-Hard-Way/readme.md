@@ -40,53 +40,53 @@ This section follows the standard documentation, which includes additional detai
 1.1 In the vSphere web client (not the HTML5 Client), From the Hosts and Clusters view, right click on the RegionA01-MGMT01 Cluster and select `Deploy OVF Template'
 
 <Details><Summary>Screenshot 1.1</Summary>
-<img src="images/2018-10-16-23-43-44.png">
+<img src="Images/2018-10-16-23-43-44.png">
 </Details>
 <br/>
 
 1.2 On the `Select Template` step, select `Local File` and Navigate to the NSXT Manager OVA file. In the reference lab, this is located on the E:/Downloads Directory
 
 <details><summary>Screenshot 1.2</summary>
-<img src="images/2018-10-16-23-48-52.png">
+<img src="Images/2018-10-16-23-48-52.png">
 </details>
 <br/>
 
 1.3 On the `Select name and location` step, use the name `nsxt-manager` and select RegionA01 Datacenter as the location
 
-<details><summary>Screenshot 1.3</summary><img src="images/2018-12-17-11-08-16.png"></details><br>
+<details><summary>Screenshot 1.3</summary><img src="Images/2018-12-17-11-08-16.png"></details><br>
 
 1.4 On the `Select a Resource` step, select RegionA01-MGMT
 
 <details><summary>Screenshot 1.4</summary>
-<img src="images/2018-10-16-23-54-05.png">
+<img src="Images/2018-10-16-23-54-05.png">
 </details>
 <br/>
 
 1.5 On the `Review Details` step, verify details and click `Next`
 
 <details><summary>Screenshot 1.5</summary>
-<img src="images/2018-10-16-23-55-58.png">
+<img src="Images/2018-10-16-23-55-58.png">
 </details>
 <br/>
 
 1.6 On the `Select Configuration` step, select a Small Configuration
 
 <details><summary>Screenshot 1.6</summary>
-<img src="images/2018-10-16-23-57-38.png">
+<img src="Images/2018-10-16-23-57-38.png">
 </details>
 <br/>
 
 1.7 On the `Select Storage` step, set the virtual disk format to `Thin Provision` and select the `RegionA01-ISCSI01-COMP01` datastore
 
 <details><summary>Screenshot 1.7</summary>
-<img src="images/2018-10-16-23-59-52.png">
+<img src="Images/2018-10-16-23-59-52.png">
 </details>
 <br/>
 
 1.8 On the `Select Networks` step, set the Destination Network to `VM-RegionA01-vDS-MGMT
 
 <details><summary>Screenshot 1.8</summary>
-<img src="images/2018-10-17-00-02-21.png">
+<img src="Images/2018-10-17-00-02-21.png">
 </details>
 <br/>
 
@@ -112,14 +112,14 @@ This section follows the standard documentation, which includes additional detai
 - All other options were left as default values
 
 <details><summary>Screenshot 1.8</summary>
-<img src="images/2018-10-17-00-12-14.png">
+<img src="Images/2018-10-17-00-12-14.png">
 </details>
 <br/>
 
 1.9 Complete the Deploy OVF Template Wizard
 
 <details><summary>Screenshot 1.9</summary>
-<img src="images/2018-10-17-00-13-27.png">
+<img src="Images/2018-10-17-00-13-27.png">
 </details>
 <br/>
 
@@ -127,14 +127,14 @@ This section follows the standard documentation, which includes additional detai
 <br/>
 
 <details><summary>Screenshot 1.10</summary>
-<img src="images/2018-10-17-00-51-10.png">
+<img src="Images/2018-10-17-00-51-10.png">
 </details>
 <br/>
 
 1.11 In the vSphere web client go to Hosts and Clusters and on the `Actions` menu for `nsxmgr-01a`, select `Edit Settings`
 
 <details><summary>Screenshot 1.11</summary>
-<img src="images/2018-10-17-02-19-08.png">
+<img src="Images/2018-10-17-02-19-08.png">
 </details>
 <br/>
 
@@ -143,7 +143,7 @@ This section follows the standard documentation, which includes additional detai
 NOTE: This step is provided to help limit the requirements for resource constrained lab environments, if your lab environment has ample hardware resources, you may skip this step
 
 <details><summary>Screenshot 1.12</summary>
-<img src="images/2018-10-17-02-22-04.png">
+<img src="Images/2018-10-17-02-22-04.png">
 </details>
 <br/>
 
@@ -152,7 +152,7 @@ NOTE: This step is provided to help limit the requirements for resource constrai
 NOTE: If the option to power on the nsxmgr-01a VM is not available, log out and then log back in to the vSphere web client
 
 <details><summary>Screenshot 1.13</summary>
-<img src="images/2018-10-17-01-23-08.png">
+<img src="Images/2018-10-17-01-23-08.png">
 </details>
 <br/>
 
@@ -168,7 +168,7 @@ Login as:
 _NOTE: On your first login, you will be prompted to accept the EULA. Accept EULA and opt out of VMware Customer Experience program._
 
 <details><summary>Screenshot 1.14</summary>
-<img src="images/2018-10-17-01-34-33.png">
+<img src="Images/2018-10-17-01-34-33.png">
 </details>
 <br/>
 
@@ -179,7 +179,7 @@ In sthis step, you create a connection between the NSX manager and your vCenter.
 
  2.1 From NSX Manager, click on **Fabric** -> **Compute Manager**
 
-<details><summary>Screenshot 2.1</summary><img src="images/2018-12-16-16-58-11.png"></details><br>
+<details><summary>Screenshot 2.1</summary><img src="Images/2018-12-16-16-58-11.png"></details><br>
 
  2.2 Click on **Add** and Configure the New Compute Manager form with following values:
 
@@ -193,14 +193,14 @@ In sthis step, you create a connection between the NSX manager and your vCenter.
 
 _NOTE: in a production implementation, you would first copy the vCetner thumbprint and then provide it in the form to properly authenticate the intial connection._
 
-<details><summary>Screenshot 2.2.1</summary><img src="images/2018-12-13-16-15-57.png"></details>
-<details><summary>Screenshot 2.2.2</summary><img src="images/2018-12-13-16-17-18.png"></details><br>
+<details><summary>Screenshot 2.2.1</summary><img src="Images/2018-12-13-16-15-57.png"></details>
+<details><summary>Screenshot 2.2.2</summary><img src="Images/2018-12-13-16-17-18.png"></details><br>
 
 
  2.3 Click **Refresh** in the lower-left hand corner and verify the Compute Manager is `Registered` and `Up`
 
-<details><summary>Screenshot 2.3.1</summary><img src="images/2018-12-16-16-54-09.png"></details>
-<details><summary>Screenshot 2.3.2</summary><img src="images/2018-12-16-16-55-15.png"></details><br>
+<details><summary>Screenshot 2.3.1</summary><img src="Images/2018-12-16-16-54-09.png"></details>
+<details><summary>Screenshot 2.3.2</summary><img src="Images/2018-12-16-16-55-15.png"></details><br>
 
 ## Step 3: Deploy NSX Controller
 
@@ -208,7 +208,7 @@ The NSX controller is the center of the NSX overlay control plane. I a productio
 
  3.1 Click on **System** -> **Components**, and then click **Add Controllers** 
 
-<details><summary>Screenshot 3.1</summary><img src="images/2018-12-16-17-00-35.png"></details><br>
+<details><summary>Screenshot 3.1</summary><img src="Images/2018-12-16-17-00-35.png"></details><br>
 
  3.2 Enable `SSH` and `Root Access`, then complete Add Controller form with the following:
 
@@ -222,7 +222,7 @@ The NSX controller is the center of the NSX overlay control plane. I a productio
 
 (Note: Notice there is no option for Small Controller size. Leave the default of 'Mediumm', you will change it to a 'Small' config in a later step.)
 
-<details><summary>Screenshot 3.2.1</summary><img src="images/2018-12-16-16-38-45.png"></details><br>
+<details><summary>Screenshot 3.2.1</summary><img src="Images/2018-12-16-16-38-45.png"></details><br>
 
 - Host Name/FQDN: `nsxc-1`
 - Cluster: `RegionA01-MGMT01`
@@ -232,20 +232,20 @@ The NSX controller is the center of the NSX overlay control plane. I a productio
 - Management Gateway: `192.168.110.1`
 - Click **Finish**
 
-<details><summary>Screenshot 3.2.2</summary><img src="images/2018-12-16-17-06-17.png"></details><br>
+<details><summary>Screenshot 3.2.2</summary><img src="Images/2018-12-16-17-06-17.png"></details><br>
 
  3.3 Verify Management Cluster is **Stable** and Controller Cluster Connectivity is **Up**
 
  This process will take some time as the VM is built, registered, and connected with the management plane.
 
-<details><summary>Screenshot 3.3</summary><img src="images/2018-12-13-20-12-05.png"></details><br>
+<details><summary>Screenshot 3.3</summary><img src="Images/2018-12-13-20-12-05.png"></details><br>
 
 _Optional:_
 
 - On the cli-vm, create and open terminal emulator SSH sessions, as described in Screenshots 3.3.2 and 3.3.3, and execute the following commands to check control plane health 
 
-    - <details><summary>Screenshot 3.3.1</summary><img src="images/2018-12-13-20-23-33.png"></details>
-    - <details><summary>Screenshot 3.3.2</summary><img src="images/2018-12-13-20-33-16.png"></details>
+    - <details><summary>Screenshot 3.3.1</summary><img src="Images/2018-12-13-20-23-33.png"></details>
+    - <details><summary>Screenshot 3.3.2</summary><img src="Images/2018-12-13-20-33-16.png"></details>
 
 - From the Manager command line, execute the following command
     - `get management-cluster status`
@@ -254,8 +254,8 @@ _Optional:_
     - `get managers`
 - Verify that all  status indicates Active/Stable/True/Connected
 
-    - <details><summary>Screenshot 3.3.3</summary><img src="images/2018-12-13-20-36-28.png"></details>
-    - <details><summary>Screenshot 3.3.4</summary><img src="images/2018-12-13-20-37-41.png"></details><br>
+    - <details><summary>Screenshot 3.3.3</summary><img src="Images/2018-12-13-20-36-28.png"></details>
+    - <details><summary>Screenshot 3.3.4</summary><img src="Images/2018-12-13-20-37-41.png"></details><br>
 
  3.4 Resize Controller
 
@@ -266,9 +266,10 @@ _NOTE: Confirm that step 3.3 has completed before proceeding to step 3.4. This s
 - Edit the settings for the **nsxc-01a** VM
 - Set CPU: `2`
 - Set Memory: `8 GB`
+- Set Memory Reservation: `0`
 - Click **Ok** and restart the VM
 
-<details><summary>Screenshot 3.4</summary><img src="images/2018-12-15-12-58-05.png"></details><br>
+<details><summary>Screenshot 3.4</summary><img src="Images/2018-12-22-15-37-34.png"></details><br>
 
 ## Step 4: Create IP Pools
 
@@ -276,7 +277,7 @@ An IP Pool is an IP address range definition within the NSX-T IPAM construct. In
 
  4.1 Click **Inventory** -> **Groups**, and then click on **IP Pools**
 
-<details><summary>Screenshot 4.1</summary><img src="images/2018-12-16-17-13-38.png"></details><br>
+<details><summary>Screenshot 4.1</summary><img src="Images/2018-12-16-17-13-38.png"></details><br>
 
  4.2 Create the TEP IP Pool, click **Add** and complete with the following values
 
@@ -287,7 +288,7 @@ An IP Pool is an IP address range definition within the NSX-T IPAM construct. In
 - CIDR: `192.168.130.0/24`
 - Click **Add**
 
-<details><summary>Screenshot 4.2</summary><img src="images/2018-12-14-11-09-57.png"></details><br>
+<details><summary>Screenshot 4.2</summary><img src="Images/2018-12-14-11-09-57.png"></details><br>
 
  4.2 Create the k8s LB Pool, click **Add** and complete with the following values
 
@@ -305,23 +306,23 @@ Prepapting hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kern
 
  5.1 Click on **Fabirc** -> **Nodes**, and then click on **Hosts**
 
-<details><summary>Screenshot 5.1</summary><img src="images/2018-12-16-17-15-38.png"></details><br>
+<details><summary>Screenshot 5.1</summary><img src="Images/2018-12-16-17-15-38.png"></details><br>
 
  5.2 Select **vCenter-compute-manager** from the **Managed by** dropdown
 
-<details><summary>Screenshot 5.2</summary><img src="images/2018-12-16-17-16-39.png"></details><br>
+<details><summary>Screenshot 5.2</summary><img src="Images/2018-12-16-17-16-39.png"></details><br>
 
  5.3 Configure Cluster RegionA01-MGMT01
 
 - Select **RegionA01-MGMT01**
 - Click **Configure Cluster**
 
-<details><summary>Screenshot 5.3.1</summary><img src="images/2018-12-14-11-21-52.png"></details><br>
+<details><summary>Screenshot 5.3.1</summary><img src="Images/2018-12-14-11-21-52.png"></details><br>
 
 - Enable `Automatically Install NSX` and `Automatically Create Transport Node`
 - Click on **Or Create New Transport Zone**  under Transport Zone
 
-<details><summary>Screenshot 5.3.2</summary><img src="images/2018-12-14-11-24-32.png"></details><br>
+<details><summary>Screenshot 5.3.2</summary><img src="Images/2018-12-14-11-24-32.png"></details><br>
 
 - Name: `overlay-tz`
 - N-VDS Name: `hostswitch-overlay`
@@ -329,7 +330,7 @@ Prepapting hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kern
 - Traffic Type: `Overlay`
 - Click **Add**
 
-<details><summary>Screenshot 5.3.3</summary><img src="images/2018-12-14-11-27-25.png"></details><br>
+<details><summary>Screenshot 5.3.3</summary><img src="Images/2018-12-14-11-27-25.png"></details><br>
 
 - Uplink Profile: `nsx-default-uplink-hostswitch-profile`
 - Ip Assignment: `Use IP Pool`
@@ -337,14 +338,14 @@ Prepapting hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kern
 - Physical NICs: `vmnic1`
 - Click **Add**
 
-<details><summary>Screenshot 5.3.4</summary><img src="images/2018-12-14-11-29-20.png"></details><br>
+<details><summary>Screenshot 5.3.4</summary><img src="Images/2018-12-14-11-29-20.png"></details><br>
 
  5.4 Configure RegionA01-COMP01
 
 - Select **RegionA01-COMP01**
 - Click **Configure Cluster**
 
-<details><summary>Screenshot 5.4</summary><img src="images/2018-12-14-11-35-42.png"></details><br>
+<details><summary>Screenshot 5.4</summary><img src="Images/2018-12-14-11-35-42.png"></details><br>
 
 - Enable `Automatically Install NSX` and `Automatically Create Transport Node`
 - Transport Zone: `overlay-tz`
@@ -368,20 +369,20 @@ An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networkin
 - Make sure you selected 'Large' size
 - Click on **Next**
 
-<details><summary>Screenshot 6.1.1</summary><img src="images/2018-12-16-17-32-59.png"></details><br>
+<details><summary>Screenshot 6.1.1</summary><img src="Images/2018-12-16-17-32-59.png"></details><br>
 
 - CLI Password: `VMware1!`
 - System Root Password: `VMware1!`
 - Click **Next**
 
-<details><summary>Screenshot 6.1.2</summary><img src="images/2018-12-13-21-40-15.png"></details><br>
+<details><summary>Screenshot 6.1.2</summary><img src="Images/2018-12-13-21-40-15.png"></details><br>
 
 - Compute Manager: `vCenter-compute-manager`
 - Cluster: `RegionA01-MGMT01`
 - Datastore: `RegionA01-ISCSI01-COMP01`
 - Click **Next**
 
-<details><summary>Screenshot 6.1.3</summary><img src="images/2018-12-17-12-31-59.png"></details><br>
+<details><summary>Screenshot 6.1.3</summary><img src="Images/2018-12-17-12-31-59.png"></details><br>
 
 - Assignment: `Static`
 - Management IP: `192.168.110.91/24`
@@ -393,17 +394,18 @@ An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networkin
     - `Transport-RegionA01-vDS-MGMT`
 - Clcik **Finish**
 
-<details><summary>Screenshot 6.1.4</summary><img src="images/2018-12-14-12-14-48.png"></details><br>
+<details><summary>Screenshot 6.1.4</summary><img src="Images/2018-12-14-12-14-48.png"></details><br>
 
  6.2 Monitor deployment status until **Deployment Status** shows **Node Ready** and **Manager Connectivity  Up**. 
  
  You may need to hit the **Refresh** link in the lower-left corner and it may take a while to complete. Controller connectivity will not show Up until we complete a future configuration.
 
-<details><summary>Screenshot 6.3</summary><img src="images/2018-12-15-13-52-12.png"></details><br>
+<details><summary>Screenshot 6.3</summary><img src="Images/2018-12-15-13-52-12.png"></details><br>
 
- 6.3 Verify that the edge vm has been created and powered on in vCenter web client
+ 6.3 Verify that the edge vm has been created and powered on in vCenter web client and that it is showing as **Node Ready** and **Up** in NSX Manager UI
 
-<details><summary>Screenshot 6.3</summary><img src="images/2018-12-16-17-34-16.png"></details><br>
+<details><summary>Screenshot 6.3.1</summary><img src="Images/2018-12-16-17-34-16.png"></details>
+<details><summary>Screenshot 6.3.2</summary><img src="Images/2018-12-22-15-52-45.png"></details><br>
 
 ## Step 7: Create Edge Transport Node
 
@@ -418,7 +420,7 @@ An NSX Edge Transport Node is the configuration of an edge with an existing tran
 
 _NOTE: If the 'Configure as Transport Node' menu item is not active, wait a few minutes and try again._
 
-<details><summary>Screenshot 7.1</summary><img src="images/2018-12-17-12-42-44.png"></details><br>
+<details><summary>Screenshot 7.1</summary><img src="Images/2018-12-17-12-42-44.png"></details><br>
 
 7.2 Complete the Transport Node as follows
 
@@ -426,7 +428,7 @@ _NOTE: This conifguration step is a common source of confusion when first learni
 
 - Click on **Create New Transport Zone** 
 
-<details><summary>Screenshot 7.2.1</summary><img src="images/2018-12-15-14-01-41.png"></details><br>
+<details><summary>Screenshot 7.2.1</summary><img src="Images/2018-12-15-14-01-41.png"></details><br>
 
 - Name: `vlan-tz`
 - N-VDS Name: `hostswitch-vlan`
@@ -434,15 +436,16 @@ _NOTE: This conifguration step is a common source of confusion when first learni
 - Traffic Type: `VLAN`
 - CLick **Add**
 
-<details><summary>Screenshot 7.2.2</summary><img src="images/2018-12-14-12-37-38.png"></details><br>
+<details><summary>Screenshot 7.2.2</summary><img src="Images/2018-12-14-12-37-38.png"></details><br>
 
 - From the **General** tab
 - Name: `edge-tn-1`
 - Select `overlay-tz` in **Available**
 - Click on the `>` to move vlan-tz to **Selected**
 - Make sure that both transport zones are selected as shown in screenshot 7.2.3
+- **Do NOT click on `Add`
 
-<details><summary>Screenshot 7.2.3</summary><img src="images/2018-12-14-12-40-22.png"></details><br>
+<details><summary>Screenshot 7.2.3</summary><img src="Images/2018-12-14-12-40-22.png"></details><br>
 
 - Click on **N-VDS** tab 
 - Edge Switch Name: `hostswith-vlan`
@@ -450,7 +453,7 @@ _NOTE: This conifguration step is a common source of confusion when first learni
 - Virtual NICs: `fp-eth0`
 - Click **Add N-VDS**
 
-<details><summary>Screenshot 7.2.4</summary><img src="images/2018-12-14-12-45-21.png"></details><br>
+<details><summary>Screenshot 7.2.4</summary><img src="Images/2018-12-14-12-45-21.png"></details><br>
 
 - Edge Switch Name: `hostswitch-overlay`
 - Uplink Profile: `nsx-default-edge-vm-uplink-hostswitch-profile`
@@ -459,7 +462,7 @@ _NOTE: This conifguration step is a common source of confusion when first learni
 - Virtual NICs: `fp-eth1`
 - Click **Add**
 
-<details><summary>Screenshot 7.2.5</summary><img src="images/2018-12-14-12-48-26.png"></details><br>
+<details><summary>Screenshot 7.2.5</summary><img src="Images/2018-12-14-12-48-26.png"></details><br>
 
  7.3 Add an Edge Cluster
 
@@ -471,11 +474,11 @@ _NOTE: This conifguration step is a common source of confusion when first learni
 - Select `edge-tn-1` from **Available** and click on ``>`` to move it to **Selected**
 - Click **Add**
 
-<details><summary>Screenshot 7.3</summary><img src="images/2018-12-14-12-52-40.png"></details><br>
+<details><summary>Screenshot 7.3</summary><img src="Images/2018-12-14-12-52-40.png"></details><br>
 
  7.4 Click on **Transport Nodes** and verify edge-tn-1 status is **Success** and **Up**
 
-<details><summary>Screenshot 7.6</summary><img src="images/2018-12-14-12-54-08.png"></details><br>
+<details><summary>Screenshot 7.6</summary><img src="Images/2018-12-14-12-54-08.png"></details><br>
 
 
 ## Step 8: Create Switches and Routers
@@ -486,15 +489,15 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 
 - Click on **Networking** -> **Switching**
 
-<details><summary>Screenshot 8.1.1</summary><img src="images/2018-12-16-17-59-04.png"></details><br>
+<details><summary>Screenshot 8.1.1</summary><img src="Images/2018-12-16-17-59-04.png"></details><br>
 
 - Click on **Add**
 - Name: `uplink-vlan-ls`
 - Transport Zone: `vlan-tz`
-- VLAN: `0`
+- VLAN: `0` _(Press [Enter] key after input to store it)_
 - Click on **Add**
 
-<details><summary>Screenshot 8.1.2</summary><img src="images/2018-12-14-20-03-39.png"></details><br>
+<details><summary>Screenshot 8.1.2</summary><img src="Images/2018-12-14-20-03-39.png"></details><br>
 
  8.2 Create PKS Management Switch
 
@@ -503,7 +506,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 - Transport Zone: `overlay-tz`
 - Click on **Add**
 
-<details><summary>Screenshot 8.2</summary><img src="images/2018-12-15-14-56-24.png"></details><br>
+<details><summary>Screenshot 8.2</summary><img src="Images/2018-12-15-14-56-24.png"></details><br>
 
  8.3 Create PKS Compute Switch
 
@@ -512,15 +515,15 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 - Transport Zone: `overlay-tz`
 - Click on **Add**
 
-<details><summary>Screenshot 8.3</summary><img src="images/2018-12-15-14-57-10.png"></details><br>
+<details><summary>Screenshot 8.3</summary><img src="Images/2018-12-15-14-57-10.png"></details><br>
 
  8.4 Create T0 Router
 
 - Click on **Networking** -> **Routers**, and then click on **Add** -> **T0 Router**
 
-<details><summary>Screenshot 8.4.1</summary><img src="images/2018-12-14-20-17-20.png"></details><br>
+<details><summary>Screenshot 8.4.1</summary><img src="Images/2018-12-14-20-17-20.png"></details><br>
 
-    Be sure to configure HA Mode as `Active-Standby
+    Be sure to configure HA Mode as `Active-Standby'
 
 - Name: `t0-pks`
 - Edge Cluster: `edge-cluster-1`
@@ -528,7 +531,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 - Failover Mode: `Non-Preemptive`
 - Click **Add**
 
-<details><summary>Screenshot 8.4.2</summary><img src="images/2018-12-15-15-09-20.png"></details><br>
+<details><summary>Screenshot 8.4.2</summary><img src="Images/2018-12-15-15-09-20.png"></details><br>
 
  8.5 Create PKS Managent T1 Router
 
@@ -539,7 +542,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 - Edge Cluster Members: `edge-tn-1`
 - Click **Add**
 
-<details><summary>Screenshot 8.5</summary><img src="images/2018-12-15-15-11-39.png"></details><br>
+<details><summary>Screenshot 8.5</summary><img src="Images/2018-12-15-15-11-39.png"></details><br>
 
  8.6 Create PKS Compute T1 Router
 
@@ -550,17 +553,17 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 - Edge Cluster Members: `edge-tn-1`
 - Click **Add**
 
-<details><summary>Screenshot 8.6</summary><img src="images/2018-12-15-15-13-17.png"></details><br>
+<details><summary>Screenshot 8.6</summary><img src="Images/2018-12-15-15-13-17.png"></details><br>
 
  8.7 Configure T0 Router VLAN Uplink Port
 
 - Click on **t0-PKS**, and then select **Configuration** -> **Router Ports**
 
-<details><summary>Screenshot 8.7.1</summary><img src="images/2018-12-14-21-16-34.png"></details><br>
+<details><summary>Screenshot 8.7.1</summary><img src="Images/2018-12-14-21-16-34.png"></details><br>
 
 - Click **Add**
 
-<details><summary>Screenshot 8.7.2</summary><img src="images/2018-12-15-15-15-09.png"></details><br>
+<details><summary>Screenshot 8.7.2</summary><img src="Images/2018-12-15-15-15-09.png"></details><br>
 
 - Name: `t0-uplink-1`
 - Type: `Uplink`
@@ -569,21 +572,21 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 - IP Address/mask: `192.168.200.3/24`  _(NOTE: We will ping this later to check connectivity)_
 - Click **Add**
 
- <details><summary>Screenshot 8.7.3</summary><img src="images/2018-12-14-20-36-31.png"></details><br>
+ <details><summary>Screenshot 8.7.3</summary><img src="Images/2018-12-14-20-36-31.png"></details><br>
 
  8.8 Add T0 Static Route
 
 - Clcik on **Routing** -> **Static Routes**
 
-<details><summary>Screenshot 8.8.1</summary><img src="images/2018-12-16-18-05-58.png"></details><br>
+<details><summary>Screenshot 8.8.1</summary><img src="Images/2018-12-16-18-05-58.png"></details><br>
 
 - Click on **Add**
 - Network: `0.0.0.0/0`
 - Click on **Next Hops +Add**
-- Next Hop: `192.168.200.1`
+- Next Hop: `192.168.200.1` _(Make sure the input stays by pressing [Enter] after enry)_
 - Click **Add** 
 
- <details><summary>Screenshot 8.8.2</summary><img src="images/2018-12-14-20-48-34.png"></details><br>
+ <details><summary>Screenshot 8.8.2</summary><img src="Images/2018-12-14-20-48-34.png"></details><br>
 
 - From the `cli-vm`, ping the T0 uplink port address `192.168.200.3` to test connectivity
 
@@ -592,7 +595,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 - Click **Networking** -> **Routers**
 - Click on **t1-pks-service** (_Verify that the router name is now listed over 'Overview'_)
 
-<details><summary>Screenshot 8.9.1</summary><img src="images/2018-12-15-15-24-02.png"></details><br>
+<details><summary>Screenshot 8.9.1</summary><img src="Images/2018-12-15-15-24-02.png"></details><br>
 
 - Click on **Configuration** -> **Router Ports**
 - Click on **Add**
@@ -602,7 +605,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 - IP Address/mask: `172.31.2.1/24`
 - Click **Add**
 
-<details><summary>Screenshot 8.9.2</summary><img src="images/2018-12-15-15-28-05.png"></details><br>
+<details><summary>Screenshot 8.9.2</summary><img src="Images/2018-12-15-15-28-05.png"></details><br>
 
  8.10 Configure PKS Management T1 Ports and Route Advertisement
 
@@ -627,7 +630,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
     - Click `Save`
     <br>==
 
-<details><summary>Screenshot 8.11</summary><img src="images/2018-12-15-15-36-08.png"></details><br>
+<details><summary>Screenshot 8.11</summary><img src="Images/2018-12-15-15-36-08.png"></details><br>
 
 - Repeat step 8.11 for router `t1-pks-service`
 
@@ -650,11 +653,11 @@ In this step, you create NAT rules to map addresses to/from the PKS and k8s netw
 
 _(NOTE: Leaving an entry blank is the method to set it as **Any**)_
 
-<details><summary>Screenshot 9.1</summary><img src="images/2018-12-14-22-57-47.png"></details><br>
+<details><summary>Screenshot 9.1</summary><img src="Images/2018-12-14-22-57-47.png"></details><br>
 
 9.2 Repeat 9.1 steps to complete the remaining rules in Screenshot 9.2
 
-<details><summary>Screenshot 9.2</summary><img src="images/2018-12-14-22-54-37.png"></details><br>
+<details><summary>Screenshot 9.2</summary><img src="Images/2018-12-14-22-54-37.png"></details><br>
 
 
 ## Step 10: Create IP Blocks for PKS Components
@@ -668,7 +671,7 @@ IP Blocks are another construct to define IP address ranges. In this case, we wi
 - Name: `ip-block-nodes-deployments`
 - CIDR: `172.15.0.0/16`
 
-<details><summary>Screenshot 10.1</summary><img src="images/2018-12-14-22-36-20.png"></details><br>
+<details><summary>Screenshot 10.1</summary><img src="Images/2018-12-14-22-36-20.png"></details><br>
 
  10.2 Create Pods IP Block
 
@@ -677,7 +680,7 @@ IP Blocks are another construct to define IP address ranges. In this case, we wi
 - CIDR: `172.16.0.0/16`
 - Click **Add**
 
-<details><summary>Screenshot 10.2</summary><img src="images/2018-12-14-22-39-32.png"></details><br>
+<details><summary>Screenshot 10.2</summary><img src="Images/2018-12-14-22-39-32.png"></details><br>
 
 ## Step 11: Create NSX API Access Certificate
 
@@ -717,18 +720,15 @@ DNS.1 = 192.168.110.42
 - `export NSX_MANAGER_IP_ADDRESS=192.168.110.42`
 - `export NSX_MANAGER_COMMONNAME=192.168.110.42`
 
-<details><summary>Screenshot 11.3</summary><img src="images/2018-12-18-01-47-44.png"></details><br>
+<details><summary>Screenshot 11.3</summary><img src="Images/2018-12-18-01-47-44.png"></details><br>
 
 11.4  Paste the following command to your cli-vm command line and execute it
 
 ```
 openssl req -newkey rsa:2048 -x509 -nodes \
-
-> -keyout nsx.key -new -out nsx.crt -subj /CN=$NSX_MANAGER_COMMONNAME \
-
-> -reqexts SAN -extensions SAN -config <(cat ./nsx-cert.cnf \
-
->  <(printf "[SAN]\nsubjectAltName=DNS:$NSX_MANAGER_COMMONNAME,IP:$NSX_MANAGER_IP_ADDRESS")) -sha256 -days 365
+ -keyout nsx.key -new -out nsx.crt -subj /CN=$NSX_MANAGER_COMMONNAME \
+ -reqexts SAN -extensions SAN -config <(cat ./nsx-cert.cnf \
+ <(printf "[SAN]\nsubjectAltName=DNS:$NSX_MANAGER_COMMONNAME,IP:$NSX_MANAGER_IP_ADDRESS")) -sha256 -days 365
 ```
 
 <br>
@@ -740,15 +740,15 @@ openssl req -newkey rsa:2048 -x509 -nodes \
 - Copy the contents of `nsx.crt` to your clipboard, beginning with `'-----BEGIN CERTIFICATE'` to the end of `'END CERTIFICATE-----'`
 
 
-<details><summary>Screenshot 11.5</summary><img src="images/2018-12-18-01-14-28.png"></details><br>
+<details><summary>Screenshot 11.5</summary><img src="Images/2018-12-18-01-14-28.png"></details><br>
 
 11.6 In NSX Manager, click on **System** -> **Trust**
 
-<details><summary>Screenshot 11.6</summary><img src="images/2018-12-18-01-20-03.png"></details><br>
+<details><summary>Screenshot 11.6</summary><img src="Images/2018-12-18-01-20-03.png"></details><br>
 
 11.7 Click on **Certificates** -> **Import** -> **Import Certificate**
 
-<details><summary>Screenshot 11.7</summary><img src="images/2018-12-18-01-19-04.png"></details><br>
+<details><summary>Screenshot 11.7</summary><img src="Images/2018-12-18-01-19-04.png"></details><br>
 
 11.8 Configure the Import Certificate form as follows
 
@@ -758,23 +758,19 @@ openssl req -newkey rsa:2048 -x509 -nodes \
 - Password: `VMware1!`
 - Click **Import**
 
-<details><summary>Screenshot 11.8</summary><img src="images/2018-12-18-01-26-30.png"></details><br>
+<details><summary>Screenshot 11.8</summary><img src="Images/2018-12-18-01-26-30.png"></details><br>
 
-11.9 Click on the 'X' in the upper-right corner to return to the tabular list of certificates
+11.9 Click on the newly imported certificate ID and copy the value to the clipboard
 
-<details><summary>Screenshot 11.9</summary><img src="images/2018-12-18-01-36-40.png"></details><br>
+<details><summary>Screenshot 11.9</summary><img src="Images/2018-12-18-01-35-52.png"></details><br>
 
-11.10 Click on the newly imported certificate ID and copy the value to the clipboard
-
-<details><summary>Screenshot 11.10</summary><img src="images/2018-12-18-01-35-52.png"></details><br>
-
-11.11 From your cli-vm command line, export the certificate ID as a variable (Replace with your certificate ID)
+11.10 From your cli-vm command line, export the certificate ID as a variable (Replace with your certificate ID)
 
 - `export CERTIFICATE_ID=<Your Certificate ID>`
 
-<details><summary>Screenshot 11.11</summary><img src="images/2018-12-18-01-40-06.png"></details><br>
+<details><summary>Screenshot 11.10</summary><img src="Images/2018-12-18-01-40-06.png"></details><br>
 
-11.12 Execute the following command to install the certifcate for API access
+11.11 Execute the following command to install the certifcate for API access
 
 ```
 curl --insecure -u admin:'VMware1!' \
@@ -784,13 +780,9 @@ curl --insecure -u admin:'VMware1!' \
 
 <br>
 
-11.13 Refresh NSX Manager web page and accept certificate if prompted.
-
-<br>
-
 ------------------
 
 
 ### You have now completed the NSX-T Installation for PKS lab. Click on the dashboard to check that it matches the image below. It may have some yellow based on your lab CPU activity, but the numbers should match.
 
-><img src="images/2018-12-14-23-07-35.png">
+><img src="Images/2018-12-14-23-07-35.png">
