@@ -31,6 +31,8 @@ This lab follows the standard documentation, which includes additional details a
 
 NOTE: NSX Manager OVA cannot be installed via HTML5 client, so for installation labs please use the vSphere web client (Flash-based).
 
+If you intend to follow the manual NSX-T isntall with the automated pipeline for PKS, be sure to match the naming of objects/properties/configurations in this lab guide exactly.
+
 This section follows the standard documentation, which includes additional details and explanations: [NSX Manager Installation](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-A65FE3DD-C4F1-47EC-B952-DEDF1A3DD0CF.html)
 
 -----------------------
