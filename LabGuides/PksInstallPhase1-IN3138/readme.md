@@ -248,7 +248,7 @@ Note: Each of the availability zones below will have a single cluster. When you 
   - Reserved IP Ranges: 172.31.0.1-172.31.0.3 
   - DNS 192.168.110.10
   - Gateway 172.31.0.1
-  - Availability Zones: PKS-MGMT-1, PKS-MGMT-2
+  - Availability Zones: PKS-MGMT-1
 - Click `Add Network` to add a network with the following values:
   - Name: PKS-COMP
   - vSphere Network Name: ls-pks-service
@@ -314,7 +314,7 @@ Note: In the nested example lab, it takes ~30 minutes to complete the BOSH deplo
 </details>
 <br/>
 
-2.12 In the vSphere web client from the `Hosts and Clusters` view, expand the pks-mgmt-2 resource pool and you should see the BOSH vm
+2.12 In the vSphere web client from the `Hosts and Clusters` view, expand the pks-mgmt-1 resource pool and you should see the BOSH vm
 
 <details><summary>Screenshot 2.12 </summary>
 <img src="Images/2018-10-22-00-51-05.png">
