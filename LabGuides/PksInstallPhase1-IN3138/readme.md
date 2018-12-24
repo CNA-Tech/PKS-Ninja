@@ -231,11 +231,6 @@ Note: Each of the availability zones below will have a single cluster. When you 
   - IaaS Configuration: vcsa-01a
   - Cluster: RegionA01-COMP01
   - Resource Pool: pks-comp-1
-- Click `Add` to add an Availability Zone with the following values
-  - Name: PKS-MGMT-2
-  - IaaS Configuration: vcsa-01a
-  - Cluster: RegionA01-COMP01
-  - Resource Pool: pks-mgmt-2
 - Click Save
 
 <details><summary>Screenshot 2.5</summary>
@@ -275,7 +270,7 @@ Note: Each of the availability zones below will have a single cluster. When you 
 
 2.7 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
 
-- Singleton Availability Zone: PKS-MGMT-2
+- Singleton Availability Zone: PKS-MGMT-1
 - Network: PKS-MGMT
 - Click Save
 
