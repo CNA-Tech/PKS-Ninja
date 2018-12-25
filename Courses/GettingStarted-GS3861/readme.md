@@ -7,13 +7,13 @@ Complete the following quickstart steps to get started with the PKS-Ninja Commun
 - Step 1: Basic Linux Skills and awareness of computer operating systems and common system administration concepts typically taught in a standard introductory Linux course are needed for all students
   - Please see the [Community Foundational and Prerequisite Skills]() page for more details and links to relevant resources that can help students learn any needed foundational or prerequisite skills
 
-- Step 2: Review the [Community Welcome Message]() and the [Community Homepage](https://github.com/cna-tech/pks-ninja) to learn more about the community
+- Step 2: Review the [Community Welcome Message](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GettingStarted-GS3861#welcome-to-the-community) and the [Community Homepage](https://github.com/cna-tech/pks-ninja) to learn more about the community
 
-- Step 3: Review the [Getting in the loop]() section below and sign up for the community mailing list and slack channel
+- Step 3: Review the [Getting in the loop](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GettingStarted-GS3861#getting-in-the-loop) section below and sign up for the community mailing list and slack channel
 
 - Step 4: Follow all the steps in the [Creating your Student Folder](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/CreateStudentFolder-SF6361) Lab Guide. This is an important setup step as most community courses and lab guides will require you to use your student folder
   - This LabGuide can be completed from any computer with github access
-  - If you would like to complete this exercise from a ninja lab environment, please see the [Getting Access To a Lab Environment]() page for further instructions
+  - If you would like to complete this exercise from a ninja lab environment, please see the [Getting Access To a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) page for further instructions
 
 - Step 5: Review the [Building your Devops Workstation](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DevopsWorkstation-DW5008) lab guide to learn practical tips and tricks for optimizing your workstation/jumpbox environments, using IDE's and other common tools that will make your life easier and more productive when working with devops and cloud native platforms
 
