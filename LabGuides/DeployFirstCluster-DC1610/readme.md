@@ -21,7 +21,7 @@
 
 1.3 Create a SSH session profile for connection to the Ops Manager VM
 
-- From the control center desktop, open putty, define, save, and open a session for `ubunut@opsman.corp.local`. Login with password: `VMware1!`
+- From the control center desktop, open putty, define, save, and open a session for `ubuntu@opsman.corp.local`. Login with password: `VMware1!`
 
 <details><summary>Screenshot 1.3.1</summary><img src="images/2018-12-22-13-23-31.png"></details>
 
