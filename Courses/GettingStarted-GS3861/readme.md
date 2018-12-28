@@ -34,7 +34,7 @@ Complete the following quickstart steps to get started with the PKS-Ninja Commun
 
 The PKS Ninja Community is an active learning environment for people who work with or have interest Cloud Native Technologies
 
-The entire github site and all educational materials are implemented as a living code base, and students interact with this environment as they complete courses and exercises. This methodology offers a unique and powerful knowledge transfer benefits for new students and experiences practitioners alike.  
+The entire github site and all educational materials are implemented as a living code base, and students interact with this environment as they complete courses and exercises. This methodology offers unique and powerful knowledge transfer benefits for new students and experiences practitioners alike  
 
 All materials on the site are free to use, anyone is welcome to read through the materials or setup their own lab environment and actively work through lab exercises
 
