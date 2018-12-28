@@ -1,4 +1,4 @@
-# Lab 9 - NSX-T Pipeline Install
+# NSX-T Pipeline Install
 
 ## Overview
 
@@ -18,6 +18,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 - Docker-compose
 - Git
 - Fly
+- If you are using the PKS Ninja v10 template, you must install the [v10 template patch](https://github.com/natereid72/PKS-Ninja-Lab-Patch) before proceeding
 
 1.0 SSH to the cli-vm
 
