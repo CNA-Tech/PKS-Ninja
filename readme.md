@@ -6,6 +6,8 @@ The PKS Ninja Community on Github provides free learning resources for cloud nat
 
 For instructions to get started with accessing courses and learning materials on the site, check out the [Community Getting Started Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GettingStarted-GS3861)
 
+All content on this site is subject to the Apache 2.0 license [as detailed here](./license.md)
+
 ## Community Intro & Overview
 
 The PKS Ninja program is dedicated to building a community of students and practitioners of Cloud Native Technologies. The community seeks to provide practical educational experiences that help enrich and maximize the knowledge sharing potential for community participants and contributors
