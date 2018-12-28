@@ -6,6 +6,11 @@ The following installation guide follows the implementation of a functional NSX-
 
 The steps provided in this lab guide are intended for a lab implementation and do not necessarily align with best practices for production implementiations. While the instructions provided in this lab guide did work for the author in their lab environment, VMware and/or any contributors to this Guide provide no assurance, warranty or support for any content provided in this guide.
 
+## Prerequisites
+
+- Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
+- If you are using the PKS Ninja v10 template, you must install the [v10 template patch](https://github.com/natereid72/PKS-Ninja-Lab-Patch) before proceeding
+
 ## Installation Notes
 
 Anyone who implements any software used in this lab must provide their own licensing and ensure that their use of all software is in accordance with the software's licensing. This guide provides no access to any software licenses.
@@ -16,17 +21,23 @@ This lab follows the standard documentation, which includes additional details a
 
 ### Overview of Tasks Covered in Lab 1
 
-- [Step 1:  Deploy NSXT Manager using OVF Install Wizard](#step-1--deploy-nsxt-manager-using-ovf-install-wizard)
-- [Step 2: Add NSX Compute Manager](#step-2-add-nsx-compute-manager)
-- [Step 3: Deploy NSX Controller](#step-3-deploy-nsx-controller)
-- [Step 4: Create IP Pool](#step-4-create-ip-pool)
-- [Step 5: Prepare and Configure ESXi Hosts](#step-5-prepare-and-configure-esxi-hosts)
-- [Step 6: Deploy NSX Edge](#step-6-deploy-nsx-edge)
-- [Step 7: Create Edge Transport Node](#step-7-create-edge-transport-node)
-- [Step 8: Create Switches and Routers](#step-8-create-switches-and-routers)
-- [Step 9: Create Network Address Translation Rules](#step-9-create-network-address-translation-rules)
-- [Step 10: Create IP Blocks for PKS Components](#step-10-create-ip-blocks-for-pks-components)
-- [Step 11: Create NSX API Access Certificate](#step-11-create-nsx-api-access-certificate)
+- [NSX-T 2.3 Installation](#nsx-t-23-installation)
+  - [Overview](#overview)
+  - [Prerequisites](#prerequisites)
+  - [Installation Notes](#installation-notes)
+    - [Overview of Tasks Covered in Lab 1](#overview-of-tasks-covered-in-lab-1)
+  - [Step 1: Deploy NSXT Manager using OVF Install Wizard](#step-1-deploy-nsxt-manager-using-ovf-install-wizard)
+  - [Step 2: Add NSX Compute Manager](#step-2-add-nsx-compute-manager)
+  - [Step 3: Deploy NSX Controller](#step-3-deploy-nsx-controller)
+  - [Step 4: Create IP Pools](#step-4-create-ip-pools)
+  - [Step 5: Prepare and Configure ESXi Hosts](#step-5-prepare-and-configure-esxi-hosts)
+  - [Step 6: Deploy NSX Edge](#step-6-deploy-nsx-edge)
+  - [Step 7: Create Edge Transport Node](#step-7-create-edge-transport-node)
+  - [Step 8: Create Switches and Routers](#step-8-create-switches-and-routers)
+  - [Step 9: Create Network Address Translation Rules](#step-9-create-network-address-translation-rules)
+  - [Step 10: Create IP Blocks for PKS Components](#step-10-create-ip-blocks-for-pks-components)
+  - [Step 11: Create NSX API Access Certificate](#step-11-create-nsx-api-access-certificate)
+    - [You have now completed the NSX-T Installation for PKS lab. Click on the dashboard to check that it matches the image below. It may have some yellow based on your lab CPU activity, but the numbers should match.](#you-have-now-completed-the-nsx-t-installation-for-pks-lab-click-on-the-dashboard-to-check-that-it-matches-the-image-below-it-may-have-some-yellow-based-on-your-lab-cpu-activity-but-the-numbers-should-match)
 
 
 NOTE: NSX Manager OVA cannot be installed via HTML5 client, so for installation labs please use the vSphere web client (Flash-based).

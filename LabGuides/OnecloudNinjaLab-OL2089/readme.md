@@ -2,7 +2,7 @@
 
 **Onecloud is available to VMware Employees only, please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) for lab access options for non VMware employees**
 
-PKS Ninja vApp Templates are available in the Global Field Enablement catalogs and is currently accessible on the NASA, EMEA and APAC Onecloud Sandbox environments
+The PKS Ninja vApp Template is available in the Global Field Enablement catalogs and is currently accessible on the NASA, EMEA and APAC Onecloud Sandbox environments
 
 ## Instructions
 
@@ -72,3 +72,14 @@ PKS Ninja vApp Templates are available in the Global Field Enablement catalogs a
 <img src="Images/2018-12-24-17-41-17.png">
 </details>
 <br/>
+
+1.8 When Using the PKS Ninja v10 template, you must run a script to make some minor updates to the lab environment before beginning any lab guides. The following steps must be completed each time you load a new instance of the Ninja v10 template
+
+You can run this script after deploying your v10 lab template, to fix the DNS client issue and the PKS pipeline issue.
+
+1.8.1 From cli-vm, git clone https://github.com/natereid72/PKS-Ninja-Lab-Patch.git
+
+1.8.2 As [per the readme](https://github.com/natereid72/PKS-Ninja-Lab-Patch), execute the shell script (Execute source cc-p1.sh at the command line on cli-vm)
+
+1.8.3 then follow lab guides as normal
+No need to copy or edit files this way. Just run the script and v10 will work per the guides
