@@ -62,13 +62,8 @@ PKS installation on vSphere requires NSX-T to be installed. If NSX-T is not inst
 </details>
 <br/>
 
-1.7 On the `Select networks` screen, ensure the `Destination Network` is set to `VM-RegionA01-vDS-MGMT`.
+1.7 On the `Select networks` screen, ensure the `Destination Network` is set to `VM-RegionA01-vDS-MGMT`
 
-browse networks
-<details><summary>Screenshot #.#</summary><img src="Images/2019-01-03-13-50-57.png"></details><br>
-
-Select ls-pks-mgmt
-<details><summary>Screenshot #.#</summary><img src="Images/2019-01-03-13-56-11.png"></details><br>
 Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connecting it to a different network during the `Deploy OVF Template` wizard as at the time of writing, there is a bug that prevents attachment to a logical switch. After the OVF deployment is complete, a later step will have you change the network attachment.
 
 <details><summary>Screenshot 1.7</summary>

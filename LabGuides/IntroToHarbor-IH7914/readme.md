@@ -3,11 +3,8 @@
 **Contents:**
 
 - [Step 1: Prepare Projects and Repositories]()
-- [Step 2: Install OpsMan Root Cert on BOSH for PKS/K8s <-> Harbor communications]()
-- [Step 3: Install Harbor certificate on `cli-vm`]()
-- [Step 4: Build Docker Image for Planespotter Frontend]()
-- [Step 5 Content Trust & Vulnerability Scanning]()
-- [Next Steps]()
+- [Step 2: Install Harbor certificate on `cli-vm`]()
+- [Step 3: Build Docker Image for Planespotter Frontend]()
 
 ## Overview
 
