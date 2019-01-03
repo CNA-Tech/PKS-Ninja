@@ -213,7 +213,7 @@ cat Dockerfile
 docker tag a6a227b1a503 harbor.corp.local/library/frontend:v1
 <<<<<<< HEAD
 docker login harbor.corp.local
- - User Name: Admin
+ - User Name: admin
  - Password: VMware1!
 =======
 >>>>>>> 4b83042eb5d684ff5a9895bdbb90b9dd9bc39862
