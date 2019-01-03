@@ -63,14 +63,13 @@ Get cert from OpsMan->Harbor-> Settings->Certificate. Copy SSL cert into buffer 
 
 Add the Harbor SSL cert to the Docker certs on cli-vm
 
-mkdir /etc/docker/certs.d/harbor.corp.local
+~~~ mkdir /etc/docker/certs.d/harbor.corp.local
 cd /etc/docker/certs.d/harbor.corp.local
 nano ca.crt
 Paste the certificate text into nano, save and close the file
 systemctl daemon-reload
 systemctl restart docker
-
-
+~~~
 
 
 See Guide #2 to setup cluster and deploy apps
