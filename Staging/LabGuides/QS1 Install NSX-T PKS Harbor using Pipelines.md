@@ -57,7 +57,25 @@ Install OpsMan Root Cert on Bosh for PKS nodes <> Harbor comms.
   Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHarbor-IH7914
   
   
-Add Harbor cert to cli-vm for comms
+Add Harbor cert to cli-vm for comms:
+
+Get cert from OpsMan->Harbor-> Settings->Certificate. Copy SSL cert into buffer or text editor
+
+Add the Harbor SSL cert to the Docker certs on cli-vm
+
+mkdir /etc/docker/certs.d/harbor.corp.local
+
+cd /etc/docker/certs.d/harbor.corp.local
+
+nano ca.crt
+
+# Paste the certificate text into nano, save and close the file
+
+systemctl daemon-reload
+systemctl restart docker
+
+
+
 
 
 
