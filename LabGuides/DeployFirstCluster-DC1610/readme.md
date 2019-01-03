@@ -19,13 +19,13 @@
 </details>
 <br/>
 
-1.3 Create a SSH session profile for connection to the Ops Manager VM
+1.3 Create a SSH session profile for connection to the Ops Manager VM and establish a connection with the UAA service
 
 - From the control center desktop, open putty, define, save, and open a session for `ubuntu@opsman.corp.local`. Login with password: `VMware1!`
 
 <details><summary>Screenshot 1.3.1</summary><img src="images/2018-12-22-13-23-31.png"></details><br>
 
-_NOTE: You are using the `ubuntu` username for this session. This is the defULT SSH user for opsman._
+_NOTE: You are using the `ubuntu` username for this session. This is the default SSH user for opsman._
 
  - From the OpsMan CLI, target your UAA server and request a token with the following commands. (Be sure to replace the string `LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr` with the secret that you gathered in the previous step 1.2)
 
@@ -35,9 +35,8 @@ uaac token client get admin -s LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr
 ```
 
 <details><summary>Screenshot 1.3.2 </summary>
-<img src="images/2018-10-24-05-37-12.png">
-</details>
-<br/>
+
+<img src="images/2018-10-24-05-37-12.png"></details><br/>
 
 1.4 From `OpsMan`, enter the following commands to create a UAA account and assign admin rights to new user `pks-admin`:
 
@@ -104,14 +103,15 @@ You should now understand the differences in how to configure a kubernetes manif
 
 4.1 Before proceeding, verify that your cluster has successfully deployed by entering the command `pks clusters` from `cli-vm`. If your PKS CLI session has timed out, login again using the command provided in step 2.1
 
-<details><summary>Screenshot 2.2 </summary>
+<details><summary>Screenshot 4.1 </summary>
 <img src="images/2018-10-24-07-15-44.png">
 </details>
 <br/>
 
 4.2 Pull down the login credentials for `my-cluster` with the command `pks get-credentials my-cluster`
 
-<details><summary>Screenshot 2.2 </summary>
+
+<details><summary>Screenshot 4.2 </summary>
 <img src="images/2018-10-24-07-17-19.png">
 </details>
 <br/>
