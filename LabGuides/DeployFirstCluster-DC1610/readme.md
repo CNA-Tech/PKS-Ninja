@@ -27,32 +27,26 @@
 
 _NOTE: You are using the `ubuntu` username for this session. This is the defULT SSH user for opsman._
 
-<BR>
- Target your UAA server and request a token with the following commands. Be sure to replace the string `LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr` with the secret that you gathered in the previous step 1.2
-- From the OpsMan CLI, execute the 
+ - From the OpsMan CLI, target your UAA server and request a token with the following commands. (Be sure to replace the string `LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr` with the secret that you gathered in the previous step 1.2)
 
 ```bash:
 uaac target https://pks.corp.local:8443 --skip-ssl-validation
 uaac token client get admin -s LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr
 ```
 
-<details><summary>Screenshot 1.3 </summary>
+<details><summary>Screenshot 1.3.2 </summary>
 <img src="images/2018-10-24-05-37-12.png">
 </details>
 <br/>
 
-1.4 From `cli-vm`, enter the following commands to create a UAA account and assign admin rights to new user `pks-admin`:
+1.4 From `OpsMan`, enter the following commands to create a UAA account and assign admin rights to new user `pks-admin`:
 
 ```bash:
 uaac user add pks-admin --emails pks-admin@corp.local -p VMware1!
 uaac member add pks.clusters.admin pks-admin
 ```
 
-<details><summary>Screenshot 1.4</summary><img src="images/2018-12-22-13-44-41.png"></details>
-
-That's it for creating a user accoutn with the UAAC tool. You can close the `OpsMan` session.
-
- <br>
+<details><summary>Screenshot 1.4</summary><img src="images/2018-12-22-13-44-41.png"></details><br>
 
 ## Step 2 Login to PKS CLI and Create Cluster
 
