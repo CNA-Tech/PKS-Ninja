@@ -6,7 +6,7 @@ In this guide you will add the PKS Installation Pipeline to Concourse and start 
 
 1.1 From the `cli-vm` prompt, Import the PKS pipeline using the `fly` cli command on the cli-vm.
 
-`cd ~/nsx-t-ci-pipelines/pipelines`
+`cd ~/nsx-t-ci-pipeline/pipelines`
 
 `source pks-setup.sh`
 
