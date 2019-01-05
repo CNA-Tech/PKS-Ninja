@@ -21,24 +21,17 @@ This lab follows the standard documentation, which includes additional details a
 
 ### Overview of Tasks Covered in Lab 1
 
-- [NSX-T 2.3 Installation](#nsx-t-23-installation)
-  - [Overview](#overview)
-  - [Prerequisites](#prerequisites)
-  - [Installation Notes](#installation-notes)
-    - [Overview of Tasks Covered in Lab 1](#overview-of-tasks-covered-in-lab-1)
-  - [Step 1: Deploy NSXT Manager using OVF Install Wizard](#step-1-deploy-nsxt-manager-using-ovf-install-wizard)
-  - [Step 2: Add NSX Compute Manager](#step-2-add-nsx-compute-manager)
-  - [Step 3: Deploy NSX Controller](#step-3-deploy-nsx-controller)
-  - [Step 4: Create IP Pools](#step-4-create-ip-pools)
-  - [Step 5: Prepare and Configure ESXi Hosts](#step-5-prepare-and-configure-esxi-hosts)
-  - [Step 6: Deploy NSX Edge](#step-6-deploy-nsx-edge)
-  - [Step 7: Create Edge Transport Node](#step-7-create-edge-transport-node)
-  - [Step 8: Create Switches and Routers](#step-8-create-switches-and-routers)
-  - [Step 9: Create Network Address Translation Rules](#step-9-create-network-address-translation-rules)
-  - [Step 10: Create IP Blocks for PKS Components](#step-10-create-ip-blocks-for-pks-components)
-  - [Step 11: Create NSX API Access Certificate](#step-11-create-nsx-api-access-certificate)
-    - [You have now completed the NSX-T Installation for PKS lab. Click on the dashboard to check that it matches the image below. It may have some yellow based on your lab CPU activity, but the numbers should match.](#you-have-now-completed-the-nsx-t-installation-for-pks-lab-click-on-the-dashboard-to-check-that-it-matches-the-image-below-it-may-have-some-yellow-based-on-your-lab-cpu-activity-but-the-numbers-should-match)
-
+- [Step 1:  Deploy NSXT Manager using OVF Install Wizard](#step-1--deploy-nsxt-manager-using-ovf-install-wizard)
+- [Step 2: Add NSX Compute Manager](#step-2-add-nsx-compute-manager)
+- [Step 3: Deploy NSX Controller](#step-3-deploy-nsx-controller)
+- [Step 4: Create IP Pools](#step-4-create-ip-pools)
+- [Step 5: Prepare and Configure ESXi Hosts](#step-5-prepare-and-configure-esxi-hosts)
+- [Step 6: Deploy NSX Edge](#step-6-deploy-nsx-edge)
+- [Step 7: Create Edge Transport Node](#step-7-create-edge-transport-node)
+- [Step 8: Create Switches and Routers](#step-8-create-switches-and-routers)
+- [Step 9: Create Network Address Translation Rules](#step-9-create-network-address-translation-rules)
+- [Step 10: Create IP Blocks for PKS Components](#step-10-create-ip-blocks-for-pks-components)
+- [Step 11: Create NSX API Access Certificate](#step-11-create-nsx-api-access-certificate)
 
 NOTE: NSX Manager OVA cannot be installed via HTML5 client, so for installation labs please use the vSphere web client (Flash-based).
 
