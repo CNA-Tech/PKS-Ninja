@@ -361,18 +361,38 @@ Note: In the nested example lab, it takes ~30 minutes to complete the BOSH deplo
 
 ## Step 3: Prep for PKS Install
 
-3.1 Generate NSX-T Principal Identity certificate (You will need this for PKS Intallation)
+3.1 Import the PKS Tile
 
-3.1.1 From the ControlCenter desktop, open putty and connect to `cli-vm`. Enter the following command:
+- Note: If you are not sure if your BOSH deployment has completed yet, check now to see if it is complete, using step 2.11 above if needed for reference
+  - If the deployment is complete, return to the Ops Manager homepage and proceed with the following steps
+  - If your BOSH deployment is not yet complete, leave your browser tab open to continue to monitor the deployment status and open a new tab and connect to the Ops Manager UI so that you have 2 active browser sessions. Use the 2nd Ops Manager connection to complete the following step
+
+- Log into the Ops Manager UI, Click `Import a Product`, select the Pivotal Container Service binary file. This is the final step of the phase 1 lab, when you resume with the phase 2 installation lab you will complete the PKS installation
+
+<details><summary>Screenshot 3.1.1 </summary>
+<img src="Images/2018-10-22-01-34-24.png">
+</details>
+
+<details><summary>Screenshot 3.1.2 </summary>
+<img src="Images/2018-10-22-01-27-45.png">
+</details>
+<br/>
+
+
+3.2 Generate NSX-T Principal Identity certificate for PKS authentication to NSX-T Manager
+
+- From the ControlCenter desktop, open putty and connect to `cli-vm`. Enter the following commands:
 
 ``` bash
 mkdir nsxt-pi-cert
 cd nsxt-pi-cert
 ```
 
-3.1.2 Use a text editor to create a file with the following shell script to generate the PI cert, for example `nano create_certificate.sh`. Copy the following text to the file:
+- Use a text editor to create a file with the following shell script to generate the PI cert, for example `nano create_certificate.sh`. 
 
-<details><summary>Click to expand create_certificate.sh</summary>
+- Copy the following text to the file:
+
+<details><summary>Click to expand create_certificate.sh</summary><br>
 
 ``` bash
 #!/bin/bash
@@ -422,44 +442,38 @@ curl -k -X POST \
 ```
 
 </details>
-Press `ctrl o` `enter` and then `ctrl x` to return to bash prompt
+<br>
+
+- Save the file and exit
 <br/>
 
-<details><summary>Screenshot 3.1.2</summary>
+<details><summary>Screenshot 3.2.1</summary>
 <img src="Images/2018-10-22-02-30-12.png">
 </details>
 <br/>
 
-3.1.3 Return to the bash prompt enter the command `bash create_certificate.sh` and enter the password `VMware1!` when prompted
+- From the command line, enter the command `source create_certificate.sh` and enter the password `VMware1!` when prompted
 
-<details><summary>Screenshot 3.1.3</summary>
+<details><summary>Screenshot 3.2.2</summary>
 <img src="Images/2018-10-22-02-45-20.png">
 </details>
 <br/>
 
-3.1.4 Review the contents of the NSX PI certificate and key and save or copy the contents as you will need these keys in later steps
+- Review the contents of the NSX PI certificate & key, copy them to a Windows notepad with each labeled. You will need these when configuring the PKS tile. 
 
 ``` bash
 cat pks-nsx-t-superuser.crt
 cat pks-nsx-t-superuser.key
 ```
 
-<details><summary>Screenshot 3.1.4</summary>
+<details><summary>Screenshot 3.2.3</summary>
 <img src="Images/2018-10-22-02-52-14.png">
 </details>
 <br/>
 
-3.1.5 In the NSX Manager UI, go to System > Trust to view certificates. You should now see a certificate for `pks-nsx-t-superuser`
-Login for NSX Manager UI is: admin/VMware1!
+3.3 Create and Register Principal Identity
 
-<details><summary>Screenshot 3.1.5</summary>
-<img src="Images/2018-10-22-03-42-57.png">
-</details>
-<br/>
-
-3.2 Create and Register Principal Identity
-
-3.2.1 From the `cli-vm` prompt, use a text editor to create a file with the following shell script and your certificate ID to generate the PI cert, for example `nano create_pi.sh`. _\[Do not cut and paste this script exactly, make sure to change the CERTIFICATE_ID to the id value from the create_certificate.sh output found in step 3.1.3]_
+- From the `cli-vm` prompt, use a text editor to create a file with the following shell script and your certificate ID to generate the PI cert, for example `nano create_pi.sh`. _\[Do not cut and paste this script exactly, make sure to change the CERTIFICATE_ID to the id value from the create_certificate.sh output found in step 3.1.3]_
 
 <details><summary>Click to expand create_pi.sh</summary>
 
@@ -507,45 +521,24 @@ curl -k -X GET \
 </details>
 <br/>
 
-<details><summary>Screenshot 3.2.1</summary>
+<details><summary>Screenshot 3.3.1</summary>
 <img src="Images/2018-10-22-03-15-42.png">
 </details>
 <br/>
 
-3.2.2 Return to the bash prompt and enter the command `bash create_pi.sh` and enter the password `VMware1!` when prompted. Your output should look similar to Screenshot 3.2.2 below
+- Return to the bash prompt and enter the command `bash create_pi.sh` and enter the password `VMware1!` when prompted. Your output should look similar to Screenshot 3.2.2 below
 
-<details><summary>Screenshot 3.2.2</summary>
+<details><summary>Screenshot 3.3.2</summary>
 <img src="Images/2018-10-22-03-25-06.png">
 </details>
 <br/>
 
-3.2.3 In the NSX Manager UI, go to System > Users and verify that you see a user account for `pks-nsx-t-superuser`
+- In the NSX Manager UI, go to System > Users and verify that you see a user account for `pks-nsx-t-superuser`
 Login for NSX Manager UI is: admin/VMware1!
 
-<details><summary>Screenshot 3.2.3</summary>
+<details><summary>Screenshot 3.3.3</summary>
 <img src="Images/2018-10-22-03-32-45.png">
 </details>
 <br/>
 
-3.3 Import the PKS Tile
-
-- Note: If you are not sure if your BOSH deployment has completed yet, check now to see if it is complete, using step 2.11 above if needed for reference
-  - If the deployment is complete, return to the Ops Manager homepage and proceed with the following steps
-  - If your BOSH deployment is not yet complete, leave your browser tab open to continue to monitor the deployment status and open a new tab and connect to the Ops Manager UI so that you have 2 active browser sessions. Use the 2nd Ops Manager connection to complete the following step
-
-3.3.1 Log into the Ops Manager UI, Click `Import a Product`, select the Pivotal Container Service binary file. This is the final step of the phase 1 lab, when you resume with the phase 2 installation lab you will complete the PKS installation
-
-Note: In the nested example lab, it takes ~10 minutes to import the PKS tile
-
-<details><summary>Screenshot 3.2.1.1 </summary>
-<img src="Images/2018-10-22-01-34-24.png">
-</details>
-
-<details><summary>Screenshot 3.2.1.2 </summary>
-<img src="Images/2018-10-22-01-27-45.png">
-</details>
-<br/>
-
-## Next Steps
-
-### [Please click here to proceed to PKS Installation Phase 2](LabGuides/PksInstallPhase2-IN1916/)
+**End of lab**
