@@ -3,11 +3,8 @@
 **Contents:**
 
 - [Step 1: Prepare Projects and Repositories]()
-- [Step 2: Install OpsMan Root Cert on BOSH for PKS/K8s <-> Harbor communications]()
-- [Step 3: Install Harbor certificate on `cli-vm`]()
-- [Step 4: Build Docker Image for Planespotter Frontend]()
-- [Step 5 Content Trust & Vulnerability Scanning]()
-- [Next Steps]()
+- [Step 2: Install Harbor certificate on `cli-vm`]()
+- [Step 3: Build Docker Image for Planespotter Frontend]()
 
 ## Overview
 
@@ -61,83 +58,31 @@ Login info: admin/VMware1!
 </details>
 <br/>
 
-## Step 2: Install OpsMan Root Cert on BOSH for PKS/K8s <-> Harbor communications
-
-Harbor requires clients to connect via SSL. In order for a container host to push/pull images to/from Harbor, the participants must agree on a common CA or self-signed (sometimes referred to as 'custom') root certificate as a source for trust. A root certificate is a public key certificate for encryption channel negotiation that also authenticates the identity of the remote host. It is not used for authorization purposes.
-
-For PKS deployed K8s nodes, BOSH automates the process of root certificate trust(s) configuration via its tile configured list of trusted root certificates. For non-PKS/BOSH deployed participants (e.g. Devloper worsktations, CI/CD tools, etc.), you will need to manually configure a root certificate trust.
-
-In this section you will install the Ops Manager root certificate in the BOSH director tile. Among other connections, this will enable trust between all PKS deployed K8s nodes and the Harbor registry. This is due to BOSH and Harbor registry having been deployed by Ops Manager with its root certificate configured as trusted root certificate automatically. Essentially, this allows all PKS deployed k8s nodes to establish SSL communication with all other Ops Manager deployed services.
-
-2.1 Log into the Ops Manager UI, go to `Admin > Settings > Advanced` and click `Download Root CA Cert` as shown in Screenshot 2.1
-
-<details><summary>Screenshot 2.1</summary>
-<img src="Images/2018-10-24-01-09-48.png">
-</details>
-<br/>
-
-2.2 From the ControlCenter desktop open Notepad++, select `File > Open` and select the `root_ca_certificate` from the `E:\Downloads` directory, and copy the contents of the file to the clipboard. This is the root cert that you downloaded in the previous step
-
-<details><summary>Screenshot 2.2.1</summary>
-<img src="Images/2018-10-24-01-21-06.png">
-</details>
-
-<details><summary>Screenshot 2.2.2</summary>
-<img src="Images/2018-10-24-01-12-58.png">
-</details>
-
-<details><summary>Screenshot 2.2.3</summary>
-<img src="Images/2018-10-24-01-25-24.png">
-</details>
-<br/>
-
-2.3 From the Ops Manager UI homepage click the `BOSH Director for vSphere` tile, go to the `Security` tab and paste the certificate in the `Trusted Certificates` textbox and click `Save`.
-
-<details><summary>Screenshot 2.3.1</summary>
-<img src="Images/2018-10-24-01-23-15.png">
-</details>
-
-<details><summary>Screenshot 2.3.2</summary>
-<img src="Images/2018-10-24-01-31-59.png">
-</details>
-<br/>
-
-2.4 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
-
-Note: In the nested example lab, this step took ~40 minutes to complete
-
-<details><summary>Screenshot 2.4</summary>
-<img src="Images/2018-10-22-22-22-46.png">
-</details>
-<br/>
-
-This completes the Ops Manger certificate setup for PKS/K8s <-> Harbor connections
-
-## Step 3: Install Harbor certificate on `cli-vm`
+## Step 2: Install Harbor certificate on `cli-vm`
 
 Harbor and container registries in general typically need to negotiate communication with clients other than just K8s nodes, for example, developer workstations, pipeline tools, etc. When providing certificates for external clients fpr the sole purpose of communicating with Harbor, you should use the Harbor self-signed certificate instead of the Ops Man certificate. This minimizes the distribution of the Ops Manager certificate and is just good practice. Accordingly, we will install the Harbor certificate on the cli-vm ubuntu host we will be using to manually interact with docker and Harbor in this lab
 
 Note: `cli-vm` is just a standard ubuntu jumpbox with docker, PKS CLI, Kubectl, GIT and a few other utilities installed
 
-3.1 From the Ops Manager homepage, click on the `VMware Harbor Registry` tile, go to the `Certificate` tab and copy the SSL certificate text from the top textbox
+2.1 From the Ops Manager homepage, click on the `VMware Harbor Registry` tile, go to the `Certificate` tab and copy the SSL certificate text from the top textbox
 
-<details><summary>Screenshot 3.1.1</summary>
+<details><summary>Screenshot 2.1.1</summary>
 <img src="Images/2018-10-24-01-50-50.png">
 </details>
 
-<details><summary>Screenshot 3.1.2</summary>
+<details><summary>Screenshot 2.1.2</summary>
 <img src="Images/2018-10-24-01-48-15.png">
 </details>
 <br/>
 
-3.2 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm`.
+2.2 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm`.
 
-<details><summary>Screenshot 3.2 </summary>
+<details><summary>Screenshot 2.2 </summary>
 <img src="Images/2018-10-23-03-04-55.png">
 </details>
 <br/>
 
-3.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory (create this dierectory if i doesn't already exist) and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
+2.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory (create this dierectory if i doesn't already exist) and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
 
 ```bash
 mkdir /etc/docker/certs.d/harbor.corp.local
@@ -148,75 +93,72 @@ systemctl daemon-reload
 systemctl restart docker
 ```
 
-<details><summary>Screenshot 3.3.1</summary>
+<details><summary>Screenshot 2.3.1</summary>
 <img src="Images/2018-10-24-02-12-17.png">
 </details>
 
-<details><summary>Screenshot 3.3.2</summary>
+<details><summary>Screenshot 2.3.2</summary>
 <img src="Images/2018-10-24-02-15-15.png">
 </details>
 <br/>
 
 You have now prepared `cli-vm' for secure communication with Harbor
 
-## Step 4: Build Docker Image for Planespotter Frontend
+## Step 3: Build Docker Image for Planespotter Frontend
 
-In Step 4, you will clone the planespotter repo and use the downloaded source files to build a container for the planespotter frontend app, and prepare Harbor for the planespotter app deployment you will do later in Lab 5.
+In Step 3, you will clone the planespotter repo and use the downloaded source files to build a container for the planespotter frontend app, and prepare Harbor for the planespotter app deployment you will do later in Lab 5.
 
 In this case we will only build the planespotter frontend container ourselves, as the planespotter repo already includes K8s deployment manifests configured to download pre-built containers from docker hub. While we do not have to build the containers in this case, its valuable to see the process and how to setup K8s manifests to pull from either Harbor or Docker Hub later in Lab 5
 
-4.1 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm` and wait for the bash prompt
+3.1 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm` and wait for the bash prompt
 
-<details><summary>Screenshot 4.1 </summary>
+<details><summary>Screenshot 3.1 </summary>
 <img src="Images/2018-10-23-03-04-55.png">
 </details>
 <br/>
 
-4.2 From the cli-vm prompt, clone the planespotter github repository with the following commands:
+3.2 From the cli-vm prompt, clone the planespotter github repository with the following commands:
 
 ```bash
 cd ~
 git clone https://github.com/yfauser/planespotter.git
 ```
 
-<details><summary>Screenshot 4.2</summary>
+<details><summary>Screenshot 3.2</summary>
 <img src="Images/2018-10-23-03-10-14.png">
 </details>
 <br/>
 
-4.3 View the planespotter frontend dockerfile with the following commands:
+3.3 View the planespotter frontend dockerfile with the following commands:
 
 ```bash
 cd ~/planespotter/frontend/
 cat Dockerfile
 ```
 
-<details><summary>Screenshot 4.3 </summary>
+<details><summary>Screenshot 3.3 </summary>
 <img src="Images/2018-10-24-03-06-42.png">
 </details>
 <br/>
 
-4.4 Build the planespotter frontend container image with the command `docker build .` and copy the image ID from the last line of the output to the clipboard
+3.4 Build the planespotter frontend container image with the command `docker build .` and copy the image ID from the last line of the output to the clipboard
 
-<details><summary>Screenshot 4.4.1 </summary>
+<details><summary>Screenshot 3.4.1 </summary>
 <img src="Images/2018-10-24-03-13-22.png">
 </details>
 
-<details><summary>Screenshot 4.4.2 </summary>
+<details><summary>Screenshot 3.4.2 </summary>
 <img src="Images/2018-10-24-03-17-58.png">
 </details>
 <br/>
 
-4.5 Update the image tag and push to harbor with the following commands - be sure to replace the value `a6a227b1a503` in the `docker tag` command below with the tag value you gathered in the previous step  
+3.5 Update the image tag and push to harbor with the following commands - be sure to replace the value `a6a227b1a503` in the `docker tag` command below with the tag value you gathered in the previous step  
 
 ```bash
 docker tag a6a227b1a503 harbor.corp.local/library/frontend:v1
-<<<<<<< HEAD
 docker login harbor.corp.local
  - User Name: Admin
  - Password: VMware1!
-=======
->>>>>>> 4b83042eb5d684ff5a9895bdbb90b9dd9bc39862
 docker push harbor.corp.local/library/frontend:v1
 ```
 
@@ -225,22 +167,22 @@ If docker push fails with "denied: requested access to the resource is denied", 
 If the cli-vm doesn't DNS resolve harbor.corp.local:
 Find the IP address (10.40.14.5) of the Harbor host from the ControlCenter (RDP desktop) DNS Mgr and add the IP address to /etc/hosts of cli-vm. After that do a docker login and then push!
 
-<details><summary>Screenshot 4.5 </summary>
+<details><summary>Screenshot 3.5 </summary>
 <img src="Images/2018-10-24-03-22-00.png">
 </details>
 <br/>
 
-4.6 Log into the Harbor UI and navigate to `Projects > library` and click on `library/frontend` to see the image you built and pushed to Harbor in the previous steps.
+3.6 Log into the Harbor UI and navigate to `Projects > library` and click on `library/frontend` to see the image you built and pushed to Harbor in the previous steps.
 
-<details><summary>Screenshot 4.6.1 </summary>
+<details><summary>Screenshot 3.6.1 </summary>
 <img src="Images/2018-10-24-03-27-01.png">
 </details>
 
-<details><summary>Screenshot 4.6.2 </summary>
+<details><summary>Screenshot 3.6.2 </summary>
 <img src="Images/2018-10-24-03-27-29.png">
 </details>
 
-<details><summary>Screenshot 4.6.3 </summary>
+<details><summary>Screenshot 3.6.3 </summary>
 <img src="Images/2018-10-24-03-31-17.png">
 </details>
 <br/>

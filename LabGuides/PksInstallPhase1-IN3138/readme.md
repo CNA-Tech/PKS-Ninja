@@ -62,7 +62,7 @@ PKS installation on vSphere requires NSX-T to be installed. If NSX-T is not inst
 </details>
 <br/>
 
-1.7 On the `Select networks` screen, ensure the `Destination Network` is set to `VM-RegionA01-vDS-MGMT`.
+1.7 On the `Select networks` screen, ensure the `Destination Network` is set to `VM-RegionA01-vDS-MGMT`
 
 Note: this VM will later be attached to the `ls-pks-mgmt`, however we are connecting it to a different network during the `Deploy OVF Template` wizard as at the time of writing, there is a bug that prevents attachment to a logical switch. After the OVF deployment is complete, a later step will have you change the network attachment.
 
@@ -268,55 +268,94 @@ Note: Each of the availability zones below will have a single cluster. When you 
 </details>
 <br/>
 
-2.7 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
+2.7 Install OpsMan Root Cert on BOSH for PKS/K8s <-> Harbor communications
+
+For PKS deployed nodes, BOSH automates the process of root certificate trust(s) configuration via its tile configured list of trusted root certificates. For non-PKS/BOSH deployed participants (e.g. Devloper worsktations, CI/CD tools, etc.), you will need to manually configure a root certificate trust.
+
+In this step you, install the Ops Manager root certificate in the BOSH director tile. Among other connections, this will enable trust between all PKS deployed K8s nodes and the Harbor registry. 
+
+- Log into the Ops Manager UI, go to `Admin > Settings > Advanced` and click `Download Root CA Cert` as shown in Screenshot 2.1
+
+<details><summary>Screenshot 2.7.1</summary>
+<img src="Images/2018-10-24-01-09-48.png">
+</details>
+<br/>
+
+- From the ControlCenter desktop open Notepad++, select `File > Open` and select the `root_ca_certificate` from the `E:\Downloads` directory, and copy the contents of the file to the clipboard. This is the root cert that you downloaded in the previous step
+
+<details><summary>Screenshot 2.7.2</summary>
+<img src="Images/2018-10-24-01-21-06.png">
+</details>
+
+<details><summary>Screenshot 2.7.3</summary>
+<img src="Images/2018-10-24-01-12-58.png">
+</details>
+
+<details><summary>Screenshot 2.7.4</summary>
+<img src="Images/2018-10-24-01-25-24.png">
+</details>
+<br/>
+
+- From the Ops Manager UI homepage click the `BOSH Director for vSphere` tile, go to the `Security` tab and paste the certificate in the `Trusted Certificates` textbox and click `Save`.
+
+<details><summary>Screenshot 2.7.5</summary>
+<img src="Images/2019-01-03-14-43-06.png">
+</details>
+
+<details><summary>Screenshot 2.7.6</summary>
+<img src="Images/2018-10-24-01-31-59.png">
+</details>
+<br/>
+
+2.8 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
 
 - Singleton Availability Zone: PKS-MGMT-1
 - Network: PKS-MGMT
 - Click Save
 
-<details><summary>Screenshot 2.7</summary>
+<details><summary>Screenshot 2.8</summary>
 <img src="Images/2018-10-21-23-17-12.png">
 </details>
 <br/>
 
-2.8 Continue with the Bosh Director tile configuration, select the `Resource Config` tab and change the value of the `VM Type` in the second row to `medium.disk` as shown in Screenshot 2.8
+2.9 Continue with the Bosh Director tile configuration, select the `Resource Config` tab and change the value of the `VM Type` in the second row to `medium.disk` as shown in Screenshot 2.7
 -Click Save
 
-<details><summary>Screenshot 2.8</summary>
+<details><summary>Screenshot 2.9</summary>
 <img src="Images/2018-10-22-01-12-45.png">
 </details>
 <br/>
 
-2.9 In the Ops Manager web UI, click on `Installation Dashboard` on the top menu bar and then click `Review Pending Changes`
+2.10 In the Ops Manager web UI, click on `Installation Dashboard` on the top menu bar and then click `Review Pending Changes`
 
-<details><summary>Screenshot 2.9</summary>
+<details><summary>Screenshot 2.10</summary>
 <img src="Images/2018-10-21-23-23-00.png">
 </details>
 <br/>
 
-2.10 On the `Review Pending Changes` screen, ensure that the checkbox for Bosh Director is checked and click `Apply Changes`
+2.11 On the `Review Pending Changes` screen, ensure that the checkbox for Bosh Director is checked and click `Apply Changes`
 
-<details><summary>Screenshot 2.10</summary>
+<details><summary>Screenshot 2.11</summary>
 <img src="Images/2018-10-21-23-24-52.png">
 </details>
 <br/>
 
-2.11 Review the `Applying Changes` to observe the BOSH VM deployment. This will take a while to complete. While BOSH is deploying, you can skip ahead to Step 3 and return to the `Applying Changes` screen periodically to check the status of the deployment. Once the BOSH deployment is complete, you should see a `Changes applied` popup window as shown in Screenshot 2.11.2
+2.12 Review the `Applying Changes` to observe the BOSH VM deployment. This will take a while to complete. While BOSH is deploying, you can skip ahead to Step 3 and return to the `Applying Changes` screen periodically to check the status of the deployment. Once the BOSH deployment is complete, you should see a `Changes applied` popup window as shown in Screenshot 2.11.2
 
 Note: In the nested example lab, it takes ~30 minutes to complete the BOSH deployment
 
-<details><summary>Screenshot 2.11.1 </summary>
+<details><summary>Screenshot 2.12.1 </summary>
 <img src="Images/2018-10-21-23-26-50.png">
 </details>
 
-<details><summary>Screenshot 2.11.2 </summary>
+<details><summary>Screenshot 2.12.2 </summary>
 <img src="Images/2018-10-22-00-41-06.png">
 </details>
 <br/>
 
-2.12 In the vSphere web client from the `Hosts and Clusters` view, expand the pks-mgmt-1 resource pool and you should see the BOSH vm
+2.13 In the vSphere web client from the `Hosts and Clusters` view, expand the pks-mgmt-1 resource pool and you should see the BOSH vm
 
-<details><summary>Screenshot 2.12 </summary>
+<details><summary>Screenshot 2.13 </summary>
 <img src="Images/2018-10-22-00-51-05.png">
 </details>
 
