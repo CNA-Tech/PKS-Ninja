@@ -452,14 +452,14 @@ curl -k -X POST \
 </details>
 <br/>
 
-- From the command line, enter the command `source create_certificate.sh` and enter the password `VMware1!` when prompted
+- From the command line, enter the command `source create_certificate.sh` and enter the password `VMware1!` when prompted. Open Notepad and copy the certificate ID (As highloghted in screenshot 3.2.2) to it. You will need this for step 3.3.
 
 <details><summary>Screenshot 3.2.2</summary>
 <img src="Images/2018-10-22-02-45-20.png">
 </details>
 <br/>
 
-- Review the contents of the NSX PI certificate & key, copy them to a Windows notepad with each labeled. You will need these when configuring the PKS tile. 
+- Review the contents of the NSX PI certificate & key, add them to the Notepad with each labeled. You will need these when configuring the PKS tile in phase 2.
 
 ``` bash
 cat pks-nsx-t-superuser.crt
