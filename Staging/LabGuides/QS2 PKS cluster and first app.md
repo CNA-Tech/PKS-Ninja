@@ -61,3 +61,6 @@ Find the IP address (10.40.14.5) of the harbor host from the ControlCenter (RDP 
 
 2) From Git:
 
+
+Lab: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/BonusLabs/Deploy%20Planespotter%20Lab
+

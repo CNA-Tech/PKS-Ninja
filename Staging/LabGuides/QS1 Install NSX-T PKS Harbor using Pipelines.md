@@ -13,19 +13,15 @@ Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/NsxtPipel
 
 script this to run from cli-vm:
 
+~~~
 cd concourse
-
 docker-compose up -d
-
 docker ps
-
-(verify ps results)
-
+#(verify ps results)
 cd ~/nsx-t-datacenter-ci-pipelines/pipelines
-
 source nsxt-setup.sh
-
 fly-s
+~~~
 
 http://cli-vm.corp.local:8080/teams/main/pipelines/install-nsx-t
 
@@ -50,15 +46,26 @@ Create a new project called "trusted", Configuration Select: Enable..Prevent..Au
 
 On Projects->Library -> Push Image, note commands to tag and push from docker.
 
-Install OpsMan Root Cert on Bosh for PKS nodes <> Harbor comms.
+Go to OpsMan, install OpsMan Root Cert on Bosh for PKS nodes <> Harbor comms.
 
 
 
   Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHarbor-IH7914
   
   
-Add Harbor cert to cli-vm for comms
+Add Harbor cert to cli-vm for comms:
 
+Get cert from OpsMan->Harbor-> Settings->Certificate. Copy SSL cert into buffer or text editor
+
+Add the Harbor SSL cert to the Docker certs on cli-vm
+
+~~~ mkdir /etc/docker/certs.d/harbor.corp.local
+cd /etc/docker/certs.d/harbor.corp.local
+nano ca.crt
+#Paste the certificate text into nano, save and close the file
+systemctl daemon-reload
+systemctl restart docker
+~~~
 
 
 See Guide #2 to setup cluster and deploy apps

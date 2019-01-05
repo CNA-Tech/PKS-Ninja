@@ -157,7 +157,7 @@ cat Dockerfile
 ```bash
 docker tag a6a227b1a503 harbor.corp.local/library/frontend:v1
 docker login harbor.corp.local
- - User Name: Admin
+ - User Name: admin
  - Password: VMware1!
 docker push harbor.corp.local/library/frontend:v1
 ```
