@@ -135,8 +135,8 @@ Login for NSX Manager UI is: admin/VMware1!
 
 - Container Networking Interface: NSX-T
 - NSX Manager Hostname: nsxmgr-01a.corp.local
-- NSX Manager Super User Principal Identity Certificate: Use the value you gathered in [Lab 2 Step 3.1.4] (https://github.com/CNA-Tech/PKS-Ninja/blob/master/LabGuides/Lab2-PksInstallationPhaseOne) pasting the certificate in the first box and the key in the 2nd box
-- NSX Manager CA Cert: Use the value you gathered in [Lab 2 Step 2.1](https://github.com/CNA-Tech/PKS-Ninja/blob/master/LabGuides/Lab2-PksInstallationPhaseOne)
+- NSX Manager Super User Principal Identity Certificate: Use the PI certificate values you gathered and copied to Notepad in PKS Phase 1 lab, pasting the certificate in the first box and the key in the 2nd box
+- NSX Manager CA Cert: Use the NSX CA certificate value you gathered in the PKS Phase 1 lab
 - Disable SSL certificate verification: True
 - NAT mode: True
 - Pods IP Block ID: Use the value you gathered in step 1.8.1.2 above
@@ -277,8 +277,6 @@ Leave the `Applying Changes` window open and check it periodically for status. W
 </details>
 <br/>
 
-## Next Steps
+**You have now completed the PKS installation**
 
-### Thank you for completing the Installation Phase 2 Lab!
-
-### [Please click here to proceed to Lab4: Harbor Enterprise Container Registry](/LabGuides/IntroToHarbor-IH7914/)
+***End of lab***
