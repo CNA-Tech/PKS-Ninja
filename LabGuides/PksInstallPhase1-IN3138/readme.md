@@ -159,11 +159,7 @@ Note: After clicking `Setup Authentication` it will take several minutes for the
 
 `openssl s_client -host nsxmgr-01a.corp.local -port 443 -prexit -showcerts`
 
-If the above command fails with gethostbyname failure, then use the IP address of nsxmgr-01a which is set to be  192.168.110.42. You can verify this by doing nslookup nsxmgr-01a.
-
-`openssl s_client -host 192.168.110.42 -port 443 -prexit -showcerts`
-
-Save the section of the output from `Begin Certificate` to `End Certificate` for use in the following steps, be sure to include the `---Begin Certificate---` and `---End Certificate---` header and footer
+Opwn Notepad and copy the section of the output from `Begin Certificate` to `End Certificate` for use in following steps and the PKS Phase 2 lab, be sure to include the `---Begin Certificate---` and `---End Certificate---` header and footer. Label it 'NSX CA Cert' for future reference.
 
 <details><summary>Screenshot 2.1</summary>
 <img src="Images/2018-10-21-21-43-02.png">
@@ -452,14 +448,14 @@ curl -k -X POST \
 </details>
 <br/>
 
-- From the command line, enter the command `source create_certificate.sh` and enter the password `VMware1!` when prompted. Open Notepad and copy the certificate ID (As highloghted in screenshot 3.2.2) to it. You will need this for step 3.3.
+- From the command line, enter the command `source create_certificate.sh` and enter the password `VMware1!` when prompted. Copy the certificate ID (As highloghted in screenshot 3.2.2) to your instance of Notepad. You will need this for step 3.3.
 
 <details><summary>Screenshot 3.2.2</summary>
 <img src="Images/2018-10-22-02-45-20.png">
 </details>
 <br/>
 
-- Review the contents of the NSX PI certificate & key, add them to the Notepad with each labeled. You will need these when configuring the PKS tile in phase 2.
+- Review the contents of the NSX PI certificate & key, add them to the Notepad with each labeled as PI Cert abd PI Key repspectively. You will need these when configuring the PKS tile in PKS Phase 2 lab.
 
 ``` bash
 cat pks-nsx-t-superuser.crt
