@@ -360,13 +360,13 @@ _Note: In the nested example lab, it takes ~30 minutes to complete the BOSH depl
 
 ## Step 3: Prep for PKS Install
 
-_Note: To save time, you will open another instance of Ops Manager admin console to continue to configuring the PKS Tile while Bosh continues to deploy. Leave your Bosh deployment browser tab open to continue to monitor the deployment status._
+_Note: To save time, you will open another instance of Ops Manager admin console and continue to importing the PKS Tile while Bosh continues to deploy. Leave your Bosh deployment browser tab open to continue to monitor the deployment status._
 
  3.1 Open a new browser tab and select the `Opsman` bookmark to open a second Ops Manager session
 
  <details><summary>Screenshot 3.1</summary><img src="Images/2019-01-06-16-14-55.png"></details><br>
 
-3.2 Login to the Ops Manager UI, Click `Import a Product`, select the Pivotal Container Service binary file. This is the final step of the phase 1 lab, when you resume with the phase 2 installation lab you will complete the PKS installation
+3.2 Login to the Ops Manager UI, Click `Import a Product`, select the Pivotal Container Service binary file as shown in screenshot 3.2
 
 <details><summary>Screenshot 3.2 </summary>
 <img src="Images/2018-10-22-01-34-24.png">
@@ -472,7 +472,7 @@ source create_certificate.sh
 
 <details><summary>Screenshot 3.9</summary><img src="Images/2019-01-06-16-30-32.png"></details><br>
 
-3.10 Review the contents of the NSX PI certificate & key with the below commands, add them to the Notepad++ instance with each labeled as PI Cert abd PI Key repspectively. You will need these when configuring the PKS tile in PKS Phase 2 lab.
+3.10 Review the contents of the NSX PI certificate & key with the below commands, add them to the Notepad++ instance with each labeled as PI Cert abd PI Key repspectively.
 
 ``` bash
 cat pks-nsx-t-superuser.crt
@@ -484,13 +484,13 @@ cat pks-nsx-t-superuser.key
 </details>
 <br/>
 
-3.11 Create and Register Principal Identity. From the `cli-vm` prompt, use a text editor to create a file
+3.11 Create and register the Principal Identity in NSX-T for PKS. From the `cli-vm` prompt, use a text editor to create a file
 
 ``` 
 nano create_pi.sh
 ```
 
-3.12 Expand the text below and copy the text to your file. _**Do not cut and paste this script exactly, make sure to change the CERTIFICATE_ID to the id value you copied to Notepadd++ earlier**_
+3.12 Expand the text below and copy the text to your file. _**Do not cut and paste this script exactly, make sure to change the CERTIFICATE_ID to the id value you copied to Notepadd++ and labeled `NSX PI Cert ID` earlier**_
 
 <details><summary>Click to expand create_pi.sh</summary>
 
@@ -558,7 +558,7 @@ source create_pi.sh
 
 _Note: Login for NSX Manager UI is: `admin/VMware1!`_
 
-<details><summary>Screenshot 3.13</summary>
+<details><summary>Screenshot 3.14</summary>
 <img src="Images/2018-10-22-03-32-45.png">
 </details>
 <br/>
