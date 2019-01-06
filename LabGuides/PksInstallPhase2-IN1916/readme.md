@@ -2,9 +2,8 @@
 
 **Contents:**
 
-- [Step 1: Install PKS]()
-- [Step 2: Install Harbor]()
-- [Next Steps]()
+- [Step 1: Install PKS](#step-1-install-pks)
+- [Step 2: Install Harbor](#step-2-install-harbor)
 
 ## Step 1: Install PKS
 
