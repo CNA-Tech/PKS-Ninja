@@ -42,7 +42,7 @@ Creating and cloning your fork only needs to be done one time, once you have clo
 
 You can review section 2 below, [Keeping your fork in sync and making pull request]() and use it as a reference for the steps you should do every time you prepare an update you want to pull into the official repository
 
-1.1 Open a web browser, log into your github.com account and from the same tab, navigate to the PKS Ninja Repo at [https://github.com/cna-tech/pks-ninja](https://github.com/cna-tech/pks-ninja). Click the `Fork` button on the upper right hand corner of the page as shown in the screenshot below
+1.1 Open a web browser, log into your github.com account and from the same tab, navigate to the PKS Ninja Repo at [https://github.com/CNA-Tech/Students](https://github.com/CNA-Tech/Students). Click the `Fork` button on the upper right hand corner of the page as shown in the screenshot below
 
 <details><summary>Screenshot 1.1.1</summary>
 <img src="Images/2018-12-14-01-42-40.png">
@@ -67,7 +67,7 @@ You can review section 2 below, [Keeping your fork in sync and making pull reque
 ```bash
 mkdir ~/Forked
 cd ~/Forked
-git clone https://github.com/yourGithubId/PKS-Ninja.git # replace the url with the url to your fork of the Students repo
+git clone https://github.com/yourGithubId/Students.git # replace the url with the url to your fork of the Students repo
 cd Students/
 ```
 
@@ -130,7 +130,7 @@ git push #follow the prompts to login and push any needed updates to your fork
 </details>
 <br/>
 
-2.2 If you have any additional updates to make, make them and then enter the following commands to push the additional updates to your fork
+2.2 If you have any additional updates to make to files you want in your student directory, make and save the any local file changes and then enter the following commands to push the additional updates to your fork
 
 ```bash
 git add . # Adds any files in your local clone of the repo that you have updated to staging so they get commited in the following command
