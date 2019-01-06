@@ -200,7 +200,7 @@ _Note: Leave notepad++ open, you will be adding more reference values to it for 
 - NSX Address: nsxmgr-01a.corp.local
 - NSX Username: admin
 - NSX Password: VMware1!
-- Copy and Paste the NSX-T Cert from step 2.1
+- Copy and Paste the NSX MGR Certificate from step 2.3
 - VM Folder: pks_vms
 - Template Folder: pks_templates
 - Disk path Folder: pks_disk
