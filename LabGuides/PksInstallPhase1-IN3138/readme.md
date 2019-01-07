@@ -301,25 +301,21 @@ _Note: In this step, you install the Ops Manager root certificate in the BOSH di
 </details>
 <br/>
 
-2.11 From the Ops Manager UI homepage click the `BOSH Director for vSphere` tile, go to the `Security` tab and paste the certificate in the `Trusted Certificates` textbox and click `Save`.
-
-<details><summary>Screenshot 2.11.1</summary>
-<img src="Images/2019-01-03-14-43-06.png">
-</details>
-
-<details><summary>Screenshot 2.11.2</summary>
-<img src="Images/2018-10-24-01-31-59.png">
-</details>
-<br/>
-
-2.12 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
+2.11 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
 
 - Singleton Availability Zone: PKS-MGMT-1
 - Network: PKS-MGMT
 - Click Save
 
-<details><summary>Screenshot 2.12</summary>
+<details><summary>Screenshot 2.11</summary>
 <img src="Images/2018-10-21-23-17-12.png">
+</details>
+<br/>
+2.12 Continue with the Bosh Director tile configuration, select the `Security` tab and paste the certificate in the `Trusted Certificates` textbox and click `Save`.
+
+
+<details><summary>Screenshot 2.12</summary>
+<img src="Images/2018-10-24-01-31-59.png">
 </details>
 <br/>
 
