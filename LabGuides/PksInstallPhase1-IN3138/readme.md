@@ -279,40 +279,40 @@ Note: Each of the availability zones below will have a single cluster. When you 
 </details>
 <br/>
 
-2.9 Install OpsMan Root Certificate on BOSH
-
-_Note: In this step, you install the Ops Manager root certificate in the BOSH director tile. Among other connections, this will enable trust between all PKS deployed K8s nodes and the Harbor registry._
-
-- Log into the Ops Manager UI, go to `Admin > Settings > Advanced` and click `Download Root CA Cert` as shown in Screenshot 2.9.1
-
-<details><summary>Screenshot 2.9</summary>
-<img src="Images/2018-10-24-01-09-48.png">
-</details>
-<br/>
-
-2.10 From the ControlCenter desktop Notepad++, select `File > Open` and select the `root_ca_certificate` from the `E:\Downloads` directory, and copy the contents of the file to the clipboard. 
-
-<details><summary>Screenshot 2.10.1</summary>
-<img src="Images/2018-10-24-01-12-58.png">
-</details>
-
-<details><summary>Screenshot 2.10.2</summary>
-<img src="Images/2018-10-24-01-25-24.png">
-</details>
-<br/>
-
-2.11 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
+2.9 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
 
 - Singleton Availability Zone: PKS-MGMT-1
 - Network: PKS-MGMT
 - Click Save
 
-<details><summary>Screenshot 2.11</summary>
+<details><summary>Screenshot 2.9</summary>
 <img src="Images/2018-10-21-23-17-12.png">
 </details>
 <br/>
-2.12 Continue with the Bosh Director tile configuration, select the `Security` tab and paste the certificate in the `Trusted Certificates` textbox and click `Save`.
 
+2.10 Prep OpsMan Root Certificate on BOSH
+
+_Note: In this step, you prepare to install the Ops Manager root certificate in the BOSH director tile. Among other connections, this will enable trust between all PKS deployed K8s nodes and the Harbor registry._
+
+- Log into the Ops Manager UI, go to `Admin > Settings > Advanced` and click `Download Root CA Cert` as shown in Screenshot 2.10
+
+<details><summary>Screenshot 2.10</summary>
+<img src="Images/2018-10-24-01-09-48.png">
+</details>
+<br/>
+
+2.11 From the ControlCenter desktop Notepad++, select `File > Open` and select the `root_ca_certificate` from the `E:\Downloads` directory, and copy the contents of the file to the clipboard. 
+
+<details><summary>Screenshot 2.11.1</summary>
+<img src="Images/2018-10-24-01-12-58.png">
+</details>
+
+<details><summary>Screenshot 2.11.2</summary>
+<img src="Images/2018-10-24-01-25-24.png">
+</details>
+<br/>
+
+2.12 Continue with the Bosh Director tile configuration, select the `Security` tab and paste the certificate in the `Trusted Certificates` textbox and click `Save`.
 
 <details><summary>Screenshot 2.12</summary>
 <img src="Images/2018-10-24-01-31-59.png">
