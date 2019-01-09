@@ -179,7 +179,7 @@ _Note: Leave notepad++ open, you will be adding more reference values to it for 
 </details>
 <details><summary>Screenshot 2.3.2</summary><img src="Images/2019-01-06-16-02-28.png"></details><br>
 
-2.4 Log into the Ops Manager web UI and click on the tile `BOSH Director for vSphere`
+2.4 From the Ops Manager web UI, click on the tile `BOSH Director for vSphere`
 
 <details><summary>Screenshot 2.4</summary>
 <img src="Images/2018-10-21-21-07-42.png">
@@ -231,7 +231,8 @@ _Note: Leave notepad++ open, you will be adding more reference values to it for 
 
 2.7 Continue with the Bosh Director tile configuration, select the `Create Availability Zones` tab and enter the following details:
 
-Note: Each of the availability zones below will have a single cluster. When you add an availability zone, make sure to click `Add` on the upper right side of the window and do **not** click `Add Cluster`
+_Note: Each of the availability zones below will have a single cluster. When you add an availability zone, make sure to click `Add` on the upper right side of the window and do **not** click `Add Cluster`_
+
 - Click `Add` to add an Availability Zone with the following values
   - Name: PKS-MGMT-1
   - IaaS Configuration: vcsa-01a
@@ -244,10 +245,7 @@ Note: Each of the availability zones below will have a single cluster. When you 
   - Resource Pool: pks-comp-1
 - Click `Save`
 
-<details><summary>Screenshot 2.7</summary>
-<img src="Images/2018-10-21-22-06-12.png">
-</details>
-<br/>
+<details><summary>Screenshot 2.7</summary><img src="Images/2019-01-08-19-10-12.png"></details><br>
 
 2.8 Continue with the Bosh Director tile configuration, select the `Create Networks` tab and enter the following values:
 
@@ -319,13 +317,9 @@ _Note: In this step, you prepare to install the Ops Manager root certificate in 
 </details>
 <br/>
 
-2.13 Continue with the Bosh Director tile configuration, select the `Resource Config` tab and change the value of the `VM Type` in the second row to `medium.disk` as shown in Screenshot 2.7
--Click Save
+2.13 Continue with the Bosh Director tile configuration, select the `Resource Config` tab and change the value of the `VM Type` in the second row to the third medium option `medium.disk` as shown in Screenshot 2.13, and click `Save`
 
-<details><summary>Screenshot 2.13</summary>
-<img src="Images/2018-10-22-01-12-45.png">
-</details>
-<br/>
+<details><summary>Screenshot 2.13</summary><img src="Images/2019-01-08-19-55-48.png"></details><br>
 
 2.14 In the Ops Manager web UI, click on `Installation Dashboard` on the top menu bar and then click `Review Pending Changes`
 
@@ -382,7 +376,7 @@ cd nsxt-pi-cert
 nano create_certificate.sh
 ``` 
 
-3.5 Expand the below section and copy the text to the file:
+3.5 Expand the below section and copy the text to the file _(Note: Right-click to paste while in Putty)_:
 
 <details><summary>Click to expand create_certificate.sh</summary><br>
 
@@ -457,36 +451,34 @@ source create_certificate.sh
 
 <br>
 
-3.8 Copy the certificate ID (As highlighted below in screenshot 3.8) to your instance of Notepad++. 
+3.8 Copy the certificate ID (As highlighted below in screenshot 3.8) to your instance of Notepad++ and label as `NSX PI Cert ID` 
 
-<details><summary>Screenshot 3.8</summary>
+<details><summary>Screenshot 3.8.1</summary>
 <img src="Images/2018-10-22-02-45-20.png">
 </details>
 <br/>
 
-3.9 Label the Notepad++ entry as `NSX PI Cert ID`
+<details><summary>Screenshot 3.8.2</summary><img src="Images/2019-01-06-16-30-32.png"></details><br>
 
-<details><summary>Screenshot 3.9</summary><img src="Images/2019-01-06-16-30-32.png"></details><br>
-
-3.10 Review the contents of the NSX PI certificate & key with the below commands, add them to the Notepad++ instance with each labeled as PI Cert abd PI Key repspectively.
+3.9 Review the contents of the NSX PI certificate & key with the below commands, add them to the Notepad++ instance with each labeled as PI Cert abd PI Key repspectively.
 
 ``` bash
 cat pks-nsx-t-superuser.crt
 cat pks-nsx-t-superuser.key
 ```
 
-<details><summary>Screenshot 3.10</summary>
+<details><summary>Screenshot 3.9</summary>
 <img src="Images/2018-10-22-02-52-14.png">
 </details>
 <br/>
 
-3.11 Create and register the Principal Identity in NSX-T for PKS. From the `cli-vm` prompt, use a text editor to create a file
+3.10 Create and register the Principal Identity in NSX-T for PKS. From the `cli-vm` prompt, use a text editor to create a file
 
 ``` 
 nano create_pi.sh
 ```
 
-3.12 Expand the text below and copy the text to your file. _**Do not cut and paste this script exactly, make sure to change the CERTIFICATE_ID to the id value you copied to Notepadd++ and labeled `NSX PI Cert ID` earlier**_
+3.11 Expand the text below and copy the text to your file. _**Do not cut and paste this script exactly, make sure to change the CERTIFICATE_ID to the id value you copied to Notepadd++ and labeled `NSX PI Cert ID` earlier**_
 
 <details><summary>Click to expand create_pi.sh</summary>
 
@@ -539,7 +531,7 @@ curl -k -X GET \
 </details>
 <br/>
 
-3.13 Save and exit. From the bash prompt, enter the below command. Enter the password `VMware1!` when prompted. 
+3.12 Save and exit. From the bash prompt, enter the below command. Enter the password `VMware1!` when prompted. 
 
 ```
 source create_pi.sh
@@ -550,11 +542,11 @@ source create_pi.sh
 </details>
 <br/>
 
-3.14 In the NSX Manager UI, go to `System > Users` and verify that you see a user account for `pks-nsx-t-superuser`
+3.13 In the NSX Manager UI, go to `System > Users` and verify that you see a user account for `pks-nsx-t-superuser`
 
 _Note: Login for NSX Manager UI is: `admin/VMware1!`_
 
-<details><summary>Screenshot 3.14</summary>
+<details><summary>Screenshot 3.13</summary>
 <img src="Images/2018-10-22-03-32-45.png">
 </details>
 <br/>
