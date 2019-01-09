@@ -8,7 +8,7 @@ The PKS The Hard Way course provides instructions to execute manual installation
 
 Please complete the following lab guides in the order presented to fullfil the requirements of the PKS the Hard Way course:
 
-- [NSX-T Manual Installation](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Staging/LabGuides/NSX-Hard-Way)
+- [NSX-T Manual Installation](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/NsxtManualInstall-IN1497)
 - [PKS Install Phase 1](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksInstallPhase1-IN3138)
 - [PKS Install Phase 2](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksInstallPhase2-IN1916)
 
