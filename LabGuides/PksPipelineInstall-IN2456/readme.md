@@ -33,8 +33,8 @@ In this guide you will add the PKS Installation Pipeline to Concourse and start 
 
 1.3 In the upper right-hand corner login to Concourse
 
-- Username: nsx
-- Password: vmware
+- Username: admin
+- Password: VMware1!
 
 <details><summary>Screenshot 1.3</summary>
 <img src="Images/concourse-login.png">
