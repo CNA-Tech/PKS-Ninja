@@ -52,23 +52,40 @@ uaac member add pks.clusters.admin pks-admin
 2.1 From `cli-vm`, Login to the PKS CLI with the following command:
 
 ```
-pks login -a pks.corp.local -u pks-admin -p VMware1! --skip-ssl-validation
+pks login -a pks.corp.local -u pks-admin --skip-ssl-validation
 ```
 
-<details><summary>Screenshot 2.1</summary><img src="images/2018-12-22-13-54-58.png"></details><br>
+- Password: `VMware1!`
 
-2.2 From `cli-vm`, verify there are no existing clusters and create a cluster with the following commands
+<details><summary>Screenshot 2.1</summary><img src="Images/2019-01-09-23-47-00.png"></details><br>
+
+2.2 From `cli-vm`, verify there are no existing clusters
 
 ```bash
 pks clusters
+```
+
+<details><summary>Screenshot 2.2</summary><img src="Images/2019-01-09-23-49-16.png"></details><br>
+ 
+ 2.3 Display available plans
+
+ ```
+ pks plans
+ ```
+
+ <details><summary>Screenshot 2.3</summary><img src="Images/2019-01-09-23-51-32.png"></details><br>
+ 
+ 2.4 Create a Kubernetes cluster
+
+```
 pks create-cluster my-cluster --external-hostname my-cluster.corp.local --plan small
 ```
 
-Note: It will take ~10 minutes for the cluster to deploy, you may proceed with step 3 while the cluster deployment is in progress, however do not proceed to step 4 until the cluster deployment status is `succeeded`
+_Note: It will take ~10 minutes for the cluster to deploy, you may proceed with step 3 while the cluster deployment is in progress, however do not proceed to step 4 until the cluster deployment status is `succeeded`_
 
-Also, it may be interesting for you to look at the `Tasks` menu in vCenter to observe some of the vSphere tasks that occur on cluster creation
+_Also, it may be interesting for you to look at the `Tasks` menu in vCenter to observe some of the vSphere tasks that occur on cluster creation_
 
-<details><summary>Screenshot 2.2 </summary>
+<details><summary>Screenshot 2.4 </summary>
 <img src="images/2018-10-24-06-00-15.png">
 </details>
 <br/>
@@ -77,7 +94,7 @@ Also, it may be interesting for you to look at the `Tasks` menu in vCenter to ob
 
 3.1 From `cli-vm`, use nano or another text editor to change the image pull location in the frontend deployment manifest to pull the image you, created and pushed to harbor in the Harbor Lab, from  `harbor.corp.local/library/frontend:v1`. Use the following commands to open the manifest in nano and then reference Screenshot 3.1 as needed to complete the update and save the file
 
-_Note: If you have no `/planespotter/kuberenetes/` directory, or did not complete the Harbor lab run:  `git clone https://github.com/yfauser/planespotter.git`_
+_Note: If you have no `/planespotter/kuberenetes/` directory, complete the Harbor lab_
 
 ```bash
 cd ~/planespotter/kubernetes
@@ -108,7 +125,11 @@ You should now understand the differences in how to configure a kubernetes manif
 </details>
 <br/>
 
-4.2 Pull down the login credentials for `my-cluster` with the command `pks get-credentials my-cluster`
+4.2 Pull down the kubernetes config and credentials for `my-cluster` with the command 
+
+```
+pks get-credentials my-cluster
+```
 
 
 <details><summary>Screenshot 4.2 </summary>
