@@ -57,7 +57,7 @@ pks login -a pks.corp.local -u pks-admin --skip-ssl-validation
 
 - Password: `VMware1!`
 
-<details><summary>Screenshot 2.1</summary><img src="Images/2019-01-09-23-47-00.png"></details><br>
+<details><summary>Screenshot 2.1</summary><img src="images/2019-01-09-23-47-00.png"></details><br>
 
 2.2 From `cli-vm`, verify there are no existing clusters
 
@@ -65,7 +65,7 @@ pks login -a pks.corp.local -u pks-admin --skip-ssl-validation
 pks clusters
 ```
 
-<details><summary>Screenshot 2.2</summary><img src="Images/2019-01-09-23-49-16.png"></details><br>
+<details><summary>Screenshot 2.2</summary><img src="images/2019-01-09-23-49-16.png"></details><br>
  
  2.3 Display available plans
 
@@ -73,7 +73,7 @@ pks clusters
  pks plans
  ```
 
- <details><summary>Screenshot 2.3</summary><img src="Images/2019-01-09-23-51-32.png"></details><br>
+ <details><summary>Screenshot 2.3</summary><img src="images/2019-01-09-23-51-32.png"></details><br>
  
  2.4 Create a Kubernetes cluster
 
