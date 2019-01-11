@@ -50,21 +50,21 @@ This section follows the standard documentation, which includes additional detai
 </Details>
 <br/>
 
-1.2 On the `Select Template` step, select `Local File` and Navigate to the NSXT Manager OVA file. In the reference lab, this is located on the E:/Downloads Directory
+1.2 On the `Select Template` step, select `Local File` and Navigate to the NSXT Manager OVA file, the filename should start with 'nsx-unified-appliance`. In the reference lab, this is located on the 'E:/Downloads' Directory
 
 <details><summary>Screenshot 1.2</summary>
 <img src="Images/2018-10-16-23-48-52.png">
 </details>
 <br/>
 
-1.3 On the `Select name and location` step, use the name `nsxt-manager` and select RegionA01 Datacenter as the location
+1.3 On the `Select name and location` step, use the name `nsxt-manager` and select `RegionA01` Datacenter as the location
 
 <details><summary>Screenshot 1.3</summary><img src="Images/2018-12-17-11-08-16.png"></details><br>
 
-1.4 On the `Select a Resource` step, select RegionA01-MGMT
+1.4 On the `Select a Resource` step, expand `RegionA01-MGMT01` and select the `pks-mgmt-1` resource pool
 
 <details><summary>Screenshot 1.4</summary>
-<img src="Images/2018-10-16-23-54-05.png">
+<img src="Images/2019-01-11-02-12-54.png">
 </details>
 <br/>
 
@@ -89,7 +89,7 @@ This section follows the standard documentation, which includes additional detai
 </details>
 <br/>
 
-1.8 On the `Select Networks` step, set the Destination Network to `VM-RegionA01-vDS-MGMT
+1.8 On the `Select Networks` step, set the Destination Network to `VM-RegionA01-vDS-MGMT`
 
 <details><summary>Screenshot 1.8</summary>
 <img src="Images/2018-10-17-00-02-21.png">
@@ -99,22 +99,22 @@ This section follows the standard documentation, which includes additional detai
 1.9 On the `Customize Template` step, enter the following variables:
 
 - Application
-    - System Root User Password: VMware1!
-    - CLI Admin User Password: VMware1!
-    - CLI Audit User Password: VMware1!
+  - System Root User Password: VMware1!
+  - CLI Admin User Password: VMware1!
+  - CLI Audit User Password: VMware1!
 - DNS
-    - DNS Server List: 192.168.110.10
-    - Domain Search List: corp.local
+  - DNS Server List: 192.168.110.10
+  - Domain Search List: corp.local
 - Network Properties
-    - Default Gateway: 192.168.110.1
-    - Hostname: nsxmgr-01a.corp.local
-    - Management Network IPv4 Address: 192.168.110.42
-    - Management Network Netmask: 255.255.255.0
-    - Rolename: nsx-manager
+  - Default Gateway: 192.168.110.1
+  - Hostname: nsxmgr-01a
+  - Management Network IPv4 Address: 192.168.110.42
+  - Management Network Netmask: 255.255.255.0
+  - Rolename: nsx-manager
 - Services Configuration
-    - Allow Root SSH Logins: True
-    - Enable SSH: True
-    - NTP Server: 192.168.100.1
+  - Allow Root SSH Logins: True
+  - Enable SSH: True
+  - NTP Server: 192.168.100.1
 - All other options were left as default values
 
 <details><summary>Screenshot 1.8</summary>
