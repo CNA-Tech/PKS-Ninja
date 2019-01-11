@@ -51,11 +51,11 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 
 1.4 Import the NSX pipeline using the `fly` cli command on the cli-vm.  The source script will create the `fly-s` alias used below to simplify the commands.
 
-`cd ~/nsx-t-datacenter-ci-pipelines/pipelines`
-
-`source nsxt-setup.sh`
-
-`fly-s`
+```bash
+cd ~/nsx-t-datacenter-ci-pipelines/pipelines
+source nsxt-setup.sh
+fly-s
+```
 
 - confirm the parameters file import with `y`
 
