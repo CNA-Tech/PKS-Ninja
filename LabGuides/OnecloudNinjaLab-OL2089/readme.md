@@ -73,13 +73,4 @@ The PKS Ninja vApp Template is available in the Global Field Enablement catalogs
 </details>
 <br/>
 
-1.8 When Using the PKS Ninja v10 template, you must run a script to make some minor updates to the lab environment before beginning any lab guides. The following steps must be completed each time you load a new instance of the Ninja v10 template
-
-You can run this script after deploying your v10 lab template, to fix the DNS client issue and the PKS pipeline issue.
-
-1.8.1 From cli-vm, git clone https://github.com/natereid72/PKS-Ninja-Lab-Patch.git
-
-1.8.2 As [per the readme](https://github.com/natereid72/PKS-Ninja-Lab-Patch), execute the shell script (Execute source cc-p1.sh at the command line on cli-vm)
-
-1.8.3 then follow lab guides as normal
-No need to copy or edit files this way. Just run the script and v10 will work per the guides
+1.8 You must run a script to make some minor updates to the lab environment before beginning any lab guides [per the instructions here](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Staging/Labrary/Microlabs/NinjaLabPrepScript-CI4231.md)

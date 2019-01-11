@@ -7,18 +7,14 @@ The NSX-T Pipeline was created to provide our customers a simple way to deploy N
 
 In this lab you will setup Concourse and then run a pipeline to install NSX-T
 
+## Prerequisites
+
+- Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
+- If you are using the PKS Ninja v10 template, you must install the [v10 template patch](https://github.com/natereid72/PKS-Ninja-Lab-Patch) before proceeding
+
 ## Concourse setup and NSX-T Pipeline Kickoff
 
 Concourse can be stoodup in many different ways. In this lab we will stand it up using a combination of docker images with docker-compose.
-
-### Prereq's: (Already have been installed)
-
-- Ubuntu 16.04 or later
-- Docker 18.06 or later
-- Docker-compose
-- Git
-- Fly
-- If you are using the PKS Ninja v10 template, you must install the [v10 template patch](https://github.com/natereid72/PKS-Ninja-Lab-Patch) before proceeding
 
 1.0 SSH to the cli-vm
 
