@@ -1,12 +1,14 @@
 # PKS Ninja SE Course Guide
 
-- [Introduction]()
-- [Instructions]()
-- [Sample Lab Agenda]()
+- [Introduction](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksNinjaSe-NI6310#introduction)
+- [Instructions](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksNinjaSe-NI6310#instructions)
+- [Sample Lab Agenda](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksNinjaSe-NI6310#sample-ninja-lab-agenda)
+  - [Session 1 Labs List](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksNinjaSe-NI6310#ninja-labs-part-1-agenda)
+  - [Session 2 Labs List](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksNinjaSe-NI6310#ninja-labs-part-2-agenda)
+
+**Note:** If you are a student in an in-person live Ninja class, please skip ahead to the [Sample Ninja Lab Agenda](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksNinjaSe-NI6310#sample-ninja-lab-agenda) section to find the list of lab guides for your class
 
 ## Introduction
-
-**Note:** If you are a student in an in-person live Ninja class, please skip ahead to the [Sample Ninja Lab Agenda]() section to find the list of lab guides for your class
 
 This guide is an online version of the PKS Ninja Course for SE's, which is a VMware internal class offering. While the live class offering is restricted, the lab guides used in the program are available freely on this site. In addition to the lab guides used in the live class, the PKS Ninja online community offers many additional regularly updated courses and lab guides to support many additional topics and the continuing education of community participants
 
@@ -61,7 +63,7 @@ The Live Ninja course includes a combination of lecture and lab sessions, howeve
 
 - Load a fresh copy of the PKS Ninja lab template
 - Complete the following lab guides:
-    - [PKS the Easy Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheEasyWay-PE6650)
+  - [PKS the Easy Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheEasyWay-PE6650)
   - [Introduction to GIT](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToGit-IG9099)
   - [Intro to Helm](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHelm-HE4490)
   - [Deploy More Apps Labs](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployMoreApps-DA6482)
