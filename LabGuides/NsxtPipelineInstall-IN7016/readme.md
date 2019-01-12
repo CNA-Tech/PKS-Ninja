@@ -48,6 +48,7 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 <details><summary>Screenshot 1.3</summary>
 <img src="Images/docker-ps.png">
 </details>
+<br>
 
 1.4 Import the NSX pipeline using the `fly` cli command on the cli-vm.  The source script will create the `fly-s` alias used below to simplify the commands.
 
@@ -80,10 +81,6 @@ fly-s
 
 `http://cli-vm.corp.local:8080`
 
-<details><summary>Screenshot 1.5</summary>
-<img src="Images/pipeline-ui.png">
-</details>
-<br>
 
 1.6 In the upper right-hand corner login to Concourse
 
