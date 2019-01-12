@@ -81,7 +81,6 @@ fly-s
 
 `http://cli-vm.corp.local:8080`
 
-
 1.6 In the upper right-hand corner login to Concourse
 
 - Username: admin

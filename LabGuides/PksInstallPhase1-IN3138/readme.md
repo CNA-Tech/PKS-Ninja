@@ -2,11 +2,12 @@
 
 **Contents:**
 
-- [Lab Access Instructions](#lab-access-instructions)
-- [Step 1: Deploy Ops Manager](#step-1-deploy-ops-manager)
-- [Step 2: Deploy BOSH](#step-2-deploy-bosh)
-- [Step 3: Prep for PKS Install](#step-3-prep-for-pks-install)
-- [Next Steps](#next-steps)
+- [Lab PKS Installation Phase 1](#lab-pks-installation-phase-1)
+  - [Lab Access Instructions](#lab-access-instructions)
+  - [Step 1: Deploy Ops Manager](#step-1-deploy-ops-manager)
+  - [Step 2: Deploy BOSH](#step-2-deploy-bosh)
+  - [Step 3: Prep for PKS Install](#step-3-prep-for-pks-install)
+  - [Next Steps](#next-steps)
 
 ## Lab Access Instructions
 
@@ -160,7 +161,7 @@ _Note: After clicking `Setup Authentication` it will take several minutes for th
 
 2.2  At the Bash prompt enter the following command:
 
-```
+```bash
 openssl s_client -host nsxmgr-01a.corp.local -port 443 -prexit -showcerts
 ```
 
@@ -186,6 +187,7 @@ _Note: Leave notepad++ open, you will be adding more reference values to it for 
 <br/>
 
 2.5 On the `vCenter Configuration` page, enter the following values and click `Save`:
+
 - Name: vcsa-01a
 - vCenter Host: vcsa-01a.corp.local
 - vCenter Username: administrator@vsphere.local
@@ -253,7 +255,7 @@ _Note: Each of the availability zones below will have a single cluster. When you
   - Name: `PKS-MGMT`
   - vSphere Network Name: `ls-pks-mgmt`
   - CIDR: `172.31.0.0/24`
-  - Reserved IP Ranges: `172.31.0.1-172.31.0.3`
+  - Reserved IP Ranges: `172.31.0.3`
   - DNS: `192.168.110.10`
   - Gateway: `172.31.0.1`
   - Availability Zones: `PKS-MGMT-1`
@@ -298,7 +300,7 @@ _Note: In this step, you prepare to install the Ops Manager root certificate in 
 </details>
 <br/>
 
-2.11 From the ControlCenter desktop Notepad++, select `File > Open` and select the `root_ca_certificate` from the `E:\Downloads` directory, and copy the contents of the file to the clipboard. 
+2.11 From the ControlCenter desktop Notepad++, select `File > Open` and select the `root_ca_certificate` from the `E:\Downloads` directory, and copy the contents of the file to the clipboard.
 
 <details><summary>Screenshot 2.11.1</summary>
 <img src="Images/2018-10-24-01-12-58.png">
@@ -309,7 +311,7 @@ _Note: In this step, you prepare to install the Ops Manager root certificate in 
 </details>
 <br/>
 
-2.12 Continue with the Bosh Director tile configuration, select the `Security` tab and paste the certificate in the `Trusted Certificates` textbox and click `Save`.
+2.12 Return to your web browser connection, go to the homepage ands click on the Bosh Director tile, Select the `Security` tab, paste the certificate in the `Trusted Certificates` textbox and click `Save`.
 
 <details><summary>Screenshot 2.12</summary>
 <img src="Images/2018-10-24-01-31-59.png">
@@ -365,15 +367,15 @@ _Note: To save time, you will open another instance of Ops Manager admin console
 3.3 Generate the NSX-T Principal Identity certificate for PKS authentication to NSX-T Manager. From the ControlCenter desktop, open putty and connect to `cli-vm`. Enter the following commands:
 
 ``` bash
-mkdir nsxt-pi-cert
-cd nsxt-pi-cert
+mkdir ~/nsxt-pi-cert
+cd ~/nsxt-pi-cert
 ```
 
 3.4 Use a text editor to create a file with the following shell script
 
-```
+```bash
 nano create_certificate.sh
-``` 
+```
 
 3.5 Expand the below section and copy the text to the file _(Note: Right-click to paste while in Putty)_:
 
@@ -444,13 +446,13 @@ Ctrl + X
 
 3.7 From the command line, enter the following command. Enter the password `VMware1!` when prompted
 
-```
+```bash
 source create_certificate.sh
 ```
 
 <br>
 
-3.8 Copy the certificate ID (As highlighted below in screenshot 3.8) to your instance of Notepad++ and label as `NSX PI Cert ID` 
+3.8 Copy the certificate ID (As highlighted below in screenshot 3.8) to your instance of Notepad++ and label as `NSX PI Cert ID`
 
 <details><summary>Screenshot 3.8.1</summary>
 <img src="Images/2018-10-22-02-45-20.png">
@@ -473,7 +475,7 @@ cat pks-nsx-t-superuser.key
 
 3.10 Create and register the Principal Identity in NSX-T for PKS. From the `cli-vm` prompt, use a text editor to create a file
 
-``` 
+```bash
 nano create_pi.sh
 ```
 
@@ -530,9 +532,9 @@ curl -k -X GET \
 </details>
 <br/>
 
-3.12 Save and exit. From the bash prompt, enter the below command. Enter the password `VMware1!` when prompted. 
+3.12 Save and exit. From the bash prompt, enter the below command. Enter the password `VMware1!` when prompted.
 
-```
+```bash
 source create_pi.sh
 ```
 
