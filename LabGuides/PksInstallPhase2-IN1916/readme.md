@@ -182,7 +182,7 @@ Login for NSX Manager UI is: admin/VMware1!
 </details>
 <br/>
 
-_**Note: Verify that BOSH tile has complates before continuing. Make sure that `Applying changes` no longer appears in the opsman banner, as seen in screenshot 1.13.2**_
+_**Stop: Verify that BOSH tile has completed before continuing. Make sure that `Applying changes` no longer appears in the opsman banner, as seen in screenshot 1.13.2**_
 
 <details><summary>Screenshot 1.13.2</summary><img src="Images/2019-01-12-00-35-16.png"></details><br>
 
