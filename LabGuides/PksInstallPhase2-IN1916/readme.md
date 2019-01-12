@@ -1,13 +1,8 @@
 # Lab: PKS Installation Phase 2
 
-**Contents:**
+## Install PKS
 
-- [Step 1: Install PKS](#step-1-install-pks)
-- [Step 2: Install Harbor](#step-2-install-harbor)
-
-## Step 1: Install PKS
-
-1.1 Login to the Ops Manager UI and locate `Pivotal Container Service` in the lefthand column. Click the `+` icon as shown in screenshot 1.1 and the `Pivotal Container Service` tile will be added to the `Installation Dashboard` 
+1.1 Login to the Ops Manager UI and locate `Pivotal Container Service` in the lefthand column. Click the `+` icon as shown in screenshot 1.1 and the `Pivotal Container Service` tile will be added to the `Installation Dashboard`
 
 <details><summary>Screenshot 1.1</summary>
 <img src="Images/2018-10-22-21-34-37.png">
@@ -86,13 +81,13 @@
 
 1.8 Select the `Kubernetes Cloud Provider` tab and enter the following values:
 
-- Choose your IaaS: vSphere
-- vCenter Master Credentials: administrator@vsphere.local
-  - Password: VMware1!
-- vCenter Host: vcsa-01a.corp.local
-- Datacenter Name: RegionA01
-- Datastore Name: RegionA01-ISCSI01-COMP01
-- Stored VM Folder: pks_vms
+- Choose your IaaS: `vSphere`
+- vCenter Master Credentials: `administrator@vsphere.local`
+  - Password: `VMware1!`
+- vCenter Host: `vcsa-01a.corp.local`
+- Datacenter Name: `RegionA01`
+- Datastore Name: `RegionA01-ISCSI01-COMP01`
+- Stored VM Folder: `pks_vms`
 - Click `Save`
 
 <details><summary>Screenshot 1.8</summary>
@@ -132,19 +127,19 @@ Login for NSX Manager UI is: admin/VMware1!
 
 1.10 Return to the Ops Manager UI, go to the settings page for Pivotal Container Service, click on the `Networking` tab and enter the following values:
 
-- Container Networking Interface: NSX-T
-- NSX Manager Hostname: nsxmgr-01a.corp.local
+- Container Networking Interface: `NSX-T`
+- NSX Manager Hostname: `nsxmgr-01a.corp.local`
 - NSX Manager Super User Principal Identity Certificate: Use the PI certificate and key values you copied to Notepad++ in the PKS Install Phase 1 lab, pasting the certificate in the first box and the key in the second box
 - NSX Manager CA Cert: Use the NSX MGR certificate value you copied to Notepad++ in the PKS Install Phase 1 lab
-- Disable SSL certificate verification: True
-- NAT mode: True
+- Disable SSL certificate verification: `True`
+- NAT mode: `True`
 - Pods IP Block ID: Use the value you gathered in step 1.9.1.1 above
 - Nodes IP Block ID: Use the value you gathered in step 1.9.1.2 above
 - T0 Router ID: Use the value you gathered in step 1.9.2 above
 - Floating IP Pool ID: Use the value you gathered in step 1.9.3 above
-- Nodes DNS: 192.168.110.10
-- vSphere Cluster Names: RegionA01-COMP01
-- Enable outbound internet access: True
+- Nodes DNS: `192.168.110.10`
+- vSphere Cluster Names: `RegionA01-COMP01`
+- Enable outbound internet access: `True`
 - Click `Save`
 
 <details><summary>Screenshot 1.10.1</summary>
@@ -194,89 +189,6 @@ _**Stop: Verify that BOSH tile has completed before continuing. Make sure that `
 <br/>
 
 _Note: After you click `Apply Changes` BOSH will begin deploying PKS and it will take a while to complete. In the nested example lab, the PKS deployment took ~1 hour to complete. Leave the `Applying Changes` window open and check it periodically for status. While waiting for the deployment, use another browser tab to open a second connection to the Ops Manager UI and use the second browser session to complete the harbor configuration in the next section._
-
-### Step 2: Install Harbor
-
-2.1 On a new browser tab, open a connection to the Ops Manager UI, click on `Import a Product` select the Harbor file and click `Open`. It can take a few minutes to import the Harbor file
-
-<details><summary>Screenshot 2.1.1 </summary>
-<img src="Images/2018-10-22-21-23-55.png">
-</details>
-
-<details><summary>Screenshot 2.1.2 </summary>
-<img src="Images/2018-10-22-01-27-45.png">
-</details>
-<br/>
-
-2.2 In the left hand column of the Ops Manager homepage under `VMware Harbor Registy`, click on the `+` icon to add the Harbor tile to the `Installation Dashboard`
-
-<details><summary>Screenshot 2.2 </summary>
-<img src="Images/2018-10-22-21-45-54.png">
-</details>
-<br/>
-
-2.3 Click on the `VMware Harbor Registry` tile to open its configuration settings
-
-<details><summary>Screenshot 2.3 </summary>
-<img src="Images/2018-10-22-21-47-27.png">
-</details>
-<br/>
-
-2.4 Select the `Assign AZs and Networks` tab and enter the following values:
-
-- Singleton Availability Zone: PKS-MGMT-1
-- Balance other jobs in: PKS-MGMT-1
-- Network: PKS-MGMT
-- Click `Save`
-
-<details><summary>Screenshot 2.4</summary>
-<img src="Images/2018-10-22-21-53-32.png">
-</details>
-<br/>
-
-2.5 Select the `General` tab and set the `Hostname` to `harbor.corp.local` , Click `Save`
-
-<details><summary>Screenshot 2.5</summary>
-<img src="Images/2018-10-22-21-57-03.png">
-</details>
-<br/>
-
-2.6 Select the `Certificate` tab, select `Generate RSA Certificate`, enter `harbor.corp.local` and click `Generate`
-
-<details><summary>Screenshot 2.6</summary>
-<img src="Images/2018-10-31-15-24-23.png">
-</details>
-<br/>
-
-2.7 On the `Certificate` tab, click `Save`
-
-<details><summary>Screenshot 2.7</summary>
-<img src="Images/2018-10-22-22-11-03.png">
-</details>
-<br/>
-
-2.8 On the `Credentials` tab, set the `Admin Password` to `VMware1!` and click `Save`
-
-<details><summary>Screenshot 2.8</summary>
-<img src="Images/2018-10-22-22-13-53.png">
-</details>
-<br/>
-
-2.9 On the `Resource Config` tab, set the `Persistent Disk Type` to `20 GB`
-
-<details><summary>Screenshot 2.9</summary>
-<img src="Images/2018-10-22-22-18-57.png">
-</details>
-<br/>
-
-**STOP**: Before proceeding, ensure that the PKS tile deployment has completed.  There will be a blue bar across the top that will show `Applying Changes` and a button for `Show Progress` as it continues to apply
-
-2.10 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
-
-<details><summary>Screenshot 2.10</summary>
-<img src="Images/2018-10-22-22-22-46.png">
-</details>
-<br/>
 
 **You have now completed the PKS installation**
 
