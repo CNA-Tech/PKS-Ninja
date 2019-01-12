@@ -200,7 +200,7 @@ _Note: Leave notepad++ open, you will be adding more reference values to it for 
 - NSX Username: admin
 - NSX Password: VMware1!
 - Copy and Paste the NSX MGR Certificate from step 2.3
-- VM Folder: pks_vms
+- VM Folder: pks_vms  **_(Make sure you change these following values, that begin with pcf_ by default, to begin with pks_)**
 - Template Folder: pks_templates
 - Disk path Folder: pks_disk
 - Click `Save`
@@ -233,38 +233,38 @@ _Note: Leave notepad++ open, you will be adding more reference values to it for 
 _Note: Each of the availability zones below will have a single cluster. When you add an availability zone, make sure to click `Add` on the upper right side of the window and do **not** click `Add Cluster`_
 
 - Click `Add` to add an Availability Zone with the following values
-  - Name: PKS-MGMT-1
-  - IaaS Configuration: vcsa-01a
-  - Cluster: RegionA01-MGMT01
-  - Resource Pool: pks-mgmt-1
+  - Name: `PKS-MGMT-1`
+  - IaaS Configuration: `vcsa-01a`
+  - Cluster: `RegionA01-MGMT01`
+  - Resource Pool: `pks-mgmt-1`
 - Click `Add` to add an Availability Zone with the following values
-  - Name: PKS-COMP
-  - IaaS Configuration: vcsa-01a
-  - Cluster: RegionA01-COMP01
-  - Resource Pool: pks-comp-1
+  - Name: `PKS-COMP`
+  - IaaS Configuration: `vcsa-01a`
+  - Cluster: `RegionA01-COMP01`
+  - Resource Pool: `pks-comp-1`
 - Click `Save`
 
 <details><summary>Screenshot 2.7</summary><img src="Images/2019-01-08-19-10-12.png"></details><br>
 
 2.8 Continue with the Bosh Director tile configuration, select the `Create Networks` tab and enter the following values:
 
-- Enable ICMP Checks: True
+- Enable ICMP Checks: `True`
 - Click `Add Network` to add a network with the following values
-  - Name: PKS-MGMT
-  - vSphere Network Name: ls-pks-mgmt
-  - CIDR: 172.31.0.0/24
-  - Reserved IP Ranges: 172.31.0.1-172.31.0.3 
-  - DNS 192.168.110.10
-  - Gateway 172.31.0.1
-  - Availability Zones: PKS-MGMT-1
+  - Name: `PKS-MGMT`
+  - vSphere Network Name: `ls-pks-mgmt`
+  - CIDR: `172.31.0.0/24`
+  - Reserved IP Ranges: `172.31.0.1-172.31.0.3`
+  - DNS: `192.168.110.10`
+  - Gateway: `172.31.0.1`
+  - Availability Zones: `PKS-MGMT-1`
 - Click `Add Network` to add a network with the following values:
-  - Name: PKS-COMP
-  - vSphere Network Name: ls-pks-service
-  - CIDR: 172.31.2.0/23
-  - Reserved IP Ranges: 172.31.2.1
-  - DNS: 192.168.110.10
-  - Gateway: 172.31.2.1
-  - Availability Zones: PKS-COMP
+  - Name: `PKS-COMP`
+  - vSphere Network Name: `ls-pks-service`
+  - CIDR: `172.31.2.0/23`
+  - Reserved IP Ranges: `172.31.2.1`
+  - DNS: `192.168.110.10`
+  - Gateway: `172.31.2.1`
+  - Availability Zones: `PKS-COMP`
   -Click `Save`
 
 <details><summary>Screenshot 2.8.1</summary>
@@ -278,8 +278,8 @@ _Note: Each of the availability zones below will have a single cluster. When you
 
 2.9 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
 
-- Singleton Availability Zone: PKS-MGMT-1
-- Network: PKS-MGMT
+- Singleton Availability Zone: `PKS-MGMT-1`
+- Network: `PKS-MGMT`
 - Click Save
 
 <details><summary>Screenshot 2.9</summary>
