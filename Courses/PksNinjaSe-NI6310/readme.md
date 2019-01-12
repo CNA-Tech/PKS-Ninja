@@ -53,6 +53,7 @@ The Live Ninja course includes a combination of lecture and lab sessions, howeve
   - [NSXT Installation with Concourse Pipeline](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/NsxtPipelineInstall-IN7016)
   - [PKS Install Phase 1](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksInstallPhase1-IN3138)
   - [PKS Install Phase 2](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksInstallPhase2-IN1916)
+  - [Harbor Tile Install](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborTileInstall-HI3943)
   - [Introduction to Harbor](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHarbor-IH7914)
   - [Deploy First Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610)
   - [PKS Storage and Persistence 1](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksStorageAndPersist-SP7357)
