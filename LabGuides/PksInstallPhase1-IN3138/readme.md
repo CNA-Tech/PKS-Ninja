@@ -20,13 +20,15 @@ PKS installation on vSphere requires NSX-T to be installed. If NSX-T is not inst
 
 ## Step 1: Deploy Ops Manager
 
-1.1 Launch the Chrome browser from the desktop or Windows taskbar, and launch the **RegionA vCenter** vSphere web client from the **RegionA** bookmarks folder, select *Use Windows session authentication* and click **Login**. In the vSphere web client, right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`
+1.1 Launch the Chrome browser from the desktop or Windows taskbar, and launch the **RegionA vCenter** vSphere web client from the **RegionA** bookmarks folder, select *Use Windows session authentication* and click **Login**. 
 
 <details><summary>Screenshot 1.1</summary><img src="Images/2019-01-11-23-12-17.png"></details><br>
 
-1.2 On the `Select template` screen, select `Local File` and navigate to the Ops Manager OVA file. The file is E:\Downloads, and named "pcf-vsphere-2.3.build.170.ova"
+1.2 In the vSphere web client, right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`. On the `Select template` screen, select `Local File` and navigate to the Ops Manager OVA file. The file is E:\Downloads, and named "pcf-vsphere-2.3.build.170.ova"
 
-<details><summary>Screenshot 1.2</summary>
+
+<details><summary>Screenshot 1.2.1</summary><img src="Images/2019-01-11-23-18-21.png"></details>
+<details><summary>Screenshot 1.2.2</summary>
 <img src="Images/2018-10-21-17-03-48.png">
 </details>
 <br/>
