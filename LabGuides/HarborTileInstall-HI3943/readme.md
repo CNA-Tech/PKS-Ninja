@@ -76,10 +76,10 @@
 
 **STOP**: Before proceeding, ensure that the PKS tile deployment has completed.  There will be a blue bar across the top that will show `Applying Changes` and a button for `Show Progress` as it continues to apply
 
-1.10 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
+1.10 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes`. Uncheck the checkbox by `Pivotal Container Service` and click `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
 
 <details><summary>Screenshot 1.10</summary>
-<img src="Images/2018-10-22-22-22-46.png">
+<img src="Images/2019-01-12-02-25-47.png">
 </details>
 <br/>
 
