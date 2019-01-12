@@ -177,10 +177,14 @@ Login for NSX Manager UI is: admin/VMware1!
 - Delete all clusters errand: On
 - Click `Save`
 
-<details><summary>Screenshot 1.13</summary>
+<details><summary>Screenshot 1.13.1</summary>
 <img src="Images/2018-10-22-20-33-01.png">
 </details>
 <br/>
+
+_**Note: Verify that BOSH tile has complates before continuing. Make sure that `Applying changes` no longer appears in the opsman banner, as seen in screenshot 1.13.2**_
+
+<details><summary>Screenshot 1.13.2</summary><img src="Images/2019-01-12-00-35-16.png"></details><br>
 
 1.14 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`
 
