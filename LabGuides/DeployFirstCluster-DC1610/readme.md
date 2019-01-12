@@ -38,7 +38,7 @@ uaac token client get admin -s LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr
 
 <img src="images/2018-10-24-05-37-12.png"></details><br/>
 
-1.4 From `OpsMan`, enter the following commands to create a UAA account and assign admin rights to new user `pks-admin`:
+1.4 From `OpsMan` putty session, enter the following commands to create a UAA account and assign admin rights to new user `pks-admin`:
 
 ```bash:
 uaac user add pks-admin --emails pks-admin@corp.local -p VMware1!
@@ -51,7 +51,7 @@ uaac member add pks.clusters.admin pks-admin
 
 2.1 From `cli-vm`, Login to the PKS CLI with the following command:
 
-```
+```bash
 pks login -a pks.corp.local -u pks-admin --skip-ssl-validation
 ```
 
