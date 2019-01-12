@@ -9,6 +9,7 @@ git clone https://github.com/natereid72/PKS-Ninja-Lab-Patch.git
 source ./PKS-Ninja-Lab-Patch/cc-p1.sh
 ```
 <details><summary>Screenshot 1.1.1</summary><img src="Images/2019-01-11-22-06-03.png"></details>
-<details><summary>Screenshot 1.1.2</summary><img src="Images/2019-01-11-22-08-25.png"></details><br>
+<details><summary>Screenshot 1.1.2</summary><img src="Images/2019-01-11-22-08-25.png"></details>
+<details><summary>Screenshot 1.1.3</summary><img src="Images/2019-01-11-22-12-19.png"></details><br>
 
-You have completed this step and you can now follow proceed with your NSX-T/PKS Installation
+You have completed this step and you can now proceed with your NSX-T/PKS Installation
