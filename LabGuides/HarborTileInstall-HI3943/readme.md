@@ -1,5 +1,8 @@
 # Harbor Tile Installation
 
+- [Step 1: Install Harbor]()
+- [Step 2: Enable Harbor Client Secure Connections]()
+
 ## Install Harbor
 
 1.1 On a new browser tab, open a connection to the Ops Manager UI, click on `Import a Product` select the Harbor file and click `Open`. It can take a few minutes to import the Harbor file
@@ -81,8 +84,54 @@
 <details><summary>Screenshot 1.10</summary>
 <img src="Images/2019-01-12-02-25-47.png">
 </details>
+
+#### You have now completed the Harbor installation
+
+## Enable Harbor Client Secure Connections
+
+Harbor's integration with PKS natively enables the PKS Control Plane and Kubernetes nodes for certificate based communications with Harbor, but most environments have additional external hosts that need to negotiate communication with harbor other than just K8s nodes. For example, developer workstations, pipeline tools,etc
+
+To ensure developer and automated workflows can have secure interaction with Harbor, a certificate should be installed on the client machine
+
+In the following exercise, you  Harbor self-signed certificate on the `cli-vm` host which you will use in later steps to interact with Harbor services
+
+2.1 From the Ops Manager homepage, click on the `VMware Harbor Registry` tile, go to the `Certificate` tab and copy the SSL certificate text from the top textbox
+
+<details><summary>Screenshot 2.1.1</summary>
+<img src="Images/2018-10-24-01-50-50.png">
+</details>
+
+<details><summary>Screenshot 2.1.2</summary>
+<img src="Images/2018-10-24-01-48-15.png">
+</details>
 <br/>
 
-**You have now completed the Harbor installation**
+2.2 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm`.
+
+<details><summary>Screenshot 2.2 </summary>
+<img src="Images/2018-10-23-03-04-55.png">
+</details>
+<br/>
+
+2.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory (create this dierectory if i doesn't already exist) and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
+
+```bash
+mkdir /etc/docker/certs.d/harbor.corp.local
+cd /etc/docker/certs.d/harbor.corp.local
+nano ca.crt
+# Paste the certificate text into nano, save and close the file
+systemctl daemon-reload
+systemctl restart docker
+```
+
+<details><summary>Screenshot 2.3.1</summary>
+<img src="Images/2018-10-24-02-12-17.png">
+</details>
+
+<details><summary>Screenshot 2.3.2</summary>
+<img src="Images/2018-10-24-02-15-15.png">
+</details>
+
+#### You have now prepared `cli-vm' for secure communication with Harbor
 
 ***End of lab***
