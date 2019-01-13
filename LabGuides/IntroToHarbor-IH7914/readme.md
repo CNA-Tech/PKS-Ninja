@@ -1,31 +1,25 @@
-# Lab 4: Harbor Enterprise Container Registry
+# Introduction to Harbor with Planespotter
 
 **Contents:**
 
-- [Step 1: Prepare Projects and Repositories]()
-- [Step 2: Install Harbor certificate on `cli-vm`]()
-- [Step 3: Build Docker Image for Planespotter Frontend]()
+- [Step 1: Initialize Harbor Projects and Repositories]()
+- [Step 2: Build and Upload Planespotter Containers to Harbor]()
 
 ## Overview
 
-The application deployments in this lab make use of a private container registry. We are
-using software from a VMware opensource project called Harbor as our registry. Harbor
-is included as an enterprise supported product with Pivotal Container Service (PKS). In
-this section, you will become familiar with the core capability of Harbor. You will create a project and see how to push and pull images from the repos. You will also enable
-content trust so that images are signed by the publisher and only signed images may be
-pulled from the project repo. You will also be introduced to the vulnerability scanning
-capability of Harbor. Most organizations will use a private registry rather than public
-Docker hub to improve security and latency for their applications. Although Harbor can
-be deployed as a highly available application, we have not done that for this lab.
+This lab guide takes a practical approach to learning VMware's Open Source Harbor container registry by focusing on configuring and preparing Harbor to deploy the Planespotter application.
 
-## Step 1: Prepare Projects and Repositories
+In this guide you will prepare a trusted harbor repository, and then build and upload the Planespotter container images
 
-Harbor organizes images into a set of projects and repositories within those projects.
-Repositories can have one or more images associated with them. Each of the images
-are tagged. Projects can have RBAC (Role Based Access Control) and replication policies
-associated with them so that administrators can regulate access to images and create
-image distribution pipelines across registries that might be geographically dispersed.
-You should now be at a summary screen that shows all of the projects in this registry.
+In subsequent lab modules you will deploy the full Planespotter application from Harbor, providing a practical walkthrough of Harbor's role in an enterprise-grade application deployment
+
+Note: Harbor is included as an enterprise supported product with VMware PKS
+
+## Step 1: Initialize Habor Projects and Repositories
+
+Harbor organizes images into a set of projects and repositories within those projects. Repositories can have one or more images associated with them. Each of the images
+are tagged. Projects can have RBAC (Role Based Access Control) and replication policies associated with them so that administrators can regulate access to images and create
+image distribution pipelines across registries that might be geographically dispersed. You should now be at a summary screen that shows all of the projects in this registry.
 For our lab, we are interested in a single project called library.
 
 1.1 Login to harbor.corp.local and click on `+ New Project`
@@ -58,101 +52,55 @@ Login info: admin/VMware1!
 </details>
 <br/>
 
-## Step 2: Install Harbor certificate on `cli-vm`
+## Step 2: Build Docker Image for Planespotter Frontend
 
-Harbor and container registries in general typically need to negotiate communication with clients other than just K8s nodes, for example, developer workstations, pipeline tools, etc. When providing certificates for external clients fpr the sole purpose of communicating with Harbor, you should use the Harbor self-signed certificate instead of the Ops Man certificate. This minimizes the distribution of the Ops Manager certificate and is just good practice. Accordingly, we will install the Harbor certificate on the cli-vm ubuntu host we will be using to manually interact with docker and Harbor in this lab
+In Step 2, you will clone the planespotter repo and use the downloaded source files to build a container for the planespotter frontend app, and prepare Harbor for the planespotter app deployment you will do later in Lab 5.
 
-Note: `cli-vm` is just a standard ubuntu jumpbox with docker, PKS CLI, Kubectl, GIT and a few other utilities installed
+In this case we will only build the planespotter frontend container ourselves, as the planespotter repo already includes K8s deployment manifests configured to download pre-built containers from docker hub. The process of building the containers is the same so for expediency you will only build the frontend to learn the build process
 
-2.1 From the Ops Manager homepage, click on the `VMware Harbor Registry` tile, go to the `Certificate` tab and copy the SSL certificate text from the top textbox
+2.1 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm` and wait for the bash prompt
 
-<details><summary>Screenshot 2.1.1</summary>
-<img src="Images/2018-10-24-01-50-50.png">
-</details>
-
-<details><summary>Screenshot 2.1.2</summary>
-<img src="Images/2018-10-24-01-48-15.png">
-</details>
-<br/>
-
-2.2 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm`.
-
-<details><summary>Screenshot 2.2 </summary>
+<details><summary>Screenshot 2.1 </summary>
 <img src="Images/2018-10-23-03-04-55.png">
 </details>
 <br/>
 
-2.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory (create this dierectory if i doesn't already exist) and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
-
-```bash
-mkdir /etc/docker/certs.d/harbor.corp.local
-cd /etc/docker/certs.d/harbor.corp.local
-nano ca.crt
-# Paste the certificate text into nano, save and close the file
-systemctl daemon-reload
-systemctl restart docker
-```
-
-<details><summary>Screenshot 2.3.1</summary>
-<img src="Images/2018-10-24-02-12-17.png">
-</details>
-
-<details><summary>Screenshot 2.3.2</summary>
-<img src="Images/2018-10-24-02-15-15.png">
-</details>
-<br/>
-
-You have now prepared `cli-vm' for secure communication with Harbor
-
-## Step 3: Build Docker Image for Planespotter Frontend
-
-In Step 3, you will clone the planespotter repo and use the downloaded source files to build a container for the planespotter frontend app, and prepare Harbor for the planespotter app deployment you will do later in Lab 5.
-
-In this case we will only build the planespotter frontend container ourselves, as the planespotter repo already includes K8s deployment manifests configured to download pre-built containers from docker hub. While we do not have to build the containers in this case, its valuable to see the process and how to setup K8s manifests to pull from either Harbor or Docker Hub later in Lab 5
-
-3.1 From the ControlCenter Desktop, open putty and under `Saved Sessions` connect to `cli-vm` and wait for the bash prompt
-
-<details><summary>Screenshot 3.1 </summary>
-<img src="Images/2018-10-23-03-04-55.png">
-</details>
-<br/>
-
-3.2 From the cli-vm prompt, clone the planespotter github repository with the following commands:
+2.2 From the cli-vm prompt, clone the planespotter github repository with the following commands:
 
 ```bash
 cd ~
 git clone https://github.com/yfauser/planespotter.git
 ```
 
-<details><summary>Screenshot 3.2</summary>
+<details><summary>Screenshot 2.2</summary>
 <img src="Images/2018-10-23-03-10-14.png">
 </details>
 <br/>
 
-3.3 View the planespotter frontend dockerfile with the following commands:
+2.3 View the planespotter frontend dockerfile with the following commands:
 
 ```bash
 cd ~/planespotter/frontend/
 cat Dockerfile
 ```
 
-<details><summary>Screenshot 3.3 </summary>
+<details><summary>Screenshot 2.3 </summary>
 <img src="Images/2018-10-24-03-06-42.png">
 </details>
 <br/>
 
-3.4 Build the planespotter frontend container image with the command `docker build .` and copy the image ID from the last line of the output to the clipboard
+2.4 Build the planespotter frontend container image with the command `docker build .` and copy the image ID from the last line of the output to the clipboard
 
-<details><summary>Screenshot 3.4.1 </summary>
+<details><summary>Screenshot 2.4.1 </summary>
 <img src="Images/2018-10-24-03-13-22.png">
 </details>
 
-<details><summary>Screenshot 3.4.2 </summary>
+<details><summary>Screenshot 2.4.2 </summary>
 <img src="Images/2018-10-24-03-17-58.png">
 </details>
 <br/>
 
-3.5 Update the image tag and push to harbor with the following commands - be sure to replace the value `a6a227b1a503` in the `docker tag` command below with the tag value you gathered in the previous step  
+2.5 Update the image tag and push to harbor with the following commands - be sure to replace the value `a6a227b1a503` in the `docker tag` command below with the tag value you gathered in the previous step  
 
 ```bash
 docker tag a6a227b1a503 harbor.corp.local/library/frontend:v1
@@ -167,27 +115,25 @@ If docker push fails with "denied: requested access to the resource is denied", 
 If the cli-vm doesn't DNS resolve harbor.corp.local:
 Find the IP address (10.40.14.5) of the Harbor host from the ControlCenter (RDP desktop) DNS Mgr and add the IP address to /etc/hosts of cli-vm. After that do a docker login and then push!
 
-<details><summary>Screenshot 3.5 </summary>
+<details><summary>Screenshot 2.5 </summary>
 <img src="Images/2018-10-24-03-22-00.png">
 </details>
 <br/>
 
-3.6 Log into the Harbor UI and navigate to `Projects > library` and click on `library/frontend` to see the image you built and pushed to Harbor in the previous steps.
+2.6 Log into the Harbor UI and navigate to `Projects > library` and click on `library/frontend` to see the image you built and pushed to Harbor in the previous steps.
 
-<details><summary>Screenshot 3.6.1 </summary>
+<details><summary>Screenshot 2.6.1 </summary>
 <img src="Images/2018-10-24-03-27-01.png">
 </details>
 
-<details><summary>Screenshot 3.6.2 </summary>
+<details><summary>Screenshot 2.6.2 </summary>
 <img src="Images/2018-10-24-03-27-29.png">
 </details>
 
-<details><summary>Screenshot 3.6.3 </summary>
+<details><summary>Screenshot 2.6.3 </summary>
 <img src="Images/2018-10-24-03-31-17.png">
 </details>
 <br/>
-
-## [Click here to proceed to Lab 5: Deploy your First PKS Cluster & Planespotter app](../DeployFirstCluster-DC1610)
 
 <!--
 
