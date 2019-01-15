@@ -70,6 +70,13 @@
 </details>
 <br/>
 
+1.8 On the `Clair Settings` tab, set the `Updater Interval` to `1` and click `Save`
+
+<details><summary>Screenshot 1.8</summary>
+<img src="Images/2018-10-22-22-13-53.png">
+</details>
+<br/>
+
 1.9 On the `Resource Config` tab, set the `Persistent Disk Type` to `20 GB`
 
 <details><summary>Screenshot 1.9</summary>
@@ -81,6 +88,8 @@
 
 1.10 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes`. Uncheck the checkbox by `Pivotal Container Service` and click `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
 
+**Please proceed with Step 2 below while Harbor is deploying, you do not need the Harbor deployment to finish to complete the remaining steps in this guide**
+
 <details><summary>Screenshot 1.10</summary>
 <img src="Images/2019-01-12-02-25-47.png">
 </details>
@@ -89,11 +98,11 @@
 
 ## Enable Harbor Client Secure Connections
 
-Harbor's integration with PKS natively enables the PKS Control Plane and Kubernetes nodes for certificate based communications with Harbor, but most environments have additional external hosts that need to negotiate communication with harbor other than just K8s nodes. For example, developer workstations, pipeline tools,etc
+Harbor's integration with PKS natively enables the PKS Control Plane hosts and Kubernetes nodes for certificate based communications with Harbor, but most environments have additional external hosts that need to negotiate communication with harbor other than just K8s nodes. For example, developer workstations, pipeline tools,etc
 
 To ensure developer and automated workflows can have secure interaction with Harbor, a certificate should be installed on the client machine
 
-In the following exercise, you  Harbor self-signed certificate on the `cli-vm` host which you will use in later steps to interact with Harbor services
+In the following exercise, you  Harbor self-signed certificate on the `cli-vm` host preparing it to interact with Harbor services
 
 2.1 From the Ops Manager homepage, click on the `VMware Harbor Registry` tile, go to the `Certificate` tab and copy the SSL certificate text from the top textbox
 
@@ -113,15 +122,17 @@ In the following exercise, you  Harbor self-signed certificate on the `cli-vm` h
 </details>
 <br/>
 
-2.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory (create this dierectory if i doesn't already exist) and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
+2.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory (create this directory if i doesn't already exist) and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
 
 ```bash
-mkdir /etc/docker/certs.d/harbor.corp.local
-cd /etc/docker/certs.d/harbor.corp.local
-nano ca.crt
+mkdir -p /etc/docker/certs.d/harbor.corp.local
+nano /etc/docker/certs.d/harbor.corp.local/ca.crt
 # Paste the certificate text into nano, save and close the file
-systemctl daemon-reload
-systemctl restart docker
+mkdir -p ~/.docker/tls/harbor.corp.local\:4443/
+cp /etc/docker/certs.d/harbor.corp.local/ca.crt ~/.docker/tls/harbor.corp.local\:4443/
+cp /etc/docker/certs.d/harbor.corp.local/ca.crt /usr/local/share/ca-certificates/
+update-ca-certificates
+service docker restart
 ```
 
 <details><summary>Screenshot 2.3.1</summary>
@@ -133,5 +144,7 @@ systemctl restart docker
 </details>
 
 #### You have now prepared `cli-vm' for secure communication with Harbor
+
+This lab guide does not include steps to validate the harbor installation because it takes time to deploy harbor, so after installation and client prep is a good natural break. To continue with validation, please continue with the next step from your course guide, or refer to the [PKS Ninja SE course guide agenda](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksNinjaSe-NI6310#ninja-labs-part-1-agenda) for next steps
 
 ***End of lab***

@@ -89,3 +89,12 @@ _Also, it may be interesting for you to look at the `Tasks` menu in vCenter to o
 <img src="images/2018-10-24-06-00-15.png">
 </details>
 <br/>
+
+2.5 Enter the command `pks clusters my-cluster` to check on your cluster deployment status, once your cluster deployment has completed, the _Status_ column should say `succeeded` as shown in the following screenshot
+
+<details><summary>Screenshot 2.5 </summary>
+<img src="images/2018-10-24-06-00-15.png">
+</details>
+<br/>
+
+**You have now completed your first cluster deployment, please return to your course guide for details on additional steps and exercises for your course**
