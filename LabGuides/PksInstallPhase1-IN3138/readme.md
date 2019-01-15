@@ -255,7 +255,7 @@ _Note: Each of the availability zones below will have a single cluster. When you
   - Name: `PKS-MGMT`
   - vSphere Network Name: `ls-pks-mgmt`
   - CIDR: `172.31.0.0/24`
-  - Reserved IP Ranges: `172.31.0.1-172.31.0.3`
+  - Reserved IP Ranges: `172.31.0.3`
   - DNS: `192.168.110.10`
   - Gateway: `172.31.0.1`
   - Availability Zones: `PKS-MGMT-1`
