@@ -102,7 +102,7 @@ Harbor's integration with PKS natively enables the PKS Control Plane hosts and K
 
 To ensure developer and automated workflows can have secure interaction with Harbor, a certificate should be installed on the client machine
 
-In the following exercise, you  Harbor self-signed certificate on the `cli-vm` host preparing it to interact with Harbor services
+In the following exercise, you install Harbor self-signed certificate on the `cli-vm` host preparing it to interact with Harbor services
 
 2.1 From the Ops Manager homepage, click on the `VMware Harbor Registry` tile, go to the `Certificate` tab and copy the SSL certificate text from the top textbox
 
@@ -143,8 +143,41 @@ service docker restart
 <img src="Images/2018-10-24-02-15-15.png">
 </details>
 
-#### You have now prepared `cli-vm' for secure communication with Harbor
+**STOP - Make sure Harbor tile has succesfully completed installation before continuing**
 
-This lab guide does not include steps to validate the harbor installation because it takes time to deploy harbor, so after installation and client prep is a good natural break. To continue with validation, please continue with the next step from your course guide, or refer to the [PKS Ninja SE course guide agenda](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksNinjaSe-NI6310#ninja-labs-part-1-agenda) for next steps
+PKS automatically configures certificate based trust between PKS components during deployment. To achieve this, we must conifgure Bosh with a trusted CA certificate to use.
+
+3.1 Prep OpsMan Root Certificate on BOSH
+
+- From the Ops Manager dashboard, go to `Admin > Settings > Advanced` and click `Download Root CA Cert` as shown in Screenshot 2.10
+
+<details><summary>Screenshot 3.1</summary>
+<img src="Images/2018-10-24-01-09-48.png">
+</details>
+<br/>
+
+3.2 From the ControlCenter desktop Notepad++, select `File > Open` and select the `root_ca_certificate` from the `E:\Downloads` directory, and copy the contents of the file to the clipboard.
+
+<details><summary>Screenshot 3.2.1</summary>
+<img src="Images/2018-10-24-01-12-58.png">
+</details>
+
+<details><summary>Screenshot 3.2.2</summary>
+<img src="Images/2018-10-24-01-25-24.png">
+</details>
+<br/>
+
+3.3 Return to your web browser connection, go to the homepage ands click on the Bosh Director tile, Select the `Security` tab, paste the certificate in the `Trusted Certificates` textbox and click `Save`.
+
+<details><summary>Screenshot 3.3</summary>
+<img src="Images/2018-10-24-01-31-59.png">
+</details>
+<br/>
+
+3.4 From the Ops Man installation dashboard, click `Review Pending Changes`, uncheck PKS and Harbor tiles as per `Screenshot 2.4`, click apply changes
+
+<details><summary>Screenshot 3.4</summary><img src="Images/2019-01-15-17-54-08.png"></details><br>
+
+This lab guide does not include steps to validate the Bosh update installation because it takes time to deploy, so after installation and client prep is a good natural break. To continue with validation, please continue with the next step from your course guide, or refer to the [PKS Ninja SE course guide agenda](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksNinjaSe-NI6310#ninja-labs-part-1-agenda) for next steps
 
 ***End of lab***

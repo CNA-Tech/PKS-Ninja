@@ -289,62 +289,33 @@ _Note: Each of the availability zones below will have a single cluster. When you
 </details>
 <br/>
 
-2.10 Prep OpsMan Root Certificate on BOSH
+2.10 Continue with the Bosh Director tile configuration, select the `Resource Config` tab and change the value of the `VM Type` in the second row to the third medium option `medium.disk` as shown in Screenshot 2.13, and click `Save`
 
-_Note: In this step, you prepare to install the Ops Manager root certificate in the BOSH director tile. Among other connections, this will enable trust between all PKS deployed K8s nodes and the Harbor registry._
+<details><summary>Screenshot 2.10</summary><img src="Images/2019-01-08-19-55-48.png"></details><br>
 
-- Log into the Ops Manager UI, go to `Admin > Settings > Advanced` and click `Download Root CA Cert` as shown in Screenshot 2.10
+2.11 In the Ops Manager web UI, click on `Installation Dashboard` on the top menu bar and then click `Review Pending Changes`
 
-<details><summary>Screenshot 2.10</summary>
-<img src="Images/2018-10-24-01-09-48.png">
-</details>
-<br/>
-
-2.11 From the ControlCenter desktop Notepad++, select `File > Open` and select the `root_ca_certificate` from the `E:\Downloads` directory, and copy the contents of the file to the clipboard.
-
-<details><summary>Screenshot 2.11.1</summary>
-<img src="Images/2018-10-24-01-12-58.png">
-</details>
-
-<details><summary>Screenshot 2.11.2</summary>
-<img src="Images/2018-10-24-01-25-24.png">
-</details>
-<br/>
-
-2.12 Return to your web browser connection, go to the homepage ands click on the Bosh Director tile, Select the `Security` tab, paste the certificate in the `Trusted Certificates` textbox and click `Save`.
-
-<details><summary>Screenshot 2.12</summary>
-<img src="Images/2018-10-24-01-31-59.png">
-</details>
-<br/>
-
-2.13 Continue with the Bosh Director tile configuration, select the `Resource Config` tab and change the value of the `VM Type` in the second row to the third medium option `medium.disk` as shown in Screenshot 2.13, and click `Save`
-
-<details><summary>Screenshot 2.13</summary><img src="Images/2019-01-08-19-55-48.png"></details><br>
-
-2.14 In the Ops Manager web UI, click on `Installation Dashboard` on the top menu bar and then click `Review Pending Changes`
-
-<details><summary>Screenshot 2.14</summary>
+<details><summary>Screenshot 2.11</summary>
 <img src="Images/2018-10-21-23-23-00.png">
 </details>
 <br/>
 
-2.15 On the `Review Pending Changes` screen, ensure that the checkbox for Bosh Director is checked and click `Apply Changes`
+2.12 On the `Review Pending Changes` screen, ensure that the checkbox for Bosh Director is checked and click `Apply Changes`
 
-<details><summary>Screenshot 2.15</summary>
+<details><summary>Screenshot 2.12</summary>
 <img src="Images/2018-10-21-23-24-52.png">
 </details>
 <br/>
 
-2.16 Review the `Applying Changes` to observe the BOSH VM deployment. While BOSH is deploying, you can skip ahead to Step 3 and return to the `Applying Changes` screen periodically to check the status of the deployment. Once the BOSH deployment is complete, you should see a `Changes applied` popup window as shown in Screenshot 2.16.2
+2.13 Review the `Applying Changes` to observe the BOSH VM deployment. While BOSH is deploying, you can skip ahead to Step 3 and return to the `Applying Changes` screen periodically to check the status of the deployment. Once the BOSH deployment is complete, you should see a `Changes applied` popup window as shown in Screenshot 2.16.2
 
 _Note: In the nested example lab, it takes ~30 minutes to complete the BOSH deployment_
 
-<details><summary>Screenshot 2.16.1 </summary>
+<details><summary>Screenshot 2.13.1 </summary>
 <img src="Images/2018-10-21-23-26-50.png">
 </details>
 
-<details><summary>Screenshot 2.16.2 </summary>
+<details><summary>Screenshot 2.13.2 </summary>
 <img src="Images/2018-10-22-00-41-06.png">
 </details>
 <br/>
