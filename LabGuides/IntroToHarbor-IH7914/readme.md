@@ -6,7 +6,7 @@
 - [Step 2: Build Docker Image for Planespotter Frontend]()
 - [Step 3: Push and Pull Container Images From Harbor]()
 - [Step 4: Configure Image Vulnerability Scanning and Enforcement]()
-- [Step 4: Configure and validate Content Trust]()
+- [Step 5: Configure and validate Content Trust]()
 
 ## Overview
 
@@ -46,7 +46,7 @@ Click on the `library` project to examine further details, and look through the 
 </details>
 <br/>
 
-1.2 From the `library` project page, select the `Configuration` tab and observe the default configuration for the library project. As you proceed through the following steps, you will upload an image to interact with the unsecured library project, and you will also create an additional `trusted` project to interact with content trust, image scanning, and vulnerable image policy enforcement
+1.2 From the `library` project page, select the `Configuration` tab and observe the default configuration for the library project. As you proceed through the following steps, you will upload an image to interact with the unsecured library project, and you will also create an additional `trusted` project to interact with the content trust feature
 
 <details><summary>Screenshot 1.2</summary>
 <img src="Images/2019-01-14-20-18-37.png">
@@ -70,11 +70,10 @@ Click on the `library` project to examine further details, and look through the 
 1.4 On the `Projects` page, click on `trusted`,  click on the `configuration` tab, enter the following values and click `Save`
 
 - Enable Content Trust: True
-- Prevent vulnerable images from running: True
 - Automatically scan images on push: True
 
 <details><summary>Screenshot 1.4</summary>
-<img src="Images/2018-10-23-02-45-20.png">
+<img src="Images/2019-01-15-02-50-08.png">
 </details>
 <br/>
 
@@ -187,7 +186,7 @@ Find the IP address (10.40.14.5) of the Harbor host from the ControlCenter (RDP 
 
 3.5 From the `cli-vm` prompt, delete the local copy of the frontend container with the command `docker rmi harbor.corp.local/library/frontend:v1` and verify the image has been deleted with the command `docker images`
 
-<details><summary>Screenshot 3.3</summary>
+<details><summary>Screenshot 3.5</summary>
 <img src="Images/2019-01-15-00-03-55.png">
 </details>
 <br/>
@@ -204,227 +203,151 @@ docker images
 </details>
 <br/>
 
+## Step 4: Configure Image Vulnerability Scanning and Enforcement
 
+4.1 Return to your web browser session with Harbor and re-login if needed. From the `Projects` page, click on `library`, and then on `library/frontend`. Check the box next to the `v1` image and click `Scan` to initiate a vulnerability scan for the image. Observe the progress in the `Vulnerability` column until the scan is complete, which typically takes from 10 seconds to 2 minutes
 
-<!--
+<details><summary>Screenshot 4.1.1</summary>
+<img src="Images/2019-01-15-01-43-37.png">
+</details>
 
-## Step 5 Content Trust & Vulnerability Scanning
-
-Content trust allows admins to require that images be signed in order for the container to run. In this section, you will push untrusted and trusted images to Harbor that we have pre-installed in the `cli-vm` in your the lab vPod, use them to validate the content trust feature You will also trigger a Clair vulnerability scan and view the results. Note that content trust and vulnerability scanning features are independent of one another and can be used seperately
-
-5.1 Resume or if needed reopen your SSH connection to `cli-vm` and upload the untrusted image with the command `docker push harbor.corp.local/trusted/helloworld:V2`
-
-<details><summary>Screenshot 5.1 </summary>
-<img src="Images/2018-10-24-04-20-26.png">
+<details><summary>Screenshot 4.1.2</summary>
+<img src="Images/2019-01-15-01-45-27.png">
 </details>
 <br/>
 
-5.2 From `cli-vm` configure environmental variables that enable the docker client to validate signed images with Harbor and upload the trusted image with the following commands. Use the passphrase `handsonlab` when prompted
+4.2 Place your mouse over the multi-colored bar in the `Vulnerability` column to see a summary of the vulnerability scanning report
+
+<details><summary>Screenshot 4.2</summary>
+<img src="Images/2019-01-15-01-47-35.png">
+</details>
+<br/>
+
+4.3 Navigate to the `Projects/library` page and select the configuration tab. Check the box for `Prevent vulnerable images from running`, verify that images with a severity of `Low` and above are prevented from being deployed and click `Save`
+
+<details><summary>Screenshot 4.3</summary>
+<img src="Images/2019-01-15-01-51-35.png">
+</details>
+<br/>
+
+4.4 From the `cli-vm` prompt, delete the local copy of the frontend container with the command `docker rmi harbor.corp.local/library/frontend:v1` and verify the image has been deleted with the command `docker images`
+
+<details><summary>Screenshot 4.4</summary>
+<img src="Images/2019-01-15-00-03-55.png">
+</details>
+<br/>
+
+4.5 From the `cli-vm` prompt, enter the command `docker pull harbor.corp.local/library/frontend:v1`. You should now see an error message indicating the vulnerable image is blocked from being downloaded, as shown in the following screenshot
+
+```bash
+docker pull harbor.corp.local/library/frontend:v1
+```
+
+<details><summary>Screenshot 4.5</summary>
+<img src="Images/2019-01-15-00-23-43.png">
+</details>
+<br/>
+
+4.6 Navigate to the `Projects/library` page and select the configuration tab. Uncheck the box for `Prevent vulnerable images from running`to return the `library` configuration to its default settings and click `Save`
+
+<details><summary>Screenshot 4.6</summary>
+<img src="Images/2019-01-15-01-58-33.png">
+</details>
+<br/>
+
+## Step 5: Configure and validate Content Trust
+
+The content trust feature allows admins to require that images be signed in order for the container to run, enabling a business process to be used where only images that meet policy requirements are signed and able to be deployed from repositories where content trust is enabled
+
+5.1 From the `cli-vm` prompt, update the image tag to prepare the frontend:v1 image for upload to the `trusted` repository and push to harbor with the following commands:
+
+```bash
+docker tag harbor.corp.local/library/frontend:v1 harbor.corp.local/trusted/frontend:v1
+docker push harbor.corp.local/trusted/frontend:v1
+```
+
+If docker push fails with "denied: requested access to the resource is denied", do "docker login harbor.corp.local" with user id=admin, and password = VMware1!, and then do docker push as above.
+
+<details><summary>Screenshot 5.1</summary>
+<img src="Images/2019-01-15-02-55-26.png">
+</details>
+<br/>
+
+5.2 Log into the Harbor UI and navigate to `Projects > trusted` and click on `trusted/frontend` to see the image you built and pushed to Harbor in the previous steps. Observe that the vulnerability scan has already been completed, which is because you enabled the `Automatically scan images on push` feature when you created the `trusted` project
+
+<details><summary>Screenshot 5.2</summary>
+<img src="Images/2019-01-15-02-57-24.png">
+</details>
+<br/>
+
+5.3 From the `cli-vm` prompt, delete all local copies of the frontend container image and verify the image has been deleted with the command `docker images`
+
+```bash
+docker rmi harbor.corp.local/library/frontend:v1
+docker rmi harbor.corp.local/trusted/frontend:v1
+docker images
+```
+
+<details><summary>Screenshot 5.3</summary>
+<img src="Images/2019-01-15-03-03-18.png">
+</details>
+<br/>
+
+5.4 From the `cli-vm` prompt, enter the command `docker pull harbor.corp.local/trusted/frontend:v1`. You should now see an error message indicating the unsigned image is blocked from being downloaded, as shown in the following screenshot
+
+<details><summary>Screenshot 5.4</summary>
+<img src="Images/2019-01-15-03-24-28.png">
+</details>
+<br/>
+
+5.5 From `cli-vm` configure environmental variables that enable the docker client to validate signed images with Harbor
 
 ```bash
 export DOCKER_CONTENT_TRUST_SERVER=https://harbor.corp.local:4443
 export DOCKER_CONTENT_TRUST=1
-docker push harbor.corp.local/trusted/nginx:V2
-#passphrase = handsonlab
 ```
 
-<details><summary>Screenshot 5.1 </summary>
-<img src="Images/2018-10-24-04-20-26.png">
+<details><summary>Screenshot 5.5</summary>
+<img src="Images/2019-01-15-03-30-38.png">
 </details>
 <br/>
 
-## Click here to proceed to [Lab 5: Deploy your First PKS Cluster & Planespotter app](../Lab5-DeployFirstCluster)
+5.4 From the `cli-vm` prompt, enter the command `docker pull harbor.corp.local/trusted/frontend:v1`. Observe that despite enabling content trust on the client, you are still prevented from downloading the image, which is because the image itself was never signed
 
+<details><summary>Screenshot 5.4</summary>
+<img src="Images/2019-01-15-03-31-33.png">
+</details>
+<br/>
 
+5.5 From the `cli-vm` prompt, download a local unsigned copy of the planespotter frontend:v1 image from the `library/frontend` repository on harbor. Update the tag to prepare for uploading to the `trusted` project where content trust is enabled. Note that when after you enter the push command, you will be prompted to enter passphrases for image signing, use the passphrase `VMware1!`
 
-**Login to Harbor UI**
+While you are still pushing the same unsigned image to harbor, because you enabled content trust on the `cli-vm` docker client, it will automatically sign an image when pushed
 
-1. Click on Google Chrome
-2. Click on Harbor.corp.local bookmark
-3. Login to Harbor with Username: admin and Password: VMware1!
+```bash
+docker pull harbor.corp.local/library/frontend:v1
+docker tag harbor.corp.local/library/frontend:v1 harbor.corp.local/trusted/frontend:v2
+docker push harbor.corp.local/trusted/frontend:v2
+```
 
-**View Projects and Repositories**
+<details><summary>Screenshot 5.5</summary>
+<img src="Images/2019-01-15-03-49-54.png">
+</details>
+<br/>
 
+5.6 From the `cli-vm` prompt, delete the local copy of the frontend:v2 container with the command `docker rmi harbor.corp.local/trusted/frontend:v2` and verify the image has been deleted with the command `docker images`
 
+<details><summary>Screenshot 5.6</summary>
+<img src="Images/2019-01-15-04-18-52.png">
+</details>
+<br/>
 
-The library project contains five repositories and has no access control. it is available to
-the public.
+5.7 From the `cli-vm` prompt, enter the command `docker pull harbor.corp.local/trusted/frontend:v2` and cobserve you are now able to download the signed image from the `trusted` repository with content trust restrictions enabled. Enter `Docker images` to verify that the frontend:v2 image is now in your local image cache
 
-1. Click on library to see the repos
+<details><summary>Screenshot 5.7</summary>
+<img src="Images/2019-01-15-04-22-43.png">
+</details>
+<br/>
 
-You now see the five different repos. The restreview repos will be used in Module 4 to
-deploy our restaurant review application.
+5.7 Disable content trust on `cli-vm` with the command `export DOCKER_CONTENT_TRUST=0`
 
-
-**View Restreview-ui Repo Images**
-
-1. Click on the library/restreview-ui repo
-
-**View Image Vulnerability Summary**
-
-Notice that there are two images. During lab preparation two versions of the same
-image were uploaded so that we could upgrade our application in Module 4.
-Vulnerability scanning is part of PKS deployed Harbor registry.
-
-
-1. Click on either of the images to see its vulnerability threat report.
-
-**View Image Vulnerability Report**
-
-Each vulnerability is detailed, along with the package containing it, and the correct
-package version to fix the vulnerability.
-
-
-**Create Trusted Project**
-
-So far you have been using unsigned images. Now we want to have a production
-project that only contains images that are trusted. In order to do that we must sign the
-images. Let's start by creating a new project.
-
-1. Click on Projects
-
-**Create New Project**
-
-1. Click on + Projects
-
-
-**Enter Project Name**
-
-1. Enter trusted for the project name and click OK
-
-**Verify Project Created**
-
-Note: The name of the project MUST be "trusted", in all lower case. We have tagged
-images with that path for you to use later in the lab. Using a different name will cause
-the image push to fail.
-
-1. click on trusted to open your new project
-
-
-**Enable Content Trust on Your Project**
-
-1. Click on Configuration
-
-
-We have options to Enable Content Trust and prevent vulnerable images from running.
-The image vulnerability restricts the pulling of images with CVEs that were identified in
-the image scans we saw previously. Enabling content trust means that only signed
-images can be pulled from this project.
-
-1. Enable content trust and click Save
-
-**Push Unsigned Image**
-
-
-1. Type docker push harbor.corp.local/trusted/helloworld:V2
-
-We have an existing unsigned image that we want to push into our trusted project.
-
-Let's go back to the Harbor UI and see our image.
-
-**View Unsigned Image**
-
-1. Click on Repositories
-2. Click on the Repo name to see the individual image tags
-3. Note that the image is unsigned
-
-Now let's go back to the CLI
-
-**Enable Docker Content Trust**
-
-1. Type export DOCKER_CONTENT_TRUST_SERVER=https://harbor.corp.local:4443
-2. Type export DOCKER_CONTENT_TRUST=1
-
-These two commands enable image signing through Docker content trust and point to
-the Notary server. Our notary server is our Harbor registry
-
-
-**Push Signed Image**
-
-1. Type docker push harbor.corp.local/trusted/nginx:V2
-2. Type passphrase at all prompts: handsonlab
-
-The root passphrase is only entered the first time you push a new image to your project.
-Note that you should not use the standard hol password 'VMware1!'. Docker notary
-doesn't seem to like the !. handsonlab was used as the password in testing.
-
-Let's return to Harbor and see our signed image.
-
-**View Signed Image**
-
-
-1. Click on Respositories in Harbor so your nginx image is visible
-1. Click on trusted/nginx image and verify that it was signed
-
-Let's create Kubernetes pods from our two images and see what happens. Return to
-the CLI.
-
-**Create Pod From Unsigned Image**
-
-1. Type kubectl apply -f /home/ubuntu/apps/hello-trusted-unsigned.yaml
-2. Type kubectl get pods
-
-Notice that there was an error pulling the image. Let's investigate further.
-
-
-**Describe Pod To Find Error**
-
-1. Enter kubectl describe po/helloworld-v2-#########
-
-Replace the ###### with the pod id from your previous kubectl get pods command.
-You can see why the pod failed to create. The image was not signed. Now let's run a
-pod with our signed image.
-
-First let's clean up.
-
-**Clean Up Pod**
-
-1. Type kubectl delete -f /home/ubuntu/apps/hello-trusted-unsigned.yaml
-
-This command will delete our deployment.
-
-**Create Pod From Signed Image**
-
-The first thing we need to do is create a secret. This will be mounted on our pod and
-shared with Harbor for authentication when pulling our image from the registry.
-
-1. Type kubectl create secret docker-registry regsecret
-    --docker-server=http://harbor.corp.local --docker-username=admin
-    --docker-password=VMware1! --docker-email=admin@corp.local
-
-
-The secret contains the information needed to login to the registry. Let's now take a
-look at the yaml file for our signed image.
-
-**View Yaml To Create Pod From Signed Image**
-
-1. Type cat nginx-trusted-signed.yaml
-
-Note the imagePullSecrets refers to the secret we just created. Now we will create our
-pod from the signed image.
-
-
-**Create Pod**
-
-1. Type kubectl apply -f nginx-trusted-signed.yaml
-2. Type kubectl get pods
-
-**Describe Pod To Verify Successful Image Pull**
-
-1. Type kubectl describe po/nginx-##### where ###### is the number for your pod
-    in the get pods command
-
-
-**Clean Up Deployment**
-
-1. Type kubectl delete -f nginx-trusted-signed.yaml
-
-
-### Conclusion.............................................................................................................
-
-**You should now have an understanding of Harbor Container Registry**
-
-**You've finished Lab 4**
-
-Congratulations on completing Lab 4!
---!>
+**You have now completed the Intro to Harbor lab**
