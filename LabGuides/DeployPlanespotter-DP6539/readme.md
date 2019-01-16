@@ -40,7 +40,6 @@ In the Intro to Harbor lab, we modified one of the manifests (.yaml file) to pul
 - [Step 2: Deploy Planespotter](#step-2-deploy-planespotter)
 - [Step 3: Publish the Planespotter app to expose it to the outside world](#step-3-publish-the-planespotter-app-to-expose-it-to-the-outside-world)
 - [Step 4: Understanding how Kubernetes Maintains state by looking at an example of ReplicaSets.](#step-4-understanding-how-kubernetes-maintains-state-by-looking-at-an-example-of-replicasets)
-- [Step 2: Deploy Planespotter App](#step-2-deploy-planespotter-app)
 
 -------------
 _If you've completed the Intro to Intro to Harbor lab, you'll already have the Planespotter repo cloned locally; If you haven't, you will need to clone it. Follow the directions below from the `cli-vm` to clone the repo for this lab:_
@@ -50,21 +49,12 @@ _If you've completed the Intro to Intro to Harbor lab, you'll already have the P
 
 Before proceeding, verify that your cluster has successfully deployed by entering the command `pks clusters` from `cli-vm`
 
-<details><summary>Screenshot 2.1 </summary>
-<img src="images/2018-10-24-07-15-44.png">
-</details>
-<br/>
-
 Pull down the kubernetes config and credentials for `my-cluster` with the command 
 
 ```
 pks get-credentials my-cluster
 ```
 
-<details><summary>Screenshot 2.2 </summary>
-<img src="images/2018-10-24-07-17-19.png">
-</details>
-<br/>
 --------------
 
 ## Step 1: Configure K8s Cluster for App Deployment
