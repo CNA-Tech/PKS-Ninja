@@ -48,6 +48,23 @@ _If you've completed the Intro to Intro to Harbor lab, you'll already have the P
 - `cd ~`
 - `git clone https://github.com/yfauser/planespotter.git`
 
+Before proceeding, verify that your cluster has successfully deployed by entering the command `pks clusters` from `cli-vm`
+
+<details><summary>Screenshot 2.1 </summary>
+<img src="images/2018-10-24-07-15-44.png">
+</details>
+<br/>
+
+Pull down the kubernetes config and credentials for `my-cluster` with the command 
+
+```
+pks get-credentials my-cluster
+```
+
+<details><summary>Screenshot 2.2 </summary>
+<img src="images/2018-10-24-07-17-19.png">
+</details>
+<br/>
 --------------
 
 ## Step 1: Configure K8s Cluster for App Deployment
@@ -334,37 +351,7 @@ Notice where it states _replicas: 2_ under the _spec:_ heading.
 
 Notice the count of pods for planespotter-frontend has not changed, there are still 2 pods. The name of one of the pods is now different than before ( the unique number in the name) and the age is more recent than the other. Kubernetes just created a new pod after the original pod was deleted in order to maintain declared state.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1.2 View the `app-server-deployment_all_k8s.yaml` file, observe the container image value is `yfauser/planespotter-app-server:1508888202fc85246248c0892c0d27dda34de8e1` which is a working configuration. You may notice this does not specify the location of the registry it is using, and that is because this container is located on docker hub, which is a default search location for hosts using docker engine including PKS deployed K8s nodes
+View the `app-server-deployment_all_k8s.yaml` file, observe the container image value is `yfauser/planespotter-app-server:1508888202fc85246248c0892c0d27dda34de8e1` which is a working configuration. You may notice this does not specify the location of the registry it is using, and that is because this container is located on docker hub, which is a default search location for hosts using docker engine including PKS deployed K8s nodes
 
 <details><summary>Screenshot 1.2 </summary>
 <img src="images/2018-10-24-07-07-26.png">
@@ -373,24 +360,3 @@ Notice the count of pods for planespotter-frontend has not changed, there are st
 
 You should now understand the differences in how to configure a kubernetes manifest to pull from docker hub or from Harbor
 
-## Step 2: Deploy Planespotter App
-
-2.1 Before proceeding, verify that your cluster has successfully deployed by entering the command `pks clusters` from `cli-vm`
-
-<details><summary>Screenshot 2.1 </summary>
-<img src="images/2018-10-24-07-15-44.png">
-</details>
-<br/>
-
-2.2 Pull down the kubernetes config and credentials for `my-cluster` with the command 
-
-```
-pks get-credentials my-cluster
-```
-
-<details><summary>Screenshot 2.2 </summary>
-<img src="images/2018-10-24-07-17-19.png">
-</details>
-<br/>
-
-Please use the instructions at [this link](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/BonusLabs/Deploy%20Planespotter%20Lab) to complete deployment of the planespotter app
