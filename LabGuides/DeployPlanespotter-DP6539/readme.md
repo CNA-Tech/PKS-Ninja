@@ -343,10 +343,5 @@ Notice the count of pods for planespotter-frontend has not changed, there are st
 
 View the `app-server-deployment_all_k8s.yaml` file, observe the container image value is `yfauser/planespotter-app-server:1508888202fc85246248c0892c0d27dda34de8e1` which is a working configuration. You may notice this does not specify the location of the registry it is using, and that is because this container is located on docker hub, which is a default search location for hosts using docker engine including PKS deployed K8s nodes
 
-<details><summary>Screenshot 1.2 </summary>
-<img src="images/2018-10-24-07-07-26.png">
-</details>
-<br/>
-
 You should now understand the differences in how to configure a kubernetes manifest to pull from docker hub or from Harbor
 
