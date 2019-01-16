@@ -70,14 +70,14 @@
 </details>
 <br/>
 
-1.8 On the `Clair Settings` tab, set the `Updater Interval` to `1` and click `Save`
+1.9 On the `Clair Settings` tab, set the `Updater Interval` to `1` and click `Save`
 
 <details><summary>Screenshot 1.8</summary>
 <img src="Images/2018-10-22-22-13-53.png">
 </details>
 <br/>
 
-1.9 On the `Resource Config` tab, set the `Persistent Disk Type` to `20 GB`
+1.10 On the `Resource Config` tab, set the `Persistent Disk Type` to `20 GB`
 
 <details><summary>Screenshot 1.9</summary>
 <img src="Images/2018-10-22-22-18-57.png">
@@ -86,7 +86,7 @@
 
 **STOP**: Before proceeding, ensure that the PKS tile deployment has completed.  There will be a blue bar across the top that will show `Applying Changes` and a button for `Show Progress` as it continues to apply
 
-1.10 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes`. Uncheck the checkbox by `Pivotal Container Service` and click `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
+1.11 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes`. Uncheck the checkbox by `Pivotal Container Service` and click `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
 
 **Please proceed with Step 2 below while Harbor is deploying, you do not need the Harbor deployment to finish to complete the remaining steps in this guide**
 
