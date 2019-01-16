@@ -283,7 +283,6 @@ If docker push fails with "denied: requested access to the resource is denied", 
 5.3 From the `cli-vm` prompt, delete all local copies of the frontend container image and verify the image has been deleted with the command `docker images`
 
 ```bash
-docker rmi harbor.corp.local/library/frontend:v1
 docker rmi harbor.corp.local/trusted/frontend:v1
 docker images
 ```
@@ -324,7 +323,6 @@ export DOCKER_CONTENT_TRUST=1
 While you are still pushing the same unsigned image to harbor, because you enabled content trust on the `cli-vm` docker client, it will automatically sign an image when pushed
 
 ```bash
-docker pull harbor.corp.local/library/frontend:v1
 docker tag harbor.corp.local/library/frontend:v1 harbor.corp.local/trusted/frontend:v2
 docker push harbor.corp.local/trusted/frontend:v2
 ```
