@@ -72,14 +72,14 @@
 
 1.9 On the `Clair Settings` tab, set the `Updater Interval` to `1` and click `Save`
 
-<details><summary>Screenshot 1.8</summary>
+<details><summary>Screenshot 1.9</summary>
 <img src="Images/2018-10-22-22-13-53.png">
 </details>
 <br/>
 
 1.10 On the `Resource Config` tab, set the `Persistent Disk Type` to `20 GB`
 
-<details><summary>Screenshot 1.9</summary>
+<details><summary>Screenshot 1.10</summary>
 <img src="Images/2018-10-22-22-18-57.png">
 </details>
 <br/>
@@ -90,7 +90,7 @@
 
 **Please proceed with Step 2 below while Harbor is deploying, you do not need the Harbor deployment to finish to complete the remaining steps in this guide**
 
-<details><summary>Screenshot 1.10</summary>
+<details><summary>Screenshot 1.11</summary>
 <img src="Images/2019-01-12-02-25-47.png">
 </details>
 
