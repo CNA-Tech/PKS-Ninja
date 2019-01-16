@@ -1,3 +1,24 @@
+1.3 Create a storage class
+
+- `kubectl create -f ~/planespotter/kubernetes/storage_class.yaml`
+
+1.3 Create a persistent volume claim for MySQL 
+
+- `kubectl create -f ~/planespotter/kubernetes/mysql_claim.yaml`
+
+_The above commands will create a storage class and generate a persistent volume claim needed to store data for the MySQl server , this claim will generate a 2 GB volume. Explore the YAML files to see what will be claimed, the volume type, the amount of storage needed etc._
+
+1.4 Verify the persistent volume has been generated.
+ 
+- `kubectl get pv`
+
+## Step 2: Deploy Planespotter
+
+2.1  Deploy the MySQL Pod
+
+- `kubectl create -f ~/planespotter/kubernetes/mysql_pod.yaml`
+
+
 ### Persistent Volumes and Kubernetes Storage Policy
 
 Although it is relatively easy to run stateless Microservices using container technology,
