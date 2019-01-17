@@ -13,8 +13,6 @@
 
 For this lab, you will need access to the ControlCenter desktop and an active Wavefront subscription. You will need to have already installed PKS with an operational kubernetes cluster deployed; if not, complete the install PKS and Deploy First Cluster labs before continuing.
 
-*If you haven't already, register for a 30 day trial Wavefront subscription at <a href="https://www.wavefront.com/sign-up/" target="_blank">https://www.wavefront.com/sign-up</a> . (If you are a VMware employee, you will need to provide a personal email address.) The process shold take less than 30 seconds.* 
-
 ## Step 1: Review Current Cluster Pods
 
 1.1 From the ControlCenter desktop, open putty, connect to **cli-vm**, and issue the following command: 
