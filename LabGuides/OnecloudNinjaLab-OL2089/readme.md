@@ -90,6 +90,6 @@ The PKS Ninja vApp Template is available in the Global Field Enablement catalogs
 </details>
 <br/>
 
-1.10 You must run a script to make some minor updates to the lab environment before beginning any lab guides [per the instructions here](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Staging/Labrary/Microlabs/NinjaLabPrepScript-CI4231.md)
+1.10 You must run a script to make some minor updates to the lab environment before beginning any lab guides [per the instructions here](https://github.com/CNA-Tech/PKS-Ninja/blob/master/Labrary/Microlabs/NinjaLabPrepScript-CI4231.md)
 
 ### You have now completed this exercise, you will need to complete either the [PKS the Easy Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheEasyWay-PE6650) or the [PKS The Hard Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheHardWay-PH7885) course to install PKS, and then you can use this lab environment to complete available courses and lab guides
