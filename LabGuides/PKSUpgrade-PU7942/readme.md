@@ -1,6 +1,12 @@
 # Lab - PKS Upgrade
 
-**Contents:**
+## Contents
+- [Prereqs](#prereqs)
+- [Step 1: Review Current Versions Detail](#step-1-review-current-versions-detail)
+- [Step 2: Prepare for PKS Upgrade](#step-2-prepare-for-pks-upgrade)
+- [Step 3: Upgrade PKS Tile](#step-3-upgrade-pks-tile)
+- [Step 4: Update CLI Tools](#step-4-update-cli-tools)
+- [Summary](#summary)
 
 
 
