@@ -7,10 +7,8 @@
 - [Step 2: Prepare for PKS Upgrade](#step-2-prepare-for-pks-upgrade)
 - [Step 3: Upgrade PKS Tile](#step-3-upgrade-pks-tile)
 - [Step 4: Upgrade CLI Tools](#step-4-upgrade-cli-tools)
-- [Step 5: Verify Kubernetes Upgrade](#step-5-verify-kubernetes-upgrade)
+- [Step 5: Verify  Upgrade](#step-5-verify-upgrade)
 - [Summary](#summary)
-
-
 
 ## Prereqs
 
@@ -18,7 +16,7 @@ For this lab, you will need access to the ControlCenter desktop, a working PKS d
 
 You will need an account on PivNet to download udpate tile and stemcells. If you do not have a PivNet account, follow the directions to create one here: https://account.run.pivotal.io/z/uaa/sign-up
 
-_Versions of PKS referred to in this lab guide may differ form the version you use to upgrade. For a protocred lab, your lab proctor will instruct you on the versions to use. For a non-proctored lab, you will need to determine the next viable upgrade version and adjust._
+_NOTE: Versions of PKS referred to in this lab guide may differ form the version you use to upgrade. For a protocred lab, your lab proctor will instruct you on the versions to use. For a non-proctored lab, you will need to determine the next viable upgrade version and adjust._
 
 ## Step 1: Review Current Versions Detail
 
@@ -34,15 +32,12 @@ _Versions of PKS referred to in this lab guide may differ form the version you u
 
 <details><summary>Screenshot 1.3</summary><img src="Images/2019-01-18-20-45-01.png"></details><br>
 
-1.4 Sign into Pivnet and access the PKS 1.2.0 release page at _(Right click and open in new tab)_
-https://network.pivotal.io/products/pivotal-container-service#/releases/191865. 
-
-_NOTE: If you don't have a pivnet account, create one per the instructions_
+1.4 Sign into Pivnet and access the PKS 1.2.0 release page _(Right click and open in new tab)_ https://network.pivotal.io/products/pivotal-container-service#/releases/191865. 
 
 
 <details><summary>Screenshot 1.4</summary><img src="Images/2019-01-19-02-11-44.png"></details><br>
 
-1.5 Scroll down and review the release details. You'll notice that version 1.2.0 includes Kubernetes 1.11.2, AWS EC2 support, NSX-T 2.3 integration, etc., and that the required stemcell version is 97.17. You can click on `Release Notes*` for extended information. Compare these versions to the information you collected above.
+1.5 Scroll down and review the release details. You'll notice that version 1.2.0 includes Kubernetes 1.11.2, AWS EC2 support, NSX-T 2.3 integration, etc., and that the required stemcell version is 97.17. You can click on `Release Notes*` for extended information. Compare these versions to the information you observed above.
 
 <details><summary>Screenshot 1.5</summary><img src="Images/2019-01-18-20-39-53.png"></details><br>
 
@@ -50,7 +45,7 @@ _NOTE: If you don't have a pivnet account, create one per the instructions_
 
 <details><summary>Screenshot 1.6</summary><img src="Images/2019-01-18-20-52-55.png"></details><br>
 
-1.7 Scroll down and review the `Depends On` and `Upgrades From` sections in the Relase Details pane. Notice that this release can upgrade from PKS release 1.2.0 and that it depends on a one of a number of BOSH release versions. Notice that the stemcell version will need to be upgraded as well.
+1.7 Scroll down and review the `Depends On` and `Upgrades From` sections in the Release Details pane. Notice that this release can upgrade from PKS release 1.2.0 and that it depends on a one of a number of BOSH release versions. Notice that the stemcell version will need to be upgraded as well.
 
 _NOTE: Based on the versions we observed above, we are ok to upgrade from PKS v1.2.0.build.47 but we are not ok to upgrade based on BOSH v2.3-build.146 (You can click on the depends on and upgrades from links to determine the equivelant build numbers). In real use, we would upgrade BOSH before upgrading PKS. To save time in the lab, we will upgrade PKS with the current version of BOSH._
 
@@ -126,8 +121,7 @@ _NOTE: It can take a few minutes for the tile to import, based on lab environmen
 
 3.7 Select `bosh-stemcell-97.43-vsphere-esxi-ubuntu-xenial-go_agent.tgz` and click `Open`
 
-<details><summary>Screenshot 3.7.1</summary><img src="Images/2019-01-18-23-32-15.png"></details>
-<details><summary>Screenshot 3.7.2</summary><img src="Images/2019-01-18-23-34-41.png"></details><br>
+<details><summary>Screenshot 3.7.1</summary><img src="Images/2019-01-18-23-32-15.png"></details><br>
 
 3.8 Apply the stemcell to `Product: Pivotal Container Service v1.2.6-build.2`
 
@@ -141,7 +135,7 @@ _NOTE: You will probably have the option to apply to Harbor, based on which labs
 
 3.10 
 
-Clcik on `Reviewing Pending Changes`
+Clcik on `Review Pending Changes`
 
 <details><summary>Screenshot 3.10</summary><img src="Images/2019-01-18-23-44-07.png"></details><br>
 
@@ -154,11 +148,11 @@ Click `Apply Changes` and continue to the next step
 
 ## Step 4: Upgrade CLI Tools
 
-In this section, you will copy the updated pks and kubectl CLI tools to your CLI VM. When you upgrade a PKS version, you are upgrading your Kubernetes and PKS API versions. This requires an update to the CLI tools you use to interact with the services. We will use the Putty pscp utility to copy the files we downloaded to the cli-vm and then make the necessary permission changes in Linux
+In this section, you will copy the updated pks and kubectl CLI tools to your CLI VM. When you upgrade a PKS version, you are upgrading your Kubernetes and PKS API versions. This requires an update to the CLI tools you use to interact with the services. You will use the Putty pscp utility to copy the downloaded files to the cli-vm
 
 4.1 From the ControlCenter desktop, open a Windows command prompt
 
-<details><summary>Screenshot 4.1</summary><img src="Images/2019-01-18-23-58-11.png"></details><br>
+<details><summary>Screenshot 4.1</summary><img src="Images/2019-01-19-03-09-21.png"></details><br>
 
 4.2 Execute the following command to update the `pks` cli tool
 
