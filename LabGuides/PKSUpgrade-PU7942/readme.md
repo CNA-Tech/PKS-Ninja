@@ -1,4 +1,4 @@
-# Lab - PKS Upgrade
+# PKS Upgrade
 
 ## Contents
 
@@ -14,9 +14,9 @@
 
 For this lab, you will need access to the ControlCenter desktop, a working PKS deployment at release version current-1, or lower, and a PKS deployed kubernetes cluster.
 
-You will need an account on PivNet to download udpate tile and stemcells. If you do not have a PivNet account, follow the directions to create one here: https://account.run.pivotal.io/z/uaa/sign-up
+You will need an account on Pivnet to download udpate tile and stemcells. If you do not have a Pivnet account, follow the directions to create one here: https://account.run.pivotal.io/z/uaa/sign-up
 
-_NOTE: Versions of PKS referred to in this lab guide may differ form the version you use to upgrade. For a protocred lab, your lab proctor will instruct you on the versions to use. For a non-proctored lab, you will need to determine the next viable upgrade version and adjust._
+_NOTE: Versions of PKS referred to in this lab guide may differ from the version you use to upgrade. For an instructor led lab, your lab guide will instruct you on the versions to use. For a seld-led lab, you will need to determine the next viable upgrade version and adjust._
 
 ## Step 1: Review Current Versions Detail
 
