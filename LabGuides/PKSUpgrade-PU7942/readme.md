@@ -178,20 +178,20 @@ pscp E:\Downloads\kubectl-linux-amd64-1.11.6 root@cli-vm.corp.local:/usr/local/b
 
 <details><summary>Screenshot 4.4</summary><img src="Images/2019-01-19-00-27-07.png"></details><br>
 
-4.5 Check on the Opsman deployment of the PKS update and ensure that it has completed successfully. Click on `Return to Dashboard`. Notice the PKS tile version maintains upgraded version after successful deployment.
+## Step 5: Verify  Upgrade
 
-<details><summary>Screenshot 4.5.1</summary><img src="Images/2019-01-19-00-36-33.png"></details>
-<details><summary>Screenshot 4.5.2</summary><img src="Images/2019-01-19-00-47-31.png"></details><br>
+5.1 Check on the Opsman deployment of the PKS update and ensure that it has completed successfully. Click on `Return to Dashboard`. Notice the PKS tile version maintains upgraded version after successful deployment.
 
-## Step 5: Verify Kubernetes Upgrade
+<details><summary>Screenshot 5.1.1</summary><img src="Images/2019-01-19-00-36-33.png"></details>
+<details><summary>Screenshot 5.1.2</summary><img src="Images/2019-01-19-00-47-31.png"></details><br>
 
-5.1 Open a `Putty `session to `cli-vm` (if it's not already open). Submit the command `kubectl get nodes` to view the upgraded version of your kubernetes cluster
+5.2 Open a `Putty `session to `cli-vm` (if it's not already open). Submit the command `kubectl get nodes` to view the upgraded version of your kubernetes cluster
 
 _NOTE: If you receive an error, log back into to PKS controller and submit the get-credentials command for your cluster. (e.g. `pks login -a pks.corp.local -u pks-admin -p VMware1! --skip-ssl-validation` -> `pks get-credentials my-cluster`)_
 
-5.2 Observe the upgraded version of Kubernetes with the `kubectl get nodes` command. You should see that you've upgraded your Kubernetes clusters from 1.11.2 to 1.11.6. 
+5.3 Observe the upgraded version of Kubernetes with the `kubectl get nodes` command. You should see that you've upgraded your Kubernetes clusters from 1.11.2 to 1.11.6. 
 
-<details><summary>Screenshot 5.2</summary><img src="Images/2019-01-19-01-26-17.png"></details><br>
+<details><summary>Screenshot 5.3</summary><img src="Images/2019-01-19-01-26-17.png"></details><br>
 
 
 ## Summary
