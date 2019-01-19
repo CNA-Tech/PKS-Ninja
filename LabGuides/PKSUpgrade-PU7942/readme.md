@@ -6,7 +6,7 @@
 - [Step 1: Review Current Versions Detail](#step-1-review-current-versions-detail)
 - [Step 2: Prepare for PKS Upgrade](#step-2-prepare-for-pks-upgrade)
 - [Step 3: Upgrade PKS Tile](#step-3-upgrade-pks-tile)
-- [Step 4: Update CLI Tools](#step-4-update-cli-tools)
+- [Step 4: Upgrade CLI Tools](#step-4-upgrade-cli-tools)
 - [Step 5: Verify Kubernetes Upgrade](#step-5-verify-kubernetes-upgrade)
 - [Summary](#summary)
 
@@ -198,4 +198,6 @@ _NOTE: If you receive an error, log back into to PKS controller and submit the g
 ## Summary
 
 You have successfully upgraded the PKS and Kuberbetes environment. The PKS control plane is now updated and the Kubernetes clusters are running secured, validated, and updated versions of Linux and Kubernetes. Your replica set pods continued to run throughout the upgrade as a result of the BOSH canary upgrade process. You should be enabled to apply the above process to upgrading any version of PKS.
+
+At the time this guide was written, PKS 1.3.0 was released. You can follow the upgrade procedures above to continue an upgrade to PKS v1.3.0.
 
