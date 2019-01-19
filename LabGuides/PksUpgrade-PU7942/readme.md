@@ -103,7 +103,7 @@ Now that we know which versions we're on and which version we can upgrade to, th
 
 <details><summary>Screenshot 3.3.1</summary><img src="Images/2019-01-18-23-05-11.png"></details>
 
-_NOTE: It can take a few minutes for the tile to import, based on lab environment. If it takes longer, hit your browser refresh_
+_NOTE: It can take a while for the tile to import, based on lab environment._
 
 <details><summary>Screenshot 3.3.2</summary><img src="Images/2019-01-18-23-08-23.png"></details><br>
 
