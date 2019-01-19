@@ -6,7 +6,7 @@
 - [Step 1: Review Current Versions Detail](#step-1-review-current-versions-detail)
 - [Step 2: Prepare for PKS Upgrade](#step-2-prepare-for-pks-upgrade)
 - [Step 3: Upgrade PKS Tile](#step-3-upgrade-pks-tile)
-- [Step 4: Update CLI Tools](#step-4-update-cli-tools)
+- [Step 4: Upgrade CLI Tools](#step-4-upgrade-cli-tools)
 - [Step 5: Verify Kubernetes Upgrade](#step-5-verify-kubernetes-upgrade)
 - [Summary](#summary)
 
