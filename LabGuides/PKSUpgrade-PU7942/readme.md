@@ -24,7 +24,7 @@ _Versions of PKS referred to in this lab guide may differ form the version you u
 
 1.1 From the ControlCenter desktop, login to Opsman from the browser with username `admin` and pasword `VMware1!`
 
-<details><summary>Screenshot 1.1</summary><img src="Images/2019-01-18-20-18-19.png"></details><br>
+<details><summary>Screenshot 1.1</summary><img src="Images/2019-01-19-02-17-40.png"></details><br>
 
 1.2 View the BOSH Director and PKS Tile versions _(In this case, the versions are v2.3-build.146 and v1.2.0.build.47)_ When you upgrade PKS, you need to know the specific versions of BOSH and PKS you are running in order to know which version you can move up to. If you are upgrading at each release _(and you should be)_ , this is not a necessary check.
 
@@ -34,12 +34,13 @@ _Versions of PKS referred to in this lab guide may differ form the version you u
 
 <details><summary>Screenshot 1.3</summary><img src="Images/2019-01-18-20-45-01.png"></details><br>
 
-1.4 Log into Pivnet and access the PKS 1.2.0 release page at 
-https://network.pivotal.io/products/pivotal-container-service#/releases/191865. Review the `CRITICAL` notice at the top of the page
+1.4 Sign into Pivnet and access the PKS 1.2.0 release page at _(Right click and open in new tab)_
+https://network.pivotal.io/products/pivotal-container-service#/releases/191865. 
 
-_NOTE: If you do not see the warning, make sure you are logged in with your Pivnet account._
+_NOTE: If you don't have a pivnet account, create one per the instructions_
 
-<details><summary>Screenshot 1.4</summary><img src="Images/2019-01-18-20-37-55.png"></details><br>
+
+<details><summary>Screenshot 1.4</summary><img src="Images/2019-01-19-02-11-44.png"></details><br>
 
 1.5 Scroll down and review the release details. You'll notice that version 1.2.0 includes Kubernetes 1.11.2, AWS EC2 support, NSX-T 2.3 integration, etc., and that the required stemcell version is 97.17. You can click on `Release Notes*` for extended information. Compare these versions to the information you collected above.
 
