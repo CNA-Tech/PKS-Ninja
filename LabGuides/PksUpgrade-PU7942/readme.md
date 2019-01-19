@@ -32,7 +32,7 @@ _NOTE: Versions of PKS referred to in this lab guide may differ from the version
 
 <details><summary>Screenshot 1.3</summary><img src="Images/2019-01-18-20-45-01.png"></details><br>
 
-1.4 Sign into Pivnet and access the PKS 1.2.0 release page _(Right click and open in new tab)_ https://network.pivotal.io/products/pivotal-container-service#/releases/191865. 
+1.4 Sign in to Pivnet and access the PKS 1.2.0 release page _(Right click and open in new tab)_ https://network.pivotal.io/products/pivotal-container-service#/releases/191865. 
 
 
 <details><summary>Screenshot 1.4</summary><img src="Images/2019-01-19-02-11-44.png"></details><br>
@@ -45,7 +45,7 @@ _NOTE: Versions of PKS referred to in this lab guide may differ from the version
 
 <details><summary>Screenshot 1.6</summary><img src="Images/2019-01-18-20-52-55.png"></details><br>
 
-1.7 Scroll down and review the `Depends On` and `Upgrades From` sections in the Release Details pane. Notice that this release can upgrade from PKS release 1.2.0 and that it depends on a one of a number of BOSH release versions. Notice that the stemcell version will need to be upgraded as well.
+1.7 Scroll down and review the `Depends On` and `Upgrades From` sections in the Release Details pane. Notice that this release can upgrade from PKS release 1.2.0 and that it depends on particular BOSH release versions. Notice that the stemcell version will need to be upgraded as well.
 
 _NOTE: Based on the versions we observed above, we are ok to upgrade from PKS v1.2.0.build.47 but we are not ok to upgrade based on BOSH v2.3-build.146 (You can click on the depends on and upgrades from links to determine the equivelant build numbers). In real use, we would upgrade BOSH before upgrading PKS. To save time in the lab, we will upgrade PKS with the current version of BOSH._
 
