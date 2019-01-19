@@ -199,3 +199,5 @@ _NOTE: If you receive an error, log back into to PKS controller and submit the g
 
 You have successfully upgraded the PKS and Kuberbetes environment. The PKS control plane is now updated and the Kubernetes clusters are running secured, validated, and updated versions of Linux and Kubernetes. Your replica set pods continued to run throughout the upgrade as a result of the BOSH canary upgrade process. You should be enabled to apply the above process to upgrading any version of PKS.
 
+At the time this guide was written, PKS 1.3.0 was released. You can follow the upgrade procedures above to continue an upgrade to PKS v1.3.0.
+
