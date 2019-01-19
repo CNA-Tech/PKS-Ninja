@@ -122,7 +122,7 @@ _NOTE: It can take a few minutes for the tile to import, based on lab environmen
 
 3.6 Click on `Import Stemcell`
 
-<details><summary>Screenshot #.#</summary><img src="Images/2019-01-18-23-30-55.png"></details><br>
+<details><summary>Screenshot 3.6</summary><img src="Images/2019-01-18-23-30-55.png"></details><br>
 
 3.7 Select `bosh-stemcell-97.43-vsphere-esxi-ubuntu-xenial-go_agent.tgz` and click `Open`
 
@@ -152,7 +152,7 @@ Click `Apply Changes` and continue to the next step
 <details><summary>Screenshot 3.11.1</summary><img src="Images/2019-01-18-23-45-48.png"></details>
 <details><summary>Screenshot 3.11.2</summary><img src="Images/2019-01-18-23-48-34.png"></details><br>
 
-## Step 4: Update CLI Tools
+## Step 4: Upgrade CLI Tools
 
 In this section, you will copy the updated pks and kubectl CLI tools to your CLI VM. When you upgrade a PKS version, you are upgrading your Kubernetes and PKS API versions. This requires an update to the CLI tools you use to interact with the services. We will use the Putty pscp utility to copy the files we downloaded to the cli-vm and then make the necessary permission changes in Linux
 
