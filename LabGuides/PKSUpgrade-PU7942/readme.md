@@ -1,11 +1,13 @@
 # Lab - PKS Upgrade
 
 ## Contents
+
 - [Prereqs](#prereqs)
 - [Step 1: Review Current Versions Detail](#step-1-review-current-versions-detail)
 - [Step 2: Prepare for PKS Upgrade](#step-2-prepare-for-pks-upgrade)
 - [Step 3: Upgrade PKS Tile](#step-3-upgrade-pks-tile)
 - [Step 4: Update CLI Tools](#step-4-update-cli-tools)
+- [Step 5: Verify Kubernetes Upgrade](#step-5-verify-kubernetes-upgrade)
 - [Summary](#summary)
 
 
@@ -181,7 +183,7 @@ pscp E:\Downloads\kubectl-linux-amd64-1.11.6 root@cli-vm.corp.local:/usr/local/b
 <details><summary>Screenshot 4.5.1</summary><img src="Images/2019-01-19-00-36-33.png"></details>
 <details><summary>Screenshot 4.5.2</summary><img src="Images/2019-01-19-00-47-31.png"></details><br>
 
-Step 5: Verify Kubernetes Upgrade
+## Step 5: Verify Kubernetes Upgrade
 
 5.1 Open a `Putty `session to `cli-vm` (if it's not already open). Submit the command `kubectl get nodes` to view the upgraded version of your kubernetes cluster
 
