@@ -137,7 +137,7 @@ _NOTE: You will probably have the option to apply to Harbor, based on which labs
 
 <details><summary>Screenshot 3.10</summary><img src="Images/2019-01-18-23-44-07.png"></details><br>
 
-3.11 Click `Apply Changes` and continue to the next step
+3.11 If there are other tiles installed (e.g. Hrabor), clear the check box for them. Click `Apply Changes` and continue to the next step
 
 <details><summary>Screenshot 3.11.1</summary><img src="Images/2019-01-18-23-45-48.png"></details>
 <details><summary>Screenshot 3.11.2</summary><img src="Images/2019-01-18-23-48-34.png"></details><br>
