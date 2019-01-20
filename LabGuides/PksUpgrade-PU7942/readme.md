@@ -101,9 +101,9 @@ Now that we know which versions we're on and which version we can upgrade to, th
 
 3.3 Select `pivotal-container-service-1.2.6-build.2.pivotal` and click on `Open`
 
-<details><summary>Screenshot 3.3.1</summary><img src="Images/2019-01-18-23-05-11.png"></details>
-
 _NOTE: It can take a while for the tile to import, based on lab environment._
+
+<details><summary>Screenshot 3.3.1</summary><img src="Images/2019-01-18-23-05-11.png"></details>
 
 <details><summary>Screenshot 3.3.2</summary><img src="Images/2019-01-18-23-08-23.png"></details><br>
 
@@ -133,15 +133,11 @@ _NOTE: You will probably have the option to apply to Harbor, based on which labs
 
 <details><summary>Screenshot 3.9</summary><img src="Images/2019-01-18-23-39-36.png"></details><br>
 
-3.10 
-
-Clcik on `Review Pending Changes`
+3.10 Clcik on `Review Pending Changes`
 
 <details><summary>Screenshot 3.10</summary><img src="Images/2019-01-18-23-44-07.png"></details><br>
 
-3.11
-
-Click `Apply Changes` and continue to the next step
+3.11 Click `Apply Changes` and continue to the next step
 
 <details><summary>Screenshot 3.11.1</summary><img src="Images/2019-01-18-23-45-48.png"></details>
 <details><summary>Screenshot 3.11.2</summary><img src="Images/2019-01-18-23-48-34.png"></details><br>
@@ -161,7 +157,7 @@ pscp E:\Downloads\pks-linux-amd64-1.2.5-build.5 root@cli-vm.corp.local:/usr/loca
 ```
 <details><summary>Screenshot 4.2</summary><img src="Images/2019-01-19-00-14-25.png"></details><br>
 
-4.3 Type `y` and `Enter` to accept the cli-vm key
+4.3 Type `y` and `Enter` to accept the cli-vm key signature
 
 <details><summary>Screenshot 4.3</summary><img src="Images/2019-01-19-00-16-14.png"></details><br>
 
