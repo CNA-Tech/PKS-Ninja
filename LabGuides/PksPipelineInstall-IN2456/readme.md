@@ -6,11 +6,11 @@ In this guide you will add the PKS Installation Pipeline to Concourse and start 
 
 1.1 From the `cli-vm` prompt, Import the PKS pipeline using the `fly` cli command on the cli-vm.
 
-`cd ~/nsx-t-ci-pipelines/pipelines`
-
-`source pks-setup.sh`
-
-`fly-s`
+```bash
+cd ~/nsx-t-ci-pipeline/pipelines
+source pks-setup.sh
+fly-s
+```
 
 - confirm the parameters file import with `y`
 
@@ -33,8 +33,8 @@ In this guide you will add the PKS Installation Pipeline to Concourse and start 
 
 1.3 In the upper right-hand corner login to Concourse
 
-- Username: nsx
-- Password: vmware
+- Username: admin
+- Password: VMware1!
 
 <details><summary>Screenshot 1.3</summary>
 <img src="Images/concourse-login.png">

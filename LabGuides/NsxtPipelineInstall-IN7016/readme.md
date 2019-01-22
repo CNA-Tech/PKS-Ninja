@@ -1,4 +1,4 @@
-# Lab 9 - NSX-T Pipeline Install
+# NSX-T Pipeline Install
 
 ## Overview
 
@@ -7,17 +7,14 @@ The NSX-T Pipeline was created to provide our customers a simple way to deploy N
 
 In this lab you will setup Concourse and then run a pipeline to install NSX-T
 
+## Prerequisites
+
+- Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
+- If you are using the PKS Ninja v10 template, you must install the [v10 template patch](https://github.com/CNA-Tech/PKS-Ninja/blob/master/Labrary/Microlabs/NinjaLabPrepScript-CI4231.md) before proceeding
+
 ## Concourse setup and NSX-T Pipeline Kickoff
 
 Concourse can be stoodup in many different ways. In this lab we will stand it up using a combination of docker images with docker-compose.
-
-### Prereq's: (Already have been installed)
-
-- Ubuntu 16.04 or later
-- Docker 18.06 or later
-- Docker-compose
-- Git
-- Fly
 
 1.0 SSH to the cli-vm
 
@@ -51,14 +48,15 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 <details><summary>Screenshot 1.3</summary>
 <img src="Images/docker-ps.png">
 </details>
+<br>
 
 1.4 Import the NSX pipeline using the `fly` cli command on the cli-vm.  The source script will create the `fly-s` alias used below to simplify the commands.
 
-`cd ~/nsx-t-datacenter-ci-pipelines/pipelines`
-
-`source nsxt-setup.sh`
-
-`fly-s`
+```bash
+cd ~/nsx-t-datacenter-ci-pipelines/pipelines
+source nsxt-setup.sh
+fly-s
+```
 
 - confirm the parameters file import with `y`
 
@@ -83,15 +81,10 @@ Concourse can be stoodup in many different ways. In this lab we will stand it up
 
 `http://cli-vm.corp.local:8080`
 
-<details><summary>Screenshot 1.5</summary>
-<img src="Images/pipeline-ui.png">
-</details>
-<br>
-
 1.6 In the upper right-hand corner login to Concourse
 
-- Username: admin
-- Password: VMware1!
+- Username: nsx
+- Password: vmware
 
 <details><summary>Screenshot 1.6</summary>
 <img src="Images/concourse-login.png">
