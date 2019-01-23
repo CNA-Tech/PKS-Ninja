@@ -193,11 +193,13 @@ _NOTE: It will take a few minutes for the authentication service to start_
 
 <details><summary>Screenshot 3.21</summary><img src="Images/2019-01-23-17-41-37.png"></details><br>
 
+<!--- 
 3.22 Click on `Review Pending Changes`, deselect all tiles other than BOSH Director, and click `Apply Changes`
 
 <details><summary>Screenshot 3.22</summary><img src="Images/2019-01-23-17-44-26.png"></details><br>
 
 **You can continue to Prepare for PKS Upgrade while the tile BOSH deploys. Do not begin Upgrade PKS Tile before the BOSH tile deployment has successfully completed.**
+-->
 
 
 ## Step 4: Prepare for PKS Upgrade
