@@ -316,10 +316,12 @@ pscp E:\Downloads\kubectl-linux-amd64-1.11.6 root@cli-vm.corp.local:/usr/local/b
 
 ## Step 7: Verify  Upgrade
 
-7.1 Check on the Opsman deployment of the PKS update and ensure that it has completed successfully. Click on `Return to Dashboard`. Notice the PKS tile version maintains upgraded version after successful deployment.
+7.1 Check on the Opsman deployment of the PKS update and ensure that it has completed successfully. Click on `Return to Dashboard`. Notice the upgraded versions of the BOSH and PKS tiles. 
+
+_NOTE: If you only uprgaded PKS, BOSH tile will have a different varion than the image below._
 
 <details><summary>Screenshot 7.1.1</summary><img src="Images/2019-01-19-00-36-33.png"></details>
-<details><summary>Screenshot 7.1.2</summary><img src="Images/2019-01-19-00-47-31.png"></details><br>
+<details><summary>Screenshot 7.1.2</summary><img src="Images/2019-01-23-20-04-06.png"></details><br>
 
 7.2 Open a `Putty `session to `cli-vm` (if it's not already open). Submit the command `kubectl get nodes` to view the upgraded version of your kubernetes cluster
 
