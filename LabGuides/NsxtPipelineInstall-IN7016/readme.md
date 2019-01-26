@@ -83,8 +83,8 @@ fly-s
 
 1.6 In the upper right-hand corner login to Concourse
 
-- Username: nsx
-- Password: vmware
+- Username: admin
+- Password: VMware1!
 
 <details><summary>Screenshot 1.6</summary>
 <img src="Images/concourse-login.png">
