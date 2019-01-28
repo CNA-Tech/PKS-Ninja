@@ -544,8 +544,6 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 - Click **Add** -> **Tier-1 Router**
 - Name: `t1-pks-mgmt`
 - Tier-0 Router: `t0-pks`
-- Edge Cluster: `edge-cluster-1`
-- Edge Cluster Members: `edge-tn-1`
 - Click **Add**
 
 <details><summary>Screenshot 8.5</summary><img src="Images/2018-12-15-15-11-39.png"></details><br>
@@ -555,8 +553,6 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 - Click **Add** -> **Tier-1 Router**
 - Name: `t1-pks-service`
 - Tier-0 Router: `t0-PKS`
-- Edge Cluster: `edge-cluster-1`
-- Edge Cluster Members: `edge-tn-1`
 - Click **Add**
 
 <details><summary>Screenshot 8.6</summary><img src="Images/2018-12-15-15-13-17.png"></details><br>
