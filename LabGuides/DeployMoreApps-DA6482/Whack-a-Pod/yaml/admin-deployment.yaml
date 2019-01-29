@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-deployment
+spec:
+  selector:
+    matchLabels:
+      app: admin
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: admin
+    spec:
+      serviceAccountName: wap-admin
+      containers:
+      - name: admin
+        image: cloudowski/whackapod-admin
+        ports:
+        - containerPort: 8080
+        env:
+        - name: APIIMAGE
+          value: cloudowski/whackapod-api
+        - name: GAMENAMESPACE
+          value: wap-game
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-deployment
+  labels:
+    app: admin
+spec:
+  ports:
+  - port: 8080
+  selector:
+app: admin
