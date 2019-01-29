@@ -62,8 +62,7 @@ kubectl apply -f admin-deployment.yaml
 
 ###Step 1.5: Deploy an Ingress
 
-This yaml will deploy and ingress for the application. You may need to change the host value in line 23 for your environment. For example, if you are using the PKS Ninja vPOD, then you would change host name to 
-whackapod.ing.corp.local.
+This yaml will deploy and ingress for the application. You may need to change the host value in line 23 if you are using a different environment than the PKS Ninja vPOD. 
 
 ```
 kubectl apply -f wap-ingress.yaml
