@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wap-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /api/*
+        backend:
+          serviceName: api-deployment
+          servicePort: 8080
+      - path: /admin/*
+        backend:
+          serviceName: admin-deployment
+          servicePort: 8080
+      - path: /*
+        backend:
+          serviceName: game-deployment
+          servicePort: 8080
+host: whackapod.ing.corp.local
