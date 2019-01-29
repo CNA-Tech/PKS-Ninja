@@ -59,19 +59,19 @@ Note: If you have worked with your own personal Git repository before, the pull 
 
 1.3 In the text editor window, on a new line, enter your validation stamp
 
-Your validation stamp is your github username followed by a semicolon, followed by the PKS Template Version number you are using in your lab environment, followed by `<br/>`, which is an html line break tag to ensure a line break follows your stamp. Include both major and minor version numbering if a minor version is used.
+Your validation stamp is your github username followed by a semicolon, followed by the PKS Template Version number you are using in your lab environment, followed by the date in MM/DD/YY format, followed by `<br/>`, which is an html line break tag to ensure a line break follows your stamp. Include both major and minor version numbering if a minor version is used.
 
-Example #1:
+Example #1 - the github user `Githubuser1` using PKS Lab Template `v5.5` on the date July 1st 2018 would enter the following stamp:
 
-`yourGithubUsername;v1.1<br/>`
+`Githubuser1;v5.5;07/01/18<br/>`
 
-Example #2 - the github user `afewell` using PKS Lab Template `v11`, would enter the following stamp:
+Example #2 - the github user `afewell` using PKS Lab Template `v11` on the date January 28th 2019 would enter the following stamp:
 
-`afewell;v11<br/>`
+`afewell;v11;01/28/19<br/>`
 
 Please see the screenshots below for an additional example. Be sure to use your own github username in your validation stamps
 
-<details><summary>Screenshot 1.3</summary><img src="Images/2019-01-27-03-54-07.png"></details><br>
+<details><summary>Screenshot 1.3</summary><img src="Images/2019-01-28-21-14-57.png"></details><br>
 
 1.4 Under the text editor window in the `Propose file change` section, enter the description `Added Validation Stamp` and click `Propose file change` as shown in the following screenshot
 
