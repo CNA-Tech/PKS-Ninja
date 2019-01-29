@@ -17,7 +17,7 @@ With the help of @nvpnathan, this repo provides a deployment methodology based o
 On your environment, download or clone the files the .yaml files to a directory of your choice
 
 ```
-git clone https://github.com/sgrman/simple_whackapod.git
+git clone https://github.com/CNA-Tech/PKS-Ninja/LabGuides/DeployMoreApps-DA6482/Whack-a-Pod.git
 ```
 
 ###Step 1.1: Deploy Namespaces
