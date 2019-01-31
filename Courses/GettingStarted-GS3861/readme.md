@@ -11,7 +11,10 @@
 ### 1.1 Prerequisite and foundational skills
 
 Basic Linux Skills and awareness of computer operating systems and common system administration concepts typically taught in a standard introductory Linux course are needed for all students. 
-  - Many of the lab guides on this site do not provide thorough explanation of concepts. We recommend reviewing the resources on the  [Community Foundational and Prerequisite Skills](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/FoundationalSkills-FS8954) to find online resources that can help compliment the Ninja lab guides with additional details and explanations of important concepts explored in the lab guides.
+
+Also Many of the lab guides on this site do not provide thorough explanation of concepts. 
+
+Please review the [Community Foundational and Prerequisite Skills](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/FoundationalSkills-FS8954) to find online learning resources to help with foundational to compliment the Ninja lab guides with additional details and explanations of important concepts explored in the exercises.
   
 ### 1.2 Getting in the loop
 
