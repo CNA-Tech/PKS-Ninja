@@ -1,10 +1,10 @@
 # PKS Ninja Community Getting Started Guide
 
-- [Step 1: Prepare and Connect]()
-- [Step 2: Try some courses or labs]()
-- [Step 3: Engage in the Ninja Learning Model]()
-- [Step 4: Become a Regular PKS Ninja Contributor]()
-- [Step 5: Stay in the loop!]()
+- [Step 1: Prepare and Connect](#step-1-prepare-and-connect)
+- [Step 2: Try some courses or labs](#step-2-try-some-courses-or-labs)
+- [Step 3: Engage in the Ninja Learning Model](#step-3-engage-in-the-ninja-learning-model)
+- [Step 4: Become a Regular PKS Ninja Contributor](#step-4-become-a-regular-pks-ninja-contributor)
+- [Step 5: Stay in the loop!](#step-5-stay-in-the-loop)
 
 ## Step 1: Prepare and Connect
 
