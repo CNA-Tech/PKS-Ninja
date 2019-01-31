@@ -1,5 +1,54 @@
 # PKS Ninja Community Getting Started Guide
 
+- [Step 1: Prepare and Connect]()
+- [Step 2: Try some courses or labs]()
+- [Step 3: Engage in the Ninja Learning Model]()
+- [Step 4: Become a PKS Ninja Contributor]()
+
+## Step 1: Prepare and Connect
+
+### 1.1 Prerequisite and foundational skills
+
+Basic Linux Skills and awareness of computer operating systems and common system administration concepts typically taught in a standard introductory Linux course are needed for all students. 
+  - Many of the lab guides on this site do not provide thorough explanation of concepts. We recommend reviewing the resources on the  [Community Foundational and Prerequisite Skills](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/FoundationalSkills-FS8954) to find online resources that can help compliment the Ninja lab guides with additional details and explanations of important concepts explored in the lab guides.
+  
+### 1.2 Getting in the loop
+
+The PKS Ninja community maintains active public communication channels so participants can stay in the loop with the latest updates and reach out to fellow community members for support or to discuss other community topics. Please see details to sign up to the community mailing list and slack channel below
+
+#### 1.2.1 Mailing List
+
+The PKS Ninja community has a public google group to provide a mailing list service. Any important updates for the community will be sent to this list, and members are free to send appropriate requests for PKS Ninja Community related discussions to the list
+
+To sign up for the list, please [click here to visit the pks-ninja-labs google group](https://groups.google.com/forum/#!forum/pks-ninja-labs) and click on the link to "Apply for membership" and your request should be approved as quickly as staff can. There is no special requirement for membership, we currently only require approval to make sure we know and can offer support and a welcome message when a new participant joins the group
+
+#### 1.2.2 Slack Channel
+
+The community hosts an active #pksninjalabs channel on the public VMware Code Slack domain. To sign up, [click here and follow the instructions to sign up for VMware Code](https://code.vmware.com/join)
+
+After you sign up you will get access to the VMware Code Slack domain, login and search for the #pksninjalabs channel and request to join to be added
+
+## Step 2: Try some courses or labs
+
+### 2.1 Get access to a compatible lab environment
+
+While the materials on this site can be used for reference, to take full advantage of the materials you will need to have access to a running PKS environment. We highly recommend using a PKS Ninja Lab environment as the lab guides provide validated, exact steps that work in the PKS Ninja Lab environment exactly. 
+
+For VMware employees, Onecloud templates are available for the PKS Ninja lab, for all others we can provide instructions on how you can build your own compatible lab environment. Please see Getting Access to a Lab Environment for more details.
+
+You can also attempt to complete the lab exercises on your own PKS installation, however you will need to make any adjustments needed to the materials for your specific environment
+
+### 2.2 Before you start
+
+While it is not required, we ask all participants who try a lab guide to let us know if it worked or if you run into any problems. 
+
+If you complete a lab guide, we ask that you add your name to a simple text file quickly so we know it worked for you, the process takes a few seconds, and you will learn the easiest way to contribute to nearly any open source github project and get commits on your public github profile each time you validate a guide. Please see 
+
+If you run into
+
+Note - I am updating this lab right now and had an interruption and have to step away briefly, sorry for any inconvenience, updates to this page will be finished shortly
+
+
 ## Community QuickStart
 
 Complete the following quickstart steps to get started with the PKS-Ninja Community
@@ -40,18 +89,4 @@ All materials on the site are free to use, anyone is welcome to read through the
 
 To fully participate in the community, sign up for the PKS Ninja communication channels and follow the steps to setup your student folder below, which is needed to complete many of the courses and exercises on this site
 
-## Getting in the loop
 
-The PKS Ninja community maintains active public communication channels so participants can stay in the loop with the latest updates and reach out to fellow community members for support or to discuss other community topics
-
-### Mailing List
-
-The PKS Ninja community has a public google group to provide a mailing list service. Any important updates for the community will be sent to this list, and members are free to send appropriate requests for PKS Ninja Community related discussions to the list
-
-To sign up for the list, please [click here to visit the pks-ninja-labs google group](https://groups.google.com/forum/#!forum/pks-ninja-labs) and click on the link to "Apply for membership" and your request should be approved as quickly as staff can. There is no special requirement for membership, we currently only require approval to make sure we know and can offer support and a welcome message when a new participant joins the group
-
-### Slack Channel
-
-The community hosts an active #pksninjalabs channel on the public VMware Code Slack domain. To sign up, [click here and follow the instructions to sign up for VMware Code](https://code.vmware.com/join)
-
-After you sign up you will get access to the VMware Code Slack domain, login and search for the #pksninjalabs channel and request to join to be added
