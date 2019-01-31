@@ -35,7 +35,9 @@ After you sign up you will get access to the VMware Code Slack domain, login and
 
 While the materials on this site can be used for reference, to take full advantage of the materials you will need to have access to a running PKS environment. We highly recommend using a PKS Ninja Lab environment as the lab guides provide validated, exact steps that work in the PKS Ninja Lab environment exactly. 
 
-For VMware employees, Onecloud templates are available for the PKS Ninja lab, for all others we can provide instructions on how you can build your own compatible lab environment. Please see Getting Access to a Lab Environment for more details.
+For VMware employees, Onecloud templates are available for the PKS Ninja lab, for all others we can provide instructions on how you can build your own compatible lab environment. 
+
+Please see [Getting Access to a Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) for more details.
 
 You can also attempt to complete the lab exercises on your own PKS installation, however you will need to make any adjustments needed to the materials for your specific environment
 
@@ -47,7 +49,7 @@ If you complete a lab guide, we ask that you add your name to a simple text file
 
 #### 2.2.1 Please start with the [Commit a Validation Stamp](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ValidationStamp-VS9927) lab to learn this quick process before taking any courses so you can help with this important process while learning valuable cloud native skills. 
 
-#### 2.2.2 If you run into any problems, please create an issue, it takes under a minute and ensures that we have a record to fix the problem. 
+#### 2.2.2 If you run into any problems or have any suggestions, please create an issue, it takes under a minute and ensures that we have a record to fix the problem. 
 
 Opening an issue is as easy as clicking on the issues tab for the repo and submitting a simple ticket explaining the problem in your own words, be sure to include the url of the page you are having a problem with. If you would like further instructions, please see [Opening an Issue on Github](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ReportingAnIssue-RI7933)
 
