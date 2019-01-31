@@ -14,7 +14,7 @@ Basic Linux Skills and awareness of computer operating systems and common system
 
 Also Many of the lab guides on this site do not provide thorough explanation of concepts. 
 
-Please review the [Community Foundational and Prerequisite Skills](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/FoundationalSkills-FS8954) to find online learning resources to help with foundational to compliment the Ninja lab guides with additional details and explanations of important concepts explored in the exercises.
+Please review the [Community Foundational and Prerequisite Skills](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/FoundationalSkills-FS8954) to find online learning resources to help with foundational skills to compliment the Ninja lab guides with additional details and explanations of important concepts explored in the exercises.
   
 ### 1.2 Getting in the loop
 
