@@ -4,7 +4,7 @@
 
 If you find any problems or suggestions for improvement on this site, please open an issue ticket on github describing your issue or suggestion.
 
-If you encounter a problem going through a lab guide and you arent sure if there is a problem in the lab guide or if you may have just made a mistake, its best to try the slack channel for the best response, however you can open a github issue for any sort of issue you encounter, including if you need help completing an exercise. 
+If you encounter a problem going through a lab guide and you arent sure if there is a problem in the lab guide or if you may have just made a mistake, its best to try the slack channel for the best response, however you can open a github issue for any sort of issue you encounter, including if you need help completing an exercise.
 
 Github issues are also used for any sort of suggestion you may have, its very simple to open an issue, per the instructions below.
 
