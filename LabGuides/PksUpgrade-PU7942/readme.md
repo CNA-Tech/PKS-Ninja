@@ -14,7 +14,7 @@
 
 ## Prereqs
 
-For this lab, you will need access to a PKS Ninja lab environment with a working PKS 1.2 deployment and a PKS deployed kubernetes cluster. 
+For this lab, you will need access to a PKS Ninja lab environment with a working PKS 1.2 deployment and a PKS deployed kubernetes cluster.
 
 If you do not already have a prepared lab environment, you can follow the steps in the [Try Some Labs!](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/CommunityLabs-CL7056) course to fully prepare a lab environment to complete this lab guide.
 
@@ -36,7 +36,7 @@ _NOTE: Versions of PKS referred to in this lab guide may differ from the version
 
 <details><summary>Screenshot 1.3</summary><img src="Images/2019-01-18-20-45-01.png"></details><br>
 
-1.4 Sign in to Pivnet and access the PKS 1.2.0 release page _(Right click and open in new tab)_ https://network.pivotal.io/products/pivotal-container-service#/releases/191865. 
+1.4 Sign in to Pivnet and access the PKS 1.2.0 release page _(Right click and open in new tab)_ https://network.pivotal.io/products/pivotal-container-service#/releases/191865.
 
 
 <details><summary>Screenshot 1.4</summary><img src="Images/2019-01-19-02-11-44.png"></details><br>
@@ -175,7 +175,7 @@ _NOTE: The opsman vm will need a few minutes to fully boot. You may need to wait
 
 <details><summary>Screenshot 3.17</summary><img src="Images/2019-01-23-17-33-20.png"></details><br>
 
-3.18 Enter `VMware1!` for Decryption Passphtase and click `Choose File`
+3.18 Enter `VMware1!` for Decryption Passphrase and click `Choose File`
 
 <details><summary>Screenshot 3.18</summary><img src="Images/2019-01-23-17-35-50.png"></details><br>
 
@@ -193,7 +193,7 @@ _NOTE: It will take a few minutes for the authentication service to start_
 
 <details><summary>Screenshot 3.21</summary><img src="Images/2019-01-23-17-41-37.png"></details><br>
 
-<!--- 
+<!---
 3.22 Click on `Review Pending Changes`, deselect all tiles other than BOSH Director, and click `Apply Changes`
 
 <details><summary>Screenshot 3.22</summary><img src="Images/2019-01-23-17-44-26.png"></details><br>
@@ -204,7 +204,7 @@ _NOTE: It will take a few minutes for the authentication service to start_
 
 ## Step 4: Prepare for PKS Upgrade
 
-Now that we know which versions we're on and which version we can upgrade to, the next step is to download the required files.
+Now that we know have upgraded OpsMan and know which versions we're on and which version we can upgrade to, the next step is to download the required files.
 
 4.1 From the Pivnet PKS release 1.2.6 download page (https://network.pivotal.io/products/pivotal-container-service#/releases/191865) download the `Pivotal Container Service` file
 
@@ -316,7 +316,7 @@ pscp E:\Downloads\kubectl-linux-amd64-1.11.6 root@cli-vm.corp.local:/usr/local/b
 
 ## Step 7: Verify  Upgrade
 
-7.1 Check on the Opsman deployment of the PKS update and ensure that it has completed successfully. Click on `Return to Dashboard`. Notice the upgraded versions of the BOSH and PKS tiles. 
+7.1 Check on the Opsman deployment of the PKS update and ensure that it has completed successfully. Click on `Return to Dashboard`. Notice the upgraded versions of the BOSH and PKS tiles.
 
 _NOTE: If you only uprgaded PKS, BOSH tile will have a different varion than the image below._
 
@@ -327,7 +327,7 @@ _NOTE: If you only uprgaded PKS, BOSH tile will have a different varion than the
 
 _NOTE: If you receive an error, log back into to PKS controller and submit the get-credentials command for your cluster. (e.g. `pks login -a pks.corp.local -u pks-admin -p VMware1! --skip-ssl-validation` -> `pks get-credentials my-cluster`)_
 
-7.3 Observe the upgraded version of Kubernetes with the `kubectl get nodes` command. You should see that you've upgraded your Kubernetes clusters from 1.11.2 to 1.11.6. 
+7.3 Observe the upgraded version of Kubernetes with the `kubectl get nodes` command. You should see that you've upgraded your Kubernetes clusters from 1.11.2 to 1.11.6.
 
 <details><summary>Screenshot 7.3</summary><img src="Images/2019-01-19-01-26-17.png"></details><br>
 
@@ -337,4 +337,3 @@ _NOTE: If you receive an error, log back into to PKS controller and submit the g
 You have successfully upgraded the PKS and Kuberbetes environment. The PKS control plane is now updated and the Kubernetes clusters are running secured, validated, and updated versions of Linux and Kubernetes. Your replica set pods continued to run throughout the upgrade as a result of the BOSH canary upgrade process. You should be enabled to apply the above process to upgrading any version of PKS.
 
 At the time this guide was written, PKS 1.3.0 was released. You can follow the upgrade procedures above to continue an upgrade to PKS v1.3.0.
-
