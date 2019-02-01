@@ -204,7 +204,7 @@ _NOTE: It will take a few minutes for the authentication service to start_
 
 ## Step 4: Prepare for PKS Upgrade
 
-Now that we know have upgraded OpsMan and know which versions we're on and which version we can upgrade to, the next step is to download the required files.
+Now that we have upgraded Opsman and know which versions we're on and which version we can upgrade to, the next step is to download the required files for PKS.
 
 4.1 From the Pivnet PKS release 1.2.6 download page (https://network.pivotal.io/products/pivotal-container-service#/releases/191865) download the `Pivotal Container Service` file
 
