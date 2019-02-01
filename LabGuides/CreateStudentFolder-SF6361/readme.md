@@ -152,7 +152,7 @@ git push #follow the prompts to login and push any needed updates to your fork
 </details>
 <br/>
 
-2.5 With this request, you are trying to update the offical CNA-Tech/Students repo with updates from your fork. Set `base fork` to `CNA-Tech/Students`, and `head fork` to `yourGithubId/PKS-Ninja`. Click `Create Pull Request`
+2.5 With this request, you are trying to update the offical CNA-Tech/Students repo with updates from your fork. Set `base fork` to `CNA-Tech/Students`, and `head fork` to `yourGithubId/Students`. Click `Create Pull Request`
 
 <details><summary>Screenshot 2.5</summary>
 <img src="Images/2018-12-14-03-45-10.png">
