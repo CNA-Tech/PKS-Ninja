@@ -1,4 +1,5 @@
 # Courses
+**Please Note: You are viewing the Main Branch of the PKS Ninja Repo, which is currently aligned with PKS NinjaLab template version 11. If you are using a different version, please switch to the branch for your version**
 
 - [Community Getting Started Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GettingStarted-GS3861)
 - [PKS Ninja SE Course Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksNinjaSe-NI6310)
