@@ -76,8 +76,7 @@ Note: The image below will look slightly different than yours as the pipeline wa
 1.8 Execute the pipeline with the **Plus** button in the upper right-hand corner
 
 <details><summary>Screenshot 1.8</summary>
-Note: The image below will look slightly different than yours as the pipeline was already run on the reference system
-<img src="Images/2018-11-11-00-28-04.png">
+<img src="Images/1_8.png">
 </details>
 <br/>
 
