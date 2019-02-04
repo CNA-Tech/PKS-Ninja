@@ -49,7 +49,7 @@ The PKS Ninja vApp Template is available in the Global Field Enablement catalogs
 1.6 On the tile view of your new vApp template, click `Open`, Click on the `Networking` tab, in the `Connection` column dropdown field for `vAppNet-single`, select the only available network connection, ensure `Nat` is checked, and `Firewall` is __not checked__ click `Apply` and wait for the configuration change to be completed by verifying there are `0 Running` tasks in the lower lefthand corner of the webpage, per the screenshots below
 
 <details><summary>Screenshot 1.6.1</summary>
-<img src="Images/2018-12-24-17-34-44.png">
+<img src="Images/OnClouNinjaLab.PNG">
 </details>
 
 <details><summary>Screenshot 1.6.2</summary>
