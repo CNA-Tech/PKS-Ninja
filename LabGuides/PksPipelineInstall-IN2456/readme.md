@@ -44,8 +44,7 @@ fly-s
 1.4 Confirm that the pipeline has imported and hit the **Play** button
 
 <details><summary>Screenshot 1.4</summary>
-Note: The image below will look slightly different than yours as the pipeline was already run on the reference system
-<img src="Images/2018-11-11-00-20-38.png">
+<img src="Images/1_4.PNG">
 </details>
 <br/>
 
