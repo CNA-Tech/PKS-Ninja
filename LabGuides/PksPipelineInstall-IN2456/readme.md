@@ -51,8 +51,7 @@ fly-s
 1.5 Click on `install-pks-with-nsx`
 
 <details><summary>Screenshot 1.5</summary>
-Note: The image below will look slightly different than yours as the pipeline was already run on the reference system
-<img src="Images/2018-11-11-00-22-24.png">
+<img src="Images/1_5.png">
 </details>
 <br/>
 
