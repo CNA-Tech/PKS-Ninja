@@ -61,8 +61,7 @@ fly-s
   - If it is in an errored state perform a `fly-d` and `fly-s` to destroy and re-import the pipeline on the cli-vm.
 
 <details><summary>Screenshot 1.6</summary>
-Note: The image below will look slightly different than yours as the pipeline was already run on the reference system
-<img src="Images/2018-11-11-00-25-04.png">
+<img src="Images/1_6.png">
 </details>
 <br/>
 
