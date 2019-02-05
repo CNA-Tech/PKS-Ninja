@@ -36,7 +36,7 @@ There are 3 onecloud templates available for the v11 template:
 <img src="Images/2019-01-11-02-33-59.png">
 </details>
 
-1.3 Click on `Add vApp fron Catalog`, select `Public Catalogs`, click on `All Templates`, in the search box type `ninja`, select the pks-ninja template and click `Next`
+1.3 Click on `Add vApp from Catalog`, select `Public Catalogs`, click on `All Templates`, in the search box type `ninja`, select the pks-ninja template and click `Next`
 
 <details><summary>Screenshot 1.3.1</summary>
 <img src="Images/2018-12-24-17-20-51.png">
