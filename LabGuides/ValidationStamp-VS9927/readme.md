@@ -25,7 +25,7 @@ Validation Stamps are a very important part of the continuous integration model 
 
 ## Prereqs
 
-For this lab, you will need access to a PKS Ninja lab environment. Please see the [Getting Access to a PKS Ninja Lab Environment] (https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) course for further instructions on lab access.
+You only need access to a web browser and a github account to complete this lab
 
 ## Understanding the Git Pull Request Process
 
@@ -61,13 +61,15 @@ Note: If you have worked with your own personal Git repository before, the pull 
 
 Your validation stamp is your github username followed by a semicolon, followed by the PKS Template Version number you are using in your lab environment, followed by the date in MM/DD/YY format, followed by `<br/>`, which is an html line break tag to ensure a line break follows your stamp. Include both major and minor version numbering if a minor version is used.
 
-Example #1 - the github user `Githubuser1` using PKS Lab Template `v5.5` on the date July 1st 2018 would enter the following stamp:
+Note: When completing the validation stamp for this lab guide, use `v11` as the version number. When you validate any other lab guides be sure to use the version number of the pks lab template you used to complete the exercise. 
 
-`Githubuser1;v5.5;07/01/18<br/>`
+Example #1 - the github user `Githubuser1` using PKS Lab Template `v11` on the date July 1st 2018 would enter the following stamp:
 
-Example #2 - the github user `afewell` using PKS Lab Template `v11` on the date January 28th 2019 would enter the following stamp:
+`Githubuser1;v11;02/04/19<br/>`
 
-`afewell;v11;01/28/19<br/>`
+Example #2 - the github user `afewell` using PKS Lab Template `v10` on the date January 28th 2019 would enter the following stamp:
+
+`afewell;v10;01/28/19<br/>`
 
 Please see the screenshots below for an additional example. Be sure to use your own github username in your validation stamps
 
