@@ -4,9 +4,9 @@
 
 If you find any problems or suggestions for improvement on this site, please open an issue ticket on github describing your issue or suggestion.
 
-If you encounter a problem going through a lab guide and you arent sure if there is a problem in the lab guide or if you may have just made a mistake, its best to try the slack channel for the best response, however you can open a github issue for any sort of issue you encounter, including if you need help completing an exercise.
+If you encounter a problem going through a lab guide and you arent sure if there is a problem in the lab guide or if you may have just made a mistake, it's best to try the slack channel for the best response, however you can open a github issue for any sort of issue you encounter, including if you need help completing an exercise.
 
-Github issues are also used for any sort of suggestion you may have, its very simple to open an issue, per the instructions below.
+Github issues are also used for any sort of suggestion you may have, it's very simple to open an issue, per the instructions below.
 
 ## Instructions
 
@@ -19,7 +19,7 @@ Before you open an issue, please take a moment to look at the issues that are al
 </details>
 <br>
 
-1.2 On the issues page review the open tickets to avoid opening a duplicate issue. On the toolbar, click the `Closed` button to review closed tickets. In many cases the answer to your issue may have already been resolved in closed tickets so it it is valuable to check.
+1.2 On the issues page review the open tickets to avoid opening a duplicate issue. On the toolbar, click the `Closed` button to review closed tickets. In many cases the answer to your issue may have already been resolved in closed tickets so it is valuable to check.
 
 <details><summary>Screenshot 1.2.1</summary>
 <img src="Images/2019-01-28-23-29-46.png">
