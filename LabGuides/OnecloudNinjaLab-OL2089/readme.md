@@ -4,6 +4,21 @@
 
 The PKS Ninja vApp Template is available in the Global Field Enablement catalogs and is currently accessible on the NASA, EMEA and APAC Onecloud Sandbox environments
 
+PKS Ninja uses a standard lab topology and configuration which is currently defined in onecloud templates. Available templates are versioned, and it is important you select the NinjaLab version that aligns with the git branch you are using. The main branch of the github site will always reflect the latest published template, and seperate git branches are maintained for older template versions.
+
+At the time of writing, the current template version is v11, for most users, you can load a v11 template and proceed with the lab guides on the site. If you would like to use an older version, load the older template, and navigate to the appropriate branch on the pks ninja repository to find content specific to your version.
+
+There are 3 onecloud templates available for the v11 template:
+
+    CNABU-2019-01-PKS-Ninja-v11
+        This template has vcenter pre-installed and prepared to do a NSX-t and PKS installation as documented in the PKS the Easy Way or the PKS the Hard Way Courses
+    CNABU-PKS-Ninja-v11-NsxtInstalled
+        This is the same as the above base v11 template, but with NSX-T Preinstalled. This template could take 30-60 minutes to load into a fully operational state
+    CNABU-PKS-Ninja-v11-fullyInstalled
+        This template is built on the base v11 template but has the following pre-installed: NSX-T, OpsMan, Bosh, PKS, Harbor
+        This template will take between 2-4 hours to load into a fully operational state
+
+
 ## Instructions
 
 1.1 Open a web browser, navigate to workspace one and launch your onecloud environment
