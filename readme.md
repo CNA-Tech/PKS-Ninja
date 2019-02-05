@@ -1,5 +1,7 @@
 # Welcome to the PKS Ninja Community
 
+**Please Note, this site is currently in beta/preview mode and under active development. Please excuse any errors or ommissions**
+
 The PKS Ninja Community on Github provides free learning resources for cloud native technologies with a learn-by-doing approach focused on practical, hands on skills. 
 
 All the content on this site revolves around lab exercises, which align tightly with the common PKS Ninja lab environment. You can load up the lab environment template and use it to go through any of the available [Courses](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/). Check out the [Community Getting Started Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GettingStarted-GS3861) for more details. 
@@ -7,6 +9,8 @@ All the content on this site revolves around lab exercises, which align tightly 
 For VMware employees, [Onecloud templates](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) are available for the PKS Ninja lab, for all others we can provide instructions on how you can build your own compatible lab environment. Please see [Getting Access to a Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) for more details.
 
 Materials on this site are continuously updated, and we release new courses and labguides frequently so please check out the [Community Getting Started Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GettingStarted-GS3861) for info on joining the google group and slack channel, how to start taking courses and more. 
+
+**You are currently viewing the main branch of the PKS Ninja repo for the PKS NinjaLab Template Version 11. If you are using a different NinjaLab Template, please switch to the branch for the version you are using**
 
 All content on this site is subject to the Apache 2.0 license [as detailed here](./license.md)
 

@@ -12,7 +12,7 @@ If you are already experienced and comfortable with the github pull request proc
 
 Git is the industry standard version control system used in modern devops and cloud native projects. Whenever someone makes an update to a file in a git repository, git keeps track of anything that has changed and assigns an updated version number automatically. It provides tools in case there is a problem with an update and an administrator needs to roll back to a previous version, along with other features that help manage frequent updates at an agile or CI/CD cadence
 
-While basic familiarity with linux systems administration is a prerequisite for this exercise and most courses,all beginner to intermediate level courses should include detailed step by step instructions with exact commands that work in the standard Ninja lab environment, enabling students with limited linux or git experience to successfully complete exercises and gain familiarity and comfort in a gradual manner towards increasing expertise
+While basic familiarity with linux systems administration is a prerequisite for this exercise and most courses, all beginner to intermediate level courses should include detailed step by step instructions with exact commands that work in the standard Ninja lab environment, enabling students with limited linux or git experience to successfully complete exercises and gain familiarity and comfort in a gradual manner towards increasing expertise
 
 Git is being introduced as a foundational element for all courses on the PKS Ninja community because it is a foundational and necessary skill for modern IT and devops environments. Git was created by Linus Torvalds, and much like Linux it has become an industry standard tool for modern infrastructure and devops projects
 

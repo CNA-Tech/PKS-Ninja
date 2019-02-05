@@ -80,7 +80,7 @@ Note: Early versions of the lab template used login `Username: nsx Password: vmw
 </details>
 
 <details><summary>Screenshot 1.5.3</summary>
-Need screensot of applying changes screen on completion
+Need screenshot of applying changes screen on completion
 </details>
 <br/>
 
