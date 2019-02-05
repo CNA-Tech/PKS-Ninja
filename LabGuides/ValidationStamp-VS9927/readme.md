@@ -49,7 +49,7 @@ Note: If you have worked with your own personal Git repository before, the pull 
 
 ## Instructions
 
-1.1 Open a web browser to [https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ValidationStamp-VS9927](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ValidationStamp-VS9927) and click on the `validate.md` file
+1.1 Open a web browser to [https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ValidationStamp-VS9927](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ValidationStamp-VS9927), make sure you are logges in, and click on the `validate.md` file
 
 <details><summary>Screenshot 1.1</summary><img src="Images/2019-01-27-03-47-10.png"></details><br>
 
