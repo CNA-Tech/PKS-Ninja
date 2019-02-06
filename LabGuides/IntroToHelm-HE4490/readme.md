@@ -101,7 +101,7 @@ Notice the output and instructions on how to connect to the database you just de
 5.4 - You can delete a running Helm release by running `helm delete <insert name from helm ls command>`
 
 <details><summary>Screenshot 5.3.1 </summary>
-<img src="images/helm_ls.png">
+<img src="images/helm_delete.png">
 </details>
 
 ## Summary
