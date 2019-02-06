@@ -50,7 +50,7 @@ subjects:
   - kind: ServiceAccount
     name: tiller
     namespace: kube-system
-    ```
+```
 
 1.3 Save `ctrl + o` then `enter` and exit `ctrl + x` then `enter`
 
