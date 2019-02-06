@@ -156,6 +156,13 @@ If docker push fails with "denied: requested access to the resource is denied", 
 If the cli-vm doesn't DNS resolve harbor.corp.local:
 Find the IP address (10.40.14.5) of the Harbor host from the ControlCenter (RDP desktop) DNS Mgr and add the IP address to /etc/hosts of cli-vm. After that do a docker login and then push!
 
+If `docker login` fails with "Error response from daemon: Get https://harbor.corp.local/v2/: x509: certificate signed by unknown authority", you need to configure Harbor as an insecure registry (or configure certificate trust as per https://docs.docker.com/registry/insecure/)
+
+```bash
+echo '{ "insecure-registries" : ["harbor.corp.local:5000"] }' >> /etc/docker/daemon.json'
+systemctl restart docker
+```
+
 <details><summary>Screenshot 3.2 </summary>
 <img src="Images/2019-01-15-00-10-07.png">
 <img src="Images/2019-01-13-16-48-07.png">
