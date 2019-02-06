@@ -215,6 +215,12 @@ docker images
 <img src="Images/2019-01-15-01-45-27.png">
 </details>
 <br/>
+If Harbor was deployed using the [HarborPipelineInstal-IN4968](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborPipelineInstal-IN4968) and no vulnerabilites are shown when you scan the image, you will need to reconfigure the PKS Harbor tile to set "Updater interval" to 1 hour and apply the changes.
+
+<details><summary>Screenshot 4.1.3</summary>
+<img src="Images/2019-02-06_15-53-52.png">
+</details>
+<br/>
 
 4.2 Place your mouse over the multi-colored bar in the `Vulnerability` column to see a summary of the vulnerability scanning report
 
