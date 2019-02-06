@@ -250,7 +250,7 @@ docker pull harbor.corp.local/library/frontend:v1
 ```
 
 <details><summary>Screenshot 4.5</summary>
-<img src="Images/2019-01-15-00-23-43.png">
+<img src="Images/2019-02-06_20-13-56.png">
 </details>
 <br/>
 
