@@ -83,8 +83,9 @@ To keep your fork in sync with the official repo, you will login to the clone of
 ```bash
 cd ~/Forked/PKS-Ninja/
 git remote add upstream https://github.com/CNA-Tech/PKS-Ninja.git
-git fetch origin git merge upstream/master
-git add .
+git fetch upstream # This command pulls down the latest updates from the upstream repo 
+git merge upstream/master # This command merges any updates from the upstream repo into your local clone of your fork
+git add . # Adds any files in your local clone of the repo that you have updated to staging so they get commited in the following command
 git commit -m "syncing fork with upstream/master"
 git push #follow the prompts to login and push any needed updates to your fork
 ```
