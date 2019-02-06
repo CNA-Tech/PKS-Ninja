@@ -10,7 +10,9 @@
 
 ## Overview
 
-This lab guide will walk you through enabling Helm in a cluster that has RBAC enabled so you can deploy Helm Chart applications.  If your cluster does not leverage RBAC you can skip to step Helm is known as the 'package manager for Kubernetes'.  A very popular way to deploy applications to Kubernetes clusters.
+This lab guide will cover installing Helm and configuring it for use in your PKS environment.  This lab will cover use in a cluster that has RBAC enabled or not.  If your environment does not leverage RBAC you can skip to step 4.1.
+
+Helm is known as the 'package manager for Kubernetes'.  A very popular way to build, share and deploy software designed to run in Kubernetes.
 
 ## Instructions
 To complete this lab, you must have completed the `DeployFirstCluster-DC1610` and ensure you have your kubectl config context set to your cluster.  
@@ -22,10 +24,10 @@ Helm works in a client-server model by leveraging a Tiller pod running in the ku
 
 In your `cli-vm`:
 
-Create a new config file ```nano rbac-config.yaml```
+Create a new config file `nano rbac-config.yaml`
 
 <details><summary>Screenshot 1.1.1 </summary>
-<img src="images/rbac-config.png">
+<img src="images/nano-config.png">
 </details>
 
 1.2 - Copy the below text into the open file
@@ -52,10 +54,6 @@ subjects:
 
 1.3 Save `ctrl + o` then `enter` and exit `ctrl + x` then `enter`
 
-<details><summary>Screenshot 1.3.1 </summary>
-<img src="images/nano-config.png">
-</details>
-
 ## Step 2: Apply the service account for Tiller created in Step 1
 
 2.1 - Create and bind the Tiller service account</br> `kubectl create -f rbac-config.yaml`
@@ -68,10 +66,10 @@ subjects:
 </details>
 
 ## Step 4: Deploy Helm via Tiller service account
-4.1 - Helm init will initialize Helm and Tiller on the client and server, and allow you to begin use! </br>
+4.1 - Helm init will initialize Helm and Tiller on the client and in your cluster, and allow you to begin use! </br>
 `helm init --service-account tiller`
 
-**if not using RBAC you can simply run `helm init` and it will install Tiller into the cluster in your current context**
+**if not using RBAC you can simply run `helm init` and it will install Tiller into the cluster in your current kubectl context**
 
 ## Step 5: Deploy a MySQL Helm Chart
 5.1 - Update your Helm repo to ensure Helm can download the latest stable chart </br>
@@ -91,7 +89,7 @@ subjects:
 <img src="images/helm_mysql2.png">
 </details>
 
-5.3 - Notice the output and instructions on how to connect to the database you just deployed.  When a chart is deployed, it is called a `release`.  You can see the running Helm charts by deployed and running with `helm ls`
+5.3 - Notice the output and instructions on how to connect to the database you just deployed.  When a chart is deployed, it is called a `release`.  You can see the running Helm charts by deployed and running with `helm ls`.
 
 <details><summary>Screenshot 5.3.1 </summary>
 <img src="images/helm_ls.png">
