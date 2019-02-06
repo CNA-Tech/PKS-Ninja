@@ -52,7 +52,7 @@ subjects:
     namespace: kube-system
 ```
 
-1.3 Save the file - `ctrl + o` then `enter`
+1.3 Save the file - `ctrl + o` then `enter` </br>
 1.4 Then exit the text editor - `ctrl + x` then `enter`
 
 ## Step 2: Apply the service account config
