@@ -52,9 +52,10 @@ subjects:
     namespace: kube-system
 ```
 
-1.3 Save `ctrl + o` then `enter` and exit `ctrl + x` then `enter`
+1.3 Save the file - `ctrl + o` then `enter`
+1.4 Then exit the text editor - `ctrl + x` then `enter`
 
-## Step 2: Apply the service account for Tiller created in Step 1
+## Step 2: Apply the service account config
 
 2.1 - Create and bind the Tiller service account</br> `kubectl create -f rbac-config.yaml`
 
@@ -66,10 +67,10 @@ subjects:
 </details>
 
 ## Step 4: Deploy Helm via Tiller service account
-4.1 - Helm init will initialize Helm and Tiller on the client and in your cluster, and allow you to begin use! </br>
+4.1 - The `helm init` command will initialize Helm and Tiller on the client and in your cluster, and allow you to begin use! </br>
 `helm init --service-account tiller`
 
-**if not using RBAC you can simply run `helm init` and it will install Tiller into the cluster in your current kubectl context**
+*If skipping from the beginng of the guide because the environment is not using RBAC, you can simply run `helm init` and it will install Tiller into the cluster in your current kubectl context*
 
 ## Step 5: Deploy a MySQL Helm Chart
 5.1 - Update your Helm repo to ensure Helm can download the latest stable chart </br>
@@ -79,8 +80,10 @@ subjects:
 <img src="images/helm_repo.png">
 </details>
 
-5.2 - Install the latest MySQL stable chart in the Helm public repository
+5.2 - Install the latest MySQL stable chart in the Helm public repository</br>
 `helm install stable/mysql`
+
+Notice the output and instructions on how to connect to the database you just deployed.
 
 <details><summary>Screenshot 5.2.1 </summary>
 <img src="images/helm_mysql1.png">
@@ -89,7 +92,7 @@ subjects:
 <img src="images/helm_mysql2.png">
 </details>
 
-5.3 - Notice the output and instructions on how to connect to the database you just deployed.  When a chart is deployed, it is called a `release`.  You can see the running Helm charts by deployed and running with `helm ls`.
+5.3 - When a chart is deployed, it is called a `release`.  You can see the running Helm charts by deployed and running with `helm ls`.
 
 <details><summary>Screenshot 5.3.1 </summary>
 <img src="images/helm_ls.png">
@@ -102,4 +105,4 @@ subjects:
 </details>
 
 ## Summary
-From this guide, you should be able to deploy Helm/Tiller to your PKS K8s clusters including clusters leveraging RBAC.  You should be able to install a Helm chart, view the running Helm releases, and delete them as well.
+From this guide, you should be able to deploy Helm/Tiller to your PKS K8s clusters including clusters leveraging RBAC.  You now know how to install a Helm chart, view the running Helm releases, and delete them as well.
