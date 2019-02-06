@@ -14,7 +14,7 @@ In this lab you will setup Concourse and then run a pipeline to install NSX-T
 
 ## Concourse setup and NSX-T Pipeline Kickoff
 
-Concourse can be stoodup in many different ways. In this lab we will stand it up using a combination of docker images with docker-compose.
+Concourse can be stood up in many different ways. In this lab we will stand it up using a combination of docker images with docker-compose.
 
 1.0 SSH to the cli-vm
 
@@ -101,7 +101,7 @@ fly-s
 1.8 Verify that the pipeline is not in an *errored* state
 
 - You will see Maroon colored boxes if the pipline is errored out
-  - If it is in an errored state perform a `fly-d` and `fly-s` to destory and re-import the pipeline on the cli-vm.
+  - If it is in an errored state perform a `fly-d` and `fly-s` to destroy and re-import the pipeline on the cli-vm.
 
 <details><summary>Screenshot 1.8</summary>
 <img src="Images/pipeline-started.png">
