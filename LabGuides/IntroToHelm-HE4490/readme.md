@@ -15,7 +15,7 @@ This lab guide will cover installing Helm and configuring it for use in your PKS
 Helm is known as the 'package manager for Kubernetes'.  A very popular way to build, share and deploy software designed to run in Kubernetes.
 
 ## Instructions
-To complete this lab, you must have completed the `DeployFirstCluster-DC1610` and ensure you have your kubectl config context set to your cluster.  
+To complete this lab, you must have completed the `DeployFirstCluster-DC1610` and ensure you have your kubectl config context set to your deployed K8s cluster.  
 
 Helm works in a client-server model by leveraging a Tiller pod running in the kube-system namespace within a K8's cluster.  In order for Tiller to access the K8s APIs required to deploy Helm Charts, you must create and bind a service account to it.  Then you can use the Helm CLI on your client, in our case on our `cli-vm`, to send in Helm charts to deploy applications through Tiller.
 
