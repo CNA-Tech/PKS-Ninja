@@ -17,7 +17,7 @@ There are 3 onecloud templates available for the v11 template:
   - This template is built on the base v11 template but has the following pre-installed: NSX-T, OpsMan, Bosh, PKS, Harbor
   - This template will take between 2-4 hours to load into a fully operational state
   
-Note: NinjaLab v10 templates are also available with PKS 1.2. If you use the PKS Ninja v10 template, you must install the [v10 template patch](https://github.com/natereid72/PKS-Ninja-Lab-Patch) before proceeding
+Note: NinjaLab v10 templates are also available with PKS 1.2. IF you would like to use a v10 template, please switch to the v10 branch of the PKS-Ninja Repo. If you use the PKS Ninja v10 template, you must install the [v10 template patch](https://github.com/natereid72/PKS-Ninja-Lab-Patch) before proceeding. 
   
 Each of these templates should be available both in onecloud and VLP, please see the corresponding link below for further instructions:
 
