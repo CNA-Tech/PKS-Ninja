@@ -8,11 +8,9 @@ VMware employees will only be eligible for access to VLP Hosted-Eval if they do 
 
 ## Instructions
 
-1.1 Open a web browser, navigate to https://www.vmwarelearningplatform.com/hosted-eval/catalogs/, login, select the `PKS-Eval-LongLease` Catalog and launch the `PKS-Ninja-v10` template
+1.1 Open a web browser, navigate to https://www.vmwarelearningplatform.com/hosted-eval/catalogs/ and login. On the left hand side you should see Catalogs for 1 and 3 Day PKS templates, you may also see other lease durations depending on your level of access. Select the catalog the corresponds to the duration of the lab session you would like,  and launch one of the available PKS Ninja templates.
 
 <details><summary>Screenshot 1.1</summary>
 <img src="Images/2018-12-24-17-50-53.png">
 </details>
 <br/>
-
-1.2 You must run a script to make some minor updates to the lab environment before beginning any lab guides [per the instructions here](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Staging/Labrary/Microlabs/NinjaLabPrepScript-CI4231.md)
