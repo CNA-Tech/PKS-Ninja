@@ -18,7 +18,6 @@ There are 3 onecloud templates available for the v11 template:
         This template is built on the base v11 template but has the following pre-installed: NSX-T, OpsMan, Bosh, PKS, Harbor
         This template will take between 2-4 hours to load into a fully operational state
 
-
 ## Instructions
 
 1.1 Open a web browser, navigate to workspace one and launch your onecloud environment
@@ -104,7 +103,5 @@ There are 3 onecloud templates available for the v11 template:
 <img src="Images/2018-12-24-17-41-17.png">
 </details>
 <br/>
-
-1.10 You must run a script to make some minor updates to the lab environment before beginning any lab guides [per the instructions here](https://github.com/CNA-Tech/PKS-Ninja/blob/master/Labrary/Microlabs/NinjaLabPrepScript-CI4231.md)
 
 ### You have now completed this exercise, you will need to complete either the [PKS the Easy Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheEasyWay-PE6650) or the [PKS The Hard Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheHardWay-PH7885) course to install PKS, and then you can use this lab environment to complete available courses and lab guides
