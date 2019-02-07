@@ -87,7 +87,7 @@ Click on `Show Progress`. Note that the harbor installation will be complete onc
 </details>
 
 <details><summary>Screenshot 1.5.3</summary>
-Need screenshot of applying changes screen on completion
+<img src="Images/2019-02-06-22-21-00.png">
 </details>
 <br/>
 
