@@ -102,7 +102,7 @@ Harbor's integration with PKS natively enables the PKS Control Plane hosts and K
 
 To ensure developer and automated workflows can have secure interaction with Harbor, a certificate should be installed on the client machine
 
-In the following exercise, you  Harbor self-signed certificate on the `cli-vm` host preparing it to interact with Harbor services
+In the following exercise, you will install the Harbor self-signed certificate on the `cli-vm` host preparing it to interact with Harbor services
 
 2.1 From the Ops Manager homepage, click on the `VMware Harbor Registry` tile, go to the `Certificate` tab and copy the SSL certificate text from the top textbox
 
@@ -122,7 +122,7 @@ In the following exercise, you  Harbor self-signed certificate on the `cli-vm` h
 </details>
 <br/>
 
-2.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory (create this directory if i doesn't already exist) and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
+2.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory (create this directory if it doesn't already exist) and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
 
 ```bash
 mkdir -p /etc/docker/certs.d/harbor.corp.local

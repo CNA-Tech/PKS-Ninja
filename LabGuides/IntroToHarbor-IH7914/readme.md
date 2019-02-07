@@ -12,7 +12,7 @@
 
 This lab guide takes a practical approach to learning VMware's Open Source Harbor container registry by focusing on configuring and preparing Harbor to deploy the Planespotter application
 
-This lab guide is part of a sequence that will show you how to deploy a modern containerized application on kubernetes with VMware PKS. While we use the planespotter application as an example, the point of the exercise is to highlight how virtual infrastructure operators and devops admins can support container application deployments on kubernetes.  The devops processes used in this guide to deploy the planespotter application are essentially the same processes to deploy and support any typical modern containerized appliaction
+This lab guide is part of a sequence that will show you how to deploy a modern containerized application on kubernetes with VMware PKS. While we use the planespotter application as an example, the point of the exercise is to highlight how virtual infrastructure operators and devops admins can support container application deployments on kubernetes.  The devops processes used in this guide to deploy the planespotter application are essentially the same processes to deploy and support any typical modern containerized application
 
 The Planespotter application was chosen as the example application because it is a production grade application that is not too simple to provide a meaningful real-world application, but complex enough to be realistic and challenging without being overwhelming
 
@@ -156,6 +156,13 @@ If docker push fails with "denied: requested access to the resource is denied", 
 If the cli-vm doesn't DNS resolve harbor.corp.local:
 Find the IP address (10.40.14.5) of the Harbor host from the ControlCenter (RDP desktop) DNS Mgr and add the IP address to /etc/hosts of cli-vm. After that do a docker login and then push!
 
+If `docker login` fails with "Error response from daemon: Get https://harbor.corp.local/v2/: x509: certificate signed by unknown authority", you need to configure Harbor as an insecure registry (or configure certificate trust as per https://docs.docker.com/registry/insecure/)
+
+```bash
+echo '{ "insecure-registries" : ["harbor.corp.local:5000"] }' >> /etc/docker/daemon.json'
+systemctl restart docker
+```
+
 <details><summary>Screenshot 3.2 </summary>
 <img src="Images/2019-01-15-00-10-07.png">
 <img src="Images/2019-01-13-16-48-07.png">
@@ -254,7 +261,7 @@ docker pull harbor.corp.local/library/frontend:v1
 </details>
 <br/>
 
-4.6 Navigate to the `Projects/library` page and select the configuration tab. Uncheck the box for `Prevent vulnerable images from running`to return the `library` configuration to its default settings and click `Save`
+4.6 Navigate to the `Projects/library` page and select the configuration tab. Uncheck the box for `Prevent vulnerable images from running` to return the `library` configuration to its default settings and click `Save`
 
 <details><summary>Screenshot 4.6</summary>
 <img src="Images/2019-01-15-01-58-33.png">
@@ -324,7 +331,7 @@ export DOCKER_CONTENT_TRUST=1
 </details>
 <br/>
 
-5.5 From the `cli-vm` prompt, download a local unsigned copy of the planespotter frontend:v1 image from the `library/frontend` repository on harbor. Update the tag to prepare for uploading to the `trusted` project where content trust is enabled. Note that when after you enter the push command, you will be prompted to enter passphrases for image signing, use the passphrase `VMware1!`
+5.5 From the `cli-vm` prompt, download a local unsigned copy of the planespotter frontend:v1 image from the `library/frontend` repository on harbor. (NOTE: you may need to set DOCKER_CONTENT_TRUST to 0 in order to download from the library, set it back to 1 when download is complete: ```export DOCKER_CONTENT_TRUST=0```) Update the tag to prepare for uploading to the `trusted` project where content trust is enabled. Note that when after you enter the push command, you will be prompted to enter passphrases for image signing, use the passphrase `VMware1!`
 
 While you are still pushing the same unsigned image to harbor, because you enabled content trust on the `cli-vm` docker client, it will automatically sign an image when pushed
 
@@ -345,7 +352,7 @@ docker push harbor.corp.local/trusted/frontend:v2
 </details>
 <br/>
 
-5.7 From the `cli-vm` prompt, enter the command `docker pull harbor.corp.local/trusted/frontend:v2` and cobserve you are now able to download the signed image from the `trusted` repository with content trust restrictions enabled. Enter `Docker images` to verify that the frontend:v2 image is now in your local image cache
+5.7 From the `cli-vm` prompt, enter the command `docker pull harbor.corp.local/trusted/frontend:v2` and observe you are now able to download the signed image from the `trusted` repository with content trust restrictions enabled. Enter `Docker images` to verify that the frontend:v2 image is now in your local image cache
 
 <details><summary>Screenshot 5.7</summary>
 <img src="Images/2019-01-15-04-22-43.png">
