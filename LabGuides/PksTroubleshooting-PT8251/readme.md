@@ -447,7 +447,7 @@ Note: The screenshot above was taken after the PKS UI VM was already powered on,
 </details>
 <br/>
 
-2.1.9 Open a new web browser tab and navigate to `https://192.168.100.72`, login with the username `administrator@vsphere.local` and password `VMware1!`, and on the `Complete PKS plugin registration` screen, click `CONTINUE`
+2.1.9 Open a new web browser tab and navigate to `https://192.168.110.72`, login with the username `administrator@vsphere.local` and password `VMware1!`, and on the `Complete PKS plugin registration` screen, click `CONTINUE`
 
 <details><summary>Screenshot 2.1.9</summary>
 <img src="Images/2018-11-10-02-16-41.png">
