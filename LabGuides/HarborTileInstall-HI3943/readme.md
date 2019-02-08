@@ -132,6 +132,9 @@ nano /etc/docker/certs.d/harbor.corp.local/ca.crt
 
 Paste the certificate text into nano, save and close the file
 
+<details><summary>Screenshot 2.3</summary>
+<img src="Images/2018-10-24-02-15-15.png">
+
 2.3.1 Create a directory within Docker on the cli-vm to allow TLS communication with Harbor
 ```
 mkdir -p ~/.docker/tls/harbor.corp.local\:4443/
@@ -143,21 +146,12 @@ cp /etc/docker/certs.d/harbor.corp.local/ca.crt  ~/.docker/tls/harbor.corp.local
 cp /etc/docker/certs.d/harbor.corp.local/ca.crt
  /usr/local/share/ca-certificates/
 ```
+
 2.3.3 Update your certificates and restart Docker service
 ```
 update-ca-certificates
 service docker restart
 ```
-
-
-<details><summary>Screenshot 2.3.1</summary>
-<img src="Images/2018-10-24-02-15-15.png">
-</details>
-
-<details><summary>Screenshot 2.3.2</summary>
-<img src="Images/2018-10-24-02-12-17.png">
-</details>
-
 
 
 #### You have now prepared `cli-vm' for secure communication with Harbor
