@@ -124,10 +124,16 @@ In the following exercise, you will install the Harbor self-signed certificate o
 
 2.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory (create this directory if it doesn't already exist) and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
 
-```bash
+```
+bash
 mkdir -p /etc/docker/certs.d/harbor.corp.local
 nano /etc/docker/certs.d/harbor.corp.local/ca.crt
-# Paste the certificate text into nano, save and close the file
+```
+
+Paste the certificate text into nano, save and close the file
+
+2.3.1 Copy the Harbor cert into the Docker tls directory to allow for trusted communication with harbor
+```
 mkdir -p ~/.docker/tls/harbor.corp.local\:4443/
 cp /etc/docker/certs.d/harbor.corp.local/ca.crt ~/.docker/tls/harbor.corp.local\:4443/
 cp /etc/docker/certs.d/harbor.corp.local/ca.crt /usr/local/share/ca-certificates/
