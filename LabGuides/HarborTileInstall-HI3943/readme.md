@@ -125,7 +125,6 @@ In the following exercise, you will install the Harbor self-signed certificate o
 2.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory (create this directory if it doesn't already exist) and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
 
 ```
-bash
 mkdir -p /etc/docker/certs.d/harbor.corp.local
 nano /etc/docker/certs.d/harbor.corp.local/ca.crt
 ```
@@ -134,13 +133,14 @@ Paste the certificate text into nano, save and close the file
 
 <details><summary>Screenshot 2.3</summary>
 <img src="Images/2018-10-24-02-15-15.png">
+</details>
 
-2.3.1 Create a directory within Docker on the cli-vm to allow TLS communication with Harbor
+2.3.1 Create a directory within Docker on the cli-vm to allow TLS communication between Docker on the client and Harbor
 ```
 mkdir -p ~/.docker/tls/harbor.corp.local\:4443/
 ```
 
-2.3.2 Copy the Harbor cert into the Docker tls directory you just created, as wall as your local user certificate directory
+2.3.2 Copy the Harbor cert into the Docker tls directory you just created, as well as your local user certificate directory
 ```
 cp /etc/docker/certs.d/harbor.corp.local/ca.crt  ~/.docker/tls/harbor.corp.local\:4443/
 cp /etc/docker/certs.d/harbor.corp.local/ca.crt
@@ -154,7 +154,7 @@ service docker restart
 ```
 
 
-#### You have now prepared `cli-vm' for secure communication with Harbor
+#### You have now prepared `cli-vm` for secure communication with Harbor
 
 This lab guide does not include steps to validate the harbor installation because it takes time to deploy harbor, so after installation and client prep is a good natural break. To continue with validation, please continue with the next step from your course guide, or refer to the [PKS Ninja SE course guide agenda](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksNinjaSe-NI6310#ninja-labs-part-1-agenda) for next steps
 
