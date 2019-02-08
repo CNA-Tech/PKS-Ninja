@@ -1,10 +1,10 @@
 # Deploy Planespotter without Persistence
---------------
-### This lab requires a working Kubernetes cluster. If you haven't completed the Deploy  Your First Cluster Lab, do that now.
+
+## This lab requires a working Kubernetes cluster. If you haven't completed the Deploy Your First Cluster Lab, do that now
 
 This lab guide provides instructions to deploy a slightly modified version of the Planespotter application. The standard version of Planespotter uses a MySQL Database with an attached persistent volume. In this guide, you will modify the standard deployment manifest to remove the persistent volume. This is done to support exercises that demonstrate the impact persistence has on application behavior
 
-The next lab guide in the Ninja SE course sequence, [PKS Storage and Persistence 1]() is designed to compliment this guide, and if you follow along, the storage and persistence lab guide will update will provide instructions to upgrade your planespotter deployment with persistent storage and walk through examples demonstrating the impact on application behavior
+The next lab guide in the Ninja SE course sequence, [PKS Storage and Persistence 1]() is designed to compliment this guide, and if you follow along, the storage and persistence lab guide will provide instructions to upgrade your planespotter deployment with persistent storage and walk through examples demonstrating the impact on application behavior
 
 If you are looking for instructions to deploy the standard planespotter app, please see the [Deploy Planespotter App](https://github.com/CNA-Tech/PKS-Ninja/blob/master/LabGuides/BonusLabs/Deploy%20Planespotter%20Lab/readme.md) lab guide
 
@@ -20,7 +20,6 @@ Now that we have a Kubernetes cluster, let's look at the magic of Kubernetes by 
 <details><summary>Planespotter Overview Image</summary>
 <img src="Images/2019-01-15-23-17-44.png">
 </details>
-<br/>
 
 Explore the YAML files that will be used for the deployments (Located in ~/planespotter/kubernetes). For example look at the front-end deployment YAML file to see how many pods and replicas the deployment YAML has specified. The deployment YAML for planespotter-frontend has specified 2 replica sets, hence post deployment you should see two pods deployed for the frontend app
 
@@ -28,7 +27,7 @@ Similarly, take a note of the labels the frontend service has been allocated. Th
 
 With Kubernetes, each component needed for the app is defined in the deployment YAML. The deployment YAML identifies the base container image , the dependencies needed from the infrastructure etc. The yaml files also create an API service that frontends the component-pod.
 
-In the Intro to Harbor lab, we modified one of the manifests (.yaml file) to pull an image from our private Harbor registry.If you haven't completed the Intro to Harbor lab, all images will be pulled from the remote registry.
+In the Intro to Harbor lab, we modified one of the manifests (.yaml file) to pull an image from our private Harbor registry. If you haven't completed the Intro to Harbor lab, all images will be pulled from the remote registry.
 
 ## Overview of Steps
 
@@ -41,12 +40,12 @@ In the Intro to Harbor lab, we modified one of the manifests (.yaml file) to pul
 -------------
 ## Prereqs
 
-_If you've completed the Intro to Intro to Harbor lab, you'll already have the Planespotter repo cloned locally; If you haven't, you will need to clone it. Follow the directions below from the `cli-vm` to clone the repo for this lab:_
+_If you've completed the Intro to Harbor lab, you'll already have the Planespotter repo cloned locally; If you haven't, you will need to clone it. Follow the directions below from the `cli-vm` to clone the repo for this lab:_
 
 - `cd ~`
 - `git clone https://github.com/yfauser/planespotter.git`
 
-Before proceeding, verify that your cluster has successfully deployed by entering the command `pks clusters` from `cli-vm`
+Before proceeding, verify that your cluster has successfully deployed by entering the command `pks clusters` from the `cli-vm`
 
 Pull down the kubernetes config and credentials for `my-cluster` with the command 
 
@@ -89,7 +88,7 @@ _Note: If you have no `/planespotter/kuberenetes/` directory, complete the [Intr
 cd ~/planespotter/kubernetes
 cp frontend-deployment_all_k8s.yaml frontend-deployment_fromHarbor.yaml
 nano frontend-deployment_fromHarbor.yaml
-# update file per image 1.1, save and close
+# change the contents of the line shown in image 2.1.1 to what is shown in 2.1.2
 ```
 
 <details><summary>Screenshot 2.1.1 </summary>
@@ -299,7 +298,7 @@ kubectl get deployment mysql
 
 ## Step 3: Publish the Planespotter app to expose it to the outside world
 
-The planespotter app has been deployed with micro-services created for each sub-components; however, if you take a closer look at the services created, you will see they are all using IP addresses from the k8s cluster pool. These are not routable outside of the cluster. In order to expose a service to external connections, we can create a node-port service type or a Load Balancer service type. For the plane spotter app we will be exposing the 'frontend' service with a load balancer. PKS utilizes an automatically created NSX Load Balancer in this case.
+The planespotter app has been deployed with micro-services created for each sub-component; however, if you take a closer look at the services created, you will see they are all using IP addresses from the k8s cluster pool. These are not routable outside of the cluster. In order to expose a service to external connections, we can create a node-port service type or a Load Balancer service type. For the plane spotter app we will be exposing the 'frontend' service with a load balancer. PKS utilizes an automatically created NSX Load Balancer in this case.
 
 3.1 Expose the planespotter-frontend with the following command
 
@@ -316,7 +315,7 @@ kubectl expose deployment planespotter-frontend \
 
 A freshly deployed app based on 4 micro-services is ready!
 
-## Step 4: Understanding how Kubernetes Maintains state by looking at an example of ReplicaSets. 
+## Step 4: Understanding how Kubernetes Maintains state by looking at an example of ReplicaSets
 
 4.1 Replicasets in Kubernetes make sure that when a deployment is made 'x' number of pods for that deployment are always running. For the Planespotter frontend deployment we specified '2' replicas to always run, take a look at the deployment YAML for Palanespotter frontend here
 
@@ -343,4 +342,3 @@ Notice the count of pods for planespotter-frontend has not changed, there are st
 View the `app-server-deployment_all_k8s.yaml` file, observe the container image value is `yfauser/planespotter-app-server:1508888202fc85246248c0892c0d27dda34de8e1` which is a working configuration. You may notice this does not specify the location of the registry it is using, and that is because this container is located on docker hub, which is a default search location for hosts using docker engine including PKS deployed K8s nodes
 
 You should now understand the differences in how to configure a kubernetes manifest to pull from docker hub or from Harbor
-
