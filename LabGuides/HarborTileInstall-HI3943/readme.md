@@ -143,8 +143,7 @@ mkdir -p ~/.docker/tls/harbor.corp.local\:4443/
 2.3.2 Copy the Harbor cert into the Docker tls directory you just created, as well as your local user certificate directory
 ```
 cp /etc/docker/certs.d/harbor.corp.local/ca.crt  ~/.docker/tls/harbor.corp.local\:4443/
-cp /etc/docker/certs.d/harbor.corp.local/ca.crt
- /usr/local/share/ca-certificates/
+cp /etc/docker/certs.d/harbor.corp.local/ca.crt /usr/local/share/ca-certificates/
 ```
 
 2.3.3 Update your certificates and restart Docker service
