@@ -20,7 +20,7 @@ As infrastructure-centric workers mature in their devops skills, more advanced g
 
 For your reference, the image below from the [Kubernetes Contributor Guide](https://github.com/kubernetes/community/blob/master/contributors/guide/README.md#github-workflow) provides a visual overview of the full pull request process. Please note that to commit a validation stamp, you will be using a highly simplified version of this process:
 
-<a href="https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md"><img src="https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md"></a>
+<a href="https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md"><img src="../ValidationStamp-VS9927/Images/2019-01-27-03-40-02.png"></a>
 
 Git is being introduced as a foundational element for all courses on the PKS Ninja community because it is a foundational and necessary skill for modern IT and devops environments.
 
