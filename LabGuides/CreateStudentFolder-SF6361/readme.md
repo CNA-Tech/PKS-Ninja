@@ -1,6 +1,6 @@
 # Creating your Student Folder
 
-The first thing all new participants in the pks-ninja community should do is create a student folder on the [https://github.com/CNA-Tech/Students](https://github.com/CNA-Tech/Students) repo using your github ID as the folder name to ensure unique values for all participants.
+Once you get acclimated to the pks-ninja site, one of the first things all new participants in the pks-ninja community should do is create a student folder on the [https://github.com/CNA-Tech/Students](https://github.com/CNA-Tech/Students) repo using your github ID as the folder name to ensure unique values for all participants.
 
 Most courses should include steps to save any files you create or modify as part of any exercise, you should save your work to your student folder, make this a regular habit in cases where a lab guide may have missed adding a step to remind you
 
@@ -293,7 +293,7 @@ Another essential factor is making sure you keep your commits small and frequent
 
 To keep your fork in sync with the official repo, you will login to the clone of your fork that you downloaded to your local filesystem in the previous section. You will update your local clone from the upstream offical pks-ninja repo, and then commit and push any updates from your local clone to your fork on github
 
-2.1 From the `cli-vm` prompt, enter the following commands to pull down the latest updates from the official pks-ninja repo and then merge them into your local clone of your fork. Normally you will follow these exact steps including the commit step even if you havent made any local changes as this will ensure that any updates you download from the upstream master get pushed back into your fork on github, otherwise your fork on github will remain out of sync.
+2.1 From the `cli-vm` prompt, enter the following commands to pull down the latest updates from the upstream CNA-Tech/Students repo and then merge them into your local clone of your fork. Normally you will follow these exact steps including the commit step even if you havent made any local changes as this will ensure that any updates you download from the upstream master get pushed back into your fork on github, otherwise your fork on github will remain out of sync. Then create and checkout a branch for the updates you would like to make.
 
 ```bash
 cd ~/Forked/Students/
