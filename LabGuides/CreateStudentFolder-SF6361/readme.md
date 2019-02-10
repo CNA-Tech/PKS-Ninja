@@ -71,7 +71,7 @@ You can review section 2 below, [Keeping your fork in sync and making pull reque
 </details>
 <br/>
 
-1.2 After the fork is completed, your browser will be redirected to the github page for the new forked repo. Click the `Clone or download' link and copy the url as shown in the screenshot below
+1.2 After the fork is completed, your browser will be redirected to the github page for the new forked repo. Click the `Clone or download` link and copy the url as shown in the screenshot below
 
 <details><summary>Screenshot 1.2</summary>
 <img src="Images/2018-12-14-01-46-59.png">
@@ -98,7 +98,7 @@ cd Students/
 
 In this example you can use `update-1` as the branch name, the name you use doesnt matter but if in the future you create an update branch and find it already exists, it may mean you forgot to delete it after a previous update so be sure to create a new branch and if needed delete any existing temporary branches that may be leftover from previous updates.
 
-Enter the followwing commands to create a branch and push the new empty branch to your fork
+Enter the followwing commands to create and checkout a new `update-1` branch
 
 ```bash
 git branch
