@@ -1042,10 +1042,9 @@ kubectl get services
 
 5.4.1 Make a copy of the `frontend-deployment_NodePort.yaml` file, save it as `frontend-deployment_LoadBalancer.yaml`
 
-<details><summary>Screenshot 5.4.1</summary>
-<img src="Images/2018-10-20-03-26-49.png">
-</details>
-<br/>
+```bash
+cp frontend-deployment_NodePort.yaml frontend-deployment_LoadBalancer.yaml
+```
 
 5.4.2 Edit the `frontend-deployment_LoadBalancer.yaml` file, near the bottom of the file in the service spec section, add the value `type: LoadBalancer` as shown in the following snippet:
 
@@ -1121,6 +1120,10 @@ kubectl get pods
 kubectl get deployments
 kubectl get services
 kubectl get services -o yaml
+
+# Tip, if running MacOS or Linux, you can use the following
+# To output just the hostname:
+kubectl get services -o yaml | sed -n -e '/hostname: / s/.*\: *//p'
 ```
 
 <details><summary>Screenshot 5.4.3.1</summary>
@@ -1133,6 +1136,8 @@ kubectl get services -o yaml
 <br/>
 
 5.4.4 Open a browser and go to the hostname shown in Screenshot 5.4.3.2 above to verify that planespotter-frontend is externally accessible with the LoadBalancer service
+
+**NOTE:** It could take up to 20 min before the url is able to resolve due to DNS
 
 <details><summary>Screenshot 5.4.4</summary>
 <img src="Images/2018-10-20-03-39-39.png">
