@@ -2,7 +2,7 @@
 
 This lab guide focuses on examining and deploying persistent volume services using the Planespotter applications MySQL service as an example
 
-This guide is part of a sequence, please complete the [Deploy Planespotter without Persistence]() lab guide prior to continuing
+This guide is part of a sequence, please complete the [Deploy Planespotter without Persistence](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployPlanespotter-DP6539) lab guide prior to continuing
 
 ## PKS & Kubernetes Storage and Persistence Overview
 
