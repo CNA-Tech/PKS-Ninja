@@ -40,7 +40,7 @@ bosh alias-env my-bosh -e 172.31.0.2 --ca-cert /var/tempest/workspaces/default/r
 1.1.4 From the Ops Manager prompt, log into Bosh Director with the command `bosh -e my-bosh log-in` using username `director` and the password you gathered in a recent step
 
 <details><summary>Screenshot 1.1.4</summary>
-<img src="Images/2018-11-13-01-47-39.png">
+<img src="Images/2019-02-11_15-00-18.png">
 </details>
 <br/>
 
