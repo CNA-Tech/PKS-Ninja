@@ -40,7 +40,7 @@ bosh alias-env my-bosh -e 172.31.0.2 --ca-cert /var/tempest/workspaces/default/r
 1.1.4 From the Ops Manager prompt, log into Bosh Director with the command `bosh -e my-bosh log-in` using username `director` and the password you gathered in a recent step
 
 <details><summary>Screenshot 1.1.4</summary>
-<img src="Images/2018-11-13-01-47-39.png">
+<img src="Images/2019-02-11_15-00-18.png">
 </details>
 <br/>
 
@@ -58,7 +58,7 @@ bosh alias-env my-bosh -e 172.31.0.2 --ca-cert /var/tempest/workspaces/default/r
 </details>
 <br/>
 
-1.1.7 From the Bosh CLI, set the BOSH_ENVIRONMENT variable so you dont have to keep typing in the `e my-bosh` evey time you enter a bosh command. Also run the bosh cloud-check with the following commands and observe the output
+1.1.7 From the Bosh CLI, set the BOSH_ENVIRONMENT variable so you dont have to keep typing in the `-e my-bosh` every time you enter a bosh command. Also run the bosh cloud-check with the following commands and observe the output
 
 ```bash
 export BOSH_ENVIRONMENT=my-bosh
@@ -66,7 +66,7 @@ bosh -d $PKS cloud-check
 ```
 
 <details><summary>Screenshot 1.1.7</summary>
-<img src="Images/2018-11-13-02-13-57.png">
+<img src="Images/2019-02-11_14-57-54.png">
 </details>
 <br/>
 
