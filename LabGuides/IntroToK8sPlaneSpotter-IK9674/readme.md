@@ -634,7 +634,8 @@ metadata:
 `kubectl get deployments -o yaml`
 
 <details><summary>Click to expand output</summary>
-``` bash
+  
+```yaml
 apiVersion: v1
 items:
 - apiVersion: extensions/v1beta1
