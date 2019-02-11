@@ -861,7 +861,7 @@ kubectl get pods
 
 5.2.3 Use kubectl exec to open a bash shell to the shell-demo pod with the command `kubectl exec -it shell-demo -- /bin/bash`
 
-Note that the shell does not have a prompt, so for example in Screenshot 5.2.3 below, after entering the command `kubectl exec -it shell-demo -- /bin/bash`, the output shows the result of entering the "ls" command:
+As you can see, the shell-demo has its own prompt, so for example in Screenshot 5.2.3 below, after entering the command `kubectl exec -it shell-demo -- /bin/bash`, the output shows the result of entering the "ls" command:
 
 <details><summary>Screenshot 5.2.3</summary>
 <img src="Images/2018-10-20-01-16-23.png">
@@ -876,7 +876,8 @@ Note that when creating a service, a local DNS record is created for the service
 apt-get update
 apt-get install curl -y
 curl planespotter-frontend | grep Planespotter # curl by service name
-curl 10.0.0.185 | grep Planespotter or curl 
+curl 10.0.0.185 | grep Planespotter or curl
+exit
 ```
 
 <details><summary>Screenshot 5.2.4</summary>
@@ -1008,6 +1009,15 @@ kubectl get node worker-5ba97a60-d42a-11e8-bab6-024dd3eb0b96 -o yaml | grep addr
 <br/>
 
 5.3.5 Open a shell session with the shell-demo pod and use curl to validate the NodePort service. Use screenshot 5.3.5 for reference:
+
+```bash
+kubectl exec -it shell-demo -- /bin/bash
+# In the following commands, use the output you received
+# From the kubectl get services command (for the NodePort number)
+# And the IP address retrieved from the kubectl get node worker-**** command
+curl <your-NodePort-IP>:<nodePort> | grep Planespotter
+exit
+```
 
 <details><summary>Screenshot 5.3.5</summary>
 <img src="Images/2018-10-20-03-16-41.png">
