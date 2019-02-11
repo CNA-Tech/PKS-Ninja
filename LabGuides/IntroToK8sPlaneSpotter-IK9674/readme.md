@@ -368,7 +368,8 @@ kubectl get deployments
 `kubectl get pods -o yaml`
 
 <details><summary>Click to expand output</summary>
-``` bash
+  
+```yaml
 apiVersion: v1
 items:
 - apiVersion: v1
