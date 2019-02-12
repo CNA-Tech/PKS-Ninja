@@ -1,4 +1,4 @@
-# Lab 11 - Harbor Pipeline Install
+# Harbor Pipeline Install
 
 The Harbor pipeline install generally follows the PKS pipeline install. If you have recently completed the pks pipeline install and still have a web browser to concourse open you can simply click on the `harbor-install-standalone` pipeline and kick it off, as detailed in the steps below
 
@@ -6,9 +6,20 @@ The Harbor pipeline install generally follows the PKS pipeline install. If you h
 
 In this guide you will navigate to the Harbor Installation Pipeline in Concourse and start the pipeline
 
-1.1 Using a web browser navigate to the concourse URL
+1.0 Before launching the Harbor install pipeline, configure the bosh trusted certificate service with the opsman root certificate, which will sign any bosh-deployed VMs including harbor with the opsman root ca, which ensures that PKS deployed K8s nodes will have the needed certificate installed to communicate with harbor automatically. 
 
-Note: If you are already logged in, your screen should resemble screenshot 1.1.2, and you can skip ahead to step 1.3. If you screen resembles screenshot 1.1.1, then proceed with step 1.2
+From the Control Center desktop, open a web browser connection to Ops Manager and log in. Click on the `Bosh Director for vSphere` tile and navigate to the `Security` tab in the left hand column. On the `Security` tab, check the box for `Include OpsManager Root CA in Trusted Certs` and click save. Next go to the Opsman HomePage, click on `Review Pending Changes`, uncheck the box next to `Pivotal Container Service` and click `Apply Changes` per the screenshots below. 
+
+You will need to wait until the bosh deployment is complete before you proceed to the next step.
+
+<details><summary>Screenshot 1.0</summary>
+<img src="Images/2019-02-12-03-40-06.png">
+</details>
+<br/>
+
+1.1 From control center open a web browser navigate to the concourse URL
+
+Note: If you are already logged in, your screen should resemble screenshot 1.1.2, and you can skip ahead to step 1.3. If you are not logged in your screen should resemble screenshot 1.1.1, then proceed with step 1.2
 
 `http://cli-vm.corp.local:8080`
 
@@ -70,11 +81,13 @@ Note: Early versions of the lab template used login `Username: nsx Password: vmw
 <br/>
 
 1.5 Open a web browser connection to the Ops Manager UI using the Opsman bookmark in Chrome. Login using the following credentials:
+
 ```yaml
 Username: admin
 Password: VMware1!
 ```
-You should see a blue bar that says `Applying Changes`. 
+
+You should see a blue bar that says `Applying Changes`.
 
 Click on `Show Progress`. Note that the harbor installation will be complete once the changes are complete
 
