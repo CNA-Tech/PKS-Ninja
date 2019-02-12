@@ -2,6 +2,7 @@
 
 **Contents:**
 
+- [Prerequisites])(#prerequisites)
 - [Step 1: Initialize Harbor Projects and Repositories]()
 - [Step 2: Build Docker Image for Planespotter Frontend]()
 - [Step 3: Push and Pull Container Images From Harbor]()
@@ -16,7 +17,7 @@ This lab guide is part of a sequence that will show you how to deploy a modern c
 
 The Planespotter application was chosen as the example application because it is a production grade application that is not too simple to provide a meaningful real-world application, but complex enough to be realistic and challenging without being overwhelming
 
-Before proceeding with this lab, please review the [Planespotter application overview](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Labrary/Lessons/PlanespotterOverview-PO6830.md) and review the Planespotter application architecture
+Before proceeding with this lab, please review the [Planespotter application overview](https://drive.google.com/open?id=1N44aYSR_c4mdmJcJt4SKZowZGeCUKojy) and review the Planespotter application architecture
 
 ## Instructions
 
@@ -26,12 +27,20 @@ In subsequent lab modules you will deploy the full Planespotter application from
 
 Note: Harbor is included as an enterprise supported product with VMware PKS
 
+## Prerequisites
+
+Before proceeding, ensure that Bosh Trusted Certificates has been configured, and that the configuration has been applied before the harbor deployment, as documented in step 1.0 of the [Harbor Installation with Concourse Pipeline Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborPipelineInstal-IN4968). If you are not sure if Bosh Trusted Certificate has been configured with the Opsman Root Cert, from the opsman home page go the `Bosh Director for vSphere > Security` page, if the `Include OpsManager Root CA in Trusted Certs` box is not checked, please follow the configuration steps at the link above.
+
+Before proceeding, ensure you have prepared the cli-vm docker engine configuration with the Harbor certificate, as documented in the [Installing Harbor Cert on External Clients Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborCertExternal-HC7212)
+
 ## Step 1: Initialize Harbor Projects and Repositories
 
 Harbor organizes images into a set of projects and repositories within those projects. Repositories can have one or more images associated with them. Each of the images
 are tagged. Projects can have RBAC (Role Based Access Control) and replication policies associated with them so that administrators can regulate access to images and create
 image distribution pipelines across registries that might be geographically dispersed. You should now be at a summary screen that shows all of the projects in this registry.
 For our lab, we are interested in a single project called library.
+
+**Important: Before proceeding, please review the [prequisites](#prequisites) section above**
 
 1.1 Login to harbor.corp.local, observe the Projects homepage and note there is already a project named `library` available by default, and it is set to a Public access level
 
