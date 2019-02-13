@@ -104,5 +104,11 @@ Notice the output and instructions on how to connect to the database you just de
 <img src="images/helm_delete.png">
 </details>
 
+5.5 Enter the command `helm list` to find the name helm assigned to your deployment
+
+5.6 Enter the command `helm status deploymentName` using the deployment name from the output of the helm list command
+
+
+
 ## Summary
 From this guide, you should be able to deploy Helm/Tiller to your PKS K8s clusters including clusters leveraging RBAC.  You now know how to install a Helm chart, view the running Helm releases, and delete them as well.
