@@ -66,8 +66,7 @@ The Live Ninja course includes a combination of lecture and lab sessions, howeve
 - Load a fresh copy of the PKS Ninja lab template
 - Complete the following lab guides:
   - [PKS the Easy Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheEasyWay-PE6650)
-  - [Deploy First Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610)
-  - [Introduction to GIT](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToGit-IG9099)
+  - [Git Learning Path](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GitLearningPath-GP5125)
   - [Intro to Helm](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHelm-HE4490)
   - [Deploy More Apps Labs](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployMoreApps-DA6482)
   - [PKS Troubleshooting](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksTroubleshooting-PT8251)
