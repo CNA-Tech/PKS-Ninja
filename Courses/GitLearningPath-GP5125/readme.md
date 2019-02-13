@@ -11,8 +11,9 @@
     - [Intro to Git CLI](#intro-to-git-cli)
     - [Github Flow](#github-flow)
   - [Create your student folder](#create-your-student-folder)
-  - [Create your contributor workspace](#create-your-contributor-workspace)
   - [Explore Branching and Forking](#explore-branching-and-forking)
+  - [Create your contributor workspace](#create-your-contributor-workspace)
+
 
 ## Introduction
 
@@ -85,6 +86,10 @@ Once you create your student folder, it is important that you proactively rememb
 
 Please complete the [Create your Student Folder Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/CreateStudentFolder-SF6361) and when finished, return to this guide and proceed with the next step below.
 
+## Explore Branching and Forking
+
+Please complete the [Explore Git Branching and Forking Lab guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/GitBranchingForking-EG7025)
+
 ## Create your contributor workspace
 
 The Create your Student Folder exercise has you practice the pull request process on the seperate CNA-Tech/Students repository, which we strongly recommend to all participants who are not already very comfortable with the complete pull request process.
@@ -92,9 +97,5 @@ The Create your Student Folder exercise has you practice the pull request proces
 Once you have gotten comfortable with the full PR process, the next step is get setup to do the full PR process to commit updates to the PKS-Ninja repo!
 
 Please complete the [Setting up your Contributor Repository](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ContributorWorkspace-CW4267) and when finished, return to this guide and proceed with the next step below.
-
-## Explore Branching and Forking
-
-Please complete the [Explore Git Branching and Forking Lab guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/GitBranchingForking-EG7025)
 
 **You have now completed the PKS the Easy Way Course! Thank you for participating!**
