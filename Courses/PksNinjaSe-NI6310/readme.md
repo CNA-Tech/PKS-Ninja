@@ -69,7 +69,7 @@ The Live Ninja course includes a combination of lecture and lab sessions, howeve
   - [Deploy First Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610)
   - [Git Learning Path](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GitLearningPath-GP5125)
   - [Intro to Helm](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHelm-HE4490)
-  - [Deploy More Apps Labs](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployMoreApps-DA6482)
+  - [Deploy More Apps Labs](../DeployMoreApps-DA6020/readme.md)
   - [PKS Troubleshooting](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksTroubleshooting-PT8251)
   - [PKS Control Plane and BOSH](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksControlPlaneBosh-CP3546)
 

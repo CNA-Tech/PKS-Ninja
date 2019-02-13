@@ -16,6 +16,6 @@ Please complete the following guides in order:
   - [PKS The Hard Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheHardWay-PH7885)
 - [Deploy First PKS Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610)
 
-Once you have completed the above steps, you will have a fully installed and prepared lab environment with a running PKS deployed Kubernetest cluster and can proceed with any of the post-installation lab guides subject to the prerequisites and dependencies listed in each lab guide. 
+Once you have completed the above steps, you will have a fully installed and prepared lab environment with a running PKS deployed Kubernetes cluster and can proceed with any of the post-installation lab guides subject to the prerequisites and dependencies listed in each lab guide.
 
 ## Thank you for completing the Try Some Labs Course!
