@@ -83,7 +83,7 @@ pks clusters
 pks create-cluster my-cluster --external-hostname my-cluster.corp.local --plan small
 ```
 
-_Note: It will take several minutes for the cluster to deploy, you may proceed with step 3 while the cluster deployment is in progress, however do not proceed to step 4 until the cluster deployment status is `succeeded`_
+_Note: It could take ~40 minutes for the cluster to deploy if you are using the onecloud labs, you will not be able to do any lab guides that require your kubernetes until the cluster deployment status is `succeeded`_
 
 _Also, it may be interesting for you to look at the `Tasks` menu in vCenter to observe some of the vSphere tasks that occur on cluster creation_
 
