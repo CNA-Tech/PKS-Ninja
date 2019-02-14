@@ -442,54 +442,82 @@ The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimize
 </details>
 <br/>
 
-2.1.7 On the `New NAT Rule`
+2.1.7 Create a nat rule that allows your workstation to connect to the web UI served by the PKS-UI VM. On the `New NAT Rule` screen, enter the following values:
 
-- Name=Eth1
-- Address=192.168.110.72/24
-- Gateway=192.168.110.1
+- Priority: 1024
+- Action: DNAT
+- Source IP: {Leave Blank}
+- Destination IP: 10.40.14.8
+- Translated IP: 172.31.0.8
+- Click `Add` to add new nat rule
 
 <details><summary>Screenshot 2.1.7</summary>
-<img src="Images/2018-11-10-00-38-27.png">
+<img src="Images/2019-02-14-12-52-45.png">
 </details>
 <br/>
 
-2.1.8 Use VI to update the PKS UI environment file with the command `vi /etc/vmware/environment` and ensure the value for `FS_IP_ADDRESS` is set to the static address for eth1 (192.168.110.72). Save and close VI and reboot the PKS UI VM with the command `reboot now`, wait for the UI VM to boot up (~1-3 mins) before proceeding
+2.1.8 From the control center desktop, press the windows button, search for `DNS` and select `DNS` as in the screenshot below to open DNS Manager.
 
 <details><summary>Screenshot 2.1.8</summary>
-<img src="Images/2018-11-12-12-28-49.png">
+<img src="Images/2019-02-14-12-57-29.png">
 </details>
 <br/>
-!-->
 
-2.1.9 Open a new web browser tab and navigate to `https://192.168.110.72`, login with the username `administrator@vsphere.local` and password `VMware1!`, and on the `Complete PKS plugin registration` screen, click `CONTINUE`
+2.1.9 In DNS Manager in the lefthand navigation column expand `ControlCenter`, expand `Forward Lookup Zones`, right click on `corp.local` and select `New Host (A or AAAA)...`
 
 <details><summary>Screenshot 2.1.9</summary>
+<img src="Images/2019-02-14-13-00-53.png">
+</details>
+<br/>
+
+2.1.10 On the `New Host` screen, enter the following values:
+
+- Name: pks-ui
+- IP Address: 10.40.14.8
+- Click `Add Host`
+- Press `OK` on the popup screen
+- Close the dns manager and new host windows
+
+<details><summary>Screenshot 2.1.10.1</summary>
+<img src="Images/2019-02-14-13-12-55.png">
+</details>
+
+<details><summary>Screenshot 2.1.10.2</summary>
+<img src="Images/2019-02-14-13-13-24.png">
+</details>
+<br/>
+
+2.1.11 Open a new web browser tab and navigate to `https://pks-ui.corp.local` being sure to use https as the ui vm will not respond to requests on port 80. Login with the username `administrator@vsphere.local` and password `VMware1!`, and on the `Complete PKS plugin registration` screen, click `CONTINUE`
+
+<details><summary>Screenshot 2.1.11</summary>
 <img src="Images/2018-11-10-02-16-41.png">
 </details>
 <br/>
 
-2.1.10 Continue with the `Complete PKS plugin registration` screen, click `REGISTER` and wait for the registration process to complete
+2.1.12 Continue with the `Complete PKS plugin registration` screen, click `REGISTER` and wait for the registration process to complete
 
-<details><summary>Screenshot 2.1.10</summary>
+<details><summary>Screenshot 2.1.12</summary>
 <img src="Images/2018-11-10-02-18-40.png">
 </details>
 <br/>
 
-2.1.11 Finish the `Complete PKS plugin registration` dialogue by clicking `LOGOUT`
+2.1.13 Finish the `Complete PKS plugin registration` dialogue by clicking `LOGOUT`
 
-<details><summary>Screenshot 2.1.11</summary>
+<details><summary>Screenshot 2.1.13</summary>
 <img src="Images/2018-11-10-02-21-56.png">
 </details>
 <br/>
 
 2.1.12 From the control center desktop, if you have any open connections to the vSphere web or HTML5 client, log out of your sessions and then close the tabs. Open a new browser window and log into the vSphere HTML5 Client, you should now see an option for `VMware PKS` on the Home screen, Shortcuts screen and in the pulldown menu. Click on the `VMware PKS` icon to open the plugin
 
+**NOTE** If you do not see the `VMware PKS` icon, try logging out, close any open browser windows and then try to log back in a second time.
+
 <details><summary>Screenshot 2.1.12.1</summary>
 <img src="Images/2018-11-10-02-26-49.png">
 </details>
 
 <details><summary>Screenshot 2.1.12.2</summary>
-<img src="Images/2018-11-10-14-09-05.png">
+<img src="Images/2019-02-14-13-25-51.png">
 </details>
 <br/>
 
