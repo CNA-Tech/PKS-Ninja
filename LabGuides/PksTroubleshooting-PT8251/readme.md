@@ -2,10 +2,9 @@
 
 **Contents:**
 
-- [1.0 Validate Base Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab15-PksTroubleshooting#10-validate-base-environment)
-- [2.0 Accelerating Problem Resolution with the vSphere PKS Plugin](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab15-PksTroubleshooting#20-accelerating-planning-operations-and-problem-resolution-with-the-vsphere-pks-plugin)
-- [3.0 Validation and Troubleshooting with Kubernetes Native Tools](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab15-PksTroubleshooting#30-validation-and-troubleshooting-with-kubernetes-native-tools)
-- [Next Steps]()
+- [1.0 Validate Base Environment](#10-validate-base-environment)
+- [2.0 Accelerating Problem Resolution with the vSphere PKS Plugin](#20-accelerating-planning-operations-and-problem-resolution-with-the-vsphere-pks-plugin)
+- [3.0 Validation and Troubleshooting with Kubernetes Native Tools](#30-validation-and-troubleshooting-with-kubernetes-native-tools)
 
 ## Overview
 
@@ -31,24 +30,24 @@ This is not necessarily an ideal order to follow in a troubleshooting scenario a
 
 Note: The PKS Plugin will not be used until later in this section, but the OVF deployment is being done first to optimize timing
 
-1.1.0 From the control center desktop, open a web browser connection to `https://labs.vmware.com/flings/vsphere-pks-plugin`, accept the license agreement and download the OVA file for the vSphere PKS Plugin.
+1.1.0 From the control center desktop, open a web browser connection to `https://labs.vmware.com/flings/vsphere-pks-plugin`, accept the license agreement and download the OVA file for the vSphere PKS Plugin to the default downloads directory (E:\Downloads).
 
 <details><summary>Screenshot 1.1.0 </summary>
-<img src="Images/2018-11-09-14-53-01.png">
+<img src="Images/2019-02-14-10-25-39.png">
 </details>
 <br/>
 
 1.1.1 Open a web browser connection to the vSphere (flash) client at `https://vcsa-01a.corp.local/vsphere-client`. Do not use the HTML5 Client for the OVF deploy. On the `Hosts and Clusters` page, right click the `RegionA01-MGMT01` cluster and select `Deploy OVF Template`
 
 <details><summary>Screenshot 1.1.1</summary>
-<img src="Images/2018-11-10-01-53-41.png">
+<img src="Images/2019-02-14-10-30-46.png">
 </details>
 <br/>
 
 1.1.2 On the `Select Template` screen, select `local file` and select the vSphere PKS Plugin OVA File in the `E:\Downloads` directory
 
 <details><summary>Screenshot 1.1.2</summary>
-<img src="Images/2018-11-09-23-09-37.png">
+<img src="Images/2019-02-14-10-33-55.png">
 </details>
 <br/>
 
@@ -69,7 +68,7 @@ Note: The PKS Plugin will not be used until later in this section, but the OVF d
 1.1.5 On the `Review Details` screen, click `Next`
 
 <details><summary>Screenshot 1.1.5</summary>
-<img src="Images/2018-11-09-23-25-17.png">
+<img src="Images/2019-02-14-10-35-59.png">
 </details>
 <br/>
 
@@ -83,14 +82,14 @@ Note: The PKS Plugin will not be used until later in this section, but the OVF d
 1.1.7 On the `Select Storage` screen, set the virtual disk format to `Thin provision`, set the `Datastore` to `RegionA01-ISCSI01-COMP01` and then click `Next`
 
 <details><summary>Screenshot 1.1.7</summary>
-<img src="Images/2018-11-10-01-57-51.png">
+<img src="Images/2019-02-14-10-37-22.png">
 </details>
 <br/>
 
-1.1.8 On the `Select networks` screen, set both `VM Network` and `PKS Deployment Network` to `ESXi-RegionA01-vDS-MGMT` and then click `Next`
+1.1.8 On the `Select networks` screen, set `VM Network` and `PKS Deployment Network` to `VM-RegionA01-vDS-MGMT` and then click `Next`
 
 <details><summary>Screenshot 1.1.8</summary>
-<img src="Images/2018-11-10-01-58-54.png">
+<img src="Images/2019-02-14-11-00-48.png">
 </details>
 <br/>
 
@@ -105,17 +104,19 @@ Note: The PKS Plugin will not be used until later in this section, but the OVF d
 - Domain Name Servers: 192.168.110.10
 - Domain Search Path: corp.local
 - FQDN: pks-ui.corp.local
+- Alternate IP Address: 10.40.14.8
+- Do NOT enable the second network interface, ensure box is unchecked
 - Leave other settings to their default values and click `Next`
 
 <details><summary>Screenshot 1.1.9</summary>
-<img src="Images/2018-11-09-23-39-13.png">
+<img src="Images/2019-02-14-10-53-19.png">
 </details>
 <br/>
 
 1.1.10 On the `Ready to complete` screen, validate configuration data and click `Finish`
 
 <details><summary>Screenshot 1.1.10</summary>
-<img src="Images/2018-11-09-23-45-59.png">
+<img src="Images/2019-02-14-10-53-38.png">
 </details>
 <br/>
 
@@ -171,7 +172,7 @@ Please proceed through the following steps while the OVA template is deploying
 </details>
 <br/>
 
-1.2.7 From the NSX Manager `Nodes` page, select the `Edges` tab and verify the status of `nsxedge-1.corp.local`. Ensure the `Deployment Status` is `Node Ready`, the controller and manager connectivity are `Up`. 
+1.2.7 From the NSX Manager `Nodes` page, select the `Edges` tab and verify the status of `nsxedge-1.corp.local`. Ensure the `Deployment Status` is `Node Ready`, the controller and manager connectivity are `Up`.
 
 <details><summary>Screenshot 1.2.7 </summary>
 <img src="Images/2018-11-12-22-15-11.png">
@@ -240,11 +241,11 @@ Close the SSH connection to the nsx edge
 </details>
 <br/>
 
-### 1.3 Validate PKS Pipeline Installation & PKS Control Plane Operations
+### 1.3 Validate PKS Installation & PKS Control Plane Operations
 
 1.3.1 In the vSphere web client, on the `Hosts and Clusters` page, expand the `pks-mgmt-1` resource pool and check the summary tab of the `opsman`, Bosh and Harbor VM's. The Bosh and Harbor VM's have automatically generated VM names that are hard to identify. If you look under the `pks-mgmt-1` resource pool, you should see two virtual machines that have names beginning with "vm-", if you click on each of these VM's, on the `Summary` screen under `Custom Attributes`, the value for the `Deployment` parameter should be `p-bosh` for the BOSH VM and `harbor-container-registry-...` for the harbor VM, as shown in the following screenshots
 
-Note: You should also see some VM's in the `pks-mgmt-1` resource pool that have names beginning with "sc-". These VMs are used by BOSH when processing certain tasks and are typically powered off under normal healthy state. If they are powered on it indicates BOSH is processing a task
+Note: You should also see some VM's in the `pks-mgmt-1` resource pool that have names beginning with "sc-". These VMs are used by BOSH when processing certain tasks and are typically powered off under normal healthy state. If they are powered on it indicates BOSH is using them to process a task
 
 <details><summary>Screenshot 1.3.1.1</summary>
 <img src="Images/2018-11-09-03-38-24.png">
@@ -394,15 +395,14 @@ The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimize
 2.1.1 In the vSphere web client, navigate to the `Hosts and Clusters` view, expand the `RegionA01-MGMT01` cluster, right-click the `pks-ui` VM, select `Edit Settings`, set `Network adapter 1` to `ls-pks-mgmt` and click `OK`
 
 <details><summary>Screenshot 2.1.1</summary>
-<img src="Images/2018-11-13-15-17-59.png">
+<img src="Images/2019-02-14-11-21-04.png">
 </details>
 <br/>
 
 2.1.2 In the vSphere web client, right-click the `pks-ui` VM and select `Power > Power On`
 
 <details><summary>Screenshot 2.1.2</summary>
-<img src="Images/2018-11-13-15-18-47.png">
-Note: The screenshot above was taken after the PKS UI VM was already powered on, which is why in the image the option to power on is grayed out
+<img src="Images/2019-02-14-11-21-54.png">
 </details>
 <br/>
 
@@ -420,16 +420,29 @@ Note: The screenshot above was taken after the PKS UI VM was already powered on,
 </details>
 <br/>
 
-2.1.5 In v1.0 of the PKS UI technical preview, the OVF deploy does not provide an option to configure a static IP address for its 2nd NIC connection to the VM network. In the student lab environment DHCP is not configured to properly assign an approprate address for this interface, so in the following steps you will configure Photon OS, which is the OS used for the PKS UI VM, with a static IP address for the PKS UI VM's 2nd NIC.
+2.1.5 From the control center desktop, open a new browser tab to NSX-T Manager, login with username `admin` password `VMware1!` and navigate to `Networking > Routing` page and click on the `t0-pks` router
 
-2.1.6 From the console connection to the 'pks-ui' VM, make a copy of the network configuration file for the eth0 interface, naming the copy appropriately to define the settings for the eth1 interface with the command `cp /etc/systemd/network/09-pks.network /etc/systemd/network/10-vm.network`, and then launch VI to edit the copied file with the command `vi /etc/systemd/network/10-vm.network`
+<details><summary>Screenshot 2.1.5.1</summary>
+<img src="Images/2019-02-14-11-31-34.png">
+</details>
 
-<details><summary>Screenshot 2.1.6</summary>
-<img src="Images/2018-11-10-00-32-29.png">
+<details><summary>Screenshot 2.1.5.2</summary>
+<img src="Images/2019-02-14-11-32-45.png">
 </details>
 <br/>
 
-2.1.7 Use VI to update the copied file changing only the following attributes, keeping the formatting intact as shown in the screenshot below, save the updates and exit VI
+2.1.6 On the `t0-pks` page, select `Services > NAT`. Click `+ ADD` to add a new NAT rule
+
+<details><summary>Screenshot 2.1.6.1</summary>
+<img src="Images/2019-02-14-11-42-14.png">
+</details>
+
+<details><summary>Screenshot 2.1.6.2</summary>
+<img src="Images/2019-02-14-11-43-33.png">
+</details>
+<br/>
+
+2.1.7 On the `New NAT Rule`
 
 - Name=Eth1
 - Address=192.168.110.72/24
@@ -446,6 +459,7 @@ Note: The screenshot above was taken after the PKS UI VM was already powered on,
 <img src="Images/2018-11-12-12-28-49.png">
 </details>
 <br/>
+!-->
 
 2.1.9 Open a new web browser tab and navigate to `https://192.168.110.72`, login with the username `administrator@vsphere.local` and password `VMware1!`, and on the `Complete PKS plugin registration` screen, click `CONTINUE`
 
