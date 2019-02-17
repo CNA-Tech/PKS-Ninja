@@ -62,7 +62,7 @@ Github issues are used in this manner in most open source and cloud native proje
 
 ### 2.3 Try Some Labs!
 
-This section provides details on how to get started trying some labs - however please note before you try to many labs, review step 3 below, as it is important to know before you get to far into the lab exercises to maximize your learning experience.
+This section provides details on how to get started trying some labs - however please note before you try to many labs, review step 3 below, as it is important to know before you get too far into the lab exercises to maximize your learning experience.
 
 #### 2.3.1 [Courses]
 
