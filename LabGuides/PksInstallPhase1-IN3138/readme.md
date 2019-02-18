@@ -25,7 +25,7 @@ PKS installation on vSphere requires NSX-T to be installed. If NSX-T is not inst
 
 <details><summary>Screenshot 1.1</summary><img src="Images/2019-01-11-23-12-17.png"></details><br>
 
-1.2 In the vSphere web client, right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`. On the `Select template` screen, select `Local File` and navigate to the Ops Manager OVA file. The file is E:\Downloads, and named "pcf-vsphere-2.4.build.132.ova"
+1.2 In the vSphere web client, right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`. On the `Select template` screen, select `Local File` and navigate to the Ops Manager OVA file. The file is E:\Downloads, and named "pcf-vsphere-2.3.build.170.ova"
 
 
 <details><summary>Screenshot 1.2.1</summary><img src="Images/2019-01-11-23-18-21.png"></details>
@@ -259,24 +259,12 @@ _Note: Each of the availability zones below will have a single cluster. When you
   - DNS: `192.168.110.10`
   - Gateway: `172.31.0.1`
   - Availability Zones: `PKS-MGMT-1`
-- Click `Add Network` to add a network with the following values:
-  - Name: `PKS-COMP`
-  - vSphere Network Name: `ls-pks-service`
-  - CIDR: `172.31.2.0/23`
-  - Reserved IP Ranges: `172.31.2.1`
-  - DNS: `192.168.110.10`
-  - Gateway: `172.31.2.1`
-  - Availability Zones: `PKS-COMP`
-  -Click `Save`
 
 <details><summary>Screenshot 2.8.1</summary>
 <img src="Images/2018-10-21-23-02-32.png">
 </details>
 
-<details><summary>Screenshot 2.8.2</summary>
-<img src="Images/2018-10-22-15-21-58.png">
-</details>
-<br/>
+
 
 2.9 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
 
