@@ -9,7 +9,10 @@
 </details>
 <br/>
 
-1.2 Click on the orange PKS tile view the tile configuration
+1.2a Click on the PKS Tile 'Stemcell Missing' hyperlink and from the stemcell library select 'Import Stemcell'. Navigate to the "bosh-stemcell-170.15-vsphere-esxi-ubuntu-xenial-go_agent.tgz" file  under E:/Downloads/ and open.
+This will import the stemcell for the PKS tile.
+
+1.2b Click on the orange PKS tile view the tile configuration
 
 <details><summary>Screenshot 1.2 </summary>
 <img src="Images/2018-10-22-01-55-47.png">
