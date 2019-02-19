@@ -349,6 +349,8 @@ _Note: In the nested example lab, it takes ~30 minutes to complete the BOSH depl
 </details>
 <br/>
 
+2.17 Once BOSH finishes to deploy, go back to the "Create Networks" screen, expand the PKS-MGMT network and add the PKS-COMP Availability Zone. This will be needed for choosing PKS-COMP as the availability zone to deploy the various plans' Availability zones for Master/ETCD as well as Worker nodes.
+
 ## Step 3: Prep for PKS Install
 
 _Note: To save time, you will open another instance of Ops Manager admin console and continue to importing the PKS Tile while Bosh continues to deploy. Leave your Bosh deployment browser tab open to continue to monitor the deployment status._
