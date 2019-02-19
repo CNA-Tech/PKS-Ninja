@@ -131,7 +131,6 @@ Login for NSX Manager UI is: admin/VMware1!
 - NSX Manager Hostname: `nsxmgr-01a.corp.local`
 - NSX Manager Super User Principal Identity Certificate: Use the PI certificate and key values you copied to Notepad++ in the PKS Install Phase 1 lab, pasting the certificate in the first box and the key in the second box
 - NSX Manager CA Cert: Use the NSX MGR certificate value you copied to Notepad++ in the PKS Install Phase 1 lab
-- Disable SSL certificate verification: `True`
 - NAT mode: `True`
 - Pods IP Block ID: Use the value you gathered in step 1.9.1.1 above
 - Nodes IP Block ID: Use the value you gathered in step 1.9.1.2 above
