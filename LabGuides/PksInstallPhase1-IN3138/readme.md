@@ -259,15 +259,7 @@ _Note: Each of the availability zones below will have a single cluster. When you
   - DNS: `192.168.110.10`
   - Gateway: `172.31.0.1`
   - Availability Zones: `PKS-MGMT-1`
-- Click `Add Network` to add a network with the following values:
-  - Name: `PKS-COMP`
-  - vSphere Network Name: `ls-pks-service`
-  - CIDR: `172.31.2.0/23`
-  - Reserved IP Ranges: `172.31.2.1`
-  - DNS: `192.168.110.10`
-  - Gateway: `172.31.2.1`
-  - Availability Zones: `PKS-COMP`
-  -Click `Save`
+
 
 <details><summary>Screenshot 2.8.1</summary>
 <img src="Images/2018-10-21-23-02-32.png">
