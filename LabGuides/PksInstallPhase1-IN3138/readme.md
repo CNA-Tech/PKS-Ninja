@@ -268,7 +268,7 @@ _Note: Each of the availability zones below will have a single cluster. When you
   - Gateway: `172.31.2.1`
   - Availability Zones: `PKS-COMP`
   -Click `Save`
-
+**Screenshot to be changed cause shows a second PKS-MGMT-2 AZ selected. One that we never created.(and shouldn't wiht this lab setup)
 <details><summary>Screenshot 2.8.1</summary>
 <img src="Images/2018-10-21-23-02-32.png">
 </details>
