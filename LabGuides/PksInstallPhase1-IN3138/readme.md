@@ -273,10 +273,6 @@ _Note: Each of the availability zones below will have a single cluster. When you
 <img src="Images/2018-10-21-23-02-32.png">
 </details>
 
-<details><summary>Screenshot 2.8.2</summary>
-<img src="Images/2018-10-22-15-21-58.png">
-</details>
-<br/>
 
 2.9 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
 
