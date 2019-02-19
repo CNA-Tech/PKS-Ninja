@@ -21,7 +21,7 @@
 - Place singleton jobs in : PKS-MGMT-1
 - Balance other jobs in: PKS-MGMT-1
 - Network: PKS-MGMT
-- Service Network: PKS-COMP
+- Service Network: PKS-MGMT
 - Click `Save`
 
 <details><summary>Screenshot 1.3</summary><img src="Images/2019-01-06-17-31-07.png"></details><br>
