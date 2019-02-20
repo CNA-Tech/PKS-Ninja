@@ -4,7 +4,7 @@
 
 **Note: If you completed your PKS installation using the concourse pipeline, or if you started with a fullyInstalled lab template, the UAA account has already been created for you by the pipeline, and you can skip to step 2. Please review Step1 so you have an understanding of how to create UAA accounts, as this is a regular, ongoing task for PKS administration that needs to be done using the manual procedure documented here to add additional user accounts after initial installation.**
 
-1.1 Login to Ops Manager UI, Click on the Pivotol Container Service tile and then click on the `Credentials` tab, look for `Pks Uaa Management Admin Client` , click `Link to Credential`
+1.1 Login to Ops Manager UI, Click on the Pivotal Container Service tile and then click on the `Credentials` tab, look for `Pks Uaa Management Admin Client` , click `Link to Credential`
 
 - From the control center, open a browser and navigate to https://opsman.corp.local
 - User name / password: admin / VMware1!
