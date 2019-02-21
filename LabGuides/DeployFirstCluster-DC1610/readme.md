@@ -40,6 +40,18 @@ uaac token client get admin -s LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr
 
 <img src="images/2018-10-24-05-37-12.png"></details><br/>
 
+- Alternatively, you can use SSL to authenticate and encrypt the traffic from opsman to the bosh pks api. In the opsman client, create a new folder in your user directory called pksapi-cert. Create the certificate file pksapi.crt file and paste the PKS api certificate downloaded from the PKS tile > PKS API > Certificate field.
+```bash:
+vi ~/pksapi-cert/pksapi.crt
+i for insert
+right mouse click to paste the certificate
+```
+From the OpsMan CLI, target your UAA server and request a token with the following commands. (Be sure to replace the string `LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr` with the secret that you gathered in the previous step 1.2)
+
+```bash:
+uaac target https://pks.corp.local:8443 --ca-cert ~/pksapi-cert/pksapi.crt
+uaac token client get admin -s LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr
+```
 1.4 From `OpsMan` putty session, enter the following commands to create a UAA account and assign admin rights to new user `pks-admin`:
 
 ```bash:
@@ -60,6 +72,13 @@ pks login -a pks.corp.local -u pksadmin --skip-ssl-validation
 - Password: `VMware1!`
 
 <details><summary>Screenshot 2.1</summary><img src="images/2019-01-09-23-47-00.png"></details><br>
+
+- Alternatively, just like you did to secure the communications between opsman and the PKS api server in teh above steps, you can use SSL to authenticate and encrypt the traffic from the cli vm to the bosh pks api server. In the cli vm, create a new folder in your user directory called pksapi-cert. Create the certificate file pksapi.crt file and paste the PKS api certificate downloaded from the PKS tile > PKS API > Certificate field. 
+From `cli-vm`, Login to the PKS CLI with the following command:
+
+```bash
+pks login -a pks.corp.local -u pksadmin --ca-cert ~/pksapi-cert/pksapi.crt
+```
 
 2.2 From `cli-vm`, verify there are no existing clusters
 
