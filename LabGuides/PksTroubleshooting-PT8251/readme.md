@@ -1,4 +1,4 @@
-# Lab 15 - PKS Troubleshooting
+# PKS Troubleshooting
 
 **Contents:**
 
