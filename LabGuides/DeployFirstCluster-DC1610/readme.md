@@ -73,7 +73,7 @@ pks login -a pks.corp.local -u pksadmin --skip-ssl-validation
 
 <details><summary>Screenshot 2.1</summary><img src="images/2019-01-09-23-47-00.png"></details><br>
 
-- Alternatively, just like you did to secure the communications between opsman and the PKS api server in teh above steps, you can use SSL to authenticate and encrypt the traffic from the cli vm to the bosh pks api server. In the cli vm, create a new folder in your user directory called pksapi-cert. Create the certificate file pksapi.crt file and paste the PKS api certificate downloaded from the PKS tile > PKS API > Certificate field. 
+- Alternatively, just like you did to secure the communications between opsman and the PKS api server in the above steps, you can use SSL to authenticate and encrypt the traffic from the cli vm to the bosh pks api server. In the cli vm, create a new folder in your user directory called pksapi-cert. Create the certificate file pksapi.crt file and paste the PKS api certificate downloaded from the PKS tile > PKS API > Certificate field. 
 From `cli-vm`, Login to the PKS CLI with the following command:
 
 ```bash
