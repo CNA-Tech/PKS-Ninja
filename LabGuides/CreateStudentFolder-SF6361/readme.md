@@ -131,7 +131,12 @@ ls
 </details>
 <br/>
 
-1.6 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and connect your forked clone back to the source PKS-Ninja repository with the command `git remote add upstream https://github.com/CNA-Tech/Students.git`. Validate the upstream configuration with the command `git remote -v`
+1.6 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and connect your forked clone back to the source PKS-Ninja repository, then validate the upstream configuration is correct.
+
+```bash
+git remote add upstream https://github.com/CNA-Tech/Students.git
+git remote -v
+```
 
 <details><summary>Screenshot 1.6</summary>
 <img src="Images/2018-12-14-02-51-58.png">
