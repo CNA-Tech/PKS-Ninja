@@ -58,7 +58,7 @@ _Before proceeding, ensure your `cli-vm` is authenticated to the PKS API server 
 
 ```bash
 pks login -a pks.corp.local -u pks-admin --skip-ssl-validation
-pks get credentials my-cluster
+pks get-credentials my-cluster
 ```
 
 1.1 Review the Storage Class spec for the Planespotter-mysql deployment with the command `cat ~/planespotter/kubernetes/storage_class.yaml`

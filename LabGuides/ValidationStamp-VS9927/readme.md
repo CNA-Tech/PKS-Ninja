@@ -33,7 +33,7 @@ On any project where multiple people contribute updates, a system is needed so t
 
 On modern software and devops projects, version control systems are used for this purpose, and Git is the industry standard version control system for Linux, Cloud Native and Open Source projects.
 
-Git uses a "Pull Request" process when a user wants to make an update to a community repository. This is because to make an update, the user first makes a their own seperate copy of the repository, updates their seperate copy, and then opens a pull request, which sends a request to the admin of the git repository you want to update, requesting that they pull the updates from the users copy into the main repository.
+Git uses a "Pull Request" process when a user wants to make an update to a community repository. This is because to make an update, the user first makes their own separate copy of the repository, updates their separate copy, and then opens a pull request, which sends a request to the admin of the git repository you want to update, requesting that they pull the updates from the users copy into the main repository.
 
 For your reference, the image below from the [Kubernetes Contributor Guide](https://github.com/kubernetes/community/blob/master/contributors/guide/README.md#github-workflow) provides a visual overview of the full pull request process. Please note that to commit a validation stamp, you will be using a highly simplified version of this process:
 
@@ -65,7 +65,7 @@ Note: When completing the validation stamp for this lab guide, use `v11` as the 
 
 Example #1 - the github user `Githubuser1` using PKS Lab Template `v11` on the date July 1st 2018 would enter the following stamp:
 
-`Githubuser1;v11;02/04/19<br/>`
+`Githubuser1;v11;07/01/18<br/>`
 
 Example #2 - the github user `afewell` using PKS Lab Template `v10` on the date January 28th 2019 would enter the following stamp:
 

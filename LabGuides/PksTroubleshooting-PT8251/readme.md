@@ -1,4 +1,4 @@
-# Lab 15 - PKS Troubleshooting
+# PKS Troubleshooting 1
 
 **Contents:**
 
@@ -7,6 +7,8 @@
 - [3.0 Validation and Troubleshooting with Kubernetes Native Tools](#30-validation-and-troubleshooting-with-kubernetes-native-tools)
 
 ## Overview
+
+**There are currently some bugs with the vSPhere UI Plugin and PKS 1.3 we expect to be resolved within the week, and will update this page shortly. In the meantime to use the PKS UI plugin, we recommend you use the v10 template, and switch to the version of this page on the v10 branch of this repo.**
 
 In this section you will review the core troubleshooting tools used in PKS troubleshooting with a focus on core product CLI and UI tools not inclusive of external monitoring and operational tools such as the vRealize suite or Wavefront, which are covered in different sections
 

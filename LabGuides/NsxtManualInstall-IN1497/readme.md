@@ -182,7 +182,7 @@ _NOTE: On your first login, you will be prompted to accept the EULA. Accept EULA
 
 ## Step 2: Add NSX Compute Manager
 
-In sthis step, you create a connection between the NSX manager and your vCenter. This enables NSX manager to deploy VIBs to the hosts, controller and edge VMs, etc.
+In this step, you create a connection between the NSX manager and your vCenter. This enables NSX manager to deploy VIBs to the hosts, controller and edge VMs, etc.
 
  2.1 From NSX Manager, click on **Fabric** -> **Compute Manager**
 
