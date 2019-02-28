@@ -523,20 +523,15 @@ The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimize
 </details>
 <br/>
 
-2.1.13 Gather the BOSH credentials needed to connect from the PKS UI VM
+2.1.13 Enter the following values for the Ops Man endpoint
 
-Open a browser connection to Opsman with admin/VMware1!, click on the `Bosh Director for vSphere` tile and navigate to the `Credentials`, Find the row for `Bosh Commandline Credentials` and click `Link to Credentials` and record the values for `BOSH_Client` and `Bosh_Client_Secret` as shown in the screenshots below. Be careful not to leave any leading or trailing spaces when you copy the secret
+- Hostname: opsman.corp.local
+- Username: admin
+- Password: VMware1!
+- Click `Add` and then click `Continue` to verify fingerprint and wait for registration to complete (takes several minutes to complete)
 
-<details><summary>Screenshot 2.1.13.1</summary>
-<img src="Images/2018-11-10-14-03-12.png">
-</details>
-
-<details><summary>Screenshot 2.1.13.2</summary>
-<img src="Images/2018-11-10-13-29-09.png">
-</details>
-
-<details><summary>Screenshot 2.1.13.3</summary>
-<img src="Images/2018-11-10-14-01-57.png">
+<details><summary>Screenshot 2.1.13</summary>
+<img src="Images/2019-02-14-13-37-53.png">
 </details>
 <br/>
 
