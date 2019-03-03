@@ -22,6 +22,8 @@ Helm works in a client-server model by leveraging a Tiller pod running in the ku
 ## Step 1: Configure Tiller
 1.1 - Create a service account for Tiller and bind it to the cluster-admin role
 
+*Note: For expediency in this example we bind the cluster-admin priviledges to the Tiller service account. This is not recommended in production environments where the minimum needed permissions should be assigned to the Tiller service account. For guidance on additional security recommendations for production deployments, please see [Securing your Helm Installation](https://github.com/helm/helm/blob/master/docs/securing_installation.md).*
+
 In your `cli-vm`:
 
 Create a new config file `nano rbac-config.yaml`
