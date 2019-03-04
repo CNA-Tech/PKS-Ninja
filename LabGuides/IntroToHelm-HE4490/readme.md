@@ -285,7 +285,11 @@ When you Sign in to the kubernetes dashboard, the homepage should show the overv
 </details>
 <br/>
 
-2.2.5 - Clean up your environment by deleting the wordpress installation with the following commands. Observe that the `--purge` flag must be used with the `helm delete` command to permanently delete an installation:
+2.2.5 **NOTE: If you are following the [Deliver Enterprise Containers & Kubernetes with PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeliverCloudNative-DK7212) lab guide, skip this step and proceed back to the lab guide and follow the instructions there**
+
+All others, please proceed to clean up your environment per the following instructions:
+
+Clean up your environment by deleting the wordpress installation with the following commands. Observe that the `--purge` flag must be used with the `helm delete` command to permanently delete an installation:
 
 ```bash
 helm delete wordpress
