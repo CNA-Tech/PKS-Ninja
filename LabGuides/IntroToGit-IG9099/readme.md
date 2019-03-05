@@ -87,7 +87,7 @@ Observe that git recognized the addition of the new `readme.md`, but it is curre
 
 Observe in the output of the git status command that you are still on the initial commit, the new readme.md file is recognized but is listed under `changes to be committed` as git requires that changes be commited with a commit message
 
-<details><summary>Screenshot 1.1.3</summary>
+<details><summary>Screenshot 1.1.4</summary>
 <img src="Images/2018-11-14-03-13-36.png">
 </details>
 <br/>
