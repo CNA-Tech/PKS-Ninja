@@ -35,11 +35,11 @@ Note: The PKS Plugin will not be used until later in this section, but the OVF d
 1.1.0 From the control center desktop, open a web browser connection to `https://labs.vmware.com/flings/vsphere-pks-plugin`, accept the license agreement and download the OVA file for the vSphere PKS Plugin to the default downloads directory (E:\Downloads).
 
 <details><summary>Screenshot 1.1.0 </summary>
-<img src="Images/2019-02-14-10-25-39.png">
+<img src="Images/2019-03-04-14-58-04.png">
 </details>
 <br/>
 
-1.1.1 Open a web browser connection to the vSphere (flash) client at `https://vcsa-01a.corp.local/vsphere-client`. Do not use the HTML5 Client for the OVF deploy. On the `Hosts and Clusters` page, right click the `RegionA01-MGMT01` cluster and select `Deploy OVF Template`
+1.1.1 Open a web browser connection to the vSphere (flash) client at `https://vcsa-01a.corp.local/vsphere-client` and login using the windows session credentials. Do not use the HTML5 Client for the OVF deploy. On the `Hosts and Clusters` page, right click the `RegionA01-MGMT01` cluster and select `Deploy OVF Template`
 
 <details><summary>Screenshot 1.1.1</summary>
 <img src="Images/2019-02-14-10-30-46.png">
@@ -49,7 +49,7 @@ Note: The PKS Plugin will not be used until later in this section, but the OVF d
 1.1.2 On the `Select Template` screen, select `local file` and select the vSphere PKS Plugin OVA File in the `E:\Downloads` directory
 
 <details><summary>Screenshot 1.1.2</summary>
-<img src="Images/2019-02-14-10-33-55.png">
+<img src="Images/2019-03-04-15-04-41.png">
 </details>
 <br/>
 
@@ -70,7 +70,7 @@ Note: The PKS Plugin will not be used until later in this section, but the OVF d
 1.1.5 On the `Review Details` screen, click `Next`
 
 <details><summary>Screenshot 1.1.5</summary>
-<img src="Images/2019-02-14-10-35-59.png">
+<img src="Images/2019-03-04-15-06-01.png">
 </details>
 <br/>
 
@@ -118,7 +118,7 @@ Note: The PKS Plugin will not be used until later in this section, but the OVF d
 1.1.10 On the `Ready to complete` screen, validate configuration data and click `Finish`
 
 <details><summary>Screenshot 1.1.10</summary>
-<img src="Images/2019-02-14-10-53-38.png">
+<img src="Images/2019-03-04-15-55-00.png">
 </details>
 <br/>
 
@@ -371,7 +371,7 @@ kubectl get nodes
 </details>
 <br/>
 
-1.2.5 In the vSphere web client, on the `Hosts and Clusters` page, expand the `pks-comp-1` resource pool and view the VM's in the resource pool. In the current configuration, all master and node VM's for all Kubernetes clusters created with this PKS instance will be deployed to the `pks-comp-1` resource pool
+1.3.13 In the vSphere web client, on the `Hosts and Clusters` page, expand the `pks-comp-1` resource pool and view the VM's in the resource pool. In the current configuration, all master and node VM's for all Kubernetes clusters created with this PKS instance will be deployed to the `pks-comp-1` resource pool
 
 Currently in your lab environment you should have one small kubernetes deployment. In the lab deployment, the small plan settings were configured to provision a single master and 3 worker nodes (The same configuration is also applied during pipeline execution). Accordingly you should see four virtual machines in the resource pool
 
@@ -383,7 +383,7 @@ Near the top of the `Summary` page for the selected VM, observe the value for `D
 
 Part of the point of this step is to demonstrate the complexity of correlating Kubernetes constructs to vSphere constructs without additional tools. Keep in mind there is currently only a single cluster deployed, in a production environment there can be hundreds of nodes and clusters
 
-<details><summary>Screenshot 1.2.5</summary>
+<details><summary>Screenshot 1.3.13</summary>
 <img src="Images/2018-11-09-22-58-38.png">
 </details>
 <br/>
@@ -408,35 +408,21 @@ The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimize
 </details>
 <br/>
 
-2.1.3 In the vSphere web client, right-click the `pks-ui` VM and select `Open Console`
+2.1.3 From the control center desktop, open a new browser tab to NSX-T Manager, login with username `admin` password `VMware1!` and navigate to `Networking > Routing` page and click on the `t0-pks` router
 
-<details><summary>Screenshot 2.1.3</summary>
-<img src="Images/2018-11-13-15-20-43.png">
-</details>
-<br/>
-
-2.1.4 In the console connection to the `pks-ui` VM, wait for the VM to complete booting and login with username `root` and password `VMware1!`
-
-<details><summary>Screenshot 2.1.4</summary>
-<img src="Images/2018-11-10-00-21-38.png">
-</details>
-<br/>
-
-2.1.5 From the control center desktop, open a new browser tab to NSX-T Manager, login with username `admin` password `VMware1!` and navigate to `Networking > Routing` page and click on the `t0-pks` router
-
-<details><summary>Screenshot 2.1.5.1</summary>
+<details><summary>Screenshot 2.1.3.1</summary>
 <img src="Images/2019-02-14-11-31-34.png">
 </details>
 
-<details><summary>Screenshot 2.1.5.2</summary>
-<img src="Images/2019-02-14-11-32-45.png">
+<details><summary>Screenshot 2.1.3.2</summary>
+<img src="Images/2019-03-04-16-01-27.png">
 </details>
 <br/>
 
 2.1.6 On the `t0-pks` page, select `Services > NAT`. Click `+ ADD` to add a new NAT rule
 
 <details><summary>Screenshot 2.1.6.1</summary>
-<img src="Images/2019-02-14-11-42-14.png">
+<img src="Images/2019-03-04-16-02-30.png">
 </details>
 
 <details><summary>Screenshot 2.1.6.2</summary>
@@ -465,7 +451,7 @@ The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimize
 </details>
 <br/>
 
-2.1.9 In DNS Manager in the lefthand navigation column expand `ControlCenter`, expand `Forward Lookup Zones`, right click on `corp.local` and select `New Host (A or AAAA)...`
+2.1.9 In DNS Manager in the lefthand navigation column expand `ControlCenter`, expand `Forward Lookup Zones`, select and then right click on `corp.local` and select `New Host (A or AAAA)...`
 
 <details><summary>Screenshot 2.1.9</summary>
 <img src="Images/2019-02-14-13-00-53.png">
@@ -478,7 +464,7 @@ The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimize
 - IP Address: 10.40.14.8
 - Click `Add Host`
 - Press `OK` on the popup screen
-- Close the dns manager and new host windows
+- Close dns manager
 
 <details><summary>Screenshot 2.1.10.1</summary>
 <img src="Images/2019-02-14-13-12-55.png">
@@ -491,7 +477,11 @@ The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimize
 
 2.1.11 Open a new web browser tab and navigate to `https://pks-ui.corp.local` being sure to use https as the ui vm will not respond to requests on port 80. Login with the username `administrator@vsphere.local` and password `VMware1!`, and on the `Complete PKS plugin registration` screen, click `CONTINUE`
 
-<details><summary>Screenshot 2.1.11</summary>
+<details><summary>Screenshot 2.1.11.1</summary>
+<img src="Images/2019-03-04-18-29-42.png">
+</details>
+
+<details><summary>Screenshot 2.1.11.2</summary>
 <img src="Images/2018-11-10-02-16-41.png">
 </details>
 <br/>
@@ -510,15 +500,19 @@ The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimize
 </details>
 <br/>
 
-2.1.12 From the control center desktop, if you have any open connections to the vSphere web or HTML5 client, log out of your sessions and then close the tabs. Open a new browser window and log into the vSphere HTML5 Client, you should now see an option for `VMware PKS` on the Home screen, Shortcuts screen and in the pulldown menu. Click on the `VMware PKS` icon to open the plugin
+2.1.12 From the control center desktop, if you have any open connections to the vSphere web or HTML5 client, log out of your sessions and then close the tabs. Open a new browser window and log into the vSphere HTML5 Client using the windows credential checkbox. Go to the home screen, where You should now see an option for `VMware PKS`, also on the Shortcuts screen and in the pulldown menu. Click on the `VMware PKS` icon to open the plugin
 
-**NOTE** If you do not see the `VMware PKS` icon, try logging out, close any open browser windows and then try to log back in a second time.
+**NOTE** If you do not see the `VMware PKS` icon, try logging out, close any open browser windows and then try to log back in a second time, a second logout and login is often needed. You will only be able to use the PKS plugin from the HTML5 Client.
 
 <details><summary>Screenshot 2.1.12.1</summary>
-<img src="Images/2018-11-10-02-26-49.png">
+<img src="Images/2019-03-04-18-36-48.png">
 </details>
 
 <details><summary>Screenshot 2.1.12.2</summary>
+<img src="Images/2019-03-04-18-37-51.png">
+</details>
+
+<details><summary>Screenshot 2.1.12.3</summary>
 <img src="Images/2019-02-14-13-25-51.png">
 </details>
 <br/>
@@ -528,37 +522,18 @@ The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimize
 - Hostname: opsman.corp.local
 - Username: admin
 - Password: VMware1!
-- Click `Add` and then click `Continue` to verify fingerprint and wait for registration to complete (takes several minutes to complete)
+- Click `Add` and then click `Continue` to verify fingerprint and wait for registration to complete (can take up to a few minutes to complete)
 
-<details><summary>Screenshot 2.1.13</summary>
+<details><summary>Screenshot 2.1.13.1</summary>
+<img src="Images/2019-03-04-18-40-38.png">
+</details>
+
+<details><summary>Screenshot 2.1.13.2</summary>
 <img src="Images/2019-02-14-13-37-53.png">
 </details>
 <br/>
 
-2.1.14 After you click on `VMware PKS` you will be directed to the `PKS Instances` configuration, enter the following values:
-
-- PKS API Endpoint
-  - Hostname: pks.corp.local
-  - Username: pksadmin
-  - Password: VMware1!
-- BOSH Endpoint
-  - IP Address: 172.31.0.2
-  - Username: ops_manager
-  - Password: Use the value for the `BOSH_CLIENT_SECRET` you gathered in the previous step
-- Networking endpoint
-  - Networking Stack: NSX-T
-  - Username: admin
-  - Password: VMware1!
-- Click `Add`
-- Click `Continue` to confirm the PKS and BOSH fingerprints per the screenshots below
-
-<details><summary>Screenshot 2.1.14.1</summary>
-<img src="Images/2018-11-10-14-09-05.png">
-</details>
-
-<details><summary>Screenshot 2.1.14.2</summary>
-<img src="Images/2018-11-10-14-11-06.png">
-</details>
+2.1.14 After you click on `VMware PKS` you will be directed to the `PKS Instances` page
 
 <details><summary>Screenshot 2.1.14.3</summary>
 <img src="Images/2018-11-11-01-19-55.png">
@@ -567,39 +542,39 @@ The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimize
 
 ## 2.2 - Use the vSphere PKS Plugin to validate PKS Instance & K8s Cluster Health
 
-2.2.1 From the vSphere HTML5 Client, navigate to the `VMware PKS` plugin and click on the name of your PKS instance
+2.2.1 From `PKS Instances` page of PKS UI Plugin, click on the name of your PKS instance
 
 <details><summary>Screenshot 2.2.1</summary>
-<img src="Images/2018-11-11-01-22-54.png">
+<img src="Images/2019-03-04-18-47-24.png">
 </details>
 <br/>
 
 2.2.2 On the `Summary` tab for your PKS instance, observe the details provided. The `Summary` tab is optimized to provide the most commonly needed PKS Instance details for VM administrators supporting PKS environments
 
 <details><summary>Screenshot 2.2.2</summary>
-<img src="Images/2018-11-11-01-27-53.png">
+<img src="Images/2019-03-04-18-48-19.png">
 </details>
 <br/>
 
 2.2.3 On the `Summary` tab for your PKS instance, observe that the VM name for the PKS Control Plane VM is provided making it simple for an admin to find in vCenter. Click on the name of the VM and observe that you are directed to the corresponding page in the vSphere client where VM admins can leverage their experience and the mature vSphere toolset to validate the health and performance of the VM. Navigate back to the `Summary` tab of your PKS instance in the `VMware PKS` plugin
 
 <details><summary>Screenshot 2.2.3.1</summary>
-<img src="Images/2018-11-11-01-32-13.png">
+<img src="Images/2019-03-04-18-49-51.png">
 </details>
 
 <details><summary>Screenshot 2.2.3.2</summary>
-<img src="Images/2018-11-11-01-33-34.png">
+<img src="Images/2019-03-04-18-51-04.png">
 </details>
 <br/>
 
 2.2.4 On the `Summary` tab for your PKS instance, observe that the key network objects for PKS cluster health are displayed. Click on the name of the `Tier-0` router and observe that you are directed to the objects page in the NSX-T UI where VM admins can leverage their experience and the mature NSX-T toolset to validate the health and performance of the router. Navigate back to the `Summary` tab of your PKS instance in the `VMware PKS` plugin
 
 <details><summary>Screenshot 2.2.4.1</summary>
-<img src="Images/2018-11-11-01-58-00.png">
+<img src="Images/2019-03-04-18-53-41.png">
 </details>
 
 <details><summary>Screenshot 2.2.4.2</summary>
-<img src="Images/2018-11-11-01-58-56.png">
+<img src="Images/2019-03-04-18-54-48.png">
 </details>
 <br/>
 
@@ -608,7 +583,7 @@ The vSphere PKS plugin is a plugin for the vSphere HTML5 client that is optimize
 Observe that the list of nodes provides key details such as node status, type, IP Address, cluster, VM and AZ names and provides the ability to launch directly to the vSphere client page for the associated objects
 
 <details><summary>Screenshot 2.2.5</summary>
-<img src="Images/2018-11-12-00-43-39.png">
+<img src="Images/2019-03-04-18-55-54.png">
 </details>
 <br/>
 
@@ -617,26 +592,26 @@ Observe that the list of nodes provides key details such as node status, type, I
 Navigate through the `PKS API Endpoint`, `Networking` and `Bosh Endpoint` pages and observe the details provided
 
 <details><summary>Screenshot 2.2.6.1</summary>
-<img src="Images/2018-11-12-00-54-18.png">
+<img src="Images/2019-03-04-18-57-03.png">
 </details>
 
 <details><summary>Screenshot 2.2.6.2</summary>
-<img src="Images/2018-11-12-00-55-58.png">
+<img src="Images/2019-03-04-18-57-41.png">
 </details>
 
 <details><summary>Screenshot 2.2.6.3</summary>
-<img src="Images/2018-11-12-00-56-13.png">
+<img src="Images/2019-03-04-18-58-10.png">
 </details>
 <br/>
 
-2.2.7 Return to the `VMware PKS` plugin, navigate to the `K8s Clusters`. On this screen you will see a list of all the running clusters in this PKS instance. Click on `my-cluster` to view cluster details
+2.2.7 From the `VMware PKS` plugin, navigate to the `K8s Clusters`. On this screen you will see a list of all the running clusters in this PKS instance. Click on `my-cluster` to view cluster details
 
 <details><summary>Screenshot 2.2.7.1</summary>
-<img src="Images/2018-11-11-01-38-52.png">
+<img src="Images/2019-03-04-18-59-32.png">
 </details>
 
 <details><summary>Screenshot 2.2.7.2</summary>
-<img src="Images/2018-11-11-01-41-35.png">
+<img src="Images/2019-03-04-19-00-25.png">
 </details>
 <br/>
 
@@ -655,9 +630,9 @@ The Storage section provides details about vSphere storage componentes used to p
 </details>
 <br/>
 
-2.2.11 From the `my-cluster` screen in the `VMware PKS` plugin, select the `Nodes` tab to view the nodes associated with the cluster and take some time to observe the details provided
+2.2.9 From the `my-cluster` screen in the `VMware PKS` plugin, select the `Nodes` tab to view the nodes associated with the cluster and take some time to observe the details provided
 
-<details><summary>Screenshot 2.2.11</summary>
+<details><summary>Screenshot 2.2.9</summary>
 <img src="Images/2018-11-11-02-15-47.png">
 </details>
 <br/>
@@ -667,7 +642,7 @@ The Storage section provides details about vSphere storage componentes used to p
 Observe the long, autogenerated name for each namespaces logical switch, and consider how much dramatically easier it is to identify and associate with a corresponding Kubernetes cluster with the plugin. Click on the name of the `Pod Network` for the `default` namespace and observe that this launches you directly into the NSX Manager UI for that object
 
 <details><summary>Screenshot 2.2.10.1</summary>
-<img src="Images/2018-11-11-02-21-36.png">
+<img src="Images/2019-03-04-19-02-30.png">
 </details>
 
 <details><summary>Screenshot 2.2.10.2</summary>
@@ -675,22 +650,22 @@ Observe the long, autogenerated name for each namespaces logical switch, and con
 </details>
 <br/>
 
-2.2.11 Launch a pod with a persistent volume to populate PKS plugin storage screen details
+## 2.3 Launch a pod with a persistent volume to populate PKS plugin storage screen details
 
-2.2.11.1 From the control center desktop, resume or open a new connection to `cli-vm`
+2.3.1 From the control center desktop, resume or open a new connection to `cli-vm`
 
-2.2.11.2 From the vSphere HTML5 Client, navigate to `VMware PKS > Your PKS Instance > K8s Clusters > my-cluster > Summary`, click on the `ACCESS CLUSTER`, copy the contents to the clipboard and paste the contents into the `cli-vm` prompt
+2.3.2 From the vSphere HTML5 Client, navigate to `VMware PKS > Your PKS Instance > K8s Clusters > my-cluster > Summary`, click on the `ACCESS CLUSTER`, copy the contents to the clipboard and paste the contents into the `cli-vm` prompt
 
-<details><summary>Screenshot 2.2.11.2.1</summary>
+<details><summary>Screenshot 2.3.2.1</summary>
 <img src="Images/2018-11-12-02-56-54.png">
 </details>
 
-<details><summary>Screenshot 2.2.11.2.2</summary>
+<details><summary>Screenshot 2.3.2.2</summary>
 <img src="Images/2018-11-12-02-58-33.png">
 </details>
 <br/>
 
-2.2.11.2 Launch the planespotter mysql pod, which includes a persistent volume, with the following commands:
+2.3.3 Launch the planespotter mysql pod, which includes a persistent volume, with the following commands:
 
 ```bash
 kubectl create ns planespotter
@@ -701,14 +676,14 @@ kubectl get pods -n planespotter
 kubectl get pv
 ```
 
-<details><summary>Screenshot 2.2.11.2</summary>
+<details><summary>Screenshot 2.3.3</summary>
 <img src="Images/2018-11-12-03-16-56.png">
 </details>
 <br/>
 
-2.2.11.3 From the vSphere HTML5 Client, navigate to `VMware PKS > Your PKS Instance > K8s Clusters > my-cluster > Summary`, and observe the Storage section to see the persistent volume claim you just created
+2.3.4 From the vSphere HTML5 Client, navigate to `VMware PKS > Your PKS Instance > K8s Clusters > my-cluster > Summary`, and observe the Storage section to see the persistent volume claim you just created
 
-<details><summary>Screenshot 2.2.11.3</summary>
+<details><summary>Screenshot 2.3.4</summary>
 <img src="Images/2018-11-12-03-21-47.png">
 </details>
 <br/>
