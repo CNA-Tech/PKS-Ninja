@@ -56,7 +56,7 @@ Observe that the output of the `git status` command shows that you are currently
 
 ```bash
 ll
-ll ./git
+ll .git/
 ```
 
 <details><summary>Screenshot 1.1.2</summary>
