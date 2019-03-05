@@ -133,7 +133,7 @@ Press the `ctrl + o` keys and hit the `Enter` key to save the file, and then pre
 </details>
 <br/>
 
-1.2.3 From the `cli-vm` prompt, enter the command `docker build . -t custom-nginx image` to build an image using the dockerfile you created in the previous step, using the `-t` flag to tag the image with the name `custom-nginx-image`. 
+1.2.3 From the `cli-vm` prompt, enter the command `docker build . -t custom-nginx-image` to build an image using the dockerfile you created in the previous step, using the `-t` flag to tag the image with the name `custom-nginx-image`. 
 
 Observe that in the output, the docker build process will go through each of the commands in the dockerfile you created in the previous step, as shown in the following screenshot
 
