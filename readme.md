@@ -1,8 +1,10 @@
 # Welcome to the PKS Ninja Community
 
+[WWKO Attendees please click here](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/wwko2019)
+
 **Please Note, this site is currently in beta/preview mode and under active development. Please excuse any errors or ommissions**
 
-The PKS Ninja Community on Github provides free learning resources for cloud native technologies with a learn-by-doing approach focused on practical, hands on skills. 
+The PKS Ninja Community on Github provides free learning resources for cloud native technologies with a learn-by-doing approach focused on practical, hands on skills.
 
 All the content on this site revolves around lab exercises, which align tightly with the common PKS Ninja lab environment. You can load up the lab environment template and use it to go through any of the available [Courses](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/). Check out the [Community Getting Started Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GettingStarted-GS3861) for more details. 
 
