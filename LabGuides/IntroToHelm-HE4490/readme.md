@@ -160,10 +160,12 @@ Notice the output and instructions on how to connect to the wordpress applicatio
 </details>
 <br/>
 
-2.1.3 Verify that the service is running by entering the command `kubectl get pods`, and ensure that the `STATUS` for all 3 pods is `Running`. If the status is not `Running`, wait for a few moments and enter the `kubectl get pods` command again, and repeat this until the `STATUS` for all 3 pods is `Running` as shown in the following screenshot:
+2.1.3 Verify that the service is running by entering the command `kubectl get pods -w`, and watch the `STATUS` of the pods as they load up. Wait for all 3 containers in the pod for status to switch to `Running` and then press the keys `ctrl + c` to exit the watch loop for `kubectl get pods` as shown in the following screenshot:
+
+Note: Depending on how quickly you enter this command after you run the helm install command in the previous step, the pods may already be in a running state by the time you execute the `kubectl get pods -w` command. In any case, once the pods are in a running state you can proceed to the next step.
 
 <details><summary>Screenshot 2.1.3 </summary>
-<img src="Images/2019-03-04-01-55-38.png">
+<img src="Images/2019-03-04-12-17-47.png">
 </details>
 <br/>
 
@@ -191,7 +193,7 @@ Observe the service IP address value in the output of the above commands and kee
 </details>
 <br/>
 
-2.1.6 The wordpress/LAMP helm chart used in this example installs apache, wordpress/php, and mysql into seperate containers that share a common pod, and deploys 3 load-balanced instances of this pod. Enter the following command `kubectl get deployment wordpress-lamp -o wide` to view the containers included in the wordpress pod spec.
+2.1.6 The wordpress/LAMP helm chart used in this example installs apache, wordpress/php, and mysql into seperate containers that share a common pod. Enter the following command `kubectl get deployment wordpress-lamp -o wide` to view the containers included in the wordpress pod spec.
 
 Observe in the command output that the `CONTAINERS` column lists the names assigned to the containers in the spec, and the `IMAGES` column lists the source images used to build the containers used in the pods in the `wordpress-lamp` deployment
 

@@ -12,9 +12,11 @@ Please complete the [Introduction to Helm](https://github.com/CNA-Tech/PKS-Ninja
 
 ## 3.0 Use the vSphere PKS Plugin to validate PKS Instance & K8s Cluster Health
 
-1.1 Complete [Secton 2.2 "vSphere PKS Plugin to validate PKS Instance & K8s Cluster Health"of the PKS Troubleshooting 1 Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksTroubleshooting-PT8251#11-install-vsphere-pks-plugin) and return back to this page to proceed with the next step below.
+3.1 Complete [Section 2.2 "vSphere PKS Plugin to validate PKS Instance & K8s Cluster Health"of the PKS Troubleshooting 1 Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksTroubleshooting-PT8251#11-install-vsphere-pks-plugin) and return back to this page to proceed with the next step below.
 
-Only complete section 2.2 from the PKS Troubleshooting guide and then return to this page to proceed with Section 4.0 below.
+Only complete section 2.2 from the PKS Troubleshooting guide and then return to this page to proceed with Step 3.2 below
+
+3.2 Complete [Step 2.2.5 from the Introduction to Helm lab to clean up your helm app installation](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHelm-HE4490#22-explore-helm-commands-and-application-management-features) and return back to this page to proceed with the next step below.
 
 ## 4.0 Deploy additional apps with Helm
 
