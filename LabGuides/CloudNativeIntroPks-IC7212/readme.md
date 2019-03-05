@@ -1,8 +1,8 @@
-## Hands On Intro to Devops & Cloud Native with PKS
+# Hands On Intro to Devops & Cloud Native with PKS
 
-### 1.0 Consuming Containerized Applications with Docker
+## 1.0 Consuming Containerized Applications with Docker
 
-#### 1.1 Running Nginx with Docker
+### 1.1 Running Nginx with Docker
 
 In this section you will use docker to run both a default and a customized ngninx server.
 
@@ -100,7 +100,7 @@ docker rm my-nginx
 </details>
 <br/>
 
-#### 1.2 Create a custom Docker Image
+### 1.2 Create a custom Docker Image
 
 1.2.1 In this step you will create a dockerfile which you will build to create a new nginx container named `custom-nginx` that includes the configuration you created for the `my-nginx` container in the previous steps
 
@@ -180,7 +180,7 @@ As the output validates, the `custom-nginx-image` container image includes the c
 </details>
 <br/>
 
-#### 1.3 Distributing your images with docker hub
+### 1.3 Distributing your images with docker hub
 
 1.3.1 From the Main Console (ControlCenter) desktop, open a new tab in the chrome browser and connect to `https://hub.docker.com/` and login. If you do not have a docker hub account, create one now.
 
@@ -270,7 +270,7 @@ docker stop custom-nginx
 </details>
 <br/>
 
-#### 1.4 Consuming containerized applications from github
+### 1.4 Consuming containerized applications from github
 
 A large number of popular applications are hosted on github, many of which are well maintained by vendors or communities. End users can utilize popular github repositories to access a broad array of software and put it to use to provide value for organizational or personal projects
 
@@ -344,9 +344,9 @@ docker images
 </details>
 <br/>
 
-### 2.0  Consuming Containerized and Cloud Native Applications with Kubernetes
+## 2.0  Consuming Containerized and Cloud Native Applications with Kubernetes
 
-#### 2.1 Review Planespotter Frontend Kubernetes Deployment
+### 2.1 Review Planespotter Frontend Kubernetes Deployment
 
 2.1.1 Resume your ssh session with `cli-vm` and from the prompt, enter the following commands to review the kubernetes manifest for the planespotter frontend application and edit the file to change the ingress host value from `planespotter.demo.yves.local` to `planespotter.corp.local` as shown in the following screenshot:
 
@@ -426,7 +426,7 @@ Gather the ip address shown in the output of the `kubectl get ingress` command a
 </details>
 <br/>
 
-#### 2.2 Deploy the complete planespotter application with Kubernetes
+### 2.2 Deploy the complete planespotter application with Kubernetes
 
 In addition to the frontend app, planespotter has 3 additional microservice applications that must be deployed to enable the complete planespotter application features. In this section, you will execute the additional commands required to deploy the remaining planespotter components, review the objects created to support the deployement, and review the planespotter application to validate its successful deployment and operation.
 
@@ -498,7 +498,7 @@ kubectl delete ns planespotter
 </details>
 <br/>
 
-#### 2.4 Deploying Kubernetes Applications with Helm
+#### 2.3 Deploying Kubernetes Applications with Helm
 
 Please complete the [Introduction to Helm](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHelm-HE4490) lab to satisfy the requirements for this section.
 

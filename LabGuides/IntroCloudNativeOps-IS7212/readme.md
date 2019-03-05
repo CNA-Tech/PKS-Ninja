@@ -2,11 +2,57 @@
 
 ## 1.0 Review Devops and Cloud Native Application Support & Operations
 
+A large number of popular applications are hosted on github, many of which are well maintained by vendors or communities. End users can utilize popular github repositories to access a broad array of software and put it to use to provide value for organizational or personal projects.
+
+Whether you are consuming an application from github, or if you are supporting the infrastructure needs of a modern cloud native development project, the skills needed are about the same.
+
+If you work for an organization that is actively implementing devops projects, chances are your organization already has a team that can plan and lead devops initiatives. Organizations at this stage need support from infrastructure operations teams, but in this use case the infrastructure roles do not need to be devops gurus to bring the needed support to make the devops project successful.
+
+If you work for an organization that is starting to plan or just getting started with early attempts at implementing devops projects, at this stage organizations should start with entry level projects, and grow in sophistication as milestones are reached and the overall devops teams and project constituents learn and grow through a phased approach.
+
+VMware PKS with vSphere delivers a modern cloud native platform that fully leverages the years of experience and valuable VMware skills common among enterprise IT workers, providing an agile and proven pathway for enterprise IT workers to successfully implement cloud native applications and platforms.
+
+With PKS, enterprise IT staff does not need to learn fundamentally different tools and methods to successfully deliver cloud native projects. This lab guide will focus on the most common use cases needed for infrastructure roles new to cloud native technologies - these use cases do not require massive amounts of retraining to be able to deliver significant value with cloud native technologies.
+
 ### 1.1 Explore Cloud Native Application Architecture
 
-A large number of popular applications are hosted on github, many of which are well maintained by vendors or communities. End users can utilize popular github repositories to access a broad array of software and put it to use to provide value for organizational or personal projects
+Most cloud native applications are made up of several distinct applications commonly called microservices that run in independent containers and work together to provide compisite application features and services.
 
-1.4.1 From the `cli-vm` prompt, enter the following commands to clone the planespotter application files from github.com to a local directory:
+For example, the [Planespotter](https://github.com/CNA-Tech/PKS-Ninja/blob/master/LabGuides/BonusLabs/Deploy%20Planespotter%20Lab/readme.md) application used as an example in many PKS Ninja lab guides consists of 5 different distinct microservices as shown in the screenshot below:
+
+<img src="Images/2019-03-04-20-17-33.png">
+
+Each of the individual microservice applications that represent part of the overall planespotter app require a kubernetes deployment spec, service spec and possibly network specs, configmaps, persistent volume claims and other artifacts required to deploy the application.
+
+As you will see with the planespotter application, anyone can download, run or modify planespotter and simply take advantage of the tremendous work that has already been done. Combined with container and kubernetes technology, applications like planespotter dont even need to have different instructions or deployment manifests for different platforms, it simply works as is on nearly all standard Kubernetes environments whether you deploy it to K8s on PKS or GKE/AKS/EKS/DIY or even minikube or kind.
+
+If you are supporting a team that is already developing applications of this nature, one of the primary new requirements for infrastructure support is providing the ability to run containers and provide container orchestration services with kubernetes. vSphere and PKS enable you to leverage proven enterprise class products that leverage existing skill sets to deliver kubernetes clusters on demand and provide a cloud class end user experience with enterprise grade security
+
+In traditional software development project, development teams provided executable builds of software to operations teams who generally had to support installation of the executable onto a operating system image and maintaining the OS and dependencies. In modern cloud native projects, the software build automation process outputs container or image builds rather than executable files, which generally makes the life of the infrastructure support role
+
+1.1.1 From the Main Console (Control Center) desktop, open the chrome browser, navigate to [http://github.com](http://github.com) and login to your account. After you log in, navigate to [https://github.com/CNA-Tech/planespotter](https://github.com/CNA-Tech/planespotter) and on the upper right hand corner of the page, click on `Fork` and proceed through the steps to create a fork of the planespotter repository on your github account.
+
+*Note: This example includes screenshots from afewell and possibly other users github repositories, please be sure to use your own github username and repository when completing the exercises.*
+
+<details><summary>Screenshot 1.1.1.1</summary>
+<img src="Images/2019-03-04-21-36-34.png">
+</details>
+
+<details><summary>Screenshot 1.1.1.2</summary>
+
+**Note: All Users may not see this image, in this case it is shown as afewell has multiple github accounts associated with his username. Other users may see a different prompt.**
+
+<img src="Images/2019-03-04-21-42-11.png">
+</details>
+<br/>
+
+<details><summary>Screenshot 1.1.1.3</summary>
+<img src="Images/2019-03-04-21-36-34.png">
+</details>
+
+
+<img src="Images/2019-03-04-21-44-45.png">
+1.1.2 From the Main Console (Control Center) desktop, poen a putty session to `cli-vm` and from the prompt, enter the following commands to clone the planespotter application files from github.com to a local directory:
 
 *Note: you can view the planespotter repository in a browser at [https://github.com/CNA-Tech/planespotter](https://github.com/CNA-Tech/planespotter)*
 
@@ -21,7 +67,7 @@ git clone https://github.com/CNA-Tech/planespotter.git
 </details>
 <br/>
 
-1.4.2 Navigate to the subdirectory for the planespotter frontend application, which provides the files to build a custom nginx based frontend for the planespotter app, and review the Dockerfile for the frontend app with the following commands:
+1.1.2 Navigate to the subdirectory for the planespotter frontend application, which provides the files to build a custom nginx based frontend for the planespotter app, and review the Dockerfile for the frontend app with the following commands:
 
 ```bash
 cd ~/cloned
