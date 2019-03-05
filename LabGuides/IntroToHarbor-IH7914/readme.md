@@ -2,7 +2,7 @@
 
 **Contents:**
 
-- [Prerequisites])(#prerequisites)
+- [Prerequisites](#prerequisites)
 - [Step 1: Initialize Harbor Projects and Repositories]()
 - [Step 2: Build Docker Image for Planespotter Frontend]()
 - [Step 3: Push and Pull Container Images From Harbor]()
