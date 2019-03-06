@@ -1,5 +1,7 @@
 # PKS Workshops @ WWKO 2019
 
+Please join the vmware slack channel #pks-wwkolab if you are attending session.
+
 - [TS-HOL-191 Hands On Intro to Devops & Cloud Native with PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/CloudNativeIntroPks-IC7212)
 - [TS-HOL-192 Deliver Enterprise Containers & Kubernetes with PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeliverCloudNative-DK7212)
 - [TS-HOL-193 Infrastructure support for Devops & Cloud Native Operations with PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroCloudNativeOps-IS7212)
