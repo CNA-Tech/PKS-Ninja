@@ -16,3 +16,5 @@ jbergfeld;v11;02/28/19<br/>
 sshin-pivotal;v11;03/05/19<br/>
 lbrinder;v11;03/05/19<br/>
 chrisling106;v11;03/05/19<br/>
+rburbridge;v11;03/05/19<br/>
+afewell;v11;03/05/19<br/>
