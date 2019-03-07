@@ -42,6 +42,11 @@
 
 1.1.6 Prepare `cli-vm` with Harbor's certificate which is required for a client to connect to Harbor. Follow the instructions in [Enable Harbor Client Secure Connections](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborCertExternal-HC7212) and then return to this lab guide and proceed with the following step. 
 
+<details><summary>Screenshot 1.1.6</summary>
+<img src="Images/6.png">
+</details>
+<br/>
+
 1.1.7 From the `cli-vm` prompt, push the updated mysql image to Harbor with the following commands:
 
 ```bash
@@ -68,14 +73,19 @@ docker push harbor.corp.local/library/mysql:5.6
 </details>
 <br/>
 
-1.1.9 From the Harbor UI on the library project page, click on the new `library/mysql` repository you created in the previous step, and observe that the `mysql:5.6` image is now saved in your local harbor repository.
+1.1.9 Click on the Syslog tab and enter the following details:
+
+- Do you want to configure syslog for BOSH Director?: Yes
+- Address: vrli-01a.corp.local
+- Port: 514
+- Transport Protocol:
 
 <details><summary>Screenshot 1.1.9</summary>
 <img src="Images/9.png">
 </details>
 <br/>
 
-1.1.10 From the Harbor UI on the library project page, click on the new `library/mysql` repository you created in the previous step, and observe that the `mysql:5.6` image is now saved in your local harbor repository.
+1.1.10 Return to the Ops Manager Homepage and click `Review Pending Changes`, and then click apply changes. You will need to wait for the redeploy to complete before being able to make use of the updated settings, this could take up to an hour to complete.
 
 <details><summary>Screenshot 1.1.10</summary>
 <img src="Images/10.png">
