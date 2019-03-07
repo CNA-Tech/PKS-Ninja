@@ -30,9 +30,6 @@
 </details>
 <br/>
 
-</details>
-<br/>
-
 1.1.5 Select the monitoring tab to open the Wavefront integration page
 
 <details><summary>Screenshot 1.1.5</summary>
