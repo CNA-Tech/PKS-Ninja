@@ -40,7 +40,7 @@
 </details>
 <br/>
 
-1.1.6 Fill in the fields for "Wavefront URL" and "Wavefront Access Token" from step 1.1.3". Remeber to presse "Save" the configuration.
+1.1.6 Fill in the fields for "Wavefront URL" and "Wavefront Access Token" from step 1.1.3". Remember to press "Save" the configuration.
 
 <details><summary>Screenshot 1.1.6</summary>
 <img src="Images/6.png">
