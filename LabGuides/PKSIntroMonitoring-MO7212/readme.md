@@ -1,6 +1,6 @@
 # PKS Intro to PKS Monitoring & Operations
 
-### 1.1 Configure Wavefront in Ebterprise PKS
+### 1.1 Configure Wavefront in Enterprise PKS
 
 1.1.1 Go to Workspace ONE and search for "Wavefront-sandbox"
 
