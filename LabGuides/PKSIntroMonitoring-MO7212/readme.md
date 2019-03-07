@@ -59,14 +59,20 @@ docker push harbor.corp.local/library/mysql:5.6
 </details>
 <br/>
 
-1.1.7 From the Main Console (Control Center) desktop, open a chrome browser session with Harbor by clicking on the harbor shortcut on the bookmarks bar, login with `username: admin` `password: VMware1!`, and click on the `library` project.
+1.1.7 Click on the Logging section and enter the following settings:
+
+- Enable Syslog for PKS: No
+- Enable VMware vRealize Integration: Yes
+- Host: vrli-01a.corp.local
+- Enable Sink Resources: Yes
+- Click Save
 
 <details><summary>Screenshot 1.1.7</summary>
 <img src="Images/7.png">
 </details>
 <br/>
 
-1.1.8 From the Main Console (Control Center) desktop, open a chrome browser session with Harbor by clicking on the harbor shortcut on the bookmarks bar, login with `username: admin` `password: VMware1!`, and click on the `library` project.
+1.1.8 From the Ops Manager Home page click on the `BOSH Director for vSphere` tile.
 
 <details><summary>Screenshot 1.1.8</summary>
 <img src="Images/8.png">
@@ -78,7 +84,7 @@ docker push harbor.corp.local/library/mysql:5.6
 - Do you want to configure syslog for BOSH Director?: Yes
 - Address: vrli-01a.corp.local
 - Port: 514
-- Transport Protocol:
+- Transport Protocol: UDP
 
 <details><summary>Screenshot 1.1.9</summary>
 <img src="Images/9.png">
