@@ -25,7 +25,7 @@ The steps in this lab access a wavefront intance that is only accessible to VMwa
 </details>
 <br/>
 
-1.1.4 Navigate to Ops Manager at "opsman.corp.local" and open the PKS Tile
+1.1.4 From the control center desktop, Navigate to Ops Manager at "opsman.corp.local" and open the PKS Tile
 
 <details><summary>Screenshot 1.1.4</summary>
 <img src="Images/4.png">
