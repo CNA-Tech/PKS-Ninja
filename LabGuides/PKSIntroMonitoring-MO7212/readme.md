@@ -2,7 +2,9 @@
 
 ### 1.1 Configure Wavefront & vRLI in Enterprise PKS
 
-1.1.1 Go to Workspace ONE and search for "Wavefront-sandbox"
+The steps in this lab access a wavefront intance that is only accessible to VMware emlployees, including accessing a pre-built PKS Dashboard. If you are not a VMware employee, you can follow along using your own wavefront account, but some steps may be different.
+
+1.1.1 From your workstation on the VMware network or vpn, open a web browser and go to Workspace ONE and search for "Wavefront-sandbox"
 
 <details><summary>Screenshot 1.1.1</summary>
 <img src="Images/1.png">
@@ -23,7 +25,7 @@
 </details>
 <br/>
 
-1.1.4 Navigate to Ops Manager at "opsman.corp.local" and open the PKS Tile
+1.1.4 From the Control Center desktop, navigate to Ops Manager at "opsman.corp.local" and open the PKS Tile
 
 <details><summary>Screenshot 1.1.4</summary>
 <img src="Images/4.png">
