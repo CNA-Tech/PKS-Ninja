@@ -40,7 +40,7 @@
 </details>
 <br/>
 
-1.1.6 Prepare `cli-vm` with Harbor's certificate which is required for a client to connect to Harbor. Follow the instructions in [Enable Harbor Client Secure Connections](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborCertExternal-HC7212) and then return to this lab guide and proceed with the following step. 
+1.1.6 Fill in the fields for "Wavefront URL" and "Wavefront Access Token" from step 1.1.3". Remeber to presse "Save" the configuration.
 
 <details><summary>Screenshot 1.1.6</summary>
 <img src="Images/6.png">
