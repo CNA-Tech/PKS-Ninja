@@ -47,18 +47,6 @@
 </details>
 <br/>
 
-1.1.7 From the `cli-vm` prompt, push the updated mysql image to Harbor with the following commands:
-
-```bash
-docker login harbor.corp.local # Enter username: admin password: VMware1!
-docker push harbor.corp.local/library/mysql:5.6
-```
-
-<details><summary>Screenshot 1.1.6</summary>
-<img src="Images/6.png">
-</details>
-<br/>
-
 1.1.7 Click on the Logging section and enter the following settings:
 
 - Enable Syslog for PKS: No
