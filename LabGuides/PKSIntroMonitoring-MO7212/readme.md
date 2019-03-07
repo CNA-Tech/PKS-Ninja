@@ -1,47 +1,29 @@
 # PKS Intro to PKS Monitoring & Operations
 
-### 1.1 Review Wavefront PKS Dashboard
+### 1.1 Configure Wavefront in Ebterprise PKS
 
-1.1.1 Resume your ssh session with `cli-vm` and from the prompt, enter the following commands to prepare you kubernetes cluster for planespotter deployment:
+1.1.1 Go to Workspace ONE and search for "Wavefront-sandbox"
 
 <details><summary>Screenshot 1.1.1</summary>
 <img src="Images/1.png">
 </details>
 <br/>
 
-1.1.2 Resume your ssh session with `cli-vm` and from the prompt, enter the following commands to deploy the planespotter application:
-
-```bash
-cd ~/forked/planespotter/kubernetes
-kubectl create -f storage_class.yaml
-kubectl create -f mysql_claim.yaml
-kubectl create -f mysql_pod.yaml
-kubectl create -f app-server-deployment_all_k8s.yaml
-kubectl create -f redis_and_adsb_sync_all_k8s.yaml
-kubectl create -f frontend-deployment_all_k8s.yaml
-```
+1.1.2 Navigate to Integrations Page in Wavefront and search for "PKS"
 
 <details><summary>Screenshot 1.1.2</summary>
 <img src="Images/2.png">
 </details>
 <br/>
 
-1.1.3 From the Main Console (Control Center) desktop, open a putty session to `cli-vm` and from the prompt, enter the following commands to clone the planespotter application files from github.com to a local directory:
-
-**Make sure to replace the string in the `git clone` command below with the git url you copied from the previous step to clone your personal fork of the planespotter repo.**
-
-```bash
-mkdir ~/forked
-cd ~/forked
-git clone https://github.com/yourGithubUsername/planespotter.git
-```
+1.1.3 Open the PKS Integration. Navigate to the setup tab inside PKS. Copy the "Wavefront URL" and the "API Token"
 
 <details><summary>Screenshot 1.1.3</summary>
 <img src="Images/3.png">
 </details>
 <br/>
 
-1.1.4 Take a few moments to review the kubernetes manifest for the planespotter mysql deployment with the 
+1.1.4 Navigate to Ops Manager at the "opsman.corp.local" and open the PKS Tile
 
 <details><summary>Screenshot 1.1.4</summary>
 <img src="Images/4.png">
@@ -51,14 +33,7 @@ git clone https://github.com/yourGithubUsername/planespotter.git
 </details>
 <br/>
 
-1.1.5 From the `cli-vm` prompt, pull the `mysql:5.6` image to the local image cache and assign a tag to prepare it for upload to the Harbor repository in your local PKS Ninja lab environment with the following commands:
-
-```bash
-docker pull mysql:5.6
-docker images
-docker tag mysql:5.6 harbor.corp.local/library/mysql:5.6
-docker images
-```
+1.1.5 Select the monitoring tab to open the Wavefront integration page
 
 <details><summary>Screenshot 1.1.5</summary>
 <img src="Images/5.png">
