@@ -10,7 +10,7 @@ All the content on this site revolves around lab exercises, which align tightly 
 
 For VMware employees, [Onecloud templates](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) are available for the PKS Ninja lab, for all others we can provide instructions on how you can build your own compatible lab environment. Please see [Getting Access to a Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) for more details.
 
-Materials on this site are continuously updated, and we release new courses and labguides frequently so please check out the [Community Getting Started Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GettingStarted-GS3861) for info on joining the google group and slack channel, how to start taking courses and more. 
+Materials on this site are continuously updated, and we release new courses and labguides frequently so please check out the [Community Getting Started Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GettingStarted-GS3861) for info on joining the google group and slack channel, how to start taking courses and more.
 
 **You are currently viewing the main branch of the PKS Ninja repo for the PKS NinjaLab Template Version 11. If you are using a different NinjaLab Template, please switch to the branch for the version you are using**
 

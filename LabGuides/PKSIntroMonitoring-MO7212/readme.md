@@ -85,5 +85,4 @@ The steps in this lab access a wavefront intance that is only accessible to VMwa
 </details>
 <br/>
 
-
 ### 1.2 [Configure Prometheus with PKS](https://github.com/CNA-Tech/Apps-on-PKS/tree/master/prometheus)

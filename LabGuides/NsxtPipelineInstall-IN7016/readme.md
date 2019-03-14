@@ -16,10 +16,19 @@ In this lab you will setup Concourse and then run a pipeline to install NSX-T
 
 Concourse can be stood up in many different ways. In this lab we will stand it up using a combination of docker images with docker-compose.
 
-1.0 SSH to the cli-vm
+1.0 SSH to the cli-vm, and update the nsxt-pipelines to the latest version with the following commands:
 
-<details><summary>Screenshot 1.0</summary>
+```bash
+cd ~/nsx-t-datacenter-ci-pipelines/
+git pull
+```
+
+<details><summary>Screenshot 1.0.1</summary>
 <img src="Images/ssh-cli-vm.png">
+</details>
+
+<details><summary>Screenshot 1.0.2</summary>
+<img src="Images/2019-03-13-19-45-02.png">
 </details>
 <br>
 
