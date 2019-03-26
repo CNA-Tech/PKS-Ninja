@@ -687,7 +687,7 @@ IP Blocks are another construct to define IP address ranges. In this case, we wi
 
 ## Step 11: Create NSX API Access Certificate
 
-In this final step, you will request and generate a self-signed certificate for API access to NSX-T. This is required to enable BOSH Director to authenticate NSX-T Manager. In a production implementation, you would likely opt for a CA signed certificate. Refer to the NSX-T documentation for more detail. To make this step easier, we will set some variables and reuse common command directions from the PKS documentation. 
+In this final step, you will request and generate a self-signed certificate for API access to NSX-T. This is required to enable BOSH Director to authenticate to the NSX-T Manager. In a production implementation, you would likely opt for a CA signed certificate. Refer to the NSX-T documentation for more detail. To make this step easier, we will set some variables and reuse common command directions from the PKS documentation. 
 
 11.1 From the cli-vm, create a directory to work from
 
