@@ -641,7 +641,7 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 
 ## Step 9: Create Network Address Translation Rules
 
-In this step, you create NAT rules to map addresses to/from the PKS and k8s networks and the physica network.
+In this step, you create NAT rules to map addresses to/from the PKS and k8s networks and the physical network.
 
 9.1 Define NAT Rules
 
