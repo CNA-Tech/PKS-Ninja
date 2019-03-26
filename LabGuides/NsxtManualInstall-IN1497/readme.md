@@ -227,7 +227,7 @@ The NSX controller is the center of the NSX overlay control plane. I a productio
 - NTP Servers: `192.168.100.1`
 - Click **Next**
 
-(Note: Notice there is no option for Small Controller size. Leave the default of 'Mediumm', you will change it to a 'Small' config in a later step.)
+(Note: Notice there is no option for Small Controller size. Leave the default of 'Medium', you will change it to a 'Small' config in a later step.)
 
 <details><summary>Screenshot 3.2.1</summary><img src="Images/2018-12-16-16-38-45.png"></details><br>
 
