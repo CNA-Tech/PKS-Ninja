@@ -51,6 +51,7 @@ The steps in this lab access a wavefront intance that is only accessible to VMwa
 - Enable Syslog for PKS: No
 - Enable VMware vRealize Integration: Yes
  - Host: vrli-01a.corp.local
+ - Enable SSL: false
  - Enable Sink Resources: Yes
 - Click Save
 
