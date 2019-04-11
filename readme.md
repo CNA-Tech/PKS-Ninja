@@ -1,6 +1,7 @@
 # Welcome to the PKS Ninja Community
 
-[Empower Attendes](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/EnterprisePKS101-AA6612)
+[Empower US Attendes](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/EnterprisePKS101-AA6612)
+
 [WWKO Attendees please click here](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/wwko2019)
 
 **Please Note, this site is currently in beta/preview mode and under active development. Please excuse any errors or ommissions**
