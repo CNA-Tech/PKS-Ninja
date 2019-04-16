@@ -1,3 +1,6 @@
+# [Empower US Attendes](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/EnterprisePKS101-AA6612)
+
+
 # PKS Workshops @ WWKO 2019
 
 Please join the vmware slack channel #pks-wwkolab if you are attending session.
