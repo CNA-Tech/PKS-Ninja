@@ -230,7 +230,6 @@ $ kubectl create namespace demo
 
 $ kubectl get namespaces
 ```
-This command changes the context for kubectl so that the default namespace to use is the new yelb-app.  It keeps you from having to specify the namespace on each command.
 <details><summary>Create k8s namespaces</summary>
 <img src="Images/create-ns.png">
 </details>
