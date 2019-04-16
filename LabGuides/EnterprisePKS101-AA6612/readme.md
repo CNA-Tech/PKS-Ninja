@@ -527,7 +527,7 @@ A large number of popular applications are hosted on github, many of which are w
     ls planespotter/
     cd planespotter/frontend
     ls
-    cat dockerfile
+    cat Dockerfile
     ```
 
     <details><summary>Screenshot 2</summary>
