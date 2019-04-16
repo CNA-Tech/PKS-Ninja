@@ -257,7 +257,10 @@ The T1 routers are created for each k8s namespaces and the *demo* T1 router was 
  
 #  Consuming Containerized Applications with Docker
 ### Running Nginx with Docker
-1. From the `cli-vm` prompt, enter the command `docker ps` and observe the command output
+1. From the `cli-vm` prompt, enter the command below and observe the command output
+    ```bash
+    docker run -p 8080:80 --name=my-nginx -d nginx
+    ```
 
     <details><summary>Screenshot 1</summary>
     <img src="Images/2019-03-01-21-45-25.png">
