@@ -48,7 +48,7 @@ Popular playlists and videos include:
 
 While there are far too many excellent hands on lab guides to list, here are a few popular labs that can help provide additional depth in areas that compliment PKS-Ninja content:
 
-- [HOL-1931-01-CNA - VMware Pivotal Container Service and Kubernetes - Getting Started](https://labs.hol.vmware.com/HOL/catalogs/catalog/874)
+- [HOL-1931-01-CNA - VMware Enterprise PKS - Getting Started](https://labs.hol.vmware.com/HOL/catalogs/catalog/874)
 - [HOL-1930-01-CNA - Project Photon OS and Container Basics - Getting Started](https://labs.hol.vmware.com/HOL/catalogs/catalog/874)
 - [HOL-1926-01-NET - VMware NSX-T Data Center - Getting Started](https://labs.hol.vmware.com/HOL/catalogs/catalog/877)
 - [HOL-1926-02-NET - Integrating Kubernetes with VMware NSX-T Data Center](https://labs.hol.vmware.com/HOL/catalogs/catalog/877)
