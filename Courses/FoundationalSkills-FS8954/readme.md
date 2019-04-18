@@ -12,7 +12,7 @@ The PKS Ninja Community aspires to host courses and educational assets for all l
 
 At the time of writing, the learning assets available do require some general knowlege of information technology, systems administration, Linux, and some familiarity with devops concepts. Participants should also be familiar with VMware vSphere. Significant expertise or deep knowledge in any specific subject is not required
 
-Participants can confirm needed background knowledge prior to beginning courses or lab exercises on this site by completing VMware Hands On Lab [HOL-1931-01-CNA - VMware Pivotal Container Service and Kubernetes - Getting Started](https://labs.hol.vmware.com/HOL/catalogs/catalog/874)
+Participants can confirm needed background knowledge prior to beginning courses or lab exercises on this site by completing VMware Hands On Lab [HOL-1931-01-CNA - VMware Enterprise PKS - Getting Started](https://labs.hol.vmware.com/HOL/catalogs/catalog/874)
 
 If you get started with HOL-1931 and struggle or would like to get more detailed explanation of foundational concepts, thorough entry level tutorial videos are available on the [VMware Cloud Native Channel on Youtube]() 
 
