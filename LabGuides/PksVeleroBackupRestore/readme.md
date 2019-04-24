@@ -56,24 +56,15 @@ For those needing access to VMware licensing for lab and educational purposes, w
 This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.3 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-3E0C4CEC-D593-4395-84C4-150CD6285963.html)
 
 ### Overview of Tasks Covered in Lab 1
+Take a backup of the planespotter namespace
+Delete the planespotter app
+Restore the planespotter namespace
 
-- [Step 1: Download official release of Heptio Velero](#step-1--deploy-nsxt-manager-using-ovf-install-wizard)
-- [Step 2: Configure Persistant Storafe](#step-2-add-nsx-compute-manager)
-- [Step 3: Deploy NSX Controller](#step-3-deploy-nsx-controller)
-- [Step 4: Create IP Pools](#step-4-create-ip-pools)
-- [Step 5: Prepare and Configure ESXi Hosts](#step-5-prepare-and-configure-esxi-hosts)
-- [Step 6: Deploy NSX Edge](#step-6-deploy-nsx-edge)
-- [Step 7: Create Edge Transport Node](#step-7-create-edge-transport-node)
-- [Step 8: Create Switches and Routers](#step-8-create-switches-and-routers)
-- [Step 9: Create Network Address Translation Rules](#step-9-create-network-address-translation-rules)
-- [Step 10: Create IP Blocks for PKS Components](#step-10-create-ip-blocks-for-pks-components)
-- [Step 11: Create NSX API Access Certificate](#step-11-create-nsx-api-access-certificate)
-
-NOTE: NSX Manager OVA cannot be installed via HTML5 client, so for installation labs please use the vSphere web client (Flash-based).
-
-If you intend to follow the manual NSX-T install with the automated pipeline for PKS, be sure to match the naming of objects/properties/configurations in this lab guide exactly.
-
-This section follows the standard documentation, which includes additional details and explanations: [NSX Manager Installation](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-A65FE3DD-C4F1-47EC-B952-DEDF1A3DD0CF.html)
+- [Step 1: Download official release of Heptio Velero](#step-1--download-official-release-of-Heptio-Velero)
+- [Step 2: Validate Planespotter app](#step-2-login-to-PKS-and-validate-the-planespotter-app)
+- [Step 3: Velero Setup](#step-3-Take-a-backup-of-the-planespotter-namespace)
+- [Step 4: Take a backup](#step-4-delete-the-planespotter-app)
+- [Step 5: Delete the planespotter App](#step-5-restire-the-planespotter-namespace)
 
 -----------------------
 
@@ -587,7 +578,7 @@ kubectl get services --namespace planespotter
 ```
 
 <Details><Summary>Screenshot 6.4</Summary>
-<img src="Images/retorepods.png">
+<img src="Images/restorepods.png">
 </Details>
 <br/>
 
