@@ -351,21 +351,21 @@ kubectl apply -f 00-minio-deployment.yaml
 
 ```
 
-3.6 Expose the minio with the following command
+3.7 Expose the minio with the following command
 
 ```bash
 kubectl expose deployment minio --name=velero-minio-lb --port=9000 --target-port=9000 --type=LoadBalancer --namespace=velero
 
 ```
 
-3.7 Check the external URL/IP address assigned to the service (make note of the first IP addres under External-IP).
+3.8 Check the external URL/IP address assigned to the service (make note of the first IP addres under External-IP).
 
 ```bash
 kubectl get service velero-minio-lb -n velero
 
 ```
 
-3.8 Copy the IP under the "External-IP" section . Point your browser to that location <external-ip>:9000. You should be able to view the minio browser
+3.9 Copy the IP under the "External-IP" section . Point your browser to that location <external-ip>:9000. You should be able to view the minio browser
 
 <details><summary>Screenshot 3.8</summary>
 <img src="Images/minio.png">
@@ -373,7 +373,7 @@ kubectl get service velero-minio-lb -n velero
 <br/>
 
 
-3.9 Deploy Velero
+3.10 Deploy Velero
 
 
 ```bash
@@ -381,7 +381,7 @@ kubectl apply -f 20-deployment.yaml
 
 ```
 
-3.10 Deploy Restic
+3.11 Deploy Restic
 
 
 ```bash
@@ -390,7 +390,7 @@ kubectl apply -f 30-restic-daemonset.yaml
 ```
 
 
-3.11 Edit the 05-backupstoragelocation.yaml to change the storage to add the persistentvolume created in the previous step. The change is the below
+3.12 Edit the 05-backupstoragelocation.yaml to change the storage to add the persistentvolume created in the previous step. The change is the below
 
       Uncomment  # publicUrl: https://minio.mycluster.com
       and change the url to the http://<external-ip>:9000 . External IP from 3.8 .
@@ -439,7 +439,7 @@ spec:
 </details>
 <br/>
 
-3.12 Deploy BackupStorageLocation
+3.13 Deploy BackupStorageLocation
 
 
 ```bash
