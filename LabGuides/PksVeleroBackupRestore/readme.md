@@ -61,10 +61,11 @@ Delete the planespotter app
 Restore the planespotter namespace
 
 - [Step 1: Download official release of Heptio Velero](#step-1--download-official-release-of-Heptio-Velero)
-- [Step 2: Validate Planespotter app](#step-2-login-to-PKS-and-validate-the-planespotter-app)
-- [Step 3: Velero Setup](#step-3-Take-a-backup-of-the-planespotter-namespace)
-- [Step 4: Take a backup](#step-4-delete-the-planespotter-app)
-- [Step 5: Delete the planespotter App](#step-5-restire-the-planespotter-namespace)
+- [Step 2: Validate the planespotter app](#step-2-Validate-the-planespotter-app)
+- [Step 3: Setup Velero](#step-3-Setup-Velero)
+- [Step 4: Backup](#step-4-Backup)
+- [Step 5: Delete the planespotter app](#step-5-Delete-the-planespotter-app)
+- [Step 6: Restore](#step-5-Restore)
 
 -----------------------
 
@@ -86,7 +87,7 @@ wget https://github.com/heptio/velero/releases/download/v1.0.0-alpha.1/velero-v1
 tar xvf velero-v1.0.0-alpha.1-linux-amd64.tar.gz
 ```
 
-## Step 2:  Login to PKS and validate the planespotter app
+## Step 2:  Validate the planespotter app
 
 2.1 Login to pks witht he command , when prompted use the password as VMware1!
 
@@ -448,7 +449,7 @@ kubectl apply -f 05-backupstoragelocation.yaml
 
 
 
-## Step 4:  Take a backup of the planespotter namespace
+## Step 4:  Backup
 
 4.1 Point your browser to that location <external-ip>:9000. You should be able to view the minio browser. Login as Access Key as minio and Secret Key as minio123
 
@@ -542,7 +543,7 @@ kubectl get po --all-namespaces
 <br/>
 
 
-## Step 6:  Restore the planespotter namespace
+## Step 6:  Restore 
 
 6.1 SSH into cli-vm 
   
