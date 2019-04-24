@@ -61,11 +61,11 @@ Delete the planespotter app
 Restore the planespotter namespace
 
 - [Step 1: Download official release of Heptio Velero](#step-1--download-official-release-of-Heptio-Velero)
-- [Step 2: Validate the planespotter app](#step-2-Validate-the-planespotter-app)
-- [Step 3: Setup Velero](#step-3-Setup-Velero)
-- [Step 4: Backup](#step-4-Backup)
-- [Step 5: Delete the planespotter app](#step-5-Delete-the-planespotter-app)
-- [Step 6: Restore](#step-5-Restore)
+- [Step 2: Validate the planespotter app](#step-2--Validate-the-planespotter-app)
+- [Step 3: Setup Velero](#step--3-Setup-Velero)
+- [Step 4: Backup](#step-4--Backup)
+- [Step 5: Delete the planespotter app](#step-5--Delete-the-planespotter-app)
+- [Step 6: Restore](#step-5--Restore)
 
 -----------------------
 
