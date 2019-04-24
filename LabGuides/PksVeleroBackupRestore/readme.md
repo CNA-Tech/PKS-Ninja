@@ -1,0 +1,607 @@
+# PKS Backup and Restore using VMWare Heptio Velero
+
+## Overview
+
+### Heptio Veleto
+ - Heptio Velero (formerly Heptio Ark) gives you tools to back up and restore your Kubernetes cluster resources and persistent volumes. 
+
+ - Velero Feature
+   Take backups of your cluster and restore in case of loss.
+   Copy cluster resources to other clusters.
+   Backup and restore PV's
+   Scheduled Backups
+   Replicate your production environment for development and testing environments.
+   Filtering (namespaces, resources, label selectors)
+   Restore into different namespaces
+
+- Velero Extensibility
+  Hooks
+  Plugins
+
+- Velero consists of:
+  A server that runs on your cluster
+  A command-line client that runs locally
+
+### Persistent Volumes 
+  In this sample , Velero leverages vSphere Storage for Kubernetes to allow Minio to use enterprise grade persistent storage to store the backup.
+  Persistent volumes requested by stateful containerized applications can be provisioned on vSAN, iSCSI, VVol, VMFS or NFS datastores.
+
+  Kubernetes volumes are defined in Pod specifications. They reference VMDK files and these VMDK files are mounted as volumes when the container is running. When the Pod is deleted the Kubernetes volume is unmounted and the data in VMDK files persists.
+  
+  PKS deploys Kubernetes clusters with the vSphere storage provider already configured. 
+
+  In order to use Persistent Volumes (PV) the user needs to create a PersistentVolumeClaim(PVC) which is nothing but a request for PVs. A claim must specify the access mode and storage capacity, once a claim is created PV is automatically bound to this claim. Kubernetes will bind a PV to PVC based on access mode and storage capacity but a claim can also mention volume name, selectors and volume class for a better match. This design of PV-PVCs not only abstracts storage provisioning and consumption but also ensures security through access control.
+
+  Static Persistent Volumes require that a vSphere administrator manually create a (virtual disk) VMDK on a datastore, then create a Persistent Volume that abstracts the VMDK. A developer would then make use of the volume by specifying a Persistent Volume Claim.
+
+  Dynamic Volume Provisioning
+  With PV and PVCs one can only provision storage statically i.e. PVs first needs to be created before a Pod claims it. However, with the StorageClass API Kubernetes enables dynamic volume provisioning. This avoids pre-provisioning of storage and storage is provisioned automatically when a user requests it. The VMDK's are also cleaned up when the Persistent Volume Claim is removed.
+
+  The StorageClass API object specifies a provisioner and parameters which are used to decide which volume plugin should be used and which provisioner specific parameters to configure.
+
+
+## Prerequisites
+
+- Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
+- PKS Install (https://github.com/riazvm/PKS-Ninja/tree/master/LabGuides/PksInstallPhase2-IN1916)
+- PKS Cluster (https://github.com/riazvm/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610)
+- Planespotter Application (https://github.com/riazvm/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610)
+
+## Installation Notes
+
+Anyone who implements any software used in this lab must provide their own licensing and ensure that their use of all software is in accordance with the software's licensing. This guide provides no access to any software licenses.
+
+For those needing access to VMware licensing for lab and educational purposes, we recommend contacting your VMware account team. Also, the [VMware User Group's VMUG Advantage Program](https://www.vmug.com/Join/VMUG-Advantage-Membership) provides a low-cost method of gaining access to VMware licenses for evaluation purposes.
+
+This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.3 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-3E0C4CEC-D593-4395-84C4-150CD6285963.html)
+
+### Overview of Tasks Covered in Lab 1
+
+- [Step 1: Download official release of Heptio Velero](#step-1--deploy-nsxt-manager-using-ovf-install-wizard)
+- [Step 2: Configure Persistant Storafe](#step-2-add-nsx-compute-manager)
+- [Step 3: Deploy NSX Controller](#step-3-deploy-nsx-controller)
+- [Step 4: Create IP Pools](#step-4-create-ip-pools)
+- [Step 5: Prepare and Configure ESXi Hosts](#step-5-prepare-and-configure-esxi-hosts)
+- [Step 6: Deploy NSX Edge](#step-6-deploy-nsx-edge)
+- [Step 7: Create Edge Transport Node](#step-7-create-edge-transport-node)
+- [Step 8: Create Switches and Routers](#step-8-create-switches-and-routers)
+- [Step 9: Create Network Address Translation Rules](#step-9-create-network-address-translation-rules)
+- [Step 10: Create IP Blocks for PKS Components](#step-10-create-ip-blocks-for-pks-components)
+- [Step 11: Create NSX API Access Certificate](#step-11-create-nsx-api-access-certificate)
+
+NOTE: NSX Manager OVA cannot be installed via HTML5 client, so for installation labs please use the vSphere web client (Flash-based).
+
+If you intend to follow the manual NSX-T install with the automated pipeline for PKS, be sure to match the naming of objects/properties/configurations in this lab guide exactly.
+
+This section follows the standard documentation, which includes additional details and explanations: [NSX Manager Installation](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-A65FE3DD-C4F1-47EC-B952-DEDF1A3DD0CF.html)
+
+-----------------------
+
+## Step 1:  Download official release of Heptio Velero
+
+1.1 Navigate to the official release of the Heptio Velero release page (https://github.com/heptio/velero/releases) and copy the link for the target VM OS (Eg. https://github.com/heptio/velero/releases/download/<release>/velero-<release>-linux-amd64.tar.gz) Right click on the release link `Copy Link Address'
+
+<Details><Summary>Screenshot 1.1</Summary>
+<img src="Images/HeptioCopyLinkAddress.png">
+</Details>
+<br/>
+
+1.2 ssh to the cli-vm and download and uncompress the Velero distribution 
+  
+```bash
+mkdir velero
+cd ~/velero
+wget https://github.com/heptio/velero/releases/download/v1.0.0-alpha.1/velero-v1.0.0-alpha.1-linux-amd64.tar.gz
+tar xvf velero-v1.0.0-alpha.1-linux-amd64.tar.gz
+```
+
+## Step 2:  Login to PKS and validate the planespotter app
+
+2.1 Login to pks witht he command , when prompted use the password as VMware1!
+
+```bash
+pks login -a pks.corp.local -u pksadmin --skip-ssl-validation
+```
+
+
+2.2 Pull down the kubernetes config and credentials for my-cluster with the command 
+
+```bash
+pks get-credentials my-cluster
+```
+
+2.3 Verify all the pods needed for the planespotter app - front-end, redis, DBC Sync services and App server (7 total) have been deployed and have entered Running state
+
+```bash
+kubectl get pods --namespace planespotter
+
+kubectl get services --namespace planespotter
+```
+
+## Step 3:  Setup Velero
+
+3.1 Set up prerequisites necessary to run the Velero server
+- `velero` namespace
+- `velero` service account
+- RBAC rules to grant permissions to the `velero` service account
+- CRDs for the Velero-specific resources (Backup, Schedule, Restore, etc.)
+
+```bash
+cd  ~/velero/config/common/
+
+kubectl apply -f 00-prereqs.yaml
+```
+
+3.2 Create a Storage Class. Create a 000-storage-class.yaml file and copy the below contents into it, save and exit. 
+
+```bash
+cd  ~/velero/config/minio/
+
+nano 000-storage-class.yaml
+```
+
+<details><summary>000-storage-class.yaml</summary>
+
+```yaml
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: minio-disk
+provisioner: kubernetes.io/vsphere-volume
+parameters:
+    diskformat: thin
+```
+
+</details>
+<br/>
+
+```bash
+kubectl apply -f 000-storage-class.yaml
+
+```
+
+3.3 Create a Persistent Volume Claim . Create a 001-velero-pvc.yaml file and copy the below contents into it, save and exit. 
+
+```bash
+nano 001-velero-pvc.yaml
+
+```
+
+<details><summary>01-velero-pvc.yaml</summary>
+
+```yaml
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: velero-claim
+  namespace: velero
+  annotations:
+    volume.beta.kubernetes.io/storage-class: minio-disk
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+```
+
+</details>
+<br/>
+
+
+```bash
+kubectl apply -f 001-velero-pvc.yaml
+
+```
+
+3.4 Login to vCenter to and check if the PV has been provisioned under kubevols
+
+<details><summary>Screenshot 3.4</summary>
+<img src="Images/Kubevols.png">
+</details>
+<br/>
+
+3.5 Edit the 00-minio-deployment.yaml to change the storage to add the persistentvolume created in the previous step. The change is the below
+
+      - name: storage
+        persistentVolumeClaim:
+          claimName: velero-claim
+
+<details><summary>00-minio-deployment.yaml</summary>
+
+```yaml
+# Copyright 2017 the Heptio Ark contributors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  namespace: velero
+  name: minio
+  labels:
+    component: minio
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        component: minio
+    spec:
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: velero-claim
+      - name: config
+        emptyDir: {}
+      containers:
+      - name: minio
+        image: minio/minio:latest
+        imagePullPolicy: IfNotPresent
+        args:
+        - server
+        - /storage
+        - --config-dir=/config
+        env:
+        - name: MINIO_ACCESS_KEY
+          value: "minio"
+        - name: MINIO_SECRET_KEY
+          value: "minio123"
+        ports:
+        - containerPort: 9000
+        volumeMounts:
+        - name: storage
+          mountPath: "/storage"
+        - name: config
+          mountPath: "/config"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: velero
+  name: minio
+  labels:
+    component: minio
+spec:
+  # ClusterIP is recommended for production environments.
+  # Change to NodePort if needed per documentation,
+  # but only if you run Minio in a test/trial environment, for example with Minikube.
+  #type: ClusterIP
+  ports:
+    - port: 9000
+      targetPort: 9000
+      protocol: TCP
+  selector:
+    component: minio
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: velero
+  name: cloud-credentials
+  labels:
+    component: minio
+stringData:
+  cloud: |
+    [default]
+    aws_access_key_id = minio
+    aws_secret_access_key = minio123
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: velero
+  name: minio-setup
+  labels:
+    component: minio
+spec:
+  template:
+    metadata:
+      name: minio-setup
+    spec:
+      restartPolicy: OnFailure
+      volumes:
+      - name: config
+        emptyDir: {}
+      containers:
+      - name: mc
+        image: minio/mc:latest
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/sh
+        - -c
+        - "mc --config-dir=/config config host add velero http://minio:9000 minio minio123 && mc --config-dir=/config mb -p velero/velero"
+        volumeMounts:
+        - name: config
+          mountPath: "/config"
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: velero-minio
+  namespace: velero
+spec:
+  rules:
+  - host: velero.minio.local
+    http:
+      paths:
+      - backend:
+          serviceName: minio
+          servicePort: 9000
+
+```
+
+</details>
+<br/>
+
+3.6 Deploy minio
+
+
+```bash
+kubectl apply -f 00-minio-deployment.yaml
+
+```
+
+3.6 Expose the minio with the following command
+
+```bash
+kubectl expose deployment minio --name=velero-minio-lb --port=9000 --target-port=9000 --type=LoadBalancer --namespace=velero
+
+```
+
+3.7 Check the external URL/IP address assigned to the service (make note of the first IP addres under External-IP).
+
+```bash
+kubectl get service velero-minio-lb -n velero
+
+```
+
+3.8 Copy the IP under the "External-IP" section . Point your browser to that location <external-ip>:9000. You should be able to view the minio browser
+
+<details><summary>Screenshot 3.8</summary>
+<img src="Images/minio.png">
+</details>
+<br/>
+
+
+3.9 Deploy Velero
+
+
+```bash
+kubectl apply -f 20-deployment.yaml
+
+```
+
+3.10 Deploy Restic
+
+
+```bash
+kubectl apply -f 30-restic-daemonset.yaml
+
+```
+
+
+3.11 Edit the 05-backupstoragelocation.yaml to change the storage to add the persistentvolume created in the previous step. The change is the below
+
+      Uncomment  # publicUrl: https://minio.mycluster.com
+      and change the url to the http://<external-ip>:9000 . External IP from 3.8 .
+      Note http and not https
+
+
+
+<details><summary>05-backupstoragelocation.yaml</summary>
+
+```yaml
+# Copyright 2018 the Velero contributors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  name: default
+  namespace: velero
+spec:
+  provider: aws
+  objectStorage:
+    bucket: velero
+  config:
+    region: minio
+    s3ForcePathStyle: "true"
+    s3Url: http://minio.velero.svc:9000
+    # Uncomment the following line and provide the value of an externally
+    # available URL for downloading logs, running Velero describe, and more.
+    publicUrl: http://10.40.14.44:9000
+
+
+```
+
+</details>
+<br/>
+
+3.12 Deploy BackupStorageLocation
+
+
+```bash
+kubectl apply -f 05-backupstoragelocation.yaml
+
+```
+
+
+
+## Step 4:  Take a backup of the planespotter namespace
+
+4.1 Point your browser to that location <external-ip>:9000. You should be able to view the minio browser. Login as Access Key as minio and Secret Key as minio123
+
+<Details><Summary>Screenshot 4.1</Summary>
+<img src="Images/miniologin.png">
+</Details>
+<br/>
+
+4.2 SSH into cli-vm 
+  
+```bash
+
+cd ~/velero
+
+```
+
+4.3 Take a backup of the planespotter namespace. The backup will be called planes
+ 
+```bash
+
+./velero backup create planes --include-namespaces planespotter
+
+```
+
+4.4 Valero will prompt the following . Check the status of the backup using the commands below
+
+```bash
+
+Backup request "planes" submitted successfully.
+Run `velero backup describe planes` or `velero backup logs planes` for more details.
+
+```
+
+4.5 Refresh the minio browser annd you will be able to view the backup that was created by velero. Velero creates a set of tar.gz files as backup.
+
+<Details><Summary>Screenshot 4.5</Summary>
+<img src="Images/miniobackup1.png">
+</Details>
+<br/>
+
+<Details><Summary>Screenshot 4.5.1</Summary>
+<img src="Images/miniobackup2.png">
+</Details>
+<br/>
+
+<Details><Summary>Screenshot 4.5.2</Summary>
+<img src="Images/miniobackup3.png">
+</Details>
+<br/>
+
+4.6 Optional: You can download the backup files to the local laptop if required by clicking on the button to the left of the archive and clicking on download object. This is useful to restore to a different environment or other use cases where your VCenters are different.
+
+<Details><Summary>Screenshot 4.6</Summary>
+<img src="Images/miniodownload.png">
+</Details>
+<br/>
+
+
+4.7 Optional: Other important commands
+
+```bash
+
+velero backup create planes-backup --selector app=planespotter
+velero backup create planes-backup --selector 'backup notin (ignore)'
+velero schedule create planes-daily --schedule="0 1 * * *" --selector app=planespotter
+velero schedule create planes-daily --schedule="@daily" --selector app=planespotter
+
+```
+
+## Step 5:  Delete the planespotter app
+
+5.1 Delete the planespotter namespace
+ 
+```bash
+
+kubectl delete ns planespotter
+
+```
+
+5.2 Check if the planespotter application is still running. Make sure that none of the planespotter app pods are running . Also make sure that the planespotter namespace does not exist
+
+```bash
+
+kubectl get po --all-namespaces
+
+```
+
+<Details><Summary>Screenshot 5.2</Summary>
+<img src="Images/planespotternopods.png">
+</Details>
+<br/>
+
+
+## Step 6:  Restore the planespotter namespace
+
+6.1 SSH into cli-vm 
+  
+```bash
+
+cd ~/velero
+
+```
+
+6.2 Restore planespotter
+
+```bash
+
+ ./velero restore create --from-backup planes
+
+```
+
+6.3 Valero will prompt the following . Check the status of the backup using the commands below
+
+```bash
+
+Restore request "planes-20190424130220" submitted successfully.
+Run `velero restore describe planes-20190424130220` or `velero restore logs planes-20190424130220` for more details.
+
+```
+
+6.4 Verify all the pods needed for the planespotter app - front-end, redis, DBC Sync services and App server (7 total) have been deployed and have entered Running state
+
+```bash
+kubectl get pods --namespace planespotter
+
+kubectl get services --namespace planespotter
+```
+
+<Details><Summary>Screenshot 6.4</Summary>
+<img src="Images/retorepods.png">
+</Details>
+<br/>
+
+6.5 Point the browser at the external ip of the loadbalancer of the planespotter app. 
+
+<Details><Summary>Screenshot 6.5</Summary>
+<img src="Images/planespotterapp.png">
+</Details>
+<br/>
+
+
+
+------------------
+
+≈
+
+### You have now completed deploying the velero app, and taking a app backup and restored the same.
