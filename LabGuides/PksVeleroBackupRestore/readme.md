@@ -65,7 +65,7 @@ Restore the planespotter namespace
 - [Step 3: Setup Velero](#step-3--Setup-Velero)
 - [Step 4: Backup](#step-4--Backup)
 - [Step 5: Delete the planespotter app](#step-5--Delete-the-planespotter-app)
-- [Step 6: Restore](#step-5--Restore)
+- [Step 6: Restore](#step-6--Restore)
 
 -----------------------
 
