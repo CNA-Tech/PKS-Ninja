@@ -45,7 +45,7 @@
 - Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
 - PKS Install (https://github.com/riazvm/PKS-Ninja/tree/master/LabGuides/PksInstallPhase2-IN1916)
 - PKS Cluster (https://github.com/riazvm/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610)
-- Planespotter Application (https://github.com/riazvm/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610)
+- Planespotter Application (https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/BonusLabs/Deploy%20Planespotter%20Lab)
 
 ## Installation Notes
 
