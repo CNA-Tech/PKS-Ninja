@@ -55,8 +55,15 @@ Click on the `library` project to examine further details, and look through the 
 </details>
 <br/>
 
-_(Note: To authenticate to a non-public project, you will need to first add a kubernetes secret for registry authentication. This can be accomplished in this lab with the following command line and then add the imagePullSecrets: to deployment manifest)_
+1.2 From the `library` project page, select the `Configuration` tab and observe the default configuration for the library project. As you proceed through the following steps, you will upload an image to interact with the unsecured library project, and you will also create an additional `trusted` project to interact with the content trust feature
 
+<details><summary>Screenshot 1.2</summary>
+<img src="Images/2019-01-14-20-18-37.png">
+</details>
+<br/>
+_(Note: To authenticate to a non-public project, you will first need to add a kubernetes secret for registry authentication. This can be accomplished in this lab with the following command line and then adding the imagePullSecrets: to your deployment manifest)_
+
+<details><summary>Expand for non-public registry config</summary>
 ```
 kubectl create secret docker-registry regcred --docker-server=harbor.corp.local --docker-username=admin --docker-password=VMware1! --docker-email=admin@corp.local
 ```
@@ -70,12 +77,6 @@ kubectl create secret docker-registry regcred --docker-server=harbor.corp.local 
       imagePullSecrets:  <--- Add this
       - name: regcred    <--- Add this
 ```
-<br/>
-
-1.2 From the `library` project page, select the `Configuration` tab and observe the default configuration for the library project. As you proceed through the following steps, you will upload an image to interact with the unsecured library project, and you will also create an additional `trusted` project to interact with the content trust feature
-
-<details><summary>Screenshot 1.2</summary>
-<img src="Images/2019-01-14-20-18-37.png">
 </details>
 <br/>
 
