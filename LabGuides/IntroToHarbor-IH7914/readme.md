@@ -47,9 +47,9 @@ For our lab, we are interested in a single project called library.
 Click on the `library` project to examine further details, and look through the various tabs to familiarize yourself
 
 <details><summary>Screenshot 1.1.1 </summary>
-<img src="Images/2018-10-23-01-31-40.png
+<img src="Images/2018-10-23-01-31-40.png">
 </details>
-          
+
 <details><summary>Screenshot 1.1.2 </summary>
 <img src="Images/2019-01-14-20-14-13.png">
 </details>
