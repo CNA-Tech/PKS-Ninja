@@ -49,7 +49,7 @@ Click on the `library` project to examine further details, and look through the 
 <details><summary>Screenshot 1.1.1 </summary>
 <img src="Images/2018-10-23-01-31-40.png
 </details>
-
+          
 <details><summary>Screenshot 1.1.2 </summary>
 <img src="Images/2019-01-14-20-14-13.png">
 </details>
@@ -70,7 +70,7 @@ kubectl create secret docker-registry regcred --docker-server=harbor.corp.local 
       imagePullSecrets:  <--- Add this
       - name: regcred    <--- Add this
 ```
-
+<br/>
 
 1.2 From the `library` project page, select the `Configuration` tab and observe the default configuration for the library project. As you proceed through the following steps, you will upload an image to interact with the unsecured library project, and you will also create an additional `trusted` project to interact with the content trust feature
 
