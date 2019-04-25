@@ -55,11 +55,22 @@ Click on the `library` project to examine further details, and look through the 
 </details>
 <br/>
 
-_(Note: To authenticate to a non-public project, you will need to first add a kubernetes secret for registry authentication. This can be accomplished in this lab with the following command line)_
+_(Note: To authenticate to a non-public project, you will need to first add a kubernetes secret for registry authentication. This can be accomplished in this lab with the following command line and then add the imagePullSecrets: to deployment manifest)_
 
 ```
 kubectl create secret docker-registry regcred --docker-server=harbor.corp.local --docker-username=admin --docker-password=VMware1! --docker-email=admin@corp.local
 ```
+```
+ spec:
+      containers:
+      - name: app1
+        image: harbor.corp.local/somerepo:v1
+        ports:
+        - containerPort: 80
+      imagePullSecrets:  <--- Add this
+      - name: regcred    <--- Add this
+```
+
 
 1.2 From the `library` project page, select the `Configuration` tab and observe the default configuration for the library project. As you proceed through the following steps, you will upload an image to interact with the unsecured library project, and you will also create an additional `trusted` project to interact with the content trust feature
 
