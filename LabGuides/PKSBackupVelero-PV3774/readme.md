@@ -531,7 +531,7 @@ Run `velero backup describe planes` or `velero backup logs planes` for more deta
 
 4.9 For a backup with PV a restic folder will be created in addition.
 
-<Details><Summary>Screenshot 4.5.2</Summary>
+<Details><Summary>Screenshot 4.9</Summary>
 <img src="Images/miniobackupwithpv.png">
 </Details>
 <br/>
@@ -539,7 +539,7 @@ Run `velero backup describe planes` or `velero backup logs planes` for more deta
 
 4.10 Optional: You can download the backup files to the local laptop if required by clicking on the button to the left of the archive and clicking on download object. This is useful to restore to a different environment or other use cases where your VCenters are different.
 
-<Details><Summary>Screenshot 4.6</Summary>
+<Details><Summary>Screenshot 4.10</Summary>
 <img src="Images/miniodownload.png">
 </Details>
 <br/>
@@ -558,7 +558,20 @@ velero schedule create planes-daily --schedule="@daily" --selector app=planespot
 
 ## Step 5:  Delete the planespotter app
 
-5.1 Delete the planespotter namespace
+5.1 Optional: Check the Persistent Volumes
+ 
+```bash
+
+kubectl get pv 
+
+```
+<Details><Summary>Screenshot 5.1</Summary>
+<img src="Images/getpvbeforedelete.png">
+</Details>
+<br/>
+
+
+5.2 Delete the planespotter namespace
  
 ```bash
 
@@ -566,7 +579,34 @@ kubectl delete ns planespotter
 
 ```
 
-5.2 Check if the planespotter application is still running. Make sure that none of the planespotter app pods are running . Also make sure that the planespotter namespace does not exist
+5.3 Check if the planespotter application is still running. Make sure that none of the planespotter app pods are running . Also make sure that the planespotter namespace does not exist
+
+```bash
+
+kubectl get po --all-namespaces
+
+```
+
+<Details><Summary>Screenshot 5.2</Summary>
+<img src="Images/planespotternopods.png">
+</Details>
+<br/>
+
+5.3 Check if the PV has been deleted
+
+```bash
+
+kubectl get pv
+
+```
+
+<Details><Summary>Screenshot 5.2</Summary>
+<img src="Images/getpvafterdelete.png">
+</Details>
+<br/>
+
+
+5.4 Check if the planespotter application is still running. Make sure that none of the planespotter app pods are running . Also make sure that the planespotter namespace does not exist
 
 ```bash
 
@@ -613,12 +653,20 @@ Run `velero restore describe planes-20190424130220` or `velero restore logs plan
 kubectl get pods --namespace planespotter
 
 kubectl get services --namespace planespotter
+
+kubectl get pv
 ```
 
 <Details><Summary>Screenshot 6.4</Summary>
 <img src="Images/restorepods.png">
 </Details>
 <br/>
+
+<Details><Summary>Screenshot 6.4.1</Summary>
+<img src="Images/getpvafterrestore.png">
+</Details>
+<br/>
+
 
 6.5 Point the browser at the external ip of the loadbalancer of the planespotter app. 
 
