@@ -466,15 +466,43 @@ cd ~/velero
 
 ```
 
-4.3 Take a backup of the planespotter namespace. The backup will be called planes
+NOTE: Steps 4.3 aand 4.4 are optional and require to be used for PV's / Stateful applications
+
+4.3 Run the following to annotate each pod that contains a volume to back up
+  
+```bash
+
+kubectl -n YOUR_POD_NAMESPACE annotate pod/YOUR_POD_NAME backup.velero.io/backup-volumes=YOUR_VOLUME_NAME_1,YOUR_VOLUME_NAME_2,...
+
+```
+
+4.4 Run the following to get the pod's that are running in the planespotter namespace
+  
+```bash
+
+kubectl get pods --namespace planespotter
+
+```
+
+
+4.5 For the planespotter app , mysql is the stateful pod that would need to be annotated. (Valumes from mysql_pod.yaml in the planespotter app)
  
+```bash
+
+kubectl -n planespotter annotate pod/<mysql pod name from 4.3 eg. mysql-0> backup.velero.io/backup-volumes=mysql-vol,mysql-config,mysql-start
+
+```
+
+4.6 Take a backup of the planespotter namespace. The backup will be called planes
+
 ```bash
 
 ./velero backup create planes --include-namespaces planespotter
 
 ```
 
-4.4 Valero will prompt the following . Check the status of the backup using the commands below
+
+4.7 Valero will prompt the following . Check the status of the backup using the commands below
 
 ```bash
 
@@ -483,7 +511,7 @@ Run `velero backup describe planes` or `velero backup logs planes` for more deta
 
 ```
 
-4.5 Refresh the minio browser annd you will be able to view the backup that was created by velero. Velero creates a set of tar.gz files as backup.
+4.8 Refresh the minio browser annd you will be able to view the backup that was created by velero. Velero creates a set of tar.gz files as backup.
 
 <Details><Summary>Screenshot 4.5</Summary>
 <img src="Images/miniobackup1.png">
@@ -500,7 +528,7 @@ Run `velero backup describe planes` or `velero backup logs planes` for more deta
 </Details>
 <br/>
 
-4.6 Optional: You can download the backup files to the local laptop if required by clicking on the button to the left of the archive and clicking on download object. This is useful to restore to a different environment or other use cases where your VCenters are different.
+4.9 Optional: You can download the backup files to the local laptop if required by clicking on the button to the left of the archive and clicking on download object. This is useful to restore to a different environment or other use cases where your VCenters are different.
 
 <Details><Summary>Screenshot 4.6</Summary>
 <img src="Images/miniodownload.png">
@@ -508,7 +536,7 @@ Run `velero backup describe planes` or `velero backup logs planes` for more deta
 <br/>
 
 
-4.7 Optional: Other important commands
+4.10 Optional: Other important commands
 
 ```bash
 
