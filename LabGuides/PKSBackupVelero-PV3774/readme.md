@@ -529,7 +529,7 @@ Run `velero backup describe planes` or `velero backup logs planes` for more deta
 <br/>
 
 
-4.8 For a backup with PV a rustic folder will be created in addition.
+4.9 For a backup with PV a rustic folder will be created in addition.
 
 <Details><Summary>Screenshot 4.5.2</Summary>
 <img src="miniobackupwithpv">
@@ -537,7 +537,7 @@ Run `velero backup describe planes` or `velero backup logs planes` for more deta
 <br/>
 
 
-4.9 Optional: You can download the backup files to the local laptop if required by clicking on the button to the left of the archive and clicking on download object. This is useful to restore to a different environment or other use cases where your VCenters are different.
+4.10 Optional: You can download the backup files to the local laptop if required by clicking on the button to the left of the archive and clicking on download object. This is useful to restore to a different environment or other use cases where your VCenters are different.
 
 <Details><Summary>Screenshot 4.6</Summary>
 <img src="Images/miniodownload.png">
@@ -545,7 +545,7 @@ Run `velero backup describe planes` or `velero backup logs planes` for more deta
 <br/>
 
 
-4.10 Optional: Other important commands
+4.11 Optional: Other important commands
 
 ```bash
 
