@@ -532,7 +532,7 @@ Run `velero backup describe planes` or `velero backup logs planes` for more deta
 4.9 For a backup with PV a rustic folder will be created in addition.
 
 <Details><Summary>Screenshot 4.5.2</Summary>
-<img src="miniobackupwithpv">
+<img src="miniobackupwithpv.png">
 </Details>
 <br/>
 
