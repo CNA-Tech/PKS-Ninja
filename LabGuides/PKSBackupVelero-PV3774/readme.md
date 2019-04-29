@@ -592,7 +592,7 @@ kubectl get po --all-namespaces
 </Details>
 <br/>
 
-5.3 Check if the PV has been deleted
+5.4 Check if the PV has been deleted
 
 ```bash
 
@@ -600,13 +600,13 @@ kubectl get pv
 
 ```
 
-<Details><Summary>Screenshot 5.2</Summary>
+<Details><Summary>Screenshot 5.4</Summary>
 <img src="Images/getpvafterdelete.png">
 </Details>
 <br/>
 
 
-5.4 Check if the planespotter application is still running. Make sure that none of the planespotter app pods are running . Also make sure that the planespotter namespace does not exist
+5.5 Check if the planespotter application is still running. Make sure that none of the planespotter app pods are running . Also make sure that the planespotter namespace does not exist
 
 ```bash
 
