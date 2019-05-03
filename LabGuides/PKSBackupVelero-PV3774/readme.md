@@ -2,7 +2,7 @@
 
 ## Overview
 
-### Heptio Veleto
+### Heptio Velero
  - Heptio Velero (formerly Heptio Ark) gives you tools to back up and restore your Kubernetes cluster resources and persistent volumes. 
 
  - Velero Feature
