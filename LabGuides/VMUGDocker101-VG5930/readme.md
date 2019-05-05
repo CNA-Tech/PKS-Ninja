@@ -1,5 +1,15 @@
 # Docker-Lab
-In this lab you will learn some basic commands of Docker to help you understand how to operate Docker as a building block of Kubernetes.  IP addresses in this tutorial will change in your environment and you may have to put your correct IP address into the commands for them to work.
+In this lab you will learn some basic commands of Docker to help you understand how to operate Docker as a building block of Kubernetes.  
+
+[Getting Started with Docker](#getting-started-with-docker)
+[Docker Networking](#docker-networking)
+[Docker Image Creation](#docker-image-creation)
+[Clean up and Wordpress](#clean-up-and-wordpress)
+[Challenge Activity](#challenge-activity)
+
+## Getting Started with Docker
+
+IP addresses in this tutorial will change in your environment and you may have to put your correct IP address into the commands for them to work.
 
 Start by opening putty and logging into the the cli-vm. Use `root` user. There is no password.
 
@@ -125,7 +135,7 @@ Let's inspect the bridge network to understand the containers IP addresses
 
 You can see that my_web_server and my_container both have ip addresses in 172.17.0.0/16 (or some other address randomly assigned by your system)
 
-# Docker-Networking
+## Docker-Networking
 A user defined network has the following characteristics that the default bridge network (bridge) does not have:
  - Containers on the same bridge automatically expose all ports to each other and no ports to outside world
  - Containers on the same bridge can access each other by IP or name/alias
@@ -200,7 +210,7 @@ Being able to reference the container via name has a huge benefit in dynamic env
  
  As you can see we have no path to access other containers unless they are exposing a port to the outside world.  my_web_server is exposing port 80 on the worker nodes port 8080 which would be accessable since the container and NAT to internet.   Networking exists only on a single host not across a clusters inside default docker which creates a lot of scalability challenges.   
  
-# Docker-Image Creation
+## Docker-Image Creation
 One function inside docker is the creation of your own images.   An image is a layer of things compiled into a very small package for distribution.  You define what should be in a image with a text file called Dockerfile.  Dockerfile definition is in layers which are loosely coupled then compiled together into a image by docker.   Is to use it in action.  You can find a complete list of command you can use in a Dockerfile at this site: https://docs.docker.com/engine/reference/builder/
 
 Exit the container (type `exit`). 
@@ -308,7 +318,7 @@ This compile should require multiple steps and downloading for your image
  
  Dockerfile can have many levels of complexity in order to create the image you want.   nginx is really a previously layer image of Ubuntu.   
  
-# Clean up and Wordpress
+## Clean up and Wordpress
 
 For the final section in the docker lab we are going to clean up all currently running containers and images and run a new wordpress install.   Wordpress is being used to demostrate the challenges in creating multi-container solutions on docker.   
 
@@ -356,7 +366,7 @@ Before you stop this lab issue the following command to clean up everything
 
      docker system prune -a
      
-# Challenge Activity
+## Challenge Activity
 If you have time and want a challenge do the following
  - Build a apache web server listing on port 80 serving up php content
  - You can copy the index.php to serve up from ~/PKS-Lab/docker/challenge
