@@ -1,11 +1,11 @@
 # Docker-Lab
 In this lab you will learn some basic commands of Docker to help you understand how to operate Docker as a building block of Kubernetes.  
 
-[Getting Started with Docker](#getting-started-with-docker)
-[Docker Networking](#docker-networking)
-[Docker Image Creation](#docker-image-creation)
-[Clean up and Wordpress](#clean-up-and-wordpress)
-[Challenge Activity](#challenge-activity)
+[Getting Started with Docker](#getting-started-with-docker)  
+[Docker Networking](#docker-networking)  
+[Docker Image Creation](#docker-image-creation)  
+[Clean up and Wordpress](#clean-up-and-wordpress)  
+[Challenge Activity](#challenge-activity)  
 
 ## Getting Started with Docker
 
