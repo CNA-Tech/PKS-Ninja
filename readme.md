@@ -1,8 +1,6 @@
 # Welcome to the PKS Ninja Community
 
-[Empower US Attendes](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/EnterprisePKS101-AA6612)
-
-[WWKO Attendees please click here](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/wwko2019)
+You are viewing the master  branch, which is currently dedicated to PKS Version 1.3. We are starting to prepare materials for PKS 1.4, if you want to use PKS 1.4, please use the "Pks1.4" Branch - however please note that most materials have not been updated for PKS 1.4 yet. 
 
 **Please Note, this site is currently in beta/preview mode and under active development. Please excuse any errors or ommissions**
 
