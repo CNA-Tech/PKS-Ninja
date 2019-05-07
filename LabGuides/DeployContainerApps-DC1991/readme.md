@@ -73,7 +73,7 @@ You typically deploy applications to kubernetes using a manifest file, however y
 
 2.1 From the cli-vm prompt, enter the following commands to log in to pks, view the deployed cluster, and pull down the credentials to connect to your cluster.
 
-```
+```bash
 pks login -a pks.corp.local -u pksadmin -k -p VMware1!
 pks clusters
 pks get-credentials my-cluster
@@ -86,7 +86,7 @@ pks get-credentials my-cluster
 
 2.2 Enter the command following commands to run your nginx container in the default namespace of your kubernetes cluster and verify.
 
-```
+```bash
 kubectl run my-nginx --image=harbor.corp.local/library/nginx:v1 --replicas=2
 kubectl get pods
 kubectl get deployments
@@ -106,7 +106,7 @@ Also many application developers provide sample kubernetes deployment manifests,
 
 <details><summary>Output 2.3</summary>
 
-```
+```bash
 root@cli-vm:~# kubectl get deployment my-nginx -o yaml
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -184,39 +184,168 @@ Kubernetes itself provides the default "Cluster-IP" service which provides a sta
 
 Like deployments, services are typically defined and created using a manifest file, however for a simple deployment or dry run where the default values are acceptable, you can create the service through a kubectl CLI command and let kubernetes automatically generate the manifest for you.
 
-Enter the following commands to create a clusterIP and a Load Balancer service for you my-nginx deployment.
+Enter the following commands to create a clusterIP and a Load Balancer service for you my-nginx deployment and verify.
 
-```
-kubectl expose my-nginx
+```bash
+kubectl expose deployment my-nginx --type=LoadBalancer --port=8080 --target-port=80
+kubectl get services
+kubectl get service my-nginx -o yaml
 ```
 
-<details><summary>Screenshot 2.2</summary>
-<img src="Images/2019-05-06-17-42-36.png">
+<details><summary>Screenshot 2.4</summary>
+<img src="Images/2019-05-07-01-08-43.png">
+</details>
+<br/>
+
+2.5 From the control center desktop, open a chrome browser to the ip address and port of your my-nginx service, reference the output of the `kubectl get services` command to find the load balancer ip assigned to your service. The address should be 10.40.14.x and since you exposed the service on port 8080, you should enter 10.40.14.x:8080 in the browser.
+
+<details><summary>Screenshot 2.5</summary>
+<img src="Images/2019-05-07-01-14-59.png">
+</details>
+<br/>
+
+2.6 From the cli-vm prompt, delete your deployment and service with the following commands:
+
+```bash
+kubectl delete service my-nginx
+kubectl delete deployment my-nginx
+kubectl get services
+kubectl get deployments
+kubectl get pods
+```
+
+<details><summary>Screenshot 2.6</summary>
+<img src="Images/2019-05-07-01-19-55.png">
 </details>
 <br/>
 
 ## 3.0 Deploying Containerized apps to Kubernetes with Manifests
 
-3.1 Deploying COTS Image
+3.1 From the control center desktop, open a browser connection to [https://kubernetes.io/docs/concepts/workloads/controllers/deployment/](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), review the table of contents, navigate to the "Creating a Deployment" section, copy the text in the sample nginx deployment manifest and paste it into Notepad++.
 
-1.1 In the previous step, you pulled the `nginx:latest` image from docker hub. From the CLI-VM prompt, enter the command `docker images` to display the images saved in the local docker image cache.
+<details><summary>Screenshot 3.1.1</summary>
+<img src="Images/2019-05-07-01-43-49.png">
+</details>
 
-Note this will also display additional images that have been previously downloaded in the lab template.
-
-<details><summary>Screenshot 1.1</summary>
-<img src="Images/2019-05-06-01-35-04.png">
+<details><summary>Screenshot 3.1.2</summary>
+<img src="Images/2019-05-07-01-48-01.png">
 </details>
 <br/>
 
-3.2 Prepare & Deploy Custom Image
+3.2 In Notepad++, edit your deployment file to ensure the deployment name is "my-nginx2", ensure it only runs a single pod, and ensure it uses the nginx image you previously uploaded to the harbor server.
 
-Deploy then rebuild with notary & clair
+The correctly completed manifest is shown below, but try to update the manifest without looking per the instructions above, reference the kubernetes documentation as needed.
 
-1.1 In the previous step, you pulled the `nginx:latest` image from docker hub. From the CLI-VM prompt, enter the command `docker images` to display the images saved in the local docker image cache.
+<details><summary>3.2 Expand only if needed - completed nginx deployment manifest</summary>
 
-Note this will also display additional images that have been previously downloaded in the lab template.
+```bash
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx2
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: harbor.corp.local/library/nginx:v1
+        ports:
+        - containerPort: 80
+```
 
-<details><summary>Screenshot 1.1</summary>
-<img src="Images/2019-05-06-01-35-04.png">
 </details>
 <br/>
+
+3.3 From the control center desktop, open a browser connection to [https://kubernetes.io/docs/concepts/services-networking/service/](https://kubernetes.io/docs/concepts/services-networking/service/), review the table of contents, navigate to the "Defining a Service" section, copy the text in the sample service manifest. In notepad++ after the last line of the deployment spec, enter a new line, remove any spaces or indentations and type in three dashes `---` (this signifies that the following lines are in yaml format), on the next line paste the sample service manifest text as shown in the images below.
+
+<details><summary>Screenshot 3.3.1</summary>
+<img src="Images/2019-05-07-02-00-43.png">
+</details>
+
+<details><summary>Screenshot 3.3.2</summary>
+<img src="Images/2019-05-07-02-41-11.png">
+</details>
+<br/>
+
+3.4 In Notepad++, edit your service manifest to ensure the service name is "my-nginx2-service", ensure that the service **selector** will direct traffic to your nginx deployment, ensure the load balancer exposes port 8080 and targets port 80 when it sends traffic to the nginx pod. After the last line of the service spec, enter "type: LoadBalancer" and ensure this parameter is entered with the same indentation (spaces, not tabs) as the "port:" parameter as the type is a child of the spec parameter.
+
+The correctly completed manifest is shown below, but try to update the manifest without looking per the instructions above, reference the kubernetes documentation as needed.
+
+<details><summary>3.4 Expand only if needed - completed nginx service manifest</summary>
+
+```bash
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-nginx2-service
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 80
+  type: LoadBalancer
+```
+
+</details>
+<br/>
+
+3.5 Copy the entire text of the deployment and service manifests from notepad++. From the cli-vm prompt, ensure you are in the home directory with the command `cd ~` and create a new file named "nginxManifest" with the command `nano nginxManifest` , paste in the test from notepad++, save the file (ctrl + o) and then close the file (ctrl + x).
+
+Note that while you included both the deployment and the service specs in a common file, that is only for your convenience, kubernetes does not care and does nothing to correlate the deployment with the service. The service selector targets pods with the tag `app: nginx`, and the deployment spec appends the tag `app: nginx` and accordingly the service will direct traffic to your deployment based solely on these labels.
+
+<details><summary>Screenshot 3.5</summary>
+<img src="Images/2019-05-07-02-31-19.png">
+</details>
+<br/>
+
+3.6 From the cli-vm prompt, enter the following commands to create your deployment and service and verify:
+
+```bash
+kubectl create -f nginxManifest
+kubectl get deployments
+kubectl get pods
+kubectl get services
+```
+
+<details><summary>Screenshot 3.6</summary>
+<img src="Images/2019-05-07-02-45-33.png">
+</details>
+<br/>
+
+3.7 From the control center desktop, open a chrome browser to the ip address and port of your my-nginx service, reference the output of the `kubectl get services` command to find the load balancer ip assigned to your service. The address should be 10.40.14.x and since you exposed the service on port 8080, you should enter 10.40.14.x:8080 in the browser.
+
+<details><summary>Screenshot 3.7</summary>
+<img src="Images/2019-05-07-02-47-04.png">
+</details>
+<br/>
+
+3.8 From the cli-vm prompt, delete your deployment and service with the following commands:
+
+```bash
+kubectl delete -f nginxManifest
+kubectl get services
+kubectl get deployments
+kubectl get pods
+```
+
+<details><summary>Screenshot 3.8</summary>
+<img src="Images/2019-05-07-02-48-12.png">
+</details>
+<br/>
+
+## 4.0 Challenge Exercise
+
+4.1 Visit hub.docker.com, pick an app, deploy it to kubernetes just as you did with the nginx app above.
+
+**You have completed the Deploy Containerized Apps Lab Guide!**
