@@ -57,7 +57,7 @@ kubectl apply -f game-deployment.yaml
 kubectl apply -f admin-deployment.yaml
 ```
 
-###Step 1.5: <Optional> Add Heptio Contour to your cluster
+###Step 1.5:  Add Heptio Contour to your cluster <Optional>
 
 Contour is an Ingress controller for Kubernetes that works by deploying the Envoy proxy as a reverse proxy and load balancer. Unlike other Ingress controllers, Contour supports dynamic configuration updates out of the box while maintaining a lightweight profile.
 
@@ -65,15 +65,15 @@ Contour is an Ingress controller for Kubernetes that works by deploying the Envo
 kubectl apply -f https://j.hept.io/contour-deployment-rbac
 ```
 
-###Step 1.6: <Optional> Add Heptio Contour to your cluster
+###Step 1.6:  Add an Ingress Route<Optional>
 
-Add An Ingress Route. You may need to change the host value in line 9if you are using a different environment than the PKS Ninja vPOD
+Add An Ingress Route. You may need to change the host value in line 9.
 
 ```
 kubectl apply -f contour-ingressroute.yaml
 ```
 
-###Step 1.7: <Optional> Create the required host entries
+###Step 1.7:  Get external IP <Optional>
 
 Browse to whackapod.corp.local. If the fqdn does not sesolve then check the external IP of the heptio contour service. Make the necessary entries in the host file .
 
