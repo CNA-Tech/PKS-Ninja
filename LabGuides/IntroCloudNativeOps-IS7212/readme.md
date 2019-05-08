@@ -465,7 +465,7 @@ kubectl get ingress -o wide
 
 1.3.4 From the Main Console (ControlCenter) desktop, open a https browser session to `http://planespotter.corp.local` to see the fully functional planespotter web app, click around on the various links to explore
 
-Note: If planespotter.corp.local does not resolve for you, you can either create a DNS record for it or simply use the IP address from the kubectl get services output from the previous command instead.
+Note: If planespotter.corp.local does not resolve for you, you can either create a DNS record for it or simply use the IP address from the kubectl get ingress output from the previous command instead.
 
 <details><summary>Screenshot 1.3.4.1</summary>
 <img src="Images/2019-03-02-07-09-09.png">
