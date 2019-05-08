@@ -167,17 +167,10 @@ kubectl create -f redis_and_adsb_sync_all_k8s.yaml
 </details>
 <br/>
 
-1.1.11 From the SSH connection to `nsxmgr-01a.corp.local`, list all nodes registered with NSX-T manager with the command `get nodes`. Ensure that the NSX manager, edge, controller, and all 6 esx hosts are listed. Close your ssh connection to nsx manager
-
-<details><summary>Screenshot 1.1.11</summary>
-<img src="../PksTroubleshooting-PT8251/Images/2018-11-12-23-34-14.png">
-</details>
-<br/>
-
-1.1.12 From the SSH connection to `nsxmgr-01a.corp.local`, display the edge cluster status with the command `get edge-cluster status`. Ensure that the NSX manager, edge, controller, and all 6 esx hosts are listed
+1.1.12 From the control center desktop, SSH and login to the nsx edge at its IP address `192.168.110.91' with username `admin` password `VMware1!`. Display the edge cluster status with the command `get edge-cluster status`.   Verify the service status are all up.
 
 <details><summary>Screenshot 1.1.12</summary>
-<img src="../PksTroubleshooting-PT8251/Images/2018-11-12-23-34-14.png">
+<img src="../PksNetSecPlanespoter-NS2513/Images/2019-05-08_17-58-44.png">
 </details>
 <br/>
 
