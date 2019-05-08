@@ -28,4 +28,4 @@ spec:
   ports:
   - port: 8080
   selector:
-app: api
+    app: api

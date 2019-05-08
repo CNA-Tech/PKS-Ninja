@@ -98,9 +98,9 @@ We are going to use the Bosh CLI directly to monitor this activity.
     <details><summary>Ops Manager login</summary>
     <img src="Images/opsman-login.png">
     </details>
-2. export bosh credentials
+2. export bosh credentials ( you may need to update the client secret from ops manager credentials https://opsman.corp.local/api/v0/deployed/director/credentials/bosh_commandline_credentials )
     ```
-    $ export BOSH_CLIENT=ops_manager BOSH_CLIENT_SECRET=ItwepXj8Sb--QbBOUQ7Uoa9JUp9BYpWo BOSH_CA_CERT=/var/tempest/workspaces/default/root_ca_certificate BOSH_ENVIRONMENT=172.31.0.2 bosh
+    $ export BOSH_CLIENT=ops_manager BOSH_CLIENT_SECRET=w6b4Hkp_JoJv2iGA6x4WF3MnciQJHXQQ BOSH_CA_CERT=/var/tempest/workspaces/default/root_ca_certificate BOSH_ENVIRONMENT=172.31.0.2 bosh
     ```
     <details><summary>Export BOSH Credentials</summary>
     <img src="Images/export-bosh-creds.png">
@@ -119,7 +119,8 @@ Each Kubernetes cluster that we create is considered a Bosh deployment.  A detai
 Now we want to see the individual instances (VMs) that make up this deployment.
 1. Run the following command to list the VMs created for your deployment.
     ```
-    $ bosh -d service-instance_84bc5c87-e480-4b17-97bc-afed45ab4a6e instances
+    $ bosh -d service-instance_<insert your service instance from previous command> instances
+    e.g. bosh -d service-instance_cfc60a5a-1022-4c9a-ac22-8e9aeffca169 instances
     ```
     <details><summary>BOSH Instances</summary>
     <img src="Images/bosh-instances.png">
