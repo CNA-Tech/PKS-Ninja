@@ -326,7 +326,7 @@ For `Destination` set the type as `Logical Port`, click on the `Port` field and 
 2.0.2 From the control center desktop use putty to connect to `cli-vm` and from the prompt, view the manifest for the planespotter kubernetes network security policy with the following commands:
 
 ```bash
-cd ~/Cloned/planespotter/kubernetes
+cd ~/Forked/planespotter/kubernetes
 cat network-policy.yaml | more
 ```
 
