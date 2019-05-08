@@ -70,7 +70,7 @@ kubectl apply -f https://j.hept.io/contour-deployment-rbac
 Add An Ingress Route. You may need to change the host value in line 9.
 
 ```
-kubectl apply -f contour-ingressroute.yaml
+kubectl apply -f contour-ingress-route.yaml
 ```
 
 ###Step 1.7:  Get external IP <Optional>
