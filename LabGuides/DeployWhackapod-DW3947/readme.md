@@ -16,9 +16,6 @@ With the help of @nvpnathan, this repo provides a deployment methodology based o
 
 On your environment, download or clone the files the .yaml files to a directory of your choice
 
-```
-git clone https://github.com/CNA-Tech/PKS-Ninja/LabGuides/DeployMoreApps-DA6482/Whack-a-Pod.git
-```
 
 ###Step 1.1: Deploy Namespaces
 
@@ -60,7 +57,31 @@ kubectl apply -f game-deployment.yaml
 kubectl apply -f admin-deployment.yaml
 ```
 
-###Step 1.5: Deploy an Ingress
+###Step 1.5: <Optional> Add Heptio Contour to your cluster
+
+Contour is an Ingress controller for Kubernetes that works by deploying the Envoy proxy as a reverse proxy and load balancer. Unlike other Ingress controllers, Contour supports dynamic configuration updates out of the box while maintaining a lightweight profile.
+
+```
+kubectl apply -f https://j.hept.io/contour-deployment-rbac
+```
+
+###Step 1.6: <Optional> Add Heptio Contour to your cluster
+
+Add An Ingress Route. You may need to change the host value in line 9if you are using a different environment than the PKS Ninja vPOD
+
+```
+kubectl apply -f contour-ingressroute.yaml
+```
+
+###Step 1.7: <Optional> Create the required host entries
+
+Browse to whackapod.corp.local. If the fqdn does not sesolve then check the external IP of the heptio contour service. Make the necessary entries in the host file .
+
+```
+kubectl get -n heptio-contour service contour -o wide
+```
+
+###Step 1.8: Deploy an Ingress
 
 This yaml will deploy and ingress for the application. You may need to change the host value in line 23 if you are using a different environment than the PKS Ninja vPOD. 
 

@@ -1,0 +1,22 @@
+# ingressroute-name.yaml
+apiVersion: contour.heptio.com/v1beta1
+kind: IngressRoute
+metadata:
+ name: wap-admin-ingrt
+ namespace: wap-admin
+spec:
+ virtualhost:
+   fqdn: whackapod.corp.local
+ routes:
+   - match: /api
+     services:
+       - name: api-deployment
+         port: 8080
+   - match: /admin
+     services:
+       - name: admin-deployment
+         port: 8080
+   - match: /
+     services:
+       - name: game-deployment
+         port: 8080
