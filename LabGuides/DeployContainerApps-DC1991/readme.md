@@ -1,4 +1,4 @@
-#Deploying Containerized Applications
+# Deploying Containerized Applications
 
 ## 1.0 Using a Private Image Registry with Harbor
 
