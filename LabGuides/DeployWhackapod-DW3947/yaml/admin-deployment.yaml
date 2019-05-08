@@ -34,4 +34,4 @@ spec:
   ports:
   - port: 8080
   selector:
-app: admin
+    app: admin
