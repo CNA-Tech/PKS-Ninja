@@ -264,7 +264,7 @@ docker push harbor.corp.local/library/mysql:5.6
 
 In most production environments it is a bad practice to allow production workloads to be pulled directly from unsecured public repositories.
 
-In this section, you will build an sign the additional planespotter images and push them to your local harbor registry
+In this section, you will build and sign the additional planespotter images and push them to your local harbor registry
 
 <!-- having problems with content trust because Harbor tile Updater Interval is set to 0 and bosh trusted cert is not setup in the clusterReady, this needs to be updated in the template, skipping for now but leaving scaffolding here to fix in future.
 
