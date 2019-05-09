@@ -167,7 +167,7 @@ kubectl create -f redis_and_adsb_sync_all_k8s.yaml
 </details>
 <br/>
 
-1.1.12 From the control center desktop, SSH and login to the nsx edge at its IP address `192.168.110.91' with username `admin` password `VMware1!`. Display the edge cluster status with the command `get edge-cluster status`.   Verify the service status are all up.
+1.1.12 From the control center desktop, SSH and login to the nsx edge at its IP address `192.168.110.91` with username `admin` password `VMware1!`. Display the edge cluster status with the command `get edge-cluster status`.   Verify the service status are all up.
 
 <details><summary>Screenshot 1.1.12</summary>
 <img src="../PksNetSecPlanespoter-NS2513/Images/2019-05-08_17-58-44.png">
