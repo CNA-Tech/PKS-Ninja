@@ -22,8 +22,8 @@ To complete this lab you will need a running pks ninja lab environment with NSX-
 1.0.2 From the control center desktop, open a putty connection to `cli-vm`. If you have not already cloned the planespotter repository to `cli-vm` , please clone it with the following commands:
 
 ```bash
-mkdir ~/Cloned
-cd ~/Cloned
+mkdir ~/Forked
+cd ~/Forked
 git clone https://github.com/CNA-Tech/planespotter.git
 ```
 
@@ -35,7 +35,7 @@ git clone https://github.com/CNA-Tech/planespotter.git
 1.0.3 From the `cli-vm` prompt, enter the following commands to deploy the planespotter application:
 
 ```bash
-cd ~/Cloned/planespotter/kubernetes/
+cd ~/Forked/planespotter/kubernetes/
 kubectl create ns planespotter
 kubectl config set-context my-cluster --namespace planespotter
 kubectl create -f storage_class.yaml
@@ -369,7 +369,7 @@ Take a few moments to go through the different firewall rules that were created.
 2.0.5 From the `cli-vm` prompt, clean up your planespotter deployment with the following commands:
 
 ```bash
-cd ~/cloned/planespotter/kubernetes
+cd ~/Forked/planespotter/kubernetes
 kubectl delete -f frontend-deployment_all_k8s.yaml
 kubectl delete -f mysql_pod.yaml
 kubectl delete -f storage_class.yaml
