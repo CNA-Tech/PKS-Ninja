@@ -131,9 +131,10 @@ ls
 </details>
 <br/>
 
-1.6 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and connect your forked clone back to the source PKS-Ninja repository, then validate the upstream configuration is correct.
+1.6 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and connect your forked clone back to the source PKS-Ninja repository, then validate the upstream configuration is correct.  If your shell prompt does not show current directory, use command `pwd` to show your current working directory.
 
 ```bash
+pwd
 git remote add upstream https://github.com/CNA-Tech/Students.git
 git remote -v
 ```
@@ -143,9 +144,10 @@ git remote -v
 </details>
 <br/>
 
-1.7 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and of you have not already, ensure your standard git defaults are set with the following commands, being sure to use your github username and the email associated with your github account:
+1.7 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and of you have not already, ensure your standard git defaults are set with the following commands, being sure to use your github username and the email associated with your github account.  If your shell prompt does not show current directory, use command `pwd` to show your current working directory.
 
 ```bash
+pwd
 git config --global user.name "Your Name"
 git config --global user.email you@example.com
 git config --global push.default simple
@@ -156,9 +158,10 @@ git config --global push.default simple
 </details>
 <br/>
 
-1.8 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and, add your updates to staging, commit your updates and then push the contents of your `update-1` branch from your local clone to your fork of the students repo with the following commands
+1.8 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and, add your updates to staging, commit your updates and then push the contents of your `update-1` branch from your local clone to your fork of the students repo with the following commands.  If your shell prompt does not show current directory, use command `pwd` to show your current working directory.
 
 ```bash
+pwd
 git add .
 git commit -m "adding my student folder"
 git push -u origin update-1
@@ -251,9 +254,10 @@ Review that in the steps above, you only edited files on your update branch and 
 </details>
 <br/>
 
-1.16 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and enter the following commands to fetch and then merge the latest updates from the upstream repository (CNA-Tech/Students: master) to the local clone of your fork. Delete the update-1 branch from your local clone.
+1.16 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and enter the following commands to fetch and then merge the latest updates from the upstream repository (CNA-Tech/Students: master) to the local clone of your fork. Delete the update-1 branch from your local clone.  If your shell prompt does not show current directory, use command `pwd` to show your current working directory.
 
 ```bash
+pwd
 git branch #observe that while you deleted your branch from your fork, it is still present in your local clone
 git checkout master
 git fetch upstream #this downloads the latest updates from the upstream but does not merge or apply them into your local branches
@@ -267,9 +271,10 @@ git branch -d update-1
 </details>
 <br/>
 
-1.17 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and enter the following commands to push the updates you just merged from upstream back to your origin fork on github, this will update your github fork of the Students repo with upstream
+1.17 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and enter the following commands to push the updates you just merged from upstream back to your origin fork on github, this will update your github fork of the Students repo with upstream.  If your shell prompt does not show current directory, use command `pwd` to show your current working directory.
 
 ```bash
+pwd
 git commit -m "syncing fork with upstream/master"
 git push #enter your username and password as prompted
 ```
@@ -365,9 +370,10 @@ Click `Delete branch` to delete the `yourGithubUsername:update-1` branch
 </details>
 <br/>
 
-2.7 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and enter the following commands to fetch and then merge the latest updates from the upstream repository (CNA-Tech/Students: master) to the local clone of your fork. Delete the update-1 branch from your local clone.
+2.7 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and enter the following commands to fetch and then merge the latest updates from the upstream repository (CNA-Tech/Students: master) to the local clone of your fork. Delete the update-1 branch from your local clone.  If your shell prompt does not show current directory, use command `pwd` to show your current working directory.
 
 ```bash
+pwd
 git branch #observe that while you deleted your branch from your fork, it is still present in your local clone
 git checkout master
 git fetch upstream #this downloads the latest updates from the upstream but does not merge or apply them into your local branches
@@ -381,9 +387,10 @@ git branch -d update-1
 </details>
 <br/>
 
-2.8 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and enter the following commands to push the updates you just merged from upstream back to your origin fork on github, this will update your github fork of the Students repo with upstream
+2.8 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and enter the following commands to push the updates you just merged from upstream back to your origin fork on github, this will update your github fork of the Students repo with upstream.  If your shell prompt does not show current directory, use command `pwd` to show your current working directory.
 
 ```bash
+pwd
 git commit -m "syncing fork with upstream/master"
 git push #enter your username and password as prompted
 ```
