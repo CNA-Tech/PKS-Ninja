@@ -421,7 +421,7 @@ The T1 routers are created for each k8s namespaces and the *demo* T1 router was 
     <img src="Images/vi-launch.png">
     New empty file named dockerfile
     <img src="Images/vi-newfile.png">
-    i key puts vi in insert mode
+    i key puts vi in insert mode, type or paste new text in file
     <img src="Images/vi-insert.png">
     Type :wq! to save file and quit vi editor
     <img src="Images/vi-write-quit-bang.png">
