@@ -346,6 +346,8 @@ The T1 routers are created for each k8s namespaces and the *demo* T1 router was 
 
 1. In this step you will create a dockerfile which you will build to create a new nginx container named `custom-nginx` that includes the configuration you created for the `my-nginx` container in the previous steps
 
+    <details><summary>Using Nano text editor</summary>
+    
     Make the `~/custom-nginx` directory and use the nano text editor to create the `~/custom-nginx/dockerfile` file with the following commands:
 
     ```bash
@@ -366,9 +368,68 @@ The T1 routers are created for each k8s namespaces and the *demo* T1 router was 
 
     Press the `ctrl + o` keys and hit the `Enter` key to save the file, and then press `ctrl + x` keys to exit nano
 
-    <details><summary>Screenshots 1</summary>
+    Confirm the newly created dockerfile was updated and saved correctly with the `cat dockerfile` command.
+    The contents of the dockerfile will print to the terminal.
+    
+    ```bash
+    cat dockerfile
+    ```
+    The `cat dockerfile` command will print the contents of the dockerfile to the terminal.
+
+    <details><summary>Nano Screenshots</summary>
+    Launch nano
     <img src="Images/2019-03-02-01-15-59.png">
+    Type or paste new text
     <img src="Images/2019-03-02-01-55-23.png">
+    cat command to verify contents of dockerfile
+    <img src="Images/vi-nano-cat.png">
+    </details>
+    <br/>
+
+    </details>
+    Optional method
+    <details><summary>Using vi text editor</summary>
+    
+    Make the `~/custom-nginx` directory and use the vi text editor to create the `~/custom-nginx/dockerfile` file with the following commands:
+
+    ```bash
+    mkdir ~/custom-nginx
+    cd ~/custom-nginx
+    vi dockerfile
+    ```
+
+    In the vi text editor, press the `i` key to enter insert mode. Type or copy and paste the following text:
+
+    ```text
+    FROM nginx
+
+    RUN apt-get update
+    RUN apt-get install -y curl
+    RUN echo 'to be or not to be, that is the question' >> /usr/share/nginx/html/index.html
+    ```
+
+    Press the `esc` key to exit insert mode.  Type `:wq!` to save the file and exit vi editor.
+
+    Confirm the newly created dockerfile was updated and saved correctly with the `cat dockerfile` command.
+    The contents of the dockerfile will print to the terminal.
+
+    ```bash
+    cat dockerfile
+    ```
+    <details><summary>vi Screenshots</summary>
+    Launch vi
+    <img src="Images/vi-launch.png">
+    New empty file named dockerfile
+    <img src="Images/vi-newfile.png">
+    i key puts vi in insert mode
+    <img src="Images/vi-insert.png">
+    Colon :wq! saves file and quits vi editor
+    <img src="Images/vi-write-quit-bang.png">
+    cat command to verify contents of dockerfile
+    <img src="Images/vi-nano-cat.png">
+    </details>
+    <br/>
+
     </details>
     <br/>
 
