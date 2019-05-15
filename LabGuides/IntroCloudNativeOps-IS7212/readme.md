@@ -380,7 +380,7 @@ docker login harbor.corp.local # Enter username: admin password: VMware1!
 docker push harbor.corp.local/library/adsb-sync:v1
 docker push harbor.corp.local/library/app-server:v1
 docker push harbor.corp.local/library/frontend:v1
-docker push redis harbor.corp.local/library/redis:v1
+docker push harbor.corp.local/library/redis:v1
 ```
 
 <details><summary>Screenshot 1.2.3.1</summary>
