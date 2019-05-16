@@ -18,29 +18,7 @@ We can view the available plans (starting sizing of clusters) to PKS
 
     pks plans
 
-We will review the plan details post starting the deployment of a cluster
-
-Deploy a small cluster with the following command:
-
-    pks create-cluster throwaway --external-hostname throwaway.corp.local --plan small
-  
-Breaking the command line down we have
- - create-cluster : pks command to execute
- - my-cluster : reference name of the cluster (user friendly name for reference with future commands)
- - external-hostname : DNS hostname to reach the cluster (preloaded into DNS in our case)
- - plan : sets the plan for the initial deployment
- 
- The creation of your cluster will take a few minutes while you wait for the cluster deployment we will continue the lab with my-cluster that was already deployed you can check the status of your cluster that is deploying using 
- 
-     pks clusters my-cluster
-
-#Learning PKS
-
-Use putty to login to the cli-vm
-
-See available clusters
-
-    pks clusters
+Let's get login for a specific kubernetes cluster
 
 Get my-cluster credentials 
 
@@ -370,7 +348,23 @@ You can see it was deleted in vCenter as well
 
 ![DockerOutput](https://github.com/gortee/pictures/blob/master/P17.PNG)
 
-# Check on Throwaway cluster
+# Build a throwaway cluster
+
+This is a lab you can do another day with your assigned lab.   Due to resources don't try to do during the class.
+
+Deploy a small cluster with the following command:
+
+    pks create-cluster throwaway --external-hostname throwaway.corp.local --plan small
+  
+Breaking the command line down we have
+ - create-cluster : pks command to execute
+ - my-cluster : reference name of the cluster (user friendly name for reference with future commands)
+ - external-hostname : DNS hostname to reach the cluster (preloaded into DNS in our case)
+ - plan : sets the plan for the initial deployment
+ 
+ The creation of your cluster will take a few minutes while you wait for the cluster deployment we will continue the lab with my-cluster that was already deployed you can check the status of your cluster that is deploying using 
+ 
+     pks clusters my-cluster
 Let's check the status of the throwaway cluster we created in the cli-vm.  
 
     pks clusters
