@@ -1,6 +1,6 @@
 # Welcome to the PKS Ninja Community
 
-You are viewing the master  branch, which is currently dedicated to PKS Version 1.3. We are starting to prepare materials for PKS 1.4, if you want to use PKS 1.4, please use the "Pks1.4" Branch - however please note that most materials have not been updated for PKS 1.4 yet. 
+You are viewing the PKS 1.4 Branch, all updates to this branch should reflect pks 1.4.
 
 **Please Note, this site is currently in beta/preview mode and under active development. Please excuse any errors or ommissions**
 
