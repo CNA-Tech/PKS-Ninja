@@ -22,8 +22,8 @@ To complete this lab you will need a running pks ninja lab environment with NSX-
 1.0.2 From the control center desktop, open a putty connection to `cli-vm`. If you have not already cloned the planespotter repository to `cli-vm` , please clone it with the following commands:
 
 ```bash
-mkdir ~/Cloned
-cd ~/Cloned
+mkdir ~/Forked
+cd ~/Forked
 git clone https://github.com/CNA-Tech/planespotter.git
 ```
 
@@ -35,7 +35,7 @@ git clone https://github.com/CNA-Tech/planespotter.git
 1.0.3 From the `cli-vm` prompt, enter the following commands to deploy the planespotter application:
 
 ```bash
-cd ~/Cloned/planespotter/kubernetes/
+cd ~/Forked/planespotter/kubernetes/
 kubectl create ns planespotter
 kubectl config set-context my-cluster --namespace planespotter
 kubectl create -f storage_class.yaml
@@ -167,17 +167,10 @@ kubectl create -f redis_and_adsb_sync_all_k8s.yaml
 </details>
 <br/>
 
-1.1.11 From the SSH connection to `nsxmgr-01a.corp.local`, list all nodes registered with NSX-T manager with the command `get nodes`. Ensure that the NSX manager, edge, controller, and all 6 esx hosts are listed. Close your ssh connection to nsx manager
-
-<details><summary>Screenshot 1.1.11</summary>
-<img src="../PksTroubleshooting-PT8251/Images/2018-11-12-23-34-14.png">
-</details>
-<br/>
-
-1.1.12 From the SSH connection to `nsxmgr-01a.corp.local`, display the edge cluster status with the command `get edge-cluster status`. Ensure that the NSX manager, edge, controller, and all 6 esx hosts are listed
+1.1.12 From the control center desktop, SSH and login to the nsx edge at its IP address `192.168.110.91` with username `admin` password `VMware1!`. Display the edge cluster status with the command `get edge-cluster status`.   Verify the service status are all up.
 
 <details><summary>Screenshot 1.1.12</summary>
-<img src="../PksTroubleshooting-PT8251/Images/2018-11-12-23-34-14.png">
+<img src="../PksNetSecPlanespoter-NS2513/Images/2019-05-08_17-58-44.png">
 </details>
 <br/>
 
@@ -326,7 +319,7 @@ For `Destination` set the type as `Logical Port`, click on the `Port` field and 
 2.0.2 From the control center desktop use putty to connect to `cli-vm` and from the prompt, view the manifest for the planespotter kubernetes network security policy with the following commands:
 
 ```bash
-cd ~/Cloned/planespotter/kubernetes
+cd ~/Forked/planespotter/kubernetes
 cat network-policy.yaml | more
 ```
 
@@ -369,7 +362,7 @@ Take a few moments to go through the different firewall rules that were created.
 2.0.5 From the `cli-vm` prompt, clean up your planespotter deployment with the following commands:
 
 ```bash
-cd ~/cloned/planespotter/kubernetes
+cd ~/Forked/planespotter/kubernetes
 kubectl delete -f frontend-deployment_all_k8s.yaml
 kubectl delete -f mysql_pod.yaml
 kubectl delete -f storage_class.yaml

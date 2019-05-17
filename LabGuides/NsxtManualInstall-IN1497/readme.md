@@ -1,16 +1,14 @@
-# NSX-T 2.3 Installation
+# NSX-T 2.4 Manual Installation
 
 ## Overview
 
-The following installation guide follows the implementation of a functional NSX-T 2.3 Installation configured for PKS 1.2 in a vSphere nested lab environment. This implementation uses variables that function in the lab environment. Anyone is welcome to build a similar lab environment and follow along with the lab exercises, but please note you will need to replace any variables such as IP addresses and FQDNs and replace them with the appropriate values for your lab environment.
+The following installation guide follows the implementation of a functional NSX-T 2.4 Installation. This implementation uses variables that function in the lab environment. Anyone is welcome to build a similar lab environment and follow along with the lab exercises, but please note you will need to replace any variables such as IP addresses and FQDNs and replace them with the appropriate values for your lab environment.
 
 The steps provided in this lab guide are intended for a lab implementation and do not necessarily align with best practices for production implementiations. While the instructions provided in this lab guide did work for the author in their lab environment, VMware and/or any contributors to this Guide provide no assurance, warranty or support for any content provided in this guide.
 
 ## Prerequisites
 
 - Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
-
-Note: NinjaLab v10 templates are also available with PKS 1.2. IF you would like to use a v10 template, please switch to the v10 branch of the PKS-Ninja Repo. If you use the PKS Ninja v10 template, you must install the v10 template patch before proceeding.
 
 ## Installation Notes
 

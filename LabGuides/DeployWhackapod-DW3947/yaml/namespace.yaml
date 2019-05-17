@@ -6,4 +6,5 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-name: wap-game
+  name: wap-game
+

@@ -227,7 +227,7 @@ docker images
 </details>
 <br/>
 
-1.1.6 Prepare `cli-vm` with Harbor's certificate which is required for a client to connect to Harbor. Follow the instructions in [Enable Harbor Client Secure Connections](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborCertExternal-HC7212) and then return to this lab guide and proceed with the following step. 
+1.1.6 Prepare `cli-vm` with Harbor's certificate which is required for a client to connect to Harbor. Follow the instructions in [Enable Harbor Client Secure Connections](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborCertExternal-HC7212) and then return to this lab guide and proceed with the following step.
 
 1.1.7 From the `cli-vm` prompt, push the updated mysql image to Harbor with the following commands:
 
@@ -264,7 +264,7 @@ docker push harbor.corp.local/library/mysql:5.6
 
 In most production environments it is a bad practice to allow production workloads to be pulled directly from unsecured public repositories.
 
-In this section, you will build an sign the additional planespotter images and push them to your local harbor registry
+In this section, you will build and sign the additional planespotter images and push them to your local harbor registry
 
 <!-- having problems with content trust because Harbor tile Updater Interval is set to 0 and bosh trusted cert is not setup in the clusterReady, this needs to be updated in the template, skipping for now but leaving scaffolding here to fix in future.
 
@@ -380,7 +380,7 @@ docker login harbor.corp.local # Enter username: admin password: VMware1!
 docker push harbor.corp.local/library/adsb-sync:v1
 docker push harbor.corp.local/library/app-server:v1
 docker push harbor.corp.local/library/frontend:v1
-docker push redis harbor.corp.local/library/redis:v1
+docker push harbor.corp.local/library/redis:v1
 ```
 
 <details><summary>Screenshot 1.2.3.1</summary>
@@ -465,7 +465,7 @@ kubectl get ingress -o wide
 
 1.3.4 From the Main Console (ControlCenter) desktop, open a https browser session to `http://planespotter.corp.local` to see the fully functional planespotter web app, click around on the various links to explore
 
-Note: If planespotter.corp.local does not resolve for you, you can either create a DNS record for it or simply use the IP address from the kubectl get services output from the previous command instead.
+Note: If planespotter.corp.local does not resolve for you, you can either create a DNS record for it or simply use the IP address from the kubectl get ingress output from the previous command instead.
 
 <details><summary>Screenshot 1.3.4.1</summary>
 <img src="Images/2019-03-02-07-09-09.png">

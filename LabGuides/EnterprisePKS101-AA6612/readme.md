@@ -98,9 +98,9 @@ We are going to use the Bosh CLI directly to monitor this activity.
     <details><summary>Ops Manager login</summary>
     <img src="Images/opsman-login.png">
     </details>
-2. export bosh credentials
+2. export bosh credentials ( you may need to update the client secret from ops manager credentials https://opsman.corp.local/api/v0/deployed/director/credentials/bosh_commandline_credentials )
     ```
-    $ export BOSH_CLIENT=ops_manager BOSH_CLIENT_SECRET=ItwepXj8Sb--QbBOUQ7Uoa9JUp9BYpWo BOSH_CA_CERT=/var/tempest/workspaces/default/root_ca_certificate BOSH_ENVIRONMENT=172.31.0.2 bosh
+    $ export BOSH_CLIENT=ops_manager BOSH_CLIENT_SECRET=w6b4Hkp_JoJv2iGA6x4WF3MnciQJHXQQ BOSH_CA_CERT=/var/tempest/workspaces/default/root_ca_certificate BOSH_ENVIRONMENT=172.31.0.2 bosh
     ```
     <details><summary>Export BOSH Credentials</summary>
     <img src="Images/export-bosh-creds.png">
@@ -119,7 +119,8 @@ Each Kubernetes cluster that we create is considered a Bosh deployment.  A detai
 Now we want to see the individual instances (VMs) that make up this deployment.
 1. Run the following command to list the VMs created for your deployment.
     ```
-    $ bosh -d service-instance_84bc5c87-e480-4b17-97bc-afed45ab4a6e instances
+    $ bosh -d service-instance_<insert your service instance from previous command> instances
+    e.g. bosh -d service-instance_cfc60a5a-1022-4c9a-ac22-8e9aeffca169 instances
     ```
     <details><summary>BOSH Instances</summary>
     <img src="Images/bosh-instances.png">
@@ -345,6 +346,8 @@ The T1 routers are created for each k8s namespaces and the *demo* T1 router was 
 
 1. In this step you will create a dockerfile which you will build to create a new nginx container named `custom-nginx` that includes the configuration you created for the `my-nginx` container in the previous steps
 
+    <details><summary>Using Nano text editor</summary>
+    
     Make the `~/custom-nginx` directory and use the nano text editor to create the `~/custom-nginx/dockerfile` file with the following commands:
 
     ```bash
@@ -365,9 +368,68 @@ The T1 routers are created for each k8s namespaces and the *demo* T1 router was 
 
     Press the `ctrl + o` keys and hit the `Enter` key to save the file, and then press `ctrl + x` keys to exit nano
 
-    <details><summary>Screenshots 1</summary>
+    Confirm the newly created dockerfile was updated and saved correctly with the `cat dockerfile` command.
+    The contents of the dockerfile will print to the terminal.
+    
+    ```bash
+    cat dockerfile
+    ```
+    The `cat dockerfile` command will print the contents of the dockerfile to the terminal.
+
+    <details><summary>Nano Screenshots</summary>
+    Launch nano
     <img src="Images/2019-03-02-01-15-59.png">
+    Type or paste new text
     <img src="Images/2019-03-02-01-55-23.png">
+    cat command to verify contents of dockerfile
+    <img src="Images/vi-nano-cat.png">
+    </details>
+    <br/>
+
+    </details>
+    Optional method
+    <details><summary>Using vi text editor</summary>
+    
+    Make the `~/custom-nginx` directory and use the vi text editor to create the `~/custom-nginx/dockerfile` file with the following commands:
+
+    ```bash
+    mkdir ~/custom-nginx
+    cd ~/custom-nginx
+    vi dockerfile
+    ```
+
+    In the vi text editor, press the `i` key to enter insert mode. Type or copy and paste the following text:
+
+    ```text
+    FROM nginx
+
+    RUN apt-get update
+    RUN apt-get install -y curl
+    RUN echo 'to be or not to be, that is the question' >> /usr/share/nginx/html/index.html
+    ```
+
+    Press the `esc` key to exit insert mode.  Type `:wq!` to save the file and exit vi editor.
+
+    Confirm the newly created dockerfile was updated and saved correctly with the `cat dockerfile` command.
+    The contents of the dockerfile will print to the terminal.
+
+    ```bash
+    cat dockerfile
+    ```
+    <details><summary>vi Screenshots</summary>
+    Launch vi
+    <img src="Images/vi-launch.png">
+    New empty file named dockerfile
+    <img src="Images/vi-newfile.png">
+    i key puts vi in insert mode, type or paste new text in file
+    <img src="Images/vi-insert.png">
+    Type :wq! to save file and quit vi editor
+    <img src="Images/vi-write-quit-bang.png">
+    cat command to verify contents of dockerfile
+    <img src="Images/vi-nano-cat.png">
+    </details>
+    <br/>
+
     </details>
     <br/>
 
