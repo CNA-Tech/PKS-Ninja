@@ -1,12 +1,13 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: wap-ingress
+  name: simple-fanout-example
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - http:
+  - host: whackapod.corp.local
+    http:
       paths:
       - path: /api/*
         backend:
@@ -20,4 +21,3 @@ spec:
         backend:
           serviceName: game-deployment
           servicePort: 8080
-host: whackapod.ing.corp.local
