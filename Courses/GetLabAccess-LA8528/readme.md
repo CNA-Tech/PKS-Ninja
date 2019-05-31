@@ -22,7 +22,7 @@ Note: NinjaLab v10 templates are also available with PKS 1.2. IF you would like 
 Each of these templates should be available both in onecloud and VLP, please see the corresponding link below for further instructions:
 
 - VMware Employees with access to Onecloud, please see [Accessing the PKS Ninja Lab with OneCloud](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/OnecloudNinjaLab-OL2089)
-- VMware or Pivotal Employees without access to Onecloud, please see [Accessing the PKS Ninja Lab with VMware Learning Platform](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/VlpNinjaLab-VL6532)
+- VMware or Pivotal or Dell Tech employees without access to Onecloud, please see [Accessing the PKS Ninja Lab with VMware Learning Platform](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/VlpNinjaLab-VL6532)
 - For all others, we are actively working on tutorials for creating compatible lab environments. Until further instructions are available, please reach out on the slack channel or pks-ninja-labs@googlegroups.com and we would can provide further documentation that can help you prepare a compatible lab environment
   
 <!--
