@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox
+spec:
+  selector:
+    matchLabels:
+      app: busybox
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: busybox
+    spec:
+      serviceAccountName: demo-sa
+      containers:
+      - name: busybox
+        image: busybox
+        command: [ "sh", "-c", "while true; do echo $(hostname) v1; sleep 60; done" ]
+        securityContext:
+          runAsUser: 500

@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      serviceAccountName: demo-sa
+      containers:
+      - name: nginx
+        image: nginx:1.13-alpine
+        ports:
+        - containerPort: 80
+        securityContext:
+          runAsUser: 0

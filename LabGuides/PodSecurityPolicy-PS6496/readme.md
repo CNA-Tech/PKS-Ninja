@@ -444,7 +444,7 @@ alias kubectl-user='kubectl --as=system:serviceaccount:psp-example:fake-user -n 
 
 ```
 
-### Demo
+### Example
 
 Navigate to the demo directory. All the commands are run from within the demo directory in this tutorial. It is assumed that you have access to a kubernetes Cluster deployed by Enterprise PKS 1.4+ and you have access to kubeconfig file for the admin user fetched using "pks get-credentials <cluster-name>".
 
@@ -710,5 +710,216 @@ busybox-69875b5488-pvwsj   1/1     Running   0          2m30s
 
 Now we will run something that requires little bit more privilidge than this. We have an nginx container to showcase that.
 
+Let's start by taking a look at out deployment yaml
+
+```yaml
+$ cat privileged/nginx.yml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      serviceAccountName: demo-sa
+      containers:
+      - name: nginx
+        image: nginx:1.13-alpine
+        ports:
+        - containerPort: 80
+        securityContext:
+          runAsUser: 0
+```
+
+As you can see, this deployment is using the ngix container which is associated with *demo-sa* service account. However, this is running as root user as implied by the PID 0 in the runAsUser field in the yaml.
+
+Create the deployment using the comand below.
+
+```bash
+$ kubectl apply -f privileged/nginx.yml
+deployment.apps/nginx created
+```
+
+Checking the deployment status shows us that pods are not being created.
+
+```bash
+$ kubectl get deployments
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/3     0            0           24s
+```
+
+```yaml
+$ kubectl describe deployment nginx
+Name:                   nginx
+Namespace:              default
+CreationTimestamp:      Mon, 10 Jun 2019 20:50:26 -0700
+Labels:                 <none>
+Annotations:            deployment.kubernetes.io/revision: 1
+                        kubectl.kubernetes.io/last-applied-configuration:
+                          {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"nginx","namespace":"default"},"spec":{"replicas":3,"selec...
+Selector:               app=nginx
+Replicas:               3 desired | 0 updated | 0 total | 0 available | 3 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:           app=nginx
+  Service Account:  demo-sa
+  Containers:
+   nginx:
+    Image:        nginx:1.13-alpine
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type             Status  Reason
+  ----             ------  ------
+  Progressing      True    NewReplicaSetCreated
+  Available        False   MinimumReplicasUnavailable
+  ReplicaFailure   True    FailedCreate
+OldReplicaSets:    <none>
+NewReplicaSet:     nginx-5656bb54bf (0/3 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  82s   deployment-controller  Scaled up replica set nginx-5656bb54bf to 3
+```
+
+Let's chekc the replica set to see what is going on.
+
+```yaml
+$ kubectl describe rs nginx-5656bb54bf
+
+Name:           nginx-5656bb54bf
+Namespace:      default
+Selector:       app=nginx,pod-template-hash=5656bb54bf
+Labels:         app=nginx
+                pod-template-hash=5656bb54bf
+Annotations:    deployment.kubernetes.io/desired-replicas: 3
+                deployment.kubernetes.io/max-replicas: 4
+                deployment.kubernetes.io/revision: 1
+Controlled By:  Deployment/nginx
+Replicas:       0 current / 3 desired
+Pods Status:    0 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:           app=nginx
+                    pod-template-hash=5656bb54bf
+  Service Account:  demo-sa
+  Containers:
+   nginx:
+    Image:        nginx:1.13-alpine
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type             Status  Reason
+  ----             ------  ------
+  ReplicaFailure   True    FailedCreate
+Events:
+  Type     Reason        Age                   From                   Message
+  ----     ------        ----                  ----                   -------
+  Warning  FailedCreate  71s (x15 over 2m33s)  replicaset-controller  Error creating: pods "nginx-5656bb54bf-" is forbidden: unable to validate against any pod security policy: [spec.containers[0].securityContext.runAsUser: Invalid value: 0: running with the root UID is forbidden]
+```
+
+As seen from above output from pod creation failed because it is trying to create the container with root access. This is because right now *demo-sa* service account is attached tp *pks-restricive* psp which doesnot allow the creation of pods with root access. So we don't have any PSPs that allows pods with root access to get created. 
+
+NOTE: PSP are checked twice, first at start when validating and then at creation time. So theoratically we can remove the "runAsUser: 0" from the nginx depoyment file and then the yaml would get validated. However because the nginx container runs as root by default, psp will reject the pod creation at runtime.
+
+Let's delete the deployment before we move forward.
+
+```bash
+$ kubectl delete -f privileged/nginx.yml
+deployment.apps "nginx" deleted
+```
+
+Again, we need to have a PSP with privilidge access, then create a ClusterRole and then create a RoleBinding with ClusterRole and the Service account.
+
+The psp-priviledged psp is also created by default in Enterprise PKS. Unlike pks-restrictive, Enterprise PKS 1.4 **doesnot** have a ClusterRole associated to it. So we would need to create a ClusterRole. Then we will create the RoleBinding between *psp:privilidged* ClusterRole and *demo-sa* service account.
+
+Let's take a look at *psp-privilidged* ClusterRole.
+
+```yaml
+$ cat privileged/cluster-role.yml
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+  name: psp:privileged
+rules:
+- apiGroups:
+  - extensions
+  resourceNames:
+  - pks-privileged
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
+```
+
+As shown above, the above yaml is creating a ClusterRole name *psp:privileged*. The rules section is adding the verb *use* on the psp name *pks-privileged*. Let's create this ClusterRole.
+
+```bash
+kubectl apply -f privileged/cluster-role.yml
+clusterrole.rbac.authorization.k8s.io/psp:privileged created
+```
+
+Now we need to create the RoleBinding to bind the ServiceAccount against the ClusterRole as shown in the yaml below.
+
+```yaml
+$ cat privileged/role-binding.yml
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: psp:demo-psp-privileged
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: psp:privileged
+subjects:
+- kind: ServiceAccount
+  name: demo-sa
+  namespace: default
+```
+
+let's create the RoleBinding
+```bash
+$ kubectl apply -f privileged/role-binding.yml
+rolebinding.rbac.authorization.k8s.io/psp:demo-psp-privileged created
+```
+
+Now that psp is setup with *demo-sa* ServiceAccount, let's create the nginx deployment.
+
+```bash
+$ kubectl apply -f privileged/nginx.yml
+deployment.apps/nginx created
+```
+
+Let's check the deployment status
+
+```bash
+$ kubectl get deployments
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   3/3     3            3           6s
+```
+
+Voilà The deployment was successfully created with 3 PODs running for the ngix container!
 
 
+Reources:
+- https://kubernetes.io/docs/concepts/policy/pod-security-policy/
+- https://docs.pivotal.io/runtimes/pks/1-4/pod-security-policy.html#psp-about
+- https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-binding-examples
