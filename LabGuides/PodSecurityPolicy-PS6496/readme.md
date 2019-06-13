@@ -739,7 +739,7 @@ spec:
           runAsUser: 0
 ```
 
-As you can see, this deployment is using the ngix container which is associated with *demo-sa* service account. However, this is running as root user as implied by the PID 0 in the runAsUser field in the yaml.
+As you can see, this deployment is using the nginx container which is associated with *demo-sa* service account. However, this is running as root user as implied by the PID 0 in the runAsUser field in the yaml.
 
 Create the deployment using the comand below.
 
