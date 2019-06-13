@@ -795,7 +795,7 @@ Events:
   Normal  ScalingReplicaSet  82s   deployment-controller  Scaled up replica set nginx-5656bb54bf to 3
 ```
 
-Let's chekc the replica set to see what is going on.
+Let's check the replica set to see what is going on.
 
 ```yaml
 $ kubectl describe rs nginx-5656bb54bf
