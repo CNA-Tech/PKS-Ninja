@@ -2,7 +2,7 @@
 
 
 ### Introduction
-Pod Security Policy is a cluster level resource that controls the security aspects if a POD specifcation by defining a set of conditions that a POD must run in orider to be accepted into the system. The following can be control by an administrator.
+Pod Security Policy is a cluster level resource that controls the security aspects of a POD specifcation by defining a set of conditions that a POD must run in order to be accepted into the system. The following can be control by an administrator.
 
 |Control Aspect | Field Names|
 |---------------|------------|
@@ -23,14 +23,15 @@ Pod Security Policy is a cluster level resource that controls the security aspec
 |The seccomp profile used by containers|	annotations|
 |The sysctl profile used by containers|	annotations|
 
-
 ### RBAC
-RBAC is a standard Kubernetes authorization mode, and can easily be used to authorize use of policies.
+
+Before we go deep into PSPs, let's go over RBAC in kubernetes. RBAC is a standard Kubernetes authorization mode, and can easily be used to authorize use of policies. This tutorial will go over using RBAC to authorize PSPs.
 
 RBAC API has 4 top level Types
+
 1. Role
     Role: Grant access to resources within a single namespace
-    
+
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
@@ -42,14 +43,16 @@ RBAC API has 4 top level Types
       resources: ["pods"]
       verbs: ["get", "watch", "list"]
     ```
+
 2. ClusterRole
 
     ClusterRole: Same as roles +
     a. cluster-scoped resources (like nodes)
     b. non-resource endpoints (like “/healthz”)
     c. namespaced resources (like pods) across all namespaces (needed to run kubectl get pods --all-namespaces, for example)
-    
+
     The following ClusterRole can be used to grant read access to secrets in any particular namespace, or across all namespaces (depending on how it is bound):
+
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
@@ -61,11 +64,13 @@ RBAC API has 4 top level Types
     resources: ["secrets"]
     verbs: ["get", "watch", "list"]
     ```
+
 3. RoleBinding
 
     A role binding grants the permissions defined in a role to a user or set of users. It holds a list of subjects (users, groups, or service accounts), and a reference to the role being granted. Permissions can be granted within a namespace with a RoleBinding, or cluster-wide with a ClusterRoleBinding. 
-    A RoleBinding may reference a Role in the same namespace. The following RoleBinding grants the “pod-reader” role to the user “jane” within the “default” namespace. This allows “jane” to read pods in the “default” namespace.
+    A RoleBinding may reference a Role in the same namespace. The following RoleBinding grants the *pod-reader* role to the user “jane” within the “default” namespace. This allows *jane* to read pods in the “default” namespace.
     *roleRef* is how you will actually create the binding. The *kind* will be either *Role* or *ClusterRole*, and the name will reference the name of the specific *Role* or *ClusterRole* you want. In the example below, this RoleBinding is using *roleRef* to bind the user “jane” to the *Role* created above named *pod-reader*
+
       ```yaml
       apiVersion: rbac.authorization.k8s.io/v1
       # This role binding allows "jane" to read pods in the "default" namespace.
@@ -82,8 +87,9 @@ RBAC API has 4 top level Types
         name: pod-reader # this must match the name of the Role or ClusterRole you wish to bind to
         apiGroup: rbac.authorization.k8s.io
       ```
+
     A RoleBinding may also reference a ClusterRole to grant the permissions to namespaced resources defined in the ClusterRole within the RoleBinding’s namespace. This allows administrators to define a set of common roles for the entire cluster, then reuse them within multiple namespaces.
-    For instance, even though the following RoleBinding refers to a ClusterRole, “dave” (the subject, case sensitive) will only be able to read secrets in the “development” namespace (the namespace of the RoleBinding)
+    For instance, even though the following RoleBinding refers to a ClusterRole, *dave* (the subject, case sensitive) will only be able to read secrets in the *development* namespace (the namespace of the RoleBinding)
 
       ```yaml
       apiVersion: rbac.authorization.k8s.io/v1
@@ -191,11 +197,11 @@ kubectl create rolebinding <name> --clusterrole psp:restricted --serviceaccount=
 NOTE: The most commonly used Kubernetes workloads (*deployment*, *replication controller*, for example) spin up pods using a service account. It is **this** entity that requires the *use* permission on the PSP. Just because the kubectl user has the *use* permission on a PSP does not mean your workload will spin up (unless you are doing simple pod-level workloads using *kubectl run*). To grant a service account *use* permission for a PSP, the user attempting to create the role binding must also have *use* on that PSP.
 
 ### Enabling Pod Security Policies
-Pod security policy control is implemented as an optional (but recommended) admission controller. PodSecurityPolicies are enforced by enabling the admission controller, but doing so without authorizing any policies will prevent any pods from being created in the cluster. Enterprise PKS allows the enabling of Pod Security Policy admission controller through the PLAN section of the PKS tile configuration, in Ops Manager, as shown in the screenshot below
+Pod security policy control is implemented as an optional (but recommended) admission controller. PodSecurityPolicies are enforced by enabling the admission controller, but doing so without authorizing any policies will prevent any pods from being created in the cluster. Enterprise PKS allows the enabling of Pod Security Policy admission controller through the *PLAN* section of the PKS tile configuration, in Ops Manager, as shown in the screenshot below
 
 <img src="images/psp-enable.png">
 
-A Kubernetes cluster created from a plan with the PodSecurilyPolicy option enabled will require cluster users to have a binding that grants **_use_** on an appropriate PSP to deploy pods. Enabling the PodSecurilyPolicy option is a security feature. The design goal is to make the Kubernetes cluster more secure. Once enabled, PodSecurilyPolicy acts on creation and modification of pods in that cluster or namespace, and determines the actions that should be permitted based on the requested security context and the applied PSP.
+A Kubernetes cluster created from a plan with the PodSecurilyPolicy option enabled will require cluster users to have a binding that grants **_use_** on an appropriate PSP to deploy pods. Enabling the PodSecurityPolicy option is a security feature. The design goal is to make the Kubernetes cluster more secure. Once enabled, PodSecurilyPolicy acts on creation and modification of pods in that cluster or namespace, and determines the actions that should be permitted based on the requested security context and the applied PSP.
 
 ### Policy Order
 In addition to restricting pod creation and update, pod security policies can also be used to provide default values for many of the fields that it controls. When multiple policies are available, the pod security policy controller selects policies according to the following criteria:
@@ -204,12 +210,13 @@ In addition to restricting pod creation and update, pod security policies can al
 2. If it is a pod creation request, then the first valid policy in alphabetical order is used.
 3. Otherwise, if it is a pod update request, an error is returned, because pod mutations are disallowed during update operations.
 
-
 ### Configuring the pks-restricted PSP for Developers to Use with PKS
+
 #### Define the PSP
+
 The first step is to define the PSP. Enterprise PKS provides the PSP named pks-*restricted* for general development work in Kubernetes. To onboard cluster users (developers), the best practice is to start with the pks-resricted PSP.
 
-NOTE: When PSP are enabled, unless the user or the service account the user is associated to is bound to a PSP, this user will not be able to run workloads.
+NOTE: When PSP are enabled, unless the user or the service account the user is associated to is bound to a PSP, this user will not be able to run workloads. Also, as mentioned before, if you are creating deployments, replicasets etc, the *service account* used to create this workloads should **also** be bound to the PSP.
 
 To view the pks-restricted PSP, run the following command:
 
@@ -218,13 +225,14 @@ kubectl get psp pks-restricted -o yaml
 ```
 
 #### Create the Cluster Role
+
 The following ClusterRole grants permission to use the pks-restricted PSP resource. You can use this role for onboarding cluster users and granting them cluster access.
 
 ```yaml
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: psp:restricted 
+  name: psp:restricted
 rules:
 - apiGroups:
   - extensions
@@ -237,6 +245,7 @@ rules:
 ```
 
 #### Create the Cluster Role Binding
+
 For onboarding cluster users, you have two options based on the mode of authentication you have chosen for PKS: internal or external. Internal authentication uses a service account mechanism for role binding, such as *SERVICE-UUID-cluster-admin*, for example. External authentication uses the OpenID Connect (OIDC) identity provider to interface with an external system such as LDAP or AD. In this case the role binding references the user or group name.
 
 Here is an example *ClusterRoleBinding* that binds service account users to the the *psp:restricted* ClusterRole, which provides permissions to use the pks-restricted PSP.
@@ -288,6 +297,7 @@ subjects:
 ```
 
 ### Administering PSPs, Roles, and RoleBindings
+
 This section lists common kubectl commands for administering and managing PSPs and related objects in Kubernetes.
 
 To view the default PSPs:
@@ -333,11 +343,13 @@ Settings:
 ```
 
 To view the role bindings:
+
 ```bash
 kubectl get rolebinding
 ```
 
 To view the cluster role bindings:
+
 ```bash
 $ kubectl get clusterrolebindings
 
@@ -347,9 +359,11 @@ cluster-admin                                          19d
 event-controller                                       19d
 fluent-bit                                             19d
 ```
+
 In the results, the UUID-cluster-admin is a service account.
 
 To view service accounts:
+
 ```bash
 $ kubectl get sa
 
@@ -359,6 +373,7 @@ default                                1         19d
 ```
 
 To view the YAML for a cluster role binding:
+
 ```bash
 $ kubectl get clusterrolebinding 33afec17-7833-456f-b76a-df5a278dcca1-cluster-admin -o yaml
 
@@ -383,11 +398,13 @@ subjects:
   ```
 
 To view a cluster role:
+
 ```bash
 kubectl get clusterrole cluster-admin
 ```
 
 To view the YAML for a clusterrole:
+
 ```bash
 $ kubectl get clusterrole cluster-admin -o yaml
 
@@ -416,37 +433,9 @@ rules:
   - '*'
 ```
 
-#### Create a policy and a pod
-
-1. create namespace psp-example
-2. create serviceaccount fake-user in namespace=psp-example
-3. Create rolebinding in namepsace=psp-example named=fake-editor with clusterrole=edit and using the serviceaccount=psp-example:fake-user
-4. Create a psp with priv=false
-5. Create a POD using fake-user => fail
-6. Create a role with verb=use, resource=psp and resource-name='psp in 4'
-7. create rolebinding fake-user:psp:unprivilidged, role='psp in 4', serviceaccount=fake-user
-8. Now create pod with fake-user
-9. still cannot cerate pods with priv
-10. remember this doesnot let us provision replicasers but deployments.
-
-#### Set up
-Set up a namespace and a service account to act as for this example. We’ll use this service account to mock a non-admin user.
-```
-kubectl create namespace psp-example
-kubectl create serviceaccount -n psp-example fake-user
-kubectl create rolebinding -n psp-example fake-editor --clusterrole=edit --serviceaccount=psp-example:fake-user
-```
-
-To make it clear which user we’re acting as and save some typing, create 2 aliases:
-```
-alias kubectl-admin='kubectl -n psp-example'
-alias kubectl-user='kubectl --as=system:serviceaccount:psp-example:fake-user -n psp-example'
-
-```
-
 ### Example
 
-Navigate to the demo directory. All the commands are run from within the demo directory in this tutorial. It is assumed that you have access to a kubernetes Cluster deployed by Enterprise PKS 1.4+ and you have access to kubeconfig file for the admin user fetched using "pks get-credentials <cluster-name>".
+Navigate to the demo directory. All the commands are run from within the demo directory in this tutorial. It is assumed that you have access to a kubernetes Cluster deployed by Enterprise PKS 1.4+ and you have access to kubeconfig file for the admin user fetched using "pks get-credentials *your-cluster-name*".
 
 ```bash
 cd demo
@@ -464,7 +453,7 @@ e2decb39-725d-4d33-a4ed-49a651b586cd   Ready    <none>   20d   v1.13.5
 e930dd7c-65d6-4dca-8e0f-d6a0f4cf0fec   Ready    <none>   20d   v1.13.5
 ```
 
-The first thing we need to create is a service account that will be used to deploy workloads. let's take a look at the service account yaml file.
+The first thing we need to create is a service account that will be used to deploy workloads. Let's take a look at the service account yaml file.
 
 ```yaml
 $ cat service-account.yml
@@ -484,9 +473,9 @@ Issuing following command will create the service account
 $ kubectl apply -f service-account.yml
 
 serviceaccount/demo-sa created
-``` 
+```
 
-Next we will create a deployment which deploys a busybox container with 3 replicas
+Next we will create a deployment which deploys a busybox pods with 3 replicas
 
 ```yaml
 $ cat restricted/busybox.yml
@@ -516,9 +505,8 @@ spec:
 
 Couple of things to note here:
 
-1. The spec section describes that this deployment is bound to the *demo-sa* service account we created earlier. So this deployment will use demo-sa to provision pods.
-2. Under securityContext, the user the POD will be running as 500 so this does not need privilidged access
-
+  1. The spec section describes that this deployment is bound to the *demo-sa* service account which we created earlier. So this deployment will use *demo-sa* to provision pods using a replicaset.
+  2. Under securityContext, the user POD will be running as 500 which is not the root user so it does not need privilidged access to run
 
 Next we will create the deployment and check the deployment status.
 
@@ -573,7 +561,7 @@ Events:
   Normal  ScalingReplicaSet  78s   deployment-controller  Scaled up replica set busybox-69875b5488 to 3
 ```
 
-As you can see from the deployment, 0/3 replicas have been created. Let's take a deeper look by looking at the replica set. You can fetch the replica set id from the output from the previod command
+As you can see from the deployment, 0/3 replicas have been created. Let's take a deeper look by looking at the replica set. You can fetch the replica set id from the output from the previous command
 
 ```yaml
 $ kubectl describe rs busybox-69875b5488
@@ -617,6 +605,7 @@ Events:
 As you can see, the events are showing us that the creation of pods failed by the replicaset as there was no POD security policy associated with the service account that is used to created this deployment. As mentioned before, most Kubernetes pods are not created directly by users. Instead, they are typically created indirectly as part of a Deployment, ReplicaSet, or other templated controller via the controller manager. Granting the controller access to the policy would grant access for all pods created by that controller, so the preferred method for authorizing policies is to grant access to the pod’s service account.
 
 Before we continue, let's cleanup the current deployment.
+
 ```bash
 $ kubectl delete -f restricted/busybox.yml
 
@@ -627,9 +616,9 @@ So to make this work, we need to have a PSP. Then create a Cluster Role to attac
 
 PSP => Cluster Role (PSP) => RoleBinding (Cluster Role, Service Account)
 
-The *pks-restrictive* psp is created by default. The ClusterRole named *psp:restricted* is also created and bound to *pks-restrictive* psp by default. The only things left to do is create the RoleBinding to associate the ClusterRole to our Service Account named *demo-sa*.
+The *pks-restrictive* psp is created by default. The ClusterRole named *psp:restricted* is also created and bound to *pks-restrictive* psp by default. The only things left to do is to create the RoleBinding to associate the ClusterRole to our Service Account named *demo-sa*.
 
-You can check the already created ClusterRole using the command below. Note that under rules->apiGroups->resourceNames the *pks-restricted* psp is specified and it has *use* permissions under verbs.
+You can check the already created ClusterRole using the command below. Note that under rules -> apiGroups -> resourceNames, the *pks-restricted* psp is specified and it has *use* permissions under verbs.
 
 ```yaml
 $ kubectl get clusterrole psp:restricted -o yaml
@@ -656,7 +645,7 @@ rules:
   - use
   ```
 
-Let's see the RoleBinding we will create.
+Let's take a look at the RoleBinding we will create.
 
 ```yaml
 $ cat restricted/role-binding.yml
@@ -678,12 +667,13 @@ subjects:
 As you can see, the RoleBinding is associating the ClusterRole *psp:restricted* to Service Account *demo-sa*.
 
 Let's create this RoleBinding
+
 ```bash
 $ kubectl apply -f restricted/role-binding.yml
 
 rolebinding.rbac.authorization.k8s.io/psp:demo-psp-restricted created
-```
 
+```
 
 Now that we have everything in place, let's recreate the deployment
 
@@ -708,9 +698,9 @@ busybox-69875b5488-pvwsj   1/1     Running   0          2m30s
 
 ```
 
-Now we will run something that requires little bit more privilidge than this. We have an nginx container to showcase that.
+Now we will run something that requires little bit more privilidges than this. We have an nginx container to showcase that.
 
-Let's start by taking a look at out deployment yaml
+Let's start by taking a look at the deployment yaml
 
 ```yaml
 $ cat privileged/nginx.yml
@@ -833,7 +823,7 @@ Events:
   Warning  FailedCreate  71s (x15 over 2m33s)  replicaset-controller  Error creating: pods "nginx-5656bb54bf-" is forbidden: unable to validate against any pod security policy: [spec.containers[0].securityContext.runAsUser: Invalid value: 0: running with the root UID is forbidden]
 ```
 
-As seen from above output from pod creation failed because it is trying to create the container with root access. This is because right now *demo-sa* service account is attached tp *pks-restricive* psp which doesnot allow the creation of pods with root access. So we don't have any PSPs that allows pods with root access to get created. 
+As seen from above output from pod creation failed because it is trying to create the container with root access. This is because right now *demo-sa* service account is attached tp *pks-restricive* psp which doesnot allow the creation of pods with root access. So we don't have any PSPs that allows pods with root access to get created.
 
 NOTE: PSP are checked twice, first at start when validating and then at creation time. So theoratically we can remove the "runAsUser: 0" from the nginx depoyment file and then the yaml would get validated. However because the nginx container runs as root by default, psp will reject the pod creation at runtime.
 
@@ -869,7 +859,7 @@ rules:
   - use
 ```
 
-As shown above, the above yaml is creating a ClusterRole name *psp:privileged*. The rules section is adding the verb *use* on the psp name *pks-privileged*. Let's create this ClusterRole.
+As shown above, the above yaml is creating a ClusterRole name *psp:privileged*. The rules section is adding the verb *use* on the psp named *pks-privileged*. Let's create this ClusterRole.
 
 ```bash
 kubectl apply -f privileged/cluster-role.yml
@@ -895,7 +885,10 @@ subjects:
   namespace: default
 ```
 
-let's create the RoleBinding
+NOTE: This is the second time we are creating a RoleBinding. The first time it was created when we were running the busybox deployment and we have not removed that role binding yet. If multiple PSPs are associated with a ServiceAccount, then first valid PSP is used in alphabetical order. In this case, because there is only one PSP that allows the creation of pods with root priviliges, the alphabetical order is not used. If we create the busybox deployment again, then in that case both pks-restrictive and pks-priviliged are valid so pks-priviliged would be used as *p* comes before *r*. This is because we associated both PSP to the same *demo-sa* ServiceAccount.
+
+Let's create the RoleBinding
+
 ```bash
 $ kubectl apply -f privileged/role-binding.yml
 rolebinding.rbac.authorization.k8s.io/psp:demo-psp-privileged created
@@ -916,8 +909,7 @@ NAME    READY   UP-TO-DATE   AVAILABLE   AGE
 nginx   3/3     3            3           6s
 ```
 
-Voilà The deployment was successfully created with 3 PODs running for the ngix container!
-
+Voilà! The deployment was successfully created with 3 PODs running for the nginx container!
 
 Reources:
 - https://kubernetes.io/docs/concepts/policy/pod-security-policy/
