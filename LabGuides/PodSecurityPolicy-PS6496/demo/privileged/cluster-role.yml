@@ -1,0 +1,15 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+  name: psp:privileged
+rules:
+- apiGroups:
+  - extensions
+  resourceNames:
+  - pks-privileged
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use

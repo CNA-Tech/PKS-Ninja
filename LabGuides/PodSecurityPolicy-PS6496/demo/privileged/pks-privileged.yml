@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  annotations:
+    apparmor.security.beta.kubernetes.io/allowedProfileName: '*'
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
+  name: pks-privileged
+spec:
+  allowPrivilegeEscalation: true
+  allowedCapabilities:
+  - '*'
+  fsGroup:
+    rule: RunAsAny
+  hostIPC: true
+  hostNetwork: true
+  hostPID: true
+  hostPorts:
+  - max: 65535
+    min: 0
+  privileged: true
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  volumes:
+  - awsElasticBlockStore
+  - azureDisk
+  - azureFile
+  - cephFS
+  - configMap
+  - csi
+  - downwardAPI
+  - emptyDir
+  - fc
+  - flexVolume
+  - flocker
+  - gcePersistentDisk
+  - glusterfs
+  - iscsi
+  - nfs
+  - persistentVolumeClaim
+  - projected
+  - portworxVolume
+  - quobyte
+  - rbd
+  - scaleIO
+  - secret
+  - storageos
+  - vsphereVolume
