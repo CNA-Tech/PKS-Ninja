@@ -1,0 +1,14 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: psp:demo-psp-restricted
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: psp:restricted
+subjects:
+- kind: ServiceAccount
+  # If ServiceAccount in application is not specified, default ServiceAccount is used in each namespace.
+  # For deploying apps that are using a different SA, change the field below to the name of the ServiceAccount
+  name: default
