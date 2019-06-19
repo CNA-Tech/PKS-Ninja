@@ -1,4 +1,4 @@
-# Quick start Guide to run apps when PSP is enabled
+# Quick Start Guide to run apps when PSP is enabled
 
 ## Introduction
 
