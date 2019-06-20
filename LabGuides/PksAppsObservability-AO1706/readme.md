@@ -41,8 +41,8 @@ This guide is a joint effort between VMWare and a Customer (Susheel Pagadala)
 ## Prerequisites
 
 - Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
-- PKS Install (https://github.com/riazvm/PKS-Ninja/tree/master/LabGuides/PksInstallPhase2-IN1916)
-- PKS Cluster (https://github.com/riazvm/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610)
+- [PKS Install](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksInstallPhase2-IN1916)
+- [PKS Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610)
 
 
 ## Installation Notes
@@ -195,7 +195,7 @@ kubectl get pods -n monitoring
 <br/>
 
 2.4 Expose the grafana service as a load balancer. We do this to access the Grafana app from the external world. Grafana would talk with prometheus. Prometheus would pull metrics from apps and exporters.
-When you expose a deployment as a Loadbalancer a new T0 router will be created in NSXT.
+When you expose a deployment as a Loadbalancer a new Loadbalancer will be created in NSXT.
 
 ```bash
 kubectl get deployment -n monitoring
@@ -213,12 +213,17 @@ kubectl expose deployment ninjarelease-grafana --name=ninjarelease-grafanalb --p
 Note: The above command exposes the ninjarelease-grafana service on port 80 and forwards the request to grafana which is exposed on port 3000 (pod)
 
 <details><summary>Screenshot 2.4.1</summary>
-<img src="Images/nsxtrouter.png">
+<img src="Images/nsxtgrafanalb.png">
 </details>
 <br/>
 
 <details><summary>Screenshot 2.4.2</summary>
-<img src="Images/nsxtpodrouting.png">
+<img src="Images/nsxtgrafanalbdetails.png">
+</details>
+<br/>
+
+<details><summary>Screenshot 2.4.3</summary>
+<img src="Images/nsxtgrafanalbpodrouting.png">
 </details>
 <br/>
 
