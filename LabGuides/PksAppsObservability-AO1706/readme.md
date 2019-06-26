@@ -303,13 +303,239 @@ Browse through the Pre packaged grafana dashboards charts by clicking on Home.
 
 ## Step 3:  Deploy Jaeger
 
-3.1 Deploy Jaeger 
+3.1 Create a namespace called tracing
+
+```bash
+kubectl create ns tracing
+```
+
+3.2 Switch context to the tracing namespace
+
+```bash
+kubectl config set-context my-cluster --namespace tracing
+```
+
+3.2 Deploy Jaeger 
 NOTE: This is not a production ready deployment. For production ready Jaeger deployment refer to [Production Environment](https://github.com/jaegertracing/)jaeger-kubernetes
 
 ```bash
-kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-kubernetes/master/all-in-one/jaeger-all-in-one-template.yml
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-kubernetes/master/all-in-one/jaeger-all-in-one-template.yml -n tracing
 ```
 
+
+## Step 4:  Deploy Order and Account microservices
+
+For more details of the [Order and Account Servicve](https://github.com/riazvm/MonitoringAndTracing)
+
+
+4.1 Create a yaml for the OrderService deployment. This Yaml file pulls an image from the public repository. The Jaeger configuration is plassed as environment variables. As an alternative you could use Config maps. Deploy into PKS
+
+NOTE: The applciation will run in the same namespace as Jaeger
+
+<details><summary>orderservice.yaml</summary>
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: order
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        service: order
+      annotations:
+        prometheus.io/scrape: "true"
+    spec:
+      containers:
+      - name: order 
+        image: riazvm/publicrepo:orderservicev7
+        ports:
+        - name: http
+          containerPort: 9090
+        - name: prometheus-jmx
+          containerPort: 9099
+        env:
+          - name: JAEGER_SERVICE_NAME
+            value: order
+          - name: JAEGER_AGENT_HOST
+            value: jaeger-agent
+          - name: JAEGER_SAMPLER_TYPE
+            value: const
+          - name: JAEGER_SAMPLER_PARAM
+            value: "1"
+          - name: JAEGER_REPORTER_LOG_SPANS
+            value: "true"
+          - name: JAEGER_TAGS
+            value: "version=${VERSION}"
+          - name: OPENTRACING_METRICS_EXPORTER_HTTP_PATH
+            value: "/metrics"
+          - name: ACCOUNTMGR_URL
+            value: "http://account:8080"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: order
+  labels:
+    service: order
+spec:
+  type: LoadBalancer
+  selector:
+    service: order
+  ports:
+  - name: http
+    port: 9090
+```
+
+</details>
+<br/>
+
+```bash
+kubectl apply -f orderservice.yaml
+```
+
+4.2 Create a yaml for the AccountService deployment. This Yaml file pulls an image from the public repository. The Jaeger configuration is plassed as environment variables. As an alternative you could use Config maps. Deploy into PKS
+
+NOTE: The applciation will run in the same namespace as Jaeger
+
+<details><summary>accountservice.yaml</summary>
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: account
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        service: account
+      annotations:
+        prometheus.io/scrape: "true"
+    spec:
+      containers:
+      - name: account 
+        image: riazvm/publicrepo:accountservicev7
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: prometheus-jmx
+          containerPort: 9099
+        env:
+          - name: JAEGER_SERVICE_NAME
+            value: account
+          - name: JAEGER_AGENT_HOST
+            value: jaeger-agent
+          - name: JAEGER_SAMPLER_TYPE
+            value: const
+          - name: JAEGER_SAMPLER_PARAM
+            value: "1"
+          - name: JAEGER_REPORTER_LOG_SPANS
+            value: "true"
+          - name: JAEGER_TAGS
+            value: "version=${VERSION}"
+          - name: OPENTRACING_METRICS_EXPORTER_HTTP_PATH
+            value: "/metrics"
+          - name: ORDERMGR_URL
+            value: "http://order:9090"
+kind: Service
+apiVersion: v1
+metadata:
+  name: account
+  labels:
+    service: account
+spec:
+  type: LoadBalancer
+  selector:
+    service: account
+  ports:
+  - name: http
+    port: 8080
+```
+
+</details>
+<br/>
+
+```bash
+kubectl apply -f accountservice.yaml
+```
+
+In order to expose the account service to external connections, we can create a node-port service type or a Load Balancer service type. We will be exposing the 'account' service with a load balancer. PKS utilizes an automatically created NSX Load Balancer in this case.
+
+```bash
+kubectl expose deployment account --name=account-lb --port=80 --target-port=8080 --type=LoadBalancer --namespace=tracing
+```
+
+
+4.3 The order service is exposed as type loadbalancer. The service definition in the yaml will create a Loadbalancer in NSXT which will make the account and order service routable and can be accessed outside the cluster. To check the external ip of the services run the following
+
+
+```bash
+kubectl get services
+```
+<details><summary>Screenshot 4.3</summary>
+<img src="Images/tracingservices.png">
+</details>
+<br/>
+
+
+4.4 Invoke the orders operation on the account service. You can use Postman, curl or any client of your choice
+
+
+<details><summary>Screenshot 4.4</summary>
+<img src="Images/postmanaccount.png">
+</details>
+<br/>
+
+4.5 Invoke the createorder operation on the account service. You can use Postman, curl or any client of your choice
+
+
+<details><summary>Screenshot 4.5</summary>
+<img src="Images/postmanaccount2.png">
+</details>
+<br/>
+
+
+## Step 5:  View trace logs
+
+5.1 Access the jaeger application , to get the external routable ip look up the services
+
+
+```bash
+kubectl get services
+```
+
+<details><summary>Screenshot 5.1</summary>
+<img src="Images/tracingservices.png">
+</details>
+<br/>
+
+5.2 Access the jaeger application by pointing the browser to the expternal ip of the jaeger-query service
+
+
+<details><summary>Screenshot 5.2</summary>
+<img src="Images/jaegerbrowser.png">
+</details>
+<br/>
+
+5.3 Select the account service from the dropdown and click on Find Traces
+
+The traces are displyed , the trace logs can be drilled down to view each request SLA etc.
+
+<details><summary>Screenshot 5.3</summary>
+<img src="Images/jaegertraces.png">
+</details>
+<br/>
+
+## Step 6: Wavefront Integration
+
+## Step 7:  vRLA integration
+
+
+## Step 8:  vRealize integration
 
 
 
