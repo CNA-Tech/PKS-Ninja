@@ -163,7 +163,7 @@ git clone https://github.com/helm/charts.git
 cd ~/helm/charts/stable/jenkins
 ```
 
-4.2 The values.yaml file contains all the configuration for your jenkins application. Edit value.yaml to reflect storage. Search for persistence and add jenkins-claim as your existing claim and storage class as "". Repolace the persistence section of the values.yaml file with the snippet below
+4.2 The values.yaml file contains all the configuration for your jenkins application. Edit value.yaml to reflect storage. Search for persistence and add jenkins-claim as your existing claim and storage class as "". Replace the persistence section of the values.yaml file with the snippet below
 
 <details><summary>values-snippet.yaml</summary>
 
