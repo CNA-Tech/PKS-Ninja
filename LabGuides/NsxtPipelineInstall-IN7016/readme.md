@@ -34,7 +34,7 @@ git pull
 
 1.1 Navigate to the concourse directory where the docker-compose.yml file is located.
 
-`cd concourse`
+`cd ~/concourse`
 
 <details><summary>Screenshot 1.1</summary>
 <img src="Images/concourse-dir.png">
