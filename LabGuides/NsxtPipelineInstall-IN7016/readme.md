@@ -20,7 +20,6 @@ Concourse can be stood up in many different ways. In this lab we will stand it u
 
 ```bash
 cd ~/nsx-t-datacenter-ci-pipelines/
-git pull
 ```
 
 <details><summary>Screenshot 1.0.1</summary>
