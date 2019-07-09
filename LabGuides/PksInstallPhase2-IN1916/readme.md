@@ -2,32 +2,25 @@
 
 ## Install PKS
 
-1.1 Login to the Ops Manager UI and locate `Pivotal Container Service` in the lefthand column. Click the `+` icon as shown in screenshot 1.1 and the `Pivotal Container Service` tile will be added to the `Installation Dashboard`
-
-<details><summary>Screenshot 1.1</summary>
-<img src="Images/2018-10-22-21-34-37.png">
-</details>
-<br/>
-
-1.2a Click on the PKS Tile 'Stemcell Missing' hyperlink and from the stemcell library select 'Import Stemcell'. Navigate to the "bosh-stemcell-170.15-vsphere-esxi-ubuntu-xenial-go_agent.tgz" file  under E:/Downloads/ and open.
-This will import the stemcell for the PKS tile.
-
-1.2b Click on the orange PKS tile view the tile configuration
+1.1 Login to the Ops Manager UI and click on the orange PKS tile view the tile configuration
 
 <details><summary>Screenshot 1.2 </summary>
 <img src="Images/2018-10-22-01-55-47.png">
 </details>
 <br>
 
-1.3 Select the `Assign AZs and Network Assignments` tab and enter the following values:
+1.2 Select the `Assign AZs and Networks` tab and enter the following values:
 
 - Place singleton jobs in : PKS-MGMT-1
 - Balance other jobs in: PKS-MGMT-1
 - Network: PKS-MGMT
-- Service Network: PKS-COMP
+- Service Network: PKS-MGMT
 - Click `Save`
 
-<details><summary>Screenshot 1.3</summary><img src="Images/2019-01-06-17-31-07.png"></details><br>
+<details><summary>Screenshot 1.2</summary>
+<img src="Images/2019-06-20-17-32-54.png">
+</details>
+<br/>
 
 1.4 Select the `PKS API` tab and enter the following values:
 
@@ -95,7 +88,7 @@ This will import the stemcell for the PKS tile.
 
 <details><summary>Screenshot 1.8</summary>
 <img src="Images/2018-10-22-19-45-25.png">
-</details>
+</details>.corp.local
 <br/>
 
 1.9 Prepare Variables to Configure the `Networking` tab

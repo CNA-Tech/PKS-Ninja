@@ -96,12 +96,12 @@ Log into the NSX Manager UI with username `admin` and password `VMware1!VMware1!
 - Transport Node: `edge-tn-1`
 - Logical Switch: `uplink-vlan-ls`
 - Under `Subnets` click `+ADD`
-  - IP Address: `192.168.200.3`
+  - IP Address: `192.168.210.3`
   - Prefix length: 24     
 - Click **Add**
 
 <details><summary>Screenshot 1.4</summary>
-<img src="Images/2019-06-15-12-23-47.png">
+<img src="Images/2019-06-19-15-14-10.png">
 </details>
 <br/>
 
@@ -116,11 +116,11 @@ Log into the NSX Manager UI with username `admin` and password `VMware1!VMware1!
 
 - Network: `0.0.0.0/0`
 - Click on **Next Hops +Add**
-- Next Hop: `192.168.200.1` _(Make sure the input stays by pressing [Enter] after enry)_
+- Next Hop: `192.168.210.1` _(Make sure the input stays by pressing [Enter] after enry)_
 - Click **Add** 
 
 <details><summary>Screenshot 1.6/summary>
-<img src="Images/2019-06-16-07-28-53.png">
+<img src="Images/2019-06-19-15-17-59.png">
 </details>
 <br/>
 
@@ -405,7 +405,7 @@ In addition, create a Floating IP Pool from which to assign routable IP addresse
 </details>
 <br/>
 
-4.2 To create the floating IP Pool for Kubernetes Load Balancer Virtual IP Addresses,  in the NSX Manager UI, navigate to `Advanced Networking & Security > Inventory > Groups` and click on the `IP Pools` tab. Click `+ADD` and add an IP Pool with the following parameters:
+4.2 To create the floating IP Pool for Kubernetes Load Balancer Virtual IP Addresses,  in the NSX Manager UI navigate to `Advanced Networking & Security > Inventory > Groups` page and click on the `IP Pools` tab. Click `+ADD` and add an IP Pool with the following parameters:
 
 - Name: `ip-pool-vips`
 - Click `Add` under Subnets
