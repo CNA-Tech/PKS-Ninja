@@ -56,28 +56,38 @@ This section follows the standard documentation, which includes additional detai
 
 1.1 Create VLAN Uplink Switch
 
-Log into the NSX Manager UI with username `admin` and password `VMware1!VMware1!`,  navigate to the **Networking** -> **Segments** page and click on `Add Segment`, add a segment with the following parameters:
+Log into the NSX Manager UI with username `admin` and password `VMware1!VMware1!`,  navigate to the **Advanced Networking & Security > Switching** page and click on `+ADD`, add a logical switch with the following parameters:
 
-- Name: `uplink-vlan-ls`
-- Transport Zone: `vlan-tz`
-- VLAN: `0` _(Press [Enter] key after input to store it)_
+- General Tab
+  - Name: `uplink-vlan-ls`
+  - Transport Zone: `vlan-tz`
+  - VLAN: `0` _(Press [Enter] key after input to store it)_
+- Switching Profiles tab
+  - Leave all values to default
+- Click on **ADD**
 
-- Click on **Save**
+<details><Summary>Screenshot 1.1.1</Summary>
+<img src="Images/2019-07-13-09-01-38.png">
+</details>
 
-<details><Summary>Screenshot 1.1</Summary>
+<details><Summary>Screenshot 1.1.2</Summary>
 <img src="Images/2019-06-15-12-18-48.png">
 </details>
 <br/>
 
-1.2 - click on **Networking** -> **Tier-0 Gateways**, and then click on **Add Tier-0 Gateways** and add a new gateway with the following parameters:
+1.2 - In the NSX Manager UI, navigate to  **`Advanced Networking & Security > Routers`**, and then click on **`+ADD > Tier-0 Router`** and add a new router with the following parameters:
 
 - Name: `t0-pks`
+- Edge Cluster: `edge-cluster-1`
 - High Availabilty Mode: **`Active-Standby`**
 - Fail Over: `Non Preemptive`
-- Edge Cluster: `edge-cluster-1`
 - Click **Save**
 
-<details><Summary>Screenshot 1.2</Summary>
+<details><Summary>Screenshot 1.2.1</Summary>
+<img src="Images/2019-07-13-09-07-23.png">
+</details>
+
+<details><Summary>Screenshot 1.2.2</Summary>
 <img src="Images/2019-06-15-12-20-16.png">
 </details>
 <br/>
@@ -101,7 +111,7 @@ Log into the NSX Manager UI with username `admin` and password `VMware1!VMware1!
 - Click **Add**
 
 <details><summary>Screenshot 1.4</summary>
-<img src="Images/2019-06-19-15-14-10.png">
+<img src="Images/2019-07-13-09-14-48.png">
 </details>
 <br/>
 
@@ -119,18 +129,10 @@ Log into the NSX Manager UI with username `admin` and password `VMware1!VMware1!
 - Next Hop: `192.168.210.1` _(Make sure the input stays by pressing [Enter] after enry)_
 - Click **Add** 
 
-<details><summary>Screenshot 1.6/summary>
+<details><summary>Screenshot 1.6</summary>
 <img src="Images/2019-06-19-15-17-59.png">
 </details>
 <br/>
-
-1.7 To create an IP pool which will be used for Kubernetes Load Balancer Virtual IP Addresses,in the NSX Manager UI, Navigate to `Advanced Networking & Security > click **Add** and complete with the following values
-
-- Name: `ip-pool-vips`
-- Click `Add` under Subnets
-- IP Range: `10.40.14.34-10.40.14.62`
-- CIDR: `10.40.14.32/27`
-- Click **Add**
 
 ## Step 2: Create the Enterprise PKS Management Plane
 
@@ -188,10 +190,9 @@ Navigate to the `Advanced Networking & Security > Routers` page and click `+ > T
 
 2.4 From the `Advanced Networking & Security > Routers > t1-pks-mgmt` page, and on the `Routing` pulldown menu, select `Route Advertisement`, under `Router Advertisement` click `Edit` and configure the available options with the following parameters:
 
-- Enable 
+- Enable the following fields (Yes):
   - Status
   - Advertise All Connected Routes
-  - Advertise All NAT Routes
 - Click `Save`
 
 <details><summary>Screenshot 2.4.1</summary>
@@ -199,11 +200,11 @@ Navigate to the `Advanced Networking & Security > Routers` page and click `+ > T
 </details>
 
 <details><summary>Screenshot 2.4.2</summary>
-<img src="Images/2019-06-15-12-58-40.png">
+<img src="Images/2019-07-13-10-22-00.png">
 </details>
 <br/>
 
-2.5 To verify the T1 Router, from the `Advanced Networking & Security > Routers > t1-pks-mgmt` page, on the Overview page in the `Tier-0 Connection` section, verify that the `t0-pks` router is displayed, or if the `Connect` option is visible, click `Connect`. (If you only see the `Disconnect` option, it should mean your routers are already connected)
+2.5 To verify the T1 Router, from the `Advanced Networking & Security > Routers > t1-pks-mgmt` page, on the Overview page in the `Tier-0 Connection` section, verify that the `t0-pks` router is displayed
 
 <details><summary>Screenshot 2.5</summary>
 <img src="Images/2019-06-16-17-06-33.png">
@@ -260,20 +261,34 @@ To Create a DNAT Rule to enable external access to PKS Management Plane VM's (BO
 
 3.4 Add **SNAT** rules to translate the PKS Management Subnets and the Pod and Node IP Blocks assigned to Kubernetes Clusters with valid external IP addresses to support outbound communications
 
-- On New Nat Rule Screen for the `t0-pks` router, click `+ADD` and add another rule with the 
+- On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
+  - Priority: `1020`
   - Action: `SNAT`
-  - Source IP: `172.31.0.0/24`
-  - Translated IP: `10.40.14.12`
+  - Source IP: `172.31.0.2`
+  - Translated IP: `10.40.14.2`
   - Click `ADD`
 - On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
+  - Priority: `1020`
+  - Action: `SNAT`
+  - Source IP: `172.31.0.3`
+  - Translated IP: `10.40.14.3`
+  - Click `ADD`
+- On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
+  - Priority: `1020`
   - Action: `SNAT`
   - Source IP: `172.31.0.4`
   - Translated IP: `10.40.14.4`
   - Click `ADD`
 - On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
+  - Priority: `1020`
   - Action: `SNAT`
   - Source IP: `172.31.0.5`
   - Translated IP: `10.40.14.5`
+  - Click `ADD`
+- On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
+  - Action: `SNAT`
+  - Source IP: `172.31.0.0/24`
+  - Translated IP: `10.40.14.12`
   - Click `ADD`
 - On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
   - Action: `SNAT`
@@ -310,63 +325,10 @@ To Create a DNAT Rule to enable external access to PKS Management Plane VM's (BO
   - Source IP: `172.16.0.0/16`
   - Translated IP: `10.40.14.33`
   - Click `ADD`
-- On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
-  - Action: `SNAT`
-  - Source IP: `172.31.0.2`
-  - Translated IP: `10.40.14.2`
-  - Click `ADD`
-- On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
-  - Action: `SNAT`
-  - Source IP: `172.31.0.3`
-  - Translated IP: `10.40.14.3`
-  - Click `ADD`
 
-<details><summary>Screenshot 3.4.1</summary>
-<img src="Images/2019-06-16-17-49-11.png">
-</details>
 
-<details><summary>Screenshot 3.4.2</summary>
-<img src="Images/2019-06-17-14-11-28.png">
-</details>
-
-<details><summary>Screenshot 3.4.3</summary>
-<img src="Images/2019-06-17-14-12-06.png">
-</details>
-
-<details><summary>Screenshot 3.4.4</summary>
-<img src="Images/2019-06-17-14-08-40.png">
-</details>
-
-<details><summary>Screenshot 3.4.5</summary>
-<img src="Images/2019-06-17-14-13-54.png">
-</details>
-
-<details><summary>Screenshot 3.4.6</summary>
-<img src="Images/2019-06-17-14-14-40.png">
-</details>
-
-<details><summary>Screenshot 3.4.7</summary>
-<img src="Images/2019-06-17-14-15-38.png">
-</details>
-
-<details><summary>Screenshot 3.4.8</summary>
-<img src="Images/2019-06-17-14-16-14.png">
-</details>
-
-<details><summary>Screenshot 3.4.9</summary>
-<img src="Images/2019-06-17-14-37-59.png">
-</details>
-
-<details><summary>Screenshot 3.4.10</summary>
-<img src="Images/2019-06-17-14-40-21.png">
-</details>
-
-<details><summary>Screenshot 3.4.11</summary>
-<img src="Images/2019-06-17-14-43-50.png">
-</details>
-
-<details><summary>Screenshot 3.4.12</summary>
-<img src="Images/2019-06-17-14-44-27.png">
+<details><summary>Screenshot 3.4</summary>
+<img src="Images/2019-07-13-14-11-23.png">
 </details>
 <br/>
 
@@ -386,22 +348,26 @@ In addition, create a Floating IP Pool from which to assign routable IP addresse
 
 ```
 
- 4.1 To Create the Pods & Nodes IP Blocks, from the NSX Manager UI Homepage, Select the `Networking` tab, expand the `IP Address Management` section, click on `IP Address Pools`, select the `IP Address Blocks` tab and click `Add IP Address Block` and add blocks for pods and nodes with the following parameters:
+ 4.1 To Create the Pods & Nodes IP Blocks, from the NSX Manager UI Homepage, Navigate to `Advanced Networking & Security > IPAM` and click `+ADD` to add an IP block with the following values:
 
 - Name: `ip-block-nodes-deployments`
 - CIDR: `172.15.0.0/16`
 - Click `Save`
-- Click `Add IP Address Block`
+- Click `+ADD` to add an additional IP Address Block
 - Name: `ip-block-pods-deployments`
 - CIDR: `172.16.0.0/16`
 - Click `Save`
 
 <details><summary>Screenshot 4.1.1</summary>
-<img src="Images/2019-06-17-15-03-55.png">
+<img src="Images/2019-07-13-14-15-29.png">
 </details>
 
 <details><summary>Screenshot 4.1.2</summary>
-<img src="Images/2019-06-17-15-09-30.png">
+<img src="Images/2019-07-13-14-17-22.png">
+</details>
+
+<details><summary>Screenshot 4.1.3</summary>
+<img src="Images/2019-07-13-14-20-05.png">
 </details>
 <br/>
 
