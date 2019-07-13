@@ -574,3 +574,7 @@ Preparing hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kerne
 <img src="Images/2019-07-13-02-42-10.png">
 </details>
 <br/>
+
+**You have now completed the Base NSX-T installation**
+
+***End of lab***
