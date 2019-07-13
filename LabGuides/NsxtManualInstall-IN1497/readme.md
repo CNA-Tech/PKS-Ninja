@@ -108,7 +108,7 @@ Note: Prior to Step 1, you will need to download the NSX-T 2.4 Installation File
   - Hostname: nsxmgr-01a
   - Management Network IPv4 Address: 192.168.110.42
   - Management Network Netmask: 255.255.255.0
-  - Rolename: nsx-manager
+  - Rolename: nsx-manager nsx controller
 - Services Configuration
   - Allow Root SSH Logins: True
   - Enable SSH: True
@@ -216,32 +216,51 @@ _NOTE: in a production implementation, you would first copy the vCenter thumbpri
 
 ## Step 3: Add an Edge Node, Transport Zones and Uplink Profiles with the NSX-T Guided Preparation Workflow
 
- 3.1 From the NSX-T Manager Homepage at the bottom of the `System` section, click `Get Started`, and then click `Setup Transport Nodes`
+ 3.1 From the NSX-T Manager UI navigate to the `Advanced Networking & Security > Inventory > Groups > IP Pools` page and click `+ADD` 
 
-<details><summary>Screenshot 3.1.1</summary>
-<img src="Images/2019-05-20-11-06-11.png">
-</details>
-
-<details><summary>Screenshot 3.1.2</summary>
-<img src="Images/2019-05-20-11-09-26.png">
+<details><summary>Screenshot 3.1</summary>
+<img src="Images/2019-07-13-01-25-39.png">
 </details>
 <br/>
 
- 3.2 On the `Select Node Type` screen, select `NSX Edge VM` and click `Next`
+ 3.2 On the `Add IP Pool` screen, enter the following values:
+
+- Name: `tep-ip-pool`
+- Click `Add` under Subnets
+- IP Range: `192.168.130.51-192.168.130.75`
+- Gateway: `192.168.130.1`
+- CIDR: `192.168.130.0/24`
+- DNS Servers:  `192.168.110.10`
+- DNS Suffix: `Corp.local`
+- Click **Add**
 
 <details><summary>Screenshot 3.2</summary>
-<img src="Images/2019-05-20-12-19-28.png">nsxedge-
+<img src="Images/2019-07-13-01-31-28.png">
 </details>
 <br/>
 
- 3.3 On the `Select NSX Edge` Screen, click `Add New Edge`
+ 3.3 From the NSX-T Manager Homepage at the bottom of the `System` section, click `Get Started`, and then click `Setup Transport Nodes`
 
 <details><summary>Screenshot 3.3</summary>
-<img src="Images/2019-05-20-12-21-02.png">
+<img src="Images/2019-07-13-01-35-19.png">
 </details>
 <br/>
 
- 3.4 Complete the Add Edge VM workflow with the following values:
+ 3.4 On the `Select Node Type` screen, select `NSX Edge VM` and click `Next`
+
+<details><summary>Screenshot 3.4</summary>
+<img src="Images/2019-07-13-01-36-49.png">
+</details>
+<br/>
+
+ 3.5 On the `Select NSX Edge` Screen, click `Add New Edge`
+
+<details><summary>Screenshot 3.5</summary>
+<img src="Images/2019-07-13-01-38-30.png">
+</details>
+<br/>
+
+ 3.6 Complete the Add Edge VM workflow with the following values:
 
  - Name: nsxedge-1
  - FQDN: nsxedge-1.corp.local   
@@ -262,165 +281,150 @@ _NOTE: in a production implementation, you would first copy the vCenter thumbpri
  - fp-eth2: VM-RegionA01-vDS-MGMT
  - Click Finish
 
-<details><summary>Screenshot 3.4.1</summary>
-<img src="Images/2019-05-20-13-21-34.png">
+<details><summary>Screenshot 3.6.1</summary>
+<img src="Images/2019-07-13-01-39-14.png">
 </details>
 
-<details><summary>Screenshot 3.4.2</summary>
-<img src="Images/2019-05-20-13-22-43.png">
+<details><summary>Screenshot 3.6.2</summary>
+<img src="Images/2019-07-13-01-39-47.png">
 </details>
 
-<details><summary>Screenshot 3.4.3</summary>
-<img src="Images/2019-06-11-23-58-16.png">
+<details><summary>Screenshot 3.6.3</summary>
+<img src="Images/2019-07-13-01-40-18.png">
 </details>
 
-<details><summary>Screenshot 3.4.4</summary>
-<img src="Images/2019-05-20-13-32-49.png">
-</details>
-<br/>
-
- 3.5 If Your NSX Manager Session times out while the edges are being deployed, log back in and return to the System > Get Started page, click `Setup Transport Nodes` and then select `NSX Edge VM` to return to the `Select NSX Edge` page. 
-
-
- 3.6 On the `Select NSX Edge` screen select `nsxedge-1` from the `Edge Node` Pulldown Menu and click `Next` 
-
-<details><summary>Screenshot 3.6</summary>
-<img src="Images/2019-05-25-08-28-38.png">
+<details><summary>Screenshot 3.6.4</summary>
+<img src="Images/2019-07-13-01-42-28.png">
 </details>
 <br/>
 
- 3.7 On the `Select Transport Zone East-West` Screen, select `Create Overlay Transport Zone`
+ 3.7 If Your NSX Manager Session times out while the edges are being deployed, log back in and return to the System > Get Started page, click `Setup Transport Nodes` and then select `NSX Edge VM` to return to the `Select NSX Edge` page. 
 
-<details><summary>Screenshot 3.7</summary>
-<img src="Images/2019-05-25-08-31-55.png">
+
+ 3.8 On the `Select NSX Edge` screen select `nsxedge-1` from the `Edge Node` Pulldown Menu and click `Next` 
+
+<details><summary>Screenshot 3.8</summary>
+<img src="Images/2019-07-13-01-43-20.png">
 </details>
 <br/>
 
- 3.8 In the `Add Transport Zone` workflow, enter the following values:
+ 3.9 On the `Select Transport Zone East-West` Screen, select `Create Overlay Transport Zone`
+
+<details><summary>Screenshot 3.9</summary>
+<img src="Images/2019-07-13-01-44-28.png">
+</details>
+<br/>
+
+ 3.10 In the `Add Transport Zone` workflow, enter the following values:
 
 - Name: `overlay-tz`
 - N-VDS Name: `hostswitch-overlay`
 - Traffic Type: `Overlay`
 - Click **Add** 
 
-<details><summary>Screenshot 3.8</summary>
-<img src="Images/2019-05-25-08-35-54.png">
-</details>
-<br/>
-
- 3.9 On the `Select Transport Zone East-West` scree, select `overlay-tz` from the `Overlay Transport Zone` pulldown menu and click `Next` 
-
-<details><summary>Screenshot 3.9</summary>
-<img src="Images/2019-05-25-08-37-51.png">
-</details>
-<br/>
-
- 3.10 On the `Select Uplink Profile East-West` screen, select `nsx-edge-single-nic-uplink-profile` from the `Select Uplink Profile` pulldown menu and click `Next`
-
 <details><summary>Screenshot 3.10</summary>
-<img src="Images/2019-05-28-10-31-42.png">
+<img src="Images/2019-07-13-01-45-26.png">
 </details>
 <br/>
 
- 3.11 On the `Link to Transport Zone East-West` screen for `Assignment IP Address` select `Use IP Pool` and click `Create IP Pool`
+ 3.11 On the `Select Transport Zone East-West` screen, select `overlay-tz` from the `Overlay Transport Zone` pulldown menu and click `Next` 
 
 <details><summary>Screenshot 3.11</summary>
-<img src="Images/2019-05-25-09-04-14.png">
+<img src="Images/2019-07-13-01-47-21.png">
 </details>
 <br/>
 
- 3.12 On the `Add IP Pool` screen, enter the following values:
-
-- Name: `tep-ip-pool`
-- Click `Add` under Subnets
-- IP Range: `192.168.130.51-192.168.130.75`
-- Gateway: `192.168.130.1`
-- CIDR: `192.168.130.0/24`
-- DNS Servers:  `192.168.110.10`
-- DNS Suffix: `Corp.local`
-- Click **Add**
+ 3.12 On the `Select Uplink Profile East-West` screen, select `nsx-edge-single-nic-uplink-profile` from the `Select Uplink Profile` pulldown menu and click `Next`
 
 <details><summary>Screenshot 3.12</summary>
-<img src="Images/2019-05-25-10-05-37.png">
+<img src="Images/2019-07-13-01-47-52.png">
 </details>
 <br/>
 
- 3.13 On the `Link to Transport Zone East-West` screen in the `NSX Edge NIC Connections` section, set the value for `fp-eth1` to `uplink-1` and click `Next`
+ 3.13 On the `Link to Transport Zone East-West` screen for `Assignment IP Address` select `Use IP Pool` and select `tep-ip-pool`
 
 <details><summary>Screenshot 3.13</summary>
-<img src="Images/2019-05-28-10-37-23.png">
+<img src="Images/2019-07-13-01-49-42.png">
 </details>
 <br/>
 
- 3.14 On the `Select Transport Zone North-South` screen, click `Create VLAN Transport Zone`
+
+ 3.14 On the `Link to Transport Zone East-West` screen in the `NSX Edge NIC Connections` section, set the value for `fp-eth1` to `uplink-1` and click `Next`
 
 <details><summary>Screenshot 3.14</summary>
-<img src="Images/2019-05-28-10-39-48.png">
+<img src="Images/2019-07-13-01-51-00.png">
 </details>
 <br/>
 
- 3.15 On the `Add Transport Zone` screen, add a transport zone with the following parameters:
+ 3.15 On the `Select Transport Zone North-South` screen, click `Create VLAN Transport Zone`
+
+<details><summary>Screenshot 3.15</summary>
+<img src="Images/2019-07-13-01-51-49.png">
+</details>
+<br/>
+
+ 3.16 On the `Add Transport Zone` screen, add a transport zone with the following parameters:
 
  - Name: vlan-tz
  - N-VDS Name: hostswitch-vlan
  - Traffic Type: VLAN
  - Click **Add**
 
-<details><summary>Screenshot 3.15</summary>
-<img src="Images/2019-05-28-10-42-04.png">
-</details>
-<br/>
-
- 3.16 On the `Select Transport Zone North-South` screen, select `vlan-tz` from the pulldown menu for `VLAN Transport Zone` and click `Next`
-
 <details><summary>Screenshot 3.16</summary>
-<img src="Images/2019-05-28-10-43-45.png">
+<img src="Images/2019-07-13-01-52-27.png">
 </details>
 <br/>
 
- 3.17 On the `Select Uplink Profile North-South` screen, select `nsx-edge-single-nic-uplink-profile` from the `Select Uplink Profile` pulldown menu and click `Next`
+ 3.17 On the `Select Transport Zone North-South` screen, select `vlan-tz` from the pulldown menu for `VLAN Transport Zone` and click `Next`
 
 <details><summary>Screenshot 3.17</summary>
-<img src="Images/2019-05-28-10-45-56.png">
+<img src="Images/2019-07-13-01-53-28.png">
 </details>
 <br/>
 
- 3.18 On the `Link To Transport Zone North-South` screen, leave the `Assignment IP Address` value blank/empty as shown in the screenshot below. In the `NSX Edge NIC Connections` section, set the value for `fp-eth0` to `uplink-1` and click `Next`
+ 3.18 On the `Select Uplink Profile North-South` screen, select `nsx-edge-single-nic-uplink-profile` from the `Select Uplink Profile` pulldown menu and click `Next`
 
 <details><summary>Screenshot 3.18</summary>
-<img src="Images/2019-05-28-11-30-21.png">
+<img src="Images/2019-07-13-01-54-11.png">
 </details>
 <br/>
 
- 3.19 On the `Add To NSX Edge Cluster` screen, select `Add To New NSX Edge Cluster (system created)` field, set the `NSX Edge Cluster Name` value to `edge-cluster-1` and click `Next`
+ 3.19 On the `Link To Transport Zone North-South` screen, leave the `Assignment IP Address` value blank/empty as shown in the screenshot below. In the `NSX Edge NIC Connections` section, set the value for `fp-eth0` to `uplink-1` and click `Next`
 
 <details><summary>Screenshot 3.19</summary>
-<img src="Images/2019-05-28-11-43-35.png">
+<img src="Images/2019-07-13-01-55-12.png">
 </details>
 <br/>
 
- 3.20 On the `Review` screen, set the `Transport Node Name` to `edge-tn-1` and click `Finish`
+ 3.20 On the `Add To NSX Edge Cluster` screen, select `Add To New NSX Edge Cluster (system created)` field, set the `NSX Edge Cluster Name` value to `edge-cluster-1` and click `Next`
 
 <details><summary>Screenshot 3.20</summary>
-<img src="Images/2019-05-28-11-46-06.png">
+<img src="Images/2019-07-13-01-56-26.png">
 </details>
 <br/>
 
- 3.21 On the `System` tab in NSX Manager UI, In the left navigation bar expand the `Fabric` section and select `Nodes`. Select the `Edge Transport Nodes` tab, verify that `edge-tn-1` has a `Configuration State` of `Success`, a `Node Status` of `Up`, and is a member of `edge-cluster-1`
+ 3.21 On the `Review` screen, set the `Transport Node Name` to `edge-tn-1` and click `Finish`
 
 <details><summary>Screenshot 3.21</summary>
-<img src="Images/2019-06-13-16-09-02.png">
+<img src="Images/2019-07-13-01-57-08.png">
 </details>
 <br/>
 
- 3.22 Log into the vsphere client, navigate to the `Hosts and Clusters` view, select `nsxedge-1`. From the actions menu for `nsxedge-1` select `Edit Settings`. Expand the `Memory` section, **uncheck** the box for `Reserve all guest memory (All Locked)`, set the `Reservation` value to `0 MB` and click `OK`
+ 3.22 On the `System` tab in NSX Manager UI, In the left navigation bar expand the `Fabric` section and select `Nodes`. Select the `Edge Transport Nodes` tab, verify that `edge-tn-1` has a `Configuration State` of `Success`, a `Node Status` of `Up`, and is a member of `edge-cluster-1`
 
-<details><summary>Screenshot 3.22.1</summary>
-<img src="Images/2019-06-12-01-18-35.png">
+<details><summary>Screenshot 3.22</summary>
+<img src="Images/2019-07-13-02-01-04.png">
+</details>
+<br/>
+
+ 3.23 Log into the vsphere client, navigate to the `Hosts and Clusters` view, select `nsxedge-1`. From the actions menu for `nsxedge-1` select `Edit Settings`. Expand the `Memory` section, **uncheck** the box for `Reserve all guest memory (All Locked)`, set the `Reservation` value to `0 MB` and click `OK`
+
+<details><summary>Screenshot 3.23.1</summary>
+<img src="Images/2019-07-13-02-02-05.png">
 </details>
 
-<details><summary>Screenshot 3.22.2</summary>
-<img src="Images/2019-06-12-02-12-33.png">
+<details><summary>Screenshot 3.23.2</summary>
+<img src="Images/2019-07-13-02-03-04.png">
 </details>
 <br/>
 
@@ -431,127 +435,142 @@ Preparing hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kerne
  4.1 From the NSX Manager UI go to the `System > Get Started` page and click `SET UP TRANSPORT NODES` 
 
 <details><summary>Screenshot 4.1</summary>
-<img src="Images/2019-05-20-11-09-26.png">
+<img src="Images/2019-07-13-01-35-19.png">
 </details>
 <br/>
 
  4.2 On the `Select Node Type` screen select `Host Cluster` and click `Next`
 
 <details><summary>Screenshot 4.2</summary>
-<img src="Images/2019-05-29-08-38-02.png">
+<img src="Images/2019-07-13-02-13-07.png">
 </details>
 <br/>
 
  4.3 On the `Select Host Cluster` Screen, set the value for `Host Cluster` to `RegionA01-COMP01`, when you make this selection, the page will prompt you to `Confirm Installation`, click `Install`. Do not proceed until the status in the `NSX` column for `esx-01a`, `esx-02a` and `esx-03a` is `NSX Installed`, and that `NSX Manager Connectivity` is `Up` for each host as shown in the screenshots below.
 
 <details><summary>Screenshot 4.3.1</summary>
-<img src="Images/2019-05-29-08-40-38.png">
+<img src="Images/2019-07-13-02-13-52.png">
 </details>
 
 <details><summary>Screenshot 4.3.2</summary>
-<img src="Images/2019-06-12-00-26-45.png">
+<img src="Images/2019-07-13-02-14-14.png">
 </details>
 
 <details><summary>Screenshot 4.3.3</summary>
-<img src="Images/2019-06-12-00-39-14.png">
+<img src="Images/2019-07-13-02-14-54.png">
+</details>
+
+<details><summary>Screenshot 4.3.4</summary>
+<img src="Images/2019-07-13-02-18-39.png">
 </details>
 <br>
 
  4.4 On the `Select Transport Zone East-West` screen set the value for `Overlay Transport Zone` to `overlay-tz` and click `Next`
 
 <details><summary>Screenshot 4.4</summary>
-<img src="Images/2019-06-12-00-43-34.png">
+<img src="Images/2019-07-13-01-44-28.png">
 </details>
 <br/>
 
  4.5 On the `Select Uplink Profile East-West` screen, set the value for `Select Uplink Profile` to `nsx-default-uplink-hostswitch-profile` and click `Next`
 
 <details><summary>Screenshot 4.5</summary>
-<img src="Images/2019-06-12-00-45-10.png">
+<img src="Images/2019-07-13-02-19-49.png">
 </details>
 <br/>
 
  4.6 On the `Link to Transport Zone East-West` screen, set the value for `Assignment IP Address` to `Use IP Pool` and set the value for `IP Pool` to `tep-ip-pool`
 
 <details><summary>Screenshot 4.6</summary>
-<img src="Images/2019-06-12-00-48-07.png">
+<img src="Images/2019-07-13-02-21-31.png">
 </details>
 <br/>
 
  4.7 On the `Link to Transport Zone East-West` screen, in the `Host NIC Connections` section, set the value for `vmnic1` to `uplink-1` and click `Next`
 
 <details><summary>Screenshot 4.7</summary>
-<img src="Images/2019-06-12-00-50-07.png">
+<img src="Images/2019-07-13-02-22-12.png">
 </details>
 <br/>
 
  4.8 On the `Review` screen, click `Finish`
 
 <details><summary>Screenshot 4.8</summary>
-<img src="Images/2019-06-12-00-51-31.png">
+<img src="Images/2019-07-13-02-22-39.png">
 </details>
 <br/>
 
  4.9 From the NSX Manager UI go to the `System > Get Started` page and click `SET UP TRANSPORT NODES` 
 
 <details><summary>Screenshot 4.9</summary>
-<img src="Images/2019-05-20-11-09-26.png">
+<img src="Images/2019-07-13-01-35-19.png">
 </details>
 <br/>
 
  4.10 On the `Select Node Type` screen select `Host Cluster` and click `Next`
 
 <details><summary>Screenshot 4.10</summary>
-<img src="Images/2019-05-29-08-38-02.png">
+<img src="Images/2019-07-13-02-13-07.png">
 </details>
 <br/>
 
  4.11 On the `Select Host Cluster` Screen, set the value for `Host Cluster` to `RegionA01-MGMT01`, when you make this selection, the page will prompt you to `Confirm Installation`, click `Install`. Do not proceed until the status in the `NSX` column for `esx-04a`, `esx-05a` and `esx-06a` is `NSX Installed`, and that `NSX Manager Connectivity` is `Up` for each host as shown in the screenshots below.
 
 <details><summary>Screenshot 4.11.1</summary>
-<img src="Images/2019-06-12-00-54-41.png">
+<img src="Images/2019-07-13-02-23-56.png">
 </details>
 
 <details><summary>Screenshot 4.11.2</summary>
-<img src="Images/2019-06-12-00-55-02.png">
+<img src="Images/2019-07-13-02-14-14.png">
 </details>
 
 <details><summary>Screenshot 4.11.3</summary>
-<img src="Images/2019-06-12-02-10-40.png">
+<img src="Images/2019-07-13-02-24-53.png">
+</details>
+
+<details><summary>Screenshot 4.11.4</summary>
+<img src="Images/2019-07-13-02-31-58.png">
 </details>
 <br>
 
  4.12 On the `Select Transport Zone East-West` screen set the value for `Overlay Transport Zone` to `overlay-tz` and click `Next`
 
 <details><summary>Screenshot 4.12</summary>
-<img src="Images/2019-06-12-00-43-34.png">
+<img src="Images/2019-07-13-02-32-37.png">
 </details>
 <br/>
 
  4.13 On the `Select Uplink Profile East-West` screen, set the value for `Select Uplink Profile` to `nsx-default-uplink-hostswitch-profile` and click `Next`
 
 <details><summary>Screenshot 4.13</summary>
-<img src="Images/2019-06-12-00-45-10.png">
+<img src="Images/2019-07-13-02-33-17.png">
 </details>
 <br/>
 
  4.14 On the `Link to Transport Zone East-West` screen, set the value for `Assignment IP Address` to `Use IP Pool` and set the value for `IP Pool` to `tep-ip-pool`
 
 <details><summary>Screenshot 4.14</summary>
-<img src="Images/2019-06-12-00-48-07.png">
+<img src="Images/2019-07-13-02-21-31.png">
 </details>
 <br/>
 
  4.15 On the `Link to Transport Zone East-West` screen, in the `Host NIC Connections` section, set the value for `vmnic1` to `uplink-1` and click `Next`
 
 <details><summary>Screenshot 4.15</summary>
-<img src="Images/2019-06-12-00-50-07.png">
+<img src="Images/2019-07-13-02-22-12.png">
 </details>
 <br/>
 
  4.16 On the `Review` screen, click `Finish`
 
 <details><summary>Screenshot 4.16</summary>
-<img src="Images/2019-06-12-00-51-31.png">
+<img src="Images/2019-07-13-02-22-39.png">
+</details>
+<br/>
+
+ 4.17 On the `System` tab in NSX Manager UI, In the left navigation bar expand the `Fabric` section and select `Nodes`. Select the `Host Transport Nodes` tab, set the `Managed by` field to `vcsa-01a`, expand the `RegionA01-MGMT01` and `RegionA01-COMP01` sections and ensure the `Configuration State` is `Success` and the `Node Status` is `Up` for all of the hosts
+
+<details><summary>Screenshot 4.17</summary>
+<img src="Images/2019-07-13-02-42-10.png">
 </details>
 <br/>
