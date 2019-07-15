@@ -4,6 +4,7 @@
 
 - [Lab PKS Installation Phase 1](#lab-pks-installation-phase-1)
   - [Lab Access Instructions](#lab-access-instructions)
+  - [Prerequisites](#prerequisites)
   - [Step 1: Deploy Ops Manager](#step-1-deploy-ops-manager)
   - [Step 2: Deploy BOSH](#step-2-deploy-bosh)
   - [Step 3: Prep for PKS Install](#step-3-prep-for-pks-install)
@@ -100,30 +101,28 @@ For VLP and Onecloud users, The CNABU-PKS-Ninja-v12-NsxtReady template has NSX-T
 </details>
 <br/>
 
-1.10 After completing the `Deploy OVF Template` wizard, go to your recent tasks view and wait for the `Status` to change to `Completed` before proceeding
+1.9 After completing the `Deploy OVF Template` wizard, go to your recent tasks view and wait for the `Status` to change to `Completed` before proceeding
 
-_Note: In the Nested example lab, it takes ~20 minutes to deploy the Ops Manager VM_
-
-<details><summary>Screenshot 1.10</summary>
+<details><summary>Screenshot 1.9</summary>
 <img src="Images/2019-06-18-17-18-35.png">
 </details>
 <br/>
 
-1.13 In the vSphere web client, right click on the opsman vm and select `Power On`
+1.10 In the vSphere web client, right click on the opsman vm and select `Power On`
 
-<details><summary>Screenshot 1.13</summary>
+<details><summary>Screenshot 1.10</summary>
 <img src="Images/2019-06-18-17-20-15.png">
 </details>
 <br/>
 
-1.14 Open a web browser connection to `https://opsman.corp.local` and select `Internal Authentication`
+1.11 Open a web browser connection to `https://opsman.corp.local` and select `Internal Authentication`
 
-<details><summary>Screenshot 1.14</summary>
+<details><summary>Screenshot 1.11</summary>
 <img src="Images/2018-10-21-19-47-13.png">
 </details>
 <br/>
 
-1.15 On the `Internal Authentication` screen, enter the following values, check the box to agree to terms and conditions and click `Setup Authentication`
+1.12 On the `Internal Authentication` screen, enter the following values, check the box to agree to terms and conditions and click `Setup Authentication`
 
 - Username: admin
 - Password: VMware1!
@@ -133,14 +132,14 @@ _Note: In the Nested example lab, it takes ~20 minutes to deploy the Ops Manager
 
 _Note: After clicking `Setup Authentication` it will take several minutes for the authentication system to start. The login screen will appear after the authentication system is finished starting up._
 
-<details><summary>Screenshot 1.15</summary>
+<details><summary>Screenshot 1.12</summary>
 <img src="Images/2018-10-21-19-49-15.png">
 </details>
 <br/>
 
-1.16 From the Ops Manager web UI, login with Username: `admin` Password: `VMware1!`
+1.13 From the Ops Manager web UI, login with Username: `admin` Password: `VMware1!`
 
-<details><summary>Screenshot 1.16</summary>
+<details><summary>Screenshot 1.13</summary>
 <img src="Images/2019-06-19-16-50-08.png">
 </details>
 <br/>
@@ -154,34 +153,138 @@ _Note: After clicking `Setup Authentication` it will take several minutes for th
 </details>
 <br/>
 
-2.2  At the Bash prompt enter the following command:
+2.2  At the Bash prompt enter the following command to create a new file called nsx-cert.cnf:
 
 ```bash
-openssl s_client -host nsxmgr-01a.corp.local -port 443 -prexit -showcerts
+nano /home/ubuntu/nsx-cert.cnf
+```
+Paste the following text into the text editor window, press the key combination `ctrl + o` to save the file and then press `ctrl + x` to exit nano:
+
+```bash
+[ req ]
+default_bits = 2048
+distinguished_name = req_distinguished_name
+req_extensions = req_ext
+prompt = no
+[ req_distinguished_name ]
+countryName = US
+stateOrProvinceName = California
+localityName = CA
+organizationName = VMware
+commonName = 192.168.110.42
+[ req_ext ]
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = 192.168.110.42
+DNS.2 = nsxmgr-01a.corp.local
+
 ```
 
+This file will be used as a certificate signing request, in the following step you will use this file to request to NSX-T Manager to generate and self-sign a certificate using the specifications in this file. 
+
 <details><summary>Screenshot 2.2</summary>
-<img src="Images/2018-10-21-21-43-02.png">
+<img src="Images/2019-07-15-14-13-06.png">
 </details>
 <br/>
 
-2.3 Open Microsoft `Notepad++` from the control center desktop and copy the certificate section of step 2.2 output into it. Copy from `-----Begin Certificate` to `End Certificate-----`.  Label this section as `NSX MGR Certificate` for reference in future steps.
+2.3 From the CLI-VM prompt, enter the following commands to generate a new certificate we will use as the NSX API Cert:
 
-_Note: Leave notepad++ open, you will be adding more reference values to it for this lab and the phase 2 lab._
+```bash
+export NSX_MANAGER_IP_ADDRESS=192.168.110.42
+export NSX_MANAGER_COMMONNAME=192.168.110.42
+openssl req -newkey rsa:2048 -x509 -nodes -keyout nsx.key -new -out nsx.crt -subj /CN=$NSX_MANAGER_COMMONNAME -reqexts SAN -extensions SAN -config <(cat ./nsx-cert.cnf <(printf "[SAN]\nsubjectAltName=DNS:$NSX_MANAGER_COMMONNAME,IP:$NSX_MANAGER_IP_ADDRESS")) -sha256 -days 3650
+
+```
 
 <details><summary>Screenshot 2.3.1</summary>
-<img src="Images/2018-10-24-01-21-06.png">
+<img src="Images/2019-07-15-14-18-40.png">
 </details>
-<details><summary>Screenshot 2.3.2</summary><img src="Images/2019-01-06-16-02-28.png"></details><br>
+<br/>
 
-2.4 From the Ops Manager web UI, click on the tile `BOSH Director for vSphere`
+2.4 From the cli-vm prompt, enter the following commands to view the certificate and the private key you generated in the previous step
+
+```bash
+cat /home/ubuntu/nsx.crt
+cat /home/ubuntu/nsx.key
+```
 
 <details><summary>Screenshot 2.4</summary>
+<img src="Images/2019-07-15-14-30-05.png">
+</details>
+<br/>
+
+2.5 On the control center desktop, open `Notepad++` from the start menu and create a new tab. On the new tab paste the output from the `nsx.crt` file from the previous step and save the file on the desktop as `nsx.crt`. Do not close the Notepad++ window as you will need to access this text in the following steps
+
+<details><summary>Screenshot 2.5</summary>
+<img src="Images/2019-07-15-14-37-03.png">
+</details>
+<br/>
+
+2.6 Open a new tab in Notepad++. Copy the output of the `nsx.key` file, paste it into the new notepad++ tab and save the file on the desktop as `nsx.key`. Do not close the Notepad++ window as you will need to access this text in the following steps
+
+<details><summary>Screenshot 2.6</summary>
+<img src="Images/2019-07-15-14-39-13.png">
+</details>
+<br/>
+
+
+2.7 Log into the NSX Manager UI (Username: admin Password VMware1!VMware1!) navigate to the `System > Certificates` page and click `Import > Import Certificate` 
+
+<details><summary>Screenshot 2.7</summary>
+<img src="Images/2019-07-15-14-23-01.png">
+</details>
+<br/>
+
+2.8 On the `Import Certificate` window, enter the following values:
+
+- Name: NSX-API-CERT
+- Certificate Components: Click `Browse` and select the `nsx.crt` file you created in the previous steps and click `Open`
+- Private Key: Click `Browse` and select the `nsx.key` file you created in the previous steps and click `Open`
+- Service Certificate: No
+- Click `Import`
+- The certificate should now be listed as `NSX-API-CERT`, click the `ID` field and copy the value for the `ID` for use in the next step
+
+<details><summary>Screenshot 2.8.1</summary>
+<img src="Images/2019-07-15-14-42-10.png">
+</details>
+
+<details><summary>Screenshot 2.8.2</summary>
+<img src="Images/2019-07-15-14-44-17.png">
+</details>
+
+<details><summary>Screenshot 2.8.3</summary>
+<img src="Images/2019-07-15-14-45-31.png">
+</details>
+
+<details><summary>Screenshot 2.8.4</summary>
+<img src="Images/2019-07-15-14-48-34.png">
+</details>
+<br/>
+
+2.9 Return to your session with cli-vm and at the prompt enter the following commands to register the certificate you just imported as the node api certificate for nsx manager
+
+**Make sure to paste the certificate ID you gathered in the previous step into the `export CERTIFICATE_ID="519da18e-ba3f-43e0-8a5b-7b8c250cbd4b"` command below**
+
+```bash
+export NSX_MANAGER_IP_ADDRESS=192.168.110.42
+export NSX_MANAGER_COMMONNAME=192.168.110.42
+export CERTIFICATE_ID="Replace_this_text_with_your_certificate_ID_from_the_previous_step"
+curl --insecure -u admin:'VMware1!VMware1!' -X POST "https://$NSX_MANAGER_IP_ADDRESS/api/v1/node/services/http?action=apply_certificate&certificate_id=$CERTIFICATE_ID"
+```
+
+<details><summary>Screenshot 2.9</summary>
+<img src="Images/2019-07-15-14-57-26.png">
+</details>
+<br/>
+
+2.10 From the Ops Manager web UI, click on the tile `BOSH Director for vSphere`
+
+<details><summary>Screenshot 2.10</summary>
 <img src="Images/2018-10-21-21-07-42.png">
 </details>
 <br/>
 
-2.5 On the `vCenter Configuration` page, enter the following values and click `Save`:
+2.11 On the `vCenter Configuration` page, enter the following values and click `Save`:
 
 - Name: vcsa-01a
 - vCenter Host: vcsa-01a.corp.local
@@ -193,25 +296,25 @@ _Note: Leave notepad++ open, you will be adding more reference values to it for 
 - Persistent Datastore Names: RegionA01-ISCSI02-COMP01
 - Select `NSX Networking`
 - NSX Mode: NSX-T
-- NSX Address: nsxmgr-01a.corp.local
+- NSX Address: 192.168.110.42
 - NSX Username: admin
 - NSX Password: VMware1!VMware1!
-- Copy and Paste the NSX MGR Certificate from step 2.3
+- Copy and Paste the text from the nsx.crt file you created in the previous steps
 - VM Folder: pks_vms  **_(Make sure you change these following values, that begin with pcf_ by default, to begin with pks_)**
 - Template Folder: pks_templates
 - Disk path Folder: pks_disk
 - Click `Save`
 
-<details><summary>Screenshot 2.5.1</summary>
+<details><summary>Screenshot 2.11.1</summary>
 <img src="Images/2018-10-21-21-29-43.png">
 </details>
 
-<details><summary>Screenshot 2.5.2</summary>
+<details><summary>Screenshot 2.11.2</summary>
 <img src="Images/2018-10-21-21-44-38.png">
 </details>
 <br/>
 
-2.6 Continue with the Bosh Director tile configuration, select the `Director Config` tab on the left side menu and enter the following values:
+2.12 Continue with the Bosh Director tile configuration, select the `Director Config` tab on the left side menu and enter the following values:
 
 - NTP Servers: ntp.corp.local
 - Enable VM Resurrector Plugin: True
@@ -220,12 +323,12 @@ _Note: Leave notepad++ open, you will be adding more reference values to it for 
 - Leave all other settings set to default values
 - Click `Save`
 
-<details><summary>Screenshot 2.6</summary>
+<details><summary>Screenshot 2.12</summary>
 <img src="Images/2018-10-21-21-52-58.png">
 </details>
 <br/>
 
-2.7 Continue with the Bosh Director tile configuration, select the `Create Availability Zones` tab and enter the following details:
+2.13 Continue with the Bosh Director tile configuration, select the `Create Availability Zones` tab and enter the following details:
 
 _Note: Each of the availability zones below will have a single cluster. When you add an availability zone, make sure to click `Add` on the upper right side of the window and do **not** click `Add Cluster`_
 
@@ -241,9 +344,9 @@ _Note: Each of the availability zones below will have a single cluster. When you
   - Resource Pool: `pks-comp-1`
 - Click `Save`
 
-<details><summary>Screenshot 2.7</summary><img src="Images/2019-01-08-19-10-12.png"></details><br>
+<details><summary>Screenshot 2.13</summary><img src="Images/2019-01-08-19-10-12.png"></details><br>
 
-2.8 Continue with the Bosh Director tile configuration, select the `Create Networks` tab and enter the following values:
+2.14 Continue with the Bosh Director tile configuration, select the `Create Networks` tab and enter the following values:
 
 - Enable ICMP Checks: `True`
 - Click `Add Network` to add a network with the following values
@@ -256,32 +359,32 @@ _Note: Each of the availability zones below will have a single cluster. When you
   - Availability Zones: `PKS-MGMT-1`, `PKS-COMP`
   -Click `Save`
 
-<details><summary>Screenshot 2.8</summary>
+<details><summary>Screenshot 2.14</summary>
 <img src="Images/2019-06-20-17-41-25.png">
 </details>
 <br/>
 
-2.9 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
+2.15 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
 
 - Singleton Availability Zone: `PKS-MGMT-1`
 - Network: `PKS-MGMT`
 - Click Save
 
-<details><summary>Screenshot 2.9</summary>
+<details><summary>Screenshot 2.15</summary>
 <img src="Images/2018-10-21-23-17-12.png">
 </details>
 <br/>
 
-2.10 Select the `Security` tab, check the box for `Include OpsManager Root CA in Trusted Certs` and click `Save`.
+2.16 Select the `Security` tab, check the box for `Include OpsManager Root CA in Trusted Certs` and click `Save`.
 
-<details><summary>Screenshot 2.10</summary>
+<details><summary>Screenshot 2.16</summary>
 <img src="Images/2019-06-19-23-37-02.png">
 </details>
 <br/>
 
-2.11 Continue with the Bosh Director tile configuration, select the `Resource Config` tab and change the value of the `VM Type` in the second row to the third medium option `medium.disk` as shown in Screenshot 2.13, and click `Save`
+2.17 Select the `Resource Config` tab and change the value of the `VM Type` in the second row to the third medium option `medium.disk` as shown in Screenshot 2.13, and click `Save`
 
-<details><summary>Screenshot 2.11</summary>
+<details><summary>Screenshot 2.17</summary>
 <img src="Images/2019-01-08-19-55-48.png">
 </details>
 <br/>
@@ -448,7 +551,7 @@ nano create_pi.sh
 
 NSX_MANAGER="192.168.110.42"
 NSX_USER="admin"
-CERTIFICATE_ID='27fbd52c-a90e-478f-9fd1-2fb52625c9fe'
+CERTIFICATE_ID="Replace this text with your certificate ID"
 
 PI_NAME="pks-nsx-t-superuser"
 NSX_SUPERUSER_CERT_FILE="pks-nsx-t-superuser.crt"
@@ -474,7 +577,7 @@ END
 curl -k -X POST \
     "https://${NSX_MANAGER}/api/v1/trust-management/principal-identities" \
     -u "$NSX_USER:$NSX_PASSWORD" \
-    -H 'content-type: application/json' \
+    -H "content-type: application/json" \
     -d "$pi_request"
 
 curl -k -X GET \
