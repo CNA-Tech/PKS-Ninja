@@ -2,7 +2,7 @@
 
 **Contents:**
 
-- [Step 1: Configure access to VKE and deploy Kubernetes cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab1-IntroToKubernetes#step-1-configure-access-to-vke-and-deploy-kubernetes-cluster)
+- [Step 1: Connect to your Kubernertes Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab1-IntroToKubernetes#step-1-connect-to-your-kubernetes-cluster)
 - [Step 2: Explore your Kubernetes cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab1-IntroToKubernetes#step-2-explore-your-kubernetes-cluster)
 - [Step 3: Review Sample Application Components](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab1-IntroToKubernetes#step-3-review-sample-application-components)
 - [Step 4: Pods, Replica Sets and Deployments](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToK8sPlaneSpotter-IK9674#step-4-pods-replica-sets-and-deployments)
@@ -11,108 +11,28 @@
 
 ## Step 1: Configure access to VKE and deploy Kubernetes cluster
 
-1.1 Register and Login to VKE
+1.1 From the control center desktop open putty and connect to `ubuntu@cli-vm`, login with the password VMware1!
 
-- By now you should have an invitation email to login to VMware Kubernetes Engine (VKE), please follow instructions in the email to sign-up as a user for VKE
-- In order to register for VKE, you will need to have a login in 'My VMware'. If you already have a login in 'My VMware' using the same email address you used for registration you don't have to create a new one. Else, you will be directed to create a 'My VMworld' ID.
-- One of the Proctors for the Workshop should have assigned you a Kubernetes Cluster that's already pre-created and assigned to you, please have the cluster name handy.
-- If you haven't received the invitation email or do not know the name of the Kubernetes Cluster assigned to you, please reach out to one of the proctors.
+1.2 From the CLI-VM Prompt, enter the command `pks login -a pks.corp.local -u pksadmin -p VMware1! -k` to log into the PKS API server in your lab
 
-1.2 Download VKE CLI & Kubectl
+1.3 From the cli-vm prompt, enter the command `pks get-credentials my-cluster`. This command downloads authentication credentials for the kubernetes cluster in your lab which is named `my-cluster` and it prepares the configuration file for kubectl (the kubeconfig file) so when you enter kubectl commands, they will target the API of the Master node for the `my-cluster` cluster
 
-The VKE CLI will help us interact with the platform, fetch us the tokens needed to get authenticated access to the Kubernetes cluster
+1.4 From the cli-vm prompt, enter the command `cat /home/ubuntu/.kube/config` to view your kubeconfig file. Observe the file has a certificate, the connection URL and the cluster name for `my-cluster` saved in the file. Often devops workers may need to connect to several different clusters on a regular basis, the kubeconfig file can maintain login information for several clusters to allow you to switch between different clusters easily. 
 
-- In a browser, launch the VMware Cloud Services console. https://console.cloud.vmware.com/
-- Log in to your VMware Cloud services organization.
-- On the VMware Kubernetes Engine tile, click Open. This takes you to the VKE console.
-- Click on 'Developer Center', once there click the text 'DOWNLOAD THE VKE CLI'. Click on 'Downloads' and select the version based on the operating system you are working on.
-- Also on the same page, download kubectl by clicking the downalod button under the kubectl tile.
-- After the download completes, move the vke executable to a common bin directory (for example, ~/bin or %UserProfile%\bin).
-  - For Linux or Mac OS X: % mkdir ~/bin % cp vke ~/bin
-  - For Windows: mkdir %UserProfile%\bin copy vke.exe %UserProfile%\bin
-- Make sure your bin directory is accessible on your PATH.
-  - For Linux or Mac OS X: % export PATH=$PATH:/Users/your-user-name/bin
-  - For Windows: set PATH=%PATH%;%UserProfile%\bin
-- Make the file executable.
-  - For Linux or Mac OS X: % chmod +x ~/bin/vke
-  - For Windows: attrib +x %UserProfile%\bin\vke.exe
-- Now change to a different directory and check the version to verify that the CLI is ready to use. vke --version
-  
-Kubectl is a command line interface for Kubernetes, it lets you interact with the Kubernetes cluster. Once logged in to the cluster Kubectl will be used anytime you want to deploy apps/services/provision storage etc. or need to query the cluster for existing pods/nodes/apps/services etc.
-
-Kubectl is also available to download from the VKE Console page, once logged in to the console, Click on Developer-->click on -->Actions -->Download kubectl
-
-Once downloaded, save the file in your environment for you to be able to access it from any directory. Just like the vke CLI above.
-
-You can also interact with Kubernetes using the kubernetes dashboard if you prefer UI over CLI, the Kubernetes dashboard is available from the VKE console-->Your-Cluster-Name>-->Actions-->Open K8's UI
-
-1.3 Login to VKE via VKE CLI
-
-So far we have downloaded the vke CLI and kubectl CLI, now we will login to VKE via the CLI to fetch the access tokens needed to talk to the clusters hosted in VKE via Kubectl
-
-Get access to the Organization ID and Refresh Tokens
-
-1.3.1 Go back to the VKE web interface Click on 'Developer Center' and click the Overview tab, once there you will see the CLI to login to VKE with the organization ID , copy the entire command and store it in a text editor
-
-<details><summary>Screenshot 1.3.1</summary>
-<img src="Images/2018-10-19-00-26-40.png">
+<details><summary>Screenshot 1.4</summary>
+<img src="Images/2019-07-17-01-00-55.png">
 </details>
 <br/>
 
-1.3.2 On the same page, click on 'Get your Refresh Token', this will redirect the browser to the 'My Accounts' page and you will see your OAuth Refresh Token, copy the token. If there is no token click "Generate Key" and copy it. Save the 'refresh token'
-
-<details><summary>Screenshot 1.3.2.1</summary>
-<img src="Images/2018-10-19-02-03-56.png">
-</details>
-
-<details><summary>Screenshot 1.3.2.2</summary>
-<img src="Images/2018-10-19-02-12-46.png">
-</details>
-<br/>
-
-**Please treat this Refresh Token as your Password and DO NOT SHARE it with others**
-
-1.3.3 Login to VKE, copy paste the VKE Login command from above (step 1.3.1) and replace 'your-refresh-token' with the one you retrieved above (step 1.3.2)
-
-`vke account login --organization fa2c1d78-9f00-4e30-8268-4ab81862080d --refresh-token {your token here, remove the brackets`
-
-<details><summary>Screenshot 1.3.3</summary>
-<img src="Images/2018-10-19-02-32-46.png">
-</details>
-<br/>
-
-1.3.4 Set folder and project within VKE
-
-``` bash
-vke folder set SharedFolder
-vke project set SharedProject
-```
-
-<details><summary>Screenshot 1.3.4</summary>
-<img src="Images/2018-10-19-02-46-10.png">
-</details>
-<br/>
-
-1.3.5 Fetch Kubectl auth for your cluster, replace with the name of the cluster assigned to you in the command below
-
-`vke cluster auth setup afewell-cluster`
-
-<details><summary>Screenshot 1.3.5</summary>
-<img src="Images/2018-10-19-02-51-03.png">
-</details>
-<br/>
-
-1.4 Access Kubernetes Cluster via Kubectl
-
-1.4.1 View the pods and services in your cluster to validate connectivity
+1.5 View the pods and services in your cluster to validate connectivity
 
 ``` bash
 kubectl get pods --all-namespaces
 kubectl get svc --all-namespaces
 ```
 
-<details><summary>Screenshot 1.4.1</summary>
-<img src="Images/2018-10-19-02-58-07.png">
+<details><summary>Screenshot 1.5</summary>
+<img src="Images/2019-07-17-01-04-12.png">
 </details>
 <br/>
 
@@ -123,32 +43,33 @@ kubectl get svc --all-namespaces
 <details><summary>Expand to view sample output</summary>
 
 ``` bash
+ubuntu@cli-vm:~$ kubectl config view -o yaml
 apiVersion: v1
 clusters:
 - cluster:
-    certificate-authority: ..\AppData\Local\Temp\lw-ca-cert-EVIF.pem091613171
-    server: https://api.afewell-cluster-69fc65f8-d37d-11e8-918b-0a1dada1e740.fa2c1d78-9f00-4e30-8268-4ab81862080d.vke-user.com:443
-  name: afewell-cluster
+    certificate-authority-data: DATA+OMITTED
+    server: https://my-cluster.corp.local:8443
+  name: my-cluster
 contexts:
 - context:
-    cluster: afewell-cluster
-    user: -afewell-cluster
-  name: afewell-cluster-context
-current-context: afewell-cluster-context
+    cluster: my-cluster
+    user: 27849453-2f23-4247-a1c5-1a89d871b9eb
+  name: my-cluster
+current-context: my-cluster
 kind: Config
 preferences: {}
 users:
-- name: -afewell-cluster
+- name: 27849453-2f23-4247-a1c5-1a89d871b9eb
   user:
-    auth-provider:
-      config:
-        client-id: f1a34f25-83f8-447f-9abd-389be1018538
-        client-secret: f1a3****-****-****-****-********8538
-        id-token: Removed from output
-        idp-certificate-authority: C:\Users\afewell\AppData\Local\Temp\lw-ca-cert-EVIF.pem091613171
-        idp-issuer-url: https://lightwave.vke.cloud.vmware.com/openidconnect/fa2c1d78-9f00-4e30-8268-4ab81862080d
-        refresh-token: ""
-      name: oidc
+    token: eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6IjI3ODQ5NDUzLTJmMjMtNDI0Ny1hMWM1LTFhODlkODcxYjllYi10b2tlbi1xc3o2ayIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiIyNzg0OTQ1My0yZjIzLTQyNDctYTFjNS0xYTg5ZDg3MWI5ZWIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI4ZGFiYzJkNi1hODVhLTExZTktOGNjNi0wMDUwNTZhNTY1NzUiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDoyNzg0OTQ1My0yZjIzLTQyNDctYTFjNS0xYTg5ZDg3MWI5ZWIifQ.p_4VDFcobG61fzFGfHM5gWWI3h8CK3fEXvs26NVrv2gSxW73P6Tc818z-L9FIAv6wuHK_hZL-GYK6FqakQgGFzz_nekyfvWF2TcIlQJJIQ0TjmwTKQC2j5y8Lb_jI0sPZgQnMON6h2zLdgDFmxhZ4AlLwGHsme-3IKBhk-6__-Ki6G-ngj_Mnon3dFuY4rAr2pBeKbGzHzCZYunWL7NNkvZuF2TvQJj_Oc_uA6koCYAbTV-wbdc8hwvpxWPXbDj3XKUkUJIlKsFrH3C3hAFh61504XuVywAvXrsoQy1IHnWLTSL7pTsGiaohGeJF9B_r7Om-GwmN9fAeFGaJq2fLCQ
+- name: 3393e21b-3e52-4e03-9233-20143673459f
+  user:
+    token: eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6IjMzOTNlMjFiLTNlNTItNGUwMy05MjMzLTIwMTQzNjczNDU5Zi10b2tlbi1iMmQ5bCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiIzMzkzZTIxYi0zZTUyLTRlMDMtOTIzMy0yMDE0MzY3MzQ1OWYiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIxMDNmNTRkNy1hODU3LTExZTktOGNjNi0wMDUwNTZhNTY1NzUiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDozMzkzZTIxYi0zZTUyLTRlMDMtOTIzMy0yMDE0MzY3MzQ1OWYifQ.DqM_3VAex9s4AY0ofs-jUEPTcR34STJX3A3nlhJ3DYoBxAXaAEjBtmOCefq6Zs4QXFnhJiMRu3-gAWS87Dxw4LmLm8IZqofg-D9DlJvKpwl0gwwupi2vivXmOgiv78qAPi9QxBaAdVBiHN4kvLTB89vqxnDYxt4N-gYfBb3iCUoLrmSJ1IHr2znYqGE2zl3Kpmm-7uzkA5CBBiwnZsWwNkw35uQom34EE8U4dkZBnAXViymz5mw87NuyGjpQxWOyqvnw0VeB0FKNPWeiF6HDUlJNJ0lpxSn6_s_99wMNDt1zLHKUvKh5KXJPt1sVMeJbZMs6202gP7B_M8eVmKfLhQ
+- name: 767eaa79-8e1c-4b2a-8b80-0471f2a64137
+  user:
+    token: eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6Ijc2N2VhYTc5LThlMWMtNGIyYS04YjgwLTA0NzFmMmE2NDEzNy10b2tlbi04N2ptaiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiI3NjdlYWE3OS04ZTFjLTRiMmEtOGI4MC0wNDcxZjJhNjQxMzciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI0Mzg3NWY5Yy1hN2QyLTExZTktOGNjNi0wMDUwNTZhNTY1NzUiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDo3NjdlYWE3OS04ZTFjLTRiMmEtOGI4MC0wNDcxZjJhNjQxMzcifQ.D_U9gRJh1OnDQ3S4ULHfASg8Z6YDtmgKEVc0hm7mD6M7ulxTx4bV3nv0eLWnonXCi5hekD_ZM2ad51Pgu1aJ3zCE1_M98D0l_gZC6E0CyZzfkZQfkr0rUGer6EkFRkUJkYpQQDlwxX8BQV4NutlBkZ6TxO6ZOg7tkFC6pPCMuQVD5KHGYKEaUQsimpuJJqSv7UCr2lhgNeS-RvVQmMh3gG0Z8N8B0FRFQ6FDX9P1YfUs9xqUuniBcB8bXelyr_xYtS_A-s7j9g9gJ2eXabVFYrqfzdif_sGbb_4BTj_OOTpSBZKJeMGxBytiIiF2DBC7jf7Pd7hM3ggwe6dVI_DFnQ
+ubuntu@cli-vm:~$
+
 ```
 
 </details>
@@ -161,18 +82,15 @@ kubectl get nodes
 kubectl get cs
 ```
 
-NOTE: The K8s cluster deployed in the example lab is based on the VKE developer cluster template which starts with a single node and adds additional nodes dynamically with VKE's "Smart Cluster" feature. Accordingly, if you run this command again in later steps, you may see additional nodes running. 
-
 <details><summary>Screenshot 2.2</summary>
-<img src="Images/2018-10-19-14-14-32.png">
-<img src="Images/2018-10-19-15-47-40.png">
+<img src="Images/2019-07-17-01-08-04.png">
 </details>
 <br/>
 
 2.3 View the namespaces in your cluster with the command `kubectl get namespaces`
 
 <details><summary>Screenshot 2.3</summary>
-<img src="Images/2018-10-19-12-11-13.png">
+<img src="Images/2019-07-17-01-09-48.png">
 </details>
 <br/>
 
@@ -184,11 +102,10 @@ NOTE: The K8s cluster deployed in the example lab is based on the VKE developer 
 kubectl get pods
 kubectl get pods --all-namespaces
 kubectl get pods --namespace=kube-system
-kubectl get pods -n vke-system
 ```
 
 <details><summary>Screenshot 2.5</summary>
-<img src="Images/2018-10-19-12-36-32.png">
+<img src="Images/2019-07-17-01-11-35.png">
 </details>
 <br/>
 
@@ -207,54 +124,16 @@ kubectl get pods -n planespotter
 </details>
 <br/>
 
-2.7 Set your current context namespace to `planespotter` and view your kube config file to see that the namespace setting is now displayed in the output. Be sure to replace references to "afewell-cluster-context" with the name of your cluster context
+2.7 Set your current context namespace to `planespotter` and view your kube config file to see that the namespace setting is now displayed in the output. 
 
 ``` bash
 kubectl config current-context
-kubectl config set-context afewell-cluster-context --namespace=planespotter
-kubectl config view -o jsonpath='{.contexts[?(@.name == "afewell-cluster-context")].context.namespace}'
-kubectl config view -o yaml
+kubectl config set-context my-cluster --namespace=planespotter
+kubectl config current-context
 ```
-
-<details><summary>Click to expand to see the full output</summary>
-
-``` bash
-
-apiVersion: v1
-clusters:
-- cluster:
-    certificate-authority: ..\AppData\Local\Temp\lw-ca-cert-EVIF.pem091613171
-    server: https://api.afewell-cluster-69fc65f8-d37d-11e8-918b-0a1dada1e740.fa2c1d78-9f00-4e30-8268-4ab81862080d.vke-user.com:443
-  name: afewell-cluster
-contexts:
-- context:
-    cluster: afewell-cluster
-    namespace: planespotter
-    user: -afewell-cluster
-  name: afewell-cluster-context
-current-context: afewell-cluster-context
-kind: Config
-preferences: {}
-users:
-- name: -afewell-cluster
-  user:
-    auth-provider:
-      config:
-        client-id: f1a34f25-83f8-447f-9abd-389be1018538
-        client-secret: f1a3****-****-****-****-********8538
-        id-token: Removed from output
-        idp-certificate-authority: C:\Users\afewell\AppData\Local\Temp\lw-ca-cert-EVIF.pem091613171
-        idp-issuer-url: https://lightwave.vke.cloud.vmware.com/openidconnect/fa2c1d78-9f00-4e30-8268-4ab81862080d
-        refresh-token: ""
-      name: oidc
-```
-
-</details>
-<br/>
 
 <details><summary>Screenshot 2.7</summary>
-<img src="Images/2018-10-19-13-54-28.png">
-<img src="Images/2018-10-19-15-35-24.png">
+<img src="Images/2019-07-17-01-18-12.png">
 </details>
 <br/>
 
@@ -271,7 +150,7 @@ users:
 </details>
 <br/>
 
-3.2 List the contents of the planespotter directory, observe the different subdirectories for each application component, docs and for kubernetes manifests
+3.2 List the contents of the planespotter directory, observe the different subdirectories for each application component, docs and for kubernetes manifests as shown in the image below
 
 <details><summary>Screenshot 3.2</summary>
 <img src="Images/2018-10-19-03-25-42.png">
@@ -878,7 +757,7 @@ Note that when creating a service, a local DNS record is created for the service
 apt-get update
 apt-get install curl -y
 curl planespotter-frontend | grep Planespotter # curl by service name
-curl 10.0.0.185 | grep Planespotter or curl
+curl 10.0.0.185 | grep Planespotter
 exit
 ```
 
@@ -1167,25 +1046,12 @@ kubectl get services
 Example:
 `cp frontend-deployment_all_k8s.yaml frontend-deployment_ingress.yaml`
 
-5.5.2 Get the URL of your smarcluster with the following command, be sure to replace 'afewell-cluster' with the name of your cluster:
-
-``` bash
-vke cluster show afewell-cluster | grep Address
-```
-
-<details><summary>Screenshot 5.5.2</summary>
-<img src="Images/2018-10-20-15-45-19.png">
-</details>
-<br/>
-
-5.5.3 Edit the `frontend-deployment_ingress.yaml` file, near the bottom of the file in the ingress spec section, change the value for spec.rules.host to URL for your smartcluster as shown in the following snippet:
-
-NOTE: Be sure to replace the URL shown here with the URL for your own smartcluster
+5.5.3 Edit the `frontend-deployment_ingress.yaml` file, near the bottom of the file in the ingress spec section, change the value for spec.rules.host to URL to planespotter.corp.local as shown in the following snippet:
 
 ``` bash
 spec:
   rules:
-  - host: afewell-cluster-69fc65f8-d37d-11e8-918b-0a1dada1e740.fa2c1d78-9f00-4e30-8268-4ab81862080d.vke-user.com
+  - host: planespotter.corp.local
     http:
       paths:
       - backend:
@@ -1257,7 +1123,7 @@ metadata:
   namespace: planespotter
 spec:
   rules:
-  - host: afewell-cluster-69fc65f8-d37d-11e8-918b-0a1dada1e740.fa2c1d78-9f00-4e30-8268-4ab81862080d.vke-user.com
+  - host: planespotter.corp.local
     http:
       paths:
       - backend:
@@ -1283,7 +1149,37 @@ kubectl describe ingress
 <img src="Images/2018-10-20-16-11-14.png">
 </details>
 
-5.5.5 Open a browser and go to the url of your VKE SmartCluster to verify that planespotter-frontend is externally accessible with the LoadBalancer service
+5.5.5 From the Main Console (ControlCenter) desktop, click the windows button, enter the value `dns` in the search box, and select the top result `DNS` as shown in the following screenshot to open DNS Manager.
+
+<details><summary>Screenshot 1.0.4</summary>
+<img src="../CloudNativeIntroPks-IC7212/Images/2019-03-02-06-31-53.png">
+</details>
+<br/>
+
+5.5.6 In DNS Manager, expand `ControlCenter > Forward Lookup Zones`, right click on `corp.local`, and select `New Host (A or AAAA)...`
+
+<details><summary>Screenshot 1.0.5</summary>
+<img src="../CloudNativeIntroPks-IC7212/Images/2019-03-02-06-34-59.png">
+</details>
+<br/>
+
+5.5.7 In the `New Host` window, enter the following values to create an dns A record for planespotter.corp.local:
+
+- Name: `planespotter`
+- IP Address: *Please be sure to use the ip address from your deployment from the output of `kubectl get ingress` in the preceeding steps*
+- Uncheck `Create associated pointer (PTR) record
+- Click `Add Host` to add the new dns record for `planespotter.corp.local`
+
+<details><summary>Screenshot 1.0.6</summary>
+<img src="../CloudNativeIntroPks-IC7212/Images/2019-03-02-06-42-30.png">
+</details>
+
+1.0.7 From the Main Console (ControlCenter) desktop, open a https browser session to `http://planespotter.corp.local` to see the planespotter frontend page.
+
+<details><summary>Screenshot 1.0.7</summary>
+<img src="../CloudNativeIntroPks-IC7212/Images/2019-03-02-06-44-38.png">
+</details>
+<br/>
 
 <details><summary>Screenshot 5.5.5</summary>
 <img src="Images/2018-10-20-16-26-46.png">
@@ -1314,5 +1210,3 @@ If you are following the PKS Ninja cirriculum, [click here to proceed to the nex
 If you are not following the PKS Ninja cirriculum and would like to deploy the complete planespotter app on VKE, you can find [complete deployment instructions here](https://github.com/Boskey/run_kubernetes_with_vmware)
 
 ### Thank you for completing the Introduction to Kubernetes Lab!
-
-### [Please click here to proceed to Lab2: PKS Installation Phase 1](../Lab2-PksInstallationPhaseOne)
