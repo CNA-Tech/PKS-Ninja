@@ -32,7 +32,7 @@ Breaking the command line down we have
  
  The creation of your cluster will take a few minutes while you wait for the cluster deployment we will continue the lab with my-cluster that was already deployed you can check the status of your cluster that is deploying using 
  
-     pks clusters my-cluster
+     pks clusters throwaway
 
 #Learning PKS
 
