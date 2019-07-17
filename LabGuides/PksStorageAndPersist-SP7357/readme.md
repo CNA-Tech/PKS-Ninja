@@ -57,7 +57,7 @@ to configure.
 _Before proceeding, ensure your `cli-vm` is authenticated to the PKS API server and your local kubeconfig is authenticated to the K8s master for my-cluster, reference the following commands as needed_
 
 ```bash
-pks login -a pks.corp.local -u pks-admin --skip-ssl-validation
+pks login -a pks.corp.local -u pksadmin --skip-ssl-validation
 pks get-credentials my-cluster
 ```
 
@@ -109,6 +109,7 @@ Dynamic provisioning involves defining a Persistent Volume Claim that refers to 
 
 ```bash
 kubectl apply -f mysql_claim.yaml
+kubectl config set-context my-cluster --namespace planespotter
 kubectl get pvc
 ```
 
@@ -128,7 +129,7 @@ kubectl get pvc
 
 ```bash
 kubectl apply -f mysql_pod.yaml
-kubectl get deployment planespotter-mysql
+kubectl get deployment mysql
 ```
 
 <details><summary>Screenshot 1.6</summary>
