@@ -11,7 +11,7 @@ In this lab you will learn some basic commands of Docker to help you understand 
 
 IP addresses in this tutorial will change in your environment and you may have to put your correct IP address into the commands for them to work.
 
-Start by opening putty and logging into the the cli-vm. Use `root` user. There is no password.
+Start by opening putty, launch into cli-vm using the ubuntu@cli-vm saved session. Use `root` user. There is no password.
 
 Let's clone a repository that will contain all the code for your labs
 
