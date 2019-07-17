@@ -22,13 +22,14 @@ We will review the plan details post starting the deployment of a cluster
 
 Deploy a small cluster with the following command:
 
-    pks create-cluster throwaway --external-hostname throwaway.corp.local --plan small
+    pks create-cluster throwaway --external-hostname throwaway.corp.local --plan small -n 1
   
 Breaking the command line down we have
  - create-cluster : pks command to execute
  - my-cluster : reference name of the cluster (user friendly name for reference with future commands)
  - external-hostname : DNS hostname to reach the cluster (preloaded into DNS in our case)
  - plan : sets the plan for the initial deployment
+ - -n 1: The -n flag stands for "nodes" so "-n 1" will override the plan setting and deploy the cluster with one worker node - without this flag the cluster would be created with 2 worker nodes as defined in the settings for the "small" plan (you can find these settings in the PKS tile in opsman)
  
  The creation of your cluster will take a few minutes while you wait for the cluster deployment we will continue the lab with my-cluster that was already deployed you can check the status of your cluster that is deploying using 
  
