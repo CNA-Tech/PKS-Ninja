@@ -280,7 +280,7 @@ A large number of popular applications are hosted on github, many of which are w
 
 ```bash
 mkdir ~/cloned
-cd ~cloned
+cd ~/cloned
 git clone https://github.com/CNA-Tech/planespotter.git
 ```
 
