@@ -69,7 +69,7 @@ apt-get install curl
 1.1.8 From the prompt, enter the command `curl http://localhost` verify that your nginx server response includes the additional line of text you added to the index.html file
 
 <details><summary>Screenshot 1.1.8</summary>
-![image](https://user-images.githubusercontent.com/15146258/61475159-2edd9300-a958-11e9-9b8f-f6708892a1b1.png)
+<img src="https://user-images.githubusercontent.com/15146258/61475159-2edd9300-a958-11e9-9b8f-f6708892a1b1.png">
 </details>
 <br/>
 
