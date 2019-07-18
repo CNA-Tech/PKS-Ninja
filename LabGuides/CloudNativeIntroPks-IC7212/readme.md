@@ -296,7 +296,7 @@ cd ~/cloned
 ls planespotter/
 cd planespotter/frontend
 ls
-cat dockerfile
+cat Dockerfile
 ```
 
 <details><summary>Screenshot 1.4.2</summary>
