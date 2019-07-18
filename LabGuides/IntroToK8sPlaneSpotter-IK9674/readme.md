@@ -9,7 +9,7 @@
 - [Step 5: ClusterIP, NodePort, LoadBalancer & Ingress](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab1-IntroToKubernetes#step-5-services---clusterip-nodeport--loadbalancer)
 - [Next Steps](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab1-IntroToKubernetes#next-steps)
 
-## Step 1: Configure access to VKE and deploy Kubernetes cluster
+## Step 1: Connect to your Kubernetes cluster
 
 1.1 From the control center desktop open putty and connect to `ubuntu@cli-vm`, login with the password VMware1!
 
