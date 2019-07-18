@@ -210,7 +210,7 @@ Once you are logged into docker hub, click the `Create Repository +` link, and c
 ```bash
 docker tag custom-nginx-image YourDockerhubUsername/custom-nginx-image:v1
 docker login #follow the prompts to log into your docker account
-docker push afewell/custom-nginx-image:v1
+docker push YourDockerhubUsername/custom-nginx-image:v1
 ```
 
 <details><summary>Screenshot 1.3.2</summary>
