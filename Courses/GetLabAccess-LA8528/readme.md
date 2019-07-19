@@ -13,9 +13,12 @@ There are 3 onecloud templates available for the v11 template:
   - This template has vcenter pre-installed and prepared to do a NSX-t and PKS installation as documented in the [PKS the Easy Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheEasyWay-PE6650) or the [PKS the Hard Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheHardWay-PH7885) Courses
 - CNABU-PKS-Ninja-v11-NsxtInstalled
   - This is the same as the above base v11 template, but with NSX-T Preinstalled. This template could take 30-60 minutes to load into a fully operational state
-- CNABU-PKS-Ninja-v11-fullyInstalled
-  - This template is built on the base v11 template but has the following pre-installed: NSX-T, OpsMan, Bosh, PKS, Harbor
-  - This template will take between 2-4 hours to load into a fully operational state
+- CNABU-PKS-Ninja-v11-PksInstalled-1.1
+  - This template is built on the base v11 template but has the following pre-installed: NSX-T, OpsMan, Bosh, PKS, Harbor, vRLI
+  - This template will take around 40 minutes to fully load
+- CNABU-PKS-Ninja-v11-ClusterReady-1.1
+  - This template is built PksInstalled-1.1 but already has a cluster deployed so once you load it up its all ready to use for demos or work on feature lab guides
+  - This template will take around 40 minutes to load into a fully operational state
   
 Note: NinjaLab v10 templates are also available with PKS 1.2. IF you would like to use a v10 template, please switch to the v10 branch of the PKS-Ninja Repo. If you use the PKS Ninja v10 template, you must install the [v10 template patch](https://github.com/natereid72/PKS-Ninja-Lab-Patch) before proceeding. 
   
