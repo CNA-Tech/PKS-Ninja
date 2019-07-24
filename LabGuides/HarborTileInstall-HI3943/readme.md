@@ -5,7 +5,7 @@
 
 ## Install Harbor
 
-1.1 On a new browser tab, open a connection to the Ops Manager UI, click on `Import a Product` select the Harbor file and click `Open`. It can take a few minutes to import the Harbor file
+1.1 On a new browser tab, open a connection to the Ops Manager UI, click on `Import a Product` select the Harbor file from the `E:\Downloads` directory and click `Open`. It can take a few minutes to import the Harbor file
 
 <details><summary>Screenshot 1.1.1 </summary>
 <img src="Images/2018-10-22-21-23-55.png">
@@ -77,7 +77,7 @@
 </details>
 <br/>
 
-1.10 On the `Resource Config` tab, set the `Persistent Disk Type` to `20 GB`
+1.10 On the `Resource Config` tab, set the `Persistent Disk Type` to `50 GB`
 
 <details><summary>Screenshot 1.10</summary>
 <img src="Images/2018-10-22-22-18-57.png">

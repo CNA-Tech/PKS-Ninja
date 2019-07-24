@@ -26,13 +26,13 @@ Deploy a small cluster with the following command:
   
 Breaking the command line down we have
  - create-cluster : pks command to execute
- - my-cluster : reference name of the cluster (user friendly name for reference with future commands)
+ - throwaway : reference name of the cluster (user friendly name for reference with future commands)
  - external-hostname : DNS hostname to reach the cluster (preloaded into DNS in our case)
  - plan : sets the plan for the initial deployment
  
  The creation of your cluster will take a few minutes while you wait for the cluster deployment we will continue the lab with my-cluster that was already deployed you can check the status of your cluster that is deploying using 
  
-     pks clusters my-cluster
+     pks clusters throwaway
 
 #Learning PKS
 
