@@ -41,7 +41,8 @@
 1.5 Select the `Plan 1` tab and enter the following values:
 
 - Master/ETCD Availability Zones: PKS-COMP
-- Worker Persistent Disk Type: 10gb
+- Worker Node Instances: 2
+- Worker Persistent Disk Type: 20gb
 - Worker Availability Zone: PKS-COMP
 - Enable Priviledged Containers: true
 - Click `Save`
@@ -51,20 +52,10 @@
 </details>
 <br/>
 
-1.6 Select the `Plan 2` tab and enter the following values:
-
-- Active: True
-- Master/ETCD Node Instances: 1
-- Master/ETCD VM Type: medium (cpu: 2, ram: 4 GB, disk: 8 GB)
-- Master Availability Zone: PKS-COMP
-- Worker VM Type: large (cpu: 2, ram: 8 GB, disk: 16 GB)
-- Worker Persistent Disk Type: 10gb
-- Worker Availability Zone: PKS-COMP
-- Enable Privileged Containers: True
-- Click `Save`
+1.6 Select the `Plan 2` tab and ensure the plan is set to `Inactive`
 
 <details><summary>Screenshot 1.6</summary>
-<img src="Images/2018-10-22-19-37-39.png">
+<img src="Images/2019-07-15-16-23-29.png">
 </details>
 <br/>
 
@@ -78,16 +69,16 @@
 1.8 Select the `Kubernetes Cloud Provider` tab and enter the following values:
 
 - Choose your IaaS: `vSphere`
-- vCenter Master Credentials: `administrator@vsphere.local`
+- vCenter Master Credentials: `administrator@corp.local`
   - Password: `VMware1!`
 - vCenter Host: `vcsa-01a.corp.local`
 - Datacenter Name: `RegionA01`
-- Datastore Name: `RegionA01-ISCSI01-COMP01`
+- Datastore Name: `RegionA01-ISCSI02-COMP01`
 - Stored VM Folder: `pks_vms`
 - Click `Save`
 
 <details><summary>Screenshot 1.8</summary>
-<img src="Images/2018-10-22-19-45-25.png">
+<img src="Images/2019-07-15-16-25-57.png">
 </details>.corp.local
 <br/>
 
@@ -126,13 +117,13 @@ Login for NSX Manager UI is: admin/VMware1!
 - Container Networking Interface: `NSX-T`
 - NSX Manager Hostname: `nsxmgr-01a.corp.local`
 - NSX Manager Super User Principal Identity Certificate: Use the PI certificate and key values you copied to Notepad++ in the PKS Install Phase 1 lab, pasting the certificate in the first box and the key in the second box
-- NSX Manager CA Cert: Use the NSX MGR certificate value you copied to Notepad++ in the PKS Install Phase 1 lab
+- NSX Manager CA Cert: Use the NSX MGR certificate value you copied to Notepad++ in the PKS Install Phase 1 lab, this should also be saved as nsx.crt on your desktop
 - Disable SSL certificate verification: `True`
 - NAT mode: `True`
-- Pods IP Block ID: Use the value you gathered in step 1.9.1.1 above
-- Nodes IP Block ID: Use the value you gathered in step 1.9.1.2 above
-- T0 Router ID: Use the value you gathered in step 1.9.2 above
-- Floating IP Pool ID: Use the value you gathered in step 1.9.3 above
+- Pods IP Block ID: Use the value you gathered above
+- Nodes IP Block ID: Use the value you gathered above
+- T0 Router ID: Use the value you gathered above
+- Floating IP Pool ID: Use the value you gathered above for ip-pool-vips
 - Nodes DNS: `192.168.110.10`
 - vSphere Cluster Names: `RegionA01-COMP01`
 - Enable outbound internet access: `True`
@@ -148,38 +139,43 @@ Login for NSX Manager UI is: admin/VMware1!
 </details>
 <br/>
 
-1.11 Select the `UAA` tab, click the radio button for `Internal UAA` and click `Save`
+1.11 Select the `UAA` tab, click the radio button for `Internal UAA` and then click `Save`
 
 <details><summary>Screenshot 1.11</summary>
 <img src="Images/2018-10-22-20-30-52.png">
 </details>
 <br/>
 
-1.12 Select the `Usage Data` tab, select `No, I do not want to join the CEIP and Telemetry Program for PKS` and click `Save`
+1.12 Select the `Logging` tab, check the box to `Enable VMware vRealize Log Insight Integration` and enter the following values:
+
+- Host: `vrli-01a.corp.local`
+- Disable SSL Certificate Validation: `True`
+- Click Save
 
 <details><summary>Screenshot 1.12</summary>
+<img src="Images/2019-07-15-16-37-27.png">
+</details>
+<br/>
+
+1.13 Select the `Usage Data` tab, select `No, I do not want to join the CEIP and Telemetry Program for PKS` and click `Save`
+
+<details><summary>Screenshot 1.13</summary>
 <img src="Images/2018-10-31-14-07-35.png">
 </details>
 <br/>
 
-1.13 Select the `Errands` tab and enter the following values:
+1.14 Select the `Resource Config` tab and set the `VM Type` for the `Pivotal Container Service` job to `medium.disk`
 
-- NSX-T Validation Errand: On
-- Delete all clusters errand: On
-- Click `Save`
-
-<details><summary>Screenshot 1.13.1</summary>
-<img src="Images/2018-10-22-20-33-01.png">
+<details><summary>Screenshot 1.14</summary>
+<img src="Images/2019-07-15-16-42-18.png">
 </details>
 <br/>
 
-_**Stop: Verify that BOSH tile has completed before continuing. Make sure that `Applying changes` no longer appears in the opsman banner, as seen in screenshot 1.13.2**_
+_**Stop: Verify that BOSH tile has completed before continuing.**
 
-<details><summary>Screenshot 1.13.2</summary><img src="Images/2019-01-12-00-35-16.png"></details><br>
+1.15 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`
 
-1.14 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`
-
-<details><summary>Screenshot 1.14</summary>
+<details><summary>Screenshot 1.15</summary>
 <img src="Images/2018-10-22-21-09-16.png">
 </details>
 <br/>
