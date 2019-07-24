@@ -2,7 +2,7 @@
 
 ### 1.1 Configure Wavefront & vRLI in Enterprise PKS
 
-The steps in this lab access a wavefront intance that is only accessible to VMware emlployees, including accessing a pre-built PKS Dashboard. If you are not a VMware employee, you can follow along using your own wavefront account, but some steps may be different.
+The steps in this lab access a wavefront instance that is only accessible to VMware emlployees, including accessing a pre-built PKS Dashboard. If you are not a VMware employee, you can follow along using your own wavefront account, but some steps may be different.
 
 1.1.1 From your workstation on the VMware network or vpn, open a web browser and go to Workspace ONE and search for "Wavefront-sandbox"
 
