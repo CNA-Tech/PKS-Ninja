@@ -1,4 +1,4 @@
-# PKS Backup and Restore using VMWare Heptio Velero
+# PKS Backup and Restore using VMware Heptio Velero
 
 ## Overview
 
