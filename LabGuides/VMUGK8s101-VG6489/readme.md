@@ -247,7 +247,7 @@ Check progress:
 # Desired state management
 Kubenetes is an orchestrator as illustrated so far ensuring it meets our requirements it is also a desired state management tool.   In order to illustrate this we are going to delete a pod inside our deployment.   Remember that we set this deployment to have two pods you can see the desired state using this command:
 
-    kubectl get service bootcamp
+    kubectl get deployment bootcamp
     
 ![DockerOutput](https://github.com/gortee/pictures/blob/master/K29.PNG) 
 
