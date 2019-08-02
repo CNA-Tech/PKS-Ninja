@@ -12,7 +12,7 @@ At the time of writing, the current template version is v12, for most users, you
 
 There are Several onecloud templates available for the v12 template:
 - CNABU-PKS-Ninja-v12-Baseline
-  - This template has vcenter pre-installed and prepared to do a NSX-t and PKS installation as documented in the [PKS the Easy Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheEasyWay-PE6650) or the [PKS the Hard Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheHardWay-PH7885) Courses
+  - This template has vcenter pre-installed and prepared to do a NSX-t and PKS installation as documented in the [PKS the Easy Way](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/Courses/PksTheEasyWay-PE6650) or the [PKS the Hard Way](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/Courses/PksTheHardWay-PH7885) Courses
 - CNABU-PKS-Ninja-v12-NsxtReady
   - This is the same as the above base v12 template, but with NSX-T Preinstalled. This template could take 30-60 minutes to load into a fully operational state
 - CNABU-PKS-Ninja-v12-PksInstalled
@@ -26,8 +26,8 @@ Note: NinjaLab v11 templates are also available with PKS 1.3. IF you would like 
   
 Each of these templates should be available both in onecloud and VLP, please see the corresponding link below for further instructions:
 
-- VMware Employees with access to Onecloud, please see [Accessing the PKS Ninja Lab with OneCloud](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/OnecloudNinjaLab-OL2089)
-- VMware or Pivotal or Dell Tech employees without access to Onecloud, please see [Accessing the PKS Ninja Lab with VMware Learning Platform](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/VlpNinjaLab-VL6532)
+- VMware Employees with access to Onecloud, please see [Accessing the PKS Ninja Lab with OneCloud](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/LabGuides/OnecloudNinjaLab-OL2089)
+- VMware or Pivotal or Dell Tech employees without access to Onecloud, please see [Accessing the PKS Ninja Lab with VMware Learning Platform](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/LabGuides/VlpNinjaLab-VL6532)
 - For all others, we are actively working on tutorials for creating compatible lab environments. Until further instructions are available, please reach out on the slack channel or pks-ninja-labs@googlegroups.com and we would can provide further documentation that can help you prepare a compatible lab environment
   
 <!--
