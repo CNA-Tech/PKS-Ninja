@@ -6,7 +6,7 @@ To be able to use the lab guides on this site, you will need access to a compati
 
 PKS Ninja uses a standard lab topology and configuration which is currently defined in onecloud templates. Available templates are versioned, and it is important you select the NinjaLab version that aligns with the git branch you are using. The main branch of the github site will always reflect the latest published template, and seperate git branches are maintained for older template versions. 
 
-At the time of writing, the current template version is v11, for most users, you can load a v12 template and proceed with the lab guides on the site. If you would like to use an older version, load the older template, and navigate to the appropriate branch on the pks ninja repository to find content specific to your version. 
+At the time of writing, the current template version is v12, for most users, you can load a v12 template and proceed with the lab guides on the site. If you would like to use an older version, load the older template, and navigate to the appropriate branch on the pks ninja repository to find content specific to your version. 
 
 **Please Note: Not all of these lab templates are currently available on all Lab Access Portals. Additional Lab Templates are in the process of being transferred to each of the different lab access portals (Quick Demo/VMware Learning Platform/Onecloud) and should be available shortly)
 
