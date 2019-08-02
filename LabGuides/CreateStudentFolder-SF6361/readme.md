@@ -158,7 +158,7 @@ git config --global push.default simple
 </details>
 <br/>
 
-1.8 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and, add your updates to staging, commit your updates and then push the contents of your `update-1` branch from your local clone to your fork of the students repo with the following commands.  If your shell prompt does not show current directory, use command `pwd` to show your current working directory.
+1.8 From the `cli-vm` prompt ensure you are in the `~/Forked/Students` directory and, add your updates to staging, commit your updates and then push the contents of your `update-1` branch from your local clone to your fork of the students repo with the following commands.  If your shell prompt does not show current directory, use command `pwd` to show your current working directory. If your github account uses two-factor authentication, you will need to create a personal access token to be used in place of your password, per the instructions at https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line.
 
 ```bash
 pwd
