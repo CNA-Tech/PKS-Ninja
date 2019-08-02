@@ -1,5 +1,7 @@
 # PKS The Easy Way
 
+**This course has not yet been updated for Pks1.4, and the parameters file for the pipelines will need to be updated before this will work. If you have concourse experience feel free to proceed, and if you create a working parameters file please share it with the community. If you do not have concourse experience, this is an advanced topic, and we recommend using the PKS the Hard Way course for installation until we have the chance to update the course, thank you for your patience!**
+
 ## Introduction
 
 The PKS The Easy Way course provides instructions to execute automated installation of NSX-T, PKS Control Plane, and Harbor using Concourse pipelines.
