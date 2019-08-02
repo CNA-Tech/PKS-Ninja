@@ -8,7 +8,7 @@ The PKS The Hard Way course provides instructions to execute manual installation
 
 You will need access to a Ninja Lab Environment to complete this course. If you have not yet setup lab access, please see the [Getting Access to a PKS Ninja Lab Environment](../GetLabAccess-LA8528/readme.md) for further instructions
 
-Note: NinjaLab v10 templates are also available with PKS 1.2. IF you would like to use a v10 template, please switch to the v10 branch of the PKS-Ninja Repo. If you use the PKS Ninja v10 template, you must install the v10 template patch before proceeding.
+Note: NinjaLab v11 templates are also available with PKS 1.3. IF you would like to use a v11 template, please switch to the master branch of the PKS-Ninja Repo.
 
 ## Instructions
 
