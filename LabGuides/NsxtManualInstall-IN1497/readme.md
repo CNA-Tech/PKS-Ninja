@@ -370,57 +370,62 @@ Preparing hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kerne
 - Select existing Transport Zone: `overlay-tz`
 - Click add and host prep will begin with previously created transport node profile
 
+4.5 When completed, hosts should be showing as `Success` and `Up`
+
+<details><summary>Screenshot 4.5</summary><img src="Images/2019-08-03-hostsuccess.png"></details><br>
+
 ## Step 6: Deploy NSX Edge
 
-An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networking for your NSX environment. It also serves an interface for a tier 0 router (more on tier 0 routers later) to connect to the physical netwrok.
+An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networking for your NSX environment. It also serves an interface for a tier 0 router (more on tier 0 routers later) to connect to the physical network.
 
-  6.1 Add an NSX Edge
+  5.1 Add an NSX Edge
 
 - Click on **Fabric** -> **Nodes**, and click on **Edges**
-- Click on `Add EDge VM`
+- Click on `Add Edge VM`
 - Name: `nsxedge-1.corp.local`
 - Host name/FQDN: `nsxedge-1.corp.local`
 - Form Factor: **`Large`** _(PKS currently requires the NSX Edge to be Large size)_
 - Make sure you selected 'Large' size
 - Click on **Next**
 
-<details><summary>Screenshot 6.1.1</summary><img src="Images/2018-12-16-17-32-59.png"></details><br>
+<details><summary>Screenshot 5.1.1</summary><img src="Images/2019-08-03-edge1.png"></details><br>
 
-- CLI Password: `VMware1!`
-- System Root Password: `VMware1!`
+- CLI Password: `VMware1!VMware1!`
+- Click `Allow Root SSH Login`
+- System Root Password: `VMware1!VMware1!`
 - Click **Next**
 
-<details><summary>Screenshot 6.1.2</summary><img src="Images/2018-12-13-21-40-15.png"></details><br>
+<details><summary>Screenshot 5.1.2</summary><img src="Images/2018-12-13-21-40-15.png"></details><br>
 
 - Compute Manager: `vCenter-compute-manager`
 - Cluster: `RegionA01-MGMT01`
 - Datastore: `RegionA01-ISCSI01-COMP01`
 - Click **Next**
 
-<details><summary>Screenshot 6.1.3</summary><img src="Images/2018-12-17-12-31-59.png"></details><br>
+<details><summary>Screenshot 5.1.3</summary><img src="Images/2018-12-17-12-31-59.png"></details><br>
 
 - Assignment: `Static`
 - Management IP: `192.168.110.91/24`
 - Default Gateway: `192.168.110.1`
 - Management Interface: `VM-RegionA01-vDS-MGMT`
-- Datapath Interfaces: 
+- Configure NSX: `overlay-tz` 
     - `Uplink-RegionA01-vDS-MGMT`
     - `Transport-RegionA01-vDS-MGMT`
     - `Transport-RegionA01-vDS-MGMT`
-- Clcik **Finish**
+- Click **Finish**
 
-<details><summary>Screenshot 6.1.4</summary><img src="Images/2018-12-14-12-14-48.png"></details><br>
+<details><summary>Screenshot 5.1.4</summary><img src="Images/2018-12-14-12-14-48.png"></details><br>
 
- 6.2 Monitor deployment status until **Deployment Status** shows **Node Ready** and **Manager Connectivity  Up**. 
+ 5.2 Monitor deployment status until **Deployment Status** shows **Node Ready** and **Manager Connectivity  Up**. 
  
  You may need to hit the **Refresh** link in the lower-left corner and it may take a while to complete. Controller connectivity will not show Up until we complete a future configuration.
 
-<details><summary>Screenshot 6.3</summary><img src="Images/2018-12-15-13-52-12.png"></details><br>
+<details><summary>Screenshot 5.3</summary><img src="Images/2018-12-15-13-52-12.png"></details><br>
 
- 6.3 Verify that the edge vm has been created and powered on in vCenter web client and that it is showing as **Node Ready** and **Up** in NSX Manager UI
+ 5.3 Verify that the edge vm has been created and powered on in vCenter web client and that it is showing as **Node Ready** and **Up** in NSX Manager UI
 
-<details><summary>Screenshot 6.3.1</summary><img src="Images/2018-12-16-17-34-16.png"></details>
-<details><summary>Screenshot 6.3.2</summary><img src="Images/2018-12-22-15-52-45.png"></details><br>
+<details><summary>Screenshot 5.3.1</summary><img src="Images/2018-12-16-17-34-16.png"></details>
+<details><summary>Screenshot 5.3.2</summary><img src="Images/2018-12-22-15-52-45.png"></details><br>
 
 ## Step 7: Create Edge Transport Node
 
@@ -439,7 +444,7 @@ _NOTE: If the 'Configure as Transport Node' menu item is not active, wait a few 
 
 7.2 Complete the Transport Node as follows
 
-_NOTE: This conifguration step is a common source of confusion when first learning to configure NSX-T. You are configuring the edge VM with an interface connecting to the physical network via a vSphere vswitch and an interface connected to the overlay host switch with a tunnel enpoint that is connected to a vSphere vswitch. The TEP terminates inside the edge VM. This configuration enables routing to/from overlay/physical._
+_NOTE: This configuration step is a common source of confusion when first learning to configure NSX-T. You are configuring the edge VM with an interface connecting to the physical network via a vSphere vswitch and an interface connected to the overlay host switch with a tunnel enpoint that is connected to a vSphere vswitch. The TEP terminates inside the edge VM. This configuration enables routing to/from overlay/physical._
 
 - Click on **Create New Transport Zone** 
 
