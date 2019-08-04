@@ -1,16 +1,14 @@
-# NSX-T 2.3 Installation
+# NSX-T 2.4 Installation
 
 ## Overview
 
-The following installation guide follows the implementation of a functional NSX-T 2.3 Installation configured for PKS 1.2 in a vSphere nested lab environment. This implementation uses variables that function in the lab environment. Anyone is welcome to build a similar lab environment and follow along with the lab exercises, but please note you will need to replace any variables such as IP addresses and FQDNs and replace them with the appropriate values for your lab environment.
+The following installation guide follows the implementation of a functional NSX-T 2.4 Installation configured for PKS 1.4 in a vSphere nested lab environment. This implementation uses variables that function in the lab environment. Anyone is welcome to build a similar lab environment and follow along with the lab exercises, but please note you will need to replace any variables such as IP addresses and FQDNs and replace them with the appropriate values for your lab environment.
 
-The steps provided in this lab guide are intended for a lab implementation and do not necessarily align with best practices for production implementiations. While the instructions provided in this lab guide did work for the author in their lab environment, VMware and/or any contributors to this Guide provide no assurance, warranty or support for any content provided in this guide.
+The steps provided in this lab guide are intended for a lab implementation and do not necessarily align with best practices for production implementations. While the instructions provided in this lab guide did work for the author in their lab environment, VMware and/or any contributors to this Guide provide no assurance, warranty or support for any content provided in this guide.
 
 ## Prerequisites
 
 - Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
-
-Note: NinjaLab v10 templates are also available with PKS 1.2. IF you would like to use a v10 template, please switch to the v10 branch of the PKS-Ninja Repo. If you use the PKS Ninja v10 template, you must install the v10 template patch before proceeding.
 
 ## Installation Notes
 
@@ -18,7 +16,7 @@ Anyone who implements any software used in this lab must provide their own licen
 
 For those needing access to VMware licensing for lab and educational purposes, we recommend contacting your VMware account team. Also, the [VMware User Group's VMUG Advantage Program](https://www.vmug.com/Join/VMUG-Advantage-Membership) provides a low-cost method of gaining access to VMware licenses for evaluation purposes.
 
-This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.3 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-3E0C4CEC-D593-4395-84C4-150CD6285963.html)
+This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.4 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/installation/GUID-67731519-E70F-4BC5-87CD-9F426E250349.html)
 
 ### Overview of Tasks Covered in Lab 1
 
@@ -38,7 +36,7 @@ NOTE: NSX Manager OVA cannot be installed via HTML5 client, so for installation 
 
 If you intend to follow the manual NSX-T install with the automated pipeline for PKS, be sure to match the naming of objects/properties/configurations in this lab guide exactly.
 
-This section follows the standard documentation, which includes additional details and explanations: [NSX Manager Installation](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-A65FE3DD-C4F1-47EC-B952-DEDF1A3DD0CF.html)
+This section follows the standard documentation, which includes additional details and explanations: [NSX Manager Installation](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/installation/GUID-67731519-E70F-4BC5-87CD-9F426E250349.html)
 
 -----------------------
 
@@ -58,9 +56,9 @@ This section follows the standard documentation, which includes additional detai
 </details>
 <br/>
 
-1.3 On the `Select name and location` step, use the name `nsxt-manager` and select `RegionA01` Datacenter as the location
+1.3 On the `Select name and location` step, use the name `nsxmgr-01a` and select `RegionA01` Datacenter as the location
 
-<details><summary>Screenshot 1.3</summary><img src="Images/2018-12-17-11-08-16.png"></details><br>
+<details><summary>Screenshot 1.3</summary><img src="Images/2019-08-03.png"></details><br>
 
 1.4 On the `Select a Resource` step, expand `RegionA01-MGMT01` and select the `pks-mgmt-1` resource pool
 
@@ -99,10 +97,12 @@ This section follows the standard documentation, which includes additional detai
 
 1.9 On the `Customize Template` step, enter the following variables:
 
+_Note: NSX Manager has new character minimum for passwords_
+
 - Application
-  - System Root User Password: VMware1!
-  - CLI Admin User Password: VMware1!
-  - CLI Audit User Password: VMware1!
+  - System Root User Password: VMware1!VMware1!
+  - CLI Admin User Password: VMware1!VMware1!
+  - CLI Audit User Password: VMware1!VMware1!
 - DNS
   - DNS Server List: 192.168.110.10
   - Domain Search List: corp.local
@@ -147,7 +147,7 @@ This section follows the standard documentation, which includes additional detai
 
 1.12 Expand the `Memory` section and set the `Reservation` to `0`
 
-NOTE: This step is provided to help limit the requirements for resource constrained lab environments, if your lab environment has ample hardware resources, you may skip this step
+_NOTE: This step is provided to help limit the requirements for resource constrained lab environments, if your lab environment has ample hardware resources, you may skip this step_
 
 <details><summary>Screenshot 1.12</summary>
 <img src="Images/2018-10-17-02-22-04.png">
@@ -163,19 +163,19 @@ NOTE: If the option to power on the nsxmgr-01a VM is not available, log out and 
 </details>
 <br/>
 
-1.14 Using the IP address you assigned to NSX Manager in the Deploy OVF Template Wizard, open a web browser connection to NSX Manager, for example:
+1.14 Using the IP addressor FQDN you assigned to NSX Manager in the Deploy OVF Template Wizard, open a web browser connection to NSX Manager, for example:
 
 `https://nsxmgr-01a.corp.local/login.jsp`
 
 Login as:
 
 - User: admin
-- Password: VMware1!
+- Password: VMware1!VMware1!
 
 _NOTE: On your first login, you will be prompted to accept the EULA. Accept EULA and opt out of VMware Customer Experience program._
 
 <details><summary>Screenshot 1.14</summary>
-<img src="Images/2018-10-17-01-34-33.png">
+<img src="2019-08-03-nsx-login.png">
 </details>
 <br/>
 
