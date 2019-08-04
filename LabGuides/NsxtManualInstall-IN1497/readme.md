@@ -204,14 +204,25 @@ _NOTE: in a production implementation, you would first copy the vCenter thumbpri
 <details><summary>Screenshot 2.2.2</summary><img src="Images/2018-12-13-16-17-18.png"></details><br>
 
 
- 2.3 Click **Refresh** in the lower-left hand corner and verify the Compute Manager is `Registered` and `Up`
+ 2.3 Verify the vCenter is listed in the compute manager window and `Up`
 
-<details><summary>Screenshot 2.3.1</summary><img src="Images/2018-12-16-16-54-09.png"></details>
-<details><summary>Screenshot 2.3.2</summary><img src="Images/2019-08-03-thumbprint.png"></details><br>
+<details><summary>Screenshot 2.3.1</summary><img src="Images/2019-08-03-vcenter.png"></details>
 
-## Step 3: Deploy NSX Controller
+2.4 With the unified appliance, the NSX Manager and Controllers are deployed together.  Verify the health of NSX through the NSX CLI
 
-The NSX controller is the center of the NSX overlay control plane. I a production implementation, you would deploy at least three in a cluster for redundancy.
+2.4.1 Using PUTTY, open an SSH terminal to the NSX Unified Appliance
+- Use the NSX Manager password `VMware1!VMware1!`
+
+<details><summary>Screenshot 2.4.1</summary><img src="Images/2019-08-03-puttynsx.png"></details>
+
+2.4.2 From the command line, execute the following command
+    - `get management-cluster status`
+
+<details><summary>Screenshot 2.4.2</summary><img src="Images/2019-08-03-clusterstatus.png"></details>
+
+<!-- ## Step 3: Deploy NSX Controller
+
+The NSX controller is the center of the NSX overlay control plane. In a production implementation, you would deploy at least three in a cluster for redundancy.
 
  3.1 Click on **System** -> **Components**, and then click **Add Controllers** 
 
@@ -276,60 +287,61 @@ _NOTE: Confirm that step 3.3 has completed before proceeding to step 3.4. This s
 - Set Memory Reservation: `0`
 - Click **Ok** and restart the VM
 
-<details><summary>Screenshot 3.4</summary><img src="Images/2018-12-22-15-37-34.png"></details><br>
+<details><summary>Screenshot 3.4</summary><img src="Images/2018-12-22-15-37-34.png"></details><br> -->
 
-## Step 4: Create IP Pools
+## Step 3: Create IP Pools
 
 An IP Pool is an IP address range definition within the NSX-T IPAM construct. In this step, you will create an ip pool for tunnel endpoints and an ip pool for k8s cluster load balancers.
 
- 4.1 Click **Inventory** -> **Groups**, and then click on **IP Pools**
+ 3.1 Click **Networking** -> **IP Address Management**, and then click on **IP Pools**
 
-<details><summary>Screenshot 4.1</summary><img src="Images/2018-12-16-17-13-38.png"></details><br>
+<details><summary>Screenshot 3.1</summary><img src="Images/2019-08-03-ippools.png"></details><br>
 
- 4.2 Create the TEP IP Pool, click **Add** and complete with the following values
+ 3.2 Create the TEP IP Pool, click **Add IP Address Pool** and complete with the following values
 
 - Name: `tep-ip-pool`
-- Click `Add` under Subnets
+- Click `Set` under Subnets
+- Select `IP Ranges`
 - IP Range: `192.168.130.51-192.168.130.75`
 - Gateway: `192.168.130.1`
 - CIDR: `192.168.130.0/24`
-- Click **Add**
+- Click **Add** and **Apply** then **Save**
 
-<details><summary>Screenshot 4.2</summary><img src="Images/2018-12-14-11-09-57.png"></details><br>
+<details><summary>Screenshot 4.2</summary><img src="Images/2019-08-03-subnet.png"></details><br>
 
- 4.2 Create the k8s LB Pool, click **Add** and complete with the following values
+ 3.2.1 Create another pool for k8s LB Pool, click **Add Subnet** and complete with the following values
 
 - Name: `ip-pool-vips`
-- Click `Add` under Subnets
+- Click `Set` under Subnets
+- Select `IP Ranges`
 - IP Range: `10.40.14.34-10.40.14.62`
 - CIDR: `10.40.14.32/27`
-- Click **Add**
+- Click **Add** and **Apply** then **Save**
 
 <br>
 
-## Step 5: Prepare and Configure ESXi Hosts
+## Step 4: Prepare and Configure ESXi Hosts
 
-Prepapting hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kernel modues) and configuring the NSX tunnel endpoints. You will use the NSX Manager web client to configure this step.
+Preparing hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kernel modues) and configuring the NSX tunnel endpoints. You will use the NSX Manager web client to configure this step.
 
- 5.1 Click on **Fabirc** -> **Nodes**, and then click on **Hosts**
+ 4.1 Click on **System** -> **Fabric** -> **Nodes**, and then click on **Nodes**
 
-<details><summary>Screenshot 5.1</summary><img src="Images/2018-12-16-17-15-38.png"></details><br>
+<details><summary>Screenshot 4.1</summary><img src="Images/2019-08-03-hostprep.png"></details><br>
 
- 5.2 Select **vCenter-compute-manager** from the **Managed by** dropdown
+ 4.2 Select **vCenter-compute-manager** from the **Managed by** dropdown
 
-<details><summary>Screenshot 5.2</summary><img src="Images/2018-12-16-17-16-39.png"></details><br>
 
  5.3 Configure Cluster RegionA01-MGMT01
 
 - Select **RegionA01-MGMT01**
-- Click **Configure Cluster**
+- Click **Configure NSX**
 
-<details><summary>Screenshot 5.3.1</summary><img src="Images/2018-12-14-11-21-52.png"></details><br>
+<details><summary>Screenshot 4.3.1</summary><img src="Images/2019-08-03-mgmt.png"></details><br>
 
-- Enable `Automatically Install NSX` and `Automatically Create Transport Node`
+
 - Click on **Or Create New Transport Zone**  under Transport Zone
 
-<details><summary>Screenshot 5.3.2</summary><img src="Images/2018-12-14-11-24-32.png"></details><br>
+<details><summary>Screenshot 4.3.2</summary><img src="Images/2019-08-03-newtz.png"></details><br>
 
 - Name: `overlay-tz`
 - N-VDS Name: `hostswitch-overlay`
@@ -337,30 +349,26 @@ Prepapting hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kern
 - Traffic Type: `Overlay`
 - Click **Add**
 
-<details><summary>Screenshot 5.3.3</summary><img src="Images/2018-12-14-11-27-25.png"></details><br>
+<details><summary>Screenshot 4.3.3</summary><img src="Images/2019-08-03-tzsettings.png"></details><br>
 
+4.3.3 On N-VDS Tab fill in:
 - Uplink Profile: `nsx-default-uplink-hostswitch-profile`
 - Ip Assignment: `Use IP Pool`
 - IP Pool: `tep-ip-pool`
 - Physical NICs: `vmnic1`
 - Click **Add**
 
-<details><summary>Screenshot 5.3.4</summary><img src="Images/2018-12-14-11-29-20.png"></details><br>
+<details><summary>Screenshot 4.3.4</summary><img src="Images/2019-08-03-tzprofile.png"></details><br>
 
  5.4 Configure RegionA01-COMP01
 
 - Select **RegionA01-COMP01**
 - Click **Configure Cluster**
 
-<details><summary>Screenshot 5.4</summary><img src="Images/2018-12-14-11-35-42.png"></details><br>
+<details><summary>Screenshot 4.4</summary><img src="Images/2018-12-14-11-35-42.png"></details><br>
 
-- Enable `Automatically Install NSX` and `Automatically Create Transport Node`
-- Transport Zone: `overlay-tz`
-- Uplink Profile: `nsx-default-uplink-hostswitch-profile`
-- Ip Assignment: `Use IP Pool`
-- IP Pool: `tep-ip-pool`
-- Physical NICs: `vmnic1`
-- Click **Add**
+- Select existing Transport Zone: `overlay-tz`
+- Click add and host prep will begin with previously created transport node profile
 
 ## Step 6: Deploy NSX Edge
 
