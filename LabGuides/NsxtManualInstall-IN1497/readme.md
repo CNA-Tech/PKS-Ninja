@@ -175,7 +175,7 @@ Login as:
 _NOTE: On your first login, you will be prompted to accept the EULA. Accept EULA and opt out of VMware Customer Experience program._
 
 <details><summary>Screenshot 1.14</summary>
-<img src="2019-08-03-nsx-login.png">
+<img src="Images/2019-08-03-nsx-login.png">
 </details>
 <br/>
 
@@ -184,21 +184,21 @@ _NOTE: On your first login, you will be prompted to accept the EULA. Accept EULA
 
 In this step, you create a connection between the NSX manager and your vCenter. This enables NSX manager to deploy VIBs to the hosts, controller and edge VMs, etc.
 
- 2.1 From NSX Manager, click on **Fabric** -> **Compute Manager**
+ 2.1 From NSX Manager, click on **System** -> **Fabric** -> **Compute Managers**
 
-<details><summary>Screenshot 2.1</summary><img src="Images/2018-12-16-16-58-11.png"></details><br>
+<details><summary>Screenshot 2.1</summary><img src="Images/2019-08-03-comp-Mgr.png"></details><br>
 
  2.2 Click on **Add** and Configure the New Compute Manager form with following values:
 
 - Name: `vCenter-compute-manager`
 - Domain Name/IP Address: `vcsa-01a.corp.local`
 - Type: `vCenter`
-- Username: `administrator@vsphere.local`
+- Username: `administrator@corp.local`
 - Password: `VMware1!`
 - Clcik **Add**
 - Click **Add** again to accept the vCenter certificate thumbprint
 
-_NOTE: in a production implementation, you would first copy the vCetner thumbprint and then provide it in the form to properly authenticate the intial connection._
+_NOTE: in a production implementation, you would first copy the vCenter thumbprint and then provide it in the form to properly authenticate the initial connection._
 
 <details><summary>Screenshot 2.2.1</summary><img src="Images/2018-12-13-16-15-57.png"></details>
 <details><summary>Screenshot 2.2.2</summary><img src="Images/2018-12-13-16-17-18.png"></details><br>
@@ -207,7 +207,7 @@ _NOTE: in a production implementation, you would first copy the vCetner thumbpri
  2.3 Click **Refresh** in the lower-left hand corner and verify the Compute Manager is `Registered` and `Up`
 
 <details><summary>Screenshot 2.3.1</summary><img src="Images/2018-12-16-16-54-09.png"></details>
-<details><summary>Screenshot 2.3.2</summary><img src="Images/2018-12-16-16-55-15.png"></details><br>
+<details><summary>Screenshot 2.3.2</summary><img src="Images/2019-08-03-thumbprint.png"></details><br>
 
 ## Step 3: Deploy NSX Controller
 
