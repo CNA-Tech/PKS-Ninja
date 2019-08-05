@@ -374,7 +374,7 @@ Preparing hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kerne
 
 <details><summary>Screenshot 4.5</summary><img src="Images/2019-08-03-hostsuccess.png"></details><br>
 
-## Step 6: Deploy NSX Edge
+## Step 6: Deploy NSX Edge/Transport Node
 
 An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networking for your NSX environment. It also serves an interface for a tier 0 router (more on tier 0 routers later) to connect to the physical network.
 
@@ -385,6 +385,9 @@ An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networkin
 - Name: `nsxedge-1.corp.local`
 - Host name/FQDN: `nsxedge-1.corp.local`
 - Form Factor: **`Large`** _(PKS currently requires the NSX Edge to be Large size)_
+
+# Would not deploy with large VM size, had to use small
+
 - Make sure you selected 'Large' size
 - Click on **Next**
 
@@ -408,26 +411,42 @@ An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networkin
 - Management IP: `192.168.110.91/24`
 - Default Gateway: `192.168.110.1`
 - Management Interface: `VM-RegionA01-vDS-MGMT`
-- Configure NSX: `overlay-tz` 
-    - `Uplink-RegionA01-vDS-MGMT`
-    - `Transport-RegionA01-vDS-MGMT`
-    - `Transport-RegionA01-vDS-MGMT`
-- Click **Finish**
+- Configure NSX: 
+    First, create uplink transport zone:
+    - Select `OR Create New Transport Zone`
+    - Name: `vlan-tz`
+    - N-VDS Name: `hostswitch-vlan`
+    - N-VDS Mode: `Standard`
+    - Traffic Type: `VLAN`
+    - Click **Add**
 
-<details><summary>Screenshot 5.1.4</summary><img src="Images/2018-12-14-12-14-48.png"></details><br>
+<details><summary>Screenshot 5.1.4</summary><img src="Images/2019-08-04-vlantz.png"></details><br>
+
+    - Select both `overlay-tz` and `vlan-tz`
+    - Edge Switch Name: `hostswitch-overlay`
+    - Uplink Profile: `nsx-edge-single-nic-uplink-profile`
+    - IP Assignment: `Use IP Pool`
+    - IP Pool: `tep-ip-pool`
+    - DPDK Fastpath: `Uplink 1` `Transport-RegionA01-vDS-MGMT`
+    - Click `+ Add N-VDS`
+    - Edge Switch Name: `hostswitch-vlan`
+    - Uplink Profile: `nsx-edge-single-nic-uplink-profile`
+    - DPDK Fastpath: `Uplink 1` `Transport-RegionA01-vDS-MGMT` `Uplink-RegionA01-vDS-MGMT`
+
+<details><summary>Screenshot 5.1.4</summary><img src="Images/2019-08-04-edgevm.png"></details><br>
+
 
  5.2 Monitor deployment status until **Deployment Status** shows **Node Ready** and **Manager Connectivity  Up**. 
  
- You may need to hit the **Refresh** link in the lower-left corner and it may take a while to complete. Controller connectivity will not show Up until we complete a future configuration.
 
-<details><summary>Screenshot 5.3</summary><img src="Images/2018-12-15-13-52-12.png"></details><br>
+<details><summary>Screenshot 5.2</summary><img src="Images/2018-12-15-13-52-12.png"></details><br>
 
  5.3 Verify that the edge vm has been created and powered on in vCenter web client and that it is showing as **Node Ready** and **Up** in NSX Manager UI
 
 <details><summary>Screenshot 5.3.1</summary><img src="Images/2018-12-16-17-34-16.png"></details>
 <details><summary>Screenshot 5.3.2</summary><img src="Images/2018-12-22-15-52-45.png"></details><br>
 
-## Step 7: Create Edge Transport Node
+<!-- ## Step 7: Create Edge Transport Node
 
 An NSX Edge Transport Node is the configuration of an edge with an existing transport zone. This includes install and configure of the tunnel enddpoint and virtual switch for connection to your NSX network.
 
@@ -436,7 +455,7 @@ An NSX Edge Transport Node is the configuration of an edge with an existing tran
 - Click on **Fabric** -> **Nodes**, and then click **Edges**
 - Select `nsxedge-1.corp.local`
 - Click the gear dropdown
-- Select Configure as Tansport Node
+- Select Configure as Transport Node
 
 _NOTE: If the 'Configure as Transport Node' menu item is not active, wait a few minutes and try again._
 
@@ -468,7 +487,7 @@ _NOTE: This configuration step is a common source of confusion when first learni
 <details><summary>Screenshot 7.2.3</summary><img src="Images/2018-12-14-12-40-22.png"></details><br>
 
 - Click on **N-VDS** tab 
-- Edge Switch Name: `hostswith-vlan`
+- Edge Switch Name: `hostswitch-vlan`
 - Uplink Profile: `nsx-default-edge-vm-uplink-hostswitch-profile`
 - Virtual NICs: `fp-eth0`
 - Click **Add N-VDS**
@@ -482,7 +501,7 @@ _NOTE: This configuration step is a common source of confusion when first learni
 - Virtual NICs: `fp-eth1`
 - Click **Add**
 
-<details><summary>Screenshot 7.2.5</summary><img src="Images/2018-12-14-12-48-26.png"></details><br>
+<details><summary>Screenshot 7.2.5</summary><img src="Images/2018-12-14-12-48-26.png"></details><br> -->
 
  7.3 Add an Edge Cluster
 
@@ -491,10 +510,10 @@ _NOTE: This configuration step is a common source of confusion when first learni
 - Name: `edge-cluster-1`
 - Edge Cluster Profile: `nsx-default-edge-high-availability-profile`
 - Member Type: `Edge Node`
-- Select `edge-tn-1` from **Available** and click on ``>`` to move it to **Selected**
+- Select `nsxedge-1.corp.local` from **Available** and click on ``>`` to move it to **Selected**
 - Click **Add**
 
-<details><summary>Screenshot 7.3</summary><img src="Images/2018-12-14-12-52-40.png"></details><br>
+<details><summary>Screenshot 7.3</summary><img src="Images/2019-08-04-edgecluster.png"></details><br>
 
  7.4 Click on **Transport Nodes** and verify edge-tn-1 status is **Success** and **Up**
 
