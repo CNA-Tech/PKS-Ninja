@@ -26,7 +26,7 @@ This lab follows the standard documentation, which includes additional details a
 - [Step 4: Create IP Pools](#step-4-create-ip-pools)
 - [Step 5: Prepare and Configure ESXi Hosts](#step-5-prepare-and-configure-esxi-hosts)
 - [Step 6: Deploy NSX Edge](#step-6-deploy-nsx-edge)
-- [Step 7: Create Edge Transport Node](#step-7-create-edge-transport-node)
+<!-- - [Step 7: Create Edge Transport Node](#step-7-create-edge-transport-node) -->
 - [Step 8: Create Switches and Routers](#step-8-create-switches-and-routers)
 - [Step 9: Create Network Address Translation Rules](#step-9-create-network-address-translation-rules)
 - [Step 10: Create IP Blocks for PKS Components](#step-10-create-ip-blocks-for-pks-components)
@@ -331,7 +331,7 @@ Preparing hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kerne
  4.2 Select **vCenter-compute-manager** from the **Managed by** dropdown
 
 
- 5.3 Configure Cluster RegionA01-MGMT01
+ 4.3 Configure Cluster RegionA01-MGMT01
 
 - Select **RegionA01-MGMT01**
 - Click **Configure NSX**
@@ -351,7 +351,7 @@ Preparing hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kerne
 
 <details><summary>Screenshot 4.3.3</summary><img src="Images/2019-08-03-tzsettings.png"></details><br>
 
-4.3.3 On N-VDS Tab fill in:
+4.3.4 On N-VDS Tab fill in:
 - Uplink Profile: `nsx-default-uplink-hostswitch-profile`
 - Ip Assignment: `Use IP Pool`
 - IP Pool: `tep-ip-pool`
@@ -360,7 +360,7 @@ Preparing hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kerne
 
 <details><summary>Screenshot 4.3.4</summary><img src="Images/2019-08-03-tzprofile.png"></details><br>
 
- 5.4 Configure RegionA01-COMP01
+ 4.4 Configure RegionA01-COMP01
 
 - Select **RegionA01-COMP01**
 - Click **Configure Cluster**
@@ -374,11 +374,11 @@ Preparing hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kerne
 
 <details><summary>Screenshot 4.5</summary><img src="Images/2019-08-03-hostsuccess.png"></details><br>
 
-## Step 6: Deploy NSX Edge/Transport Node
+## Step 5: Deploy NSX Edge/Transport Node
 
 An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networking for your NSX environment. It also serves an interface for a tier 0 router (more on tier 0 routers later) to connect to the physical network.
 
-  5.1 Add an NSX Edge
+  5.1 Add an NSX Edge VM
 
 - Click on **Fabric** -> **Nodes**, and click on **Edges**
 - Click on `Add Edge VM`
@@ -386,7 +386,7 @@ An NSX Edge enables services above, and beyond, layer 2  and 3 virtual networkin
 - Host name/FQDN: `nsxedge-1.corp.local`
 - Form Factor: **`Large`** _(PKS currently requires the NSX Edge to be Large size)_
 
-# Would not deploy with large VM size, had to use small
+<!-- _Was forced to use small...might cause problems_ -->
 
 - Make sure you selected 'Large' size
 - Click on **Next**
@@ -503,7 +503,7 @@ _NOTE: This configuration step is a common source of confusion when first learni
 
 <details><summary>Screenshot 7.2.5</summary><img src="Images/2018-12-14-12-48-26.png"></details><br> -->
 
- 7.3 Add an Edge Cluster
+ ## Step 6: Create an Edge Cluster
 
 - Click on **Fabric** -> **Nodes**, and then click on **Edge Clusters**
 - Click on **Add**
@@ -513,92 +513,88 @@ _NOTE: This configuration step is a common source of confusion when first learni
 - Select `nsxedge-1.corp.local` from **Available** and click on ``>`` to move it to **Selected**
 - Click **Add**
 
-<details><summary>Screenshot 7.3</summary><img src="Images/2019-08-04-edgecluster.png"></details><br>
+<details><summary>Screenshot 6</summary><img src="Images/2019-08-04-edgecluster.png"></details><br>
 
  7.4 Click on **Transport Nodes** and verify edge-tn-1 status is **Success** and **Up**
 
-<details><summary>Screenshot 7.6</summary><img src="Images/2018-12-14-12-54-08.png"></details><br>
+<details><summary>Screenshot 6.1</summary><img src="Images/2018-12-14-12-54-08.png"></details><br>
 
 
-## Step 8: Create Switches and Routers
+## Step 7: Create Switches and Routers
 
 NSX switches and routers enable virtual and physical network connectivity. NSX uses multiple tier 1 routers spoked into a tier 0 router. The tier 0 router connects to the physical network though the edge VLAN interface. For this, you will create a VLAN Uplink switch. You will then create tier 1 switches and routers to connect the virtual subnets to the tier 0.
 
- 8.1 Create VLAN Uplink Switch
+ 7.1 Create VLAN Uplink Switch
 
-- Click on **Networking** -> **Switching**
+- Click on **Networking** -> **Segments**
 
-<details><summary>Screenshot 8.1.1</summary><img src="Images/2018-12-16-17-59-04.png"></details><br>
-
-- Click on **Add**
+- Click on **Add Segment**
 - Name: `uplink-vlan-ls`
 - Transport Zone: `vlan-tz`
 - VLAN: `0` _(Press [Enter] key after input to store it)_
-- Click on **Add**
+- Click on **Save**
 
-<details><summary>Screenshot 8.1.2</summary><img src="Images/2018-12-14-20-03-39.png"></details><br>
+<details><summary>Screenshot 7.1.1</summary><img src="Images/2019-08-04-vlanuplink.png"></details><br>
 
- 8.2 Create PKS Management Switch
+ 7.2 Create PKS Management Switch
 
-- Clcik on **Add**
+- Clcik on **Add Segment**
 - Name: `ls-pks-mgmt`
 - Transport Zone: `overlay-tz`
-- Click on **Add**
+- Click on **Save**
 
-<details><summary>Screenshot 8.2</summary><img src="Images/2018-12-15-14-56-24.png"></details><br>
+<details><summary>Screenshot 7.2</summary><img src="Images/2019-08-04-lspksmgmt.png"></details><br>
 
- 8.3 Create PKS Compute Switch
+ 7.3 Create PKS Compute Switch
 
-- Clcik on **Add**
+- Clcik on **Add Segment**
 - Name: `ls-pks-service`
 - Transport Zone: `overlay-tz`
-- Click on **Add**
+- Click on **Save**
 
-<details><summary>Screenshot 8.3</summary><img src="Images/2018-12-15-14-57-10.png"></details><br>
+<details><summary>Screenshot 7.3</summary><img src="Images/2019-08-04-service.png"></details><br>
 
- 8.4 Create T0 Router
+ 7.4 Create T0 Router
 
-- Click on **Networking** -> **Routers**, and then click on **Add** -> **T0 Router**
+- Click on **Networking** -> **Tier-0 Gateways**, and then click on **Add** -> **T0 Gateway**
 
-<details><summary>Screenshot 8.4.1</summary><img src="Images/2018-12-14-20-17-20.png"></details><br>
+<details><summary>Screenshot 7.4.1</summary><img src="Images/2018-12-14-20-17-20.png"></details><br>
 
-    Be sure to configure HA Mode as `Active-Standby'
+Be sure to configure HA Mode as `Active-Standby`
 
 - Name: `t0-pks`
 - Edge Cluster: `edge-cluster-1`
 - High Availabilty Mode: **`Active-Standby`**
 - Failover Mode: `Non-Preemptive`
-- Click **Add**
+- Click **Save**
 
-<details><summary>Screenshot 8.4.2</summary><img src="Images/2018-12-15-15-09-20.png"></details><br>
+<details><summary>Screenshot 7.4.2</summary><img src="Images/2019-08-04-t0.png"></details><br>
 
- 8.5 Create PKS Managent T1 Router
+ 7.5 Create PKS Managent T1 Router
 
-- Click **Add** -> **Tier-1 Router**
+- Click **Tier-1 Gateways** -> **Add Tier-1 Gateway**
 - Name: `t1-pks-mgmt`
 - Tier-0 Router: `t0-pks`
-- Click **Add**
+- Click **Save**
 
-<details><summary>Screenshot 8.5</summary><img src="Images/2018-12-15-15-11-39.png"></details><br>
+<details><summary>Screenshot 7.5</summary><img src="Images/2019-08-04-t1.png"></details><br>
 
- 8.6 Create PKS Compute T1 Router
+ 7.6 Create PKS Compute T1 Router
 
-- Click **Add** -> **Tier-1 Router**
+- Click **Add Tier-1 Gateway**
 - Name: `t1-pks-service`
 - Tier-0 Router: `t0-PKS`
-- Click **Add**
+- Click **Save**
 
-<details><summary>Screenshot 8.6</summary><img src="Images/2018-12-15-15-13-17.png"></details><br>
+<details><summary>Screenshot 7.6</summary><img src="Images/2019-08-04-servicet1.png"></details><br>
 
- 8.7 Configure T0 Router VLAN Uplink Port
+ 7.7 Configure T0 Router VLAN Uplink Port
 
-- Click on **t0-PKS**, and then select **Configuration** -> **Router Ports**
+- Click on **Tier-0 Gateways** -> **t0-PKS**, and then select **Edit** from the drop down menu-> **Interfacess** -> **Set**
 
-<details><summary>Screenshot 8.7.1</summary><img src="Images/2018-12-14-21-16-34.png"></details><br>
+- Click **Add Interface**
 
-- Click **Add**
-
-<details><summary>Screenshot 8.7.2</summary><img src="Images/2018-12-15-15-15-09.png"></details><br>
+<details><summary>Screenshot 7.7.2</summary><img src="Images/2019-08-04-edit-t0.png"></details><br>
 
 - Name: `t0-uplink-1`
 - Type: `Uplink`
@@ -607,53 +603,54 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
 - IP Address/mask: `192.168.200.3/24`  _(NOTE: We will ping this later to check connectivity)_
 - Click **Add**
 
- <details><summary>Screenshot 8.7.3</summary><img src="Images/2018-12-14-20-36-31.png"></details><br>
+ <details><summary>Screenshot 7.7.3</summary><img src="Images/2019-08-04-t0-uplink.png"></details><br>
 
- 8.8 Add T0 Static Route
+ 7.8 Add T0 Static Route
 
-- Clcik on **Routing** -> **Static Routes**
+- Clcik on **Routing** -> Underneath Static Routes -> **Set** -> **Add Static Route**
 
-<details><summary>Screenshot 8.8.1</summary><img src="Images/2018-12-16-18-05-58.png"></details><br>
+<details><summary>Screenshot 7.8.1</summary><img src="Images/2019-08-04-set-static.png"></details><br>
 
 - Click on **Add**
+- Name: `t0-static`
 - Network: `0.0.0.0/0`
-- Click on **Next Hops +Add**
+- Click on **Set Next Hops**
 - Next Hop: `192.168.200.1` _(Make sure the input stays by pressing [Enter] after enry)_
-- Click **Add** 
+- Click **Add** and **Apply**
 
- <details><summary>Screenshot 8.8.2</summary><img src="Images/2018-12-14-20-48-34.png"></details><br>
+ <details><summary>Screenshot 7.8.2</summary><img src="Images/2019-08-04-Next-hop.png"></details><br>
 
 - From the `cli-vm`, ping the T0 uplink port address `192.168.200.3` to test connectivity
 
- 8.9 Configure PKS Service T1 Ports
+ 7.9 Configure PKS Service T1 Ports
 
-- Click **Networking** -> **Routers**
-- Click on **t1-pks-service** (_Verify that the router name is now listed over 'Overview'_)
+- Click **Tier-1 Gateways**-> **Edit**
+- Click on **t1-pks-service** 
 
-<details><summary>Screenshot 8.9.1</summary><img src="Images/2018-12-15-15-24-02.png"></details><br>
+<details><summary>Screenshot 7.9.1</summary><img src="Images/2019-08-04-t1-servicedownlink.png"></details><br>
 
-- Click on **Configuration** -> **Router Ports**
-- Click on **Add**
+- Click on **Service Interfaces** -> **Set**
+- Click on **Add Interface**
 - Name: `ls-pks-serviceRouterPort`
-- Type: `Downlink`
 - Logical Switch: `ls-pks-service`
 - IP Address/mask: `172.31.2.1/24`
-- Click **Add**
+- Click **Save**
 
-<details><summary>Screenshot 8.9.2</summary><img src="Images/2018-12-15-15-28-05.png"></details><br>
+<details><summary>Screenshot 7.9.2</summary><img src="Images/2019-08-04-t1-mgmtdownlink.png"></details><br>
 
- 8.10 Configure PKS Management T1 Ports and Route Advertisement
+ 7.10 Configure PKS Management T1 Ports and Route Advertisement
 
-- Click on **t1-pks-mgmt** (_Verify that the router name is now listed over 'Overview'_)
-- Click on **Configuration** -> **Router Ports**
-- Click on **Add**
+- Click **Tier-1 Gateways**-> **Edit**
+- Click on **t1-pks-mgmt** 
+- Click on **Service Interfaces** -> **Set**
+- Click on **Add Interface**
 - Name: `ls-pks-mgmtRouterPort`
 - Type: `Downlink`
 - Logical Switch: `ls-pks-mgmt`
 - IP Address/mask: `172.31.0.1/24`
-- Click **Add**
+- Click **Save**
 
- 8.11 Enable T1 Route Advertisement
+ 7.11 Enable T1 Route Advertisement
 
 - Select `t1-pks-mgmt`
 - Click on **Routing** -> **Route Advertisement**
@@ -665,22 +662,22 @@ NSX switches and routers enable virtual and physical network connectivity. NSX u
     - Click `Save`
     <br>==
 
-<details><summary>Screenshot 8.11</summary><img src="Images/2018-12-15-15-36-08.png"></details><br>
+<details><summary>Screenshot 7.11</summary><img src="Images/2019-08-04-rteadverts.png"></details><br>
 
-- Repeat step 8.11 for router `t1-pks-service`
+- Repeat step 7.11 for router `t1-pks-service`
 
 <br>
 
-## Step 9: Create Network Address Translation Rules
+## Step 8: Create Network Address Translation Rules
 
 In this step, you create NAT rules to map addresses to/from the PKS and k8s networks and the physical network.
 
-9.1 Define NAT Rules
+8.1 Define NAT Rules
 
-- Click on **Networking** -> **Routers**
-- Select the `t0-pks` Router
-- Click on **Services** -> **NAT**
-- Click on **Add**
+- Click on **NAT**
+- With the `t0-pks` Router Selected
+- Click on **Add NAT Rule**
+- Name: Rule1
 - Action: `SNAT`
 - Source IP: `172.31.0.0/24`
 - Translated IP: `10.40.14.12`
@@ -688,45 +685,46 @@ In this step, you create NAT rules to map addresses to/from the PKS and k8s netw
 
 _(NOTE: Leaving an entry blank is the method to set it as **Any**)_
 
-<details><summary>Screenshot 9.1</summary><img src="Images/2018-12-14-22-57-47.png"></details><br>
+<details><summary>Screenshot 8.1</summary><img src="Images/2019-08-04-editNAT.png"></details><br>
 
-9.2 Repeat 9.1 steps to complete the remaining rules in Screenshot 9.2
+8.2 Repeat 8.1 steps to complete the remaining rules in Screenshot 8.2
 
-<details><summary>Screenshot 9.2</summary><img src="Images/2018-12-14-22-54-37.png"></details><br>
+<details><summary>Screenshot 8.2</summary><img src="Images/2019-08-04-NATRules.png"></details><br>
 
 
-## Step 10: Create IP Blocks for PKS Components
+## Step 9: Create IP Blocks for PKS Components
 
-IP Blocks are another construct to define IP address ranges. In this case, we will define a range to be applied to PKS node VMs and another to be applied to k8s pods.
+IP Blocks are a construct to define IP address ranges. In this case, we will define a range to be applied to PKS node VMs and another to be applied to k8s pods.
 
- 10.1 Create Nodes IP Block
+ 9.1 Create Nodes IP Block
 
 - Click on **Networking** -> **IPAM**
-- Click **Add**
+- Click **IP Address Blocks** -> **Add IP Address Block**
 - Name: `ip-block-nodes-deployments`
 - CIDR: `172.15.0.0/16`
+- Click **Save**
 
-<details><summary>Screenshot 10.1</summary><img src="Images/2018-12-14-22-36-20.png"></details><br>
+<details><summary>Screenshot 10.1</summary><img src="Images/2019-08-04-node-block.png"></details><br>
 
- 10.2 Create Pods IP Block
+ 9.2 Create Pods IP Block
 
-- Click **Add**
+- Click **Add IP Address Block**
 - Name: `ip-block-pods-deployments`
 - CIDR: `172.16.0.0/16`
-- Click **Add**
+- Click **Save**
 
-<details><summary>Screenshot 10.2</summary><img src="Images/2018-12-14-22-39-32.png"></details><br>
+<details><summary>Screenshot 9.2</summary><img src="Images/2019-08-04-blocksdone.png"></details><br>
 
-## Step 11: Create NSX API Access Certificate
+## Step 10: Create NSX API Access Certificate
 
 In this final step, you will request and generate a self-signed certificate for API access to NSX-T. This is required to enable BOSH Director to authenticate to the NSX-T Manager. In a production implementation, you would likely opt for a CA signed certificate. Refer to the NSX-T documentation for more detail. To make this step easier, we will set some variables and reuse common command directions from the PKS documentation. 
 
-11.1 From the cli-vm, create a directory to work from
+10.1 From the cli-vm, create a directory to work from
 
 - `mkdir ~/nsxt-cert`
 - `cd ~/nsxt-cert`
 
-11.2 Create the nsx-cert.cnf file and copy the below contents into it, save and exit.
+10.2 Create the nsx-cert.cnf file and copy the below contents into it, save and exit.
 
 - `nano nsx-cert.cnf`
 - Paste below contents into file, save, exit
@@ -749,14 +747,14 @@ subjectAltName=DNS:nsxmgr-01a.corp.local,IP:192.168.110.42
 
 <br>
 
-11.3 Export following variables at your cli-vm commmand line
+10.3 Export following variables at your cli-vm commmand line
 
 - `export NSX_MANAGER_IP_ADDRESS=192.168.110.42`
 - `export NSX_MANAGER_COMMONNAME=nsxmgr-01a.corp.local`
 
 <details><summary>Screenshot 11.3</summary><img src="Images/2018-12-18-01-47-44.png"></details><br>
 
-11.4  Paste the following command to your cli-vm command line and execute it
+10.4  Paste the following command to your cli-vm command line and execute it
 
 ```
 openssl req -newkey rsa:2048 -x509 -nodes \
@@ -767,7 +765,7 @@ openssl req -newkey rsa:2048 -x509 -nodes \
 
 <br>
 
-11.5 Display contents of .crt and .key files
+10.5 Display contents of .crt and .key files
 
 - `cat nsx.crt`
 - `cat nsx.key`
@@ -776,37 +774,31 @@ openssl req -newkey rsa:2048 -x509 -nodes \
 
 <details><summary>Screenshot 11.5</summary><img src="Images/2018-12-18-01-14-28.png"></details><br>
 
-11.6 In NSX Manager, click on **System** -> **Trust**
+10.6 In NSX Manager, click on **System** -> **Certificates**
 
-<details><summary>Screenshot 11.6</summary><img src="Images/2018-12-18-01-20-03.png"></details><br>
+<details><summary>Screenshot 11.6</summary><img src="Images/2019-08-04-11-6.png"></details><br>
 
-11.7 Click on **Certificates** -> **Import** -> **Import Certificate**
+10.7 Click on **Certificates** -> **Import** -> **Import Certificate**
 
-<details><summary>Screenshot 11.7</summary><img src="Images/2018-12-18-01-19-04.png"></details><br>
+<details><summary>Screenshot 11.7</summary><img src="Images/2019-08-04-11-7.png"></details><br>
 
-11.8 Configure the Import Certificate form as follows
+10.8 Configure the Import Certificate form as follows
 
 - Name: `NSX-T_API_CERT`
 - Paste the .crt file contents you copies into the `Certificate Contents` field
 - Copy and paste the .key file output to the `Private Key` field
-- Password: `VMware1!`
+- De-select `Service Certificate`
 - Click **Import**
 
 _NOTE: Make sure you don't leave an extra line after the ---END CERTIFICATE--- lines_
 
-<details><summary>Screenshot 11.8</summary><img src="Images/2018-12-18-01-26-30.png"></details><br>
+10.9 Click on the newly imported certificate ID and copy the value to the clipboard
 
-11.9 Click on the newly imported certificate ID and copy the value to the clipboard
-
-<details><summary>Screenshot 11.9</summary><img src="Images/2018-12-18-01-35-52.png"></details><br>
-
-11.10 From your cli-vm command line, export the certificate ID as a variable (Replace with your certificate ID)
+10.10 From your cli-vm command line, export the certificate ID as a variable (Replace with your certificate ID)
 
 - `export CERTIFICATE_ID=<Your Certificate ID>`
 
-<details><summary>Screenshot 11.10</summary><img src="Images/2018-12-18-01-40-06.png"></details><br>
-
-11.11 Execute the following command to register the certifcate for API access
+10.11 Execute the following command to register the certifcate for API access
 
 ```
 curl --insecure -u admin:'VMware1!' \
@@ -819,6 +811,6 @@ curl --insecure -u admin:'VMware1!' \
 ------------------
 
 
-### You have now completed the NSX-T Installation for PKS lab. Click on the dashboard to check that it matches the image below. It may have some yellow based on your lab CPU activity, but the numbers should match.
+### You have now completed the NSX-T Installation for PKS lab. Click on the **Home** dashboard to check that it matches the image below. It may have some yellow based on your lab CPU activity, but the numbers should match.
 
-><img src="Images/2018-12-14-23-07-35.png">
+><img src="Images/2019-08-05-complete.png">
