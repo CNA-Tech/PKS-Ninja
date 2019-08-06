@@ -85,11 +85,7 @@ You can see we have a bootcamp pod running let's get more details on the pod (in
     
 ![DockerOutput](https://github.com/gortee/pictures/blob/master/K11.PNG)
 
-This shows a lot of information on the pod (not individual image)  for example labels (metadata assigned) IP address of the pod and how the image was created.   Let's try to ping the IP address for the pod on the NSX-T overlay network. (in my case it was assigned 172.16.0.2) 
-
-    ping -c 3 {ip_Address}
-    
- ![DockerOutput](https://github.com/gortee/pictures/blob/master/k12.PNG)
+This shows a lot of information on the pod (not individual image)  for example labels (metadata assigned) IP address of the pod and how the image was created.  
  
  Let examine the logs from the pod using your pod name (mine is bootcamp-95bd888fc-pc2pq)
  
