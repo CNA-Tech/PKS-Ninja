@@ -24,7 +24,7 @@ The PKS Ninja community maintains active public communication channels so partic
 
 The PKS Ninja community has a public google group to provide a mailing list service. Any important updates for the community will be sent to this list, and members are free to send appropriate requests for PKS Ninja Community related discussions to the list
 
-To sign up for the list, please [click here to visit the pks-ninja-labs google group](https://groups.google.com/forum/#!forum/pks-ninja-labs) and click on the link to "Apply for membership" and your request should be approved as quickly as staff can. There is no special requirement for membership, we currently only require approval to make sure we know and can offer support and a welcome message when a new participant joins the group
+To sign up for the list, please [click here to visit the pks-ninja-labs google group](https://groups.google.com/forum/#!forum/pks-ninja-labs/join) and click on the link to "Apply for membership" and your request should be approved as quickly as staff can. There is no special requirement for membership, we currently only require approval to make sure we know and can offer support and a welcome message when a new participant joins the group
 
 #### 1.2.2 Slack Channel
 
