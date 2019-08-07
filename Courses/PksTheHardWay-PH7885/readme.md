@@ -16,8 +16,8 @@ Please complete the following lab guides in the order presented to fullfil the r
 
 - [NSX-T Manual Installation](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtManualInstall-IN1497)
 - [NSX-T Configuration for PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtConfigForPks-NC5947) 
-- [PKS Install Phase 1](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksInstallPhase1-IN3138)
-- [PKS Install Phase 2](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksInstallPhase2-IN1916)
-- [Harbor Tile Install](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborTileInstall-HI3943)
+- [PKS Install Phase 1](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksInstallPhase1-IN3138)
+- [PKS Install Phase 2](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksInstallPhase2-IN1916)
+- [Harbor Tile Install](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborTileInstall-HI3943)
 
 **You have now completed the PKS the Hard Way Course! Thank you for participating!**
