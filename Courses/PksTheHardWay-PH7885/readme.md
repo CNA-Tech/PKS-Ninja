@@ -14,7 +14,7 @@ Note: NinjaLab v11 templates are also available with PKS 1.3. IF you would like 
 
 Please complete the following lab guides in the order presented to fullfil the requirements of the PKS the Hard Way course:
 
-- [NSX-T Manual Installation](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/NsxtManualInstall-IN1497)
+- [NSX-T Manual Installation](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtManualInstall-IN1497)
 - [NSX-T Configuration for PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtConfigForPks-NC5947) 
 - [PKS Install Phase 1](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksInstallPhase1-IN3138)
 - [PKS Install Phase 2](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksInstallPhase2-IN1916)
