@@ -41,7 +41,7 @@ Note: Prior to Step 1, you will need to download the NSX-T 2.4 Installation File
 1.1 In the vSphere client, From the Hosts and Clusters view, right click on the RegionA01-MGMT01 Cluster and select `Deploy OVF Template'
 
 <Details><Summary>Screenshot 1.1</Summary>
-<img src="Images/2019-06-11-07-26-48.png">
+<img src="Images/2019-08-12-15-51-39.png">
 </Details>
 <br/>
 
