@@ -1,10 +1,10 @@
 # PKS Ninja Community Foundational and Prerequisite Skills
 
 - [Introduction]()
-- [Recommended Learning Resources](https://github.com/CNA-Tech/PKS-Ninja/blob/master/Courses/FoundationalSkills-FS8954/readme.md#recommended-learning-resources)
-  - [VMware Cloud Native Channel on Youtube](https://github.com/CNA-Tech/PKS-Ninja/blob/master/Courses/FoundationalSkills-FS8954/readme.md#vmware-cloud-native-channel-on-youtube)
-  - [VMware Hands On Labs](https://github.com/CNA-Tech/PKS-Ninja/blob/master/Courses/FoundationalSkills-FS8954/readme.md#vmware-hands-on-labs)
-  - [Linux Foundation Training](https://github.com/CNA-Tech/PKS-Ninja/blob/master/Courses/FoundationalSkills-FS8954/readme.md#linux-foundation-training)
+- [Recommended Learning Resources](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/Courses/FoundationalSkills-FS8954/readme.md#recommended-learning-resources)
+  - [VMware Cloud Native Channel on Youtube](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/Courses/FoundationalSkills-FS8954/readme.md#vmware-cloud-native-channel-on-youtube)
+  - [VMware Hands On Labs](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/Courses/FoundationalSkills-FS8954/readme.md#vmware-hands-on-labs)
+  - [Linux Foundation Training](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/Courses/FoundationalSkills-FS8954/readme.md#linux-foundation-training)
 
 ## Introduction
 

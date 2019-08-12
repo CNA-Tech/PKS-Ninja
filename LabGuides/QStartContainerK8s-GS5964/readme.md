@@ -2,7 +2,7 @@
 
 ## 1.0 Getting Started with Docker
 
-1.1 Complete the [Getting Started with Docker](https://github.com/CNA-Tech/PKS-Ninja/blob/master/LabGuides/VMUGDocker101-VG5930/readme.md#getting-started-with-docker) section from the Docker-Lab Lab Guide. Stop when you get to the "Docker Networking" section do not complete it or any other sections, return to this page and proceed with the next step.
+1.1 Complete the [Getting Started with Docker](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/LabGuides/VMUGDocker101-VG5930/readme.md#getting-started-with-docker) section from the Docker-Lab Lab Guide. Stop when you get to the "Docker Networking" section do not complete it or any other sections, return to this page and proceed with the next step.
 
 ## 2.0 Getting Started with Kubernetes
 

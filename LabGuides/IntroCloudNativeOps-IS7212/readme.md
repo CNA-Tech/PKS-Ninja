@@ -18,7 +18,7 @@ With PKS, enterprise IT staff does not need to learn fundamentally different too
 
 Most cloud native applications are made up of several distinct applications commonly called microservices that run in independent containers and work together to provide compisite application features and services.
 
-For example, the [Planespotter](https://github.com/CNA-Tech/PKS-Ninja/blob/master/LabGuides/BonusLabs/Deploy%20Planespotter%20Lab/readme.md) application used as an example in many PKS Ninja lab guides consists of 5 different distinct microservices as shown in the screenshot below:
+For example, the [Planespotter](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/LabGuides/BonusLabs/Deploy%20Planespotter%20Lab/readme.md) application used as an example in many PKS Ninja lab guides consists of 5 different distinct microservices as shown in the screenshot below:
 
 <img src="Images/2019-03-04-20-17-33.png">
 
