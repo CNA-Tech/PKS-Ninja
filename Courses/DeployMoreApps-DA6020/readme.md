@@ -15,9 +15,9 @@ If an external site has a great guide that covers a k8s app installation, but th
 
 ## K8s Apps
 
-- [Deploy Whackapod](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployWhackapod-DW3947)
-- [Deploy Planespotter without Persistence](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployPlanespotter-DP6539)
-- [Deploy Planespotter with Persistent Storage](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksStorageAndPersist-SP7357)
+- [Deploy Whackapod](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployWhackapod-DW3947)
+- [Deploy Planespotter without Persistence](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployPlanespotter-DP6539)
+- [Deploy Planespotter with Persistent Storage](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksStorageAndPersist-SP7357)
 
 ## Helm Apps
 

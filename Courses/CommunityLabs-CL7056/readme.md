@@ -10,11 +10,11 @@ This course provides details on how to get access to a lab environment and compl
 
 Please complete the following guides in order:
 
-- [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528)
+- [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/GetLabAccess-LA8528)
 - Use one of the following methods to install NSX-T, PKS and Harbor:
-  - [PKS The Easy Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheEasyWay-PE6650)
-  - [PKS The Hard Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheHardWay-PH7885)
-- [Deploy First PKS Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610)
+  - [PKS The Easy Way](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/PksTheEasyWay-PE6650)
+  - [PKS The Hard Way](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/PksTheHardWay-PH7885)
+- [Deploy First PKS Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployFirstCluster-DC1610)
 
 Once you have completed the above steps, you will have a fully installed and prepared lab environment with a running PKS deployed Kubernetes cluster and can proceed with any of the post-installation lab guides subject to the prerequisites and dependencies listed in each lab guide.
 

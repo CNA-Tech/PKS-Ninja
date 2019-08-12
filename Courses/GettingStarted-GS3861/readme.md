@@ -14,7 +14,7 @@ Basic Linux Skills and awareness of computer operating systems and common system
 
 Also Many of the lab guides on this site do not provide thorough explanation of concepts. 
 
-Please review the [Community Foundational and Prerequisite Skills](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/FoundationalSkills-FS8954) to find online learning resources to help with foundational skills to compliment the Ninja lab guides with additional details and explanations of important concepts explored in the exercises.
+Please review the [Community Foundational and Prerequisite Skills](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/FoundationalSkills-FS8954) to find online learning resources to help with foundational skills to compliment the Ninja lab guides with additional details and explanations of important concepts explored in the exercises.
   
 ### 1.2 Getting in the loop
 
@@ -40,7 +40,7 @@ While the materials on this site can be used for reference, to take full advanta
 
 For VMware employees, Onecloud templates are available for the PKS Ninja lab, for all others we can provide instructions on how you can build your own compatible lab environment. 
 
-Please see [Getting Access to a Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) for more details.
+Please see [Getting Access to a Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/GetLabAccess-LA8528) for more details.
 
 You can also attempt to complete the lab exercises on your own PKS installation, however you will need to make any adjustments needed to the materials for your specific environment
 
@@ -50,11 +50,11 @@ While it is not required, we ask all participants who try using a course or lab 
 
 If you complete a lab guide, we ask that you add your name to a simple text file quickly so we know it worked for you, the process takes under a minute, and you will learn the easiest way to contribute to nearly any open source github project, and your public github profile will display new commits each time you validate a guide! 
 
-#### 2.2.1 Please start with the [Commit a Validation Stamp](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ValidationStamp-VS9927) lab to learn this quick process before taking any courses so you can help with this important process while learning valuable cloud native skills. 
+#### 2.2.1 Please start with the [Commit a Validation Stamp](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/ValidationStamp-VS9927) lab to learn this quick process before taking any courses so you can help with this important process while learning valuable cloud native skills. 
 
 #### 2.2.2 If you run into any problems or have any suggestions, please create an issue, it takes under a minute and ensures that we have a record to fix the problem. 
 
-Opening an issue is as easy as clicking on the issues tab for the repo and submitting a simple ticket explaining the problem in your own words, be sure to include the url of the page you are having a problem with. If you would like further instructions, please see [Opening an Issue on Github](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ReportingAnIssue-RI7933)
+Opening an issue is as easy as clicking on the issues tab for the repo and submitting a simple ticket explaining the problem in your own words, be sure to include the url of the page you are having a problem with. If you would like further instructions, please see [Opening an Issue on Github](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/ReportingAnIssue-RI7933)
 
 If you are unsure if there is a problem or your mistake, dont worry, issues can be opened for any reason, this community is designed to be supportive of people new to this process. 
 
@@ -70,17 +70,17 @@ Lab guides are the central aspect of the learning materials in the pks ninja git
 
 For example, if you wanted to learn to install core PKS components using automated pipelines, the standard process currently involves 3 distinct steps: run the nsxt install pipeline, then run the opsman/bosh/pks install pipeline, then run the Harbor install pipeline
 
-Per the modular design principles of the site, each of these steps is detailed in a seperate lab guide. But, with this model, there needs to be a way for people to know the order and sequence of the lab guides to be able to complete an installation. This is what [Courses](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses) are for.
+Per the modular design principles of the site, each of these steps is detailed in a seperate lab guide. But, with this model, there needs to be a way for people to know the order and sequence of the lab guides to be able to complete an installation. This is what [Courses](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses) are for.
 
-[Courses](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses) are just text documents that provide instructions needed to understand and complete exercises that involve multiple lab guides, for example, the [PKS the Easy Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheEasyWay-PE6650) course provides instructions and lists the order in which the required lab guides must be executed to complete the automated installation. 
+[Courses](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses) are just text documents that provide instructions needed to understand and complete exercises that involve multiple lab guides, for example, the [PKS the Easy Way](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/PksTheEasyWay-PE6650) course provides instructions and lists the order in which the required lab guides must be executed to complete the automated installation. 
 
 #### 2.3.2 Independent Lab Guides
 
-Some lab guides arent especially useful independently, for example the [Deploy First PKS Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610) lab guide is very short and really only useful in the context of a course. 
+Some lab guides arent especially useful independently, for example the [Deploy First PKS Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployFirstCluster-DC1610) lab guide is very short and really only useful in the context of a course. 
 
 As a result, the LabGuides directory is not the best way to find independent lab guides. 
 
-If you would like to find lab guides that are easy to navigate without an associated [Course]((https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses)), please see the [Try Some Labs!]((https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses)) page, which provides a listing of LabGuides that are valuable without requiring a course guide. 
+If you would like to find lab guides that are easy to navigate without an associated [Course]((https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses)), please see the [Try Some Labs!]((https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses)) page, which provides a listing of LabGuides that are valuable without requiring a course guide. 
 
 ## Step 3: Engage in the Ninja Learning Model
 
@@ -88,7 +88,7 @@ Most modern cloud native and devops projects operate around a standard git based
 
 The PKS Ninja Github site implements the standard git based workflow to manage all content on the site. This aspect is a core part of the learning experience, enabling participants to learn and participate in a real implementation of this core cloud native/devops workflow with a specially designed model to support participants who are new to this process and experienced git committers alike. 
 
-The first step in learning how to participate in git projects starts with the  [Commit a Validation Stamp](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ValidationStamp-VS9927) lab per step 2 above, which teaches a simple but very effective way to execute the industry standard "pull request" (PR) process to commit updates. The same exact method can be used to contribute to most modern cloud native and open source projects. 
+The first step in learning how to participate in git projects starts with the  [Commit a Validation Stamp](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/ValidationStamp-VS9927) lab per step 2 above, which teaches a simple but very effective way to execute the industry standard "pull request" (PR) process to commit updates. The same exact method can be used to contribute to most modern cloud native and open source projects. 
 
 **Note: For your own personal git repos, you do not typically do a pull request (PR). The PR process is implemented on projects with multiple contributors including most professional and open source projects, including the PKS Ninja repositories**
 
@@ -98,7 +98,7 @@ The advanced pull request method is a fairly simple, repetive process that is re
 
 ### 3.1 Create your student folder
 
-To get started learning the advanced pull request method, the [Creating your Student Folder](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/CreateStudentFolder-SF6361) guide is a specially designed exercise designed to help new students get comfortable quickly with this process. 
+To get started learning the advanced pull request method, the [Creating your Student Folder](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/CreateStudentFolder-SF6361) guide is a specially designed exercise designed to help new students get comfortable quickly with this process. 
 
 In this exercise, participants create a student folder on the dedicated [student folder repository](), where each student creates a subdirectory using their github username, ensuring that every student can have their own unique space where they can practice committing to a shared git repository using the industry standard pull request process. 
 
@@ -108,11 +108,11 @@ After you get comfortable with the advanced PR process with your student folder,
 
 ## Step 4: Become a Regular PKS Ninja Contributor
 
-While the simple pr method to contribute updates covered in the [Commit a Validation Stamp](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ValidationStamp-VS9927) lab is a great way to handle simple updates, if you would like to be a regular contributor to the PKS Ninja repo, you should also know how to use the advanced pull request process to make updates to the PKS Ninja Repo. 
+While the simple pr method to contribute updates covered in the [Commit a Validation Stamp](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/ValidationStamp-VS9927) lab is a great way to handle simple updates, if you would like to be a regular contributor to the PKS Ninja repo, you should also know how to use the advanced pull request process to make updates to the PKS Ninja Repo. 
 
 ### 4.1 Set up your Contributor Workspace
 
-The [Setting up your Contributor Workspace](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ContributorWorkspace-CW4267) guide provides instructions to setup your environment and execute the advanced pull request process to update the PKS-Ninja repository. 
+The [Setting up your Contributor Workspace](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/ContributorWorkspace-CW4267) guide provides instructions to setup your environment and execute the advanced pull request process to update the PKS-Ninja repository. 
 
 This guide also provides important information and guidelines for site contribution.
 
@@ -123,5 +123,5 @@ Cloud native technologies constantly evolve, and people who work with these tech
 **This completes the getting started guide, thank you for participating in the PKS Ninja Community!**
 
 <!-- 
-- Step : Review the [Building your Devops Workstation](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DevopsWorkstation-DW5008) lab guide to learn practical tips and tricks for optimizing your workstation/jumpbox environments, using IDE's and other common tools that will make your life easier and more productive when working with devops and cloud native platforms 
+- Step : Review the [Building your Devops Workstation](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DevopsWorkstation-DW5008) lab guide to learn practical tips and tricks for optimizing your workstation/jumpbox environments, using IDE's and other common tools that will make your life easier and more productive when working with devops and cloud native platforms 
 -->

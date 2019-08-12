@@ -68,11 +68,11 @@ The validation stamp lab is your first opportunity to learn the easy way to comm
 
 This method also is a valid method to submit simple updates to nearly any public repo on github and it automates most steps of the pull request process behind the scenes for you. This method is so simple that even after you become more comfortable with more advanced git methods, it is still generally the easiest method to commit simple updates.
 
-Please Complete the [Commit a Validation Stamp Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ValidationStamp-VS9927) and when finished, return to this guide and proceed with the next step below.
+Please Complete the [Commit a Validation Stamp Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/ValidationStamp-VS9927) and when finished, return to this guide and proceed with the next step below.
 
 ### Intro to Git CLI
 
-Please complete the [Intro to Git CLI Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToGit-IG9099) and when finished, return to this guide and proceed with the next step below.
+Please complete the [Intro to Git CLI Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/IntroToGit-IG9099) and when finished, return to this guide and proceed with the next step below.
 
 ### Github Flow
 
@@ -84,11 +84,11 @@ The Create Your Student Folder teaches how to do the complete pull request proce
 
 Once you create your student folder, it is important that you proactively remember to use it. While most lab guides wont remind you,  every time you modify a file as part of any lab guide exercise, remember to 'save your homework' by doing a pull request to save a copy of your modified files in the student folder. If you make a practice of this, the complete git pull request process will become very comfortable and familar to you very quickly.
 
-Please complete the [Create your Student Folder Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/CreateStudentFolder-SF6361) and when finished, return to this guide and proceed with the next step below.
+Please complete the [Create your Student Folder Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/CreateStudentFolder-SF6361) and when finished, return to this guide and proceed with the next step below.
 
 ## Explore Branching and Forking
 
-Please complete the [Explore Git Branching and Forking Lab guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/GitBranchingForking-EG7025)
+Please complete the [Explore Git Branching and Forking Lab guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/GitBranchingForking-EG7025)
 
 ## Create your contributor workspace
 
@@ -96,6 +96,6 @@ The Create your Student Folder exercise has you practice the pull request proces
 
 Once you have gotten comfortable with the full PR process, the next step is get setup to do the full PR process to commit updates to the PKS-Ninja repo!
 
-Please complete the [Setting up your Contributor Repository](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ContributorWorkspace-CW4267) and when finished, return to this guide and proceed with the next step below.
+Please complete the [Setting up your Contributor Repository](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/ContributorWorkspace-CW4267) and when finished, return to this guide and proceed with the next step below.
 
 **You have now completed the PKS the Easy Way Course! Thank you for participating!**

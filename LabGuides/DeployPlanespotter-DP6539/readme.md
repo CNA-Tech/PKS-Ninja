@@ -82,7 +82,7 @@ kubectl config set-context my-cluster --namespace planespotter
 
 2.1 From `cli-vm`, use the following commands to open the k8s deployment manifest for the frontend in nano, find the value for the `Image:` for the `planespotter-fe` container in the file, and replace the value ` yfauser/planespotter-frontend:d0b30abec8bfdbde01a36d07b30b2a3802d9ccbb` with the tag of your harbor frontend image `harbor.corp.local/library/frontend:v1`
 
-_Note: If you have no `/planespotter/kuberenetes/` directory, complete the [Intro to Harbor with Planespotter](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHarbor-IH7914) lab_
+_Note: If you have no `/planespotter/kuberenetes/` directory, complete the [Intro to Harbor with Planespotter](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/IntroToHarbor-IH7914) lab_
 
 ```bash
 cd ~/planespotter/kubernetes

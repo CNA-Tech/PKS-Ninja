@@ -8,7 +8,7 @@ If you are using a Ninja-v11 template, you will need to upgrade your vSphere env
 
 ## Prerequisites
 
-- Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
+- Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
 
 This lab is only required for PKS v11 and earlier templates, when PKS v12 templates are published (Still in planning at time this was written) they will include vSphere 6.7 and will not be required or compatible with this lab guide.
 

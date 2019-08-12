@@ -207,7 +207,7 @@ This will take a little time for PKS to identify it as failed and take action bu
  # Harbor
 Harbor is an open source repository that provides image security scanning and reporting.  Harbor organizes images into a set of projects and repositories within those projects. Repositories can have one or more images associated with them. Each of the images are tagged. Projects can have RBAC (Role Based Access Control) and replication policies associated with them so that administrators can regulate access to images and create image distribution pipelines across registries that might be geographically dispersed. You should now be at a summary screen that shows all of the projects in this registry. For our lab, we are interested in a single project called library.
 
-In order to use harbor you need to setup secure communications between harbor and your virtual machine.   Follow these instructions (https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborCertExternal-HC7212)
+In order to use harbor you need to setup secure communications between harbor and your virtual machine.   Follow these instructions (https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212)
 
 Once you have the certificates completed return to this lab.
 

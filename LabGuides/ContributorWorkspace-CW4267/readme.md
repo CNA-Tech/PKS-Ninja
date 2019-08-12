@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-Before proceeding with this guide, please complete the [Community Getting Started Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GettingStarted-GS3861), most importantly the [Creating Your Student Folder](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/CreateStudentFolder-SF6361) lab guide. Also please be sure to review the [Contributors Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/ContributorsGuide-CG2415)
+Before proceeding with this guide, please complete the [Community Getting Started Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/GettingStarted-GS3861), most importantly the [Creating Your Student Folder](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/CreateStudentFolder-SF6361) lab guide. Also please be sure to review the [Contributors Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/ContributorsGuide-CG2415)
 
 The steps you take to create your student folder are the same steps you will take to create your contributor repository, with the main exception that you will use your contributor repository to make changes to existing content or add new content on the official PKS Ninja repo
 
@@ -14,7 +14,7 @@ You do not need to have much git experience to commit simple updates to the pks-
 
 Contributing to the PKS-Ninja repository uses the same git pull request process that is the standard model for contributing to most open source and private cloud native development projects
 
-If you are new to the pull request process, please complete the [Creating Your Student Folder](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/CreateStudentFolder-SF6361) lab guide and reference this guide as needed for additional detail in understanging the pull request process.
+If you are new to the pull request process, please complete the [Creating Your Student Folder](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/CreateStudentFolder-SF6361) lab guide and reference this guide as needed for additional detail in understanging the pull request process.
 
 ## 1.0 One-Time Setup Instructions
 

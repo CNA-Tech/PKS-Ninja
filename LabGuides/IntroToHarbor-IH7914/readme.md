@@ -29,9 +29,9 @@ Note: Harbor is included as an enterprise supported product with VMware PKS
 
 ## Prerequisites
 
-Before proceeding, ensure that Bosh Trusted Certificates has been configured, and that the configuration has been applied before the harbor deployment, as documented in step 1.0 of the [Harbor Installation with Concourse Pipeline Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborPipelineInstal-IN4968). If you are not sure if Bosh Trusted Certificate has been configured with the Opsman Root Cert, from the opsman home page go the `Bosh Director for vSphere > Security` page, if the `Include OpsManager Root CA in Trusted Certs` box is not checked, please follow the configuration steps at the link above.
+Before proceeding, ensure that Bosh Trusted Certificates has been configured, and that the configuration has been applied before the harbor deployment, as documented in step 1.0 of the [Harbor Installation with Concourse Pipeline Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborPipelineInstal-IN4968). If you are not sure if Bosh Trusted Certificate has been configured with the Opsman Root Cert, from the opsman home page go the `Bosh Director for vSphere > Security` page, if the `Include OpsManager Root CA in Trusted Certs` box is not checked, please follow the configuration steps at the link above.
 
-Before proceeding, ensure you have prepared the cli-vm docker engine configuration with the Harbor certificate, as documented in the [Installing Harbor Cert on External Clients Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborCertExternal-HC7212)
+Before proceeding, ensure you have prepared the cli-vm docker engine configuration with the Harbor certificate, as documented in the [Installing Harbor Cert on External Clients Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212)
 
 ## Step 1: Initialize Harbor Projects and Repositories
 
@@ -180,7 +180,7 @@ docker push harbor.corp.local/library/frontend:v1
 If the cli-vm doesn't DNS resolve harbor.corp.local:
 Find the IP address (10.40.14.5) of the Harbor host from the ControlCenter (RDP desktop) DNS Mgr and add the IP address to /etc/hosts of cli-vm. After that do a docker login and then push!
 
-If `docker login` fails with "Error response from daemon: Get https://harbor.corp.local/v2/: x509: certificate signed by unknown authority", you need to prepare the cli-vm docker engine configuration with the Harbor certificate, as documented in the [Installing Harbor Cert on External Clients Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborCertExternal-HC7212)
+If `docker login` fails with "Error response from daemon: Get https://harbor.corp.local/v2/: x509: certificate signed by unknown authority", you need to prepare the cli-vm docker engine configuration with the Harbor certificate, as documented in the [Installing Harbor Cert on External Clients Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212)
 
 <details><summary>Screenshot 3.2 </summary>
 <img src="Images/2019-01-15-00-10-07.png">
@@ -241,7 +241,7 @@ docker images
 <img src="Images/2019-01-15-01-45-27.png">
 </details>
 <br/>
-If Harbor was deployed using the [HarborPipelineInstal-IN4968](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborPipelineInstal-IN4968) and no vulnerabilites are shown when you scan the image, you will need to reconfigure the PKS Harbor tile to set "Updater interval" to 1 hour and apply the changes.
+If Harbor was deployed using the [HarborPipelineInstal-IN4968](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborPipelineInstal-IN4968) and no vulnerabilites are shown when you scan the image, you will need to reconfigure the PKS Harbor tile to set "Updater interval" to 1 hour and apply the changes.
 
 <details><summary>Screenshot 4.1.3</summary>
 <img src="Images/2019-02-06_15-53-52.png">

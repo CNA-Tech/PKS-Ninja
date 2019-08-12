@@ -500,6 +500,6 @@ kubectl delete ns planespotter
 
 #### 2.3 Deploying Kubernetes Applications with Helm
 
-Please complete the [Introduction to Helm](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHelm-HE4490) lab to satisfy the requirements for this section.
+Please complete the [Introduction to Helm](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/IntroToHelm-HE4490) lab to satisfy the requirements for this section.
 
 **Thank you for completing the Hands On Intro to Devops & Cloud Native with PKS Lab!**

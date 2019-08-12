@@ -216,7 +216,7 @@ git push origin master
 </details>
 <br/>
 
-1.2.10 From your web browser, navigate to the [https://github.com/CNA-Tech/PKS-Ninja/tree/master/Students](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Students) page. After an administrator merges your pull request, you should see a folder with yourGitHubUsername on this page
+1.2.10 From your web browser, navigate to the [https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Students](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Students) page. After an administrator merges your pull request, you should see a folder with yourGitHubUsername on this page
 
 <details><summary>Screenshot 1.2.10</summary>
 <img src="Images/2018-11-14-12-35-10.png">

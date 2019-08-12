@@ -102,8 +102,8 @@ Harbor's integration with PKS natively enables the PKS Control Plane hosts and K
 
 To ensure developer and automated workflows can have secure interaction with Harbor, a certificate should be installed on the client machine
 
-Please complete the [Installing Harbor Cert on External Clients](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborCertExternal-HC7212) lab guide to learn the required steps and prepare cli-vm with needed configuration to complete other harbor exercises if you plan to proceed with additional harbor lab guides.
+Please complete the [Installing Harbor Cert on External Clients](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212) lab guide to learn the required steps and prepare cli-vm with needed configuration to complete other harbor exercises if you plan to proceed with additional harbor lab guides.
 
-This lab guide does not include steps to validate the harbor installation because it takes time to deploy harbor, so after installation and client prep is a good natural break. To continue with validation, please continue with the next step from your course guide, or refer to the [PKS Ninja SE course guide agenda](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksNinjaSe-NI6310#ninja-labs-part-1-agenda) for next steps
+This lab guide does not include steps to validate the harbor installation because it takes time to deploy harbor, so after installation and client prep is a good natural break. To continue with validation, please continue with the next step from your course guide, or refer to the [PKS Ninja SE course guide agenda](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/PksNinjaSe-NI6310#ninja-labs-part-1-agenda) for next steps
 
 ***End of lab***

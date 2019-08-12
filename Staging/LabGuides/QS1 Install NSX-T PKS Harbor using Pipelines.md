@@ -9,7 +9,7 @@ In the lab environment console, launch Chrome browser, run http://myip.oc.vmware
 Setup RDP client with the IP address as the target
 
 # 3) Install NSX-T using Concourse pipeline
-Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/NsxtPipelineInstall-IN7016
+Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtPipelineInstall-IN7016
 
 script this to run from cli-vm:
 
@@ -33,10 +33,10 @@ admin/VMware1!
 
 Pipeline has issues. Review Issues list upstream!
 
-Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PksPipelineInstall-IN2456
+Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksPipelineInstall-IN2456
 
 # 5) Install Harbor
-Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborPipelineInstal-IN4968
+Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborPipelineInstal-IN4968
 
 Harbor login: admin/VMware1!
 
@@ -50,7 +50,7 @@ Go to OpsMan, install OpsMan Root Cert on Bosh for PKS nodes <> Harbor comms.
 
 
 
-  Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/IntroToHarbor-IH7914
+  Lab Guide: https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/IntroToHarbor-IH7914
   
   
 Add Harbor cert to cli-vm for comms:

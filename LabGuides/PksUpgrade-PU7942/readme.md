@@ -16,7 +16,7 @@
 
 For this lab, you will need access to a PKS Ninja lab environment with a working PKS 1.2 deployment and a PKS deployed kubernetes cluster.
 
-If you do not already have a prepared lab environment, you can follow the steps in the [Try Some Labs!](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/CommunityLabs-CL7056) course to fully prepare a lab environment to complete this lab guide.
+If you do not already have a prepared lab environment, you can follow the steps in the [Try Some Labs!](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/CommunityLabs-CL7056) course to fully prepare a lab environment to complete this lab guide.
 
 You will need an account on Pivnet to download udpate tile and stemcells. If you do not have a Pivnet account, follow the directions to create one here: https://account.run.pivotal.io/z/uaa/sign-up
 
