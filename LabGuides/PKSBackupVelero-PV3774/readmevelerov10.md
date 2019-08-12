@@ -677,8 +677,4 @@ kubectl get pv
 
 
 
-------------------
-
-≈
-
 ### You have now completed deploying the velero app, and taking a app backup and restored the same.
