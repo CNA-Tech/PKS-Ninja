@@ -58,6 +58,6 @@ This lab follows the standard documentation, which includes additional details a
 
 ## LabGuide
 
-[Velero 1.0 backup and restore guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PKSBackupVelero-PV3774/readmevelerov10.md)
+[Velero 1.0 backup and restore guide](https://github.com/riazvm/PKS-Ninja/tree/master/LabGuides/PKSBackupVelero-PV3774/readmevelerov10.md)
 
-[Velero 1.1 backup and restore guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/PKSBackupVelero-PV3774/readmevelerov11.md)
+[Velero 1.1 backup and restore guide](https://github.com/riazvm/PKS-Ninja/tree/master/LabGuides/PKSBackupVelero-PV3774/readmevelerov11.md)
