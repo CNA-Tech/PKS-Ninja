@@ -42,7 +42,7 @@ Enter the command `docker tag YourImageId harbor.corp.local/library/nginx:v1` an
 </details>
 <br/>
 
-1.4 Prepare `cli-vm` with Harbor's certificate which is required for a client to connect to Harbor. Follow the instructions in [Enable Harbor Client Secure Connections](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/HarborCertExternal-HC7212) and then return to this lab guide and proceed with the following step.
+1.4 Prepare `cli-vm` with Harbor's certificate which is required for a client to connect to Harbor. Follow the instructions in [Enable Harbor Client Secure Connections](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212) and then return to this lab guide and proceed with the following step.
 
 1.5 From the `cli-vm` prompt, push the updated mysql image to Harbor with the following commands:
 

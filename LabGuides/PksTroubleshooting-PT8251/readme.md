@@ -358,7 +358,7 @@ bosh -e my-bosh -d pivotal-container-service-cee84d9beaf7ca483987 cloud-check
 
 1.3.12 From the control center desktop, open a putty session with cli-vm, login, authenticate to the PKS API, get the kubectl context for `my-cluster` and view the the kubernetes node ID's for `my-cluster` with the following commands. Take note of the output from the `kubectl get nodes` command as you will need to reference the node names provided in the following steps
 
-Note: If you do not currently have a cluster deployed, please deploy a cluster per the instructions in [Step 2 of Lab5](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/Lab5-DeployFirstCluster#step-2-login-to-pks-cli-and-create-cluster) before proceeding
+Note: If you do not currently have a cluster deployed, please deploy a cluster per the instructions in [Step 2 of Lab5](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/Lab5-DeployFirstCluster#step-2-login-to-pks-cli-and-create-cluster) before proceeding
 
 ```bash
 pks login -a pks.corp.local -u pksadmin -k -p VMware1!

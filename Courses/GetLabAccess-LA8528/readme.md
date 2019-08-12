@@ -31,5 +31,5 @@ Each of these templates should be available both in onecloud and VLP, please see
 - For all others, we are actively working on tutorials for creating compatible lab environments. Until further instructions are available, please reach out on the slack channel or pks-ninja-labs@googlegroups.com and we would can provide further documentation that can help you prepare a compatible lab environment
   
 <!--
-- For instructions on building a single server nested PKS Ninja Lab, please see [Building a Nested Single Server PKS Ninja Lab](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/NestedNinjaLab-NL3985)
+- For instructions on building a single server nested PKS Ninja Lab, please see [Building a Nested Single Server PKS Ninja Lab](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NestedNinjaLab-NL3985)
 -->

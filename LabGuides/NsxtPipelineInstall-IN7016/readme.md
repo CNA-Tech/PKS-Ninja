@@ -9,7 +9,7 @@ In this lab you will setup Concourse and then run a pipeline to install NSX-T
 
 ## Prerequisites
 
-- Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
+- Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
 - If you are using the PKS Ninja v10 template, you must install the [v10 template patch](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/Labrary/Microlabs/NinjaLabPrepScript-CI4231.md) before proceeding
 
 ## Concourse setup and NSX-T Pipeline Kickoff

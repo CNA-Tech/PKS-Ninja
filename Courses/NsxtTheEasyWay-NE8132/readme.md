@@ -14,10 +14,10 @@ You will need access to a Ninja Lab Environment to complete this course. If you 
 
 ## Instructions
 
-Before beginning installation, you must first apply the latest lab prep script [per the instructions here](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Labrary/Microlabs/NinjaLabPrepScript-CI4231.md)
+Before beginning installation, you must first apply the latest lab prep script [per the instructions here](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Labrary/Microlabs/NinjaLabPrepScript-CI4231.md)
 
 Please complete the following lab guides in the order presented to fullfil the requirements of the PKS the Easy Way course:
 
-- [NSXT Installation with Concourse Pipeline](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/NsxtPipelineInstall-IN7016)
+- [NSXT Installation with Concourse Pipeline](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtPipelineInstall-IN7016)
 
 **You have now completed the PKS the Easy Way Course! Thank you for participating!**

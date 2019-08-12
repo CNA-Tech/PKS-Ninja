@@ -35,7 +35,7 @@ Helm is designed to bring all of the different microservices required for an app
 
 ### Prerequisites
 
-To complete this lab, you need to have a compatible lab environment with a kubernetes cluster deployed using the method and configuration in the [Deploy first cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610) lab guide, or by loading a clusterReady Ninja lab template. Also ensure you have your kubectl config context set to your deployed K8s cluster by logging into PKS and using the `pks get-credentials my-cluster` command.
+To complete this lab, you need to have a compatible lab environment with a kubernetes cluster deployed using the method and configuration in the [Deploy first cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployFirstCluster-DC1610) lab guide, or by loading a clusterReady Ninja lab template. Also ensure you have your kubectl config context set to your deployed K8s cluster by logging into PKS and using the `pks get-credentials my-cluster` command.
 
 ## 1.0 Setup Tiller
 
@@ -287,7 +287,7 @@ When you Sign in to the kubernetes dashboard, the homepage should show the overv
 </details>
 <br/>
 
-2.2.5 **NOTE: If you are following the [Deliver Enterprise Containers & Kubernetes with PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeliverCloudNative-DK7212) lab guide, skip this step and proceed back to the lab guide and follow the instructions there**
+2.2.5 **NOTE: If you are following the [Deliver Enterprise Containers & Kubernetes with PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeliverCloudNative-DK7212) lab guide, skip this step and proceed back to the lab guide and follow the instructions there**
 
 All others, please proceed to clean up your environment per the following instructions:
 

@@ -19,7 +19,7 @@ When you complete a lab guide on the PKS Ninja Github site, please enter a valid
 
 *If you do not complete a LabGuide successfully, DO NOT ADD A VALIDATION STAMP*
 
-If you had any problems and could not complete a lab guide, please open an issue as shown in the [Reporting an Issue on Github](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ReportingAnIssue-RI7933)
+If you had any problems and could not complete a lab guide, please open an issue as shown in the [Reporting an Issue on Github](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/ReportingAnIssue-RI7933)
 
 Validation Stamps are a very important part of the continuous integration model that the PKS Ninja Community uses to keep lab guides up to date. The PKS Ninja Lab template is continuously updated, and accordingly there is a need to continuously validate the lab guides with the latest version of the template, and it is a huge help to the community when you take an extra moment to leave a validation stamp.
 
@@ -43,13 +43,13 @@ In the [Instructions](#instructions) section below, you will use Github's in-bro
 
 This same process can be used to contribute updates to most modern open source and private development projects.
 
-When you are making more complex updates or contribute to a project regularly, it is usually desirable to edit files on your local workstation where you can use more advanced editing tools. While it is not needed for simple updates, if you plan to work supporting cloud native and devops processes, you should plan to also learn the complete pull request process. The [Create your student folder](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/CreateStudentFolder-SF6361) lab  is designed to help students new to Git to learn the full pull request process.
+When you are making more complex updates or contribute to a project regularly, it is usually desirable to edit files on your local workstation where you can use more advanced editing tools. While it is not needed for simple updates, if you plan to work supporting cloud native and devops processes, you should plan to also learn the complete pull request process. The [Create your student folder](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/CreateStudentFolder-SF6361) lab  is designed to help students new to Git to learn the full pull request process.
 
 Note: If you have worked with your own personal Git repository before, the pull request process may be new to you as users do not need to do a pull request to update their own repositories.
 
 ## Instructions
 
-1.1 Open a web browser to [https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ValidationStamp-VS9927](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/ValidationStamp-VS9927), make sure you are logged in, and click on the `validate.md` file
+1.1 Open a web browser to [https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/ValidationStamp-VS9927](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/ValidationStamp-VS9927), make sure you are logged in, and click on the `validate.md` file
 
 <details><summary>Screenshot 1.1</summary><img src="Images/2019-01-27-03-47-10.png"></details><br>
 
