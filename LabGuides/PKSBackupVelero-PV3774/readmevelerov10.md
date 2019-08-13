@@ -367,7 +367,7 @@ kubectl get service velero-minio-lb -n velero
 
 3.9 Copy the IP under the "External-IP" section . Point your browser to that location <external-ip>:9000. You should be able to view the minio browser
 
-<details><summary>Screenshot 3.8</summary>
+<details><summary>Screenshot 3.9</summary>
 <img src="Images/minio.png">
 </details>
 <br/>
@@ -513,17 +513,17 @@ Run `velero backup describe planes` or `velero backup logs planes` for more deta
 
 4.8 Refresh the minio browser annd you will be able to view the backup that was created by velero. Velero creates a set of tar.gz files as backup.
 
-<Details><Summary>Screenshot 4.5</Summary>
+<Details><Summary>Screenshot 4.8</Summary>
 <img src="Images/miniobackup1.png">
 </Details>
 <br/>
 
-<Details><Summary>Screenshot 4.5.1</Summary>
+<Details><Summary>Screenshot 4.8.1</Summary>
 <img src="Images/miniobackup2.png">
 </Details>
 <br/>
 
-<Details><Summary>Screenshot 4.5.2</Summary>
+<Details><Summary>Screenshot 4.8.2</Summary>
 <img src="Images/miniobackup3.png">
 </Details>
 <br/>

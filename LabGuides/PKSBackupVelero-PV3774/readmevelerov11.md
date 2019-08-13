@@ -490,18 +490,18 @@ Run `./velero backup describe planes` or `velero backup logs planes` for more de
 
 4.8 Refresh the minio browser annd you will be able to view the backup that was created by velero. Velero creates a set of tar.gz files as backup.
 
-<Details><Summary>Screenshot 4.5</Summary>
+<Details><Summary>Screenshot 4.8</Summary>
 <img src="Images/miniobackup1.png">
 </Details>
 <br/>
 
-<Details><Summary>Screenshot 4.5.1</Summary>
+<Details><Summary>Screenshot 4.8.1</Summary>
 <img src="Images/miniobackup2.png">
 </Details>
 <br/>
 
-<Details><Summary>Screenshot 4.5.2</Summary>
-<img src="Images/miniobackup3.png">
+<Details><Summary>Screenshot 4.8.2</Summary>
+<img src="Images/planespotterbk.png">
 </Details>
 <br/>
 
