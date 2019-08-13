@@ -1,8 +1,10 @@
-# NSX-T 2.3 Installation
+# NSX-T 2.4.1 Configuration for Enterprise PKS
 
 ## Overview
 
-The following installation guide follows the implementation of a functional NSX-T 2.3 Installation configured for PKS 1.2 in a vSphere nested lab environment. This implementation uses variables that function in the lab environment. Anyone is welcome to build a similar lab environment and follow along with the lab exercises, but please note you will need to replace any variables such as IP addresses and FQDNs and replace them with the appropriate values for your lab environment.
+The following installation guide walks through the configuration of NSX-T 2.4.1 for VMware Enterprise PKS. The steps and variables used in this Lab Guide are specific to the PKS-Ninja-v12 lab templates. 
+
+ Anyone is welcome to build a similar lab environment and follow along with the lab exercises, but please note you will need to replace any variables such as IP addresses and FQDNs and replace them with the appropriate values for your lab environment.
 
 The steps provided in this lab guide are intended for a lab implementation and do not necessarily align with best practices for production implementiations. While the instructions provided in this lab guide did work for the author in their lab environment, VMware and/or any contributors to this Guide provide no assurance, warranty or support for any content provided in this guide.
 
@@ -10,28 +12,25 @@ The steps provided in this lab guide are intended for a lab implementation and d
 
 - Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
 
-Note: NinjaLab v10 templates are also available with PKS 1.2. IF you would like to use a v10 template, please switch to the v10 branch of the PKS-Ninja Repo. If you use the PKS Ninja v10 template, you must install the v10 template patch before proceeding.
-
 ## Installation Notes
 
 Anyone who implements any software used in this lab must provide their own licensing and ensure that their use of all software is in accordance with the software's licensing. This guide provides no access to any software licenses.
 
 For those needing access to VMware licensing for lab and educational purposes, we recommend contacting your VMware account team. Also, the [VMware User Group's VMUG Advantage Program](https://www.vmug.com/Join/VMUG-Advantage-Membership) provides a low-cost method of gaining access to VMware licenses for evaluation purposes.
 
-This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.3 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-3E0C4CEC-D593-4395-84C4-150CD6285963.html)
+This lab guide follows steps that are customized for a specific lab environment, to support other implementations and to find additional information, please see the [Installing Enterprise PKS on vSphere with NSX-T Data Center](https://docs.vmware.com/en/VMware-Enterprise-PKS/1.4/vmware-enterprise-pks-14/GUID-vsphere-nsxt-index.html) page in the VMware Enterprise PKS 1.4 Documentation. 
 
-### Overview of Tasks Covered in Lab 1
+## Overview of Tasks Covered in Lab 1
 
-- [NSX-T 2.3 Installation](#nsx-t-23-installation)
+- [NSX-T 2.4.1 Configuration for Enterprise PKS](#nsx-t-241-configuration-for-enterprise-pks)
   - [Overview](#overview)
   - [Prerequisites](#prerequisites)
   - [Installation Notes](#installation-notes)
-    - [Overview of Tasks Covered in Lab 1](#overview-of-tasks-covered-in-lab-1)
+  - [Overview of Tasks Covered in Lab 1](#overview-of-tasks-covered-in-lab-1)
 - [Step 1: Create T0 Logical Router for Enterprise PKS](#step-1-create-t0-logical-router-for-enterprise-pks)
   - [Step 2: Create the Enterprise PKS Management Plane](#step-2-create-the-enterprise-pks-management-plane)
   - [Step 3: Create NAT Rules for PKS Management and Compute Plane Operations](#step-3-create-nat-rules-for-pks-management-and-compute-plane-operations)
   - [Step 4: Create IP Pools & Blocks needed for PKS](#step-4-create-ip-pools--blocks-needed-for-pks)
-    - [You have now completed the NSX-T Configuration for PKS lab. There are some additional NSX-T related configurations for PKS that will be need to be made when setting up the PKS Control Plane, and those are detailed in the PKS Install Part 1 Lab Guide](#you-have-now-completed-the-nsx-t-configuration-for-pks-lab-there-are-some-additional-nsx-t-related-configurations-for-pks-that-will-be-need-to-be-made-when-setting-up-the-pks-control-plane-and-those-are-detailed-in-the-pks-install-part-1-lab-guide)
 
 NOTE: NSX Manager OVA cannot be installed via HTML5 client, so for installation labs please use the vSphere web client (Flash-based).
 
@@ -394,4 +393,4 @@ In addition, create a Floating IP Pool from which to assign routable IP addresse
 ------------------
 
 
-### You have now completed the NSX-T Configuration for PKS lab. There are some additional NSX-T related configurations for PKS that will be need to be made when setting up the PKS Control Plane, and those are detailed in the PKS Install Part 1 Lab Guide
+**You have now completed the NSX-T Configuration for PKS lab. There are some additional NSX-T related configurations for PKS that will be need to be made when setting up the PKS Control Plane, and those are detailed in the PKS Install Part 1 Lab Guide**
