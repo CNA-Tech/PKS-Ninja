@@ -262,7 +262,7 @@ _NOTE: in a production implementation, you would first copy the vCenter thumbpri
 
  - Name: nsxedge-1
  - FQDN: nsxedge-1.corp.local   
- - Form Factor: medium
+ - Form Factor: Large
  - Click Next
  - CLI Password: VMware1!VMware1!
  - System Root Password: VMware1!VMware1!
@@ -280,7 +280,7 @@ _NOTE: in a production implementation, you would first copy the vCenter thumbpri
  - Click Finish
 
 <details><summary>Screenshot 3.6.1</summary>
-<img src="Images/2019-07-13-01-39-14.png">
+<img src="Images/2019-08-12-23-48-01.png">
 </details>
 
 <details><summary>Screenshot 3.6.2</summary>
@@ -296,10 +296,27 @@ _NOTE: in a production implementation, you would first copy the vCenter thumbpri
 </details>
 <br/>
 
- 3.7 If Your NSX Manager Session times out while the edges are being deployed, log back in and return to the System > Get Started page, click `Setup Transport Nodes` and then select `NSX Edge VM` to return to the `Select NSX Edge` page. 
+ 3.7 The Wizard will deploy and attempt to power on the edge VM, but it will fail as there is no host with the capacity to run the edge in the lab. Log into vCenter, review the tasks pane to ensure the edge VM is finished deploying, wait as needed, and verify you can see the error message indicating that vCenter could not power on the edge vm. 
+
+Navigate to the `Hosts and Clusters` view, select `nsxedge-1`. From the actions menu for `nsxedge-1` select `Edit Settings`.
+
+**If you are using the Baseline-0.6 template or newer, set the CPU count to `8`. If you are using the Baseline-0.5 template or older, set the CPU count to `4`.** 
+
+ Expand the `Memory` section, **uncheck** the box for `Reserve all guest memory (All Locked)`, set the `Reservation` value to `0 MB` and click `OK`
+
+<details><summary>Screenshot 3.7.1</summary>
+<img src="Images/2019-07-13-02-02-05.png">
+</details>
+
+<details><summary>Screenshot 3.7.2</summary>
+<img src="Images/2019-07-13-02-03-04.png">
+</details>
+<br/>
 
 
- 3.8 On the `Select NSX Edge` screen select `nsxedge-1` from the `Edge Node` Pulldown Menu and click `Next` 
+ 3.8 Return to the NSX UI and wait for the wizard to recognize the NSX Edge VM. This may take up to ~15 minutes, and you may need to refresh your connection to NSX Manager, if so you can use the same steps as above to get back to the `Setup Transport Nodes ` wizard. 
+ 
+ On the `Select NSX Edge` screen select `nsxedge-1` from the `Edge Node` Pulldown Menu and click `Next` 
 
 <details><summary>Screenshot 3.8</summary>
 <img src="Images/2019-07-13-01-43-20.png">
@@ -415,16 +432,7 @@ _NOTE: in a production implementation, you would first copy the vCenter thumbpri
 </details>
 <br/>
 
- 3.23 Log into the vsphere client, navigate to the `Hosts and Clusters` view, select `nsxedge-1`. From the actions menu for `nsxedge-1` select `Edit Settings`. Expand the `Memory` section, **uncheck** the box for `Reserve all guest memory (All Locked)`, set the `Reservation` value to `0 MB` and click `OK`
-
-<details><summary>Screenshot 3.23.1</summary>
-<img src="Images/2019-07-13-02-02-05.png">
-</details>
-
-<details><summary>Screenshot 3.23.2</summary>
-<img src="Images/2019-07-13-02-03-04.png">
-</details>
-<br/>
+ 
 
 ## Step 4: Prepare and Configure ESXi Hosts as NSX-T Transport Nodes
 
