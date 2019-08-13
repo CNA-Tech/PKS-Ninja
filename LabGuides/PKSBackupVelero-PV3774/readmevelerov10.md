@@ -71,7 +71,7 @@ Restore the planespotter namespace
 
 ## Step 1:  Download official release of Heptio Velero
 
-1.1 Navigate to the official release of the Heptio Velero release page (https://github.com/heptio/velero/releases) and copy the link for the target VM OS (Eg. https://github.com/heptio/velero/releases/download/<release>/velero-<release>-linux-amd64.tar.gz) Right click on the release link `Copy Link Address'
+1.1 Navigate to the official release of the Heptio Velero release page (https://github.com/heptio/velero/releases) and copy the link for the target VM OS (Eg. https://github.com/heptio/velero/releases/download/) Right click on the release link `Copy Link Address'
 
 <Details><Summary>Screenshot 1.1</Summary>
 <img src="Images/HeptioCopyLinkAddress.png">
