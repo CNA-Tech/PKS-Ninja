@@ -48,28 +48,28 @@ Note: Prior to Step 1, you will need to download the NSX-T 2.4 Installation File
 1.2 On the `Select an OVF Template` step, select `Local File` and Navigate to the NSXT Manager OVA file, the filename should start with 'nsx-unified-appliance`. In the reference lab, this is located on the 'E:/Downloads' Directory
 
 <details><summary>Screenshot 1.2</summary>
-<img src="Images/2019-06-11-07-36-11.png">
+<img src="Images/2019-08-12-23-21-05.png">
 </details>
 <br/>
 
 1.3 On the `Select a name and folder` step, use the name `nsxmgr-01a` and select `RegionA01` Datacenter as the location
 
 <details><summary>Screenshot 1.3</summary>
-<img src="Images/2019-06-13-14-17-55.png">
+<img src="Images/2019-08-12-23-22-12.png">
 </details>
 <br/>
 
 1.4 On the `Select a compute resource` step, select `RegionA01-MGMT01` and click `Next`
 
 <details><summary>Screenshot 1.4</summary>
-<img src="Images/2019-06-13-14-18-45.png">
+<img src="Images/2019-08-12-23-22-42.png">
 </details>
 <br/>
 
 1.5 On the `Review Details` step, verify details and click `Next`
 
 <details><summary>Screenshot 1.5</summary>
-<img src="Images/2019-06-13-14-19-34.png">
+<img src="Images/2019-08-12-23-23-33.png">
 </details>
 <br/>
 
@@ -80,17 +80,19 @@ Note: Prior to Step 1, you will need to download the NSX-T 2.4 Installation File
 </details>
 <br/>
 
-1.7 On the `Select Storage` step, set the virtual disk format to `Thin Provision` and select the `RegionA01-ISCSI02-COMP01` datastore
+1.7 On the `Select Storage` step, **first** select the `RegionA01-ISCSI02-COMP01` datastore and then set the virtual disk format to `Thin Provision`.
+
+Note: When you select the datastore, the UI resets the value for the virtual disk format back to thick provision, so its best to select the datastore first and then set the virtual disk format.
 
 <details><summary>Screenshot 1.7</summary>
-<img src="Images/2019-06-13-14-21-31.png">
+<img src="Images/2019-08-12-23-24-25.png">
 </details>
 <br/>
 
 1.8 On the `Select Networks` step, set the Destination Network to `VM-RegionA01-vDS-MGMT` and click `Next`
 
 <details><summary>Screenshot 1.8</summary>
-<img src="Images/2019-06-13-14-22-11.png">
+<img src="Images/2019-08-12-23-26-59.png">
 </details>
 <br/>
 
@@ -116,14 +118,14 @@ Note: Prior to Step 1, you will need to download the NSX-T 2.4 Installation File
 - All other options were left as default values
 
 <details><summary>Screenshot 1.8</summary>
-<img src="Images/2019-06-11-07-41-53.png">
+<img src="Images/2019-08-12-23-27-58.png">
 </details>
 <br/>
 
 1.9 On the Ready to Complete screen, click `Finish` to complete the Deploy OVF Template Wizard
 
 <details><summary>Screenshot 1.9</summary>
-<img src="Images/2019-06-11-07-42-09.png">
+<img src="Images/2019-08-12-23-29-40.png">
 </details>
 <br/>
 
@@ -135,14 +137,10 @@ Note: Prior to Step 1, you will need to download the NSX-T 2.4 Installation File
 </details>
 <br/>
 
- 1.11 Log into the vsphere client, navigate to the `Hosts and Clusters` view, select `nsxmgr-01a` and in the actions menu select `Edit Settings`. Expand the `Memory` section and set the `Reservation` value to `0 MB` and click `OK`
+ 1.11 Log into the vsphere client, navigate to the `Hosts and Clusters` view, select `nsxmgr-01a` and in the actions menu select `Edit Settings`. Ensure the `Reserve all guest memory` checkbox is **not checked**
 
-<details><summary>Screenshot 1.11.1</summary>
+<details><summary>Screenshot 1.11</summary>
 <img src="Images/2019-06-12-01-46-04.png">
-</details>
-
-<details><summary>Screenshot 1.11.2</summary>
-<img src="Images/2019-06-12-01-45-21.png">
 </details>
 <br/>
 
@@ -151,7 +149,7 @@ Note: Prior to Step 1, you will need to download the NSX-T 2.4 Installation File
 NOTE: If the option to power on the nsxmgr-01a VM is not available, log out and then log back in to the vSphere web client
 
 <details><summary>Screenshot 1.12</summary>
-<img src="Images/2019-06-13-14-36-38.png">
+<img src="Images/2019-08-12-23-32-58.png">
 </details>
 <br/>
 
@@ -178,7 +176,7 @@ In this step, you create a connection between the NSX manager and your vCenter. 
  2.1 Click anywhere on the screen to skip the "Welcome to NSX-T" Screen, click on the `System` tab and then on the left navigation bar Click `Fabric`, and then click `Compute Managers`
 
 <details><summary>Screenshot 2.1</summary>
-<img src="Images/2019-05-20-09-21-29.png">
+<img src="Images/2019-08-12-23-36-45.png">
 </details>
 <br/>
 
@@ -195,7 +193,7 @@ In this step, you create a connection between the NSX manager and your vCenter. 
 _NOTE: in a production implementation, you would first copy the vCenter thumbprint and then provide it in the form to properly authenticate the intial connection._
 
 <details><summary>Screenshot 2.2.1</summary>
-<img src="Images/2019-05-20-09-24-32.png">
+<img src="Images/2019-08-12-23-37-30.png">
 </details>
 
 <details><summary>Screenshot 2.2.2</summary>
@@ -210,7 +208,7 @@ _NOTE: in a production implementation, you would first copy the vCenter thumbpri
 </details>
 
 <details><summary>Screenshot 2.3.2</summary>
-<img src="Images/2019-06-13-15-01-33.png">
+<img src="Images/2019-08-12-23-38-16.png">
 </details>
 <br/>
 
