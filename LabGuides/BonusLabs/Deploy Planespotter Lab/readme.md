@@ -102,7 +102,7 @@ kubectl expose deployment planespotter-frontend \
 
 3.2 Check the external URL/IP address assigned to the service (make note of the first IP addres under External-IP).
 
-- `kubectl get service planespotter-frontend-lb`
+- `kubectl get service planespotter-frontend-lb -n planespotter`
 
 3.3 Copy the IP under the "External-IP" section and point your browser to that location.
 
