@@ -378,7 +378,7 @@ In addition, create a Floating IP Pool from which to assign routable IP addresse
 - Click `Add` under Subnets
 - IP Range: `10.40.14.34-10.40.14.62`
 - Gateway: `10.40.14.33`
-- CIDR: `10.40.14.0/27`
+- CIDR: `10.40.14.32/27`
 - DNS Servers: `192.168.110.10`
 - DNS Suffix: `corp.local`
 - Click **Add**
