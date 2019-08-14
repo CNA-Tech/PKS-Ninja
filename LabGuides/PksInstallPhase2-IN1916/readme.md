@@ -115,7 +115,7 @@ Login for NSX Manager UI is: admin/VMware1!
 1.10 Return to the Ops Manager UI, go to the settings page for Pivotal Container Service, click on the `Networking` tab and enter the following values:
 
 - Container Networking Interface: `NSX-T`
-- NSX Manager Hostname: `nsxmgr-01a.corp.local`
+- NSX Manager Hostname: `192.168.110.10`
 - NSX Manager Super User Principal Identity Certificate: Use the PI certificate and key values you copied to Notepad++ in the PKS Install Phase 1 lab, pasting the certificate in the first box and the key in the second box
 - NSX Manager CA Cert: Use the NSX MGR certificate value you copied to Notepad++ in the PKS Install Phase 1 lab, this should also be saved as nsx.crt on your desktop
 - Disable SSL certificate verification: `True`

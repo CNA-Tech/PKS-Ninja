@@ -1,5 +1,7 @@
 # NSX-T 2.4 Manual Installation
 
+**New:**[Video Walkthrough for this Lab Guide](https://www.youtube.com/watch?v=U2dgKUU4a84&feature=youtu.be)
+
 For NSXT 2.3 Manual Installation, please see the Pks1.3 Branch
 
 ## Overview
