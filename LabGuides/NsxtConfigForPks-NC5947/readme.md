@@ -1,5 +1,7 @@
 # NSX-T 2.4.1 Configuration for Enterprise PKS
 
+**New:**[Video Walkthrough for this Lab Guide](https://youtu.be/pFB7_-Fd7S0)
+
 ## Overview
 
 The following installation guide walks through the configuration of NSX-T 2.4.1 for VMware Enterprise PKS. The steps and variables used in this Lab Guide are specific to the PKS-Ninja-v12 lab templates. 
