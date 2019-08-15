@@ -12,7 +12,7 @@ For VMware employees, [Onecloud templates](https://github.com/CNA-Tech/PKS-Ninja
 
 Materials on this site are continuously updated, and we release new courses and labguides frequently so please check out the [Community Getting Started Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/GettingStarted-GS3861) for info on joining the google group and slack channel, how to start taking courses and more.
 
-**You are currently viewing the main branch of the PKS Ninja repo for the PKS NinjaLab Template Version 11. If you are using a different NinjaLab Template, please switch to the branch for the version you are using**
+**You are currently viewing the Pks1.4 branch of the PKS Ninja repo for the PKS NinjaLab Template Version 12. If you are using a different NinjaLab Template, please switch to the branch for the version you are using**
 
 All content on this site is subject to the Apache 2.0 license [as detailed here](./license.md)
 
