@@ -1,13 +1,14 @@
 # Harbor Tile Installation
 
-- [Step 1: Install Harbor]()
-- [Step 2: Enable Harbor Client Secure Connections]()
+- [Harbor Tile Installation](#harbor-tile-installation)
+  - [Install Harbor](#install-harbor)
+  - [Enable Harbor Client Secure Connections](#enable-harbor-client-secure-connections)
 
 ## Install Harbor
 
-1.0 Download Harbor Installation Binaries
+Please Note: if you are using the PKS-Ninja-v12-Baseline-0.5, NsxtReady-0.3 or older template, you will need to apply the [Workaround for Issue # 507](https://github.com/CNA-Tech/PKS-Ninja/issues/507) to fix the issue before you can proceed, its a very simple workaround, and there is also a [video walkthrough of the resolution here](https://youtu.be/RrNuBXbXuzo). If you are using a newer template, this issue will not affect you, please proceed.
 
-From the control center desktop, open a browser to Pivnet [https://network.pivotal.io/products/harbor-container-registry/](https://network.pivotal.io/products/harbor-container-registry/) and sign in. If you do not have an account, you can easily create one, no special entitlements are required. Download the Harbor Container registry. At the time of writing, `VMware Harbor Container Registry for PCF 1.8.1` was used to prepare this lab guide, however feel free to try with the latest Harbor version if you prefer.
+1.0 To download Harbor Installation Binaries, from the control center desktop, open a browser to Pivnet [https://network.pivotal.io/products/harbor-container-registry/](https://network.pivotal.io/products/harbor-container-registry/) and sign in. If you do not have an account, you can easily create one, no special entitlements are required. Download the Harbor Container registry. At the time of writing, `VMware Harbor Container Registry for PCF 1.8.1` was used to prepare this lab guide, however feel free to try with the latest Harbor version if you prefer.
 
 1.1 On a new browser tab, open a connection to the Ops Manager UI, click on `Import a Product` select the Harbor file from the `E:\Downloads` directory and click `Open`. It can take a few minutes to import the Harbor file
 
@@ -97,8 +98,6 @@ From the control center desktop, open a browser to Pivnet [https://network.pivot
 <details><summary>Screenshot 1.11</summary>
 <img src="Images/2019-01-12-02-25-47.png">
 </details>
-
-#### You have now completed the Harbor installation
 
 ## Enable Harbor Client Secure Connections
 
