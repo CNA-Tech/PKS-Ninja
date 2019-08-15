@@ -1,5 +1,7 @@
 # Lab PKS Installation Phase 1
 
+**New:**[Video Walkthrough for this Lab Guide](https://www.youtube.com/watch?v=dzkCwLvVSng&t=5s)
+
 **Contents:**
 
 - [Lab PKS Installation Phase 1](#lab-pks-installation-phase-1)

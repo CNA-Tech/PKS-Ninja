@@ -392,6 +392,8 @@ In addition, create a Floating IP Pool from which to assign routable IP addresse
 </details>
 <br/>
 
+## Step 5: Configure 2nd interface on cli-vm
+
 ------------------
 
 

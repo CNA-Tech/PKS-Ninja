@@ -2,7 +2,7 @@
 
 ## Step 1: Create UAA Account for PKS User
 
-**Note: If you completed your PKS installation using the concourse pipeline, or if you started with a fullyInstalled lab template, the UAA account has already been created for you by the pipeline, and you can skip to step 2. Please review Step1 so you have an understanding of how to create UAA accounts, as this is a regular, ongoing task for PKS administration that needs to be done using the manual procedure documented here to add additional user accounts after initial installation.**
+**Note: If you completed your PKS installation using the concourse pipeline, or if you started with a PksInstalled lab template, the UAA account has already been created for you by the pipeline, and you can skip to step 2. Please review Step1 so you have an understanding of how to create UAA accounts, as this is a regular, ongoing task for PKS administration that needs to be done using the manual procedure documented here to add additional user accounts after initial installation.**
 
 1.1 Login to Ops Manager UI, Click on the Pivotal Container Service tile and then click on the `Credentials` tab, look for `Pks Uaa Management Admin Client` , click `Link to Credential`
 
@@ -21,15 +21,16 @@
 </details>
 <br/>
 
-1.3 Create a SSH session profile for connection to the Ops Manager VM and establish a connection with the UAA service
+1.3 From the control center desktop, open putty to connect to ubuntu@cli-vm and establish a connection with the UAA service
 
-- From the control center desktop, open putty, define, save, and open a session for `ubuntu@opsman.corp.local`. Login with password: `VMware1!`
+- From the control center desktop, open putty and open a ssh connection to `ubuntu@cli-vm`. Login with password: `VMware1!`
 
-<details><summary>Screenshot 1.3.1</summary><img src="images/2018-12-22-13-23-31.png"></details><br>
+<details><summary>Screenshot 1.3.1</summary>
+<img src="Images/2019-08-15-00-55-15.png">
+</details>
+<br>
 
-_NOTE: You are using the `ubuntu` username for this session. This is the default SSH user for opsman._
-
-- From the OpsMan CLI, target your UAA server and request a token with the following commands. (Be sure to replace the string `LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr` with the secret that you gathered in the previous step 1.2)
+- From the `cli-vm` CLI, target your UAA server and request a token with the following commands. (Be sure to replace the string `LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr` with the secret that you gathered in the previous step 1.2)
 
 ```bash:
 uaac target https://pks.corp.local:8443 --skip-ssl-validation
@@ -37,22 +38,23 @@ uaac token client get admin -s LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr
 ```
 
 <details><summary>Screenshot 1.3.2 </summary>
+<img src="Images/2019-08-15-00-57-42.png">
+</details>
+<br/>
 
-<img src="images/2018-10-24-05-37-12.png"></details><br/>
-
-- Alternatively, you can use SSL to authenticate and encrypt the traffic from opsman to the bosh pks api. In the opsman client, create a new folder in your user directory called pksapi-cert. Create the certificate file pksapi.crt file and paste the PKS api certificate downloaded from the PKS tile > PKS API > Certificate field.
+- Alternatively, you can use SSL to authenticate and encrypt the traffic from cli-vm to the bosh pks api. In the cli-vm client, create a new folder in your user directory called pksapi-cert. Create the certificate file pksapi.crt file and paste the PKS api certificate downloaded from the PKS tile > PKS API > Certificate field.
 ```bash:
 vi ~/pksapi-cert/pksapi.crt
 i for insert
 right mouse click to paste the certificate
 ```
-From the OpsMan CLI, target your UAA server and request a token with the following commands. (Be sure to replace the string `LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr` with the secret that you gathered in the previous step 1.2)
+From the `cli-vm` CLI, target your UAA server and request a token with the following commands. (Be sure to replace the string `LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr` with the secret that you gathered in the previous step 1.2)
 
 ```bash:
 uaac target https://pks.corp.local:8443 --ca-cert ~/pksapi-cert/pksapi.crt
 uaac token client get admin -s LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr
 ```
-1.4 From `OpsMan` putty session, enter the following commands to create a UAA account and assign admin rights to new user `pks-admin`:
+1.4 From `cli-vm` putty session, enter the following commands to create a UAA account and assign admin rights to new user `pks-admin`:
 
 ```bash:
 uaac user add pksadmin --emails pksadmin@corp.local -p VMware1!
