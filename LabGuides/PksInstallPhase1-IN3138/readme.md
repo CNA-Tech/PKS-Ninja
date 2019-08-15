@@ -607,7 +607,7 @@ source create_pi.sh
 
 3.12 In the NSX Manager UI, go to `System > Users` and verify that you see a user account for `pks-nsx-t-superuser`
 
-_Note: Login for NSX Manager UI is: `admin/VMware1!`_
+_Note: Login for NSX Manager UI is: `admin/VMware1!VMware1!`_
 
 <details><summary>Screenshot 3.12</summary>
 <img src="Images/2019-06-20-17-05-49.png">
