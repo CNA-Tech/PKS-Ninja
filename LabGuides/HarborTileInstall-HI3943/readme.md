@@ -5,6 +5,10 @@
 
 ## Install Harbor
 
+1.0 Download Harbor Installation Binaries
+
+From the control center desktop, open a browser to Pivnet [https://network.pivotal.io/products/harbor-container-registry/](https://network.pivotal.io/products/harbor-container-registry/) and sign in. If you do not have an account, you can easily create one, no special entitlements are required. Download the Harbor Container registry. At the time of writing, `VMware Harbor Container Registry for PCF 1.8.1` was used to prepare this lab guide, however feel free to try with the latest Harbor version if you prefer.
+
 1.1 On a new browser tab, open a connection to the Ops Manager UI, click on `Import a Product` select the Harbor file from the `E:\Downloads` directory and click `Open`. It can take a few minutes to import the Harbor file
 
 <details><summary>Screenshot 1.1.1 </summary>
