@@ -47,10 +47,10 @@ Please Note: if you are using the PKS-Ninja-v12-Baseline-0.5, NsxtReady-0.3 or o
 </details>
 <br/>
 
-1.5 Select the `General` tab and set the `Hostname` to `harbor.corp.local` , Click `Save`
+1.5 Select the `General` tab and set the `Hostname` to `harbor.corp.local`, and set the `Static IP Address` to `172.31.0.5` , Click `Save`
 
 <details><summary>Screenshot 1.5</summary>
-<img src="Images/2018-10-22-21-57-03.png">
+<img src="Images/2019-08-14-21-05-55.png">
 </details>
 <br/>
 
