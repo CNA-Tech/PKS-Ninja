@@ -389,29 +389,29 @@ _Note: Each of the availability zones below will have a single cluster. When you
 </details>
 <br/>
 
-2.12 In the Ops Manager web UI, click on `Installation Dashboard` on the top menu bar and then click `Review Pending Changes`
+2.18 In the Ops Manager web UI, click on `Installation Dashboard` on the top menu bar and then click `Review Pending Changes`
 
-<details><summary>Screenshot 2.12</summary>
+<details><summary>Screenshot 2.18</summary>
 <img src="Images/2018-10-21-23-23-00.png">
 </details>
 <br/>
 
-2.15 On the `Review Pending Changes` screen, ensure that the checkbox for Bosh Director is checked and click `Apply Changes`
+2.19 On the `Review Pending Changes` screen, ensure that the checkbox for Bosh Director is checked and click `Apply Changes`
 
-<details><summary>Screenshot 2.15</summary>
+<details><summary>Screenshot 2.19</summary>
 <img src="Images/2019-06-19-23-39-13.png">
 </details>
 <br/>
 
-2.16 Review the `Applying Changes` to observe the BOSH VM deployment. While BOSH is deploying, you can skip ahead to Step 3 and return to the `Applying Changes` screen periodically to check the status of the deployment. Once the BOSH deployment is complete, you should see a `Changes applied` popup window as shown in Screenshot 2.16.2
+2.20 Review the `Applying Changes` to observe the BOSH VM deployment. While BOSH is deploying, you can skip ahead to Step 3 and return to the `Applying Changes` screen periodically to check the status of the deployment. Once the BOSH deployment is complete, you should see a `Changes applied` popup window as shown in Screenshot 2.16.2
 
 _Note: In the nested example lab, it takes ~30 minutes to complete the BOSH deployment_
 
-<details><summary>Screenshot 2.16.1 </summary>
+<details><summary>Screenshot 2.20.1 </summary>
 <img src="Images/2018-10-21-23-26-50.png">
 </details>
 
-<details><summary>Screenshot 2.16.2 </summary>
+<details><summary>Screenshot 2.20.2 </summary>
 <img src="Images/2018-10-22-00-41-06.png">
 </details>
 <br/>
@@ -607,7 +607,7 @@ source create_pi.sh
 
 3.12 In the NSX Manager UI, go to `System > Users` and verify that you see a user account for `pks-nsx-t-superuser`
 
-_Note: Login for NSX Manager UI is: `admin/VMware1!`_
+_Note: Login for NSX Manager UI is: `admin/VMware1!VMware1!`_
 
 <details><summary>Screenshot 3.12</summary>
 <img src="Images/2019-06-20-17-05-49.png">
