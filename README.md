@@ -1,4 +1,4 @@
-# Welcome to the PKS Ninja Community
+# Welcome to the PKS Ninja Labs Community on Github
 
 You are viewing the PKS 1.4 Branch, all updates to this branch should reflect pks 1.4.
 
