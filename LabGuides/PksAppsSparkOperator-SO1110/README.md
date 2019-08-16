@@ -75,17 +75,16 @@ This lab follows the standard documentation, which includes additional details a
 
 ### Overview of Tasks Covered in Lab 
 
-
-- [Step 1: HELM](#step-1--HELM)
-- [Step 2: Setup Standalone HDFS ](#step-2--Setup-Standalone-HDFS )
-- [Step 3: Download Helm Charts](#step-3--Download-Helm-Charts)
-- [Step 4: Deploy Jenkins](#step-4--Deploy-Jenkins)
-- [Step 5: Verify Deployment and Run First Job](#step-5--Verify-Deployment-and-Run-First-Job)
-
-
+- [Step 1: Create Ubuntu VM](#step-1--Create-Ubuntu-VM)
+- [Step 2: Setup Standalone HDFS](#step-2--Setup-Standalone-HDFS )
+- [Step 3: Start the HDFS Cluster](#step-3--Start-the-HDFS-Cluster)
+- [Step 4: Creating the environment to run spark](#step-4--Creating-the-environment-to-run-spark)
+- [Step 5: Deploy Spark Operator](#step-5--Deploy-Spark-Operator)
+- [Step 6: The Word Counter Spark Project](#step-6--The-Word-Counter-Spark-Project)
+- [Step 7: Run Word count sample in PKS using spark operator](#step-7--Run-Word-Count-sample-in-PKS-using-spark-operator)
 -----------------------
 
-## Step 1: Setup Standalone HDFS
+## Step 1: Create Ubuntu VM
 
 ### Create a Ubuntu VM in the lab environment
 
