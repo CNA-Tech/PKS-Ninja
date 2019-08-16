@@ -75,7 +75,7 @@ This lab follows the standard documentation, which includes additional details a
 
 ### Overview of Tasks Covered in Lab 
 
-- [Step 1: Create Ubuntu VM](#step-1--Create-Ubuntu-VM)
+- [Step 1: Create Ubuntu VM](#step-1-Create-Ubuntu-VM)
 - [Step 2: Setup Standalone HDFS](#step-2--Setup-Standalone-HDFS )
 - [Step 3: Start the HDFS Cluster](#step-3--Start-the-HDFS-Cluster)
 - [Step 4: Creating the environment to run spark](#step-4--Creating-the-environment-to-run-spark)
