@@ -19,6 +19,6 @@ Please complete the following lab guides in the order presented to fullfil the r
 - [PKS Install Phase 1](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksInstallPhase1-IN3138)
 - [PKS Install Phase 2](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksInstallPhase2-IN1916)
 - [Harbor Tile Install](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborTileInstall-HI3943)
-- [Deploy First Kubernetes Cluster with Enterprise PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610)
+- [Deploy First Kubernetes Cluster with Enterprise PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployFirstCluster-DC1610)
 
 **You have now completed the PKS the Hard Way Course! Thank you for participating!**
