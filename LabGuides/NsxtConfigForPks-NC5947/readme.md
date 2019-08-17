@@ -154,11 +154,10 @@ Navigate to the `Advanced Networking & Security > Switching` page and click `+AD
 
 2.2 Create NSX-T Tier-1 Router for the Enterprise PKS Management Plane
 
-Navigate to the `Advanced Networking & Security > Routers` page and click `+ > Tier-1 Router` and add a new Tier-1 Router with the following parameters:
-
+Navigate to the `Advanced Networking & Security > Routers` page and click `+ > Tier-1 Router` and add a new Tier-1 Router with the following parameters but ignore the Screen Shot for the Edge Cluster variable and leave this value blank. If you select an Edge Cluster for your T1 Router, NSX will deploy a T1-SR and hair pin all your E/W traffic through this SR. If you do not deploy a T1 SR then your E/W traffic will be distributed accross all your Transport Nodes T1-DR. For PKS with NAT we are running all services on the T0-SR and a T1-SR is not needed:
 - Name: `t1-pks-mgmt`
 - Tier-0 Router: `t0-pks`
-- Edge Cluster: edge-cluster-1
+- Edge Cluster: 
 - Click **Add**
 
 <details><summary>Screenshot 2.2.1</summary>
