@@ -315,6 +315,7 @@ Navigate to the `Hosts and Clusters` view, select `nsxedge-1`. From the actions 
 </details>
 <br/>
 
+After making the changes to the `nsxedge-1` VM, power the VM on via the vCenter UI.
 
  3.8 Return to the NSX UI and wait for the wizard to recognize the NSX Edge VM. This may take up to ~15 minutes, and you may need to refresh your connection to NSX Manager, if so you can use the same steps as above to get back to the `Setup Transport Nodes ` wizard. 
  
