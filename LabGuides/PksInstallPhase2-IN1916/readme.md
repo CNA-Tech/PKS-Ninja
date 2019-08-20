@@ -79,7 +79,7 @@
 
 <details><summary>Screenshot 1.8</summary>
 <img src="Images/2019-07-15-16-25-57.png">
-</details>.corp.local
+</details>
 <br/>
 
 1.9 Prepare Variables to Configure the `Networking` tab
