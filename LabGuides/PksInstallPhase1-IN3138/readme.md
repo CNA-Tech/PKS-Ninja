@@ -66,7 +66,9 @@ For VLP and Onecloud users, The CNABU-PKS-Ninja-v12-NsxtReady template has NSX-T
 </details>
 <br/>
 
-1.5 On the `Select storage` screen, set `Thin Provision` as the virtual disk format and `RegionA01-ISCSI02-COMP01` as the datastore and click `Next`
+1.5 On the `Select Storage` step, first select the `RegionA01-ISCSI02-COMP01` datastore and then set the virtual disk format to `Thin Provision`.
+
+Note: When you select the datastore, the UI resets the value for the virtual disk format back to thick provision, so its best to select the datastore first and then set the virtual disk format.
 
 <details><summary>Screenshot 1.5</summary>
 <img src="Images/2019-06-18-15-51-48.png">
