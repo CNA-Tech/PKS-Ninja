@@ -516,7 +516,7 @@ source create_certificate.sh
 
 <br>
 
-3.7 Copy the certificate ID (As highlighted below in screenshot 3.8) to your instance of Notepad++ and label as `NSX PI Cert ID`
+3.7 Copy the certificate ID (As highlighted below in screenshot 3.7.1) to your instance of Notepad++ and label as `NSX PI Cert ID`
 
 <details><summary>Screenshot 3.7.1</summary>
 <img src="Images/2018-10-22-02-45-20.png">
