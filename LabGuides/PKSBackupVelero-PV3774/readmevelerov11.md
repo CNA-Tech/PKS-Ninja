@@ -110,13 +110,16 @@ kubectl get pods --namespace planespotter
 kubectl get services --namespace planespotter
 ```
 
-## Step 3:  Setup Velero
+## Step 3:  Setup Minio
 
 3.1 Set up prerequisites necessary to run the Velero server
-- `velero` namespace
+    Delete any existing velero namespaces , clusterbindings and crds 
 
 
 ```bash
+kubectl delete namespace/velero clusterrolebinding/velero
+kubectl delete crds -l component=velero
+
 kubectl create ns velero
 ```
 
@@ -145,7 +148,7 @@ aws_secret_access_key = minio123
 </details>
 <br/>
 
-3.2 We are setting up a PV that velero can use to store the backups.
+3.4 We are setting up a PV that velero can use to store the backups.
     Create a Storage Class. Create a 000-storage-class.yaml file and copy the below contents into it, save and exit.  
 
 ```bash
@@ -175,7 +178,7 @@ kubectl apply -f 000-storage-class.yaml
 
 ```
 
-3.3 Create a Persistent Volume Claim . Create a 001-velero-pvc.yaml file and copy the below contents into it, save and exit. 
+3.5 Create a Persistent Volume Claim . Create a 001-velero-pvc.yaml file and copy the below contents into it, save and exit. 
 
 ```bash
 nano 001-velero-pvc.yaml
@@ -210,14 +213,14 @@ kubectl apply -f 001-velero-pvc.yaml
 
 ```
 
-3.4 Login to vCenter to and check if the PV has been provisioned under kubevols
+3.6 Login to vCenter to and check if the PV has been provisioned under kubevols
 
-<details><summary>Screenshot 3.4</summary>
+<details><summary>Screenshot 3.6</summary>
 <img src="Images/Kubevols.png">
 </details>
 <br/>
 
-3.5 Edit the 00-minio-deployment.yaml to change the storage to add the persistentvolume created in the previous step. The change is the below
+3.7 Edit the 00-minio-deployment.yaml to change the storage to add the persistentvolume created in the previous step. The change is the below
 
       - name: storage
         persistentVolumeClaim:
@@ -345,54 +348,56 @@ spec:
 </details>
 <br/>
 
-3.4 Create the minio deployment
+3.8 Create the minio deployment
 
 ```bash
 kubectl apply -f 00-minio-deployment.yaml
 ```
 
-3.5 Check  the minio services and pods 
+3.9 Check  the minio services and pods 
 
 ```bash
 kubectl get po
 kubectl get services
 ```
-<details><summary>Screenshot 3.5</summary>
+<details><summary>Screenshot 3.9</summary>
 <img src="Images/miniostatus.png">
 </details>
 <br/>
 
 
-3.6 Expose the minio with the following command
+3.10 Expose the minio with the following command
 
 ```bash
 kubectl expose deployment minio --name=velero-minio-lb --port=9000 --target-port=9000 --type=LoadBalancer --namespace=velero
 
 ```
 
-3.7 Check the external URL/IP address assigned to the service (make note of the first IP addres under External-IP).
+3.11 Check the external URL/IP address assigned to the service (make note of the first IP addres under External-IP).
 
 ```bash
 kubectl get service velero-minio-lb -n velero
 
 ```
-<details><summary>Screenshot 3.7</summary>
+<details><summary>Screenshot 3.11</summary>
 <img src="Images/miniolb.png">
 </details>
 <br/>
 
-3.8 Copy the IP under the "External-IP" section . Point your browser to that location <external-ip>:9000. You should be able to view the minio browser
+3.12 Copy the IP under the "External-IP" section . Point your browser to that location <external-ip>:9000. You should be able to view the minio browser
 
-<details><summary>Screenshot 3.8</summary>
+<details><summary>Screenshot 3.12</summary>
 <img src="Images/minioip.png">
 </details>
 <br/>
 
 
-3.9 Start the server and the local storage service. Velero does not support vSphere currently so we are going to be using Restic. We will also be supplying the credentials file for minio that we created in the previous step. We will also be proividing the url to the minio service that we exposed as a loadbalancer in the previous step.
+3.13 Start the server and the local storage service. Velero does not support vSphere currently so we are going to be using Restic. We will also be supplying the credentials file for minio that we created in the previous step. We will also be proividing the url to the minio service that we exposed as a loadbalancer in the previous step.
 
 
 ```bash
+cd ~/velero/velero-v1.1.0-beta.1-linux-amd64
+
 ./velero install \
      --provider aws \
      --bucket velero \
@@ -402,12 +407,12 @@ kubectl get service velero-minio-lb -n velero
      --backup-location-config region=minio,s3ForcePathStyle="true",s3Url=http://minio.velero.svc:9000,publicUrl=http://10.40.14.43:9000
 ```
 
-<details><summary>Screenshot 3.9</summary>
+<details><summary>Screenshot 3.13</summary>
 <img src="Images/veleroinstall.png">
 </details>
 <br/>
 
-3.10 Check status of the installation
+3.14 Check status of the installation
 
 
 ```bash
@@ -416,7 +421,7 @@ kubectl get deployments
 
 ```
 
-<details><summary>Screenshot 3.10</summary>
+<details><summary>Screenshot 3.14</summary>
 <img src="Images/veleroinstallcheck.png">
 </details>
 <br/>
@@ -651,6 +656,11 @@ kubectl get pv
 <img src="Images/planespotterapp.png">
 </Details>
 <br/>
+
+
+6.6 Note: You could Backup from Cluster 1 and Restore to Cluster 2
+    Cluster1  ---backup---  >>    minio  >>  -----restore---- cluster2 
+    Make sure the Harbor cert is in place on cluster 2 via bosh / worker VM's
 
 
 
