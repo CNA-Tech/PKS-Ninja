@@ -119,5 +119,5 @@ kubectl delete service nginx-test
 </details>
 <br/>
 
-
+**You have now tested access and functionality of your Kubernetes cluster, please return to your course guide for details on additional steps and exercises for your course**
 
