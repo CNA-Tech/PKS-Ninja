@@ -143,6 +143,7 @@ spec:
 2.4 Apply Configuration 
 
 ```bash
+kubectl create ns jenkins-project
 kubectl apply -f jenkins-claim.yaml
 ```
 
