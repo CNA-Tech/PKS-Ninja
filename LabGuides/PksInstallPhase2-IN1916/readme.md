@@ -79,14 +79,14 @@
 
 <details><summary>Screenshot 1.8</summary>
 <img src="Images/2019-07-15-16-25-57.png">
-</details>.corp.local
+</details>
 <br/>
 
 1.9 Prepare Variables to Configure the `Networking` tab
 
 _Note: Use Notepad++ to keep track of the values you will locate below._
 
-1.9.1 Log into the NSX Manager UI, go to `Networking > IPAM`, and on the IPAM page and gather the ID for the `ip-block-pods-deployments` and `ip-block-nodes-deployments` and keep note of the values
+1.9.1 Log into the NSX Manager UI, go to `Advanced Networking & Security > Networking > IPAM`, and on the IPAM page and gather the ID for the `ip-block-pods-deployments` and `ip-block-nodes-deployments` and keep note of the values
 Login for NSX Manager UI is: admin/VMware1!
 
 <details><summary>Screenshot 1.9.1.1</summary>
@@ -98,14 +98,14 @@ Login for NSX Manager UI is: admin/VMware1!
 </details>
 <br>
 
-1.9.2 In the NSX Manager UI, go to `Networking > Routing`, click on t0-pks and gather the t0-pks ID value
+1.9.2 In the NSX Manager UI, go to `Advanced Networking & Security > Networking > Routers`, click on t0-pks and gather the t0-pks ID value
 
 <details><summary>Screenshot 1.9.2</summary>
 <img src="Images/2018-10-22-19-59-01.png">
 </details>
 <br/>
 
-1.9.3 In the NSX Manger UI, go to the `Inventory > Groups > IP Pools` click on the ID value for `ip-pool-vips` and a pop-up window will display the entire ID value, keep note of it
+1.9.3 In the NSX Manger UI, go to the `Advanced Networking & Security > Inventory > Groups > IP Pools` click on the ID value for `ip-pool-vips` and a pop-up window will display the entire ID value, keep note of it
 
 <details><summary>Screenshot 1.9.3</summary>
 <img src="Images/2018-10-22-20-12-07.png">

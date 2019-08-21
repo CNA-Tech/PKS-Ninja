@@ -66,7 +66,9 @@ For VLP and Onecloud users, The CNABU-PKS-Ninja-v12-NsxtReady template has NSX-T
 </details>
 <br/>
 
-1.5 On the `Select storage` screen, set `Thin Provision` as the virtual disk format and `RegionA01-ISCSI02-COMP01` as the datastore and click `Next`
+1.5 On the `Select Storage` step, first select the `RegionA01-ISCSI02-COMP01` datastore and then set the virtual disk format to `Thin Provision`.
+
+Note: When you select the datastore, the UI resets the value for the virtual disk format back to thick provision, so its best to select the datastore first and then set the virtual disk format.
 
 <details><summary>Screenshot 1.5</summary>
 <img src="Images/2019-06-18-15-51-48.png">
@@ -516,7 +518,7 @@ source create_certificate.sh
 
 <br>
 
-3.7 Copy the certificate ID (As highlighted below in screenshot 3.8) to your instance of Notepad++ and label as `NSX PI Cert ID`
+3.7 Copy the certificate ID (As highlighted below in screenshot 3.7.1) to your instance of Notepad++ and label as `NSX PI Cert ID`
 
 <details><summary>Screenshot 3.7.1</summary>
 <img src="Images/2018-10-22-02-45-20.png">
