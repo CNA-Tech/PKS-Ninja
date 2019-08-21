@@ -12,7 +12,7 @@ pks clusters
 pks clusters my-cluster
 ~~~
 <details><summary>Screenshot 1.1 </summary>
-<img src="Images/2019-08-15-00-57-42.png">
+<img src="Images/1.png">
 </details>
 <br/>
 
@@ -23,7 +23,7 @@ pks get-credentials my-cluster
 ~~~
 
 <details><summary>Screenshot 1.2 </summary>
-<img src="Images/2019-08-15-00-57-42.png">
+<img src="Images/2.png">
 </details>
 <br/>
 
@@ -38,7 +38,7 @@ kubectl get nodes
 ~~~
 
 <details><summary>Screenshot 2.1 </summary>
-<img src="Images/2019-08-15-00-57-42.png">
+<img src="Images/3.png">
 </details>
 <br/>
 
@@ -51,7 +51,7 @@ kubectl get pods --all-namespaces
 ~~~
 
 <details><summary>Screenshot 2.2 </summary>
-<img src="Images/2019-08-15-00-57-42.png">
+<img src="Images/4.png">
 </details>
 <br/>
 
@@ -66,7 +66,7 @@ kubectl run nginx-test --image=nginx --restart=Never --port=80 --expose
 This command will deploy a pod named `nginx-test` utilizing the `nginx` image. It will also open up port 80 on the pod and create a service of type `ClusterIP` to serve out the default `nginx` homepage within the Kubernetes cluster.
 
 <details><summary>Screenshot 3.1 </summary>
-<img src="Images/2019-08-15-00-57-42.png">
+<img src="Images/5.png">
 </details>
 <br/>
 
@@ -77,7 +77,7 @@ kubectl get services
 ~~~
 
 <details><summary>Screenshot 3.2 </summary>
-<img src="Images/2019-08-15-00-57-42.png">
+<img src="Images/6.png">
 </details>
 <br/>
 
@@ -88,7 +88,7 @@ kubectl run busybox --rm --image=busybox -it --restart=Never -- sh
 ~~~
 
 <details><summary>Screenshot 3.3 </summary>
-<img src="Images/2019-08-15-00-57-42.png">
+<img src="Images/7.png">
 </details>
 <br/>
 
@@ -99,7 +99,7 @@ kubectl run busybox --rm --image=busybox -it --restart=Never -- sh
 ~~~
 
 <details><summary>Screenshot 3.4 </summary>
-<img src="Images/2019-08-15-00-57-42.png">
+<img src="Images/8.png">
 </details>
 <br/>
 
@@ -115,7 +115,7 @@ kubectl delete service nginx-test
 ~~~
 
 <details><summary>Screenshot 3.5 </summary>
-<img src="Images/2019-08-15-00-57-42.png">
+<img src="Images/9.png">
 </details>
 <br/>
 
