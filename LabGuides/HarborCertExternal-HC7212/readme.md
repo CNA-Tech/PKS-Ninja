@@ -24,11 +24,11 @@ In the following exercise, you will install the Harbor self-signed certificate o
 </details>
 <br/>
 
-1.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory (create this directory if it doesn't already exist) and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands:
+1.3 Install the cert as a trusted source on the cli-vm by navigating to the `/etc/docker/certs.d/harbor.corp.local` directory (create this directory if it doesn't already exist) and creating a `ca.crt` file with the certificate text you copied in the previous step using the following commands. You'll need to use `sudo` for some of the commands below. The `ubuntu` user's password is `VMware1!`:
 
 ```
-mkdir -p /etc/docker/certs.d/harbor.corp.local
-nano /etc/docker/certs.d/harbor.corp.local/ca.crt
+sudo mkdir -p /etc/docker/certs.d/harbor.corp.local
+sudo nano /etc/docker/certs.d/harbor.corp.local/ca.crt
 ```
 
 Paste the certificate text into nano, save and close the file
@@ -44,14 +44,14 @@ mkdir -p ~/.docker/tls/harbor.corp.local\:4443/
 
 1.3.2 Copy the Harbor cert into the Docker tls directory you just created, as well as your local user certificate directory
 ```
-cp /etc/docker/certs.d/harbor.corp.local/ca.crt  ~/.docker/tls/harbor.corp.local\:4443/
-cp /etc/docker/certs.d/harbor.corp.local/ca.crt /usr/local/share/ca-certificates/
+sudo cp /etc/docker/certs.d/harbor.corp.local/ca.crt  ~/.docker/tls/harbor.corp.local\:4443/
+sudo cp /etc/docker/certs.d/harbor.corp.local/ca.crt /usr/local/share/ca-certificates/
 ```
 
 1.3.3 Update your certificates and restart Docker service
 ```
-update-ca-certificates
-service docker restart
+sudo update-ca-certificates
+sudo service docker restart
 ```
 
 
