@@ -104,19 +104,19 @@ Note: When you select the datastore, the UI resets the value for the virtual dis
   - System Root User Password: VMware1!VMware1!
   - CLI Admin User Password: VMware1!VMware1!
   - CLI Audit User Password: VMware1!VMware1!
+- Network Properties
+  - Hostname: nsxmgr-01a
+  - Rolename: nsx-manager nsx-controller
+  - Default Gateway: 192.168.110.1
+  - Management Network IPv4 Address: 192.168.110.42
+  - Management Network Netmask: 255.255.255.0
 - DNS
   - DNS Server List: 192.168.110.10
   - Domain Search List: corp.local
-- Network Properties
-  - Default Gateway: 192.168.110.1
-  - Hostname: nsxmgr-01a
-  - Management Network IPv4 Address: 192.168.110.42
-  - Management Network Netmask: 255.255.255.0
-  - Rolename: nsx-manager nsx controller
 - Services Configuration
-  - Allow Root SSH Logins: True
-  - Enable SSH: True
   - NTP Server: 192.168.100.1
+  - Enable SSH: True
+  - Allow Root SSH Logins: True
 - All other options were left as default values
 
 <details><summary>Screenshot 1.8</summary>
