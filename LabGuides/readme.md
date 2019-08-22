@@ -7,6 +7,7 @@
 - [PKS Install Phase 2](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksInstallPhase2-IN1916)
 - [Introduction to Harbor](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/IntroToHarbor-IH7914)
 - [Deploy First Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployFirstCluster-DC1610)
+- [Access First Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/AccessFirstCluster-AC6818)
 - [PKS Storage and Persistence 1](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksStorageAndPersist-SP7357)
 - [PKS Wavefront Integration 1](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksWavefrontInt-WA9983)
 - [PKS Monitoring and Operations 1](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksMonitoringAndOps-MO2189)
