@@ -1,6 +1,6 @@
 # Lab Guides
 
-**Please Note: You are viewing the Main Branch of the PKS Ninja Repo, which is currently aligned with PKS NinjaLab template version 11. If you are using a different version, please switch to the branch for your version**
+**Please Note: You are viewing the PKS 1.4 branch of the PKS Ninja Repo, which is currently aligned with PKS NinjaLab template version 12. If you are using a different version, please switch to the branch for your version**
 
 - [Introduction to Kubernetes with Planespotter](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/IntroToK8sPlaneSpotter-IK9674)
 - [PKS Install Phase 1](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksInstallPhase1-IN3138)
