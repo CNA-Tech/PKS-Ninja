@@ -103,7 +103,7 @@ Note: Do not simply copy/paste the commands below, be sure to go through them on
 CLUSTER=$(bosh deployments | grep ^service-instance | awk '{print $1;}')
 bosh -d $CLUSTER vms --vitals
 bosh -d $CLUSTER tasks --recent=9
-bosh -d $CLUSTER task 91 --debug
+bosh -d $CLUSTER task <pick a task ID # from previous command output>  --debug
 bosh -d $CLUSTER ssh master/0
 bosh -d $CLUSTER ssh worker/0
 bosh -d $CLUSTER logs
