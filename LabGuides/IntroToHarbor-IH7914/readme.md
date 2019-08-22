@@ -312,6 +312,11 @@ docker pull harbor.corp.local/library/frontend:v1
 docker pull harbor.corp.local/library/frontend:v1
 ```
 
+<details><summary>Screenshot 4.7</summary>
+<img src="Images/2019-08-22-04-53-43.png">
+</details>
+<br/>
+
 ## Step 5: Configure and validate Content Trust
 
 The content trust feature allows admins to require that images be signed in order for the container to run, enabling a business process to be used where only images that meet policy requirements are signed and able to be deployed from repositories where content trust is enabled
