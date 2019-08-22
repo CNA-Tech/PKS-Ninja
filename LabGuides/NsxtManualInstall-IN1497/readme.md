@@ -40,6 +40,8 @@ This lab follows the standard documentation, which includes additional details a
 
 Note: Prior to Step 1, you will need to download the NSX-T 2.4 Installation Files and binaries. The Installation binaries are not included in the lab, users will need to provide their own access and licensing to download and use NSX-T 2.4. 
 
+1.0 In the Main Console, the vSphere web client is already set up in Chrome. Open up Chrome to get to the vSphere login screen. You can log in using the credentials you were given for the lab, *but you have to make sure you click the **Use Windows session authentication** box*
+
 1.1 In the vSphere client, From the Hosts and Clusters view, right click on the RegionA01-MGMT01 Cluster and select `Deploy OVF Template'
 
 <Details><Summary>Screenshot 1.1</Summary>
