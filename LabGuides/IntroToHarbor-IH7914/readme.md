@@ -116,19 +116,21 @@ In this case we will only build the planespotter frontend container ourselves, a
 </details>
 <br/>
 
-2.2 From the cli-vm prompt, clone the planespotter github repository with the following commands:
+2.2 As the `ubuntu` user, run `sudo -i` to login as the `root` user (`ubuntu` user's pw is `VMware1!`)
+
+2.3 From the cli-vm prompt, clone the planespotter github repository with the following commands:
 
 ```bash
 cd ~
 git clone https://github.com/CNA-Tech/planespotter.git
 ```
 
-<details><summary>Screenshot 2.2</summary>
+<details><summary>Screenshot 2.3</summary>
 <img src="Images/2019-01-13-16-35-48.png">
 </details>
 <br/>
 
-2.3 View the planespotter frontend dockerfile with the following commands:
+2.4 View the planespotter frontend dockerfile with the following commands:
 
 ```bash
 cd ~/planespotter/frontend/
@@ -136,25 +138,41 @@ ls
 cat Dockerfile
 ```
 
-<details><summary>Screenshot 2.3 </summary>
+<details><summary>Screenshot 2.4 </summary>
 <img src="Images/2019-01-13-16-37-22.png">
 </details>
 <br/>
 
-2.4 Build the planespotter frontend container image with the command `docker build .` and copy the image ID from the last line of the output to the clipboard as shown in the screenshots below
+2.5 Verify there are no existing docker images present on the `cli-vm` by running `docker images`. If images are present (as shown in screenshot 2.5.1) run the following command to clear them out before proceeding:
 
-<details><summary>Screenshot 2.4.1 </summary>
+~~~
+docker rmi -f $(docker images -a -q)
+~~~
+
+<details><summary>Screenshot 2.5.1 </summary>
+<img src="Images/2019-08-22-04-42-49.png">
+</details>
+<br/>
+
+<details><summary>Screenshot 2.5.2 </summary>
+<img src="Images/2019-08-22-04-44-27.png">
+</details>
+<br/>
+
+2.6 Build the planespotter frontend container image with the command `docker build .` and copy the image ID from the last line of the output to the clipboard as shown in the screenshots below
+
+<details><summary>Screenshot 2.6.1 </summary>
 <img src="Images/2019-01-13-16-40-45.png">
 </details>
 
-<details><summary>Screenshot 2.4.2 </summary>
+<details><summary>Screenshot 2.6.2 </summary>
 <img src="Images/2019-01-14-23-43-29.png">
 </details>
 <br/>
 
-2.5  Enter the command `docker images` and observe that you can now see the docker image with the id you copied from the previous step in in the local docker image cache on `cli-vm`
+2.7  Enter the command `docker images` and observe that you can now see the docker image with the id you copied from the previous step in in the local docker image cache on `cli-vm`
 
-<details><summary>Screenshot 2.5</summary>
+<details><summary>Screenshot 2.7</summary>
 <img src="Images/2019-01-14-23-44-27.png">
 </details>
 
@@ -241,7 +259,8 @@ docker images
 <img src="Images/2019-01-15-01-45-27.png">
 </details>
 <br/>
-If Harbor was deployed using the [HarborPipelineInstal-IN4968](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborPipelineInstal-IN4968) and no vulnerabilites are shown when you scan the image, you will need to reconfigure the PKS Harbor tile to set "Updater interval" to 1 hour and apply the changes.
+
+If Harbor was deployed using the [Harbor Pipeline Install](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborPipelineInstal-IN4968) and no vulnerabilites are shown when you scan the image, you will need to reconfigure the PKS Harbor tile to set "Updater interval" to 1 hour and apply the changes.
 
 <details><summary>Screenshot 4.1.3</summary>
 <img src="Images/2019-02-06_15-53-52.png">
@@ -286,6 +305,12 @@ docker pull harbor.corp.local/library/frontend:v1
 <img src="Images/2019-01-15-01-58-33.png">
 </details>
 <br/>
+
+4.7 Pull the image down again with the following command to prepare for Step 5:
+
+```bash
+docker pull harbor.corp.local/library/frontend:v1
+```
 
 ## Step 5: Configure and validate Content Trust
 
@@ -350,7 +375,7 @@ export DOCKER_CONTENT_TRUST=1
 </details>
 <br/>
 
-5.5 From the `cli-vm` prompt, download a local unsigned copy of the planespotter frontend:v1 image from the `library/frontend` repository on harbor. (NOTE: you may need to set DOCKER_CONTENT_TRUST to 0 in order to download from the library, set it back to 1 when download is complete: ```export DOCKER_CONTENT_TRUST=0```) Update the tag to prepare for uploading to the `trusted` project where content trust is enabled. Note that when after you enter the push command, you will be prompted to enter passphrases for image signing, use the passphrase `VMware1!`
+5.5 Update the tag on the existing `harbor.corp.local/library/frontend:v1` image to prepare for uploading to the `trusted` project where content trust is enabled. Note that after you enter the push command, you will be prompted to enter passphrases for image signing, use the passphrase `VMware1!`
 
 While you are still pushing the same unsigned image to harbor, because you enabled content trust on the `cli-vm` docker client, it will automatically sign an image when pushed
 
