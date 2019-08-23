@@ -1,9 +1,9 @@
-# PKS Backup and Restore using VMWare Heptio Velero
+# PKS Backup and Restore using Velero
 
 ## Overview
 
-### Heptio Velero
- - Heptio Velero (formerly Heptio Ark) gives you tools to back up and restore your Kubernetes cluster resources and persistent volumes. 
+### Velero
+ - Velero (formerly Heptio Ark) gives you tools to back up and restore your Kubernetes cluster resources and persistent volumes. 
 
  - Velero Feature
    Take backups of your cluster and restore in case of loss.
