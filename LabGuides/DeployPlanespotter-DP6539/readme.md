@@ -1,29 +1,32 @@
-# Deploy Plane Spotter App
+# Deploy PlaneSpotter App
 
 --------------
-### This lab requires a working Kubernetes cluster. If you haven't completed the Deploy  Your First Cluster Lab, do that now.
+
+### This Lab Supports the HOL-2031 lab template, along with the v12 Baseline, NsxtReady, PksInstalled and ClusterReady templates - however please note you will need PKS and a Kubernetes cluster deployed before proceeding
 
 ## Overview of App
 
-Now that we have a Kubernetes cluster, let's look at the magic of Kubernetes by deploying an application. For this exercise we will be using an app called 'planespotter' developed by the very talented @yfauser [here](https://github.com/yfauser/planespotter). Planespotter essentially lets you query Aircraft data from the FAA Registry. It has the following components
+Now that we have a Kubernetes cluster, let's look at the magic of Kubernetes by deploying an application. For this exercise we will be using an app called 'planespotter' developed by the very talented @yfauser [here](https://github.com/yfauser/planespotter). Planespotter lets you query Aircraft data from the FAA Registry. It has the following components (Please note that at the time of writing, Planespotters connection to )
 
 1. Front-end: User interface to take queries and showcase results
 2. API App server: to retrieve data from DB
 3. MySQL DB: Stores Aircraft registration data from FAA
 4. Redis-server: Memory cache server to fetch data of Aircrafts currently airborne
 
-Explore the YAML files that will be used for the deployments (Located in ~/planespotter/kubernetes). For example look at the front-end deployment YAML file to see how many pods and replicas the deployment YAML has specified. The deployment YAML for planespotter-frontend has specified 2 replica sets, hence post deployment you should see two pods deployed for the frontend app. 
+<details><summary>Planespotter Overview Image</summary>
+<img src="Images/2019-01-15-23-17-44.png">
+</details>
+
+If you would like you can explore the [YAML files that will be used for the deployments](https://github.com/CNA-Tech/planespotter/tree/master/kubernetes), or just proceed through the steps and watch the deployments in action - some times it helps the understanding of the deployment files to watch the deployment first and then revisit looking at the yaml files. For example look at the front-end deployment YAML file to see how many pods and replicas the deployment YAML has specified. The deployment YAML for planespotter-frontend has specified 2 replica sets, hence post deployment you should see two pods deployed for the frontend app. 
 
 Similarly, take a note of the labels the frontend service has been allocated. These labels will be used to built the frontend loadbalancer when we expose the app. Kubernetes will understand which pods to route the incoming traffic for the front-end loadbalancer. The traffic is routed via pod labels, hence there is no need to configure IP addresses, host names etc.
 
 With Kubernetes, each component needed for the app is defined in the deployment YAML. The deployment YAML identifies the base container image , the dependencies needed from the infrastructure etc. The yaml files also create an API service that frontends the component-pod.
 
-In the Intro to Harbor lab, we modified one of the manifests (.yaml file) to pull an image from our private Harbor registry.If you haven't completed the Intro to Harbor lab, all images will be pulled from the remote registry.
-
 ## Overview of Steps
 
-- [Deploy Plane Spotter App](#deploy-plane-spotter-app)
-    - [This lab requires a working Kubernetes cluster. If you haven't completed the Deploy Your First Cluster Lab, do that now.](#this-lab-requires-a-working-kubernetes-cluster-if-you-havent-completed-the-deploy-your-first-cluster-lab-do-that-now)
+- [Deploy PlaneSpotter App](#deploy-planespotter-app)
+    - [This Lab Supports the HOL-2031 lab template, along with the v12 Baseline, NsxtReady, PksInstalled and ClusterReady templates - however please note you will need PKS and a Kubernetes cluster deployed before proceeding](#this-lab-supports-the-hol-2031-lab-template-along-with-the-v12-baseline-nsxtready-pksinstalled-and-clusterready-templates---however-please-note-you-will-need-pks-and-a-kubernetes-cluster-deployed-before-proceeding)
   - [Overview of App](#overview-of-app)
   - [Overview of Steps](#overview-of-steps)
   - [Step 1: Configure K8s Cluster for App Deployment](#step-1-configure-k8s-cluster-for-app-deployment)
@@ -32,10 +35,6 @@ In the Intro to Harbor lab, we modified one of the manifests (.yaml file) to pul
   - [Step 4: Understanding how Kubernetes Maintains state by looking at an example of ReplicaSets.](#step-4-understanding-how-kubernetes-maintains-state-by-looking-at-an-example-of-replicasets)
 
 -------------
-_If you've completed the Intro to Intro to Harbor lab, you'll already have the Planespotter repo cloned locally; If you haven't, you will need to clone it. Follow the directions below from the `cli-vm` to clone the repo for this lab:_
-
-- `cd ~`
-- `git clone https://github.com/cna-tech/planespotter.git`
 
 **Note that in the above command you are cloning the CNA-Tech fork of the original Planespotter application, as we have modified the deployment specs to pull planespotter images from our public harbor repository, which is accessible from the HOL-2031 environment.**
 
@@ -43,10 +42,29 @@ _If you've completed the Intro to Intro to Harbor lab, you'll already have the P
 
 ## Step 1: Configure K8s Cluster for App Deployment
 
+**HOL-2031 Users, Please Complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) Before Proceeding**
+
+1.0 From the control-center desktop, open a putty/ssh session to `ubuntu@cli-vm` and login with the password `VMware1!`, login to the PKS API and get your Kubernetes cluster credentials with the following commands:
+
+```bash
+pks login -a pks.corp.local -u pks-admin -p  --skip-ssl-validation
+pks get-credentials my-cluster
+```
+
+Clone the planespotter repository and navigate to the kubernetes directory with the following commands
+
+```bash
+cd /home/ubuntu
+git clone https://github.com/cna-tech/planespotter.git
+cd planespotter/kubernetes
+```
+
 1.1 Create namespace "planespotter" and set the namespace as your default
 
-- `kubectl create ns planespotter`
-- `kubectl config set-context my-cluster --namespace planespotter`
+```bash
+  kubectl create ns planespotter
+  kubectl config set-context my-cluster --namespace planespotter
+```
 
 1.2 Verify your namespace has been created
 
