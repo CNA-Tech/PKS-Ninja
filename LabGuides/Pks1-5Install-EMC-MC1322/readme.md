@@ -1,619 +1,481 @@
-# Pks 1.5 Installation with Enterprise PKS Management Console
+# PKS 1.5 Installation with the VMware Enterprise PKS Managment Console Beta
 
-**Contents:**
+**Note: VMware Enterprise PKS Management Console (EPMC) is currently in Beta, and users of this lab guide will need to use thier own access to installation files. Access to this software is not provided with this lab guide or with any of the available lab templates. VMware employees can find further details about accessing this software on the #pks_gear2_support channel in the VMware employee slack domain, external users will need to inquire with their VMware account representative to see if they are eligible for access to the Beta.**
 
-- [Pks 1.5 Installation with Enterprise PKS Management Console](#pks-15-installation-with-enterprise-pks-management-console)
+**Table of Contents**
+
+- [PKS 1.5 Installation with the VMware Enterprise PKS Managment Console Beta](#pks-15-installation-with-the-vmware-enterprise-pks-managment-console-beta)
   - [Lab Access Instructions](#lab-access-instructions)
   - [Prerequisites](#prerequisites)
-  - [Step 1: Deploy Enterprise PKS Management Console OVF](#step-1-deploy-enterprise-pks-management-console-ovf)
-  - [Step 2: Deploy BOSH](#step-2-deploy-bosh)
-  - [Step 3: Prep for PKS Install](#step-3-prep-for-pks-install)
-  - [Next Steps](#next-steps)
+  - [Install PKS 1.5 with Enterprise PKS Management Console (EPMC)](#install-pks-15-with-enterprise-pks-management-console-epmc)
+    - [Step 1: Download EPMC OVF File](#step-1-download-epmc-ovf-file)
+    - [Step 2: Deploy the EPMC OVF File](#step-2-deploy-the-epmc-ovf-file)
+    - [Step 3: Clean out old NAT rules andCreate NAT Rules to Connect to the epmc-01a web UI](#step-3-clean-out-old-nat-rules-andcreate-nat-rules-to-connect-to-the-epmc-01a-web-ui)
+    - [Step 4: Complete the installation workflow](#step-4-complete-the-installation-workflow)
 
 ## Lab Access Instructions
 
-Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/GetLabAccess-LA8528) to find more details on accessing the lab environment.
+Please see [Getting Access to a Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/GetLabAccess-LA8528) for instructions on accessing lab environments. The HOL-2031 template already has PKS 1.4.1 pre-installed and is not compatible with this lab guide. 
 
-To follow along with this lab guide, please load the PKS-Ninja-v12-NsxtReady template, or alternatively you can load the PKS-Ninja-v12-Baseline template and complete the NSXT Manual Install and NSXT Configuration for PKS Lab Guides prior to proceeding.
-
-Obtaining IP address of the ControlCenter desktop (If using VMware Learning Platform): From browser on the virtual lab environment deskop, go to http://myip.oc.vmware.com/
-
-All instructions in this lab guide should be performed from the ControlCenter desktop unless otherwise specified.
+Please see the prerequisites section below for mandatory steps you will need to follow to complete this lab guide.
 
 ## Prerequisites
 
-PKS installation on vSphere requires NSX-T to be installed and Pre-Configured in accordance with the [NSX-T Manual Installation](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtManualInstall-IN1497) and [NSX-T Configuration for PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtConfigForPks-NC5947) lab guides on this site.
+This lab guide is compatible with the PKS-Ninja-v12-NsxtReady or the PKS-Ninja-v12-Baseline templates. You can use the NsxtReady template if you prefer to just do the PKS installation, or use the Baseline template if you would prefer to perform an NSX-T installation as well as the PKS 1.5 installation. 
 
- The CNABU-PKS-Ninja-v12-NsxtReady template has NSX-T preinstalled and preconfigured, so you can load up that template and proceed with the instructions in this lab guide if you do not want to install/configure NSX-T.
+Please follow the instructions below for the template you are using prior to proceeding, per the following instructions:
 
-## Step 1: Deploy Enterprise PKS Management Console OVF
+<details><summary><b>Expand this section for instructions to prepare the PKS-Ninja-v12-NsxtReady template for this Lab Guide</b></summary>
 
+This lab guide is prepared based on the PKS-Ninja-v12-NsxtReady template. If you are using PKS-Ninja-v12-NsxtReady-0.3 or older v12-NsxtReady template, you will need to patch your template per the instructions in [Issue #507](https://github.com/CNA-Tech/PKS-Ninja/issues/507). If you are using the PKS-Ninja-v12-NsxtReady-0.4 or newer template, you do not need to worry about applying this patch. 
 
+After patching the template (if needed), you can proceed to the next section.
 
-1.1 From the control center desktop, download the Enterprise PKS Management Console OVF file. If you are a VMware employee you can access the OVF file at the following link, otherwise you will need to use your own myvmware credentials or other mechanism for downloading the software. 
-
-VMware employees can use the following link: [http://sc-dbc1222.eng.vmware.com/fanz/gear2-build/master/pks-v0.9.0-dev.comprehensive-ova.master.475928-916204b0.ova](http://sc-dbc1222.eng.vmware.com/fanz/gear2-build/master/pks-v0.9.0-dev.comprehensive-ova.master.475928-916204b0.ova)
-
-
-1.2 Login to the vSphere client using the windows system credentials and navigate to the `Hosts and Clusters` page. Right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`. On the `Select template` screen, select `Local File` and navigate to the Enterprise PKS Management Console OVA file in the E:\Downloads directory " and click `Next`
-
-On the `Select name and location` screen, rename the Virtual machine name `opsman` and select `RegionA01` as the datacenter
-
-<details><summary>Screenshot 1.2</summary>
-<img src="Images/2019-06-18-15-47-42.png">
 </details>
 <br/>
 
-1.3 On the `Select a resource` screen, select the `pks-mgmt-1` resource pool and click `Next`
+<details><summary><b>Expand this section for instructions to prepare the PKS-Ninja-v12-Baseline template for this Lab Guide</b></summary>
 
-<details><summary>Screenshot 1.3</summary>
-<img src="Images/2019-06-18-15-48-26.png">
-</details>
+If you would prefer to go through the NSX-T Installation and/or Preparation steps to configure NSX-T for a PKS 1.5 Installation with Enterprise PKS Management Console (EPMC), you have a choice on how to proceed. EPMC includes the ability to install PKS into environments with only a very basic NSX-T installation and it will automate the entire configuration of NSX-T for PKS, or alternatively, EPMC also includes the ability to install PKS on environments where NSX-T has a been pre-configuration for PKS installation. At this time, this guide only includes instructions for Installing PKS 1.5 with EPMC on environments where NSX-T is pre-configured for Enterprise PKS installation. 
+
+In either case, if you are using PKS-Ninja-v12-Baseline-0.5 or older v12-Baseline template, you will need to patch your template per the instructions in [Issue #507](https://github.com/CNA-Tech/PKS-Ninja/issues/507).
+
+  <details><summary><b>Expand this section if you would like to complete a basic NSX-T installation and use EPMC to both configure NSX-T for PKS and Install PKS 1.5</b></summary>
+
+  If you would like to try the first option to use EPMC using the option to install on a base NSX-T install, the environment should support it and it should not be difficult, we just havent had the time to verify or include specific instructions in this lab guide yet. This lab guide only currently includes specific instructions for the v12-NsxtReady template and for users who use a v-12 Baseline template and complete both the [NSX-T 2.4 Manual Installation](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtManualInstall-IN1497) and the [NSX-T Configuration for PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtConfigForPks-NC5947) Lab Guides.
+
+  First you will need to complete the [NSX-T 2.4 Manual Installation Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtManualInstall-IN1497) to complete the base NSX-T base install. 
+
+  Next, you can use EPMC to automate the NSX-T Configuration for PKS and Install PKS 1.5, specific instructions are not currently provided in this lab guide, however you can reference the [Using the Enterprise PKS Management Console](https://docs.vmware.com/en/VMware-Enterprise-PKS/1.5/vmware-enterprise-pks-15/GUID-console-console-index.html) section in the [Enterprise PKS 1.5 Documentation](https://docs.vmware.com/en/VMware-Enterprise-PKS/1.5/vmware-enterprise-pks-15/GUID-console-console-index.html) for documentation on how to use EPMC to perform installations using this methog. 
+
+  </details>
 <br/>
 
-1.4 On the `Review details` screen, confirm the details and click `Next`
+  <details><summary><b>Expand this section if you would like to complete a basic NSX-T installation, configure NSX-T for PKS, and then use EPMC to install PKS 1.5</b></summary>
 
-<details><summary>Screenshot 1.4</summary>
-<img src="Images/2019-06-18-15-50-12.png">
-</details>
+  After you load a PKS-Ninja-v12-Baseline template, use the following sequence to prepare your lab environment:
+
+  Step 1: If you are using a PKS-Ninja-v12-Baseline-0.5 or older v12-Baseline template, you will need to patch your template per the instructions in [Issue #507](https://github.com/CNA-Tech/PKS-Ninja/issues/507).
+
+  Step 2: Complete the [NSX-T 2.4 Manual Installation Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtManualInstall-IN1497)
+
+**Please Note: When completing Step 3, you can skip the section for adding NAT rules as epmc automates NAT rule configuration when it is used**
+
+  Step 3: Complete the  [NSX-T Configuration for PKS Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtConfigForPks-NC5947)
+
+  Step 4: Proceed to the next section and follow the instructions to proceed with using EPMC to install PKS 1.5
+
+  </details>
 <br/>
 
-1.5 On the `Select storage` screen, set `Thin Provision` as the virtual disk format and `RegionA01-ISCSI02-COMP01` as the datastore and click `Next`
-
-<details><summary>Screenshot 1.5</summary>
-<img src="Images/2019-06-18-15-51-48.png">
 </details>
-<br/>
 
-1.6 On the `Select networks` screen, ensure the `Destination Network` is set to `ls-pks-mgmt`
+## Install PKS 1.5 with Enterprise PKS Management Console (EPMC)
 
-<details><summary>Screenshot 1.6</summary>
-<img src="Images/2019-06-18-15-52-39.png">
-</details>
-<br/>
+Please be sure to complete the requirements in the [Prerequisites](#prerequisites) section above before proceeding.
 
-1.7 On the `Customize template` screen, enter the following variables:
+### Step 1: Download EPMC OVF File
 
-  - IP Address: 172.31.0.3
-  - Netmask: 255.255.255.0
-  - Default Gateway: 172.31.0.1
-  - DNS: 192.168.110.10
-  - NTP Servers: ntp.corp.local
-  - Admin Password: VMware1!
-  - Public SSH Key: (leave blank)
-  - Custom Hostname: opsman
+1.1 VMware Enterprise PKS Management Console (EPMC) is, at the time of writing, in Beta, and users of this lab guide will need to use thier own credentials or source for the PKS Management Console access to this software. 
 
-<details><summary>Screenshot 1.7</summary>
-<img src="Images/2019-06-18-16-08-58.png">
-</details>
-<br/>
+Access to the EPMC beta or installation files is not provided with this lab guide or with any of the available lab templates. 
 
-1.8 On the `Ready to complete` screen, confirm the details and click `Finish`
+VMware employees can find further details about accessing this software on the #pks_gear2_support channel in the VMware employee slack domain.
 
-<details><summary>Screenshot 1.8</summary>
-<img src="Images/2019-06-18-16-10-00.png">
-</details>
-<br/>
+External users will need to inquire with their VMware account representative to see if they are eligible for access to the Beta.
 
-1.9 After completing the `Deploy OVF Template` wizard, go to your recent tasks view and wait for the `Status` to change to `Completed` before proceeding
+### Step 2: Deploy the EPMC OVF File
 
-<details><summary>Screenshot 1.9</summary>
-<img src="Images/2019-06-18-17-18-35.png">
-</details>
-<br/>
-
-1.10 In the vSphere web client, right click on the opsman vm and select `Power On`
-
-<details><summary>Screenshot 1.10</summary>
-<img src="Images/2019-06-18-17-20-15.png">
-</details>
-<br/>
-
-1.11 Open a web browser connection to `https://opsman.corp.local` and select `Internal Authentication`
-
-<details><summary>Screenshot 1.11</summary>
-<img src="Images/2018-10-21-19-47-13.png">
-</details>
-<br/>
-
-1.12 On the `Internal Authentication` screen, enter the following values, check the box to agree to terms and conditions and click `Setup Authentication`
-
-- Username: admin
-- Password: VMware1!
-- Decryption Passphrase: VMware1!
-- Check "I agree to the terms and conditions..."
-- Click "Setup Authentication"
-
-_Note: After clicking `Setup Authentication` it will take several minutes for the authentication system to start. The login screen will appear after the authentication system is finished starting up._
-
-<details><summary>Screenshot 1.12</summary>
-<img src="Images/2018-10-21-19-49-15.png">
-</details>
-<br/>
-
-1.13 From the Ops Manager web UI, login with Username: `admin` Password: `VMware1!`
-
-<details><summary>Screenshot 1.13</summary>
-<img src="Images/2019-06-19-16-50-08.png">
-</details>
-<br/>
-
-## Step 2: Deploy BOSH
-
-2.1 From the ControlCenter desktop, open putty and connect to `cli-vm` with username `ubuntu` and password `VMware1!`
+2.1 From the ControlCenter desktop, open chrome, connect to the vSPhere web client and login using the windows system credentials checkbox. Navigate to the `Hosts and Clusters` page, expand `RegionA01`, right click on cluster `RegionA01-MGMT01` and select `Deploy OVF Template`
 
 <details><summary>Screenshot 2.1</summary>
-<img src="Images/2019-06-19-16-51-53.png">
+<img src="Images/2019-08-23-23-53-53.png">
 </details>
 <br/>
 
-2.2  At the Bash prompt enter the following command to create a new file called nsx-cert.cnf:
-
-```bash
-nano /home/ubuntu/nsx-cert.cnf
-```
-Paste the following text into the text editor window, press the key combination `ctrl + o` to save the file and then press `ctrl + x` to exit nano:
-
-```bash
-[ req ]
-default_bits = 2048
-distinguished_name = req_distinguished_name
-req_extensions = req_ext
-prompt = no
-[ req_distinguished_name ]
-countryName = US
-stateOrProvinceName = California
-localityName = CA
-organizationName = VMware
-commonName = 192.168.110.42
-[ req_ext ]
-subjectAltName = @alt_names
-[alt_names]
-DNS.1 = 192.168.110.42
-DNS.2 = nsxmgr-01a.corp.local
-
-```
-
-This file will be used as a certificate signing request, in the following step you will use this file to request to NSX-T Manager to generate and self-sign a certificate using the specifications in this file. 
+2.2  Select the EPMC OVF File from the location where you downloaded it and click `Next`. The default download location is `E:\Downloads`.
 
 <details><summary>Screenshot 2.2</summary>
-<img src="Images/2019-07-15-14-13-06.png">
+<img src="Images/2019-08-24-00-07-33.png">
 </details>
 <br/>
 
-2.3 From the CLI-VM prompt, enter the following commands to generate a new certificate we will use as the NSX API Cert:
+2.3 On the `Select Name and Folder` page, set the `Virtual Machine Name` to `epmc-01a` and click `Next`
 
-```bash
-export NSX_MANAGER_IP_ADDRESS=192.168.110.42
-export NSX_MANAGER_COMMONNAME=192.168.110.42
-openssl req -newkey rsa:2048 -x509 -nodes -keyout nsx.key -new -out nsx.crt -subj /CN=$NSX_MANAGER_COMMONNAME -reqexts SAN -extensions SAN -config <(cat ./nsx-cert.cnf <(printf "[SAN]\nsubjectAltName=DNS:$NSX_MANAGER_COMMONNAME,IP:$NSX_MANAGER_IP_ADDRESS")) -sha256 -days 3650
-
-```
-
-<details><summary>Screenshot 2.3.1</summary>
-<img src="Images/2019-07-15-14-18-40.png">
+<details><summary>Screenshot 2.3</summary>
+<img src="Images/2019-08-24-00-10-05.png">
 </details>
 <br/>
 
-2.4 From the cli-vm prompt, enter the following commands to view the certificate and the private key you generated in the previous step
+2.4 On the `Select a compute resource` page, expand `RegionA01-MGMT01` and select the `pks-mgmt-1` resource pool and click `Next`.
 
-```bash
-cat /home/ubuntu/nsx.crt
-cat /home/ubuntu/nsx.key
-```
 
 <details><summary>Screenshot 2.4</summary>
-<img src="Images/2019-07-15-14-30-05.png">
+<img src="Images/2019-08-24-00-43-31.png">
 </details>
 <br/>
 
-2.5 On the control center desktop, open `Notepad++` from the start menu and create a new tab. On the new tab paste the output from the `nsx.crt` file from the previous step and save the file on the desktop as `nsx.crt`. Do not close the Notepad++ window as you will need to access this text in the following steps
+2.5 On the `Review Details` page, verify the details and click `Next`.
 
 <details><summary>Screenshot 2.5</summary>
-<img src="Images/2019-07-15-14-37-03.png">
+<img src="Images/2019-08-24-00-13-13.png">
 </details>
 <br/>
 
-2.6 Open a new tab in Notepad++. Copy the output of the `nsx.key` file, paste it into the new notepad++ tab and save the file on the desktop as `nsx.key`. Do not close the Notepad++ window as you will need to access this text in the following steps
+2.6 On the `License Agreements` page, check the `I accept all license agreements` checkbox and click `Next`.
 
 <details><summary>Screenshot 2.6</summary>
-<img src="Images/2019-07-15-14-39-13.png">
+<img src="Images/2019-08-24-00-15-05.png">
 </details>
 <br/>
 
 
-2.7 Log into the NSX Manager UI (Username: admin Password VMware1!VMware1!) navigate to the `System > Certificates` page and click `Import > Import Certificate` 
+2.7 On the `Select Storage` page, **First** select the `RegionA01-ISCSI02-COMP01` datastore, and then set the `virtual disk format` to `Thin Provision` and click `Next`.
 
 <details><summary>Screenshot 2.7</summary>
-<img src="Images/2019-07-15-14-23-01.png">
+<img src="Images/2019-08-24-00-17-25.png">
 </details>
 <br/>
 
-2.8 On the `Import Certificate` window, enter the following values:
+2.8 On the `Select networks` page, set the `VM Network` to `VM-RegionA01-vDS-MGMT` and click `Next`.
 
-- Name: NSX-API-CERT
-- Certificate Components: Click `Browse` and select the `nsx.crt` file you created in the previous steps and click `Open`
-- Private Key: Click `Browse` and select the `nsx.key` file you created in the previous steps and click `Open`
-- Service Certificate: No
-- Click `Import`
-- The certificate should now be listed as `NSX-API-CERT`, click the `ID` field and copy the value for the `ID` for use in the next step
-
-<details><summary>Screenshot 2.8.1</summary>
-<img src="Images/2019-07-15-14-42-10.png">
-</details>
-
-<details><summary>Screenshot 2.8.2</summary>
-<img src="Images/2019-07-15-14-44-17.png">
-</details>
-
-<details><summary>Screenshot 2.8.3</summary>
-<img src="Images/2019-07-15-14-45-31.png">
-</details>
-
-<details><summary>Screenshot 2.8.4</summary>
-<img src="Images/2019-07-15-14-48-34.png">
+<details><summary>Screenshot 2.8</summary>
+<img src="Images/2019-08-24-16-17-55.png">
 </details>
 <br/>
 
-2.9 Return to your session with cli-vm and at the prompt enter the following commands to register the certificate you just imported as the node api certificate for nsx manager
+2.9 On the `Customize template` page, enter the following values: (leave any unspecified values to their default setting)
 
-**Make sure to paste the certificate ID you gathered in the previous step into the `export CERTIFICATE_ID="519da18e-ba3f-43e0-8a5b-7b8c250cbd4b"` command below**
-
-```bash
-export NSX_MANAGER_IP_ADDRESS=192.168.110.42
-export NSX_MANAGER_COMMONNAME=192.168.110.42
-export CERTIFICATE_ID="Replace_this_text_with_your_certificate_ID_from_the_previous_step"
-curl --insecure -u admin:'VMware1!VMware1!' -X POST "https://$NSX_MANAGER_IP_ADDRESS/api/v1/node/services/http?action=apply_certificate&certificate_id=$CERTIFICATE_ID"
-```
+- Root Password: `VMware1!`
+- Permit Root Login: `True`
+- Network IP Address: `192.168.110.28`
+- Network Netmask: `255.255.255.0`
+- Default Gateway: `192.168.110.1`
+- Domain Name Servers: `192.168.110.10`
+- Domain Search Path: `corp.local`
+- FQDN: `epmc-01a.corp.local`
+- Log Insight Server Host/IP: `vrli-01a.corp.local`
+- Click `Next`
 
 <details><summary>Screenshot 2.9</summary>
-<img src="Images/2019-07-15-14-57-26.png">
+<img src="Images/2019-08-24-00-27-57.png">
 </details>
 <br/>
 
-2.10 From the Ops Manager web UI, click on the tile `BOSH Director for vSphere`
+2.10 On the `Ready to complete` page, review the details and click `Finish`
 
 <details><summary>Screenshot 2.10</summary>
-<img src="Images/2018-10-21-21-07-42.png">
+<img src="Images/2019-08-24-00-28-47.png">
 </details>
 <br/>
 
-2.11 On the `vCenter Configuration` page, enter the following values and click `Save`:
+2.11 On the Control Center desktop, click the windows start key and search for `DNS`, select the top result shown as shown in the following screenshot. 
 
-- Name: vcsa-01a
-- vCenter Host: vcsa-01a.corp.local
-- vCenter Username: administrator@corp.local
-- vCenter Password: VMware1!
-- Datacenter Name: RegionA01
-- Virtual Disk Type: thin
-- Ephemeral Datastore Names: RegionA01-ISCSI02-COMP01
-- Persistent Datastore Names: RegionA01-ISCSI02-COMP01
-- Select `NSX Networking`
-- NSX Mode: NSX-T
-- NSX Address: 192.168.110.42
-- NSX Username: admin
-- NSX Password: VMware1!VMware1!
-- Copy and Paste the text from the nsx.crt file you created in the previous steps
-- VM Folder: pks_vms  **_(Make sure you change these following values, that begin with pcf_ by default, to begin with pks_)**
-- Template Folder: pks_templates
-- Disk path Folder: pks_disk
-- Click `Save`
-
-<details><summary>Screenshot 2.11.1</summary>
-<img src="Images/2018-10-21-21-29-43.png">
-</details>
-
-<details><summary>Screenshot 2.11.2</summary>
-<img src="Images/2018-10-21-21-44-38.png">
+<details><summary>Screenshot 2.11</summary>
+<img src="Images/2019-08-24-00-30-50.png">
 </details>
 <br/>
 
-2.12 Continue with the Bosh Director tile configuration, select the `Director Config` tab on the left side menu and enter the following values:
+2.12 In `DNS Manager` expand `Forward Lookup Zones` and left-click `corp.local` Right click the `corp.local` folder, and select `New Host (A or AAAA)...`
 
-- NTP Servers: ntp.corp.local
-- Enable VM Resurrector Plugin: True
-- Enable Post Deploy Scripts: True
-- Recreate All VMs: True
-- Leave all other settings set to default values
-- Click `Save`
 
 <details><summary>Screenshot 2.12</summary>
-<img src="Images/2018-10-21-21-52-58.png">
+<img src="Images/2019-08-24-00-32-57.png">
 </details>
 <br/>
 
-2.13 Continue with the Bosh Director tile configuration, select the `Create Availability Zones` tab and enter the following details:
+2.13 In the `New Host` dialogue enter the following values:
 
-_Note: Each of the availability zones below will have a single cluster. When you add an availability zone, make sure to click `Add` on the upper right side of the window and do **not** click `Add Cluster`_
+- Name: `epmc-01a`
+- IP Address: `192.168.110.28`
+- Click `Add Host`
+- Close DNS Manager
 
-- Click `Add` to add an Availability Zone with the following values
-  - Name: `PKS-MGMT-1`
-  - IaaS Configuration: `vcsa-01a`
-  - Cluster: `RegionA01-MGMT01`
-  - Resource Pool: `pks-mgmt-1`
-- Click `Add` to add an Availability Zone with the following values
-  - Name: `PKS-COMP`
-  - IaaS Configuration: `vcsa-01a`
-  - Cluster: `RegionA01-COMP01`
-  - Resource Pool: `pks-comp-1`
-- Click `Save`
+<details><summary>Screenshot 2.13</summary>
+<img src="Images/2019-08-24-16-16-58.png">
+</details>
+<br/>
 
-<details><summary>Screenshot 2.13</summary><img src="Images/2019-01-08-19-10-12.png"></details><br>
-
-2.14 Continue with the Bosh Director tile configuration, select the `Create Networks` tab and enter the following values:
-
-- Enable ICMP Checks: `True`
-- Click `Add Network` to add a network with the following values
-  - Name: `PKS-MGMT`
-  - vSphere Network Name: `ls-pks-mgmt`
-  - CIDR: `172.31.0.0/24`
-  - Reserved IP Ranges: `172.31.0.1,172.31.0.3`
-  - DNS: `192.168.110.10`
-  - Gateway: `172.31.0.1`
-  - Availability Zones: `PKS-MGMT-1`, `PKS-COMP`
-  -Click `Save`
+2.14 Return to the vSphere web client, expand `Recent Tasks` and verify that the epmc ovf package import is complete. If your OVF Package import is not yet completed, please wait until it completes before proceeding.
 
 <details><summary>Screenshot 2.14</summary>
-<img src="Images/2019-06-20-17-41-25.png">
+<img src="Images/2019-08-24-00-38-15.png">
 </details>
 <br/>
 
-2.15 Continue with the Bosh Director tile configuration, select the `Assign AZs and Networks` tab and enter the following values:
-
-- Singleton Availability Zone: `PKS-MGMT-1`
-- Network: `PKS-MGMT`
-- Click Save
+2.15 From the `Hosts and Clusters` page, navigate to and expand the `RegionA01-MGMT01 > pks-mgmt-01` resource pool, right click `epmc-01a` and select `Power > Power On`. 
 
 <details><summary>Screenshot 2.15</summary>
-<img src="Images/2018-10-21-23-17-12.png">
+<img src="Images/2019-08-24-01-09-42.png">
 </details>
 <br/>
 
-2.16 Select the `Security` tab, check the box for `Include OpsManager Root CA in Trusted Certs` and click `Save`.
+### Step 3: Clean out old NAT rules andCreate NAT Rules to Connect to the epmc-01a web UI
 
-<details><summary>Screenshot 2.16</summary>
-<img src="Images/2019-06-19-23-37-02.png">
+Your lab environment was pre-configured with NAT rules for scenarios in which you manually install PKS, however as epmc will automatically create NAT rules, it is necessary to delete the existing NAT rules to prevent conflicts.
+
+ 3.1 From the Control Center desktop, open the chrome browser and click on the link to `NSX Manager` in the bookmarks bar. Login with the username `admin` and the password `VMware1!VMware1!`. Navigate to the `Advanced Networking & Security > Networking > NAT` page, ensure the `Logical Router` value is set to `t0-pks` and delete all existing NAT rules
+
+<details><summary>Screenshot 3.1</summary>
+<img src="Images/2019-08-24-03-53-37.png">
 </details>
 <br/>
 
-2.17 Select the `Resource Config` tab and change the value of the `VM Type` in the second row to the third medium option `medium.disk` as shown in Screenshot 2.13, and click `Save`
+3.2 From the Control Center Desktop, open a new browser tab in chrome, and navigate to [https://epmc-01a.corp.local/login](https://epmc-01a.corp.local/login), login with the username `root` and the password `VMware1!`
 
-<details><summary>Screenshot 2.17</summary>
-<img src="Images/2019-01-08-19-55-48.png">
+<details><summary>Screenshot 3.4</summary>
+<img src="Images/2019-08-24-03-04-27.png">
 </details>
 <br/>
 
-2.12 In the Ops Manager web UI, click on `Installation Dashboard` on the top menu bar and then click `Review Pending Changes`
+### Step 4: Complete the installation workflow
 
-<details><summary>Screenshot 2.12</summary>
-<img src="Images/2018-10-21-23-23-00.png">
+4.1 From the Control Center Desktop, open a new browser tab in chrome, and navigate to [https://epmc-01a.corp.local/login](https://epmc-01a.corp.local/login), login with the username `root` and the password `VMware1!` click `INSTALL`, and then click `START CONFIGURATION`
+
+<details><summary>Screenshot 4.1.1</summary>
+<img src="Images/2019-08-24-03-04-27.png">
+</details>
+
+<details><summary>Screenshot 4.1.2</summary>
+<img src="Images/2019-08-24-03-06-46.png">
 </details>
 <br/>
 
-2.15 On the `Review Pending Changes` screen, ensure that the checkbox for Bosh Director is checked and click `Apply Changes`
+4.2 In the `PKS Configuration` Dialogue, enter the following values in section `1. vCenter Account`(leave any unspecified values set to their default value):
 
-<details><summary>Screenshot 2.15</summary>
-<img src="Images/2019-06-19-23-39-13.png">
+- vCenter Server: `vcsa-01a.corp.local`
+- Username: `administrator@corp.local`
+- Password: `VMware1!`
+- Click the `Connect` button
+- DataCenter: `RegionA01`
+- Click `Next`
+
+<details><summary>Screenshot 4.2</summary>
+<img src="Images/2019-08-24-03-14-35.png">
 </details>
 <br/>
 
-2.16 Review the `Applying Changes` to observe the BOSH VM deployment. While BOSH is deploying, you can skip ahead to Step 3 and return to the `Applying Changes` screen periodically to check the status of the deployment. Once the BOSH deployment is complete, you should see a `Changes applied` popup window as shown in Screenshot 2.16.2
+4.3 In the `PKS Configuration` Dialogue, enter the following values in section `2. Networking`(leave any unspecified values set to their default value):
 
-_Note: In the nested example lab, it takes ~30 minutes to complete the BOSH deployment_
+- Select `NSX-T Data Center (Prepared for PKS)`
+- NSX Manager: `nsxmgr-01a.corp.local`
+- Username: `admin`
+- Password: `VMware1!VMware1!`
+- Pod IP Block ID: `ip-block-pods-deployments`
+- Node IP Block ID: `ip-block-nodes-deployments`
+- Floating IP Pool ID: `ip-pool-vips`
+- Nodes DNS: `10.100.200.2`
+- Deployment DNS: `192.168.110.10`
+- NTP Server: `192.168.100.1`
+- Click `Next`
 
-<details><summary>Screenshot 2.16.1 </summary>
-<img src="Images/2018-10-21-23-26-50.png">
-</details>
-
-<details><summary>Screenshot 2.16.2 </summary>
-<img src="Images/2018-10-22-00-41-06.png">
-</details>
-<br/>
-
-## Step 3: Prep for PKS Install
-
-_Note: To save time, you will open another instance of Ops Manager admin console and continue to importing the PKS Tile while Bosh continues to deploy. Leave your Bosh deployment browser tab open to continue to monitor the deployment status._
-
- 3.1 Open a new browser tab and select the `Opsman` bookmark to open a second Ops Manager session
-
- <details><summary>Screenshot 3.1</summary><img src="Images/2019-01-06-16-14-55.png"></details><br>
-
-3.2 Login to the Ops Manager UI, Click `Import a Product`, select the `PKS` binary file in the E:\Downloads directory as shown in screenshot 3.2. Wait for the import to complete, which could take a few minutes.
-
-<details><summary>Screenshot 3.2 </summary>
-<img src="Images/2019-06-20-15-02-15.png">
+<details><summary>Screenshot 4.3</summary>
+<img src="Images/2019-08-24-03-54-31.png">
 </details>
 <br/>
 
-3.3 Generate the NSX-T Principal Identity certificate for PKS authentication to NSX-T Manager. 
+4.4 In the `PKS Configuration` Dialogue, enter the following values in section `3.Identity`(leave any unspecified values set to their default value):
 
-From the control center desktop open a putty session with `cli-vm`  and use a text editor to create the `create_certificate.sh` file with the following command:
+- Select `Local user database`
+- PKS API FQDN: `pks.corp.local`
+- Click `Next`
 
-```bash
-nano create_certificate.sh
-```
-
-3.4 Expand the below section and copy the text to the file _(Note: Right-click to paste while in Putty)_:
-
-<details><summary>Click to expand create_certificate.sh</summary><br>
-
-``` bash
-#!/bin/bash
-#create_certificate.sh
-
-NSX_MANAGER="192.168.110.42"
-NSX_USER="admin"
-
-PI_NAME="pks-nsx-t-superuser"
-NSX_SUPERUSER_CERT_FILE="pks-nsx-t-superuser.crt"
-NSX_SUPERUSER_KEY_FILE="pks-nsx-t-superuser.key"
-
-stty -echo
-printf "Password: "
-read NSX_PASSWORD
-stty echo
-
-openssl req \
-  -newkey rsa:2048 \
-  -x509 \
-  -nodes \
-  -keyout "$NSX_SUPERUSER_KEY_FILE" \
-  -new \
-  -out "$NSX_SUPERUSER_CERT_FILE" \
-  -subj /CN=pks-nsx-t-superuser \
-  -extensions client_server_ssl \
-  -config <(
-    cat /etc/ssl/openssl.cnf \
-    <(printf '[client_server_ssl]\nextendedKeyUsage = clientAuth\n')
-  ) \
-  -sha256 \
-  -days 730
-
-cert_request=$(cat <<END
-  {
-    "display_name": "$PI_NAME",
-    "pem_encoded": "$(awk '{printf "%s\\n", $0}' $NSX_SUPERUSER_CERT_FILE)"
-  }
-END
-)
-
-curl -k -X POST \
-    "https://${NSX_MANAGER}/api/v1/trust-management/certificates?action=import" \
-    -u "$NSX_USER:$NSX_PASSWORD" \
-    -H 'content-type: application/json' \
-    -d "$cert_request"
-```
-
-</details>
-<br>
-
-3.5 Save the file and exit
-
-``` bash
-Ctrl + O
-Enter
-Ctrl + X
-```
-
-<details><summary>Screenshot 3.5</summary>
-<img src="Images/2019-06-20-16-49-10.png">
+<details><summary>Screenshot 4.4</summary>
+<img src="Images/2019-08-24-03-57-21.png">
 </details>
 <br/>
 
-3.6 From the command line, enter the following command. Enter the password `VMware1!VMware1!` when prompted
+4.5 In the `PKS Configuration` Dialogue, enter the following values in section `4. Availability Zones`(leave any unspecified values set to their default value):
 
-```bash
-source create_certificate.sh
-```
+- Under `Availability Zone`
+  - Name: `PKS-MGMT-1`
+  - This is the management availability zone: `True`
+  - Compute Resource: `pks-mgmt-1`
+  - Click `Save Availability Zone`
+- Click `Add Availability Zone`
+  - Name: `PKS-COMP`
+  - Compute Resource: `pks-comp-1`
+  - Click `Save Availability Zone`
+- Click `Next`
 
-<br>
+<details><summary>Screenshot 4.5.1</summary>
+<img src="Images/2019-08-24-04-07-54.png">
+</details>
 
-3.7 Copy the certificate ID (As highlighted below in screenshot 3.8) to your instance of Notepad++ and label as `NSX PI Cert ID`
-
-<details><summary>Screenshot 3.7.1</summary>
-<img src="Images/2018-10-22-02-45-20.png">
+<details><summary>Screenshot 4.5.2</summary>
+<img src="Images/2019-08-24-04-10-16.png">
 </details>
 <br/>
 
-<details><summary>Screenshot 3.7.2</summary><img src="Images/2019-01-06-16-30-32.png"></details><br>
+4.6 In the `PKS Configuration` Dialogue, enter the following values in section `5. Storage`(leave any unspecified values set to their default value):
 
-3.8 Review the contents of the NSX PI certificate & key with the below commands, add them to the Notepad++ instance with each labeled as PI Cert abd PI Key repspectively.
+- `Ephemeral Storage`
+  - Select: `RegionA01-ISCI02-COMP01`
+- `Kubernetes Persistent Volume Storage`
+  - Select: `RegionA01-ISCI02-COMP01`
+- Click `Next`
 
-``` bash
-cat pks-nsx-t-superuser.crt
-cat pks-nsx-t-superuser.key
-```
-
-<details><summary>Screenshot 3.8</summary>
-<img src="Images/2018-10-22-02-52-14.png">
+<details><summary>Screenshot 4.6</summary>
+<img src="Images/2019-08-24-04-13-26.png">
 </details>
 <br/>
 
-3.9 Create and register the Principal Identity in NSX-T for PKS. From the `cli-vm` prompt, use a text editor to create a file
+4.7 In the `PKS Configuration` Dialogue, enter the following values in section `6. Plans`(leave any unspecified values set to their default value):
 
-```bash
-nano create_pi.sh
-```
+- `Small`
+  - Name: `Small`
+  - Worker Node Instances: `2`
+  - Worker Persistent Disk Size: `20 GB`
+  - Enable Priviledged Containers: `True`
+  - Click `Save Plan`
+- `Medium`
+  - To the right of `Save Plan`, click `DELETE` to delete the medium plan
+- `Large`
+  - To the right of `Save Plan`, click `DELETE` to delete the medium plan
+- Click `Next`
 
-3.10 Expand the text below and copy the text to your file. _**Do not cut and paste this script exactly, make sure to change the CERTIFICATE_ID to the id value you copied to Notepadd++ and labeled `NSX PI Cert ID` earlier**_
-
-<details><summary>Click to expand create_pi.sh</summary>
-
-``` bash
-#!/bin/bash
-#create_pi.sh
-
-NSX_MANAGER="192.168.110.42"
-NSX_USER="admin"
-CERTIFICATE_ID="Replace this text with your certificate ID"
-
-PI_NAME="pks-nsx-t-superuser"
-NSX_SUPERUSER_CERT_FILE="pks-nsx-t-superuser.crt"
-NSX_SUPERUSER_KEY_FILE="pks-nsx-t-superuser.key"
-NODE_ID=$(cat /proc/sys/kernel/random/uuid)
-
-stty -echo
-printf "Password: "
-read NSX_PASSWORD
-stty echo
-
-pi_request=$(cat <<END
-    {
-         "display_name": "$PI_NAME",
-         "name": "$PI_NAME",
-         "permission_group": "superusers",
-         "certificate_id": "$CERTIFICATE_ID",
-         "node_id": "$NODE_ID"
-    }
-END
-)
-
-curl -k -X POST \
-    "https://${NSX_MANAGER}/api/v1/trust-management/principal-identities" \
-    -u "$NSX_USER:$NSX_PASSWORD" \
-    -H "content-type: application/json" \
-    -d "$pi_request"
-
-curl -k -X GET \
-    "https://${NSX_MANAGER}/api/v1/trust-management/principal-identities" \
-    --cert $(pwd)/"$NSX_SUPERUSER_CERT_FILE" \
-    --key $(pwd)/"$NSX_SUPERUSER_KEY_FILE"
-```
-
+<details><summary>Screenshot 4.7</summary>
+<img src="Images/2019-08-24-18-00-06.png">
 </details>
 <br/>
 
-<details><summary>Screenshot 3.10</summary>
-<img src="Images/2018-10-22-03-15-42.png">
+4.8 In the `PKS Configuration` Dialogue, enter the following values in section `7. Integrations`(leave any unspecified values set to their default value):
+
+- `Wavefront`
+  - Enable: `False`
+  - Click `Save`
+- `vRealize Operations Manager`
+  - Enable: `False`
+  - Click `Save`
+- `vRealize Log Insight`
+  - Enable Log Insight: `True`
+  - Host: `vrli-01a.corp.local`
+  - Click `Save`
+- `Other Logging`
+  - Enable Syslog for PKS: `False`
+  - Click `Save`
+- Click `Next`
+
+<details><summary>Screenshot 4.8</summary>
+<img src="Images/2019-08-24-04-27-24.png">
 </details>
 <br/>
 
-3.11 Save and exit. From the bash prompt, enter the below command. Enter the password `VMware1!VMware1!` when prompted.
+4.9 In the `PKS Configuration` Dialogue, enter the following values in section `8. Harbor`(leave any unspecified values set to their default value):
 
-```bash
-source create_pi.sh
-```
+- Enable Harbor: `True`
+- Harbor FQDN: `harbor.corp.local`
+- Password:   `VMware1!`
+- Confirm Password: `VMware1!`
+- VM type for harbor-app: `medium.disk (cpu: 2, ram: 4GB, disk: 32GB)`
+- Disk size for harbor-app: `50 GB`
+- Updater Interval: `1`
+- Click `Next`
 
-<details><summary>Screenshot 3.11</summary>
-<img src="Images/2018-10-22-03-25-06.png">
+<details><summary>Screenshot 4.9</summary>
+<img src="Images/2019-08-24-04-33-32.png">
 </details>
 <br/>
 
-3.12 In the NSX Manager UI, go to `System > Users` and verify that you see a user account for `pks-nsx-t-superuser`
+4.10 In the `PKS Configuration` Dialogue, enter the following values in section `9. CEIP and Telemetry`(leave any unspecified values set to their default value):
 
-_Note: Login for NSX Manager UI is: `admin/VMware1!`_
+- Please select your participation level in the CEIP and Telemetry Program: `None`
+- Please select how you will be using this PKS Installation: `Demo or Proof-of-concept`
+- Click `Next`
+- Click `Generate Configuration`
 
-<details><summary>Screenshot 3.12</summary>
-<img src="Images/2019-06-20-17-05-49.png">
+<details><summary>Screenshot 4.10</summary>
+<img src="Images/2019-08-24-04-37-38.png">
 </details>
 <br/>
 
-_**Note: Do not discard the values you've stored in Notepad++, you will need them again for PKS Install Phase 2.**_
+4.11 In the `PKS Configuration` Dialogue, on the `Configuration YAML` screen, review the values and observe that you could edit values with the in-browser text editor if you needed to. Click `APPLY CONFIGURATION`, and on the `Apply Configuration` popup window, select `Continue`
+
+<details><summary>Screenshot 4.11.1</summary>
+<img src="Images/2019-08-24-04-40-29.png">
+</details>
+
+<details><summary>Screenshot 4.11.2</summary>
+<img src="Images/2019-08-24-04-42-03.png">
+</details>
+
+<details><summary>Screenshot 4.11.3</summary>
+<img src="Images/2019-08-24-04-42-35.png">
+</details>
+<br/>
+
+4.12 Observe the various steps that the deployment goes through on the `Installing PKS Instance` screen while waiting for the deployment to complete:
+
+<details><summary>Screenshot 4.12</summary>
+<img src="Images/2019-08-24-04-46-02.png">
+</details>
+<br/>
+
+4.13 After the installation completes, click `Go To VMware Enterprise PKS`
+
+<details><summary>Screenshot 4.13</summary>
+<img src="Images/2019-08-24-19-37-42.png">
+</details>
+<br/>
+
+4.14 Observe the information provided, including links to the relevant VM and Network object pages in vCenter and NSX Manager, making it easy to identify and more effectively utlize vSphere tools when supporting the Enterprise PKS Deployment. 
+
+If you look at the cluster and nodes tabs right now they are blank as you have not deployed a cluster yet. After you deploy a cluster revisit the clusters and nodes tabs to easily find exactly which VMs and vsphere/nsx objects are associated with each K8s cluster.
+
+<details><summary>Screenshot 4.14</summary>
+<img src="Images/2019-08-24-19-44-54.png">
+</details>
+<br/>
+
+4.15 Click on `Deployment Metadata` and observe that this tab provides each of the certificates and secrets used during the deployment, providing a simple, central location administrators can go to find access details.
+
+Navigate to the 2nd page of the `Deployment Metadata` screen and observe the IP addresses for each of the VM's deployed by epmc.
+
+<details><summary>Screenshot 4.15.1</summary>
+<img src="Images/2019-08-24-19-48-00.png">
+</details>
+
+<details><summary>Screenshot 4.15.2</summary>
+<img src="Images/2019-08-24-19-55-08.png">
+</details>
+<br/>
+
+4.16 From Control Center, open DNS Manager and navigate to `corp.local` folder. Update the entries for `harbor`, `opsman` and `pks` to match the IP addresses you observed in the previous step.
+
+<details><summary>Screenshot 4.16</summary>
+<img src="Images/2019-08-24-19-57-46.png">
+</details>
+<br/>
+
+4.17 From Control Center, open a new chrome browser tab and click on the `Harbor` bookmark and login with the username `admin` and the password `VMware1!`
+
+<details><summary>Screenshot 4.17.1</summary>
+<img src="Images/2019-08-24-20-07-29.png">
+</details>
+
+<details><summary>Screenshot 4.17.2</summary>
+<img src="Images/2019-08-24-20-08-17.png">
+</details>
+<br/>
+
+4.18 Return to the `epmc-01a` web console, navigate to the `Deployment Metadata` and find the `Enteprise PKS Admin User Name` and `Password` You will use this information in the next step to log into the PKS API.
+
+<details><summary>Screenshot 4.18</summary>
+<img src="Images/2019-08-24-20-14-59.png">
+</details>
+<br/>
+
+4.18 From the control center desktop, open a putty session to `ubuntu@cli-vm` and from the prompt, enter the following command to login to the PKS API. Be sure to use the password you gathered in the previous step:
+
+`pks login -a pks.corp.local -u admin - p ReplaceWithPassword -k` 
+
+<details><summary>Screenshot 4.18</summary>
+<img src="Images/2019-08-24-20-18-45.png">
+</details>
+<br/>
 
 **End of lab**
 
-## Next Steps
-- Complete the PKS installation with the PKS Install Phase 2 Lab.
 
 
 

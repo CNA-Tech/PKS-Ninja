@@ -100,3 +100,97 @@ git config --global push.default simple
 </details>
 <br/>
 
+### Step 2: Setup http proxy on docker client
+
+2.1 From the ControlCenter desktop, open chrome, connect to the vSPhere web client and login using the windows system credentials checkbox. Navigate to the `Hosts and Clusters` page, expand `RegionA01`, right click on cluster `RegionA01-MGMT01` and select `Deploy OVF Template`
+
+<details><summary>Screenshot 2.1</summary>
+<img src="Images/2019-08-23-23-53-53.png">
+</details>
+<br/>
+
+2.2  Select the EPMC OVF File from the location where you downloaded it and click `Next`. The default download location is `E:\Downloads`.
+
+<details><summary>Screenshot 2.2</summary>
+<img src="Images/2019-08-24-00-07-33.png">
+</details>
+<br/>
+
+2.3 On the `Select Name and Folder` page, set the `Virtual Machine Name` to `epmc-01a` and click `Next`
+
+<details><summary>Screenshot 2.3</summary>
+<img src="Images/2019-08-24-00-10-05.png">
+</details>
+<br/>
+
+2.4 On the `Select a compute resource` page, expand `RegionA01-MGMT01` and select the `pks-mgmt-1` resource pool and click `Next`.
+
+
+<details><summary>Screenshot 2.4</summary>
+<img src="Images/2019-08-24-00-43-31.png">
+</details>
+<br/>
+
+2.5 On the `Review Details` page, verify the details and click `Next`.
+
+<details><summary>Screenshot 2.5</summary>
+<img src="Images/2019-08-24-00-13-13.png">
+</details>
+<br/>
+
+2.6 On the `License Agreements` page, check the `I accept all license agreements` checkbox and click `Next`.
+
+<details><summary>Screenshot 2.6</summary>
+<img src="Images/2019-08-24-00-15-05.png">
+</details>
+<br/>
+
+
+2.7 On the `Select Storage` page, **First** select the `RegionA01-ISCSI02-COMP01` datastore, and then set the `virtual disk format` to `Thin Provision` and click `Next`.
+
+<details><summary>Screenshot 2.7</summary>
+<img src="Images/2019-08-24-00-17-25.png">
+</details>
+<br/>
+
+### Step 3: Prepare CLI-VM with the public harbor servers certificate so it can establish secure connectivity to the registry
+
+ 3.1 From the Control Center desktop, open the chrome browser and click on the link to `NSX Manager` in the bookmarks bar. Login with the username `admin` and the password `VMware1!VMware1!`. Navigate to the `Advanced Networking & Security > Networking > NAT` page, ensure the `Logical Router` value is set to `t0-pks` and delete all existing NAT rules
+
+<details><summary>Screenshot 3.1</summary>
+<img src="Images/2019-08-24-03-53-37.png">
+</details>
+<br/>
+
+3.2 From the `Advanced Networking & Security > Networking > NAT` page, ensure the `Logical Router` value is set to `t0-pks` and click `+ADD` to add a SNAT rule for epmc-01a. In the `New NAT Rule` dialogue, enter the following values (leave any unspecified values set to their default value):
+
+- Priority: `1020`
+- Action: `SNAT`
+- Source IP: `172.31.0.8`
+- Translated IP: `10.40.14.8`
+- Click `ADD`
+
+<details><summary>Screenshot 3.2</summary>
+<img src="Images/2019-01-08-19-55-48.png">
+</details>
+<br/>
+
+3.3 From the `Advanced Networking & Security > Networking > NAT` page, ensure the `Logical Router` value is set to `t0-pks` and click `+ADD` to add a DNAT rule for epmc-01am and enter the following values in the `New NAT Rule` dialogue:
+
+- Priority: `1024`
+- Action: `DNAT`
+- Destination IP: `10.40.14.8`
+- Translated IP: `172.31.0.8`
+- Click `ADD`
+
+<details><summary>Screenshot 3.3</summary>
+<img src="Images/2019-08-24-02-57-48.png">
+</details>
+<br/>
+
+3.4 From the Control Center Desktop, open a new browser tab in chrome, and navigate to [https://epmc-01a.corp.local/login](https://epmc-01a.corp.local/login), login with the username `root` and the password `VMware1!`
+
+<details><summary>Screenshot 3.4</summary>
+<img src="Images/2019-08-24-03-04-27.png">
+</details>
+<br/>
