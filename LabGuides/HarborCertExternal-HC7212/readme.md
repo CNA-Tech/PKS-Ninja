@@ -4,6 +4,19 @@ Harbor's integration with PKS natively enables the PKS Control Plane hosts and K
 
 To ensure developer and automated workflows can have secure interaction with Harbor, a certificate should be installed on the client machine
 
+**Table of Contents:**
+
+- [PKS 1.5 Installation with the VMware Enterprise PKS Managment Console Beta](#pks-15-installation-with-the-vmware-enterprise-pks-managment-console-beta)
+  - [Lab Access Instructions](#lab-access-instructions)
+  - [Prerequisites](#prerequisites)
+  - [Install PKS 1.5 with Enterprise PKS Management Console (EPMC)](#install-pks-15-with-enterprise-pks-management-console-epmc)
+    - [Step 1: Download EPMC OVF File](#step-1-download-epmc-ovf-file)
+    - [Step 2: Deploy the EPMC OVF File](#step-2-deploy-the-epmc-ovf-file)
+    - [Step 3: Clean out old NAT rules andCreate NAT Rules to Connect to the epmc-01a web UI](#step-3-clean-out-old-nat-rules-andcreate-nat-rules-to-connect-to-the-epmc-01a-web-ui)
+    - [Step 4: Complete the installation workflow](#step-4-complete-the-installation-workflow)
+
+## 1.0 Prepare `cli-vm` with the certificates to connect to the local harbor.corp.local server
+
 In the following exercise, you will install the Harbor self-signed certificate on the `cli-vm` host preparing it to interact with Harbor services
 
 1.1 From the Ops Manager homepage, click on the `VMware Harbor Registry` tile, go to the `Certificate` tab and copy the SSL certificate text from the top textbox
@@ -54,5 +67,4 @@ sudo update-ca-certificates
 sudo service docker restart
 ```
 
-
-#### You have now prepared `cli-vm` for secure communication with Harbor
+**You have now prepared `cli-vm` for secure communication with Harbor
