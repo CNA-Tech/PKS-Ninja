@@ -29,26 +29,83 @@ With Kubernetes, each component needed for the app is defined in the deployment 
     - [This Lab Supports the HOL-2031 lab template, along with the v12 Baseline, NsxtReady, PksInstalled and ClusterReady templates - however please note you will need PKS and a Kubernetes cluster deployed before proceeding](#this-lab-supports-the-hol-2031-lab-template-along-with-the-v12-baseline-nsxtready-pksinstalled-and-clusterready-templates---however-please-note-you-will-need-pks-and-a-kubernetes-cluster-deployed-before-proceeding)
   - [Overview of App](#overview-of-app)
   - [Overview of Steps](#overview-of-steps)
+  - [Step 0: Prepare Planespotter Containers for Deployment from the Local Harbor Registry Server](#step-0-prepare-planespotter-containers-for-deployment-from-the-local-harbor-registry-server)
   - [Step 1: Configure K8s Cluster for App Deployment](#step-1-configure-k8s-cluster-for-app-deployment)
   - [Step 2: Deploy Planespotter](#step-2-deploy-planespotter)
   - [Step 3: Publish the Planespotter app to expose it to the outside world](#step-3-publish-the-planespotter-app-to-expose-it-to-the-outside-world)
   - [Step 4: Understanding how Kubernetes Maintains state by looking at an example of ReplicaSets.](#step-4-understanding-how-kubernetes-maintains-state-by-looking-at-an-example-of-replicasets)
 
--------------
-
-**Note that in the above command you are cloning the CNA-Tech fork of the original Planespotter application, as we have modified the deployment specs to pull planespotter images from our public harbor repository, which is accessible from the HOL-2031 environment.**
-
 --------------
 
-## Step 1: Configure K8s Cluster for App Deployment
+## Step 0: Prepare Planespotter Containers for Deployment from the Local Harbor Registry Server
 
-**HOL-2031 Users, Please Complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) Before Proceeding**
+**HOL-2031 Users, Please Complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) and [Prepare cli-vm with the certificates to connect to the local harbor.corp.local server](1.0)Before Proceeding**
+
+**All v12 templates must complete all steps in the [Enable Harbor Client Secure Connections Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212) before proceeding**
+
+While in many cases organizations may use containers from trusted public sources, it is a best practice to run containers from a private registry server to ensure security and optimal performance. 
+
+In this section, you will download the container images required for the planespotter application from the PKS Ninja Labs public harbor server, and upload the images to the private harbor.corp.local registry server in your lab environment. 
+
+0.1 From the control-center desktop, open a putty/ssh session to `ubuntu@cli-vm`, if needed login with the password `VMware1!`, and enter the following commands to pull down the docker images from the public harbor server:
+
+```bash
+sudo docker pull 35.209.26.28/library/planespotter-app-server:V1
+sudo docker pull 35.209.26.28/library/planespotter-frontend:V1
+sudo docker pull 35.209.26.28/library/mysql:5.6
+sudo docker pull 35.209.26.28/library/redis:latest
+sudo docker pull 35.209.26.28/library/adsb-sync:V1
+```
+
+<details><summary>Screenshot 0.1</summary>
+<img src="Images/2019-08-25-01-41-26.png">
+</details>
+<br/>
+
+0.2 From your putty/ssh session to `ubuntu@cli-vm`, enter the following commands to tag and prepare the images for upload to harbor.corp.local:
+
+```bash
+sudo docker tag 35.209.26.28/library/planespotter-app-server:V1 harbor.corp.local/library/planespotter-app-server:V1
+sudo docker tag 35.209.26.28/library/planespotter-frontend:V1 harbor.corp.local/library/planespotter-frontend:V1
+sudo docker tag 35.209.26.28/library/mysql:5.6 harbor.corp.local/library/mysql:5.6
+sudo docker tag 35.209.26.28/library/redis:latest harbor.corp.local/library/redis:latest
+sudo docker tag 35.209.26.28/library/adsb-sync:V1 harbor.corp.local/library/adsb-sync:V1
+```
+
+<details><summary>Screenshot 0.2</summary>
+<img src="Images/2019-08-25-02-45-53.png">
+</details>
+<br/>
+
+0.3 From your putty/ssh session to `ubuntu@cli-vm`, enter the command `sudo docker login harbor.corp.local` and login with `username: admin` and `password: VMware1!`. If needed, enter the sudo password `VMware1!`
+
+<details><summary>Screenshot 0.3</summary>
+<img src="Images/2019-08-25-02-43-01.png">
+</details>
+<br/>
+
+0.4 From your putty/ssh session to `ubuntu@cli-vm`, enter the following commands to push the required images for planespotter to harbor.corp.local:
+
+```bash
+sudo docker push harbor.corp.local/library/planespotter-app-server:V1
+sudo docker push harbor.corp.local/library/planespotter-frontend:V1
+sudo docker push harbor.corp.local/library/mysql:5.6
+sudo docker push harbor.corp.local/library/redis:latest
+sudo docker push harbor.corp.local/library/adsb-sync:V1
+```
+
+<details><summary>Screenshot 0.4</summary>
+<img src="Images/2019-08-25-01-41-26.png">
+</details>
+<br/>
+
+## Step 1: Configure K8s Cluster for App Deployment
 
 1.0 From the control-center desktop, open a putty/ssh session to `ubuntu@cli-vm` and login with the password `VMware1!`, login to the PKS API and get your Kubernetes cluster credentials with the following commands:
 
 ```bash
-pks login -a pks.corp.local -u pks-admin -p  --skip-ssl-validation
-pks get-credentials my-cluster
+sudo pks login -a pks.corp.local -u pks-admin -p VMware1! -k
+sudo pks get-credentials my-cluster
 ```
 
 Clone the planespotter repository and navigate to the kubernetes directory with the following commands
@@ -59,6 +116,11 @@ git clone https://github.com/cna-tech/planespotter.git
 cd planespotter/kubernetes
 ```
 
+<details><summary>Screenshot 1.0</summary>
+<img src="Images/2019-08-25-01-41-26.png">
+</details>
+<br/>
+
 1.1 Create namespace "planespotter" and set the namespace as your default
 
 ```bash
@@ -66,37 +128,50 @@ cd planespotter/kubernetes
   kubectl config set-context my-cluster --namespace planespotter
 ```
 
+<details><summary>Screenshot 1.1</summary>
+<img src="Images/2019-08-25-01-43-24.png">
+</details>
+<br/>
+
 1.2 Verify your namespace has been created
 
 - `kubectl get namespaces`
 
 1.3 Create a storage class
 
-- `kubectl create -f ~/planespotter/kubernetes/storage_class.yaml`
+- `kubectl create -f /home/ubuntu/planespotter/kubernetes/storage_class.yaml`
 
-1.3 Create a persistent volume claim for MySQL 
+1.4 Create a persistent volume claim for MySQL 
 
-- `kubectl create -f ~/planespotter/kubernetes/mysql_claim.yaml`
+- `kubectl create -f /home/ubuntu/planespotter/kubernetes/mysql_claim.yaml`
 
 _The above commands will create a storage class and generate a persistent volume claim needed to store data for the MySQl server , this claim will generate a 2 GB volume. Explore the YAML files to see what will be claimed, the volume type, the amount of storage needed etc._
 
-1.4 Verify the persistent volume has been generated.
+1.5 Verify the persistent volume has been generated.
  
 - `kubectl get pv`
 
+<details><summary>Screenshot 1.5</summary>
+<img src="Images/2019-08-25-01-45-29.png">
+</details>
+<br/>
+
+
 ## Step 2: Deploy Planespotter
 
-2.1  Deploy the MySQL Pod
+2.1  Deploy the MySQL Pod and Verify it  has deployed
 
 - `kubectl create -f ~/planespotter/kubernetes/mysql_pod.yaml`
-
-2.2 Verify the MySQL pod has deployed
-
 - `kubectl get pods --namespace planespotter`
 
 _You should see the pod created with name 'mysql-0'_
 
-2.3 Deploy the App-Server Pod 
+<details><summary>Screenshot 2.1</summary>
+
+</details>
+<br/>
+
+2.2 Deploy the App-Server Pod 
 
 - `kubectl create -f ~/planespotter/kubernetes/app-server-deployment_all_k8s.yaml`
 
