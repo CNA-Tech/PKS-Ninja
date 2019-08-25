@@ -1,10 +1,10 @@
-# PKS 1.5 Installation with the VMware Enterprise PKS Managment Console Beta
+# PKS 1.5 Installation with the VMware Enterprise PKS Management Console Beta
 
 **Note: VMware Enterprise PKS Management Console (EPMC) is currently in Beta, and users of this lab guide will need to use thier own access to installation files. Access to this software is not provided with this lab guide or with any of the available lab templates. VMware employees can find further details about accessing this software on the #pks_gear2_support channel in the VMware employee slack domain, external users will need to inquire with their VMware account representative to see if they are eligible for access to the Beta.**
 
 **Table of Contents**
 
-- [PKS 1.5 Installation with the VMware Enterprise PKS Managment Console Beta](#pks-15-installation-with-the-vmware-enterprise-pks-managment-console-beta)
+- [PKS 1.5 Installation with the VMware Enterprise PKS Management Console Beta](#pks-15-installation-with-the-vmware-enterprise-pks-management-console-beta)
   - [Lab Access Instructions](#lab-access-instructions)
   - [Prerequisites](#prerequisites)
   - [Install PKS 1.5 with Enterprise PKS Management Console (EPMC)](#install-pks-15-with-enterprise-pks-management-console-epmc)
