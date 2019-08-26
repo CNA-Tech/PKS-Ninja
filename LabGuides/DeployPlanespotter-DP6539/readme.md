@@ -6,7 +6,7 @@
 
 ## Overview of App
 
-Now that we have a Kubernetes cluster, let's look at the magic of Kubernetes by deploying an application. For this exercise we will be using an app called 'planespotter' developed by the very talented @yfauser [here](https://github.com/yfauser/planespotter). Planespotter lets you query Aircraft data from the FAA Registry. It has the following components (Please note that at the time of writing, Planespotters connection to )
+Now that we have a Kubernetes cluster, let's look at the magic of Kubernetes by deploying an application. For this exercise we will be using an app called 'planespotter' developed by the very talented @yfauser [here](https://github.com/yfauser/planespotter). Planespotter lets you query Aircraft data from the FAA Registry. It has the following components (Please note that at the time of writing, Planespotters connection to the public FAA database is broken, the application itself works fine but intil its fixed it cannot access live/realtime information.)
 
 1. Front-end: User interface to take queries and showcase results
 2. API App server: to retrieve data from DB
@@ -42,6 +42,8 @@ With Kubernetes, each component needed for the app is defined in the deployment 
 **HOL-2031 Users, Please Complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) and [Prepare cli-vm with the certificates to connect to the local harbor.corp.local server](1.0)Before Proceeding**
 
 **All v12 templates must complete all steps in the [Enable Harbor Client Secure Connections Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212) before proceeding**
+
+**Note:** We recommend you go through Step 0 at least one time, but it can be tedious to do every time so instead of completeting Step 0, you can run the [loadPsContaners.sh](./loadPsContaners.sh) script insted, first be sure to complete the prep steps for your v12 or HOL lab above, log onto `cli-vm`, enter `sudo su`, `docker login harbor.corp.local` with username `admin` and password `VMware1!`, and then you can download or create a local copy of the [loadPsContaners.sh](./loadPsContaners.sh), mark it as executable with `chmod +x loadPsContainers.sh` and then run the script with `./loadPsContainers.sh` from the location where you saved the script, which will run each of the commands in Step 0 for you, once the script finishes you can proceed with step 1. 
 
 While in many cases organizations may use containers from trusted public sources, it is a best practice to run containers from a private registry server to ensure security and optimal performance. 
 
