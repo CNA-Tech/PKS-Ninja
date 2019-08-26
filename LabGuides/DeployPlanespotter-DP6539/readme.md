@@ -6,7 +6,7 @@ This lab guide provides instructions to deploy a slightly modified version of th
 
 The next lab guide in the Ninja SE course sequence, [PKS Storage and Persistence 1]() is designed to compliment this guide, and if you follow along, the storage and persistence lab guide will provide instructions to upgrade your planespotter deployment with persistent storage and walk through examples demonstrating the impact on application behavior
 
-If you are looking for instructions to deploy the standard planespotter app, please see the [Deploy Planespotter App](https://github.com/CNA-Tech/PKS-Ninja/blob/master/LabGuides/BonusLabs/Deploy%20Planespotter%20Lab/readme.md) lab guide
+If you are looking for instructions to deploy the standard planespotter app, please see the [Deploy Planespotter App](https://github.com/CNA-Tech/PKS-Ninja/blob/master/LabGuides/BonusLabs/Deploy%20Planespotter%20Lab/readme.md) lab guide.
 
 ## Overview of App
 
