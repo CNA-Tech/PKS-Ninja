@@ -82,7 +82,7 @@ Log into the NSX Manager UI with username `admin` and password `VMware1!VMware1!
 - Edge Cluster: `edge-cluster-1`
 - High Availabilty Mode: **`Active-Standby`**
 - Fail Over: `Non Preemptive`
-- Click **Save**
+- Click **Add**
 
 <details><Summary>Screenshot 1.2.1</Summary>
 <img src="Images/2019-07-13-09-07-23.png">
