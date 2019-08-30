@@ -3,6 +3,8 @@
 You are viewing the PKS 1.4 Branch, all updates to this branch should reflect pks 1.4.
 
 **Please Note, this site is currently in beta/preview mode and under active development. Please excuse any errors or ommissions**
+<br/>
+**VMware Hands On Labs (HOL-2031) Users, [Please Click Here](Courses/HOL2031LabGuides-HL2541)**
 
 The PKS Ninja Community on Github provides free learning resources for cloud native technologies with a learn-by-doing approach focused on practical, hands on skills.
 

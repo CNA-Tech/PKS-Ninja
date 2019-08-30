@@ -2,7 +2,7 @@
 
 --------------
 
-### This Lab Supports the HOL-2031 lab template, along with the v12 Baseline, NsxtReady, PksInstalled and ClusterReady templates - however please note you will need PKS and a Kubernetes cluster deployed before proceeding
+**This Lab Supports the HOL-2031 and PKS-Ninja-v12-ClusterReady templates. This Lab also supports the PKS-Ninja-v12 Baseline, NsxtReady and PksInstalled templates, however please note you will need PKS and a Kubernetes cluster deployed before proceeding**
 
 ## Overview of App
 
@@ -26,7 +26,6 @@ With Kubernetes, each component needed for the app is defined in the deployment 
 ## Overview of Steps
 
 - [Deploy PlaneSpotter App](#deploy-planespotter-app)
-    - [This Lab Supports the HOL-2031 lab template, along with the v12 Baseline, NsxtReady, PksInstalled and ClusterReady templates - however please note you will need PKS and a Kubernetes cluster deployed before proceeding](#this-lab-supports-the-hol-2031-lab-template-along-with-the-v12-baseline-nsxtready-pksinstalled-and-clusterready-templates---however-please-note-you-will-need-pks-and-a-kubernetes-cluster-deployed-before-proceeding)
   - [Overview of App](#overview-of-app)
   - [Overview of Steps](#overview-of-steps)
   - [Step 0: Prepare Planespotter Containers for Deployment from the Local Harbor Registry Server](#step-0-prepare-planespotter-containers-for-deployment-from-the-local-harbor-registry-server)
