@@ -33,6 +33,7 @@ With Kubernetes, each component needed for the app is defined in the deployment 
   - [Step 2: Deploy Planespotter](#step-2-deploy-planespotter)
   - [Step 3: Publish the Planespotter app to expose it to the outside world](#step-3-publish-the-planespotter-app-to-expose-it-to-the-outside-world)
   - [Step 4: Understanding how Kubernetes Maintains state by looking at an example of ReplicaSets.](#step-4-understanding-how-kubernetes-maintains-state-by-looking-at-an-example-of-replicasets)
+  - [Step 5: Cleanup PlaneSpotter App](#step-5-cleanup-planespotter-app)
 
 --------------
 
@@ -234,4 +235,17 @@ Notice where it states _replicas: 2_ under the _spec:_ heading.
 
 Notice the count of pods for planespotter-frontend has not changed, there are still 2 pods. The name of one of the pods is now different than before ( the unique number in the name) and the age is more recent than the other. Kubernetes just created a new pod after the original pod was deleted in order to maintain declared state.
 
+## Step 5: Cleanup PlaneSpotter App
+
+When you are done with this lab it is best if you delete planespotter before proceeding to complete additional labs, as other lab guides may have steps that conflict with the planespotter deployment. 
+
+5.1 From the cli-vm prompt, enter the following commands to delete your planespotter deployment:
+
+```Bash
+kubectl delete -f /home/ubuntu/planespotter/kubernetes/mysql_pod.yaml
+kubectl delete -f /home/ubuntu/planespotter/kubernetes/app-server-deployment_all_k8s.yaml
+kubectl delete -f /home/ubuntu/planespotter/kubernetes/frontend-deployment_all_k8s.yaml
+kubectl delete -f /home/ubuntu/planespotter/kubernetes/redis_and_adsb_sync_all_k8s.yaml
+kubectl delete svc planespotter-frontend-lb -n planespotter
+```
 
