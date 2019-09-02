@@ -13,11 +13,15 @@ The HOL lab environment only permits limited internet access sufficient to compl
 </details>
 <br/>
 
-1.2 From the `cli-vm` prompt, enter the commans `nano ~/.bashrc` and enter the sudo password `VMware1!` when prompted to use the nano text editor to edit the .bashrc file for the root user on cli-vm. The .bashrc file is a special file that loads commands and environmental variables into the bash shell each time you open a new shell session (including ssh sessions) with `cli-vm`. 
+1.2 From the `cli-vm` prompt, enter the commans `nano ~/.bashrc` to use the nano text editor to edit the .bashrc file for the ubuntu user on cli-vm. 
+
+<details><summary>Expand to see explanation of this exercise</summary>
+The .bashrc file is a special file that loads commands and environmental variables into the bash shell each time you open a new shell session (including ssh sessions) for the specified user with `cli-vm`. 
 
 While it is possible to export the required environmental variables directly from the `cli-vm` prompt, exporting directly from the bash prompt only loads the environmental variables in the currently running session, so if you were to close your ssh session to `cli-vm`, or if the ssh session were to timeout, the environmental variables would no longer be populated the next time you connected to `cli-vm`. 
 
 By placing the required environmental variables in the .bashrc file, it will ensure that the proxy configuration is still present each time you connect to `cli-vm` during your active session with a HOL-2031 pod. If at any point you end your HOL-2031 session or your lease times out and you need to re-enroll to launch a new HOL-2031 session, you will need to repeat these steps. (If your HOL-2031 session has a temporary timeout and allows you to "Resume your lab", you do not need to repeat these steps)
+</details>
 
 <details><summary>Screenshot 1.1</summary>
 <img src="Images/2019-08-24-02-20-31.png">

@@ -15,8 +15,8 @@ docker tag 35.209.26.28/library/redis:latest harbor.corp.local/library/redis:lat
 docker tag 35.209.26.28/library/adsb-sync:V1 harbor.corp.local/library/adsb-sync:V1
 
 #Push the re-tagged images to your local harbor.corp.local registry
-docker tag 35.209.26.28/library/planespotter-app-server:V1 harbor.corp.local/library/planespotter-app-server:V1
-docker tag 35.209.26.28/library/planespotter-frontend:V1 harbor.corp.local/library/planespotter-frontend:V1
-docker tag 35.209.26.28/library/mysql:5.6 harbor.corp.local/library/mysql:5.6
-docker tag 35.209.26.28/library/redis:latest harbor.corp.local/library/redis:latest
-docker tag 35.209.26.28/library/adsb-sync:V1 harbor.corp.local/library/adsb-sync:V1
+docker push harbor.corp.local/library/planespotter-app-server:V1
+docker push harbor.corp.local/library/planespotter-frontend:V1
+docker push harbor.corp.local/library/mysql:5.6
+docker push harbor.corp.local/library/redis:latest
+docker push harbor.corp.local/library/adsb-sync:V1
