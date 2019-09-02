@@ -38,7 +38,7 @@ With Kubernetes, each component needed for the app is defined in the deployment 
 
 ## Step 0: Prepare Planespotter Containers for Deployment from the Local Harbor Registry Server
 
-**HOL-2031 Users, Please Complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) and [Prepare cli-vm with the certificates to connect to the local harbor.corp.local server](1.0)Before Proceeding**
+**HOL-2031 Users, Please Complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) before proceeding**
 
 **All v12 templates must complete all steps in the [Enable Harbor Client Secure Connections Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212) before proceeding**
 
@@ -105,7 +105,7 @@ sudo docker push harbor.corp.local/library/adsb-sync:V1
 1.0 From the control-center desktop, open a putty/ssh session to `ubuntu@cli-vm` and login with the password `VMware1!`, login to the PKS API and get your Kubernetes cluster credentials with the following commands:
 
 ```bash
-sudo pks login -a pks.corp.local -u pks-admin -p VMware1! -k
+sudo pks login -a pks.corp.local -u pksadmin -p VMware1! -k
 sudo pks get-credentials my-cluster
 ```
 
@@ -142,6 +142,8 @@ cd planespotter/kubernetes
 
 - `kubectl create -f /home/ubuntu/planespotter/kubernetes/storage_class.yaml`
 
+Note: Depending on which template you are using, you may get an error message saying that the storage class "thin-disk" already exists. If you get this error, you can ignore it and proceed to the next step. In some templates, this storage class may be pre-configured in the template. 
+
 1.4 Create a persistent volume claim for MySQL 
 
 - `kubectl create -f /home/ubuntu/planespotter/kubernetes/mysql_claim.yaml`
@@ -162,7 +164,7 @@ _The above commands will create a storage class and generate a persistent volume
 
 2.1  Deploy the MySQL Pod and Verify it  has deployed
 
-- `kubectl create -f ~/planespotter/kubernetes/mysql_pod.yaml`
+- `kubectl create -f /home/ubuntu/planespotter/kubernetes/mysql_pod.yaml`
 - `kubectl get pods --namespace planespotter`
 
 _You should see the pod created with name 'mysql-0'_
@@ -174,15 +176,15 @@ _You should see the pod created with name 'mysql-0'_
 
 2.2 Deploy the App-Server Pod 
 
-- `kubectl create -f ~/planespotter/kubernetes/app-server-deployment_all_k8s.yaml`
+- `kubectl create -f /home/ubuntu/planespotter/kubernetes/app-server-deployment_all_k8s.yaml`
 
 2.4 Deploy the Frontend
 
-- `kubectl create -f ~/planespotter/kubernetes/frontend-deployment_all_k8s.yaml`
+- `kubectl create -f /home/ubuntu/planespotter/kubernetes/frontend-deployment_all_k8s.yaml`
 
 2.5 Deploy Redis and the ADSB Sync Service
 
-- `kubectl create -f ~/planespotter/kubernetes/redis_and_adsb_sync_all_k8s.yaml`
+- `kubectl create -f /home/ubuntu/planespotter/kubernetes/redis_and_adsb_sync_all_k8s.yaml`
 
 2.6 Verify all the pods needed for front-end, redis, DBC Sync services and App server (7 total) have been deployed and have entered Running state
 
@@ -212,7 +214,7 @@ A freshly deployed app based on 4 micro-services is ready!
 
 4.1 Replicasets in Kubernetes make sure that when a deployment is made 'x' number of pods for that deployment are always running. For the Planespotter frontend deployment we specified '2' replicas to always run, take a look at the deployment YAML for Palanespotter frontend here
 
-- `nano ~/planespotter/kubernetes/frontend-deployment_all_k8s.yaml`
+- `cat /home/ubuntu/planespotter/kubernetes/frontend-deployment_all_k8s.yaml | more`
 
 Notice where it states _replicas: 2_ under the _spec:_ heading.
 
