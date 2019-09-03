@@ -1,5 +1,7 @@
 # NSX-T The Easy Way
 
+Currently the concourse pipelines provided in the lab environment are not correctly configured. NSX-T 2.4.x can be installed using concourse pipelines, but you will need to know how to correctly configure the parameters, and we have not yet been able to update this guide with complete instructions. If you do know the correct configuration, please let us know so we can update the course for everyone, thanks!
+
 ## Introduction
 
 The NSX-T The Easy Way course provides instructions to execute automated installation of NSX-T using Concourse pipelines
