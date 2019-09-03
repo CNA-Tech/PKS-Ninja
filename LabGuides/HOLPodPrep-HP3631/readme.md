@@ -13,7 +13,7 @@ The HOL lab environment only permits limited internet access sufficient to compl
 </details>
 <br/>
 
-1.2 From the `cli-vm` prompt, enter the commans `nano ~/.bashrc` to use the nano text editor to edit the .bashrc file for the ubuntu user on cli-vm. 
+1.2 From the `cli-vm` prompt, enter the commans `nano /home/ubuntu/.bashrc` to use the nano text editor to edit the .bashrc file for the ubuntu user on cli-vm. 
 
 <details><summary>Expand to see explanation of this exercise</summary>
 The .bashrc file is a special file that loads commands and environmental variables into the bash shell each time you open a new shell session (including ssh sessions) for the specified user with `cli-vm`. 
@@ -42,9 +42,9 @@ export no_proxy=localhost,127.0.0.1,*.corp.local
 </details>
 <br/>
 
-1.4 From the `cli-vm` prompt, enter the command `source ~/.bashrc` to reload your updated .bashrc file, and then enter the command `curl https://github.com/cna-tech/pks-ninja` to verify that you can recieve http/s traffic from an approved site. 
+1.4 From the `cli-vm` prompt, enter the command `source /home/ubuntu/.bashrc` to reload your updated .bashrc file, and then enter the command `curl https://github.com/cna-tech/pks-ninja` to verify that you can recieve http/s traffic from an approved site. 
 
-Note that the output from the curl command is not important, it only matters that you are getting output and not an error message.
+Note that the exact output from the curl command is not important, it only matters that you are getting output and not an error message.
 
 <details><summary>Screenshot 1.4</summary>
 <img src="Images/2019-08-25-00-14-40.png">
@@ -63,6 +63,8 @@ In many PKS Ninja Lab Guides you will need to pull images to the PKS Ninja Labs 
 sudo mkdir -p /etc/systemd/system/docker.service.d
 sudo nano /etc/systemd/system/docker.service.d/http-proxy.conf
 ```
+
+If needed enter the sudo password `VMware1!` when prompted.
 
 <details><summary>Screenshot 2.1</summary>
 <img src="Images/2019-08-25-01-21-34.png">
