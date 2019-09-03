@@ -281,6 +281,17 @@ Over time this will remove all resources including pods.   (Yes the virtual serv
 # WordPress
 While Wordpress is not a micro-service it does allow us to show the power of Kubernetes.   One of the key challenges of the docker wordpress was the lack of persistent storage.   VMware implements storage persistence using Project Hatchway (https://vmware.github.io/hatchway/) this allows us to create a MySQL container with persistent storage.   This is critical if the container or worker node fails the storage will persist and be reconnected to the image recreated by Kubernetes.
 
+<!--
+  Download the wordpress image you will use in the next step from the PKS Ninja Labs public Harbor registry, retag the image to prepare it for upload and push the image to the harbor.corp.local registry in your local lab environment
+
+```Bash
+sudo docker login harbor.corp.local
+sudo docker pull 35.209.26.28/library/wordpress
+sudo docker tag 35.209.26.28/library/wordpress harbor.corp.local/library/wordpress
+sudo docker push harbor.corp.local/library/wordpress
+```
+The sudo password is `VMware1!`, the harbor.corp.local login username is `admin` and the password is `VMware1!
+-->
 
 In this tutorial we will begin to work with much more complex constructs inside YAML files.   You can chain whole micro-services inside a single YAML file for ease of use.   The first thing we need to do is create a secret inside Kubernetes as the password for the database.  By using this method we avoid having hard coded passwords in the YAML files.  
 
