@@ -14,6 +14,7 @@ Before beginning installation, you must first apply the latest lab prep script [
 
 Please complete the following lab guides in the order presented to fullfil the requirements of the PKS the Hard Way course:
 
-- [NSX-T Manual Installation](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtManualInstall-IN1497)
+- [NSX-T 2.4.1 Manual Installation](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtManualInstall-IN1497)
+- [NSX-T 2.4.1 Configuration for PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtConfigForPks-NC5947)
 
 **You have now completed the PKS the Hard Way Course! Thank you for participating!**
