@@ -34,7 +34,7 @@ By placing the required environmental variables in the .bashrc file, it will ens
 export http_proxy=http://192.168.110.1:3128
 export https_proxy=http://192.168.110.1:3128
 export ftp_proxy=http://192.168.110.1:3128
-export no_proxy=localhost,127.0.0.1,*.corp.local
+export no_proxy=pks.corp.local,localhost,127.0.0.1,*.corp.local
 ```
 
 <details><summary>Screenshot 1.3</summary>

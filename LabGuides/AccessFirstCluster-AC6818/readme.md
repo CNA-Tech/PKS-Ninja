@@ -1,16 +1,20 @@
 # Accessing First PKS Cluster
 
+**HOL-2031 Users: for many of the steps in this lab guide, you will need to complete an alternative step that is slightly adjusted to work in the HOL-2031 lab environment. Each step below that requires a modification for HOL-2031 will be clearly indicated. All HOL-2031 users will need to complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) before proceeding**
+
 ## Step 1: Obtain Kubernetes Cluster Config File via PKS CLI
 
-Before starting this lab, ensure you have succesfully logged in to the PKS CLI on the `cli-vm` and provisioned your cluster as instructed in the [Deploy First Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployFirstCluster-DC1610) lab.
+Before starting this lab, your lab environment will need to have Enterprise PKS installed and a kubernetes cluster deployed. You can either load a template that already has a cluster provisioned, or if you are installing PKS please be sure to provision your cluster as instructed in the [Deploy First Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployFirstCluster-DC1610) lab.
 
-1.1 After ensuring you have logged into the PKS CLI as the `pksadmin` user, verify your cluster has been provisioned succesfully:
+1.1 If needed, login to the PKS api from cli-vm with the command `pks login -a pks.corp.local -u pksadmin -p VMware1! -k`
+
+After ensuring you have logged into the PKS CLI, verify your cluster has been provisioned succesfully:
+
 ~~~
 pks clusters
-~~~
-~~~
 pks clusters my-cluster
 ~~~
+
 <details><summary>Screenshot 1.1 </summary>
 <img src="Images/1.png">
 </details>
@@ -27,7 +31,7 @@ pks get-credentials my-cluster
 </details>
 <br/>
 
-**Note**: This will pull the config file down to the `cli-vm` and place it in the default location `kubectl` will look for when trying to access a cluster (`~/home/.kube/config`)
+**Note**: This will pull the kubernetes config file down to `cli-vm` and place it in the default location `kubectl` will look for when trying to access a cluster (`~/home/.kube/config`)
 
 ## Step 2: Verify Cluster Access with `kubectl`
 
@@ -62,6 +66,13 @@ kubectl get pods --all-namespaces
 ~~~
 kubectl run nginx-test --image=nginx --restart=Never --port=80 --expose
 ~~~
+<details><summary><span style="color:brown"> <b>HOL-2031 Users:</b> Please expand this section and use the alternate command below</span></summary>
+<span style="color:brown"> 
+
+`kubectl run nginx-test --image=harbor.corp.local/library/nginx:V1 --restart=Never --port=80 --expose`
+</span>
+</details>
+<br/>
 
 This command will deploy a pod named `nginx-test` utilizing the `nginx` image. It will also open up port 80 on the pod and create a service of type `ClusterIP` to serve out the default `nginx` homepage within the Kubernetes cluster.
 
@@ -86,6 +97,23 @@ kubectl get services
 ~~~
 kubectl run busybox --rm --image=busybox -it --restart=Never -- sh
 ~~~
+
+<details><summary><span style="color:brown"> <b>HOL-2031 Users:</b> Please expand this section and use the alternate commands below</span></summary>
+<span style="color:brown"> 
+
+First download the busybox image from the public PKS Ninja Labs Harbor registry, Retag and push the image to the harbor.corp.local registry server in your local lab with the following commands:  
+
+`sudo docker login harbor.corp.local -u admin -p VMware1!`<br/>
+`sudo docker pull 35.209.26.28/library/busybox`<br/>
+`sudo docker tag  35.209.26.28/library/busybox harbor.corp.local/library/busybox`<br/>
+`sudo docker push harbor.corp.local/library/busybox`<br/>
+<br/>
+Enter the following command to run this container in your kubernetes cluster:
+
+`kubectl run busybox --rm --image=harbor.corp.local/library/busybox it --restart=Never -- sh`
+</span>
+</details>
+<br/>
 
 <details><summary>Screenshot 3.3 </summary>
 <img src="Images/7.png">
