@@ -1,6 +1,6 @@
 # Accessing First PKS Cluster
 
-**HOL-2031 Users: for many of the steps in this lab guide, you will need to complete an alternative step that is slightly adjusted to work in the HOL-2031 lab environment. Each step below that requires a modification for HOL-2031 will be clearly indicated. All HOL-2031 users will need to complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) before proceeding**
+**HOL-2031 Users: for some of the steps in this lab guide, you will need to complete an alternative step that is slightly adjusted to work in the HOL-2031 lab environment. Each step below that requires a modification for HOL-2031 will be clearly indicated. All HOL-2031 users will need to complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) before proceeding**
 
 ## Step 1: Obtain Kubernetes Cluster Config File via PKS CLI
 
