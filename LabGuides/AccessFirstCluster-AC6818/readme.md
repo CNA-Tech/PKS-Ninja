@@ -66,11 +66,12 @@ kubectl get pods --all-namespaces
 ~~~
 kubectl run nginx-test --image=nginx --restart=Never --port=80 --expose
 ~~~
-<details><summary><span style="color:brown"> <b>HOL-2031 Users:</b> Please expand this section and use the alternate command below</span></summary>
-<span style="color:brown"> 
+<details><summary><b>HOL-2031 Users:</b> Please expand this section and use the alternate command below</summary>
 
-`kubectl run nginx-test --image=harbor.corp.local/library/nginx:V1 --restart=Never --port=80 --expose`
-</span>
+```bash
+kubectl run nginx-test --image=harbor.corp.local/library/nginx:V1 --restart=Never --port=80 --expose
+```
+
 </details>
 <br/>
 
@@ -98,20 +99,20 @@ kubectl get services
 kubectl run busybox --rm --image=busybox -it --restart=Never -- sh
 ~~~
 
-<details><summary><span style="color:brown"> <b>HOL-2031 Users:</b> Please expand this section and use the alternate commands below</span></summary>
-<span style="color:brown"> 
+<details><summary><b>HOL-2031 Users:</b> Please expand this section and use the alternate commands below</summary>
 
-First download the busybox image from the public PKS Ninja Labs Harbor registry, Retag and push the image to the harbor.corp.local registry server in your local lab with the following commands:  
+```bash
+# First download the busybox image from the public PKS Ninja Labs Harbor registry, Retag and push the image to the harbor.corp.local registry server in your local lab with the following commands:  
 
-`sudo docker login harbor.corp.local -u admin -p VMware1!`<br/>
-`sudo docker pull 35.209.26.28/library/busybox`<br/>
-`sudo docker tag  35.209.26.28/library/busybox harbor.corp.local/library/busybox`<br/>
-`sudo docker push harbor.corp.local/library/busybox`<br/>
-<br/>
-Enter the following command to run this container in your kubernetes cluster:
+sudo docker login harbor.corp.local -u admin -p VMware1!
+sudo docker pull 35.209.26.28/library/busybox
+sudo docker tag  35.209.26.28/library/busybox harbor.corp.local/library/busybox
+sudo docker push harbor.corp.local/library/busybox
 
-`kubectl run busybox --rm --image=harbor.corp.local/library/busybox it --restart=Never -- sh`
-</span>
+# Enter the following command to run this container in your kubernetes cluster:
+
+kubectl run busybox --rm --image=harbor.corp.local/library/busybox it --restart=Never -- sh
+```
 </details>
 <br/>
 
