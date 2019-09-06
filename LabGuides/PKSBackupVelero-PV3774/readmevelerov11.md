@@ -395,6 +395,7 @@ kubectl get service velero-minio-lb -n velero
 3.13 Start the server and the local storage service. Velero does not support vSphere currently so we are going to be using Restic. We will also be supplying the credentials file for minio that we created in the previous step. We will also be proividing the url to the minio service that we exposed as a loadbalancer in the previous step.
 
 
+
 ```bash
 cd ~/velero/velero-v1.1.0-beta.1-linux-amd64
 
@@ -426,9 +427,21 @@ kubectl get deployments
 </details>
 <br/>
 
+Note : If the restic pods fail to start do the following
 
 
+```bash
+kubectl edit daemonset restic -n velero
+```
+change hostPath from /var/lib/kubelet/pods to /var/vcap/data/kubelet/pods:
 
+Which will look like below
+
+```yaml
+      - hostPath:
+          path: /var/vcap/data/kubelet/pods
+
+```
 
 
 ## Step 4:  Backup
@@ -439,6 +452,7 @@ kubectl get deployments
 <img src="Images/miniologin.png">
 </Details>
 <br/>
+
 
 4.2 SSH into cli-vm 
   
