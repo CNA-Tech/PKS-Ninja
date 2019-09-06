@@ -231,7 +231,7 @@ kubectl proxy
 </details>
 <br/>
 
-2.1.9 From the Main Console (ControlCenter) desktop, open a chrome browser session and on the shortcuts bar select the shortcut `Sign in - Kubernetes` to access your kubernetes dashboard and proceed through the following steps to sign in:
+2.1.9 From the Main Console (ControlCenter) desktop, open a chrome browser session and on the shortcuts bar select the shortcut `Kubernetes Dashboard` to access your kubernetes dashboard and proceed through the following steps to sign in:
 
 - Select `Kubeconfig`
 - Click on `Choose kubeconfig file`
