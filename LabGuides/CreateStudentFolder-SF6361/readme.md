@@ -327,7 +327,7 @@ git checkout -b update-1 #creates and switches the local context to the update-1
 echo "</br>another snarky comment</br>" >> ~/Forked/yourGithubUsername/readme.md
 cat ~/Forked/yourGithubUsername/readme.md
 git add . # Adds any files in your local clone of the repo that you have updated to staging so they get commited in the following command
-git commit -m "type a relevant message desribing your update here"
+git commit -m "type a relevant message describing your update here"
 git push origin update-1 #follow the prompts to login and push any needed updates to your fork
 ```
 
@@ -343,7 +343,7 @@ git push origin update-1 #follow the prompts to login and push any needed update
 </details>
 <br/>
 
-2.4 On the `Open a pull request` page verify the request has the base set to CNA-Tech/Students: master and the head is set to afewell/Students: update-1 as shown in the following screenshot, ensure you enter a comment and click `Create pull request`
+2.4 On the `Open a pull request` page verify the request has the base set to CNA-Tech/Students: master and the head is set to yourGithubUsername/Students: update-1 as shown in the following screenshot, ensure you enter a comment and click `Create pull request`
 
 <details><summary>Screenshot 2.4</summary>
 <img src="Images/2019-02-09-21-53-09.png">
