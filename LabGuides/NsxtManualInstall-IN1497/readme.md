@@ -143,8 +143,13 @@ Note: When you select the datastore, the UI resets the value for the virtual dis
 
  1.11 Log into the vsphere client, navigate to the `Hosts and Clusters` view, select `nsxmgr-01a` and in the actions menu select `Edit Settings`. Ensure the `Reserve all guest memory` checkbox is **not checked**
 
-<details><summary>Screenshot 1.11</summary>
-<img src="Images/2019-06-12-01-46-04.png">
+<details><summary>Screenshot 1.11.1</summary>
+<img src="Images/2019-09-06-10-33-22.png">
+</details>
+<br/>
+
+<details><summary>Screenshot 1.11.2</summary>
+<img src="Images/2019-09-06-10-33-46.png">
 </details>
 <br/>
 
