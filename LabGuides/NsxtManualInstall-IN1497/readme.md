@@ -484,7 +484,7 @@ Preparing hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kerne
  4.4 On the `Select Transport Zone East-West` screen set the value for `Overlay Transport Zone` to `overlay-tz` and click `Next`
 
 <details><summary>Screenshot 4.4</summary>
-<img src="Images/2019-07-13-01-44-28.png">
+<img src="Images/2019-09-09-15-24-00.png">
 </details>
 <br/>
 
