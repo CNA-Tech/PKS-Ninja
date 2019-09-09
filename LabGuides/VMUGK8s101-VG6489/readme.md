@@ -1,13 +1,24 @@
 # Kubernetes-Lab 
+
+**HOL-2031 Users: for some of the steps in this lab guide, you will need to complete an alternative step that is slightly adjusted to work in the HOL-2031 lab environment. Each step below that requires a modification for HOL-2031 will be clearly indicated. There may also be some some minor differences in the screenshots provided below from what you see in your lab environment. All HOL-2031 users will need to complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) before proceeding**
+
 # Learning Kubernetes
 
-Login to the cli-vm by using putty and selecting cli-vm  
+Login to the cli-vm by using putty and selecting ubuntu@cli-vm  
 
-Once logged into the server via ssh issue the following command to login to PKS CLI
+If you have not already, clone the PKS-Lab repository with the following commands:
 
-    pks login -a pks.corp.local -u pksadmin --skip-ssl-validation
+```bash
+sudo su
+#password is VMware1!
+cd /root
+git clone 
+https://github.com/CNA-Tech/PKS-Lab.git
+```
 
- - Password: VMware1!
+Enter the following command to login to PKS CLI
+
+    pks login -a pks.corp.local -u pksadmin -p VMware1! -k
 
 See available clusters
 
@@ -37,9 +48,27 @@ You can gather additional data on a specific node by cutting and pasting it's na
  ![DockerOutput](https://github.com/gortee/pictures/blob/master/K3.PNG)
  ![DockerOutput](https://github.com/gortee/pictures/blob/master/K4.PNG)
  
- We are going to use a container provided by google to test the functionality of Kubernetes.  These steps will be very similar to docker commands we did before.   The image we will use is called kubernetes-bootcamp there are many different tutorials using this image available on the internet.  
+ We are going to use a container provided by google to test the functionality of Kubernetes.  These steps will be very similar to docker commands we did before. The image we will use is called kubernetes-bootcamp there are many different tutorials using this image available on the internet.  
  
     kubectl run bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --port=8080
+
+<details><summary><b>HOL-2031 Users:</b> Please expand this section and use the alternate commands below</summary>
+
+```bash
+# First download the busybox image from the public PKS Ninja Labs Harbor registry, Retag and push the image to the harbor.corp.local registry server in your local lab with the following commands:  
+
+sudo docker login harbor.corp.local -u admin -p VMware1!
+sudo docker pull 35.209.26.28/library/kubernetes-bootcamp:v1
+sudo docker tag 35.209.26.28/library/kubernetes-bootcamp:v1 harbor.corp.local/library/kubernetes-bootcamp:v1
+sudo docker push harbor.corp.local/library/kubernetes-bootcamp:v1
+
+# Enter the following command to run this container in your kubernetes cluster:
+
+kubectl run bootcamp --image=harbor.corp.local/library/kubernetes-bootcamp:v1 --port=8080
+```
+</details>
+<br/>
+
 
 ![DockerOutput](https://github.com/gortee/pictures/blob/master/K5.PNG)
 
@@ -124,7 +153,7 @@ Let's review the services available now that we have created a new LoadBalancer 
 ![DockerOutput](https://github.com/gortee/pictures/blob/master/K16.PNG)
 
 You now have a new LoadBalancer for bootcamp with the following information:
-- Cluster-IP (internal) : 10.100.200.103 internal way to access the loadbalancer for c&c
+- Cluster-IP (internal) : 10.100.200.103 internal way to access the loadbalancer for pod to pod/service traffic
 - External-IP : 10.40.14.42,100.64.96.7 the first address is the external IP to access this service the second is a routing IP address.
 
 Let's try accessing our deployment on your IP address (mine is 10.40.14.42) open the web browser and navigate to http://{your-external-ip:8080.   
@@ -133,10 +162,10 @@ Let's try accessing our deployment on your IP address (mine is 10.40.14.42) open
 
 The tight integration between NSX-T and Kubernetes makes this possible.  Login to NSX manager by opening an additional tab in Chrome and clicking on the NSX-T Manager icon.  
 - Username: admin
-- Password: VMware1!
+- Password: VMware1!VMware1!
 
 Once logged in:
-- Click Load Balancers in middle of the screen
+- Navigate to `Advanced Networking & Security > Networking > Load Balancing`
 - Click on the Virtual Servers tab
 - Review the list of virtual servers and locate the one called default-bootcamp (denotes that it's default namespace and called bootcamp service)   
 
@@ -180,7 +209,9 @@ Looking at the deployment and pods we should now have additional replicas of the
     
 ![DockerOutput](https://github.com/gortee/pictures/blob/master/K22.PNG)
 
-If you return to the NSX-T console in Chrome you can select the Service Pool tab to show the backend containers now included in the pool for the load balancer.  It clearly denotes 4 members.  Click on the 4 to see the pod names.   
+If you return to the NSX-T console in Chrome you can select the Server Pool tab and select the server pool that ends with `default-bootcamp-8080` to show the backend containers now included in the pool for the load balancer.  It clearly denotes 4 members.  Click on the 4 to see the pod names.   
+
+Note: Depending on your screen size, you may need to zoom out in chrome to be able to clearly see the pods in the load balancer pool
 
 ![DockerOutput](https://github.com/gortee/pictures/blob/master/K23.PNG)
 
@@ -213,7 +244,24 @@ You can track progress with this command:
  
  Start by updating the image to be used by the deployment:
  
-     kubectl set image deployments/bootcamp bootcamp=jocatalin/kubernetes-bootcamp:v2
+     kubectl --record deployment.apps/bootcamp set image deployment.v1.apps/bootcamp bootcamp=jocatalin/kubernetes-bootcamp:v2
+
+<details><summary><b>HOL-2031 Users:</b> Please expand this section and use the alternate commands below</summary>
+
+```bash
+# First download the busybox image from the public PKS Ninja Labs Harbor registry, Retag and push the image to the harbor.corp.local registry server in your local lab with the following commands:  
+
+sudo docker login harbor.corp.local -u admin -p VMware1!
+sudo docker pull 35.209.26.28/library/kubernetes-bootcamp:v2
+sudo docker tag 35.209.26.28/library/kubernetes-bootcamp:v2 harbor.corp.local/library/kubernetes-bootcamp:v2
+sudo docker push harbor.corp.local/library/kubernetes-bootcamp:v2
+
+# Enter the following command to run this container in your kubernetes cluster:
+
+kubectl --record deployment.apps/bootcamp set image deployment.v1.apps/bootcamp bootcamp=harbor.corp.local/library/kubernetes-bootcamp:v2
+```
+</details>
+<br/>
      
  This will automatically update the image one at a time.  You will have to type the following commands fast to catch the state of the old containers.   
  
@@ -221,7 +269,7 @@ You can track progress with this command:
     kubectl describe services/bootcamp
     kubectl rollout status deployments/bootcamp
     
-![DockerOutput](https://github.com/gortee/pictures/blob/master/K26.PNG)   
+<img src="Images/2019-09-05-23-20-57.png">
 
 Return to the web browser window for our application and reload to see the version change to v2
 
@@ -232,7 +280,15 @@ We can also rollback the V2 application to V1 very quickly.
 
 Set the image for the deployment:
 
-    kubectl set image deployments/bootcamp bootcamp=gcr.io/google-samples/kubernetes-bootcamp:v1
+    kubectl --record deployment.apps/bootcamp set image deployments/bootcamp bootcamp=gcr.io/google-samples/kubernetes-bootcamp:v1
+
+<details><summary><b>HOL-2031 Users:</b> Please expand this section and use the alternate commands below</summary>
+
+```bash
+kubectl --record deployment.apps/bootcamp set image deployment.v1.apps/bootcamp bootcamp=harbor.corp.local/library/kubernetes-bootcamp:v1
+```
+</details>
+<br/>
     
 Do the rollout command:
 
@@ -306,6 +362,8 @@ Examine this command:
  We can now create additional constructs using the kubectl create -f (-f for file) command.   We need to create a storage class inside Kubernetes that allows our YAML files to access project Hatchway.   Hatchway will dynamically create VMDK files on VMware cluster file system on demand.   In order to save you massive typing we are going to use the repository you downloaded:
  
     cd /root/PKS-Lab/kubernetes/wordpress
+
+Note: If you do not see the /root/PKS-Lab directory, you may not have cloned it per the first step in this lab guide, or if you remember cloning it but dont see it in the /root/ directory, check the /home/ubuntu directory in case you may have cloned it there
  
  We will be implementing the file storage_class.yaml which contains the following:
  
@@ -321,6 +379,8 @@ In detail
 Execute the storage class:
 
     kubectl create -f storage_class.yaml
+
+Note: You may recieve an error saying this storage class already exists, if so you can ignore the error message and move on. Some of the PKS Ninja Lab templates have this storage class pre-configured.
 
 You can view the storage class using
 
@@ -367,6 +427,27 @@ In Detail:
 Create the mysql deployment and service using this command:
 
     kubectl create -f wp_mysql.yaml
+
+<details><summary><b>HOL-2031 Users:</b> Please expand this section and use the alternate commands below</summary>
+
+```bash
+# First download the wordpress image from the public PKS Ninja Labs Harbor registry, Retag and push the image to the harbor.corp.local registry server in your local lab with the following commands:  
+
+sudo docker login harbor.corp.local -u admin -p VMware1!
+sudo docker pull 35.209.26.28/library/mysql:5.6
+sudo docker tag 35.209.26.28/library/mysql:5.6 harbor.corp.local/library/mysql:5.6
+sudo docker push harbor.corp.local/library/mysql:5.6
+
+# Enter the following command to create a deployment based on the wp_mysql.yaml file provided in the PKS-Lab directory:
+kubectl create -f wp_mysql.yaml
+
+# Note that the above command will create a wordpress-mysql deployment but the container will not load properly in the HOL-2031 environment as the wp_mysql.yaml file specifies an image on docker hub which is not accessible from HOL-2031
+# Enter the following command to update the wordpress-mysql deployment to pull the mysql image from harbor.corp.local
+
+kubectl set image deployment.v1.apps/wordpress-mysql mysql=harbor.corp.local/library/mysql:5.6
+```
+</details>
+<br/>
  
 You can list the specifics of the created entity with:
 
@@ -400,7 +481,28 @@ Some details:
 Start up your wordpress apache service and deployment with:
 
     kubectl create -f wp.yaml
-    
+
+<details><summary><b>HOL-2031 Users:</b> Please expand this section and use the alternate commands below</summary>
+
+```bash
+# First download the wordpress image from the public PKS Ninja Labs Harbor registry, Retag and push the image to the harbor.corp.local registry server in your local lab with the following commands:  
+
+sudo docker login harbor.corp.local
+sudo docker pull 35.209.26.28/library/wordpress
+sudo docker tag 35.209.26.28/library/wordpress harbor.corp.local/library/wordpress
+sudo docker push harbor.corp.local/library/wordpress
+
+# Enter the following command to create a deployment based on the wp_mysql.yaml file provided in the PKS-Lab directory:
+kubectl create -f wp.yaml
+
+# Note that the above command will create a wordpress deployment but the container will not load properly in the HOL-2031 environment as the wp_mysql.yaml file specifies an image on docker hub which is not accessible from HOL-2031
+# Enter the following command to update the wordpress deployment to pull the mysql image from harbor.corp.local
+
+kubectl set image deployment.v1.apps/wordpress wordpress=harbor.corp.local/library/wordpress
+```
+</details>
+<br/>
+
 You can see the output of the command with:
 
     kubectl get service
@@ -449,7 +551,7 @@ This has created a firewall solution inside NSX-T.  Switch to your wordpress tab
 Let's review how it's handled in NSX-T.  Login to NSX-T Manager if required:
 
 - Username: admin
-- Password: VMware1!
+- Password: VMware1!VMware1!
 
 Once logged into the console do a search using the top bar search for mysql-deny-all (the name of the networkpolicy).  
 
@@ -457,21 +559,19 @@ Once logged into the console do a search using the top bar search for mysql-deny
 
 You can see that Kubernetes and NSX-T have created a number of constructs including Firewall rules, sections and IP sets.  If you expand the IP set you will see that it contains the IP address for our MySQL pod (kubectl describe pods -l tier=mysql look for IP) Kubernetes will dynamically assign IP address into NSX-T as Networkpolicy matches are achieved.  NSX-T provides powerful troubleshooting capabilities due to the deep integration. 
 
-- Navigate to the left side of NSX causing the menu to pop up
-- Locate tools and click on it
-- Click on Traceflow
+- Navigate to the `Advanced Networking & Securty > Tools > Traceflow` page
 - Switch the Source type to logical port
 - Use the drop down in source port to locate the description that has wordpress (not wordpress-mysql) and select it
 - Switch the Destination type to logical port
 - Use the drop down in destination port to locate the description that has wordpress-mysql and select it
 
-![DockerOutput](https://github.com/gortee/pictures/blob/master/K48.PNG)
+<img src="Images/2019-09-06-00-31-44.png">
 
 - Click on Trace
 
-![DockerOutput](https://github.com/gortee/pictures/blob/master/K49.PNG)
+<img src="Images/2019-09-06-00-33-09.png">
 
-As you can see in my case the communication is on the same ESXi host and blocked by firewall rule 4133.  Using search icon in the menu bar you can locate 4133 (or your rule number it may be different) and see what firewall rule applies it.  
+As you can see in my case the communication is on the same ESXi host and blocked by firewall rule 9224.  Using search icon in the menu bar you can locate 9224 (or your rule number it may be different) and see what firewall rule applies it.  
 
 To remove this networkpolicy just delete it.   This is done in the console with:
 
@@ -499,13 +599,26 @@ In this execercise you will deploy a true micro-services application called plan
 
 We will skip the wavefront for monitoring stage of the application deployment but it can be added later with simple sidecars.  Let's get the application from github:
 
-    mkdir ~/cloned
-    cd ~/cloned
-    git clone https://github.com/CNA-Tech/planespotter.git
-    cd ~/cloned/planespotter/kubernetes
+```bash
+sudo su
+sudo mkdir /root/cloned
+cd /root/cloned
+git clone https://github.com/CNA-Tech/planespotter.git
+cd /root/cloned/planespotter/
+```
 
+**All v12 templates must complete all steps in the [Enable Harbor Client Secure Connections Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212) before proceeding - this does not apply to HOL-2031 lab environments**
 
-This application contains storage classes, persistent volumes, and multiple pods.   Since we already have a storage class called thin-disk we will skip creating that part (kubectl get storageclass).   We will need to create a new namespace (deploying a new T1 router) and switch to that namespace
+The kubernetes manifests included in this directory will require that the planespotter container images be loaded onto the harbor.corp.local server in order to run successfully. Enter the following commands to launch a script that will download the planespotter container images from the public harbor registry and upload the images to the harbor.corp.local server in your lab environment
+
+```bash
+sudo chmod +x loadPsContainers.sh
+./loadPsContainers.sh
+cd /root/cloned/planespotter/kubernetes
+``` 
+Note: this script may take a few minutes to run
+
+This application contains storage classes, persistent volumes, and multiple pods. Since we already have a storage class called thin-disk we will skip creating that part (kubectl get storageclass). We will need to create a new namespace (deploying a new T1 router) and switch to that namespace
 
     kubectl create namespace planespotter
     kubectl config set-context my-cluster --namespace planespotter
@@ -519,6 +632,8 @@ You can view your created namespace with (kubectl get namespace or kubectl get n
      kubectl create -f frontend-deployment_all_k8s.yaml
 
 You can view the status of all these containers using the following commands:
+
+Note: It may take up to a few minutes before the new planespotter objects are up and running
 
      kubectl get pvc
      kubectl get deployments
@@ -543,9 +658,6 @@ Switch to Chrome and go to the Loadbalancer IP for your application (mine is 10.
 
 Reload a few times and notice how the host and ip at the top change.  While you have the application setup lets locate all the 737 planes.  
 
-- Click on US Aircraft Registry
-- In the aircraft model type 737 and search
-
 # Cleanup
 To cleanup planespotter (it uses a lot of memory) do the following:
 
@@ -559,5 +671,6 @@ To cleanup planespotter (it uses a lot of memory) do the following:
 If you have available extra time try to achieve one of these stretch goals:
 
 - Setup a LAMP stack (Apache, MySQL, PHP on Linux containers) running a simple php script that does hello world and shows that database connection works
+  - Note, in the HOL-2031 lab environment you cannot access docker hub to pull down these images, you can access the required images using 35.209.26.28/library/httpd, 35.209.26.28/library/php 35.209.26.28/library/mysql:5.6 and 35.209.26.28/library/wordpress to accomplish these objectives. You will need to download these images and then upload them to harbor.corp.local to deploy them to your kubernetes cluster
 - Create custom firewall rules between the Wordpress site that allows 3309 but denies everything else
 - Try another tutorial on the internet to learn Kubernetes 

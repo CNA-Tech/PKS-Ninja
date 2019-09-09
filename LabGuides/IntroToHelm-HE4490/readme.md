@@ -4,8 +4,9 @@
 
 - [1.0 Setup Tiller & Initialize Helm]()
   - [Understanding Tiller & Security]()
-  - [1.1 Tillerless Helm using a Client-side Tiller Server]()
-  - [1.2 Helm with remote Tiller Server, Tiller Service Account & Kubernetes RBAC]()
+  - [1.1 Install the Helm client on the `cli-vm`]()
+  - [1.2 Tillerless Helm using a Client-side Tiller Server]()
+  - [1.3 Helm with remote Tiller Server, Tiller Service Account & Kubernetes RBAC]()
 - [2.0 Explore Helm]()
   - [2.1 Deploy First Helm App]()
   - [2.2 Explore Helm Commands and Application Management Features]()
@@ -37,31 +38,33 @@ Helm is designed to bring all of the different microservices required for an app
 
 To complete this lab, you need to have a compatible lab environment with a kubernetes cluster deployed using the method and configuration in the [Deploy first cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployFirstCluster-DC1610) lab guide, or by loading a clusterReady Ninja lab template. Also ensure you have your kubectl config context set to your deployed K8s cluster by logging into PKS and using the `pks get-credentials my-cluster` command.
 
-## 1.0 Setup Tiller
+## 1.0 Setup Tiller and Initailize Helm
 
 Before you can use Helm, you need to determine how you want to setup the tiller server, a component included with Helm used to execute functions on the Kubernetes API.
 
 This lab guide includes instructions on installing tiller on the client workstation (also known as 'tillerless' helm) in section 1.1, and installing tiller in the remote kubernetes cluster in section 1.2.
 
-**You only need to complete either section 1.1, or section 1.2, not both. Once you have completed either section 1.1 OR 1.2, you can proceed to section 2.0. If you want to quickly get started with Helm, we recommend setting up tiller on the client workstation with section 1.1. For a deeper explanation of this decision, please read the [Understanding Tiller & Security]() section below.
+**You only need to complete either section 1.2, or section 1.3, not both. Once you have completed either section 1.2 OR 1.3, you can proceed to section 2.0. If you want to quickly get started with Helm, we recommend setting up tiller on the client workstation with section 1.2. For a deeper explanation of this decision, please read the [Understanding Tiller & Security]() section below.
 
 ### Understanding Tiller & Security
 
-Helm runs locally on the client workstation or server that is initiating Helm commands. In the pks ninja lab, Helm is pre-installed on CLI-VM. Helm provides standard application package management features much like apt or yum on Linux, except Helm does this for applications running on Kubernetes. To provide this service, helm includes an application called Tiller Server (aka Tiller) that is usually installed as a pod in the kubernetes cluster that is setup for running helm packaged application.
+Helm runs locally on the client workstation or server that is initiating Helm commands. Helm provides standard application package management features much like apt or yum on Linux, except Helm does this for applications running on Kubernetes. To provide this service, helm includes an application called Tiller Server (aka Tiller) that is usually installed as a pod in the kubernetes cluster that is setup for running helm packaged application.
 
 When you enter a helm command to, for example, install an application, helm communicates the instructions to the tiller server which interacts with the kubernetes api to execute commands.
 
 As tiller has the ability to execute privliedge commands within a kubernetes cluster, it should always be installed with thorough security precautions as detailed in [Securing your Helm Installation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) page in the Helm Documentation. To communicate with the kubernetes API, tiller needs to have a service account, which should be assigned the minimal level of permissions needed to execute only the required commands it needs to. Kubernetes can allow for extremely granular RBAC permissions which allows very thorough and granular security in production environments, however this level of detail is beyond the scope of this lab guide.
 
-Many helm tutorials bypass the need for granular rbac configuration by assigning administrator level permissions to the tiller service account, which is an effective way to demonstrate how to create a tiller service account and apply an RBAC configuration, albeit in a simplified context by using the administrator account for permissions. This method is shown below in section 1.2, it is simple and works effectively, however this should never be used on production or public-internet facing applications as it presents a significant security vulnerability. It should always be used with great caution, as if an administrator is not careful, they could leave a tiller server running in a remote kubernetes cluster without even being aware of it.
+Many helm tutorials bypass the need for granular rbac configuration by assigning administrator level permissions to the tiller service account, which is an effective way to demonstrate how to create a tiller service account and apply an RBAC configuration, albeit in a simplified context by using the administrator account for permissions. This method is shown below in section 1.3, it is simple and works effectively, however this should never be used on production or public-internet facing applications as it presents a significant security vulnerability. It should always be used with great caution, as if an administrator is not careful, they could leave a tiller server running in a remote kubernetes cluster without even being aware of it.
 
 However, rather than installing tiller into a remote kubernetes cluster, you can simply run tiller on the same client workstation where helm is running, which allows an administrator to execute helm/tiller functions using the administrators login session, only while the administator is logged into their session.
 
-It is very useful for kubernetes and pks administators to be able to take advantage of helm and tiller without needing to worry about the potential security implications of a remote tiller server, and accordingly we recommend using the 'Tillerless Helm' methodology provided in section 1.1.
+It is very useful for kubernetes and pks administators to be able to take advantage of helm and tiller without needing to worry about the potential security implications of a remote tiller server, and accordingly we recommend using the 'Tillerless Helm' methodology provided in section 1.2.
 
-This method is commonly referred to as 'Tillerless Helm', and we will refer to this method, detailed in section 1.1, as the 'Tillerless Helm' method. It should be noted however that while this method is commonly referred to as 'Tillerless Helm', there are other methods of using helm without tiller entirely that sometimes also use the phrase 'Tillerless Helm'.
+This method is commonly referred to as 'Tillerless Helm', and we will refer to this method, detailed in section 1.2, as the 'Tillerless Helm' method. It should be noted however that while this method is commonly referred to as 'Tillerless Helm', there are other methods of using helm without tiller entirely that sometimes also use the phrase 'Tillerless Helm'.
 
-### 1.1 Tillerless Helm using a Client-side Tiller Server
+### 1.1 Install the Helm client on the `cli-vm`
+
+Before we configure Helm, we need to install the Helm client on the `cli-vm` to ensure we can utilize `helm` commands from the `cli-vm` to deploy apps to our cluster.
 
 1.1.1 From the Main Console (ControlCenter) desktop, open putty and under saved sessions, open a ssh connection to `cli-vm`
 
@@ -70,33 +73,68 @@ This method is commonly referred to as 'Tillerless Helm', and we will refer to t
 </details>
 <br/>
 
-1.1.2 To setup tillerless helm, you will use the [Tillerless Helm Plugin](https://github.com/rimusz/helm-tiller). Install the plugin with the command `helm plugin install https://github.com/rimusz/helm-tiller`.
+**Note:** Ensure you have run the `pks get-credentials my-cluster` command before proceeding as Helm will need access to your cluster via the config file
+
+1.1.2 Run the following commands to retrieve the Helm client archive package, unpack the archive, and move the `helm` executable into the local path:
+~~~
+wget https://get.helm.sh/helm-v2.14.3-linux-amd64.tar.gz
+~~~
+
+~~~
+tar -zxvf helm-v2.14.3-linux-amd64.tar.gz
+~~~
+
+~~~
+mv linux-amd64/helm /usr/local/bin/helm
+~~~
 
 <details><summary>Screenshot 1.1.2</summary>
+<img src="Images/2019-09-05-03-06-48.png">
+</details>
+<br/>
+
+Now that you have installed the Helm client, you are ready to configure Helm on your cluster.
+
+ ### 1.2 Tillerless Helm using a Client-side Tiller Server
+
+1.2.1 The first thing you'll need to do is initialize the Helm client to create the required directory structure for Helm to store it's configuration files and plugins via the `helm init --client-only` command:
+
+~~~
+helm init --client-only
+~~~
+
+<details><summary>Screenshot 1.2.1</summary>
+<img src="Images/2019-09-05-03-05-10.png">
+</details>
+<br/>
+
+1.2.2 To setup tillerless helm, you will use the [Tillerless Helm Plugin](https://github.com/rimusz/helm-tiller). Install the plugin with the command `helm plugin install https://github.com/rimusz/helm-tiller`.
+
+<details><summary>Screenshot 1.2.2</summary>
 <img src="Images/2019-03-04-00-15-27.png">
 </details>
 <br/>
 
-1.1.3 Start Tiller Server locally and initialize helm with the command `helm tiller start`.
+1.2.3 Start Tiller Server locally and initialize helm with the command `helm tiller start`.
 
-<details><summary>Screenshot 1.1.3</summary>
-<img src="Images/2019-03-04-00-17-35.png">
+<details><summary>Screenshot 1.2.3</summary>
+<img src="Images/2019-09-05-03-07-40.png">
 </details>
 <br/>
 
-### 1.2 Helm with remote Tiller Server, Tiller Service Account & Kubernetes RBAC
+### 1.3 Helm with remote Tiller Server, Tiller Service Account & Kubernetes RBAC
 
-1.2.2 - Create a service account for Tiller and bind it to the cluster-admin role
+1.3.1 - Create a service account for Tiller and bind it to the cluster-admin role
 
 *Note: For expediency in this example we bind the cluster-admin priviledges to the Tiller service account. You should never do this in production environments where the minimum needed permissions should be assigned to the Tiller service account. For guidance on additional security recommendations for production deployments, please see [Securing your Helm Installation](https://github.com/helm/helm/blob/master/docs/securing_installation.md).*
 
 From the `cli-vm` prompt, create a new k8s RBAC config file with the command `nano rbac-config.yaml`
 
-<details><summary>Screenshot 1.2.1 </summary>
+<details><summary>Screenshot 1.3.1 </summary>
 <img src="images/nano-config.png">
 </details>
 
-1.2.2 - Copy the below text into the open file in nano
+1.3.2 - Copy the below text into the open file in nano
 
 ```yaml
 apiVersion: v1
@@ -122,9 +160,9 @@ subjects:
 Save the file - `ctrl + o` then `enter` <br/>
 Then exit the text editor - `ctrl + x` then `enter`
 
-1.2.3 - Create and bind the Tiller service account<br/> `kubectl create -f rbac-config.yaml`
+1.3.3 - Create and bind the Tiller service account<br/> `kubectl create -f rbac-config.yaml`
 
-1.2.4 - The `helm init` command will initialize Helm and Tiller on the client and in your cluster, and allow you to begin use! <br/>
+1.3.4 - The `helm init` command will initialize Helm and Tiller on the client and in your cluster, and allow you to begin use! <br/>
 `helm init --service-account tiller`
 
 ## 2.0 Explore Helm
@@ -231,7 +269,7 @@ kubectl proxy
 </details>
 <br/>
 
-2.1.9 From the Main Console (ControlCenter) desktop, open a chrome browser session and on the shortcuts bar select the shortcut `Sign in - Kubernetes` to access your kubernetes dashboard and proceed through the following steps to sign in:
+2.1.9 From the Main Console (ControlCenter) desktop, open a chrome browser session and on the shortcuts bar select the shortcut `Kubernetes Dashboard` to access your kubernetes dashboard and proceed through the following steps to sign in:
 
 - Select `Kubeconfig`
 - Click on `Choose kubeconfig file`
