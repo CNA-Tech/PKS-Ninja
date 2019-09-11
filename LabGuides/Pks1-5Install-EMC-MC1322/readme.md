@@ -446,7 +446,7 @@ Navigate to the 2nd page of the `Deployment Metadata` screen and observe the IP 
 <img src="Images/2019-09-11-09-51-30.png">
 </details>
 
-4.18 To access the Ops Manager UI, from Control Center, get the Ops Manager IP address from `EPMC->Deployment Metadata->Ops Manager Address`.  Then, open a new chrome browser tab and load up the Ops Manager IP address and login with the username `admin` and the password `VMware1!`
+4.18 To access the Ops Manager UI, from Control Center, get the Ops Manager IP address from `EPMC->Deployment Metadata->Ops Manager Address`, and also get the `Ops Manager Admin User Name` and `Ops Manager Admin User Password`.  Then, open a new chrome browser tab and load up the Ops Manager IP address and login with the username and password you retrieved.
 
 <details><summary>Screenshot 4.18.1</summary>
 <img src="Images/2019-09-11-13-56-20.png">
@@ -463,7 +463,7 @@ Navigate to the 2nd page of the `Deployment Metadata` screen and observe the IP 
 
 4.19 Return to the `epmc-01a` web console, navigate to the `Deployment Metadata` and find the `Enteprise PKS Admin User Name` and `Password` You will use this information in the next step to log into the PKS API.
 
-<details><summary>Screenshot 4.18</summary>
+<details><summary>Screenshot 4.19</summary>
 <img src="Images/2019-08-24-20-14-59.png">
 </details>
 <br/>
@@ -472,7 +472,7 @@ Navigate to the 2nd page of the `Deployment Metadata` screen and observe the IP 
 
 `pks login -a pks.corp.local -u admin -p ReplaceWithPassword -k` 
 
-<details><summary>Screenshot 4.18</summary>
+<details><summary>Screenshot 4.20</summary>
 <img src="Images/2019-08-24-20-18-45.png">
 </details>
 <br/>
