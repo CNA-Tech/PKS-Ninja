@@ -221,16 +221,9 @@ Your lab environment was pre-configured with NAT rules for scenarios in which yo
 </details>
 <br/>
 
-3.2 From the Control Center Desktop, open a new browser tab in chrome, and navigate to [https://epmc-01a.corp.local/login](https://epmc-01a.corp.local/login), login with the username `root` and the password `VMware1!`
-
-<details><summary>Screenshot 3.4</summary>
-<img src="Images/2019-08-24-03-04-27.png">
-</details>
-<br/>
-
 ### Step 4: Complete the installation workflow
 
-4.1 From the Control Center Desktop, open a new browser tab in chrome, and navigate to [https://epmc-01a.corp.local/login](https://epmc-01a.corp.local/login), login with the username `root` and the password `VMware1!` click `INSTALL`, and then click `START CONFIGURATION`
+4.1 From the Control Center Desktop, open a new browser tab in chrome, and navigate to [https://epmc-01a.corp.local/login](https://epmc-01a.corp.local/login), login with the username `root` and the password `VMware1!`, click `INSTALL`, and then click `START CONFIGURATION`
 
 <details><summary>Screenshot 4.1.1</summary>
 <img src="Images/2019-08-24-03-04-27.png">
@@ -450,24 +443,34 @@ Navigate to the 2nd page of the `Deployment Metadata` screen and observe the IP 
 4.17 From Control Center, open a new chrome browser tab and click on the `Harbor` bookmark and login with the username `admin` and the password `VMware1!`
 
 <details><summary>Screenshot 4.17.1</summary>
+<img src="Images/2019-09-11-09-51-30.png">
+</details>
+
+4.18 To access the Ops Manager UI, from Control Center, get the Ops Manager IP address from `EPMC->Deployment Metadata->Ops Manager Address`.  Then, open a new chrome browser tab and load up the Ops Manager IP address and login with the username `admin` and the password `VMware1!`
+
+<details><summary>Screenshot 4.18.1</summary>
+<img src="Images/2019-09-11-13-56-20.png">
+</details>
+
+<details><summary>Screenshot 4.18.2</summary>
 <img src="Images/2019-08-24-20-07-29.png">
 </details>
 
-<details><summary>Screenshot 4.17.2</summary>
+<details><summary>Screenshot 4.18.3</summary>
 <img src="Images/2019-08-24-20-08-17.png">
 </details>
 <br/>
 
-4.18 Return to the `epmc-01a` web console, navigate to the `Deployment Metadata` and find the `Enteprise PKS Admin User Name` and `Password` You will use this information in the next step to log into the PKS API.
+4.19 Return to the `epmc-01a` web console, navigate to the `Deployment Metadata` and find the `Enteprise PKS Admin User Name` and `Password` You will use this information in the next step to log into the PKS API.
 
 <details><summary>Screenshot 4.18</summary>
 <img src="Images/2019-08-24-20-14-59.png">
 </details>
 <br/>
 
-4.18 From the control center desktop, open a putty session to `ubuntu@cli-vm` and from the prompt, enter the following command to login to the PKS API. Be sure to use the password you gathered in the previous step:
+4.20 From the control center desktop, open a putty session to `ubuntu@cli-vm` and from the prompt, enter the following command to login to the PKS API. Be sure to use the password you gathered in the previous step:
 
-`pks login -a pks.corp.local -u admin - p ReplaceWithPassword -k` 
+`pks login -a pks.corp.local -u admin -p ReplaceWithPassword -k` 
 
 <details><summary>Screenshot 4.18</summary>
 <img src="Images/2019-08-24-20-18-45.png">
