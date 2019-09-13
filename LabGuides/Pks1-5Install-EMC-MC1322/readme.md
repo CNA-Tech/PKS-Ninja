@@ -257,7 +257,7 @@ Your lab environment was pre-configured with NAT rules for scenarios in which yo
 - Pod IP Block ID: `ip-block-pods-deployments`
 - Node IP Block ID: `ip-block-nodes-deployments`
 - Floating IP Pool ID: `ip-pool-vips`
-- Nodes DNS: `10.100.200.2`
+- Nodes DNS: `192.168.110.10`
 - Deployment DNS: `192.168.110.10`
 - NTP Server: `192.168.100.1`
 - Click `Next`
