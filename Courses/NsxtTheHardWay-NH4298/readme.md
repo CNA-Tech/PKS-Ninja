@@ -10,8 +10,6 @@ You will need access to a Ninja Lab Environment to complete this course. If you 
 
 ## Instructions
 
-Before beginning installation, you must first apply the latest lab prep script [per the instructions here](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Labrary/Microlabs/NinjaLabPrepScript-CI4231.md)
-
 Please complete the following lab guides in the order presented to fullfil the requirements of the PKS the Hard Way course:
 
 - [NSX-T 2.4.1 Manual Installation](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtManualInstall-IN1497)
