@@ -14,7 +14,7 @@ Anyone who implements any software used in this lab must provide their own licen
 
 ### Overview of Tasks Covered in this Lab Guide
 
-- [Step 1: Set up the ssh keys between the cli-vm and the Ops Manager VM](#step-1-set-up-the-ssh-keys)
+- [Step 1: Set up the ssh keys between the cli-vm and the Ops Manager VM](#step-1-set-up-the-ssh-keys-between-the-cli-vm-and-the-ops-manager)
 - [Step 2: Install the bosh cli](#step-2-install-the-bosh-cli)
 - [Step 3: Set up the bosh tunnel](#step-3-set-up-the-bosh-tunnel)
 - [Step 4: Run bosh commands](#step-4-run-bosh-commands)
