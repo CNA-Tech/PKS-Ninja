@@ -92,226 +92,56 @@ bosh --version
 
 ## Step 3: Set up the bosh tunnel
 
- 3.1 From the NSX-T Manager UI navigate to the `Advanced Networking & Security > Inventory > Groups > IP Pools` page and click `+ADD` 
+ 3.1 From the Ops Manager UI, click the Bosh Director Tile, then click Credentials tab, then click `Link to Credential` of Bosh Commandline Credentials.  The credential page will be loaded.  Copy the value excluding the last word (`bosh`) and then save it somewhere as it will be used in later steps.
 
-<details><summary>Screenshot 3.1</summary>
-<img src="Images/2019-07-13-01-25-39.png">
+<details><summary>Screenshot 3.1.1</summary>
+<img src="Images/2019-09-25-15-06-20.png">
+</details>
+
+<details><summary>Screenshot 3.1.2</summary>
+<img src="Images/2019-09-25-15-08-45.png">
+</details>
+
+<details><summary>Screenshot 3.1.3</summary>
+<img src="Images/2019-09-25-15-15-04.png">
 </details>
 <br/>
 
- 3.2 On the `Add IP Pool` screen, enter the following values:
 
-- Name: `tep-ip-pool`
-- Click `Add` under Subnets
-- IP Range: `192.168.130.51-192.168.130.75`
-- Gateway: `192.168.130.1`
-- CIDR: `192.168.130.0/24`
-- DNS Servers:  `192.168.110.10`
-- DNS Suffix: `Corp.local`
-- Click **Add**
+ 3.2 From the Ops Manager UI, click `admin` in the upper right corner and then click `Settings` from the drop-down menu.  Then, in the Settings page, click `Advanced Options` and then click `DOWNLOAD ROOT CA CERT`.  This will download a file named `root_ca_certificate` into your Downloads folder.  We will use this file in later steps.
 
 <details><summary>Screenshot 3.2</summary>
-<img src="Images/2019-07-13-01-31-28.png">
+<img src="Images/2019-09-25-15-18-45.png">
+</details>
+
+<details><summary>Screenshot 3.2</summary>
+<img src="Images/2019-09-25-15-21-12.png">
 </details>
 <br/>
 
- 3.3 From the NSX-T Manager Homepage at the bottom of the `System` section, click `Get Started`, and then click `Setup Transport Nodes`
+ 3.3 Transfer the `root_ca_certificate` into the `cli-vm`.  You can do this by opening the file in Notepad++ and then copying all the contents, and then pasting the contents into a file in `cli-vm`.
 
-<details><summary>Screenshot 3.3</summary>
-<img src="Images/2019-07-13-01-35-19.png">
+<details><summary>Screenshot 3.3.1</summary>
+<img src="Images/2019-09-25-15-29-14.png">
+</details>
+
+<details><summary>Screenshot 3.3.2</summary>
+<img src="Images/2019-09-25-15-29-58.png">
 </details>
 <br/>
 
- 3.4 On the `Select Node Type` screen, select `NSX Edge VM` and click `Next`
+ 3.4 In the `cli-vm`, create a file named `env.sh` that will contain all the Bosh environment variables that will be used in the tunnel and environment.  You can run the following commands but make sure you replace the placeholder in the line 3 with the value you get from step 3.1.  See screenshot for more context.
+
+```
+cat > env.sh
+export BOSH_ALL_PROXY=ssh+socks5://ubuntu@opsman.corp.local:22?private-key=/home/ubuntu/opsman-ssh-key
+export <replace with the value you got from step 3.1>
+```
 
 <details><summary>Screenshot 3.4</summary>
-<img src="Images/2019-07-13-01-36-49.png">
+<img src="Images/.2019-09-25-15-36-19png">
 </details>
 <br/>
-
- 3.5 On the `Select NSX Edge` Screen, click `Add New Edge`
-
-<details><summary>Screenshot 3.5</summary>
-<img src="Images/2019-07-13-01-38-30.png">
-</details>
-<br/>
-
- 3.6 Complete the Add Edge VM workflow with the following values:
-
- - Name: nsxedge-1
- - FQDN: nsxedge-1.corp.local   
- - Form Factor: Large
- - Click Next
- - CLI Password: VMware1!VMware1!
- - System Root Password: VMware1!VMware1!
- - Compute Manager: vcsa-01a
- - Cluster: RegionA01-MGMT01
- - Datastore: RegionA01-ISCSI02-COMP01
- - Click Next
- - Management: VM-RegionA01-vDS-MGMT
- - Select "Static" (not DHCP)
- - Management IP: 192.168.110.91/24
- - Gateway IP: 192.168.110.1
- - fp-eth0: Uplink-RegionA01-vDS-MGMT
- - fp-eth1: Transport-RegionA01-vDS-MGMT
- - fp-eth2: VM-RegionA01-vDS-MGMT
- - Click Finish
-
-<details><summary>Screenshot 3.6.1</summary>
-<img src="Images/2019-08-12-23-48-01.png">
-</details>
-
-<details><summary>Screenshot 3.6.2</summary>
-<img src="Images/2019-07-13-01-39-47.png">
-</details>
-
-<details><summary>Screenshot 3.6.3</summary>
-<img src="Images/2019-07-13-01-40-18.png">
-</details>
-
-<details><summary>Screenshot 3.6.4</summary>
-<img src="Images/2019-07-13-01-42-28.png">
-</details>
-<br/>
-
- 3.7 The Wizard will deploy and attempt to power on the edge VM, but it will fail as there is no host with the capacity to run the edge in the lab. Log into vCenter, review the tasks pane to ensure the edge VM is finished deploying, wait as needed, and verify you can see the error message indicating that vCenter could not power on the edge vm. 
-
-Navigate to the `Hosts and Clusters` view, select `nsxedge-1`. From the actions menu for `nsxedge-1` select `Edit Settings`.
-
-**If you are using the Baseline-0.6 template or newer, set the CPU count to `8`. If you are using the Baseline-0.5 template or older, set the CPU count to `4`.** 
-
- Expand the `Memory` section, **uncheck** the box for `Reserve all guest memory (All Locked)`, set the `Reservation` value to `0 MB` and click `OK`
-
-<details><summary>Screenshot 3.7.1</summary>
-<img src="Images/2019-07-13-02-02-05.png">
-</details>
-
-<details><summary>Screenshot 3.7.2</summary>
-<img src="Images/2019-07-13-02-03-04.png">
-</details>
-<br/>
-
-After making the changes to the `nsxedge-1` VM, power the VM on via the vCenter UI.
-
- 3.8 Return to the NSX UI and wait for the wizard to recognize the NSX Edge VM. This may take up to ~15 minutes, and you may need to refresh your connection to NSX Manager, if so you can use the same steps as above to get back to the `Setup Transport Nodes ` wizard. 
- 
- On the `Select NSX Edge` screen select `nsxedge-1` from the `Edge Node` Pulldown Menu and click `Next` 
-
-<details><summary>Screenshot 3.8</summary>
-<img src="Images/2019-07-13-01-43-20.png">
-</details>
-<br/>
-
- 3.9 On the `Select Transport Zone East-West` Screen, select `Create Overlay Transport Zone`
-
-<details><summary>Screenshot 3.9</summary>
-<img src="Images/2019-07-13-01-44-28.png">
-</details>
-<br/>
-
- 3.10 In the `Add Transport Zone` workflow, enter the following values:
-
-- Name: `overlay-tz`
-- N-VDS Name: `hostswitch-overlay`
-- Traffic Type: `Overlay`
-- Click **Add** 
-
-<details><summary>Screenshot 3.10</summary>
-<img src="Images/2019-07-13-01-45-26.png">
-</details>
-<br/>
-
- 3.11 On the `Select Transport Zone East-West` screen, select `overlay-tz` from the `Overlay Transport Zone` pulldown menu and click `Next` 
-
-<details><summary>Screenshot 3.11</summary>
-<img src="Images/2019-07-13-01-47-21.png">
-</details>
-<br/>
-
- 3.12 On the `Select Uplink Profile East-West` screen, select `nsx-edge-single-nic-uplink-profile` from the `Select Uplink Profile` pulldown menu and click `Next`
-
-<details><summary>Screenshot 3.12</summary>
-<img src="Images/2019-07-13-01-47-52.png">
-</details>
-<br/>
-
- 3.13 On the `Link to Transport Zone East-West` screen for `Assignment IP Address` select `Use IP Pool` and select `tep-ip-pool`
-
-<details><summary>Screenshot 3.13</summary>
-<img src="Images/2019-07-13-01-49-42.png">
-</details>
-<br/>
-
-
- 3.14 On the `Link to Transport Zone East-West` screen in the `NSX Edge NIC Connections` section, set the value for `fp-eth1` to `uplink-1` and click `Next`
-
-<details><summary>Screenshot 3.14</summary>
-<img src="Images/2019-07-13-01-51-00.png">
-</details>
-<br/>
-
- 3.15 On the `Select Transport Zone North-South` screen, click `Create VLAN Transport Zone`
-
-<details><summary>Screenshot 3.15</summary>
-<img src="Images/2019-07-13-01-51-49.png">
-</details>
-<br/>
-
- 3.16 On the `Add Transport Zone` screen, add a transport zone with the following parameters:
-
- - Name: vlan-tz
- - N-VDS Name: hostswitch-vlan
- - Traffic Type: VLAN
- - Click **Add**
-
-<details><summary>Screenshot 3.16</summary>
-<img src="Images/2019-07-13-01-52-27.png">
-</details>
-<br/>
-
- 3.17 On the `Select Transport Zone North-South` screen, select `vlan-tz` from the pulldown menu for `VLAN Transport Zone` and click `Next`
-
-<details><summary>Screenshot 3.17</summary>
-<img src="Images/2019-07-13-01-53-28.png">
-</details>
-<br/>
-
- 3.18 On the `Select Uplink Profile North-South` screen, select `nsx-edge-single-nic-uplink-profile` from the `Select Uplink Profile` pulldown menu and click `Next`
-
-<details><summary>Screenshot 3.18</summary>
-<img src="Images/2019-07-13-01-54-11.png">
-</details>
-<br/>
-
- 3.19 On the `Link To Transport Zone North-South` screen, leave the `Assignment IP Address` value blank/empty as shown in the screenshot below. In the `NSX Edge NIC Connections` section, set the value for `fp-eth0` to `uplink-1` and click `Next`
-
-<details><summary>Screenshot 3.19</summary>
-<img src="Images/2019-07-13-01-55-12.png">
-</details>
-<br/>
-
- 3.20 On the `Add To NSX Edge Cluster` screen, select `Add To New NSX Edge Cluster (system created)` field, set the `NSX Edge Cluster Name` value to `edge-cluster-1` and click `Next`
-
-<details><summary>Screenshot 3.20</summary>
-<img src="Images/2019-07-13-01-56-26.png">
-</details>
-<br/>
-
- 3.21 On the `Review` screen, set the `Transport Node Name` to `edge-tn-1` and click `Finish`
-
-<details><summary>Screenshot 3.21</summary>
-<img src="Images/2019-07-13-01-57-08.png">
-</details>
-<br/>
-
- 3.22 On the `System` tab in NSX Manager UI, In the left navigation bar expand the `Fabric` section and select `Nodes`. Select the `Edge Transport Nodes` tab, verify that `edge-tn-1` has a `Configuration State` of `Success`, a `Node Status` of `Up`, and is a member of `edge-cluster-1`
-
-<details><summary>Screenshot 3.22</summary>
-<img src="Images/2019-07-13-02-01-04.png">
-</details>
-<br/>
-
- 
 
 ## Step 4: Run bosh commands
 
