@@ -139,156 +139,36 @@ export <replace with the value you got from step 3.1>
 ```
 
 <details><summary>Screenshot 3.4</summary>
-<img src="Images/.2019-09-25-15-36-19png">
+<img src="Images/2019-09-25-15-36-19.png">
 </details>
 <br/>
 
 ## Step 4: Run bosh commands
 
-Preparing hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kernel modues) and configuring the NSX tunnel endpoints and participation in the N-VDS overlay fabric.
-
- 4.1 From the NSX Manager UI go to the `System > Get Started` page and click `SET UP TRANSPORT NODES` 
+ 4.1 Source the `env.sh` file to export the needed environment variables.  You can run `source env.sh`.
 
 <details><summary>Screenshot 4.1</summary>
-<img src="Images/2019-07-13-01-35-19.png">
+<img src="Images/2019-09-25-15-45-51.png">
 </details>
 <br/>
 
- 4.2 On the `Select Node Type` screen select `Host Cluster` and click `Next`
+ 4.2 You should now be able to run bosh cli commands from the `cli-vm`.  You can run the following bosh commands if you wish:
 
-<details><summary>Screenshot 4.2</summary>
-<img src="Images/2019-07-13-02-13-07.png">
+```
+bosh env
+bosh vms
+bosh instances -p
+bosh deployments
+bosh deployments --column=name
+```
+
+<details><summary>Screenshot 4.2.1</summary>
+<img src="Images/2019-09-25-15-49-33.png">
+</details>
+
+<details><summary>Screenshot 4.2.2</summary>
+<img src="Images/2019-09-25-15-49-54.png">
 </details>
 <br/>
-
- 4.3 On the `Select Host Cluster` Screen, set the value for `Host Cluster` to `RegionA01-COMP01`, when you make this selection, the page will prompt you to `Confirm Installation`, click `Install`. Do not proceed until the status in the `NSX` column for `esx-01a`, `esx-02a` and `esx-03a` is `NSX Installed`, and that `NSX Manager Connectivity` is `Up` for each host as shown in the screenshots below.
-
-<details><summary>Screenshot 4.3.1</summary>
-<img src="Images/2019-07-13-02-13-52.png">
-</details>
-
-<details><summary>Screenshot 4.3.2</summary>
-<img src="Images/2019-07-13-02-14-14.png">
-</details>
-
-<details><summary>Screenshot 4.3.3</summary>
-<img src="Images/2019-07-13-02-14-54.png">
-</details>
-
-<details><summary>Screenshot 4.3.4</summary>
-<img src="Images/2019-07-13-02-18-39.png">
-</details>
-<br>
-
- 4.4 On the `Select Transport Zone East-West` screen set the value for `Overlay Transport Zone` to `overlay-tz` and click `Next`
-
-<details><summary>Screenshot 4.4</summary>
-<img src="Images/2019-09-09-15-24-01.png">
-</details>
-<br/>
-
- 4.5 On the `Select Uplink Profile East-West` screen, set the value for `Select Uplink Profile` to `nsx-default-uplink-hostswitch-profile` and click `Next`
-
-<details><summary>Screenshot 4.5</summary>
-<img src="Images/2019-07-13-02-19-49.png">
-</details>
-<br/>
-
- 4.6 On the `Link to Transport Zone East-West` screen, set the value for `Assignment IP Address` to `Use IP Pool` and set the value for `IP Pool` to `tep-ip-pool`
-
-<details><summary>Screenshot 4.6</summary>
-<img src="Images/2019-07-13-02-21-31.png">
-</details>
-<br/>
-
- 4.7 On the `Link to Transport Zone East-West` screen, in the `Host NIC Connections` section, set the value for `vmnic1` to `uplink-1` and click `Next`
-
-<details><summary>Screenshot 4.7</summary>
-<img src="Images/2019-07-13-02-22-12.png">
-</details>
-<br/>
-
- 4.8 On the `Review` screen, click `Finish`
-
-<details><summary>Screenshot 4.8</summary>
-<img src="Images/2019-07-13-02-22-39.png">
-</details>
-<br/>
-
- 4.9 From the NSX Manager UI go to the `System > Get Started` page and click `SET UP TRANSPORT NODES` 
-
-<details><summary>Screenshot 4.9</summary>
-<img src="Images/2019-07-13-01-35-19.png">
-</details>
-<br/>
-
- 4.10 On the `Select Node Type` screen select `Host Cluster` and click `Next`
-
-<details><summary>Screenshot 4.10</summary>
-<img src="Images/2019-07-13-02-13-07.png">
-</details>
-<br/>
-
- 4.11 On the `Select Host Cluster` Screen, set the value for `Host Cluster` to `RegionA01-MGMT01`, when you make this selection, the page will prompt you to `Confirm Installation`, click `Install`. Do not proceed until the status in the `NSX` column for `esx-04a`, `esx-05a` and `esx-06a` is `NSX Installed`, and that `NSX Manager Connectivity` is `Up` for each host as shown in the screenshots below.
-
-<details><summary>Screenshot 4.11.1</summary>
-<img src="Images/2019-07-13-02-23-56.png">
-</details>
-
-<details><summary>Screenshot 4.11.2</summary>
-<img src="Images/2019-07-13-02-14-14.png">
-</details>
-
-<details><summary>Screenshot 4.11.3</summary>
-<img src="Images/2019-07-13-02-24-53.png">
-</details>
-
-<details><summary>Screenshot 4.11.4</summary>
-<img src="Images/2019-07-13-02-31-58.png">
-</details>
-<br>
-
- 4.12 On the `Select Transport Zone East-West` screen set the value for `Overlay Transport Zone` to `overlay-tz` and click `Next`
-
-<details><summary>Screenshot 4.12</summary>
-<img src="Images/2019-07-13-02-32-37.png">
-</details>
-<br/>
-
- 4.13 On the `Select Uplink Profile East-West` screen, set the value for `Select Uplink Profile` to `nsx-default-uplink-hostswitch-profile` and click `Next`
-
-<details><summary>Screenshot 4.13</summary>
-<img src="Images/2019-07-13-02-33-17.png">
-</details>
-<br/>
-
- 4.14 On the `Link to Transport Zone East-West` screen, set the value for `Assignment IP Address` to `Use IP Pool` and set the value for `IP Pool` to `tep-ip-pool`
-
-<details><summary>Screenshot 4.14</summary>
-<img src="Images/2019-07-13-02-21-31.png">
-</details>
-<br/>
-
- 4.15 On the `Link to Transport Zone East-West` screen, in the `Host NIC Connections` section, set the value for `vmnic1` to `uplink-1` and click `Next`
-
-<details><summary>Screenshot 4.15</summary>
-<img src="Images/2019-07-13-02-22-12.png">
-</details>
-<br/>
-
- 4.16 On the `Review` screen, click `Finish`
-
-<details><summary>Screenshot 4.16</summary>
-<img src="Images/2019-07-13-02-22-39.png">
-</details>
-<br/>
-
- 4.17 On the `System` tab in NSX Manager UI, In the left navigation bar expand the `Fabric` section and select `Nodes`. Select the `Host Transport Nodes` tab, set the `Managed by` field to `vcsa-01a`, expand the `RegionA01-MGMT01` and `RegionA01-COMP01` sections and ensure the `Configuration State` is `Success` and the `Node Status` is `Up` for all of the hosts
-
-<details><summary>Screenshot 4.17</summary>
-<img src="Images/2019-07-13-02-42-10.png">
-</details>
-<br/>
-
 
 ***End of lab***
