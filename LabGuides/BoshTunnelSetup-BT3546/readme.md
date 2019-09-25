@@ -61,44 +61,32 @@ Note: You should skip this step if you can already ssh from the cli-vm into the 
 
 ## Step 2: Install the bosh cli
 
-In this step, you create a connection between the NSX manager and your vCenter. This enables NSX manager to deploy VIBs to the hosts, controller and edge VMs, etc.
+This step is to make sure that the bosh cli binary is installed in the `cli-vm`.
 
- 2.1 Click anywhere on the screen to skip the "Welcome to NSX-T" Screen, click on the `System` tab and then on the left navigation bar Click `Fabric`, and then click `Compute Managers`
+ 2.1 From the `cli-vm`, run `bosh --version`.  If the bosh cli binary is installed, then you'll get the version number info, and if so, you can proceed to step 3.
 
 <details><summary>Screenshot 2.1</summary>
-<img src="Images/2019-08-12-23-36-45.png">
+<img src="Images/2019-09-25-14-51-53.png">
 </details>
 <br/>
 
- 2.2 Click on **Add** and Configure the New Compute Manager form with following values:
+ 2.2 If you don't have the bosh cli binary installed, then download from github by running `wget https://github.com/cloudfoundry/bosh-cli/releases/download/v5.5.1/bosh-cli-5.5.1-linux-amd64`
 
-- Name: `vcsa-01a`
-- Domain Name/IP Address: `vcsa-01a.corp.local`
-- Type: `vCenter`
-- Username: `administrator@corp.local`
-- Password: `VMware1!`
-- Clcik **Add**
-- Click **Add** again to accept the vCenter certificate thumbprint
-
-_NOTE: in a production implementation, you would first copy the vCenter thumbprint and then provide it in the form to properly authenticate the intial connection._
-
-<details><summary>Screenshot 2.2.1</summary>
-<img src="Images/2019-08-12-23-37-30.png">
-</details>
-
-<details><summary>Screenshot 2.2.2</summary>
-<img src="Images/2018-12-13-16-17-18.png">
+<details><summary>Screenshot 2.2</summary>
+<img src="Images/2019-09-25-14-55-35.png">
 </details>
 <br/>
 
- 2.3 Click **Refresh** in the lower-left hand corner and verify the Compute Manager is `Registered` and `Up`
+ 2.3 Copy the bosh cli binary into `/usr/local/bin/` with file name as `bosh`.  You can run the following commands to copy the binary and make it executable, and verify bosh version.
 
-<details><summary>Screenshot 2.3.1</summary>
-<img src="Images/2018-12-16-16-54-09.png">
-</details>
+```
+cp bosh-cli-5.5.1-linux-amd64 /usr/local/bin/bosh
+chmod 755 /usr/local/bin/bosh
+bosh --version
+```
 
-<details><summary>Screenshot 2.3.2</summary>
-<img src="Images/2019-08-12-23-38-16.png">
+<details><summary>Screenshot 2.3</summary>
+<img src="Images/2019-09-25-14-59-13.png">
 </details>
 <br/>
 
