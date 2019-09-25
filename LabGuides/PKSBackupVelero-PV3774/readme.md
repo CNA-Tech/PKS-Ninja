@@ -43,9 +43,9 @@
 ## Prerequisites
 
 - Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
-- PKS Install (https://github.com/riazvm/PKS-Ninja/tree/master/LabGuides/PksInstallPhase2-IN1916)
-- PKS Cluster (https://github.com/riazvm/PKS-Ninja/tree/master/LabGuides/DeployFirstCluster-DC1610)
-- Planespotter Application (https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/BonusLabs/Deploy%20Planespotter%20Lab)
+- Complete PKS Install Lab [Phase 1](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksInstallPhase1-IN3138) and [Phase 2](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksInstallPhase2-IN1916)
+- Deploy Your [First PKS Cluster](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployFirstCluster-DC1610)
+- Deploy the [Planespotter Application](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployPlanespotter-DP6539)
 
 ## Installation Notes
 
@@ -53,7 +53,7 @@ Anyone who implements any software used in this lab must provide their own licen
 
 For those needing access to VMware licensing for lab and educational purposes, we recommend contacting your VMware account team. Also, the [VMware User Group's VMUG Advantage Program](https://www.vmug.com/Join/VMUG-Advantage-Membership) provides a low-cost method of gaining access to VMware licenses for evaluation purposes.
 
-This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.3 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T/2.2/com.vmware.nsxt.install.doc/GUID-3E0C4CEC-D593-4395-84C4-150CD6285963.html)
+This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.4 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/installation/GUID-3E0C4CEC-D593-4395-84C4-150CD6285963.html)
 
 ### Overview of Tasks Covered in Lab 1
 Take a backup of the planespotter namespace
@@ -71,32 +71,33 @@ Restore the planespotter namespace
 
 ## Step 1:  Download official release of Heptio Velero
 
-1.1 Navigate to the official release of the Heptio Velero release page (https://github.com/heptio/velero/releases) and copy the link for the target VM OS (Eg. https://github.com/heptio/velero/releases/download/<release>/velero-<release>-linux-amd64.tar.gz) Right click on the release link `Copy Link Address'
+1.1 Navigate to the official release of the Heptio Velero release page (https://github.com/heptio/velero/releases) and copy the link for the target VM OS. Right click on the release link and select `Copy Link Address'. We are looking for `velero-v1.1.0-linux-amd64.tar.gz` to install on the `cli-vm`
 
 <Details><Summary>Screenshot 1.1</Summary>
 <img src="Images/HeptioCopyLinkAddress.png">
 </Details>
 <br/>
 
-1.2 ssh to the cli-vm and download and uncompress the Velero distribution 
+1.2 ssh to the cli-vm and download and uncompress the Velero distribution and move the velero binary into your PATH:
   
 ```bash
 mkdir velero
 cd ~/velero
-wget https://github.com/heptio/velero/releases/download/v1.0.0-alpha.1/velero-v1.0.0-alpha.1-linux-amd64.tar.gz
-tar xvf velero-v1.0.0-alpha.1-linux-amd64.tar.gz
+wget https://github.com/heptio/velero/releases/download/v1.1.0/velero-v1.1.0-linux-amd64.tar.gz
+tar xvf velero-v1.1.0-linux-amd64.tar.gz
+sudo mv velero-v1.1.0-linux-amd64/velero /usr/bin/velero
 ```
 
 ## Step 2:  Validate the planespotter app
 
-2.1 Login to pks witht he command , when prompted use the password as VMware1!
+2.1 Login to the PKS API with the following command, when prompted use the password `VMware1!`:
 
 ```bash
 pks login -a pks.corp.local -u pksadmin --skip-ssl-validation
 ```
 
 
-2.2 Pull down the kubernetes config and credentials for my-cluster with the command 
+2.2 Pull down the kubernetes config and credentials for `my-cluster` with the follwoing command: 
 
 ```bash
 pks get-credentials my-cluster
@@ -112,22 +113,16 @@ kubectl get services --namespace planespotter
 
 ## Step 3:  Setup Velero
 
-3.1 Set up prerequisites necessary to run the Velero server
-- `velero` namespace
-- `velero` service account
-- RBAC rules to grant permissions to the `velero` service account
-- CRDs for the Velero-specific resources (Backup, Schedule, Restore, etc.)
+3.1 The first thing you'll need to do is configure a namespace that `velero` will operate in:
 
 ```bash
-cd  ~/velero/config/common/
+kubectl create namespace velero
+``` 
 
-kubectl apply -f 00-prereqs.yaml
-```
-
-3.2 Create a Storage Class. Create a 000-storage-class.yaml file and copy the below contents into it, save and exit. 
+3.2 Create a Storage Class that will allow the `velero` service to create persistent volume claims. First, create a `000-storage-class.yaml` file and copy the below contents into it, save and exit. After saving the file, use `kubectl` to create the storage class resource:
 
 ```bash
-cd  ~/velero/config/minio/
+cd  ~/velero
 
 nano 000-storage-class.yaml
 ```
@@ -153,7 +148,7 @@ kubectl apply -f 000-storage-class.yaml
 
 ```
 
-3.3 Create a Persistent Volume Claim . Create a 001-velero-pvc.yaml file and copy the below contents into it, save and exit. 
+3.3 Create a Persistent Volume Claim that will be used by the `velero` service for backups. First, create the ` 001-velero-pvc.yaml` file and copy the below contents into it, save and exit. After saving the file, use `kubectl` to create the PVC:
 
 ```bash
 nano 001-velero-pvc.yaml
@@ -195,7 +190,7 @@ kubectl apply -f 001-velero-pvc.yaml
 </details>
 <br/>
 
-3.5 Edit the 00-minio-deployment.yaml to change the storage to add the persistentvolume created in the previous step. The change is the below
+3.5 Edit the file at `~/velero/velero-v1.1.0-linux-amd64/examples/minio/00-minio-deployment.yaml` to ensure the Minio service uses the persistentvolume created in the previous step. The change is the below (as well as an example of the entire `00-minio-deployment.yaml` file):
 
       - name: storage
         persistentVolumeClaim:
@@ -343,26 +338,25 @@ spec:
 </details>
 <br/>
 
-3.6 Deploy minio
+3.6 After adding the reference to the PVC, deploy the Minio service with the following command:
 
 
 ```bash
-kubectl apply -f 00-minio-deployment.yaml
+kubectl apply -f ~/velero/velero-v1.1.0-linux-amd64/examples/minio/00-minio-deployment.yaml
 
 ```
 
-3.7 Expose the minio with the following command
+3.7 Expose the minio service with the following command:
 
 ```bash
 kubectl expose deployment minio --name=velero-minio-lb --port=9000 --target-port=9000 --type=LoadBalancer --namespace=velero
 
 ```
 
-3.8 Check the external URL/IP address assigned to the service (make note of the first IP addres under External-IP).
+3.8 Check the external URL/IP address assigned to the service (make note of the first IP addres under External-IP):
 
 ```bash
 kubectl get service velero-minio-lb -n velero
-
 ```
 
 3.9 Copy the IP under the "External-IP" section . Point your browser to that location <external-ip>:9000. You should be able to view the minio browser
@@ -372,93 +366,76 @@ kubectl get service velero-minio-lb -n velero
 </details>
 <br/>
 
-
-3.10 Deploy Velero
-
+3.10 Now that we've configured the minio service, we are almost ready to install Velero. First, we need to create a `credentials-velero` file that the Velero installer will use to connect to the minio service:
 
 ```bash
-kubectl apply -f 20-deployment.yaml
+nano ~/velero/credentials-velero
 
 ```
+```bash
+[default]
+aws_access_key_id = minio
+aws_secret_access_key = minio123
+```
 
-3.11 Deploy Restic
+3.11 The `velero install` command will create CRDs (Custom Resource Definintions) that Velero uses to perform its magic. Run the following install command to deploy Velero in your cluster:
 
+**Note**: Replace the `<public-ip-minio-service>` value with the IP address from the minio service `LoadBalancer` address from step 3.8
 
 ```bash
-kubectl apply -f 30-restic-daemonset.yaml
-
+velero install  --provider aws --bucket velero --secret-file credentials-velero --use-volume-snapshots=false --use-restic --backup-location-config region=minio,s3ForcePathStyle="true",s3Url=http://minio.velero.svc:9000,publicUrl=http://<public-ip-minio-service>:9000
 ```
-
-
-3.12 Edit the 05-backupstoragelocation.yaml to change the storage to add the persistentvolume created in the previous step. The change is the below
-
-      Uncomment  # publicUrl: https://minio.mycluster.com
-      and change the url to the http://<external-ip>:9000 . External IP from 3.8 .
-      Note http and not https
-
-
-
-<details><summary>05-backupstoragelocation.yaml</summary>
-
-```yaml
-# Copyright 2018 the Velero contributors.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
----
-apiVersion: velero.io/v1
-kind: BackupStorageLocation
-metadata:
-  name: default
-  namespace: velero
-spec:
-  provider: aws
-  objectStorage:
-    bucket: velero
-  config:
-    region: minio
-    s3ForcePathStyle: "true"
-    s3Url: http://minio.velero.svc:9000
-    # Uncomment the following line and provide the value of an externally
-    # available URL for downloading logs, running Velero describe, and more.
-    publicUrl: http://10.40.14.44:9000
-
-
-```
-
+<details><summary>Screenshot 3.11</summary>
+<img src="Images/<new-image>.png">
 </details>
 <br/>
 
-3.13 Deploy BackupStorageLocation
-
+3.12 Verify the following pods have been created in the `velero` namespace(notice the error for the `restic` pods):
 
 ```bash
-kubectl apply -f 05-backupstoragelocation.yaml
+kubectl get pod -n velero
+NAME                      READY   STATUS              RESTARTS   AGE
+minio-68f65f4cc6-j686d    1/1     Running             0          14m
+minio-setup-4r7md         0/1     Completed           0          14m
+restic-sl57t              0/1     RunContainerError   0          37s
+restic-vh9rx              0/1     RunContainerError   1          37s
+velero-5cc55f7ff6-xwcnn   1/1     Running             0          37s
+```
+3.13 As mentioned above, the `restic` pods are not able to start. That is because in Enterprise PKS Kubernetes clusters, the path to the pods on the nodes is a little different (`/var/vcap/data/kubelet/pods`) than in "vanilla" Kubernetes clusters (`/var/lib/kubelet/pods`). In order for us to allow the restic pods to run as expected, we need to edit the `restic` daemon set and change the `hostPath` variable as referenced below:
 
+```bash
+
+volumes:
+      - hostPath:
+          path: /var/vcap/data/kubelet/pods
+          type: ""
+        name: host-pods
 ```
 
+3.14 Verify the restic pods are in the `Running` state after the change:
 
+```bash
+kubectl get pods -n velero
+NAME                      READY   STATUS      RESTARTS   AGE
+minio-68f65f4cc6-j686d    1/1     Running     0          35m
+minio-setup-4r7md         0/1     Completed   0          35m
+restic-45hbc              1/1     Running     0          32s
+restic-ndpb9              1/1     Running     0          32s
+velero-5cc55f7ff6-xwcnn   1/1     Running     0          20m
+~~~
+
+Great! Now we're ready to back up our app!
 
 ## Step 4:  Backup
 
-4.1 Point your browser to that location <external-ip>:9000. You should be able to view the minio browser. Login as Access Key as minio and Secret Key as minio123
+4.1 Point your browser to that location <external-ip>:9000. You should be able to view the minio browser. Login with Access Key as `minio` and Secret Key as `minio123`:
 
 <Details><Summary>Screenshot 4.1</Summary>
 <img src="Images/miniologin.png">
 </Details>
 <br/>
 
-4.2 SSH into cli-vm 
+4.2 Navigate back to the `cli-vm` putty session and ensure you are in the `~/velero` directory:
   
 ```bash
 
