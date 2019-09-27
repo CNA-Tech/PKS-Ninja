@@ -73,7 +73,7 @@ Restore the planespotter namespace
 </Details>
 <br/>
 
-1.2 ssh to the cli-vm and download and uncompress the Velero distribution and move the velero binary into your PATH:
+1.2 ssh to the `cli-vm`, download and uncompress the Velero distribution and move the `velero` binary into your `PATH`:
   
 ```bash
 mkdir velero
@@ -98,7 +98,9 @@ pks login -a pks.corp.local -u pksadmin --skip-ssl-validation
 pks get-credentials my-cluster
 ```
 
-2.3 Verify all the pods needed for the planespotter app - front-end, redis, DBC Sync services and App server (7 total) have been deployed and have entered Running state
+2.3 Verify all the pods needed for the planespotter app (`planespotter-frontend`, `planespotter-app`, `redis`, `adsb-sync`, and `mysql-0`, 7 pods in total) have been deployed and have entered `Running` state.
+
+**Note**: If you have not deployed the planespotter app, please refer to the [Planespotter Application](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployPlanespotter-DP6539) lab to deploy the application with persistent storage.
 
 ```bash
 kubectl get pods --namespace planespotter
@@ -354,7 +356,7 @@ kubectl expose deployment minio --name=velero-minio-lb --port=9000 --target-port
 kubectl get service velero-minio-lb -n velero
 ```
 
-3.9 Copy the IP under the `External-IP` section . Point your browser to that location (`<external-ip>:9000`). You should be able to view the minio browser:
+3.9 Copy the IP under the `External-IP` section . Point your browser to that location on port `9000` (`<external-ip>:9000`). You should be able to view the minio browser:
 
 <details><summary>Screenshot 3.9</summary>
 <img src="Images/minio.png">
@@ -417,13 +419,13 @@ minio-setup-4r7md         0/1     Completed   0          35m
 restic-45hbc              1/1     Running     0          32s
 restic-ndpb9              1/1     Running     0          32s
 velero-5cc55f7ff6-xwcnn   1/1     Running     0          20m
-~~~
+```
 
 Great! Now we're ready to back up our app!
 
 ## Step 4:  Backup
 
-4.1 Point your browser to that location (`<external-ip>:9000). You should be able to view the minio browser. Login with Access Key as `minio` and Secret Key as `minio123`:
+4.1 Refer back to the browser window where you accessed the Minio web UI (`<external-ip>:9000`) and login with Access Key as `minio` and Secret Key as `minio123`:
 
 <Details><Summary>Screenshot 4.1</Summary>
 <img src="Images/miniologin.png">
@@ -438,7 +440,7 @@ cd ~/velero
 
 ```
 
-4.3 Since our planespotter app is using a mysql pod that it utilizing persistent storage, we need to annotate the `mysql-0` pod so the velero service understand it needs to include those volumes in the backup we will run shortly. Run the following to annotate the `mysql-0` pod that contains a volume to back up
+4.3 Since our planespotter app is using a `mysql` pod that is utilizing persistent storage, we need to annotate the `mysql-0` pod so the Velero service understand it needs to include those volumes in the backup we will run shortly. Run the following to annotate the `mysql-0` as required for Velero to back up the associated volumes:
    
 ```bash
 
@@ -604,4 +606,4 @@ kubectl get pv
 </Details>
 <br/>
 
-Congrats! You have succesfully deployed the Velero app in your cluster as well as simulating a DR scenario by using Velero to restore a failed/deleted application!
+**Congrats! You have succesfully deployed the Velero app in your cluster as well as simulating a DR scenario by using Velero to restore a failed/deleted application!**
