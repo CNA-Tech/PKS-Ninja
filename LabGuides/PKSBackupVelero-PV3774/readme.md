@@ -2,43 +2,38 @@
 
 ## Overview
 
-### Heptio Velero
- - Heptio Velero (formerly Heptio Ark) gives you tools to back up and restore your Kubernetes cluster resources and persistent volumes. 
+### Velero
+Velero (formerly Heptio Ark) gives you tools to back up and restore your Kubernetes cluster resources and persistent volumes. 
 
- - Velero Feature
-   Take backups of your cluster and restore in case of loss.
-   Copy cluster resources to other clusters.
-   Backup and restore PV's
-   Scheduled Backups
-   Replicate your production environment for development and testing environments.
-   Filtering (namespaces, resources, label selectors)
-   Restore into different namespaces
+- Velero Features:
+  * Take backups of your cluster and restore in case of loss.
+  * Copy cluster resources to other clusters.
+  * Backup and restore persistent volumes
+  * Scheduled backups
+  * Replicate your production environment for development and testing environments.
+  * Filtering (namespaces, resources, label selectors)
+  * Restore into different namespaces
 
 - Velero Extensibility
-  Hooks
-  Plugins
+  * Hooks
+  * Plugins
 
 - Velero consists of:
-  A server that runs on your cluster
-  A command-line client that runs locally
+  * A server that runs on your cluster
+  * A command-line client that runs locally
 
 ### Persistent Volumes 
-  In this sample , Velero leverages vSphere Storage for Kubernetes to allow Minio to use enterprise grade persistent storage to store the backup.
-  Persistent volumes requested by stateful containerized applications can be provisioned on vSAN, iSCSI, VVol, VMFS or NFS datastores.
 
-  Kubernetes volumes are defined in Pod specifications. They reference VMDK files and these VMDK files are mounted as volumes when the container is running. When the Pod is deleted the Kubernetes volume is unmounted and the data in VMDK files persists.
+In this sample , Velero leverages vSphere Storage for Kubernetes to allow Minio to use enterprise grade persistent storage to store the backup. Persistent volumes requested by stateful containerized applications can be provisioned on vSAN, iSCSI, VVol, VMFS or NFS datastores. PKS deploys Kubernetes clusters with the vSphere Cloud (Storage) Provider already configured. 
+
+Kubernetes volumes are defined in Pod specifications. They reference VMDK files and these VMDK files are mounted as volumes when the container is running. When the Pod is deleted the Kubernetes volume is unmounted and the data in VMDK files persists.
   
-  PKS deploys Kubernetes clusters with the vSphere storage provider already configured. 
 
-  In order to use Persistent Volumes (PV) the user needs to create a PersistentVolumeClaim(PVC) which is nothing but a request for PVs. A claim must specify the access mode and storage capacity, once a claim is created PV is automatically bound to this claim. Kubernetes will bind a PV to PVC based on access mode and storage capacity but a claim can also mention volume name, selectors and volume class for a better match. This design of PV-PVCs not only abstracts storage provisioning and consumption but also ensures security through access control.
+In order to use Persistent Volumes (PV), the user needs to create a `PersistentVolumeClaim`(PVC) which is a request for PVs. A claim must specify the access mode and storage capacity. Once a claim is created, a PV is automatically bound to this claim. Kubernetes will bind a PV to PVC based on access mode and storage capacity but a claim can also mention volume name, selectors and volume class for a better match. The relationship of PVs and PVCs not only abstracts storage provisioning and consumption but also ensures security through access control.
 
-  Static Persistent Volumes require that a vSphere administrator manually create a (virtual disk) VMDK on a datastore, then create a Persistent Volume that abstracts the VMDK. A developer would then make use of the volume by specifying a Persistent Volume Claim.
+Static Persistent Volumes require that a vSphere administrator manually create a (virtual disk) VMDK on a datastore, then create a Persistent Volume that abstracts the VMDK. A developer would then make use of the volume by specifying a Persistent Volume Claim.
 
-  Dynamic Volume Provisioning
-  With PV and PVCs one can only provision storage statically i.e. PVs first needs to be created before a Pod claims it. However, with the StorageClass API Kubernetes enables dynamic volume provisioning. This avoids pre-provisioning of storage and storage is provisioned automatically when a user requests it. The VMDK's are also cleaned up when the Persistent Volume Claim is removed.
-
-  The StorageClass API object specifies a provisioner and parameters which are used to decide which volume plugin should be used and which provisioner specific parameters to configure.
-
+The vSphere Cloud (Storage) Provider allows for Dynamic Persistent Volume provisioning, meaning a vSphere admin doens't have to manually create storage resources to support the developers' Kubernetes workloads. Kubernetes `StorageClasses` allow the creation of Persistent Volumes on-demand without having to create storage and mount it into K8s nodes upfront. `StorageClasses` specifiy a provisioner and parameters which are used to define the intended policy for a Persistent Volume which will be dynamically provisioned.
 
 ## Prerequisites
 
@@ -71,10 +66,10 @@ Restore the planespotter namespace
 
 ## Step 1:  Download official release of Heptio Velero
 
-1.1 Navigate to the official release of the Heptio Velero release page (https://github.com/heptio/velero/releases) and copy the link for the target VM OS. Right click on the release link and select `Copy Link Address'. We are looking for `velero-v1.1.0-linux-amd64.tar.gz` to install on the `cli-vm`
+1.1 Navigate to the official release of the Heptio Velero release page (https://github.com/heptio/velero/releases) and copy the link for the target VM OS. Right click on the release link and select `Copy Link Address`. We are looking for `velero-v1.1.0-linux-amd64.tar.gz` to install on the `cli-vm`:
 
 <Details><Summary>Screenshot 1.1</Summary>
-<img src="Images/HeptioCopyLinkAddress.png">
+<img src="Images/new-image">
 </Details>
 <br/>
 
@@ -113,7 +108,7 @@ kubectl get services --namespace planespotter
 
 ## Step 3:  Setup Velero
 
-3.1 The first thing you'll need to do is configure a namespace that `velero` will operate in:
+3.1 The first thing you'll need to do is configure a namespace that the `velero` service will operate in:
 
 ```bash
 kubectl create namespace velero
@@ -353,20 +348,20 @@ kubectl expose deployment minio --name=velero-minio-lb --port=9000 --target-port
 
 ```
 
-3.8 Check the external URL/IP address assigned to the service (make note of the first IP addres under External-IP):
+3.8 Check the external IP address assigned to the service (make note of the first IP addres under `External-IP`):
 
 ```bash
 kubectl get service velero-minio-lb -n velero
 ```
 
-3.9 Copy the IP under the "External-IP" section . Point your browser to that location <external-ip>:9000. You should be able to view the minio browser
+3.9 Copy the IP under the `External-IP` section . Point your browser to that location (`<external-ip>:9000`). You should be able to view the minio browser:
 
-<details><summary>Screenshot 3.8</summary>
+<details><summary>Screenshot 3.9</summary>
 <img src="Images/minio.png">
 </details>
 <br/>
 
-3.10 Now that we've configured the minio service, we are almost ready to install Velero. First, we need to create a `credentials-velero` file that the Velero installer will use to connect to the minio service:
+3.10 Now that we've configured the minio service, we are almost ready to install Velero. First, we need to create a `credentials-velero` file that the Velero installer will use to connect to the minio service to store the subsequent backups:
 
 ```bash
 nano ~/velero/credentials-velero
@@ -401,7 +396,7 @@ restic-sl57t              0/1     RunContainerError   0          37s
 restic-vh9rx              0/1     RunContainerError   1          37s
 velero-5cc55f7ff6-xwcnn   1/1     Running             0          37s
 ```
-3.13 As mentioned above, the `restic` pods are not able to start. That is because in Enterprise PKS Kubernetes clusters, the path to the pods on the nodes is a little different (`/var/vcap/data/kubelet/pods`) than in "vanilla" Kubernetes clusters (`/var/lib/kubelet/pods`). In order for us to allow the restic pods to run as expected, we need to edit the `restic` daemon set and change the `hostPath` variable as referenced below:
+3.13 As mentioned above, the `restic` pods are not able to start. That is because in Enterprise PKS Kubernetes clusters, the path to the pods on the nodes is a little different (`/var/vcap/data/kubelet/pods`) than in "vanilla" Kubernetes clusters (`/var/lib/kubelet/pods`). In order for us to allow the `restic` pods to run as expected, we need to edit the `restic` daemon set and change the `hostPath` variable as referenced below:
 
 ```bash
 
@@ -412,7 +407,7 @@ volumes:
         name: host-pods
 ```
 
-3.14 Verify the restic pods are in the `Running` state after the change:
+3.14 Verify the `restic` pods are in the `Running` state after the change:
 
 ```bash
 kubectl get pods -n velero
@@ -428,7 +423,7 @@ Great! Now we're ready to back up our app!
 
 ## Step 4:  Backup
 
-4.1 Point your browser to that location <external-ip>:9000. You should be able to view the minio browser. Login with Access Key as `minio` and Secret Key as `minio123`:
+4.1 Point your browser to that location (`<external-ip>:9000). You should be able to view the minio browser. Login with Access Key as `minio` and Secret Key as `minio123`:
 
 <Details><Summary>Screenshot 4.1</Summary>
 <img src="Images/miniologin.png">
