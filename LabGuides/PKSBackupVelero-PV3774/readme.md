@@ -55,7 +55,7 @@ Take a backup of the planespotter namespace
 Delete the planespotter app
 Restore the planespotter namespace
 
-- [Step 1: Download official release of Heptio Velero](#step-1--download-official-release-of-Heptio-Velero)
+- [Step 1: Download official release of Velero 1.1](#step-1--download-official-release-of-Heptio-Velero)
 - [Step 2: Validate the planespotter app](#step-2--Validate-the-planespotter-app)
 - [Step 3: Setup Velero](#step-3--Setup-Velero)
 - [Step 4: Backup](#step-4--Backup)
@@ -69,7 +69,7 @@ Restore the planespotter namespace
 1.1 Navigate to the official release of the Heptio Velero release page (https://github.com/heptio/velero/releases) and copy the link for the target VM OS. Right click on the release link and select `Copy Link Address`. We are looking for `velero-v1.1.0-linux-amd64.tar.gz` to install on the `cli-vm`:
 
 <Details><Summary>Screenshot 1.1</Summary>
-<img src="Images/new-image">
+<img src="Images/velero-download.png">
 </Details>
 <br/>
 
@@ -381,7 +381,7 @@ aws_secret_access_key = minio123
 velero install  --provider aws --bucket velero --secret-file credentials-velero --use-volume-snapshots=false --use-restic --backup-location-config region=minio,s3ForcePathStyle="true",s3Url=http://minio.velero.svc:9000,publicUrl=http://<public-ip-minio-service>:9000
 ```
 <details><summary>Screenshot 3.11</summary>
-<img src="Images/<new-image>.png">
+<img src="Images/velero-install.png">
 </details>
 <br/>
 
