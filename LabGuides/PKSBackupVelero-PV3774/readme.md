@@ -348,20 +348,20 @@ kubectl expose deployment minio --name=velero-minio-lb --port=9000 --target-port
 
 ```
 
-3.8 Check the external URL/IP address assigned to the service (make note of the first IP addres under External-IP):
+3.8 Check the external IP address assigned to the service (make note of the first IP addres under `External-IP`):
 
 ```bash
 kubectl get service velero-minio-lb -n velero
 ```
 
-3.9 Copy the IP under the "External-IP" section . Point your browser to that location <external-ip>:9000. You should be able to view the minio browser
+3.9 Copy the IP under the `External-IP` section . Point your browser to that location (`<external-ip>:9000`). You should be able to view the minio browser:
 
-<details><summary>Screenshot 3.8</summary>
+<details><summary>Screenshot 3.9</summary>
 <img src="Images/minio.png">
 </details>
 <br/>
 
-3.10 Now that we've configured the minio service, we are almost ready to install Velero. First, we need to create a `credentials-velero` file that the Velero installer will use to connect to the minio service:
+3.10 Now that we've configured the minio service, we are almost ready to install Velero. First, we need to create a `credentials-velero` file that the Velero installer will use to connect to the minio service to store the subsequent backups:
 
 ```bash
 nano ~/velero/credentials-velero
@@ -396,7 +396,7 @@ restic-sl57t              0/1     RunContainerError   0          37s
 restic-vh9rx              0/1     RunContainerError   1          37s
 velero-5cc55f7ff6-xwcnn   1/1     Running             0          37s
 ```
-3.13 As mentioned above, the `restic` pods are not able to start. That is because in Enterprise PKS Kubernetes clusters, the path to the pods on the nodes is a little different (`/var/vcap/data/kubelet/pods`) than in "vanilla" Kubernetes clusters (`/var/lib/kubelet/pods`). In order for us to allow the restic pods to run as expected, we need to edit the `restic` daemon set and change the `hostPath` variable as referenced below:
+3.13 As mentioned above, the `restic` pods are not able to start. That is because in Enterprise PKS Kubernetes clusters, the path to the pods on the nodes is a little different (`/var/vcap/data/kubelet/pods`) than in "vanilla" Kubernetes clusters (`/var/lib/kubelet/pods`). In order for us to allow the `restic` pods to run as expected, we need to edit the `restic` daemon set and change the `hostPath` variable as referenced below:
 
 ```bash
 
@@ -407,7 +407,7 @@ volumes:
         name: host-pods
 ```
 
-3.14 Verify the restic pods are in the `Running` state after the change:
+3.14 Verify the `restic` pods are in the `Running` state after the change:
 
 ```bash
 kubectl get pods -n velero
@@ -423,7 +423,7 @@ Great! Now we're ready to back up our app!
 
 ## Step 4:  Backup
 
-4.1 Point your browser to that location <external-ip>:9000. You should be able to view the minio browser. Login with Access Key as `minio` and Secret Key as `minio123`:
+4.1 Point your browser to that location (`<external-ip>:9000). You should be able to view the minio browser. Login with Access Key as `minio` and Secret Key as `minio123`:
 
 <Details><Summary>Screenshot 4.1</Summary>
 <img src="Images/miniologin.png">
