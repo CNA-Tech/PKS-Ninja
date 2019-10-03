@@ -399,7 +399,9 @@ restic-vh9rx              0/1     RunContainerError   1          37s
 velero-5cc55f7ff6-xwcnn   1/1     Running             0          37s
 ```
 3.13 As mentioned above, the `restic` pods are not able to start. That is because in Enterprise PKS Kubernetes clusters, the path to the pods on the nodes is a little different (`/var/vcap/data/kubelet/pods`) than in "vanilla" Kubernetes clusters (`/var/lib/kubelet/pods`). In order for us to allow the `restic` pods to run as expected, we need to edit the `restic` daemon set and change the `hostPath` variable as referenced below:
-
+~~~
+$ kubectl edit daemonset restic -n velero
+~~~
 ```bash
 
 volumes:
