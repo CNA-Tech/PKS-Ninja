@@ -20,6 +20,7 @@
 - [PKS Troubleshooting](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksTroubleshooting-PT8251)
 - [PKS Control Plane and BOSH](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksControlPlaneBosh-CP3546)
 - [Deploy Planespotter](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DeployPlanespotter-DP6539)
+- [Backup and Restore with Velero](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PKSBackupVelero-PV3774)
 - [Kubernetes Replicasets](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/K8SReplicaSets-KR7417)
 - [Creating Your Student Folder](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/CreateStudentFolder-SF6361)
 - [Building your DevOps Workstation](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/DevopsWorkstation-DW5008)
