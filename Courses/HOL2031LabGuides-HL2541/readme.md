@@ -26,7 +26,9 @@ Below Please find a list of Lab Guides that are verified as compatible with HOL-
 
 - [Access First Cluster](../../LabGuides/AccessFirstCluster-AC6818)
 - [Deploy Planespotter](../../LabGuides/DeployPlanespotter-DP6539)
-- [VMUG Docker 101 Lab](../../LabGuides/VMUGDocker101-VG5930)
-- [VMUG K8s 101 Lab](../../LabGuides/VMUGK8s101-VG6489)
+- [VMUG PKS 1 Day Training Class](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/VMUGPKS1Day-VG6055)
+    - [VMUG Docker 101 Lab](../../LabGuides/VMUGDocker101-VG5930)
+    - [VMUG Kubernetes 101 Lab](../../LabGuides/VMUGK8s101-VG6489)
+    - [VMUG PKS 101 Lab](../../LabGuides/VMUGPKS101-VG6922)
 
 

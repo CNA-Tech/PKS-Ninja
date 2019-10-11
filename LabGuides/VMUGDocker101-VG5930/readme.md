@@ -9,7 +9,7 @@ In this lab you will learn some basic commands of Docker to help you understand 
 
 ## Getting Started with Docker
 
-**HOL-2031 Users, Please Complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) before proceeding**
+**HOL-2031 Users, Please Complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) before proceeding. Please note you will not be able to browse the internet from the HOL-2031 lab environment, if any steps require you to browse a public internet site, you will need to do so from a seperate browser tab from your local machine, outside of the HOL lab environment. If there are any steps that require you to download an external file, please follow the instructions provided**
 
 **All v12 templates must complete all steps in the [Enable Harbor Client Secure Connections Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212) before proceeding**
 
@@ -21,7 +21,7 @@ Let's clone a repository that will contain all the code for your labs
 
 ```Bash
 cd /home/ubuntu
-git clone https://github.com/CNA-Tech/PKS-Lab.git
+git clone http://gitmir.cloudnativeapps.ninja/CNA-Tech/PKS-Lab.git
 ```
 
 You can browse the the repository by changing into the directory or by [visiting the site](https://github.com/CNA-Tech/PKS-Lab/). 
@@ -30,7 +30,7 @@ Let's start with running a simple container from the PKS Ninja Labs public harbo
 
 Run the following command:
 
-`sudo docker run -dit --name my_container 35.209.26.28/library/alpine ash`
+`sudo docker run -dit --name my_container harbor.cloudnativeapps.ninja/library/alpine ash`
 
 Enter the password `VMware1!` when prompted. 
 
@@ -40,11 +40,11 @@ This will start a container called my_container running the alpine image with it
 
 `--name : name of container for easy reference`
 
-`35.209.26.28/library/alpine : the image tag, which is made up of the server ip address (35.209.206.28), project folder (library) and the image name (alpine)`
+`harbor.cloudnativeapps.ninja/library/alpine : the image tag, which is made up of the container registry server ip address (harbor.cloudnativeapps.ninja), project folder (library) and the image name (alpine)`
 
 `ash : parameter to tell it to start the ash shell which gives us the potential of interactivity`
 
- Note: Alternatively, from any standard docker host with access to docker hub, you could run the command `sudo docker run -dit --name my_container alpine ash` which as you can see does not specify the location of the alpine image. This results in searching [docker hub](hub.docker.com) for the image, which is the default image repository for standard docker engine installations. The HOL-2031 lab environment has restricted internet access and so it will need to access the image from the PKS Ninja Labs public Harbor registry at 35.209.26.28. 
+ Note: Alternatively, from any standard docker host with access to docker hub, you could run the command `sudo docker run -dit --name my_container alpine ash` which as you can see does not specify the location of the alpine image. This results in searching [docker hub](hub.docker.com) for the image, which is the default image repository for standard docker engine installations. The HOL-2031 lab environment has restricted internet access and so it will need to access the image from the PKS Ninja Labs public Harbor registry at harbor.cloudnativeapps.ninja 
 
 We can see it as running and get it's container ID with the following command
 
@@ -114,7 +114,7 @@ You can restart the container with `docker start my_container` or remove it comp
 
 Let's now create a web server container that forwards container port 80 to docker host port 8080 (making port 80 on the container accessable on the real network)  For this we will use a ngnix container.
 
-    sudo docker run -d -p 8080:80 --name my_web_server 35.209.26.28/library/nginx
+    sudo docker run -d -p 8080:80 --name my_web_server harbor.cloudnativeapps.ninja/library/nginx
 
 <img src="Images/2019-09-02-17-30-27.png">
 
@@ -128,7 +128,7 @@ Lets examine this command line
 
 `--name my_web_server : user friendly name of container`
 
-`35.209.26.28/library/nginx : docker image tag with location and image name to use`
+`harbor.cloudnativeapps.ninja/library/nginx : docker image tag with location and image name to use`
 
 Go to the browser and type in the URL: `http://cli-vm:8080` to see if nginx is working.
 
@@ -182,8 +182,8 @@ Notice a few differences with the output first it's a different randomly assigne
 Let's test some of the properties of our 'dev_network' by deploying some containers to it:
 
 ```Bash
-sudo docker run -dit --name ping1 --network dev_network 35.209.26.28/library/alpine ash
-sudo docker run -dit --name ping2 --network dev_network 35.209.26.28/library/alpine ash
+sudo docker run -dit --name ping1 --network dev_network harbor.cloudnativeapps.ninja/library/alpine ash
+sudo docker run -dit --name ping2 --network dev_network harbor.cloudnativeapps.ninja/library/alpine ash
 ```
 
 <img src="Images/2019-09-02-18-01-57.png">
@@ -405,13 +405,13 @@ Note: At this point if you are using docker playground, you can leave your docke
 
   Create a mysql container (normally you would not put passwords on the command line because they are stored in plain text)
 
-      sudo docker run --name db --network wordpress -e MYSQL_ROOT_PASSWORD=VMware1! -d 35.209.26.28/library/mysql:5.7
+      sudo docker run --name db --network wordpress -e MYSQL_ROOT_PASSWORD=VMware1! -d harbor.cloudnativeapps.ninja/library/mysql:5.7
 
 <img src="Images/2019-09-02-20-57-14.png">
 
   Create an apacheweb server with Wordpress
 
-`sudo docker run --name web -p 888:80 --network wordpress -e WORDPRESS_DB_HOST=db:3306 -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=VMware1! -d 35.209.26.28/library/wordpress`
+`sudo docker run --name web -p 888:80 --network wordpress -e WORDPRESS_DB_HOST=db:3306 -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=VMware1! -d harbor.cloudnativeapps.ninja/library/wordpress`
 
 <img src="Images/2019-09-02-23-08-57.png">
 

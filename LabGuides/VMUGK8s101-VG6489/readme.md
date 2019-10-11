@@ -1,6 +1,6 @@
 # Kubernetes-Lab 
 
-**HOL-2031 Users: for some of the steps in this lab guide, you will need to complete an alternative step that is slightly adjusted to work in the HOL-2031 lab environment. Each step below that requires a modification for HOL-2031 will be clearly indicated. There may also be some some minor differences in the screenshots provided below from what you see in your lab environment. All HOL-2031 users will need to complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) before proceeding**
+**HOL-2031 Users: for some of the steps in this lab guide, you will need to complete an alternative step that is slightly adjusted to work in the HOL-2031 lab environment. Each step below that requires a modification for HOL-2031 will be clearly indicated. There may also be some some minor differences in the screenshots provided below from what you see in your lab environment. All HOL-2031 users will need to complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) before proceeding. Please note you will not be able to browse the internet from the HOL-2031 lab environment, if any steps require you to browse a public internet site, you will need to do so from a seperate browser tab from your local machine, outside of the HOL lab environment. If there are any steps that require you to download an external file, please follow the instructions provided**
 
 # Learning Kubernetes
 
@@ -13,7 +13,7 @@ sudo su
 #password is VMware1!
 cd /root
 git clone 
-https://github.com/CNA-Tech/PKS-Lab.git
+http://gitmir.cloudnativeapps.ninja/CNA-Tech/PKS-Lab.git
 ```
 
 Enter the following command to login to PKS CLI
@@ -58,8 +58,8 @@ You can gather additional data on a specific node by cutting and pasting it's na
 # First download the busybox image from the public PKS Ninja Labs Harbor registry, Retag and push the image to the harbor.corp.local registry server in your local lab with the following commands:  
 
 sudo docker login harbor.corp.local -u admin -p VMware1!
-sudo docker pull 35.209.26.28/library/kubernetes-bootcamp:v1
-sudo docker tag 35.209.26.28/library/kubernetes-bootcamp:v1 harbor.corp.local/library/kubernetes-bootcamp:v1
+sudo docker pull harbor.cloudnativeapps.ninja/library/kubernetes-bootcamp:v1
+sudo docker tag harbor.cloudnativeapps.ninja/library/kubernetes-bootcamp:v1 harbor.corp.local/library/kubernetes-bootcamp:v1
 sudo docker push harbor.corp.local/library/kubernetes-bootcamp:v1
 
 # Enter the following command to run this container in your kubernetes cluster:
@@ -252,8 +252,8 @@ You can track progress with this command:
 # First download the busybox image from the public PKS Ninja Labs Harbor registry, Retag and push the image to the harbor.corp.local registry server in your local lab with the following commands:  
 
 sudo docker login harbor.corp.local -u admin -p VMware1!
-sudo docker pull 35.209.26.28/library/kubernetes-bootcamp:v2
-sudo docker tag 35.209.26.28/library/kubernetes-bootcamp:v2 harbor.corp.local/library/kubernetes-bootcamp:v2
+sudo docker pull harbor.cloudnativeapps.ninja/library/kubernetes-bootcamp:v2
+sudo docker tag harbor.cloudnativeapps.ninja/library/kubernetes-bootcamp:v2 harbor.corp.local/library/kubernetes-bootcamp:v2
 sudo docker push harbor.corp.local/library/kubernetes-bootcamp:v2
 
 # Enter the following command to run this container in your kubernetes cluster:
@@ -342,8 +342,8 @@ While Wordpress is not a micro-service it does allow us to show the power of Kub
 
 ```Bash
 sudo docker login harbor.corp.local
-sudo docker pull 35.209.26.28/library/wordpress
-sudo docker tag 35.209.26.28/library/wordpress harbor.corp.local/library/wordpress
+sudo docker pull harbor.cloudnativeapps.ninja/library/wordpress
+sudo docker tag harbor.cloudnativeapps.ninja/library/wordpress harbor.corp.local/library/wordpress
 sudo docker push harbor.corp.local/library/wordpress
 ```
 The sudo password is `VMware1!`, the harbor.corp.local login username is `admin` and the password is `VMware1!
@@ -434,8 +434,8 @@ Create the mysql deployment and service using this command:
 # First download the wordpress image from the public PKS Ninja Labs Harbor registry, Retag and push the image to the harbor.corp.local registry server in your local lab with the following commands:  
 
 sudo docker login harbor.corp.local -u admin -p VMware1!
-sudo docker pull 35.209.26.28/library/mysql:5.6
-sudo docker tag 35.209.26.28/library/mysql:5.6 harbor.corp.local/library/mysql:5.6
+sudo docker pull harbor.cloudnativeapps.ninja/library/mysql:5.6
+sudo docker tag harbor.cloudnativeapps.ninja/library/mysql:5.6 harbor.corp.local/library/mysql:5.6
 sudo docker push harbor.corp.local/library/mysql:5.6
 
 # Enter the following command to create a deployment based on the wp_mysql.yaml file provided in the PKS-Lab directory:
@@ -488,8 +488,8 @@ Start up your wordpress apache service and deployment with:
 # First download the wordpress image from the public PKS Ninja Labs Harbor registry, Retag and push the image to the harbor.corp.local registry server in your local lab with the following commands:  
 
 sudo docker login harbor.corp.local
-sudo docker pull 35.209.26.28/library/wordpress
-sudo docker tag 35.209.26.28/library/wordpress harbor.corp.local/library/wordpress
+sudo docker pull harbor.cloudnativeapps.ninja/library/wordpress
+sudo docker tag harbor.cloudnativeapps.ninja/library/wordpress harbor.corp.local/library/wordpress
 sudo docker push harbor.corp.local/library/wordpress
 
 # Enter the following command to create a deployment based on the wp_mysql.yaml file provided in the PKS-Lab directory:
@@ -603,7 +603,7 @@ We will skip the wavefront for monitoring stage of the application deployment bu
 sudo su
 sudo mkdir /root/cloned
 cd /root/cloned
-git clone https://github.com/CNA-Tech/planespotter.git
+git clone http://gitmir.cloudnativeapps.ninja/CNA-Tech/planespotter.git
 cd /root/cloned/planespotter/
 ```
 
@@ -671,6 +671,6 @@ To cleanup planespotter (it uses a lot of memory) do the following:
 If you have available extra time try to achieve one of these stretch goals:
 
 - Setup a LAMP stack (Apache, MySQL, PHP on Linux containers) running a simple php script that does hello world and shows that database connection works
-  - Note, in the HOL-2031 lab environment you cannot access docker hub to pull down these images, you can access the required images using 35.209.26.28/library/httpd, 35.209.26.28/library/php 35.209.26.28/library/mysql:5.6 and 35.209.26.28/library/wordpress to accomplish these objectives. You will need to download these images and then upload them to harbor.corp.local to deploy them to your kubernetes cluster
+  - Note, in the HOL-2031 lab environment you cannot access docker hub to pull down these images, you can access the required images using harbor.cloudnativeapps.ninja/library/httpd, harbor.cloudnativeapps.ninja/library/php harbor.cloudnativeapps.ninja/library/mysql:5.6 and harbor.cloudnativeapps.ninja/library/wordpress to accomplish these objectives. You will need to download these images and then upload them to harbor.corp.local to deploy them to your kubernetes cluster
 - Create custom firewall rules between the Wordpress site that allows 3309 but denies everything else
 - Try another tutorial on the internet to learn Kubernetes 
