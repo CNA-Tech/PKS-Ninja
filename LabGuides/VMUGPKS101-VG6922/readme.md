@@ -22,8 +22,10 @@ We will review the plan details post starting the deployment of a cluster
 
 Deploy a small cluster with the following command:
 
+**NOTE: If you are using the HOL-2031 environment, you will not be able to create the additional "throwaway" cluster due to sizing restrictions in the lab environment. Instead please review the screenshots below to observe the cluster deployment process**
+
     pks create-cluster throwaway --external-hostname throwaway.corp.local --plan small
-  
+
 Breaking the command line down we have
  - create-cluster : pks command to execute
  - throwaway : reference name of the cluster (user friendly name for reference with future commands)
@@ -207,7 +209,7 @@ This will take a little time for PKS to identify it as failed and take action bu
  # Harbor
 Harbor is an open source repository that provides image security scanning and reporting.  Harbor organizes images into a set of projects and repositories within those projects. Repositories can have one or more images associated with them. Each of the images are tagged. Projects can have RBAC (Role Based Access Control) and replication policies associated with them so that administrators can regulate access to images and create image distribution pipelines across registries that might be geographically dispersed. You should now be at a summary screen that shows all of the projects in this registry. For our lab, we are interested in a single project called library.
 
-In order to use harbor you need to setup secure communications between harbor and your virtual machine.   Follow these instructions (https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212)
+In order to use harbor you need to setup secure communications between harbor and your virtual machine. This step is NOT required for HOL-2031 users. Follow these instructions (https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212)
 
 Once you have the certificates completed return to this lab.
 
@@ -244,27 +246,19 @@ Let's create a new project for one of our docker images.
 
 ![DockerOutput](https://github.com/gortee/pictures/blob/master/P29.PNG)
 
-Return to the cli-vm putty window.  We are going to check in our first docker image into Harbor.  
+Return to the cli-vm putty window.  We are going to check in our first docker image into Harbor - pull the ping image down from harbor.cloudnativeapps.ninja.  
 
-    cd /root/PKS-Lab/docker/first
-
-Build the docker image again
-
-    docker build .
-    
-Copy the image ID from the last line of the build command (mine is ee3cc31c901b)
-
-![DockerOutput](https://github.com/gortee/pictures/blob/master/P30.PNG)
-
+    docker pull harbor.cloudnativeapps.ninja/ping:v1
+ 
 From the cli-vm prompt, update the image tag and push to harbor with the following commands - be sure to replace the value ee3cc31c901b in the docker tag command below with the tag value you gathered in the previous step
 
-    docker tag ee3cc31c901b harbor.corp.local/library/ping:v1
+    docker tag harbor.cloudnativeapps.ninja/ping:v1 harbor.corp.local/ping:v1
     docker login harbor.corp.local
      - User Name: admin
      - Password: VMware1!
     docker push harbor.corp.local/library/ping:v1
 
-If docker login fails with "Error response from daemon: Get https://harbor.corp.local/v2/: x509: certificate signed by unknown authority", you need to prepare the cli-vm docker engine configuration with the Harbor certificate, as documented in the Installing Harbor Cert on External Clients Lab Guide
+If docker login fails with "Error response from daemon: Get https://harbor.corp.local/v2/: x509: certificate signed by unknown authority", you need to prepare the cli-vm docker engine configuration with the Harbor certificate, as documented in the [Installing Harbor Cert on External Clients Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212)
 
 Log into the Harbor UI and navigate to Projects > library and click on library/ping to see the image you built and pushed to Harbor in the previous steps.
 
@@ -372,7 +366,7 @@ You can see it was deleted in vCenter as well
 
 # Check on Throwaway cluster
 Let's check the status of the throwaway cluster we created in the cli-vm.  
-
+**NOTE: If you are using the HOL-2031 environment, you will not be able to create the additional "throwaway" cluster due to sizing restrictions in the lab environment. Instead please review the screenshots below to observe the cluster deployment process**
     pks clusters
     
 ![DockerOutput](https://github.com/gortee/pictures/blob/master/P22.PNG)
@@ -382,7 +376,7 @@ Once succeed we cab login to the cluster and create a namespace.   Remember this
 In this way (assuming DNS is configured) you can have seperate Kubernetes clusters all managed by PKS to allow role seperation.   You can implement rolling upgrades from the PKS API or command line across all clusters thus reducing the time required to do day two operations.   Let's configure DNS so we can test our throwaway cluster.   
 
 First identify the IP address for the throwaway cluster with 
-
+**NOTE: If you are using the HOL-2031 environment, you will not be able to create the additional "throwaway" cluster due to sizing restrictions in the lab environment. Instead please review the screenshots below to observe the cluster deployment process. Alternatively you can review the below commands using the cluster that is deployed in the HOL-2031 lab which is named "my-cluster" instead of the "throwaway" cluster**
     pks cluster throwaway
     
 ![DockerOutput](https://github.com/gortee/pictures/blob/master/P24.PNG)  
@@ -425,7 +419,7 @@ As shown my cluster IP is 10.40.14.42 (yours may be different)
 ![DockerOutput](https://github.com/gortee/pictures/blob/master/P27.PNG)
 
 As shown before this cluster and namespace has it's own routing and Kubernetes cluster independant of my-cluster.   For resource constraint purposes we need to remove the throwaway cluster.
-
+**NOTE: If you are using the HOL-2031 environment, you will not be able to create the additional "throwaway" cluster due to sizing restrictions in the lab environment. Instead please review the screenshots below to observe the cluster deployment process**
     pks delete-cluster throwaway
     
 This command will remove and cleanup everything about the cluster except the DNS record you manually created.   

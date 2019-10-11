@@ -1,6 +1,6 @@
 # Accessing First PKS Cluster
 
-**HOL-2031 Users: for some of the steps in this lab guide, you will need to complete an alternative step that is slightly adjusted to work in the HOL-2031 lab environment. Each step below that requires a modification for HOL-2031 will be clearly indicated. All HOL-2031 users will need to complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) before proceeding**
+**HOL-2031 Users: for some of the steps in this lab guide, you will need to complete an alternative step that is slightly adjusted to work in the HOL-2031 lab environment. Each step below that requires a modification for HOL-2031 will be clearly indicated. All HOL-2031 users will need to complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) before proceeding. Please note you will not be able to browse the internet from the HOL-2031, if any steps require you to browse a public internet site, you will need to do so from a seperate browser tab from your local machine, outside of the HOL lab environment. If there are any steps that require you to download an external file, please follow the instructions provided**
 
 ## Step 1: Obtain Kubernetes Cluster Config File via PKS CLI
 
@@ -105,8 +105,8 @@ kubectl run busybox --rm --image=busybox -it --restart=Never -- sh
 # First download the busybox image from the public PKS Ninja Labs Harbor registry, Retag and push the image to the harbor.corp.local registry server in your local lab with the following commands:  
 
 sudo docker login harbor.corp.local -u admin -p VMware1!
-sudo docker pull 35.209.26.28/library/busybox
-sudo docker tag  35.209.26.28/library/busybox harbor.corp.local/library/busybox
+sudo docker pull harbor.cloudnativeapps.ninja/library/busybox
+sudo docker tag  harbor.cloudnativeapps.ninja/library/busybox harbor.corp.local/library/busybox
 sudo docker push harbor.corp.local/library/busybox
 
 # Enter the following command to run this container in your kubernetes cluster:

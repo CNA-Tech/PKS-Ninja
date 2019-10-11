@@ -37,71 +37,15 @@ With Kubernetes, each component needed for the app is defined in the deployment 
 
 --------------
 
-## Step 0: Prepare Planespotter Containers for Deployment from the Local Harbor Registry Server
-
-**HOL-2031 Users, Please Complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) before proceeding**
-
-**All v12 templates must complete all steps in the [Enable Harbor Client Secure Connections Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212) before proceeding**
-
-**Note:** We recommend you go through Step 0 at least one time, but it can be tedious to do every time so instead of completeting Step 0, you can run the [loadPsContaners.sh](./loadPsContaners.sh) script insted, first be sure to complete the prep steps for your v12 or HOL lab above, log onto `cli-vm`, enter `sudo su`, `docker login harbor.corp.local` with username `admin` and password `VMware1!`, and then you can download or create a local copy of the [loadPsContaners.sh](./loadPsContaners.sh), mark it as executable with `chmod +x loadPsContainers.sh` and then run the script with `./loadPsContainers.sh` from the location where you saved the script, which will run each of the commands in Step 0 for you, once the script finishes you can proceed with step 1. 
-
-While in many cases organizations may use containers from trusted public sources, it is a best practice to run containers from a private registry server to ensure security and optimal performance. 
-
-In this section, you will download the container images required for the planespotter application from the PKS Ninja Labs public harbor server, and upload the images to the private harbor.corp.local registry server in your lab environment. 
-
-0.1 From the control-center desktop, open a putty/ssh session to `ubuntu@cli-vm`, if needed login with the password `VMware1!`, and enter the following commands to pull down the docker images from the public harbor server:
-
-```bash
-sudo docker pull 35.209.26.28/library/planespotter-app-server:V1
-sudo docker pull 35.209.26.28/library/planespotter-frontend:V1
-sudo docker pull 35.209.26.28/library/mysql:5.6
-sudo docker pull 35.209.26.28/library/redis:latest
-sudo docker pull 35.209.26.28/library/adsb-sync:V1
-```
-
-<details><summary>Screenshot 0.1</summary>
-<img src="Images/2019-08-25-01-41-26.png">
-</details>
-<br/>
-
-0.2 From your putty/ssh session to `ubuntu@cli-vm`, enter the following commands to tag and prepare the images for upload to harbor.corp.local:
-
-```bash
-sudo docker tag 35.209.26.28/library/planespotter-app-server:V1 harbor.corp.local/library/planespotter-app-server:V1
-sudo docker tag 35.209.26.28/library/planespotter-frontend:V1 harbor.corp.local/library/planespotter-frontend:V1
-sudo docker tag 35.209.26.28/library/mysql:5.6 harbor.corp.local/library/mysql:5.6
-sudo docker tag 35.209.26.28/library/redis:latest harbor.corp.local/library/redis:latest
-sudo docker tag 35.209.26.28/library/adsb-sync:V1 harbor.corp.local/library/adsb-sync:V1
-```
-
-<details><summary>Screenshot 0.2</summary>
-<img src="Images/2019-08-25-02-45-53.png">
-</details>
-<br/>
-
-0.3 From your putty/ssh session to `ubuntu@cli-vm`, enter the command `sudo docker login harbor.corp.local` and login with `username: admin` and `password: VMware1!`. If needed, enter the sudo password `VMware1!`
-
-<details><summary>Screenshot 0.3</summary>
-<img src="Images/2019-08-25-02-43-01.png">
-</details>
-<br/>
-
-0.4 From your putty/ssh session to `ubuntu@cli-vm`, enter the following commands to push the required images for planespotter to harbor.corp.local:
-
-```bash
-sudo docker push harbor.corp.local/library/planespotter-app-server:V1
-sudo docker push harbor.corp.local/library/planespotter-frontend:V1
-sudo docker push harbor.corp.local/library/mysql:5.6
-sudo docker push harbor.corp.local/library/redis:latest
-sudo docker push harbor.corp.local/library/adsb-sync:V1
-```
-
-<details><summary>Screenshot 0.4</summary>
 <img src="Images/2019-08-25-01-41-26.png">
 </details>
 <br/>
 
 ## Step 1: Configure K8s Cluster for App Deployment
+
+**HOL-2031 Users, Please Complete [HOL POD Prep for PKS Ninja Lab Guides](../HOLPodPrep-HP3631/readme.md) before proceeding. Please note you will not be able to browse the internet from the HOL-2031, if any steps require you to browse a public internet site, you will need to do so from a seperate browser tab from your local machine, outside of the HOL lab environment. If there are any steps that require you to download an external file, please follow the instructions provided**
+
+**All v12 templates must complete all steps in the [Enable Harbor Client Secure Connections Lab Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212) before proceeding**
 
 1.0 From the control-center desktop, open a putty/ssh session to `ubuntu@cli-vm` and login with the password `VMware1!`, login to the PKS API and get your Kubernetes cluster credentials with the following commands:
 
@@ -114,7 +58,7 @@ Clone the planespotter repository and navigate to the kubernetes directory with 
 
 ```bash
 cd /home/ubuntu
-git clone https://github.com/cna-tech/planespotter.git
+git clone http://gitmir.cloudnativeapps.ninja/cna-tech/planespotter.git
 cd planespotter/kubernetes
 ```
 

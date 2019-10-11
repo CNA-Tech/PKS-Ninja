@@ -8,7 +8,7 @@ To ensure developer and automated workflows can have secure interaction with Har
 
 - [Enable Harbor Client Secure Connections](#enable-harbor-client-secure-connections)
   - [1.0 Prepare `cli-vm` with the certificates to connect to the local harbor.corp.local server](#10-prepare-cli-vm-with-the-certificates-to-connect-to-the-local-harborcorplocal-server)
-  - [2.0 Prepare `cli-vm` with the certificates to connect to the public PKS Ninja Lab harbor server](#20-prepare-cli-vm-with-the-certificates-to-connect-to-the-public-pks-ninja-lab-harbor-server)
+  - [Addendum: Certificate prep for to connect to the public PKS Ninja Lab harbor backup server](#20-prepare-cli-vm-with-the-certificates-to-connect-to-the-public-pks-ninja-lab-harbor-server)
 
 
 ## 1.0 Prepare `cli-vm` with the certificates to connect to the local harbor.corp.local server
@@ -65,7 +65,9 @@ sudo service docker restart
 
 **You have now prepared `cli-vm` for secure communication with harbor.corp.local
 
-## 2.0 Prepare `cli-vm` with the certificates to connect to the public PKS Ninja Lab harbor server
+## 2.0 Prepare `cli-vm` with the certificates to connect to the public PKS Ninja Lab harbor backup server
+
+The primary pks ninja labs harbor server is at https://harbor.cloudnativeapps.ninja - if you are able to access this server, you do not need to complete the steps below. If for any reason the harbor.cloudnativeapps.ninja server is not available, you may be able to access the backup harbor server at 35.209.26.28, however you will need to follow the steps below prior to accessing the server.
 
 2.1 From the Control Center desktop, open a putty session with `ubuntu@cli-vm` and from the prompt, enter the following commands to create the required directory to keep registry certificates in the docker client, and to use the nano text editor to create a file for the PKS Ninja Labs Public Harbor server CA certificate:
 
