@@ -9,5 +9,6 @@
 - [NSX-T The Hard Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Staging/LabGuides/NsxtManualInstall-IN1497)
 - [NSX-T The Easy Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/LabGuides/NsxtPipelineInstall-IN7016)
 - [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GetLabAccess-LA8528)
+- [VMUG PKS 1 Day Training](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/VMUGPKS1Day-VG6055)
 
 A Course Catalog application is currently under development which will provide additional details and search/browse/filter capabilities. A mockup of the catalog data model can be found here: [PKS Ninja Site Data Models](https://docs.google.com/spreadsheets/d/1ZhozDjFc5TGcbKe6a4PZ0EU4uYCWJ-ujuG2GTP0Agrk/edit?usp=sharing)
