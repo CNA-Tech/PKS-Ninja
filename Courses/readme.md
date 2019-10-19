@@ -2,7 +2,9 @@
 **Please Note: You are viewing the Main Branch of the PKS Ninja Repo, which is currently aligned with PKS NinjaLab template version 11. If you are using a different version, please switch to the branch for your version**
 
 - [Community Getting Started Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/GettingStarted-GS3861)
+- [Community Foundational and Prerequisite Skills](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/FoundationalSkills-FS8954)
 - [Try Some Labs](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/CommunityLabs-CL7056)
+- [Deploy More Apps](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/DeployMoreApps-DA6020)
 - [PKS Ninja SE Course Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksNinjaSe-NI6310)
 - [Contributors Guide](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/ContributorsGuide-CG2415)
 - [PKS The Hard Way](https://github.com/CNA-Tech/PKS-Ninja/tree/master/Courses/PksTheHardWay-PH7885)
