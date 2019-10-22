@@ -10,4 +10,4 @@ Please join the [VMware KubeDay Slack](https://vmwarekubeday.slack.com) if you a
 - [TS-HOL-193 Infrastructure support for Devops & Cloud Native Operations with PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/IntroCloudNativeOps-IS7212)
 - [TS-HOL-194 Deliver Enterprise Grade Storage, Networking & Security for Containers & Cloud Native with PKS & NSX-T](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PksStorNetSec-SN7212)
 - [TS-HOL-195 PKS Monitoring & Operations](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PKSIntroMonitoring-MO7212)
-- [TS-HOL-196 PKS Backup and Restore using VMware Heptio Velero](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PKSBackupVelero-PV3774)
+- [TS-HOL-196 PKS Backup and Restore using VMware Tanzu Velero](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/PKSBackupVelero-PV3774)
