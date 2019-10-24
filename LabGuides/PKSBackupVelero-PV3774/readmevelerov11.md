@@ -676,26 +676,8 @@ kubectl get pv
     Cluster1  ---backup---  >>    minio  >>  -----restore---- cluster2 
     Make sure the Harbor cert is in place on cluster 2 via bosh / worker VM's
 
-6.7 To restore the backup to another cluster in your environment .  Eg you have backed up in my-cluster and want to restore to pks-cluster
 
-```bash
-pks get credentials pks-cluster
-```
 
-6.8 Identify where your kubeconfig like is . Usually it is under .kube/config
-
-6.9 Change the current context to the cluster you would want to restore the backup to
-
-```bash
-kubectl config set-context pks-cluster
-```
-6.10 Restore backup to the pks-cluster from my-cluster
-
-```bash
-
- ./velero restore create --from-backup planes --kubeconfig /root/.kube/config --kubecontext my-cluster
-
-```
 
 
 ### You have now completed deploying the velero app, and taking a app backup and restored the same.
