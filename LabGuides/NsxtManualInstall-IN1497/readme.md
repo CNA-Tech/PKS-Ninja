@@ -1,18 +1,16 @@
-# NSX-T 2.4 Manual Installation
+# NSX-T 2.5 Manual Installation
 
-**New:**[Video Walkthrough for this Lab Guide](https://www.youtube.com/watch?v=U2dgKUU4a84&feature=youtu.be)
-
-For NSXT 2.3 Manual Installation, please see the Pks1.3 Branch
+For NSXT 2.4 Manual Installation, please see the Pks1.4 Branch
 
 ## Overview
 
-The following installation guide follows the implementation of a functional NSX-T 2.4 Installation. This implementation uses variables that function in the lab environment. Anyone is welcome to build a similar lab environment and follow along with the lab exercises, but please note you will need to replace any variables such as IP addresses and FQDNs and replace them with the appropriate values for your lab environment.
+The following installation guide documents the implementation of a functional NSX-T 2.5 Installation. This implementation uses variables that function in the PKS-Ninja Topology 1 (T1) lab environment, using the PKS-Ninja-T1-Baseline template. Anyone is welcome to build a similar lab environment and follow along with the lab exercises, but please note you will need to replace any variables such as IP addresses and FQDNs and replace them with the appropriate values for your lab environment.
 
 The steps provided in this lab guide are intended for a lab implementation and do not necessarily align with best practices for production implementiations. While the instructions provided in this lab guide did work for the author in their lab environment, VMware and/or any contributors to this Guide provide no assurance, warranty or support for any content provided in this guide.
 
 ## Prerequisites
 
-- Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
+- Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.6/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
 
 ## Installation Notes
 
@@ -20,11 +18,11 @@ Anyone who implements any software used in this lab must provide their own licen
 
 For those needing access to VMware licensing for lab and educational purposes, we recommend contacting your VMware account team. Also, the [VMware User Group's VMUG Advantage Program](https://www.vmug.com/Join/VMUG-Advantage-Membership) provides a low-cost method of gaining access to VMware licenses for evaluation purposes.
 
-This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.4 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/nsxt_24_install.pdf)
+This lab follows the standard documentation, which includes additional details and explanations: [NSX-T 2.4 Installation Guide](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.5/installation/GUID-3E0C4CEC-D593-4395-84C4-150CD6285963.html)
 
 ### Overview of Tasks Covered in Lab 1
 
-- [NSX-T 2.4 Manual Installation](#nsx-t-24-manual-installation)
+- [NSX-T 2.5 Manual Installation](#nsx-t-24-manual-installation)
   - [Overview](#overview)
   - [Prerequisites](#prerequisites)
   - [Installation Notes](#installation-notes)
@@ -38,21 +36,21 @@ This lab follows the standard documentation, which includes additional details a
 
 ## Step 1:  Deploy NSXT Manager using OVF Install Wizard
 
-Note: Prior to Step 1, you will need to download the NSX-T 2.4 Installation Files and binaries. The Installation binaries are not included in the lab, users will need to provide their own access and licensing to download and use NSX-T 2.4. 
+Note: Prior to Step 1, you will need to download the NSX-T 2.5 Installation Files and binaries. The Installation binaries are not included in the lab, users will need to provide their own access and licensing to download and use NSX-T 2.5. 
 
-1.0 In the Main Console, the vSphere web client is already set up in Chrome. Open up Chrome to get to the vSphere login screen. You can log in using the credentials you were given for the lab, *but you have to make sure you click the **Use Windows session authentication** box*
+1.0 In the Main Console, the vSphere web client is already set up in Chrome. Open up Chrome to get to the vSphere login screen. You can log in using the credentials you were given for the lab,  and you may login by clicking the **Use Windows session authentication** checkbox.
 
 1.1 In the vSphere client, From the Hosts and Clusters view, right click on the RegionA01-MGMT01 Cluster and select `Deploy OVF Template'
 
 <Details><Summary>Screenshot 1.1</Summary>
-<img src="Images/2019-08-12-15-51-39.png">
+<img src="Images/2019-11-15-02-46-11.png">
 </Details>
 <br/>
 
 1.2 On the `Select an OVF Template` step, select `Local File` and Navigate to the NSXT Manager OVA file, the filename should start with 'nsx-unified-appliance`. In the reference lab, this is located on the 'E:/Downloads' Directory
 
 <details><summary>Screenshot 1.2</summary>
-<img src="Images/2019-08-12-23-21-05.png">
+<img src="Images/2019-11-15-02-44-02.png">
 </details>
 <br/>
 
@@ -73,7 +71,7 @@ Note: Prior to Step 1, you will need to download the NSX-T 2.4 Installation File
 1.5 On the `Review Details` step, verify details and click `Next`
 
 <details><summary>Screenshot 1.5</summary>
-<img src="Images/2019-08-12-23-23-33.png">
+<img src="Images/2019-11-15-02-47-14.png">
 </details>
 <br/>
 
@@ -108,7 +106,7 @@ Note: When you select the datastore, the UI resets the value for the virtual dis
   - CLI Audit User Password: VMware1!VMware1!
 - Network Properties
   - Hostname: nsxmgr-01a
-  - Rolename: nsx-manager nsx-controller
+  - Rolename: NSX Manager
   - Default Gateway: 192.168.110.1
   - Management Network IPv4 Address: 192.168.110.42
   - Management Network Netmask: 255.255.255.0
@@ -129,7 +127,7 @@ Note: When you select the datastore, the UI resets the value for the virtual dis
 1.9 On the Ready to Complete screen, click `Finish` to complete the Deploy OVF Template Wizard
 
 <details><summary>Screenshot 1.9</summary>
-<img src="Images/2019-08-12-23-29-40.png">
+<img src="Images/2019-11-15-03-31-30.png">
 </details>
 <br/>
 
