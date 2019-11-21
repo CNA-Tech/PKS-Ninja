@@ -22,7 +22,7 @@ This lab follows the standard documentation, which includes additional details a
 
 ### Overview of Tasks Covered in Lab 1
 
-- [NSX-T 2.5 Manual Installation](#nsx-t-24-manual-installation)
+- [NSX-T 2.5 Manual Installation](#nsx-t-25-manual-installation)
   - [Overview](#overview)
   - [Prerequisites](#prerequisites)
   - [Installation Notes](#installation-notes)
@@ -54,10 +54,10 @@ Note: Prior to Step 1, you will need to download the NSX-T 2.5 Installation File
 </details>
 <br/>
 
-1.3 On the `Select a name and folder` step, use the name `nsxmgr-01a` and select `RegionA01` Datacenter as the location
+1.3 On the `Select a name and folder` step, use the name `nsxmgr01a-1` and select `RegionA01` Datacenter as the location
 
 <details><summary>Screenshot 1.3</summary>
-<img src="Images/2019-08-12-23-22-12.png">
+<img src="Images/2019-11-16-07-59-21.png">
 </details>
 <br/>
 
@@ -75,7 +75,7 @@ Note: Prior to Step 1, you will need to download the NSX-T 2.5 Installation File
 </details>
 <br/>
 
-1.6 On the `Configuration` step, select a Small Configuration and click `Next`
+1.6 On the `Configuration` step, select a `Small` Configuration and click `Next`
 
 <details><summary>Screenshot 1.6</summary>
 <img src="Images/2019-06-13-14-20-24.png">
@@ -105,10 +105,10 @@ Note: When you select the datastore, the UI resets the value for the virtual dis
   - CLI Admin User Password: VMware1!VMware1!
   - CLI Audit User Password: VMware1!VMware1!
 - Network Properties
-  - Hostname: nsxmgr-01a
+  - Hostname: nsxmgr01a-1
   - Rolename: NSX Manager
   - Default Gateway: 192.168.110.1
-  - Management Network IPv4 Address: 192.168.110.42
+  - Management Network IPv4 Address: 192.168.110.31
   - Management Network Netmask: 255.255.255.0
 - DNS
   - DNS Server List: 192.168.110.10
@@ -119,50 +119,38 @@ Note: When you select the datastore, the UI resets the value for the virtual dis
   - Allow Root SSH Logins: True
 - All other options were left as default values
 
-<details><summary>Screenshot 1.8</summary>
+<details><summary>Screenshot 1.9</summary>
 <img src="Images/2019-08-12-23-27-58.png">
 </details>
 <br/>
 
-1.9 On the Ready to Complete screen, click `Finish` to complete the Deploy OVF Template Wizard
+1.10 On the Ready to Complete screen, click `Finish` to complete the Deploy OVF Template Wizard
 
-<details><summary>Screenshot 1.9</summary>
-<img src="Images/2019-11-15-03-31-30.png">
+<details><summary>Screenshot 1.10</summary>
+<img src="Images/2019-11-16-08-04-37.png">
 </details>
 <br/>
 
-1.10 In the vSphere web client go to the task console and verify that the Status for Deploy OVF Template is "Completed" before proceeding
+1.11 In the vSphere web client go to the task console and verify that the Status for Deploy OVF Template is "Completed" before proceeding
 <br/>
 
-<details><summary>Screenshot 1.10</summary>
+<details><summary>Screenshot 1.11</summary>
 <img src="Images/2018-10-17-00-51-10.png">
 </details>
 <br/>
 
- 1.11 Log into the vsphere client, navigate to the `Hosts and Clusters` view, select `nsxmgr-01a` and in the actions menu select `Edit Settings`. Ensure the `Reserve all guest memory` checkbox is **not checked**. Then, click OK.
-
-<details><summary>Screenshot 1.11.1</summary>
-<img src="Images/2019-09-06-10-33-22.png">
-</details>
-<br/>
-
-<details><summary>Screenshot 1.11.2</summary>
-<img src="Images/2019-09-06-10-33-46.png">
-</details>
-<br/>
-
-1.12 In the vSphere web client power on the nsxmgr-01a VM, wait a few minutes for NSX Manager to fully boot up before proceeding to the next step
+1.12 In the vSphere web client power on the nsxmgr01a-1 VM, wait a few minutes for NSX Manager to fully boot up before proceeding to the next step
 
 NOTE: If the option to power on the nsxmgr-01a VM is not available, log out and then log back in to the vSphere web client
 
 <details><summary>Screenshot 1.12</summary>
-<img src="Images/2019-08-12-23-32-58.png">
+<img src="Images/2019-11-17-07-19-45.png">
 </details>
 <br/>
 
 1.13 Open a web browser connection to NSX Manager, for example:
 
-[https://nsxmgr-01a.corp.local/login.jsp](https://nsxmgr-01a.corp.local/login.jsp)
+[https://nsxmgr01a-1.corp.local/login.jsp](https://nsxmgr01a-1.corp.local/login.jsp)
 
 Login as:
 
@@ -171,16 +159,47 @@ Login as:
 
 _NOTE: On your first login, you will be prompted to accept the EULA. Accept EULA and opt out of VMware Customer Experience program._
 
-<details><summary>Screenshot 1.13</summary>
+<details><summary>Screenshot 1.14</summary>
 <img src="Images/2018-10-17-01-34-33.png">
 </details>
 <br/>
+
+1.15 In the NSX Manager UI, navigate to `System > Appliances`. Observe the value for `Virtual IP` is not set, click `Edit` and set the Virtual IP address to `192.168.110.42`
+
+The virtual IP address provides a single ip address that can be used to connect to a cluster of NSX manager appliances providing high availability. Because the lab environment is highly oversubscribed, you will only create a single nsx manager appliance, however the steps in this guide still assign a virtual IP address to configure NSX-T as you would when using clustered NSX Manager nodes.
+
+<details><summary>Screenshot 1.15.1</summary>
+<img src="Images/2019-11-17-07-27-20.png">
+</details>
+<br/>
+
+<details><summary>Screenshot 1.15.2</summary>
+<img src="Images/2019-11-17-07-28-02.png">
+</details>
+<br/>
+
+<details><summary>Screenshot 1.15.3</summary>
+<img src="Images/2019-11-17-07-35-51.png">
+</details>
+<br/>
+
+1.16 In your web browser tab connected to NSX-T Manager, change the URL to [https://nsxmgr-01a.corp.local/login.jsp](https://nsxmgr-01a.corp.local/login.jsp) and reconnect to NSX Manager using this new URL. 
+
+The URL `nsxmgr-01a.corp.local` is configured to resolve to `192.168.110.42` in the labs DNS server. Note that this `192.168.110.42` is the same IP address that you assigned as the NSX Manager Virtual IP address in the last step. By changing your URL and reconnecting to NSX Manager, you validate that the Virtual IP address is functioning as intended. 
+
+Going forward unless otherwise noted, you should use the NSX-T Manager virtual IP address or its associated hostname `nsxmgr-01a.corp.local` both when you connect to NSX manager, or when you configure any machine-to-machine connections for NSX Manager. 
+
+<details><summary>Screenshot 1.16</summary>
+<img src="Images/2019-11-17-07-44-53.png">
+</details>
+<br/>
+
 
 ## Step 2: Add NSX Compute Manager
 
 In this step, you create a connection between the NSX manager and your vCenter. This enables NSX manager to deploy VIBs to the hosts, controller and edge VMs, etc.
 
- 2.1 Click anywhere on the screen to skip the "Welcome to NSX-T" Screen, click on the `System` tab and then on the left navigation bar Click `Fabric`, and then click `Compute Managers`
+ 2.1 In your web browser connection to NSX-T Manager, click on the `System` tab and then on the left navigation bar Click `Fabric`, and then click `Compute Managers`
 
 <details><summary>Screenshot 2.1</summary>
 <img src="Images/2019-08-12-23-36-45.png">
@@ -204,11 +223,11 @@ _NOTE: in a production implementation, you would first copy the vCenter thumbpri
 </details>
 
 <details><summary>Screenshot 2.2.2</summary>
-<img src="Images/2018-12-13-16-17-18.png">
+<img src="Images/2019-11-17-08-32-08.png">
 </details>
 <br/>
 
- 2.3 Click **Refresh** in the lower-left hand corner and verify the Compute Manager is `Registered` and `Up`
+ 2.3 Verify the Compute Manager is `Registered` and `Up`. If needed, click **Refresh** in the lower-left hand corner to refresh the display.
 
 <details><summary>Screenshot 2.3.1</summary>
 <img src="Images/2018-12-16-16-54-09.png">
@@ -244,7 +263,7 @@ _NOTE: in a production implementation, you would first copy the vCenter thumbpri
 </details>
 <br/>
 
- 3.3 From the NSX-T Manager Homepage at the bottom of the `System` section, click `Get Started`, and then click `Setup Transport Nodes`
+ 3.3 From NSX-T Manager UI, click on the `System` tab, then click `Get Started` in the left navigation bar, and then click `Setup Transport Nodes`
 
 <details><summary>Screenshot 3.3</summary>
 <img src="Images/2019-07-13-01-35-19.png">
@@ -273,6 +292,7 @@ _NOTE: in a production implementation, you would first copy the vCenter thumbpri
  - Click Next
  - CLI Password: VMware1!VMware1!
  - System Root Password: VMware1!VMware1!
+ - Click Next
  - Compute Manager: vcsa-01a
  - Cluster: RegionA01-MGMT01
  - Datastore: RegionA01-ISCSI02-COMP01
@@ -284,6 +304,9 @@ _NOTE: in a production implementation, you would first copy the vCenter thumbpri
  - fp-eth0: Uplink-RegionA01-vDS-MGMT
  - fp-eth1: Transport-RegionA01-vDS-MGMT
  - fp-eth2: VM-RegionA01-vDS-MGMT
+ - Search Domain Names: corp.local
+ - DNS Servers: 192.168.110.10
+ - NTP Servers: 192.168.100.1
  - Click Finish
 
 <details><summary>Screenshot 3.6.1</summary>
@@ -303,20 +326,20 @@ _NOTE: in a production implementation, you would first copy the vCenter thumbpri
 </details>
 <br/>
 
- 3.7 The Wizard will deploy and attempt to power on the edge VM, but it will fail as there is no host with the capacity to run the edge in the lab. Log into vCenter, review the tasks pane to ensure the edge VM is finished deploying, wait as needed, and verify you can see the error message indicating that vCenter could not power on the edge vm. 
+ 3.7 The Wizard will deploy and attempt to power on the edge VM (This will take several minutes), but it will fail as there is no host with the capacity to run the large edge in the lab. 
+ 
+ Log into the vCenter web ui, review the tasks pane to check the status of the edge VM deployment and ensure the edge VM is finished deploying, wait as needed, and verify you can see the error message indicating that vCenter could not power on the edge vm. 
 
 Navigate to the `Hosts and Clusters` view, select `nsxedge-1`. From the actions menu for `nsxedge-1` select `Edit Settings`.
 
-**If you are using the Baseline-0.6 template or newer, set the CPU count to `8`. If you are using the Baseline-0.5 template or older, set the CPU count to `4`.** 
-
- Expand the `Memory` section, **uncheck** the box for `Reserve all guest memory (All Locked)`, set the `Reservation` value to `0 MB` and click `OK`
+Set the CPU count to `4`, then expand the `Memory` section, **uncheck** the box for `Reserve all guest memory (All Locked)`, set the `Reservation` value to `0 MB` and click `OK`
 
 <details><summary>Screenshot 3.7.1</summary>
-<img src="Images/2019-07-13-02-02-05.png">
+<img src="Images/2019-11-17-14-49-11.png">
 </details>
 
 <details><summary>Screenshot 3.7.2</summary>
-<img src="Images/2019-07-13-02-03-04.png">
+<img src="Images/2019-11-17-14-51-56.png">
 </details>
 <br/>
 
@@ -324,7 +347,7 @@ After making the changes to the `nsxedge-1` VM, power the VM on via the vCenter 
 
  3.8 Return to the NSX UI and wait for the wizard to recognize the NSX Edge VM. This may take up to ~15 minutes, and you may need to refresh your connection to NSX Manager, if so you can use the same steps as above to get back to the `Setup Transport Nodes ` wizard. 
  
- On the `Select NSX Edge` screen select `nsxedge-1` from the `Edge Node` Pulldown Menu and click `Next` 
+ On the `Select NSX Edge` screen select `nsxedge-1` from the `Edge Node` Pulldown Menu, ensure the `Deployment Status` is `Node Ready`,  and click `Next` 
 
 <details><summary>Screenshot 3.8</summary>
 <img src="Images/2019-07-13-01-43-20.png">
@@ -357,7 +380,7 @@ After making the changes to the `nsxedge-1` VM, power the VM on via the vCenter 
 </details>
 <br/>
 
- 3.12 On the `Select Uplink Profile East-West` screen, select `nsx-edge-single-nic-uplink-profile` from the `Select Uplink Profile` pulldown menu and click `Next`
+ 3.12 On the `Select Uplink Profile East-West` screen, click the `Select Uplink Profile` pulldown menu and select the `nsx-edge-single-nic-uplink-profile` and click `Next`
 
 <details><summary>Screenshot 3.12</summary>
 <img src="Images/2019-07-13-01-47-52.png">
@@ -412,10 +435,10 @@ After making the changes to the `nsxedge-1` VM, power the VM on via the vCenter 
 </details>
 <br/>
 
- 3.19 On the `Link To Transport Zone North-South` screen, leave the `Assignment IP Address` value blank/empty as shown in the screenshot below. In the `NSX Edge NIC Connections` section, set the value for `fp-eth0` to `uplink-1` and click `Next`
+ 3.19 On the `Link To Transport Zone North-South` screen, tin the `NSX Edge NIC Connections` section, set the value for `fp-eth0` to `uplink-1` and click `Next`
 
 <details><summary>Screenshot 3.19</summary>
-<img src="Images/2019-07-13-01-55-12.png">
+<img src="Images/2019-11-17-15-07-41.png">
 </details>
 <br/>
 
@@ -440,11 +463,9 @@ After making the changes to the `nsxedge-1` VM, power the VM on via the vCenter 
 </details>
 <br/>
 
- 
-
 ## Step 4: Prepare and Configure ESXi Hosts as NSX-T Transport Nodes
 
-Preparing hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kernel modues) and configuring the NSX tunnel endpoints and participation in the N-VDS overlay fabric.
+To prepare hosts for NSX-T,  NSX-T Manager will deploy and install NSX VIBs (i.e.kernel modues), configure the NSX tunnel endpoints, which enables host participation in the N-VDS overlay fabric.
 
  4.1 From the NSX Manager UI go to the `System > Get Started` page and click `SET UP TRANSPORT NODES` 
 
@@ -585,7 +606,7 @@ Preparing hosts entails NSX Manager deploying and installing NSX VIBs (i.e.kerne
  4.17 On the `System` tab in NSX Manager UI, In the left navigation bar expand the `Fabric` section and select `Nodes`. Select the `Host Transport Nodes` tab, set the `Managed by` field to `vcsa-01a`, expand the `RegionA01-MGMT01` and `RegionA01-COMP01` sections and ensure the `Configuration State` is `Success` and the `Node Status` is `Up` for all of the hosts
 
 <details><summary>Screenshot 4.17</summary>
-<img src="Images/2019-07-13-02-42-10.png">
+<img src="Images/2019-11-17-15-38-04.png">
 </details>
 <br/>
 

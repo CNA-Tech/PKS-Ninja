@@ -1,7 +1,5 @@
 # Lab PKS Installation Phase 1
 
-**New:**[Video Walkthrough for this Lab Guide](https://www.youtube.com/watch?v=dzkCwLvVSng&t=5s)
-
 **Contents:**
 
 - [Lab PKS Installation Phase 1](#lab-pks-installation-phase-1)
@@ -16,32 +14,22 @@
 
 This lab guide along with the PKS Install Phase 2 lab guide will walk through the process of installing PKS for vSphere with NSX-T in the PKS Ninja lab environment. 
 
-The Phase 1 install aligns with the [Deploying NSX-T v2.4 for Enterprise PKS
-] documentation steps 18-21, and 23. Please refer to this documentation for further details and explanations.  
-
-For PKS Ninja students using the labs provided in the course, the lab admins will provide you with instructions on accessing the lab environment. 
-
-Obtaining IP address of the ControlCenter desktop (If using VMware Learning Platform): From browser on the virtual lab environment deskop, go to http://myip.oc.vmware.com/
-
-All instructions in this lab guide should be performed from the ControlCenter desktop unless otherwise specified.
+The Phase 1 install aligns with the [Installing Enterprise PKS on vSphere with NSX-T Data Center](https://docs.vmware.com/en/VMware-Enterprise-PKS/1.6/vmware-enterprise-pks-16/GUID-vsphere-nsxt-index.html) documentation steps 5-8. Please refer to this documentation for further details and explanations.  
 
 ## Prerequisites
 
-PKS installation on vSphere requires NSX-T to be installed and Pre-Configured in accordance with the [NSX-T Manual Installation](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtManualInstall-IN1497#overview-of-tasks-covered-in-lab-1) and [NSX-T Configuration for PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/NsxtConfigForPks-NC5947) lab guides on this site.
-
-For VLP and Onecloud users, The CNABU-PKS-Ninja-v12-NsxtReady template has NSX-T preinstalled and preconfigured, so you can load up that template and proceed with the instructions in this lab guide if you do not want to install/configure NSX-T.
+The PKS installation path in this guide requires NSX-T to be installed and Pre-Configured in accordance with the [NSX-T Manual Installation](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.6/LabGuides/NsxtManualInstall-IN1497#overview-of-tasks-covered-in-lab-1) and [NSX-T Configuration for PKS](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.6/LabGuides/NsxtConfigForPks-NC5947) lab guides on this site.
 
 ## Step 1: Deploy Ops Manager
 
 1.1 Login to the vSphere client using the windows system credentials, right click on the `pks-mgmt-1` resource pool and select `Deploy OVF Template`. On the `Select template` screen, select `Local File` and navigate to the Ops Manager OVA file. The file is E:\Downloads, and the file name should begin with "ops-manager-vsphere-" and click `Next`
-
 
 <details><summary>Screenshot 1.1.1</summary>
 <img src="Images/2019-06-18-15-45-06.png">
 </details>
 
 <details><summary>Screenshot 1.1.2</summary>
-<img src="Images/2019-06-18-15-46-55.png">
+<img src="Images/2019-11-18-15-36-13.png">
 </details>
 <br/>
 
@@ -62,7 +50,7 @@ For VLP and Onecloud users, The CNABU-PKS-Ninja-v12-NsxtReady template has NSX-T
 1.4 On the `Review details` screen, confirm the details and click `Next`
 
 <details><summary>Screenshot 1.4</summary>
-<img src="Images/2019-06-18-15-50-12.png">
+<img src="Images/2019-11-18-15-37-08.png">
 </details>
 <br/>
 
@@ -75,7 +63,7 @@ Note: When you select the datastore, the UI resets the value for the virtual dis
 </details>
 <br/>
 
-1.6 On the `Select networks` screen, ensure the `Destination Network` is set to `ls-pks-mgmt`
+1.6 On the `Select networks` screen, ensure the `Destination Network` is set to `ls-pks-mgmt` and click `NEXT`
 
 <details><summary>Screenshot 1.6</summary>
 <img src="Images/2019-06-18-15-52-39.png">
@@ -88,9 +76,9 @@ Note: When you select the datastore, the UI resets the value for the virtual dis
   - Netmask: 255.255.255.0
   - Default Gateway: 172.31.0.1
   - DNS: 192.168.110.10
-  - NTP Servers: ntp.corp.local
+  - NTP Servers: 192.168.100.1
   - Admin Password: VMware1!
-  - Public SSH Key: (leave blank)
+  - Public SSH Key: Open C:\hol\SSH\keys\cc_authkey.txt with notepad, copy the key text, and paste the value here.
   - Custom Hostname: opsman
 
 <details><summary>Screenshot 1.7</summary>
@@ -134,7 +122,7 @@ Note: When you select the datastore, the UI resets the value for the virtual dis
 - Check "I agree to the terms and conditions..."
 - Click "Setup Authentication"
 
-_Note: After clicking `Setup Authentication` it will take several minutes for the authentication system to start. The login screen will appear after the authentication system is finished starting up._
+_Note: After clicking `Setup Authentication` it will take several minutes for the authentication system to startm you can proceed with the next step while waiting. The login screen will appear after the authentication system is finished starting up._
 
 <details><summary>Screenshot 1.12</summary>
 <img src="Images/2018-10-21-19-49-15.png">
@@ -150,7 +138,7 @@ _Note: After clicking `Setup Authentication` it will take several minutes for th
 
 ## Step 2: Deploy BOSH
 
-2.1 From the ControlCenter desktop, open putty and connect to `cli-vm` with username `ubuntu` and password `VMware1!`
+2.1 From the ControlCenter desktop, open putty and connect to the saved session for `ubuntu@cli-vm`.
 
 <details><summary>Screenshot 2.1</summary>
 <img src="Images/2019-06-19-16-51-53.png">
@@ -181,13 +169,15 @@ subjectAltName = @alt_names
 [alt_names]
 DNS.1 = 192.168.110.42
 DNS.2 = nsxmgr-01a.corp.local
+DNS.3 = nsxmgr01a-1.corp.local
+DNS.4 = 192.168.110.31
 
 ```
 
 This file will be used as a certificate signing request, in the following step you will use this file to request to NSX-T Manager to generate and self-sign a certificate using the specifications in this file. 
 
 <details><summary>Screenshot 2.2</summary>
-<img src="Images/2019-07-15-14-13-06.png">
+<img src="Images/2019-11-20-23-53-09.png">
 </details>
 <br/>
 
@@ -257,7 +247,7 @@ cat /home/ubuntu/nsx.key
 </details>
 
 <details><summary>Screenshot 2.8.3</summary>
-<img src="Images/2019-07-15-14-45-31.png">
+<img src="Images/2019-11-20-23-29-28.png">
 </details>
 
 <details><summary>Screenshot 2.8.4</summary>
@@ -273,15 +263,15 @@ cat /home/ubuntu/nsx.key
 export NSX_MANAGER_IP_ADDRESS=192.168.110.42
 export NSX_MANAGER_COMMONNAME=192.168.110.42
 export CERTIFICATE_ID="Replace_this_text_with_your_certificate_ID_from_the_previous_step"
-curl --insecure -u admin:'VMware1!VMware1!' -X POST "https://$NSX_MANAGER_IP_ADDRESS/api/v1/node/services/http?action=apply_certificate&certificate_id=$CERTIFICATE_ID"
+curl --insecure -u admin:'VMware1!VMware1!' -X POST "https://$NSX_MANAGER_IP_ADDRESS/api/v1/cluster/api-certificate?action=set_cluster_certificate&certificate_id=$CERTIFICATE_ID"
 ```
 
 <details><summary>Screenshot 2.9</summary>
-<img src="Images/2019-07-15-14-57-26.png">
+<img src="Images/2019-11-21-00-04-22.png">
 </details>
 <br/>
 
-2.10 From the Ops Manager web UI, click on the tile `BOSH Director for vSphere`
+2.10 Return to the Ops Manager web UI, login again if needed, click on the tile `BOSH Director for vSphere`
 
 <details><summary>Screenshot 2.10</summary>
 <img src="Images/2018-10-21-21-07-42.png">
@@ -386,7 +376,7 @@ _Note: Each of the availability zones below will have a single cluster. When you
 </details>
 <br/>
 
-2.17 Select the `Resource Config` tab and change the value of the `VM Type` in the second row to the third medium option `medium.disk` as shown in Screenshot 2.13, and click `Save`
+2.17 Select the `Resource Config` tab and change the value of the `VM Type` in the second row for the `Master Compilation Job` to the third medium option `medium.disk` as shown in Screenshot 2.13, and click `Save`
 
 <details><summary>Screenshot 2.17</summary>
 <img src="Images/2019-01-08-19-55-48.png">
@@ -431,7 +421,7 @@ _Note: To save time, you will open another instance of Ops Manager admin console
 3.2 Login to the Ops Manager UI, Click `Import a Product`, select the `PKS` binary file in the E:\Downloads directory as shown in screenshot 3.2. Wait for the import to complete, which could take a few minutes.
 
 <details><summary>Screenshot 3.2 </summary>
-<img src="Images/2019-06-20-15-02-15.png">
+<img src="Images/2019-11-21-00-20-24.png">
 </details>
 <br/>
 
@@ -617,6 +607,8 @@ _Note: Login for NSX Manager UI is: `admin/VMware1!VMware1!`_
 <img src="Images/2019-06-20-17-05-49.png">
 </details>
 <br/>
+
+3.13 Return to the Ops Manager web ui. Ensure that the BOSH Director installation completes before proceeding.
 
 _**Note: Do not discard the values you've stored in Notepad++, you will need them again for PKS Install Phase 2.**_
 
