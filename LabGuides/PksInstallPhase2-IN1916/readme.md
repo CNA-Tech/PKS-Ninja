@@ -2,10 +2,14 @@
 
 ## Install PKS
 
-1.1 Login to the Ops Manager UI and click on the orange PKS tile view the tile configuration
+1.1 Login to the Ops Manager UI. On the left navigation bar under `Import a Product`, you should see an entry for an `Enterprise PKS` with the version and build number listed, with a `+` icon. Click on the `+` icon as shown in the screenshot below, and then click on the orange PKS tile view the tile configuration.
 
-<details><summary>Screenshot 1.2 </summary>
-<img src="Images/2018-10-22-01-55-47.png">
+<details><summary>Screenshot 1.1.1 </summary>
+<img src="Images/2019-11-21-00-48-06.png">
+</details>
+
+<details><summary>Screenshot 1.1.2 </summary>
+<img src="Images/2019-11-21-00-49-00.png">
 </details>
 <br>
 
@@ -40,6 +44,24 @@
 
 1.5 Select the `Plan 1` tab and enter the following values:
 
+- Name: tiny
+- Master/ETCD Availability Zones: PKS-COMP
+- Worker Node Instances: 1
+- Worker Persistent Disk Type: 20gb
+- Worker Availability Zone: PKS-COMP
+- Allow Privileged: true
+- Click `Save`
+
+<details><summary>Screenshot 1.5</summary>
+<img src="Images/2019-11-21-00-55-10.png">
+</details>
+<br/>
+
+1.6 Select the `Plan 2` tab and enter the following values:
+
+- Plan: Active
+- Name: small
+- Master/ETCD Node Instances: 1
 - Master/ETCD Availability Zones: PKS-COMP
 - Worker Node Instances: 2
 - Worker Persistent Disk Type: 20gb
@@ -47,15 +69,8 @@
 - Enable Priviledged Containers: true
 - Click `Save`
 
-<details><summary>Screenshot 1.5</summary>
-<img src="Images/2018-10-22-19-31-47.png">
-</details>
-<br/>
-
-1.6 Select the `Plan 2` tab and ensure the plan is set to `Inactive`
-
 <details><summary>Screenshot 1.6</summary>
-<img src="Images/2019-07-15-16-23-29.png">
+<img src="Images/2019-11-21-00-57-30.png">
 </details>
 <br/>
 

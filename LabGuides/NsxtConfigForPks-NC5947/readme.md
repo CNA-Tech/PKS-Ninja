@@ -1,10 +1,8 @@
-# NSX-T 2.4.1 Configuration for Enterprise PKS
-
-**New:**[Video Walkthrough for this Lab Guide](https://youtu.be/pFB7_-Fd7S0)
+# NSX-T 2.5.0 Configuration for Enterprise PKS
 
 ## Overview
 
-The following installation guide walks through the configuration of NSX-T 2.4.1 for VMware Enterprise PKS. The steps and variables used in this Lab Guide are specific to the PKS-Ninja-v12 lab templates. 
+The following installation guide walks through the configuration of NSX-T 2.5.0 for VMware Enterprise PKS. The steps and variables used in this Lab Guide are specific to the PKS-Ninja-T1-{BuildName}0.x lab templates. 
 
  Anyone is welcome to build a similar lab environment and follow along with the lab exercises, but please note you will need to replace any variables such as IP addresses and FQDNs and replace them with the appropriate values for your lab environment.
 
@@ -12,7 +10,9 @@ The steps provided in this lab guide are intended for a lab implementation and d
 
 ## Prerequisites
 
-- Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
+- To use this lab guide, you must use either the PKS-Ninja-T1-NsxtInstalled template, or if you prefer to install NSX-T yourself, you can also load the PKS-Ninja-T1-
+
+- Please see [Getting Access to a PKS Ninja Lab Environment](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.6/Courses/GetLabAccess-LA8528) to learn about how to access or build a compatible lab environment
 
 ## Installation Notes
 
@@ -20,11 +20,11 @@ Anyone who implements any software used in this lab must provide their own licen
 
 For those needing access to VMware licensing for lab and educational purposes, we recommend contacting your VMware account team. Also, the [VMware User Group's VMUG Advantage Program](https://www.vmug.com/Join/VMUG-Advantage-Membership) provides a low-cost method of gaining access to VMware licenses for evaluation purposes.
 
-This lab guide follows steps that are customized for a specific lab environment, to support other implementations and to find additional information, please see the [Installing Enterprise PKS on vSphere with NSX-T Data Center](https://docs.vmware.com/en/VMware-Enterprise-PKS/1.4/vmware-enterprise-pks-14/GUID-vsphere-nsxt-index.html) page in the VMware Enterprise PKS 1.4 Documentation. 
+This lab guide follows steps that are customized for a specific lab environment, to support other implementations and to find additional information, please see the [Installing Enterprise PKS on vSphere with NSX-T Data Center](https://docs.vmware.com/en/VMware-Enterprise-PKS/1.6/vmware-enterprise-pks-16/GUID-vsphere-nsxt-index.html) page in the VMware Enterprise PKS 1.6 Documentation. 
 
 ## Overview of Tasks Covered in Lab 1
 
-- [NSX-T 2.4.1 Configuration for Enterprise PKS](#nsx-t-241-configuration-for-enterprise-pks)
+- [NSX-T 2.5.0 Configuration for Enterprise PKS](#nsx-t-250-configuration-for-enterprise-pks)
   - [Overview](#overview)
   - [Prerequisites](#prerequisites)
   - [Installation Notes](#installation-notes)
@@ -33,12 +33,6 @@ This lab guide follows steps that are customized for a specific lab environment,
   - [Step 2: Create the Enterprise PKS Management Plane](#step-2-create-the-enterprise-pks-management-plane)
   - [Step 3: Create NAT Rules for PKS Management and Compute Plane Operations](#step-3-create-nat-rules-for-pks-management-and-compute-plane-operations)
   - [Step 4: Create IP Pools & Blocks needed for PKS](#step-4-create-ip-pools--blocks-needed-for-pks)
-
-NOTE: NSX Manager OVA cannot be installed via HTML5 client, so for installation labs please use the vSphere web client (Flash-based).
-
-If you intend to follow the manual NSX-T install with the automated pipeline for PKS, be sure to match the naming of objects/properties/configurations in this lab guide exactly.
-
-This section follows the standard documentation, which includes additional details and explanations: [Planning, Preparing, and Configuring NSX-T for Enterprise PKS](https://docs.vmware.com/en/VMware-Enterprise-PKS/1.4/vmware-enterprise-pks-14/GUID-nsxt-prepare-env.html)
 
 -----------------------
 
@@ -137,8 +131,6 @@ Log into the NSX Manager UI with username `admin` and password `VMware1!VMware1!
 
 ## Step 2: Create the Enterprise PKS Management Plane
 
-For additional detail, please see the [corresponding section in the official documentation](https://docs.vmware.com/en/VMware-Enterprise-PKS/1.4/vmware-enterprise-pks-14/GUID-nsxt-prepare-mgmt-plane.html)
-
 2.1 Create NSX-T Logical Switch for the Enterprise PKS Management Plane
 
 Navigate to the `Advanced Networking & Security > Switching` page and click `+ADD` and add a new logical switch with the following parameters:
@@ -157,7 +149,7 @@ Navigate to the `Advanced Networking & Security > Switching` page and click `+AD
 Navigate to the `Advanced Networking & Security > Routers` page and click `+ > Tier-1 Router` and add a new Tier-1 Router with the following parameters but ignore the Screen Shot for the Edge Cluster variable and leave this value blank. If you select an Edge Cluster for your T1 Router, NSX will deploy a T1-SR and hair pin all your E/W traffic through this SR. If you do not deploy a T1 SR then your E/W traffic will be distributed accross all your Transport Nodes T1-DR. For PKS with NAT we are running all services on the T0-SR and a T1-SR is not needed:
 - Name: `t1-pks-mgmt`
 - Tier-0 Router: `t0-pks`
-- Edge Cluster: 
+- Edge Cluster: edge-cluster-1
 - Click **Add**
 
 <details><summary>Screenshot 2.2.1</summary>
@@ -191,11 +183,11 @@ Navigate to the `Advanced Networking & Security > Routers` page and click `+ > T
 2.4 From the `Advanced Networking & Security > Routers > t1-pks-mgmt` page, and on the `Routing` pulldown menu, select `Route Advertisement`, under `Router Advertisement` click `Edit` and configure the available options with the following parameters:
 
 - Enable the following fields (Yes):
-  - Status
-  - Advertise All Connected Routes
+  - Status: Enabled
+  - Advertise All Connected Routes: Yes
 - Click `Save`
 
-<details><summary>Screenshot 2.4.1</summary>
+<details><summary>Screenshot 2.5.0</summary>
 <img src="Images/2019-06-15-12-57-21.png">
 </details>
 
@@ -213,7 +205,7 @@ Navigate to the `Advanced Networking & Security > Routers` page and click `+ > T
 
 ## Step 3: Create NAT Rules for PKS Management and Compute Plane Operations
 
-3.1 The PKS Management  and Compute Plane Networks are deployed to private subnets in the standard Ninja topology (PKS also supports using routed subnets), this requires several NAT rules to be implemented for communications between these isolated private networks and any hosts not directly attached to the subnet, including vCenter and NSX Managers, ESXi Hosts, Jumpboxes & Management hosts. The following steps implement the standard NAT rules used in the Ninja lab environment to enable communications between the PKS Management/Compute Networks and the rest of the lab environment.
+3.1 The PKS Management and Compute Plane Networks are deployed to private subnets in the standard Ninja topology (PKS also supports using routed subnets), this requires several NAT rules to be implemented for communications between these isolated private networks and any hosts not directly attached to the subnet, including vCenter and NSX Managers, ESXi Hosts, Jumpboxes & Management hosts. The following steps implement the standard NAT rules used in the Ninja lab environment to enable communications between the PKS Management/Compute Networks and the rest of the lab environment.
 
 To Create a DNAT Rule to enable external access to PKS Management Plane VM's (BOSH Director, Ops Manager, PKS API, Harbor Container Registry), From the `Advanced Networking & Security > Routers` page, click on the `t0-pks` logical router to bring up its details. Click the `Services` Pulldown Menu and select `NAT`. In the NAT pane click `+ADD` and add a DNAT rule with the following parameters:
 
@@ -261,7 +253,7 @@ To Create a DNAT Rule to enable external access to PKS Management Plane VM's (BO
 
 3.4 Add **SNAT** rules to translate the PKS Management Subnets and the Pod and Node IP Blocks assigned to Kubernetes Clusters with valid external IP addresses to support outbound communications
 
-- On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
+- On New Nat Rule Screen for the `t0-pks` router, click `+ADD` and add another rule with the following parameters:
   - Priority: `1020`
   - Action: `SNAT`
   - Source IP: `172.31.0.2`
@@ -352,11 +344,11 @@ In addition, create a Floating IP Pool from which to assign routable IP addresse
 
 - Name: `ip-block-nodes-deployments`
 - CIDR: `172.15.0.0/16`
-- Click `Save`
+- Click `ADD`
 - Click `+ADD` to add an additional IP Address Block
 - Name: `ip-block-pods-deployments`
 - CIDR: `172.16.0.0/16`
-- Click `Save`
+- Click `ADD`
 
 <details><summary>Screenshot 4.1.1</summary>
 <img src="Images/2019-07-13-14-15-29.png">
@@ -371,11 +363,11 @@ In addition, create a Floating IP Pool from which to assign routable IP addresse
 </details>
 <br/>
 
-4.2 To create the floating IP Pool for Kubernetes Load Balancer Virtual IP Addresses,  in the NSX Manager UI navigate to `Advanced Networking & Security > Inventory > Groups` page and click on the `IP Pools` tab. Click `+ADD` and add an IP Pool with the following parameters:
+4.2 To create the floating IP Pool for Kubernetes Load Balancer Virtual IP Addresses, in the NSX Manager UI navigate to `Advanced Networking & Security > Inventory > Groups` page and click on the `IP Pools` tab. Click `+ADD` and add an IP Pool with the following parameters:
 
 - Name: `ip-pool-vips`
 - Click `Add` under Subnets
-- IP Range: `10.40.14.34-10.40.14.62`
+- IP Range: `10.40.14.41-10.40.14.62`
 - Gateway: `10.40.14.33`
 - CIDR: `10.40.14.32/27`
 - DNS Servers: `192.168.110.10`
@@ -390,8 +382,6 @@ In addition, create a Floating IP Pool from which to assign routable IP addresse
 <img src="Images/2019-06-17-15-16-44.png">
 </details>
 <br/>
-
-## Step 5: Configure 2nd interface on cli-vm
 
 ------------------
 
