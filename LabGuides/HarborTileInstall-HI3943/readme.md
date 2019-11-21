@@ -6,9 +6,7 @@
 
 ## Install Harbor
 
-Please Note: if you are using the PKS-Ninja-v12-Baseline-0.5, NsxtReady-0.3 or older template, you will need to apply the [Workaround for Issue # 507](https://github.com/CNA-Tech/PKS-Ninja/issues/507) to fix the issue before you can proceed, its a very simple workaround, and there is also a [video walkthrough of the resolution here](https://youtu.be/RrNuBXbXuzo). If you are using a newer template, this issue will not affect you, please proceed.
-
-1.0 To download Harbor Installation Binaries, from the control center desktop, open a browser to Pivnet [https://network.pivotal.io/products/harbor-container-registry/](https://network.pivotal.io/products/harbor-container-registry/) and sign in. If you do not have an account, you can easily create one, no special entitlements are required. Download the Harbor Container registry. At the time of writing, `VMware Harbor Container Registry for PCF 1.8.1` was used to prepare this lab guide, however feel free to try with the latest Harbor version if you prefer.
+1.0 To download Harbor Installation Binaries, from the control center desktop, open a browser to Pivnet [https://network.pivotal.io/products/harbor-container-registry/](https://network.pivotal.io/products/harbor-container-registry/) and sign in. If you do not have an account, you can easily create one, no special entitlements are required. Download the Harbor Container registry. At the time of writing, `VMware Harbor Container Registry for PCF 1.8.5` was used to prepare this lab guide, however feel free to try with the latest Harbor version if you prefer.
 
 1.1 On a new browser tab, open a connection to the Ops Manager UI, click on `Import a Product` select the Harbor file from the `E:\Downloads` directory and click `Open`. It can take a few minutes to import the Harbor file
 
@@ -25,6 +23,35 @@ Please Note: if you are using the PKS-Ninja-v12-Baseline-0.5, NsxtReady-0.3 or o
 
 <details><summary>Screenshot 1.2 </summary>
 <img src="Images/2018-10-22-21-45-54.png">
+</details>
+<br/>
+
+1.2b Depending on the version and build of PKS you used for installation, you may be required to install a stemcell for Harbor. If you are required to install an additional stemcell, the `VMware Harbor Registry` tile on the Ops Manager homepage will say `Missing Stemcell` as shown in the image below. If the tile does not say `Missing Stemcell`, you can skip this step.
+
+If you see the `Missing Stemcell` message, click it and you will be directed to the stemcell page. On the row for `VMware Harbor Registry`. the required stemcell version will be displayed in the `Required` column. Go to pivnet per the instrucitons in step 1.0, look for the `Pivotal Stemcells (Ubuntu Xenial)` product, select the version number needed for Harbor, and download the relevant stemcell for vsphere.
+
+After you have downloaded the required stemcell, return to the `Stemcell Library` page. On the row for `VMware Harbor Registry`, click `Import Stemcell` select the stemcell file you downloaded and click open. This will bring up the `Import Stemcell` prompt, click `Apply Stemcell to Products`.
+
+NOTE: You may see an error message saying opsman was unable to apply the stemcell, you should be able to ignor this error message. I (the lab author) did get this error message, but returned to the opsman homepage and no longer saw the missing stemcell message and was able to proceed with harbor tile configuration, so it appears this is not a valid error message.
+
+<details><summary>Screenshot 1.2b.1</summary>
+<img src="Images/2019-11-21-01-45-24.png">
+</details>
+
+<details><summary>Screenshot 1.2b.2</summary>
+<img src="Images/2019-11-21-01-48-52.png">
+</details>
+
+<details><summary>Screenshot 1.2b.3</summary>
+<img src="Images/2019-11-21-01-49-49.png">
+</details>
+
+<details><summary>Screenshot 1.2b.4</summary>
+<img src="Images/2019-11-21-01-53-16.png">
+</details>
+
+<details><summary>Screenshot 1.2b.5</summary>
+<img src="Images/2019-11-21-01-55-19.png">
 </details>
 <br/>
 
@@ -68,28 +95,26 @@ Please Note: if you are using the PKS-Ninja-v12-Baseline-0.5, NsxtReady-0.3 or o
 </details>
 <br/>
 
-1.8 On the `Credentials` tab, set the `Admin Password` to `VMware1!` and click `Save`
+1.8 On the `Credentials` tab, set the `Admin Password` and the `Admin Password to run smoke test` to `VMware1!` and click `Save`
 
 <details><summary>Screenshot 1.8</summary>
-<img src="Images/2018-10-22-22-13-53.png">
+<img src="Images/2019-11-21-02-02-03.png">
 </details>
 <br/>
 
 1.9 On the `Clair Settings` tab, set the `Updater Interval` to `1` and click `Save`
 
 <details><summary>Screenshot 1.9</summary>
-<img src="Images/2018-10-22-22-13-53.png">
+<img src="Images/2019-11-21-02-02-41.png">
 </details>
 <br/>
 
-1.10 On the `Resource Config` tab, set the `Persistent Disk Type` to `50 GB`
+1.10 On the `Resource Config` tab, for the `harbor-app` job, set the `Persistent Disk Type` to `50 GB` and click `Save`
 
 <details><summary>Screenshot 1.10</summary>
 <img src="Images/2018-10-22-22-18-57.png">
 </details>
 <br/>
-
-**STOP**: Before proceeding, ensure that the PKS tile deployment has completed.  There will be a blue bar across the top that will show `Applying Changes` and a button for `Show Progress` as it continues to apply
 
 1.11 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes`. Uncheck the checkbox by `Pivotal Container Service` and click `Apply Changes`. Monitor the `Applying Changes` screen until the deployment is complete
 
@@ -107,6 +132,6 @@ To ensure developer and automated workflows can have secure interaction with Har
 
 Please complete the [Installing Harbor Cert on External Clients](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/LabGuides/HarborCertExternal-HC7212) lab guide to learn the required steps and prepare cli-vm with needed configuration to complete other harbor exercises if you plan to proceed with additional harbor lab guides.
 
-This lab guide does not include steps to validate the harbor installation because it takes time to deploy harbor, so after installation and client prep is a good natural break. To continue with validation, please continue with the next step from your course guide, or refer to the [PKS Ninja SE course guide agenda](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.4/Courses/PksNinjaSe-NI6310#ninja-labs-part-1-agenda) for next steps
+This lab guide does not include steps to validate the harbor installation because it takes time to deploy harbor, so after installation and client prep is a good natural break. To continue with validation, please continue with the next step from your course guide, or refer to the [PKS Ninja SE course guide agenda](https://github.com/CNA-Tech/PKS-Ninja/tree/Pks1.6/Courses/PksNinjaSe-NI6310#ninja-labs-part-1-agenda) for next steps
 
 ***End of lab***

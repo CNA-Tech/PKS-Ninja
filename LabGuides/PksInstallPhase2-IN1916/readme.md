@@ -74,7 +74,7 @@
 </details>
 <br/>
 
-1.7 Select the `Plan 3` tab, set the value for `Plan` to `Inactive` and click `Save`
+1.7 Select the `Plan 3` tab, ensure the value for `Plan` is set to `Inactive` and click `Save`
 
 <details><summary>Screenshot 1.7</summary>
 <img src="Images/2018-10-22-19-39-35.png">
@@ -132,7 +132,7 @@ Login for NSX Manager UI is: admin/VMware1!
 - Container Networking Interface: `NSX-T`
 - NSX Manager Hostname: `192.168.110.42`
 - NSX Manager Super User Principal Identity Certificate: Use the PI certificate and key values you copied to Notepad++ in the PKS Install Phase 1 lab, pasting the certificate in the first box and the key in the second box
-- NSX Manager CA Cert: Use the NSX MGR certificate value you copied to Notepad++ in the PKS Install Phase 1 lab, this should also be saved as nsx.crt on your desktop
+- NSX Manager CA Cert: Use the NSX API certificate value you copied to Notepad++ in the PKS Install Phase 1 lab, this should also be saved as nsx.crt on your desktop
 - Disable SSL certificate verification: `True`
 - NAT mode: `True`
 - Pods IP Block ID: Use the value you gathered above
@@ -154,39 +154,46 @@ Login for NSX Manager UI is: admin/VMware1!
 </details>
 <br/>
 
-1.11 Select the `UAA` tab, click the radio button for `Internal UAA` and then click `Save`
+1.11 Select the `UAA` tab and enter the following values:
+
+- Configure your UAA user account store with either internal or external authentication mechanisms: `Internal UAA`
+- Click `Save`
 
 <details><summary>Screenshot 1.11</summary>
-<img src="Images/2018-10-22-20-30-52.png">
+<img src="Images/2019-11-21-01-14-24.png">
 </details>
 <br/>
 
-1.12 Select the `Logging` tab, check the box to `Enable VMware vRealize Log Insight Integration` and enter the following values:
+1.12 Select the `Host Monitoring` tab, check the box to `Enable VMware vRealize Log Insight Integration` and enter the following values:
 
 - Host: `vrli-01a.corp.local`
 - Disable SSL Certificate Validation: `True`
 - Click Save
 
 <details><summary>Screenshot 1.12</summary>
-<img src="Images/2019-07-15-16-37-27.png">
+<img src="Images/2019-11-21-01-15-53.png">
 </details>
 <br/>
 
-1.13 Select the `Usage Data` tab, select `No, I do not want to join the CEIP and Telemetry Program for PKS` and click `Save`
+1.13 Select the `CEIP and Telemtetry` tab and enter the following values:
+
+- Please select your participation level in the CEIP and Telemetry program:
+  - `None: No data will be collected from your PKS installation and you will not be eligible for any benefits`
+- Please select how you will be using this PKS Installation:
+  - `Demo or Proof-of-concept`
+- Click `Save`
 
 <details><summary>Screenshot 1.13</summary>
-<img src="Images/2018-10-31-14-07-35.png">
+<img src="Images/2019-11-21-01-19-43.png">
 </details>
 <br/>
 
-1.14 Select the `Resource Config` tab and set the `VM Type` for the `Pivotal Container Service` job to `medium.disk`
+1.14 Select the `Resource Config` tab and set the `VM Type` for the `Pivotal Container Service` job to `medium.disk` and click `Save`
 
 <details><summary>Screenshot 1.14</summary>
 <img src="Images/2019-07-15-16-42-18.png">
 </details>
 <br/>
-
-_**Stop: Verify that BOSH tile has completed before continuing.**
 
 1.15 In the Ops Manager UI on the top menu bar click `Installation Dashboard`, next select `Review Pending Changes` and on the `Review Pending Changes`, select `Apply Changes`
 

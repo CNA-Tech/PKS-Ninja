@@ -290,22 +290,22 @@ To Create a DNAT Rule to enable external access to PKS Management Plane VM's (BO
 - On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
   - Action: `SNAT`
   - Source IP: `172.16.0.0/24`
-  - Translated IP: `10.40.14.37`
+  - Translated IP: `10.40.14.36`
   - Click `ADD`
 - On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
   - Action: `SNAT`
   - Source IP: `172.16.1.0/24`
-  - Translated IP: `10.40.14.38`
+  - Translated IP: `10.40.14.37`
   - Click `ADD`
 - On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
   - Action: `SNAT`
   - Source IP: `172.16.2.0/24`
-  - Translated IP: `10.40.14.39`
+  - Translated IP: `10.40.14.38`
   - Click `ADD`
 - On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
   - Action: `SNAT`
   - Source IP: `172.16.3.0/24`
-  - Translated IP: `10.40.14.40`
+  - Translated IP: `10.40.14.39`
   - Click `ADD`
 - On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
   - Action: `SNAT`
@@ -315,7 +315,7 @@ To Create a DNAT Rule to enable external access to PKS Management Plane VM's (BO
 - On New Nat Rule Screen click `+ADD` and add another rule with the following parameters:
   - Action: `SNAT`
   - Source IP: `172.16.0.0/16`
-  - Translated IP: `10.40.14.33`
+  - Translated IP: `10.40.14.40`
   - Click `ADD`
 
 
@@ -367,7 +367,7 @@ In addition, create a Floating IP Pool from which to assign routable IP addresse
 
 - Name: `ip-pool-vips`
 - Click `Add` under Subnets
-- IP Range: `10.40.14.41-10.40.14.62`
+- IP Range: `10.40.14.34-10.40.14.62`
 - Gateway: `10.40.14.33`
 - CIDR: `10.40.14.32/27`
 - DNS Servers: `192.168.110.10`

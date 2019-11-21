@@ -4,10 +4,11 @@
 
 **Note: If you completed your PKS installation using the concourse pipeline, or if you started with a PksInstalled lab template, the UAA account has already been created for you by the pipeline, and you can skip to step 2. Please review Step1 so you have an understanding of how to create UAA accounts, as this is a regular, ongoing task for PKS administration that needs to be done using the manual procedure documented here to add additional user accounts after initial installation.**
 
-1.1 Login to Ops Manager UI, Click on the Pivotal Container Service tile and then click on the `Credentials` tab, look for `Pks Uaa Management Admin Client` , click `Link to Credential`
+1.1 Login to Ops Manager UI, Click on the `Enterprise PKS` tile and then click on the `Credentials` tab, look for `Pks Uaa Management Admin Client` , click `Link to Credential`
 
 - From the control center, open a browser and navigate to https://opsman.corp.local
-- User name / password: admin / VMware1!
+- User name: admin
+- Password: VMware1!
 
 <details><summary>Screenshot 1.1 </summary>
 <img src="images/2018-10-24-05-19-50.png">
@@ -42,7 +43,11 @@ uaac token client get admin -s LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr
 </details>
 <br/>
 
-- Alternatively, you can use SSL to authenticate and encrypt the traffic from cli-vm to the bosh pks api. In the cli-vm client, create a new folder in your user directory called pksapi-cert. Create the certificate file pksapi.crt file and paste the PKS api certificate downloaded from the PKS tile > PKS API > Certificate field.
+- Alternatively, you can use SSL to authenticate and encrypt the traffic from cli-vm to the bosh pks api: 
+
+<details><summary>Click here to see alternative instructions to authenticate with the ssl certificate rather than the token</summary>
+
+ In the cli-vm client, create a new folder in your user directory called pksapi-cert. Create the certificate file pksapi.crt file and paste the PKS api certificate downloaded from the PKS tile > PKS API > Certificate field.
 ```bash:
 vi ~/pksapi-cert/pksapi.crt
 i for insert
@@ -54,6 +59,10 @@ From the `cli-vm` CLI, target your UAA server and request a token with the follo
 uaac target https://pks.corp.local:8443 --ca-cert ~/pksapi-cert/pksapi.crt
 uaac token client get admin -s LtrWeSarpeGbnM_h0kJB5Ddxy0emt5qr
 ```
+
+</details>
+</br>
+
 1.4 From `cli-vm` putty session, enter the following commands to create a UAA account and assign admin rights to new user `pks-admin`:
 
 ```bash:
@@ -68,12 +77,11 @@ uaac member add pks.clusters.admin pksadmin
 2.1 From `cli-vm`, Login to the PKS CLI with the following command:
 
 ```bash
-pks login -a pks.corp.local -u pksadmin --skip-ssl-validation
+pks login -a pks.corp.local -u pksadmin -p VMware1! --skip-ssl-validation
 ```
-
-- Password: `VMware1!`
-
-<details><summary>Screenshot 2.1</summary><img src="images/2019-01-09-23-47-00.png"></details><br>
+<details><summary>Screenshot 2.1</summary>
+<img src="Images/2019-11-21-02-29-59.png">
+</details><br>
 
 - Alternatively, just like you did to secure the communications between opsman and the PKS api server in the above steps, you can use SSL to authenticate and encrypt the traffic from the cli vm to the bosh pks api server. In the cli vm, create a new folder in your user directory called pksapi-cert. Create the certificate file pksapi.crt file and paste the PKS api certificate downloaded from the PKS tile > PKS API > Certificate field. 
 From `cli-vm`, Login to the PKS CLI with the following command:
@@ -88,7 +96,10 @@ pks login -a pks.corp.local -u pksadmin --ca-cert ~/pksapi-cert/pksapi.crt
 pks clusters
 ```
 
-<details><summary>Screenshot 2.2</summary><img src="images/2019-01-09-23-49-16.png"></details><br>
+<details><summary>Screenshot 2.2</summary>
+<img src="images/2019-01-09-23-49-16.png">
+</details>
+<br>
 
  2.3 Display available plans
 
@@ -96,7 +107,10 @@ pks clusters
  pks plans
  ```
 
- <details><summary>Screenshot 2.3</summary><img src="images/2019-01-09-23-51-32.png"></details><br>
+<details><summary>Screenshot 2.3</summary>
+<img src="Images/2019-11-21-10-26-59.png">
+</details>
+<br>
 
  2.4 Create a Kubernetes cluster
 
