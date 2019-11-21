@@ -1,6 +1,6 @@
 # Welcome to the PKS Ninja Labs Community on Github
 
-You are viewing the master  branch, which is currently dedicated to PKS Version 1.3. We are starting to prepare materials for PKS 1.4, if you want to use PKS 1.4, please use the "Pks1.4" Branch - however please note that most materials have not been updated for PKS 1.4 yet. 
+You are viewing the master  branch, which is currently dedicated to PKS Version 1.3. You can also view PKS 1.4 and 1.5 materials by selecting the PKS 1.4 branch, and we are also preparing files for PKS 1.6 on the PKS 1.6 branch, however please be aware that the PKS 1.6 materials are still in the early stages of development and may not be fully prepared.
 
 **Please Note, this site is currently in beta/preview mode and under active development. Please excuse any errors or ommissions**
 
