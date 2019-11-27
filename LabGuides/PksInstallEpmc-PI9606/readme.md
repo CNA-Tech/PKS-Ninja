@@ -34,7 +34,7 @@ Please be sure to complete the requirements in the [Prerequisites](#prerequisite
 
 From the control center desktop, click the windows start button and open Windows Powershell from the start menu. Enter the following commands to create a certificate for epmc-01.corp.local:
 
-``bash
+```
 
 import-module C:\hol\ssl\hol-ssl.psm1
 New-HostSslCertificate -HOST_SHORTNAME epmc-01a -HOST_IPv4 192.168.110.28
