@@ -297,7 +297,7 @@ Please be sure to complete the requirements in the [Prerequisites](#prerequisite
 </details>
 <br/>
 
-3.9 Enter the following values in section `8. Harbor`(leave any unspecified values set to their default value):
+3.9 Enter the following values in section `8. Harbor` (leave any unspecified values set to their default value):
 
 - Enable Harbor: `True`
 - Harbor FQDN: `harbor.corp.local`
