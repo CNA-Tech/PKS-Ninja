@@ -25,7 +25,7 @@ This lab guide is designed for the PKS-Ninja-T1-NsxtInstalled Template. If you p
 
 Please be sure to complete the requirements in the [Prerequisites](#prerequisites) section above before proceeding.
 
-### Step 1: Download EPMC OVF File & create CA signed Certificates for installation
+### Step 1: Download EPMC OVF File
 
 1.1 Users of this lab will need to use their own access to download the files for EPMC. Please download the EPMC OVA file to control center before proceeding.
 
