@@ -249,7 +249,7 @@ The NSX controller is the center of the NSX overlay control plane. I a productio
 
 _Optional:_
 
-- On the cli-vm, create and open terminal emulator SSH sessions, as described in Screenshots 3.3.2 and 3.3.3, and execute the following commands to check control plane health 
+- On the cli-vm, create and open terminal emulator SSH sessions, as described in Screenshots 3.3.1 and 3.3.2, and execute the following commands to check control plane health 
 
     - <details><summary>Screenshot 3.3.1</summary><img src="Images/2018-12-13-20-23-33.png"></details>
     - <details><summary>Screenshot 3.3.2</summary><img src="Images/2018-12-13-20-33-16.png"></details>
