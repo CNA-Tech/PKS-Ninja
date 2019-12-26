@@ -15,23 +15,23 @@ For OneCloud and VMware Learning Platform users, you can load a v12 template and
 **Please Note: Not all of these lab templates are currently available on all Lab Access Portals. Additional Lab Templates are in the process of being transferred to each of the different lab access portals (Quick Demo/VMware Learning Platform/Onecloud) and should be available shortly)
 
 There are Several onecloud templates available for the v12 template:
-- CNABU-PKS-Ninja-v12-Baseline
+- CNABU-PKS-Ninja-T1-Baseline
   - This template has vcenter pre-installed and prepared to do a NSX-t and PKS installation as documented in the [PKS the Easy Way](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/Courses/PksTheEasyWay-PE6650) or the [PKS the Hard Way](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/Courses/PksTheHardWay-PH7885) Courses
-- CNABU-PKS-Ninja-v12-NsxtReady
+- CNABU-PKS-Ninja-T1-NsxtInstalled
   - This is the same as the above base v12 template, but with NSX-T Preinstalled. This template could take 30-60 minutes to load into a fully operational state
-- CNABU-PKS-Ninja-v12-PksInstalled
+- CNABU-PKS-Ninja-T1-PksInstalled
   - This template is built on the base v12 template but has the following pre-installed: NSX-T, OpsMan, Bosh, PKS, Harbor, vRLI
   - This template will take around 40 minutes to fully load
-- CNABU-PKS-Ninja-v12-ClusterReady
+- CNABU-PKS-Ninja-T1-ClusterReady
   - This template is built PksInstalled but already has a cluster deployed so once you load it up its all ready to use for demos or work on feature lab guides
   - This template will take around 40 minutes to load into a fully operational state
   
-Note: NinjaLab v11 templates are also available with PKS 1.3. IF you would like to use a v11 template, please switch to the Master branch of the PKS-Ninja Repo. 
+Note: NinjaLab v12 templates are also available with PKS 1.4. IF you would like to use a v12 template, please switch to the Pks1.4 branch of the PKS-Ninja Repo. 
   
 Each of these templates should be available both in onecloud and VLP, please see the corresponding link below for further instructions:
 
-- VMware Employees with access to Onecloud, please see [Accessing the PKS Ninja Lab with OneCloud](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/LabGuides/OnecloudNinjaLab-OL2089)
-- VMware or Pivotal or Dell Tech employees without access to Onecloud, please see [Accessing the PKS Ninja Lab with VMware Learning Platform](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/LabGuides/VlpNinjaLab-VL6532)
+- VMware Employees with access to Onecloud, please see [Accessing the PKS Ninja Lab with OneCloud](../LabGuides/OnecloudNinjaLab-OL2089/readme.md)
+- VMware or Pivotal or Dell Tech employees without access to Onecloud, please see [Accessing the PKS Ninja Lab with VMware Learning Platform](../LabGuides/VlpNinjaLab-VL6532)
 - For all others, we are actively working on tutorials for creating compatible lab environments. Until further instructions are available, please reach out on the slack channel or pks-ninja-labs@googlegroups.com and we would can provide further documentation that can help you prepare a compatible lab environment
   
 <!--
