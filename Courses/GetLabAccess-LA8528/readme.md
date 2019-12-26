@@ -18,9 +18,9 @@ There are Several onecloud templates available for the v12 template:
 - CNABU-PKS-Ninja-T1-Baseline
   - This template has vcenter pre-installed and prepared to do a NSX-t and PKS installation as documented in the [PKS the Easy Way](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/Courses/PksTheEasyWay-PE6650) or the [PKS the Hard Way](https://github.com/CNA-Tech/PKS-Ninja/blob/Pks1.4/Courses/PksTheHardWay-PH7885) Courses
 - CNABU-PKS-Ninja-T1-NsxtInstalled
-  - This is the same as the above base v12 template, but with NSX-T Preinstalled. This template could take 30-60 minutes to load into a fully operational state
+  - This is the same as the above baseline template, but with NSX-T Preinstalled. This template could take 30-60 minutes to load into a fully operational state
 - CNABU-PKS-Ninja-T1-PksInstalled
-  - This template is built on the base v12 template but has the following pre-installed: NSX-T, OpsMan, Bosh, PKS, Harbor, vRLI
+  - This template is built on the baseline template but has the following pre-installed: NSX-T, OpsMan, Bosh, PKS, Harbor, vRLI
   - This template will take around 40 minutes to fully load
 - CNABU-PKS-Ninja-T1-ClusterReady
   - This template is built PksInstalled but already has a cluster deployed so once you load it up its all ready to use for demos or work on feature lab guides
