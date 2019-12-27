@@ -6,7 +6,7 @@
   - [Lab Access Instructions](#lab-access-instructions)
   - [Prerequisites](#prerequisites)
   - [Install PKS 1.6 with Enterprise PKS Management Console (EPMC)](#install-pks-16-with-enterprise-pks-management-console-epmc)
-    - [Step 1: Download EPMC OVF File & create CA signed Certificates for installation](#step-1-download-epmc-ovf-file--create-ca-signed-certificates-for-installation)
+    - [Step 1: Download EPMC OVF File](#step-1-download-epmc-ovf-file)
     - [Step 2: Deploy the EPMC OVF File](#step-2-deploy-the-epmc-ovf-file)
     - [Step 3: Complete the installation workflow](#step-3-complete-the-installation-workflow)
 
