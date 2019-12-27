@@ -6,7 +6,11 @@ To be able to use the lab guides on this site, you will need access to a compati
 
 PKS Ninja uses a standard lab topology and configuration which is currently defined in onecloud templates. Available templates are versioned, and it is important you select the NinjaLab version that aligns with the git branch you are using. The main branch of the github site will always reflect the latest published template, and seperate git branches are maintained for older template versions. 
 
-At the time of writing, the current template version is v12 for Non-HOL users, and HOL-2031 for users participating through the VMware Hands on Labs. 
+The naming convention for the pks-ninja onecloud templates includes a version number you can check to ensure you are using the latest version. 
+
+For example, in the template named "PKS-Ninja-T1-Baseline-0.1":
+- The **"T1"** stands for "Topology 1" which is currently the only supported topology other than HOL-2031. 
+- The **"0.1** is the version number. The 0.x train is intended for PKS 1.6, with the intent that the 1.x train should be used for PKS 1.7 and so on.  
 
 If you are using the VMware Hands on Labs HOL-2031 environment (Open to the Public), please login to labs.hol.vmware.com and look for the HOL-2031 Lab. On your first time, please complete the entire Lab including all steps in Module 5, and then proceed to the [HOL-2031 Course Guide](../HOL2031LabGuides-HL2541). 
 
@@ -30,8 +34,8 @@ Note: NinjaLab v12 templates are also available with PKS 1.4. IF you would like 
   
 Each of these templates should be available both in onecloud and VLP, please see the corresponding link below for further instructions:
 
-- VMware Employees with access to Onecloud, please see [Accessing the PKS Ninja Lab with OneCloud](../LabGuides/OnecloudNinjaLab-OL2089/readme.md)
-- VMware or Pivotal or Dell Tech employees without access to Onecloud, please see [Accessing the PKS Ninja Lab with VMware Learning Platform](../LabGuides/VlpNinjaLab-VL6532)
+- VMware Employees with access to Onecloud, please see [Accessing the PKS Ninja Lab with OneCloud](../../LabGuides/OnecloudNinjaLab-OL2089/readme.md)
+- VMware or Pivotal or Dell Tech employees without access to Onecloud, please see [Accessing the PKS Ninja Lab with VMware Learning Platform](../../LabGuides/VlpNinjaLab-VL6532)
 - For all others, we are actively working on tutorials for creating compatible lab environments. Until further instructions are available, please reach out on the slack channel or pks-ninja-labs@googlegroups.com and we would can provide further documentation that can help you prepare a compatible lab environment
   
 <!--
