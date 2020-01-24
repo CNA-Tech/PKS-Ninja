@@ -65,7 +65,7 @@ Note: When completing the validation stamp for this lab guide, use `v11` as the 
 
 Example #1 - the github user `Githubuser1` using PKS Lab Template `v11` on the date July 1st 2018 would enter the following stamp:
 
-`Githubuser1;v11;07/01/18<br/>`
+**`Githubuser1;v11;07/01/18<br/>`**
 
 Example #2 - the github user `afewell` using PKS Lab Template `v10` on the date January 28th 2019 would enter the following stamp:
 
