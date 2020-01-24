@@ -1,4 +1,4 @@
-# Commit a Validation Stamp
+# Commit a Validation Stamp --> Githubuser1;v11;07/01/18
 
 This guide walks through the simplified method of committing an update to a shared git repository, using the example of adding your validation stamp to a file on the PKS Ninja Github repository. You can also use this method to update any other file on the PKS Ninja or other github repositories
 
