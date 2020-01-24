@@ -59,7 +59,7 @@ Note: If you have worked with your own personal Git repository before, the pull 
 
 1.3 In the text editor window, on a new line, enter your validation stamp
 
-Your validation stamp is your github username followed by a semicolon, followed by the PKS Template Version number you are using in your lab environment, followed by the date in MM/DD/YY format, followed by `<br/>`, which is an html line break tag to ensure a line break follows your stamp. Include both major and minor version numbering if a minor version is used.
+Your validation stamp is your **github username followed by a semicolon, followed by the PKS Template Version number you are using in your lab environment, followed by the date in MM/DD/YY format, followed by `<br/>`**, which is an html line break tag to ensure a line break follows your stamp. Include both major and minor version numbering if a minor version is used.
 
 Note: When completing the validation stamp for this lab guide, use `v11` as the version number. When you validate any other lab guides be sure to use the version number of the pks lab template you used to complete the exercise. 
 
@@ -69,7 +69,7 @@ Example #1 - the github user `Githubuser1` using PKS Lab Template `v11` on the d
 
 Example #2 - the github user `afewell` using PKS Lab Template `v10` on the date January 28th 2019 would enter the following stamp:
 
-`afewell;v10;01/28/19<br/>`
+**`afewell;v10;01/28/19<br/>`**
 
 Please see the screenshots below for an additional example. Be sure to use your own github username in your validation stamps
 
