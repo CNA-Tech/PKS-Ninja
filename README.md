@@ -1,3 +1,5 @@
+**PKS Ninja Labs is transitioning to a new site, Please visit [https://github.com/ModernAppsNinja/dojo](https://github.com/ModernAppsNinja/dojo) to find currently active content. Please feel free to browse the pks-ninja repository, however do note that it is no longer actively maintained. Thank you!**
+
 # Welcome to the PKS Ninja Labs Community on Github
 
 You are viewing the master  branch, which is currently dedicated to PKS Version 1.3. You can also view PKS 1.4 and 1.5 materials by selecting the PKS 1.4 branch, and we are also preparing files for PKS 1.6 on the PKS 1.6 branch, however please be aware that the PKS 1.6 materials are still in the early stages of development and may not be fully prepared.
