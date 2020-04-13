@@ -1,3 +1,5 @@
+**PKS Ninja Labs is transitioning to a new site, Please visit [https://github.com/ModernAppsNinja/dojo](https://github.com/ModernAppsNinja/dojo) to find currently active content. Please feel free to browse the pks-ninja repository, however do note that it is no longer actively maintained. Thank you!**
+
 # Welcome to the PKS Ninja Labs Community on Github
 
 You are viewing the PKS 1.4 Branch, all updates to this branch should reflect pks 1.4.
