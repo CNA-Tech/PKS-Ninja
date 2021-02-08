@@ -1,4 +1,4 @@
-**PKS Ninja Labs is transitioning to a new site, Please visit [https://github.com/ModernAppsNinja/dojo](https://github.com/ModernAppsNinja/dojo) to find currently active content. Please feel free to browse the pks-ninja repository, however do note that it is no longer actively maintained. Thank you!**
+**PKS Ninja Labs is transitioning to a new site, Please visit [https://modernapps.ninja](https://modernapps.ninja) to find currently active content. Please feel free to browse the pks-ninja repository, however do note that it is no longer actively maintained. Thank you!**
 
 # Welcome to the PKS Ninja Labs Community on Github
 
